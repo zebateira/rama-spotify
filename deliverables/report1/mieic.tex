@@ -24,7 +24,7 @@
 %% Portuguese version
 
 %% MIEIC options
-\usepackage[portugues,mieic]{feupteses}
+\usepackage[portugues,mieic]{styles/feupteses}
 %\usepackage[portugues,mieic,juri]{feupteses}
 %\usepackage[portugues,mieic,final]{feupteses}
 %\usepackage[portugues,mieic,final,onpaper]{feupteses}
@@ -81,7 +81,7 @@
 
 %%----------------------------------------
 %% TIP: if you want to define more macros, use an external file to keep them
-\include{mymacros}
+\include{utils/mymacros}
 %%----------------------------------------
 
 %%========================================
@@ -160,12 +160,14 @@
 %% Bibliography
 %% Comment the next command if BibTeX file not used, 
 %% Assumes that bibliography is in ``myrefs.bib''
+
 \PrintBib{myrefs}
+\bibliographystyle{bib/unstr-pt}
 \bibliography{bib/myrefs}
 
 %% Comment next 2 commands if numbered appendices are not used
-\appendix
-\include{appendix1}
+% \appendix
+% \include{appendix1}
 
 %% Index
 %% Uncomment next command if index is required, 
