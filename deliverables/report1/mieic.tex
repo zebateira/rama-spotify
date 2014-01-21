@@ -125,9 +125,9 @@
 
 % remove unnecessary \include{} commands
 \begin{Prolog}
-  \include{abstract} % the abstract
-  \include{acknows}  % the acknowledgments
-  \include{quote}    % initial quotation if desired
+  \include{prolog/abstract} % the abstract
+  \include{prolog/acknows}  % the acknowledgments
+  \include{prolog/quote}    % initial quotation if desired
   \cleardoublepage
   \pdfbookmark[0]{Conteúdo}{contents}
   \tableofcontents
@@ -137,7 +137,7 @@
   \cleardoublepage
   \pdfbookmark[0]{Lista de Tabelas}{tables}
   \listoftables
-  \include{abbrevs}  % the list of abbreviations used
+  \include{prolog/abbrevs}  % the list of abbreviations used
 \end{Prolog}
 
 %%----------------------------------------
@@ -147,11 +147,11 @@
 \StartBody
 
 %% TIP: use a separate file for each chapter
-\include{chapter1} 
-\include{chapter2}
-\include{chapter3}
-\include{chapter4}
-\include{chapter5} 
+\include{chapters/chapter1} 
+\include{chapters/chapter2}
+\include{chapters/chapter3}
+\include{chapters/chapter4}
+\include{chapters/chapter5} 
 
 %%----------------------------------------
 %% Final materials
@@ -161,7 +161,7 @@
 %% Comment the next command if BibTeX file not used, 
 %% Assumes that bibliography is in ``myrefs.bib''
 \PrintBib{myrefs}
-\bibliography{myrefs}
+\bibliography{bib/myrefs}
 
 %% Comment next 2 commands if numbered appendices are not used
 \appendix
