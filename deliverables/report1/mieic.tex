@@ -31,6 +31,7 @@
 
 %% Include source-code listings package
 \usepackage{listings}
+
 \lstset{ %
  language=C,                        % choose the language of the code
  basicstyle=\footnotesize\ttfamily,
@@ -52,18 +53,14 @@
  breaklines=true,                   % sets automatic line breaking
  breakatwhitespace=false,           % sets if automatic breaks should only happen at whitespace
  escapeinside={\%*}{*)},            % if you want to add a comment within your code
- morekeywords={*}  % if you want to add more keywords to the set
+ morekeywords={*}
 }
-
 
 %% Uncomment next line to set the depth of sectional units listed in the toc
 %\setcounter{tocdepth}{3}
 
-%% Uncomment to create an index (at the end of the document)
 %\makeindex
 
-%% Path to the figures directory
-%% TIP: use folder ``figures'' to keep all your figures
 \graphicspath{{figures/}}
 
 %% macros
@@ -75,18 +72,15 @@
 %%========================================
 \begin{document}
 
-%% Information about the work
 \title{Spotify-ed: Music Recommendation and Discovery in Spotify}
 \author{José Lage Bateira}
 
 \thesisdate{31 de Janeiro de 2014}
 
-%% Uncomment next line for copyright text if used
-%\copyrightnotice{Author, 2014}
 \supervisor{Orientador}{Fabien Gouyon}
 
 %% Uncomment committee stuff in the final version
-%\committeetext{Aprovado em provas públicas pelo Júri:}
+% \committeetext{Aprovado em provas públicas pelo Júri:}
 %\committeemember{Presidente}{Nome do presidente do júri}
 %\committeemember{Arguente}{Nome do arguente do júri}
 %\committeemember{Vogal}{Nome do vogal do júri}
@@ -95,11 +89,9 @@
 %% Specify cover logo (in folder ``figures'')
 \logo{uporto-feup.pdf}
 
-%% Uncomment next line for additional text below the author's name (front page)
 \additionalfronttext{Preparação da Dissertação}
 
 %% Preliminary materials
-% remove unnecessary \include{} commands
 \begin{Prolog}
   \include{prolog/abstract} % the abstract
   \include{prolog/acknows}  % the acknowledgments
@@ -119,24 +111,32 @@
 %% Body
 \StartBody
 
-%% TIP: use a separate file for each chapter
 \include{chapters/chapter1} 
 \include{chapters/chapter2}
 \include{chapters/chapter3}
 \include{chapters/chapter4}
-\include{chapters/chapter5} 
+\include{chapters/chapter5}
+
+
 
 %% Final materials
 
 %% Bibliography
-\PrintBib{myrefs}
-\bibliographystyle{bib/unstr-pt}
+
+
+\renewcommand{\bibname}{Referências}
+
+
 \bibliography{bib/myrefs}
+\bibliographystyle{bib/unsrt-pt}
+
+% \renewcommand{\bibname}{Referências}
+% \PrintBib{./bib/mieic}
 
 %% Comment next 2 commands if numbered appendices are not used
 % \appendix
 % \include{appendix1}
 
-\PrintIndex
+% \PrintIndex
 
 \end{document}
