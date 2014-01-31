@@ -5,8 +5,8 @@
 Bem longe vão os tempos, antes da Internet, em que ouvir e descobrir música nova era um desafio por si só. Agora, com alguns cliques, temos acesso a um catálogo de música tão grande, que o nosso cérebro não consegue processar.
 
 Existem dezenas de serviços online que oferecem isso mesmo.
-Alguns especializam-se na criação/geração de playlists (que funcionam como rádios), outros em expandir o catálogo de música e outros focam-se mais na capacidade de sugestão e recomendação de música (ou artistas de música) aos utilizadores.
-Estes últimos, apresentam as sugestões de artistas/álbuns/músicas ao utilizador de uma forma rudimentar como listas ou em grelha.
+Alguns especializam-se na criação/geração de playlists (que funcionam como rádios), outros em expandir o catálogo de música e outros focam-se mais na sugestão e recomendação de artistas/álbuns/músicas personalizada para os utilizadores.
+Estes últimos, apresentam as sugestões de conteúdo ao utilizador de uma forma rudimentar como listas ou em grelha.
 
 No entanto, listas ou grelhas não fornecem ao utilizador qualquer tipo de informação adicional sobre a relação entre os artistas nem justificam a sua semelhança \cite{Lamere2008}.
 Até fazem parecer que não existe nenhuma relação/ligação entre os artistas recomendados, o que não é verdade.
@@ -15,28 +15,48 @@ Essas relações existem e podem ser representadas como uma rede de artistas int
 Este é o conceito que o RAMA\footnote{http://rama.inescporto.pt}, projeto desenvolvido no INESC Porto, usa.
 
 A partir de uma pesquisa de um artista de música, o RAMA cria e desenha um grafo que ajuda o utilizador a explorar música que lhe possa interessar de uma forma muito mais natural e informativa.
+No entanto, quando um utilizador pretende ouvir uma música de um artista, é usado stream do Youtube\footnote{http://youtube.com}. 
+Apesar de este oferecer um catálogo alargado de música, o mesmo não é indicado para esta funcionalidade pois não fornece nenhum tipo de API\footnote{Application Programming Interface} orientada a música, nem a qualidade de som do stream é adequada.
+
+Por forma a resolver este problema, foram analisadas várias possibilidades de integrar um serviço de streaming de música no RAMA, ou vice-versa.
+A escolha final foi desenvolver uma aplicação (como plugin) para o Spotify\footnote{http://spotify.com}.
+Desta forma, os utilizadores Spotify poderão ter uma experiência mais natural e integrada, usufruindo de todas as funcionalidades que o RAMA oferece.
+
 
 \section{Contexto/Enquadramento} \label{sec:context}
 
-\emph{Esta secção descreve a área em que o trabalho se insere, podendo
-referir um eventual projeto de que faz parte e apresentar uma breve
-descrição da empresa onde o trabalho decorreu.}
+Este projeto complementa o RAMA, trabalho desenvolvido no INESC Porto \cite{Costa2008} \cite{Sarmento2009} \cite{Costa2009} \cite{Gouyon2011}.
 
 \section{Motivação e Objetivos} \label{sec:goals}
 
-Apresenta a motivação e enumera os objetivos do trabalho terminando
-com um resumo das metodologias para a prossecução dos objetivos.
+O objetivo final do projeto é poder oferecer aos utilizadores do Spotify, uma experiência de descoberta de música muito mais agradável, natural e detalhada.
+No entanto, para avaliar e validar o resultado final, será necessário fazer testes com utilizadores finais para comparar a sua experiência no Spotify com e sem a aplicação desenvolvida.
 
+Desta forma, a aplicação será desenvolvida iterativamente, implementando as funcionalidades que o RAMA oferece, e quando esta estiver ao nível do RAMA, serão realizados testes cuidados com os utilizadores à medida que se melhora a implementação com o seu feedback.
+ \\
+ \\
+Em suma, os objetivos deste projeto são:
+
+\begin{itemize}
+  \item Melhorar a forma de apresentação da recomendação de conteúdo dentro do Spotify
+  \item Dar mais poder ao utilizador na descoberta de música nova
+  \item Tornar a experiência de descoberta mais interessante e cativante
+\end{itemize}
+
+Para atingir estes objetivos a aplicação será testada como já foi referido.
 
 \section{Projeto} \label{sec:proj}
 
+A aplicação a desenvolver deverá estender as funcionalidades do Spotify.
+
+\emph{
 Na continuação da secção anterior, e apenas no caso de ser um Projeto
-e não uma Dissertação, esta secção apresenta resumidamente o projeto.
+e não uma Dissertação, esta secção apresenta resumidamente o projeto.}
 
 
 \section{Estrutura da Dissertação} \label{sec:struct}
 
-Para além da introdução, esta dissertação contém mais x capítulos.
+\emph{Para além da introdução, esta dissertação contém mais x capítulos.
 No capítulo~\ref{chap:sota}, é descrito o estado da arte e são
 apresentados trabalhos relacionados.
 %\todoline{Complete the document structure.}
@@ -45,3 +65,4 @@ No capítulo~\ref{chap:chap4} praesent sit amet sem.
 No capítulo~\ref{chap:concl}  posuere, ante non tristique
 consectetuer, dui elit scelerisque augue, eu vehicula nibh nisi ac
 est. 
+}
