@@ -2,7 +2,12 @@
 
 \chapter{Introdução} \label{chap:intro}
 
-Bem longe vão os tempos, antes da Internet, em que ouvir e descobrir música nova era um desafio por si só. Agora, com alguns cliques, temos acesso a um catálogo de música tão grande, que o nosso cérebro não consegue processar.
+
+
+\section{Contexto/Enquadramento} \label{sec:context}
+
+Bem longe vão os tempos, antes da Internet, em que ouvir e descobrir música nova era um desafio por si só.
+Agora, com alguns cliques, temos acesso a um catálogo de música tão grande, que o nosso cérebro não consegue processar.
 
 Existem dezenas de serviços online que oferecem isso mesmo.
 Alguns especializam-se na criação/geração de playlists (que funcionam como rádios), outros em expandir o catálogo de música e outros focam-se mais na sugestão e recomendação de artistas/álbuns/músicas personalizada para os utilizadores.
@@ -12,42 +17,40 @@ No entanto, listas ou grelhas não fornecem ao utilizador qualquer tipo de infor
 Até fazem parecer que não existe nenhuma relação/ligação entre os artistas recomendados, o que não é verdade.
 
 Essas relações existem e podem ser representadas como uma rede de artistas interligados num grafo, onde cada nó é um artista de música, e cada ligação entre nós representa uma ligação forte de parecença entre os artistas.
-Este é o conceito que o RAMA\footnote{http://rama.inescporto.pt}, projeto desenvolvido no INESC Porto, usa.
+Este é o conceito que o RAMA\footnote{http://rama.inescporto.pt}, projeto desenvolvido no INESC Porto\footnote{http://inescporto.pt}, usa. \cite{Costa2008} \cite{Sarmento2009} \cite{Costa2009} \cite{Gouyon2011}
+
+\section{Motivação e Objetivos} \label{sec:goals}
+
 
 A partir de uma pesquisa de um artista de música, o RAMA cria e desenha um grafo que ajuda o utilizador a explorar música que lhe possa interessar de uma forma muito mais natural e informativa.
+A informação que o RAMA usa é retirada do serviço Last.fm\footnote{http://last.fm}.
+
 No entanto, quando um utilizador pretende ouvir uma música de um artista, é usado stream do Youtube\footnote{http://youtube.com}. 
 Apesar de este oferecer um catálogo alargado de música, o mesmo não é indicado para esta funcionalidade pois não fornece nenhum tipo de API\footnote{Application Programming Interface} orientada a música, nem a qualidade de som do stream é adequada.
 
 Por forma a resolver este problema, foram analisadas várias possibilidades de integrar um serviço de streaming de música no RAMA, ou vice-versa.
 A escolha final foi desenvolver uma aplicação (como plugin) para o Spotify\footnote{http://spotify.com}.
-Desta forma, os utilizadores Spotify poderão ter uma experiência mais natural e integrada, usufruindo de todas as funcionalidades que o RAMA oferece.
+Desta forma, os utilizadores Spotify poderão ter uma experiência mais natural e integrada, usufruindo de todas as funcionalidades que o RAMA oferece, dentro do Spotify.
 
-
-\section{Contexto/Enquadramento} \label{sec:context}
-
-Este projeto complementa o RAMA, trabalho desenvolvido no INESC Porto \cite{Costa2008} \cite{Sarmento2009} \cite{Costa2009} \cite{Gouyon2011}.
-
-\section{Motivação e Objetivos} \label{sec:goals}
 
 O objetivo final do projeto é poder oferecer aos utilizadores do Spotify, uma experiência de descoberta de música muito mais agradável, natural e detalhada.
 No entanto, para avaliar e validar o resultado final, será necessário fazer testes com utilizadores finais para comparar a sua experiência no Spotify com e sem a aplicação desenvolvida.
 
-Desta forma, a aplicação será desenvolvida iterativamente, implementando as funcionalidades que o RAMA oferece, e quando esta estiver ao nível do RAMA, serão realizados testes cuidados com os utilizadores à medida que se melhora a implementação com o seu feedback.
+Desta forma, o desenvolvimento da aplicação será feito de forma iterativa, implementando as funcionalidades que o RAMA oferece, e quando esta estiver ao nível do RAMA, serão realizados testes cuidados com os utilizadores à medida que se melhora a implementação com o seu feedback.
  \\
  \\
 Em suma, os objetivos deste projeto são:
 
 \begin{itemize}
-  \item Melhorar a forma de apresentação da recomendação de conteúdo dentro do Spotify
-  \item Dar mais poder ao utilizador na descoberta de música nova
-  \item Tornar a experiência de descoberta mais interessante e cativante
+  \item Melhorar a forma de apresentação da recomendação de conteúdo dentro do Spotify;
+  \item Dar mais poder ao utilizador na descoberta de música nova;
+  \item Tornar a experiência de descoberta mais interessante e cativante.
 \end{itemize}
-
-Para atingir estes objetivos a aplicação será testada como já foi referido.
 
 \section{Projeto} \label{sec:proj}
 
-A aplicação a desenvolver deverá estender as funcionalidades do Spotify.
+A aplicação a desenvolver será uma alternativa ao modo de descoberta do Spotify.
+No momento de escrita deste relatório, o modo de descoberta/recomendação de música do Spotify é, comparativamente ao do Last.fm, mais simples e com pouca profundidade.
 
 \emph{
 Na continuação da secção anterior, e apenas no caso de ser um Projeto
