@@ -30,10 +30,10 @@ Apesar de este oferecer um catálogo alargado de música, o mesmo não é indica
 
 Por forma a resolver este problema, foram analisadas várias possibilidades de integrar um serviço de streaming de música no RAMA, ou vice-versa.
 A escolha final foi desenvolver uma aplicação (como plugin) para o Spotify\footnote{http://spotify.com}.
-Desta forma, os utilizadores Spotify poderão ter uma experiência mais natural e integrada, usufruindo de todas as funcionalidades que o RAMA oferece, dentro do Spotify.
+Desta forma, os utilizadores Spotify poderão ter uma experiência mais natural e integrada, usufruindo de todas as funcionalidades que o RAMA oferece, dentro do Spotify (Aplicações Spotify\footnote{http://developer.spotify.com/technologies/apps}).
+ 
 
-
-O objetivo final do projeto é poder oferecer aos utilizadores do Spotify, uma experiência de descoberta de música muito mais agradável, natural e detalhada.
+O objetivo final do projeto é oferecer aos utilizadores do Spotify, uma experiência de descoberta de música muito mais agradável, natural e detalhada, recorrendo a uma visualização das relações entre artistas.
 No entanto, para avaliar e validar o resultado final, será necessário fazer testes com utilizadores finais para comparar a sua experiência no Spotify com e sem a aplicação desenvolvida.
 
 Desta forma, o desenvolvimento da aplicação será feito de forma iterativa, implementando as funcionalidades que o RAMA oferece, e quando esta estiver ao nível do RAMA, serão realizados testes cuidados com os utilizadores à medida que se melhora a implementação com o seu feedback.
@@ -50,14 +50,32 @@ Em suma, os objetivos deste projeto são:
 \section{Projeto} \label{sec:proj}
 
 A aplicação a desenvolver será uma alternativa ao modo de descoberta do Spotify.
-No momento de escrita deste relatório, o modo de descoberta/recomendação de música do Spotify, comparativamente ao do Last.fm, é simples: apresenta recomendaçõs em forma de grelha.
+No momento de escrita deste relatório, o modo de d  Description
+activityType  module:api/activity~Activity.Type Type of the activity.
+item  module:api/models~Loadable  Item, primary object in the activity.
+context module:api/models~Loadable  Context, secondary object in the activity.
+referrer   {uri: string, name: string, image: string} Referrer of the activity.
+message  string Message attached to the activity.
+timestamp  Date The timestamp when state was applied.
+user  module:api/models~User  User object, owner of the activity.escoberta/recomendação de música do Spotify, comparativamente ao do Last.fm, é simples: apresenta recomendações em forma de grelha.
 
+Desta forma, propõem-se uma representação visual em forma de grafo similar à do RA
+  \item [Gruntjs]MA.
+A aplicação corre dentro do ambiente do Spotify como uma Aplicação Spotify.
+As suas principais funcionalidades serão: pesquisa de conteúdo, interação com o grafo e reproduzir música dos resultados da pesquisa.
+Estes são os requisitos mínimos que irão ser implementados.
 
+Durente todo o desenvolvimento da aplicação, algumas das ferramentas a ser usadas são:
 
-\section*{}
-\emph{
-Na continuação da secção anterior, e apenas no caso de ser um Projeto
-e não uma Dissertação, esta secção apresenta resumidamente o projeto.}
+\begin{description}
+  \item[Spotify Desktop Client] spotify.com
+  \item[Webkit Development Tools] webkit.org
+  \item[Sublime Text] sublimetext.com
+  \item[Bower] bower.io
+  \item[Gruntjs] gruntjs.com
+  \item[Arborjs] arborjs.org
+\end{description}
+
 
 
 \section{Estrutura da Dissertação} \label{sec:struct}
@@ -65,7 +83,6 @@ e não uma Dissertação, esta secção apresenta resumidamente o projeto.}
 \emph{Para além da introdução, esta dissertação contém mais x capítulos.
 No capítulo~\ref{chap:sota}, é descrito o estado da arte e são
 apresentados trabalhos relacionados.
-%\todoline{Complete the document structure.}
 No capítulo~\ref{chap:chap3}, é explicado em detalhe em que consiste o projeto
 No capítulo~\ref{chap:chap4} praesent sit amet sem. 
 No capítulo~\ref{chap:concl}  posuere, ante non tristique
