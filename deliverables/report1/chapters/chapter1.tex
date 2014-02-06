@@ -20,33 +20,44 @@ Até fazem parecer que não existe nenhuma relação/ligação entre os artistas
 Essas relações existem e podem ser representadas como uma rede de artistas interligados num grafo, onde cada nó é um artista de música, e cada ligação entre nós representa uma ligação forte de parecença entre os artistas.
 Este é o conceito que o RAMA\footnote{http://rama.inescporto.pt}, projeto desenvolvido no INESC Porto\footnote{http://inescporto.pt}, usa. \cite{Costa2008} \cite{Sarmento2009} \cite{Costa2009} \cite{Gouyon2011}
 
+
+
 \section{Motivação e Objetivos} \label{sec:goals}
 
 
 A partir de uma pesquisa de um artista de música, o RAMA cria e desenha um grafo que ajuda o utilizador a explorar música que lhe possa interessar de uma forma muito mais natural e informativa.
 A informação que o RAMA usa é retirada do serviço Last.fm\footnote{http://last.fm}.
 
-No entanto, quando um utilizador pretende ouvir uma música de um artista, é usado stream do Youtube\footnote{http://youtube.com}. 
-Apesar de este oferecer um catálogo alargado de música, o mesmo não é indicado para esta funcionalidade pois não fornece nenhum tipo de API\footnote{Application Programming Interface} orientada a música, nem a qualidade de som do stream é adequada.
+No entanto, quando um utilizador pretende ouvir uma música de um artista, é usado \emph{stream} do Youtube\footnote{http://youtube.com}. 
+Apesar de este oferecer um catálogo alargado de música, o mesmo não é indicado para esta funcionalidade pois não fornece nenhum tipo de API\footnote{Application Programming Interface} orientada a música, nem a qualidade de som do \emph{stream} é adequada.
 
-Por forma a resolver este problema, foram analisadas várias possibilidades de integrar um serviço de streaming de música no RAMA, ou vice-versa.
-A escolha final foi desenvolver uma aplicação (como plugin) para o Spotify\footnote{http://spotify.com}.
-Desta forma, os utilizadores Spotify poderão ter uma experiência mais natural e integrada, usufruindo de todas as funcionalidades que o RAMA oferece, dentro do Spotify (Aplicações Spotify\footnote{http://developer.spotify.com/technologies/apps}).
- 
+A experiência musical do utilizador do RAMA poderá melhorar consideravelmente ao colmatar esta falha.
+Existe por isso uma necessidade de substituir o Youtube por outro serviço mais orientado a \emph{streaming} de música de qualidade.
+O Spotify\footnote{http://spotify.com} é um deles. Fornece API orientada a música \footnote{https://developer.spotify.com/technologies/web-api}, e o \emph{streaming} é de qualidade adequada para este tipo de funcionalidade.
 
-O objetivo final do projeto é oferecer aos utilizadores do Spotify, uma experiência de descoberta de música muito mais agradável, natural e detalhada, recorrendo a uma visualização das relações entre artistas.
+De que formas é que se pode intregar o RAMA e o Spotify?
+
+Por forma a resolver este problema, foram analisadas várias possibilidades:
+
+\begin{description}
+  \item[Spotify Play Button\footnote{https://developer.spotify.com/technologies/widgets/spotify-play-button/}] \hfill \\
+    \emph{Widget} do Spotify que pode ser embebida no RAMA.
+  \item[Aplicação Spotify\footnote{https://developer.spotify.com/technologies/apps/}] \hfill \\
+    Serve como \emph{plugin} ao programa do Spotify, estendendo as funcionalidades do Spotify com visualização gráfica de recomendações e construção de playlists.
+  \item[Integrar o Perfil de um utilizador Spotify no RAMA] \hfill \\
+    Para complementar as recomendações de artistas.
+  \item[Aplicação Móvel] \hfill \\
+    Com as funcionalidades acima descritas.
+\end{description}
+
+A escolha final foi desenvolver uma aplicação (como \emph{plugin}) para o Spotify.
+Será que um utilizador Spotify ao descobrir música nova de uma forma mais gráfica terá uma experiência de utilizador mais rica e natural do que o modo de descoberta \emph{standard} do Spotify (em grelha)?
+
+Esse é o objetivo primordial desta dissertação: Tentar descobrir se utilizadores Spotify terão uma experiência melhorada ao usar a Aplicação Spotify proposta.
+
 No entanto, para avaliar e validar o resultado final, será necessário fazer testes com utilizadores finais para comparar a sua experiência no Spotify com e sem a aplicação desenvolvida.
 
 Desta forma, o desenvolvimento da aplicação será feito de forma iterativa, implementando as funcionalidades que o RAMA oferece, e quando esta estiver ao nível do RAMA, serão realizados testes cuidados com os utilizadores à medida que se melhora a implementação com o seu feedback.
- \\
- \\
-Em suma, os objetivos deste projeto são:
-
-\begin{itemize}
-  \item Melhorar a forma de apresentação da recomendação de conteúdo dentro do Spotify;
-  \item Dar mais poder ao utilizador na descoberta de música nova;
-  \item Tornar a experiência de descoberta mais interessante e cativante.
-\end{itemize}
 
 \section{Projeto} \label{sec:proj}
 
