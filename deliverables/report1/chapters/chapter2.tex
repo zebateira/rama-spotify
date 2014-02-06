@@ -17,6 +17,8 @@ Tal não invalida que o tratamento dessa informação seja mal feito, e por isso
 \section{RAMA - Relational Artist MAps} % (fold)
 \label{sec:rama}
 
+
+
 % section rama (end)
 
 \section{Projetos Relacionados} % (fold)
@@ -33,7 +35,7 @@ Este não permite editar o grafo e, ao clicar num nó o grafo, é novamente gera
   \begin{center}
     \includegraphics[width=\textwidth]{liveplasma.pdf}
   \end{center}
-  \caption{liveplasma: resultado da pesquisa "Amália Rodrigues". Canto superior esquerdo: álbums da artista; Canto inferior esquerdo: \emph{mini-player} do youtube}.
+  \caption{liveplasma: resultado da pesquisa "Amália Rodrigues". Canto superior esquerdo: álbums da artista; Canto inferior esquerdo: \emph{mini-player} do youtube.}
   \label{fig:sota_liveplasma}
 \end{figure}
 
@@ -110,23 +112,36 @@ Ao expandir o nó inicial de pesquisa, os nós novos estão apenas e só diretam
     \includegraphics[]{tuneglue2.pdf}
   \end{center}
   \caption{Tuneglue: grafo depois do primeiro nó ser expandido.}
-  \label{fig:figure1}
+  \label{fig:sota_tuneglue2}
 \end{figure}
 
-Ao contrário do Liveplasma, o Tuneglue não faz uma pesquisa recursiva.
+Ao contrário do Liveplasma, o Tuneglue não faz uma pesquisa recursiva automaticamente, requerendo ao utilizador que expande os nós que este quiser manualmente.
 
 \subsubsection{Prós} % (fold)
 \label{ssub:audiomap_pros}
+
+Dá bastante liberdade ao utilizador, pois dá-lhe toda a responsabilidade na criação do grafo.
+O utilizador sente que todo o grafo foi criação sua e dissimula o utilizador a pensar que foi este que descobriu novos artistas ao invés de receber recomendações.
+
+O Tuneglue, assim comom
 
 % subsubsection pros (end)
 
 \subsubsection{Contras} % (fold)
 \label{ssub:audiomap_contras}
 
+Mais uma vez, o facto da ferramenta ser feita em flash não ajuda a que a interface seja intuitiva.
+Para além de pouco responsiva (o utilizador ao início pode-se sentir perdido por não saber o que fazer), é bastante uniforme, ou seja, não salienta diferenças entre cada artista, nem distingue as ligações entre eles.
+
 % subsubsection contras (end)
 
 \subsubsection{Resumo} % (fold)
 \label{ssub:audiomap_resumo}
+
+Em suma, o Tuneglue é inteligente por dar poder ao utilizador, mas ao mesmo tempo não existe um limite nesse poder.
+E assim, é possível expandir o grafo até se tornar ilegível.
+
+
 
 % subsubsection resumo (end)
 
@@ -135,15 +150,60 @@ Ao contrário do Liveplasma, o Tuneglue não faz uma pesquisa recursiva.
 \subsection{MusicRoamer - musicroamer.com} % (fold)
 \label{sub:musicroamer}
 
+  O MusicRoamer é outra ferramenta que permite explorar música nova.
+  Tal como o Tuneglue, este permitir construir o grafo à medida que se expande cada nó.
 
+  Umas das funcionalidades mais interessantes do MusicRoamer são as várias opções que temos de pesquisa (figura \ref{fig:sota_musicroamer}):
+
+  \begin{description}
+    \item[Pesquisa por Artista] \hfill \\
+      Tipo de pesquisa mais utilizada
+    \item[Pesquisa por \emph{Keyword}] \hfill \\
+      Usar palavras-chave como géneros musicais para pesquisar livremente
+    \item[Pesquisa por perfil do Last.fm] \hfill \\
+      Esta pesquisa gera um grafo para cada artista (os mais ouvidos pelo utilizador)
+
+  \end{description}
+
+  \begin{figure}[tb]
+    \begin{center}
+      \includegraphics[]{musicroamer.pdf}
+    \end{center}
+    \caption{MusicRoamer: Várias opções de pesquisa. Por artista; por \emph{keyword} e pelo perfil de utilizador do Last.fm}
+    \label{fig:sota_musicroamer}
+  \end{figure}
+
+  \subsubsection{Prós} % (fold)
+  \label{ssub:pros}
+
+  
+
+  % subsubsection pros (end)
+
+  \subsubsection{Contras} % (fold)
+  \label{ssub:contras}
+  
+  % subsubsection contras (end)
+
+  \subsubsection{Resumo} % (fold)
+  \label{ssub:resumo}
+  
+  % subsubsection resumo (end)
 
 % subsection musicroamer (end)
-
 
 % section projetos_relacionados (end)
 
 
 \section{Resumo ou Conclusões}
+
+Existem muitas outras ferramentas de descoberta de música. Apesar serem poucas as que usam esta representação visual em grafo, todas elas são importantes de se referir:
+
+\begin{itemize}
+  \item 
+  \item 
+\end{itemize}
+
 
 Umas das primeiras lições que se tira dos exemplos dados é que quanto maior for o factor de ramificação de um grafo, mais confuso e saturado se torna.
 Não é um exagero dizer que para além de confuso, o grafo perde o seu propósito inicial de ajudar o utilizador na sua descoberta de música nova.
