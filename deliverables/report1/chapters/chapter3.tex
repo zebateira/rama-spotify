@@ -5,26 +5,28 @@
 
 \section*{}
 
-O principal objectivo desta dissertação, como foi referido no capítulo \ref{chap:intro}, é integrar RAMA e Spotify, desenvolvendo um (ou mais) módulo(s) dos seguintes:
+O principal objectivo desta dissertação, como foi referido no capítulo \ref{chap:intro}, é desenvolver um (ou mais) módulo(s) de software que contribuam para uma melhoria na descoberta e recomendação de música num ambiente integrado entre o RAMA e o Spotify, por forma a tirar partido da representação gráfica do grafo de artistas de música do RAMA e da qualidade do serviço de \emph{Streaming} de música do Spotify.
 
-\begin{itemize}
-  \item Integrar o serviço de \emph{streaming} de música do Spotify no RAMA
-  \item Integrar a visualização de grafos de artistas de música num Aplicação Spotify
-  \item Integrar o módulo de criação de \emph{playlists} do RAMA numa Aplicação Spotify
-  \item Integrar informação de um utilizador Spotify no RAMA, por forma a melhorar as recomendações de artistas de música
-  \item Integrar alguns dos módulos acima referidos numa aplicação móvel
-  \item Melhorias ao design e funcionalidades do RAMA
-\end{itemize}
+Para tal, a proposta inicial desta dissertação consiste em desenvolver, no mínimo, um módulo que implemente uma das seguintes funcionalidades:
 
-No final, deverão ter sido desenvolvidos módulos de software que contribuam para uma melhoria na descoberta e recomendação de música num ambiente relacionado com o RAMA.
+\begin{enumerate}
+  \item \label{item:obj1} Integrar o serviço de \emph{streaming} de música do Spotify \textbf{no RAMA}
+  \item \label{item:obj2} Integrar informação de um utilizador Spotify \textbf{no RAMA}
+  \item \label{item:obj3} Melhorar design e funcionalidades \textbf{do RAMA}
+  \item \label{item:obj4} Integrar a visualização de grafos de artistas de música \textbf{numa Aplicação Spotify}
+  \item \label{item:obj5} Integrar o módulo de criação de \emph{playlists} do RAMA \textbf{numa Aplicação Spotify}
+  \item \label{item:obj6} Integrar alguns dos módulos acima referidos \textbf{numa aplicação móvel}
+\end{enumerate}
 
+As três primeiras funcionalidades (\ref{item:obj1}, \ref{item:obj2} e \ref{item:obj3}) focam-se em melhorar o serviço do RAMA, usando API's do Spotify, ou seja, integrar o Spotify dentro do RAMA.
+Por outro lado, as funcionalidades \ref{item:obj4} e \ref{item:obj5} têm como objetivo integrar o RAMA dentro do Spotify, através de uma Aplicação Spotify, que funciona como plugin do programa principal do Spotify.
+A última funcionalidade (\ref{item:obj6}) teria de implementar algumas das anteriores num Sistema Operativo Móvel (Android, iOS ou Windows Phone).
 
+Este capítulo procura analisar todas as condicionantes que afetam a escolha  dos módulos a desenvolver, e em que ambientes estes se encaixam melhor (Aplicação Spotify, aplicação móvel ou RAMA).
 
-\emph{ Este capítulo deve começar por fazer uma apresentação detalhada do
-problema a resolver podendo mesmo, caso se justifique, constituir-se um capítulo com essa finalidade.
-Deve depois dedicar-se à apresentação da solução sem detalhes de
-implementação. 
-Dependendo do trabalho, pode ser uma descrição mais teórica, mais arquitetural, etc. }
+Inicialmente será explorado o ambiente de desenvolvimento do Spotify, seguido das tecnologias que suportam os referidos módulos, da arquitetura subjacente a cada módulo, e seguida de experimentações feitas que ajudaram na tomada de decisão final.
+
+No final, deve ficar claro quais serão os módulos de software a desenvolver, tendo em conta que o seu objetivo é contribuir para uma melhoria na descoberta e recomendação de música num ambiente relacionado com o RAMA.
 
 
 \section{Spotify} % (fold)
@@ -51,5 +53,4 @@ Dependendo do trabalho, pode ser uma descrição mais teórica, mais arquitetura
 
 \section{Resumo e Conclusões}
 
-Resumir e apresentar as conclusões que se podem tirar no fim deste
-capítulo.
+
