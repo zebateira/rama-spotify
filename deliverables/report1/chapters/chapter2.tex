@@ -6,11 +6,11 @@
 
 \section{Introdução}
 
-Neste capítulo será feita uma análise dos serviços já disponíveis que são relevantes para esta disseração.
+Neste capítulo será feita uma análise dos serviços já disponíveis que são relevantes para esta dissertação.
 Inicialmente, dar-se-á foco ao RAMA, para depois se comparar as suas funcionalidades com os projetos relacionados.
 
 Esta dissertação foca-se mais na forma como se apresenta o conteúdo que se pretende recomendar ao utilizador, e não qual o conteúdo que é sugerido (não obstante da sua importância obviamente).
-No entanto, é quase impossível, no estudo do estado da arte, não se refirir outros projetos que se focam também no conteúdo.
+No entanto, é quase impossível, no estudo do estado da arte, não se referir outros projetos que se focam também no conteúdo.
 Regra geral, os projetos que de seguida serão analisados, utilizam bases de dados externas, como o last.fm, para obter metadata que, convenientemente, também oferecem um tipo de recomendação de música com base numa pesquisa inicial.
 Tal não invalida que o tratamento dessa informação seja mal feito, e por isso, será feita uma pequena análise dos conteúdos sugeridos em cada um dos serviços.
 
@@ -26,8 +26,8 @@ Tal não invalida que o tratamento dessa informação seja mal feito, e por isso
 \subsection{Liveplasma - liveplasma.com} % (fold)
 \label{sub:liveplasma}
 
-O liveplasma.com é uma aplicação em flash que mosta relações de artistas de música em forma de grafo, para além de também permitir criar grafos com livros e filmes.
-Este não permite editar o grafo e, ao clicar num nó o grafo, é novamente gerado apartir desse nó.
+O liveplasma.com é uma aplicação em flash que mostra relações de artistas de música em forma de grafo, para além de também permitir criar grafos com livros e filmes.
+Este não permite editar o grafo e, ao clicar num nó o grafo, é novamente gerado a partir desse nó.
 
 \begin{figure}[tb]
   \begin{center}
@@ -54,7 +54,7 @@ Na figura \ref{fig:sota_liveplasma} podemos ver o resultado de uma pesquisa.
 \subsubsection{Prós} % (fold)
 \label{ssub:liveplasma_pros}
 
-Os aspectos interessantes desta ferramenta são:
+Os aspetos interessantes desta ferramenta são:
 
 \begin{itemize}
   \item Links para compra dos álbums
@@ -205,7 +205,7 @@ E assim, é possível expandir o grafo até se tornar ilegível.
   \label{ssub:contras}
 
   Um problema do MusicRoamer é o facto de ser feito em flash, pois torna a interface menos natural e fluída.
-  Para aĺém disso, à medida que a profundidade do grafo vai aumentando, o grafo começa a ficar confuso e ilegível (figura~\ref{fig:sota_musicroamer4}).
+  Para além disso, à medida que a profundidade do grafo vai aumentando, o grafo começa a ficar confuso e ilegível (figura~\ref{fig:sota_musicroamer4}).
   A linhas começam a se sobrepor e alguns nós ficam pouco legíveis.
 
   \begin{figure}[tb]
@@ -257,8 +257,8 @@ Existem muitas outras ferramentas de descoberta de música. Apesar serem poucas 
 \end{itemize}
 
 
-Umas das primeiras lições que se tira dos exemplos dados é que quanto maior for o factor de ramificação de um grafo, mais confuso e saturado se torna.
+Umas das primeiras lições que se tira dos exemplos dados é que quanto maior for o fator de ramificação de um grafo, mais confuso e saturado se torna.
 Não é um exagero dizer que para além de confuso, o grafo perde o seu propósito inicial de ajudar o utilizador na sua descoberta de música nova.
 
-Uma forma de evitar este problema, será limitar o factor de ramificação a um máximo que não cause este problema.
+Uma forma de evitar este problema, será limitar o fator de ramificação a um máximo que não cause este problema.
 
