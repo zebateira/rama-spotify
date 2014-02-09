@@ -1,23 +1,86 @@
 %!TEX root = ../mieic.tex
 
-\chapter{Projeto}\label{chap:chap3}
+\chapter{Projeto}
+\label{chap:chap3}
 
 \section*{}
 
-Este capítulo deve começar por fazer uma apresentação detalhada do
-problema a resolver\footnote{Na introdução a apresentação do
-  problema foi breve.} podendo mesmo, caso se justifique,
-constituir-se um capítulo com essa finalidade.
+O principal objetivo desta dissertação, como foi referido no capítulo \ref{chap:intro}, é desenvolver um (ou mais) módulo(s) de software que contribuam para uma melhoria na descoberta e recomendação de música num ambiente integrado entre o RAMA e o Spotify, por forma a tirar partido da representação gráfica do grafo de artistas de música do RAMA e da qualidade do serviço de \emph{Streaming} de música do Spotify.
 
-Deve depois dedicar-se à apresentação da solução sem detalhes de
-implementação. 
-Dependendo do trabalho, pode ser uma descrição mais teórica, mais
-``arquitetural'', etc.
+Para tal, a proposta inicial desta dissertação consiste em desenvolver, no mínimo, um módulo que implemente uma das seguintes funcionalidades:
+
+\begin{enumerate}
+  \item \label{item:obj1} Integrar o serviço de \emph{streaming} de música do Spotify \textbf{no RAMA}
+  \item \label{item:obj2} Integrar informação de um utilizador Spotify \textbf{no RAMA}
+  \item \label{item:obj3} Melhorar design e funcionalidades \textbf{do RAMA}
+  \item \label{item:obj4} Integrar a visualização de grafos de artistas de música \textbf{numa Aplicação Spotify}
+  \item \label{item:obj5} Integrar o módulo de criação de \emph{playlists} do RAMA \textbf{numa Aplicação Spotify}
+  \item \label{item:obj6} Integrar alguns dos módulos acima referidos \textbf{numa aplicação móvel}
+\end{enumerate}
+
+As três primeiras funcionalidades (\ref{item:obj1}, \ref{item:obj2} e \ref{item:obj3}) focam-se em melhorar o serviço do RAMA, usando API's do Spotify, ou seja, integrar o Spotify dentro do RAMA.
+Por outro lado, as funcionalidades \ref{item:obj4} e \ref{item:obj5} têm como objetivo integrar o RAMA dentro do Spotify, através de uma Aplicação Spotify, que funciona como plugin do programa principal do Spotify.
+A última funcionalidade (\ref{item:obj6}) teria de implementar algumas das anteriores num Sistema Operativo Móvel (Android, iOS ou Windows Phone).
+
+Este capítulo procura analisar todas as condicionantes que afetam a escolha  dos módulos a desenvolver, e em que ambientes estes se encaixam melhor (Aplicação Spotify, aplicação móvel ou RAMA).
+
+Inicialmente será explorado o ambiente de desenvolvimento que o Spotify disponibiliza, ou seja, que tecnologias tem disponíveis para \emph{developers}.
+De seguida serão analisadas quais dessas tecnologias assentam melhor em cada um dos módulos propostos a desenvolver, através de experimentações feitas\footnote{E quando necessário, será descrito um possível esquema de arquitetura por forma a facilitar a explicação do problema}.
+
+
+No final, deve ficar claro quais serão os módulos de software a desenvolver, que tecnologias irão ser usadas e qual o esquema geral da sua arquitetura.
+O produto final deve de ir ao encontro do objetivo de contribuir para uma melhoria na descoberta e recomendação de música num ambiente relacionado com o RAMA.
+
 
 \section{Spotify} % (fold)
 \label{sec:spotify}
 
-\lipsum
+  O Spotify é um serviço de \emph{streaming} de música que...
+
+  \subsection{Ferramentas de Desenvolvimento} % (fold)
+  \label{sub:ferramentas_de_desenvolvimento}
+  
+    No momento de escrita deste relatório, o Spotify tem disponível um conjunto de ferramentas\footnote{http://developer.spotify.com/technologies} para desenvolver módulos de software que podem estar embebidos nas mais diversas aplicações (\emph{third-party applications}) ou então dentro do \emph{Spotify Desktop Client}.
+
+    Existem quatro ferramentas de desenvolvimento, cada uma delas com o seu propósito e utilidade.
+
+
+    \subsubsection{Spotify Apps} % (fold)
+    \label{ssub:spotify_apps}
+      É usada para desenvolver Aplicações Spotify\footnote{https://developer.spotify.com/technologies/apps} que são usadas pelos utilizadores Spotify dentro do \emph{Spotify Desktop Client}.
+      
+      Para o seu desenvolvimento são disponibilizadas duas \emph{frameworks}: \emph{API Framework}\footnote{https://developer.spotify.com/docs/apps/api/1.0/} e \emph{Views Framework}\footnote{https://developer.spotify.com/docs/apps/views/1.0/}.
+      A primeira fornece uma interface para recolher metadados de artistas, álbuns e músicas e controlar o reprodutor de música.
+      A segundar fornece componentes de design como botões, listas, abas, entre outros, para o desenvolvimento da aplicação.
+
+      Para desenvolver os módulos \ref{item:obj4} e \ref{item:obj5}, será necessário
+
+    % subsubsection spotify_apps (end)
+
+
+    \subsubsection{Spotify Widgets} % (fold)
+    \label{ssub:spotify_widgets}
+      Spotify Widgets\footnote{https://developer.spotify.com/technologies/widgets}
+
+
+    % subsubsection spotify_widgets (end)
+
+    \subsubsection{Libspotify SDK} % (fold)
+    \label{ssub:libspotify_sdk}
+    
+      Libspotify SDK\footnote{https://developer.spotify.com/technologies/libspotify}
+
+    % subsubsection libspotify_sdk (end)
+
+
+    \subsubsection{Metadata API} % (fold)
+    \label{ssub:metadata_api}
+    
+      Metadata API\footnote{https://developer.spotify.com/technologies/web-api}
+
+    % subsubsection metadata_api (end)
+
+  % subsection ferramentas_de_desenvolvimento (end)
 
 % section spotify (end)
 
@@ -29,7 +92,6 @@ Dependendo do trabalho, pode ser uma descrição mais teórica, mais
 \section{Arquitetura} % (fold)
 \label{sec:arquitetura}
 
-\lipsum
 
 % section arquitetura (end)
 
@@ -40,5 +102,4 @@ Dependendo do trabalho, pode ser uma descrição mais teórica, mais
 
 \section{Resumo e Conclusões}
 
-Resumir e apresentar as conclusões que se podem tirar no fim deste
-capítulo.
+
