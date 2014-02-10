@@ -25,17 +25,18 @@ A última funcionalidade (\ref{item:obj6}) teria de implementar algumas das ante
 Este capítulo procura analisar todas as condicionantes que afetam a escolha  dos módulos a desenvolver, e em que ambientes estes se encaixam melhor (Aplicação Spotify, aplicação móvel ou RAMA).
 
 Inicialmente será explorado o ambiente de desenvolvimento que o Spotify disponibiliza, ou seja, que tecnologias tem disponíveis para \emph{developers}.
-De seguida serão analisadas quais dessas tecnologias assentam melhor em cada um dos módulos propostos a desenvolver, através de experimentações feitas\footnote{E quando necessário, será descrito um possível esquema de arquitetura por forma a facilitar a explicação do problema}.
+De seguida serão analisadas quais dessas tecnologias assentam melhor em cada um dos módulos propostos a desenvolver, através de experimentações feitas, e quando necessário, será descrito um possível esquema de arquitetura por forma a facilitar a explicação do problema.
 
 
-No final, deve ficar claro quais serão os módulos de software a desenvolver, que tecnologias irão ser usadas e qual o esquema geral da sua arquitetura.
+No final deste capítulo, deve ficar claro quais serão os módulos de software a desenvolver, que tecnologias irão ser usadas e qual o esquema geral da sua arquitetura.
 O produto final deve de ir ao encontro do objetivo de contribuir para uma melhoria na descoberta e recomendação de música num ambiente relacionado com o RAMA.
 
 
 \section{Spotify} % (fold)
 \label{sec:spotify}
 
-  O Spotify é um serviço de \emph{streaming} de música que...
+  O Spotify é um serviço de \emph{streaming} de música que permite ouvir, através de uma ligação de Internet, qualquer música que o Spotify possua no seu catálogo.
+
 
   \subsection{Ferramentas de Desenvolvimento} % (fold)
   \label{sub:ferramentas_de_desenvolvimento}
@@ -47,28 +48,53 @@ O produto final deve de ir ao encontro do objetivo de contribuir para uma melhor
 
     \subsubsection{Spotify Apps} % (fold)
     \label{ssub:spotify_apps}
-      É usada para desenvolver Aplicações Spotify\footnote{https://developer.spotify.com/technologies/apps} que são usadas pelos utilizadores Spotify dentro do \emph{Spotify Desktop Client}.
+      Serve para desenvolver Aplicações Spotify\footnote{https://developer.spotify.com/technologies/apps} que são usadas pelos utilizadores Spotify dentro do \emph{Spotify Desktop Client}.
       
       Para o seu desenvolvimento são disponibilizadas duas \emph{frameworks}: \emph{API Framework}\footnote{https://developer.spotify.com/docs/apps/api/1.0/} e \emph{Views Framework}\footnote{https://developer.spotify.com/docs/apps/views/1.0/}.
       A primeira fornece uma interface para recolher metadados de artistas, álbuns e músicas e controlar o reprodutor de música.
-      A segundar fornece componentes de design como botões, listas, abas, entre outros, para o desenvolvimento da aplicação.
+      A segunda fornece componentes de design como botões, listas, abas, entre outros, para o desenvolvimento da aplicação.
 
-      Para desenvolver os módulos \ref{item:obj4} e \ref{item:obj5}, será necessário
+      Para desenvolver os módulos \ref{item:obj4} e \ref{item:obj5} esta é a ferramenta mais apropriada obviamente.
+
+      ...
 
     % subsubsection spotify_apps (end)
 
 
     \subsubsection{Spotify Widgets} % (fold)
     \label{ssub:spotify_widgets}
-      Spotify Widgets\footnote{https://developer.spotify.com/technologies/widgets}
+      As Widgets\footnote{https://developer.spotify.com/technologies/widgets} são pequenos componentes que se podem embeber em \emph{websites}.
+      No momento da escrita deste relatório existem dois componentes: \emph{Play Button} e \emph{Follow Button}.
 
+      No entanto, existe algumas limitações no uso destas componentes.
+      No Spotify, apenas utilizadores que tenham criado conta no serviço Spotify é que podem usar o mesmo.
+      O mesmo também se aplica a estas \emph{widgets} - apesar de estas existirem numa aplicação externa ao Spotify, apenas utilizadores Spotify podem usá-las.
+      Esta limitação pode fazer sentido para o \emph{Follow Button}, mas o \emph{Play Button} torna-se inútil para utilizadores que não usem o Spotify.
+      Outro problema surge quando a música do \emph{Play Button} não está disponível no País em que o utilizador está.
+
+      Estas \emph{widgets} apenas servem de hiperligação ou ao \emph{Player} do Spotify ou ao \emph{WebPlayer} do Spotify.
+      Na realidade, usando estas \emph{widgets}, o stream de música do Spotify é sempre reproduzido dentro do ambiente do Spotify, e nunca em aplicações externas.
+
+      ...
 
     % subsubsection spotify_widgets (end)
 
     \subsubsection{Libspotify SDK} % (fold)
     \label{ssub:libspotify_sdk}
     
-      Libspotify SDK\footnote{https://developer.spotify.com/technologies/libspotify}
+      Libspotify SDK\footnote{https://developer.spotify.com/technologies/libspotify} é uma API que permite adicionar os serviços do Spotify em aplicações externas.
+      No entanto, existem algumas limitações para os utilizadores destas aplicações.
+
+      
+      Existem, dois tipos de conta a que o utilizador pode subscrever: conta grátis e conta \emph{premium}.
+      Como foi referido anteriormente (\ref{ssub:spotify_widgets}) apenas utilizadores Spotify podem interagir com qualquer componente do Spotify, dentro ou fora das aplicações nativas do mesmo.
+      Libspotify fornece uma interface que permite a um utilizador fazer \emph{login} no Spotify em aplicações externas por forma a poder ouvir música do Spotify, criar playlists e outras funcionalidades.
+      No entanto, o único tipo de utilizadores que pode fazer \emph{login} nestas aplicações que usam Libspotify, são utilizadores \emph{premium}.
+
+      Neste sentido, uma aplicação que, para funcionar, necessita de que o utilizador, para além de possuir uma conta Spotify, também pague uma subscrição mensal de utilizador premium, é uma aplicação bastante restritiva.
+
+      Esta ferramenta pode ser usada para desenvolver o módulo \ref{item:obj6}.
+      
 
     % subsubsection libspotify_sdk (end)
 
@@ -76,30 +102,64 @@ O produto final deve de ir ao encontro do objetivo de contribuir para uma melhor
     \subsubsection{Metadata API} % (fold)
     \label{ssub:metadata_api}
     
-      Metadata API\footnote{https://developer.spotify.com/technologies/web-api}
+      A \emph{Metadata API}\footnote{https://developer.spotify.com/technologies/web-api} disponibiliza publicamente informação de músicas, álbuns e artistas da Base de dados do Spotify.
+
+      Através de pedidos HTTP
+
+      ...
+
+
+
 
     % subsubsection metadata_api (end)
 
   % subsection ferramentas_de_desenvolvimento (end)
+
+  \subsection{Experimentações Feitas} % (fold)
+  \label{sub:experimentacoes}
+  
+    ...
+
+  % subsection experimentacoes (end)
+
+  \subsection{Conclusão} % (fold)
+  \label{sub:conclusao}
+  
+    A escolha final do módulo a desenvolver é a Aplicação Spotify.
+
+  % subsection conclusao (end)
 
 % section spotify (end)
 
 \section{Tecnologias} % (fold)
 \label{sec:tecnologias}
 
+  Tecnologias a serem usadas:
+
+  \begin{description}
+    \item[Spotify Desktop Client] \hfill \\
+      O desenvolvimento de aplicações Spotify é feito de forma integrada no programa.
+    \item[Webkit Development Tools - webkit.org] \hfill \\
+      A aplicação do Spotify foi desenvolvida com Webkit, e por isso, as aplicações Spotify também o são.
+    \item[Sublime Text - sublimetext.com] \hfill \\
+      Um editor de texto bastante orientado a desenvolvimento web. Um dos mais usados neste contexto
+    \item[Bower - bower.io] \hfill \\
+      Gestor de pacotes de software e dependências orientado para desenvolvimento web
+    \item[Gruntjs - gruntjs.com] \hfill \\
+      Programa de gestão de tarefas automatizadas. Muito útil para testes, compilação e otimização de código
+    \item[Arborjs - arborjs.org] \hfill \\
+      Framework de javascript para desenho de grafos. Foi já utilizada no desenvolvimento do RAMA (existe sempre a possibilidade de se usar outra ferramenta substituta caso esta não for adequada)
+  \end{description}
+
 % section tecnologias (end)
 
 \section{Arquitetura} % (fold)
 \label{sec:arquitetura}
 
+  Esquema geral da arquitetura da Aplicação.
 
 % section arquitetura (end)
 
-\section{Experimentação Feita} % (fold)
-\label{sec:experimentacao}
-
-% section experimentacao (end)
-
 \section{Resumo e Conclusões}
 
-
+  A escolha final do módulo a desenvolver é a Aplicação Spotify.
