@@ -58,7 +58,7 @@ O produto final deve de ir ao encontro do objetivo de contribuir para uma melhor
         \label{fig:spotify_apps}
       \end{figure}
 
-      Na figura \ref{fig:spotify_apps} é possível ver o aspecto do \emph{Spotify Desktop Client}.
+      Na figura \ref{fig:spotify_apps} é possível ver o aspeto do \emph{Spotify Desktop Client}.
       Na barra lateral esquerda, dentro do separador \emph{Apps}, aparece a lista de aplicações já instaladas, assim como o \emph{App Finder}, que permite procurar e instalar aplicações com apenas um clique.
  
       Na figura \ref{fig:spotify_apps2} está aberta a aplicação da Last.fm. É possível ver que as Aplicações Spotify têm apenas um espaço reservado embutido no \emph{Spotify Desktop Client}.
@@ -183,7 +183,7 @@ O produto final deve de ir ao encontro do objetivo de contribuir para uma melhor
           Dada a \emph{query}: \\
           \url{http://ws.spotify.com/search/1/artist.json?q=camane} (fadista "Camané")
 
-          Obtemos o resultado:
+          Obtém-se o resultado:
 
           \lstinputlisting[caption={Os resultados são ordenados pelo atributo "popularity"}]{snippets/search_camane.json}
 
@@ -235,7 +235,7 @@ O produto final deve de ir ao encontro do objetivo de contribuir para uma melhor
 
     \end{figure}
 
-    Verificou-se que as duas ferramentas estão bem documetadas e em constante actulização. \\
+    Verificou-se que as duas ferramentas estão bem documentadas e em constante atualização. \\
 
     Outra experiência foi realizada para verificar se é possível usar o elemento \emph{canvas} numa Aplicação Spotify.
     Isto é necessário pois será a única forma de poder desenhar graficamente o grafo.
@@ -294,31 +294,105 @@ O produto final deve de ir ao encontro do objetivo de contribuir para uma melhor
     Para abrir uma Aplicação Spotify, localmente, escreve-se o seguinte na barra de pesquisa: spotify:app:rama
 
     Onde \emph{rama} deve ser o identificador da aplicação declarado no ficheiro \emph{manifest.json}\footnote{ficheiro situado na \emph{root} da pasta do projeto}. \\
+    Exemplo de ficheiro \emph{manifest.json}:
+
+    \lstinputlisting[caption={manifest.json: \emph{BundleIdentifier} é o identificador da aplicação; \emph{Dependencies} declara as dependências das API's necessárias ao desenvolvimento.}]{snippets/manifest.json}
 
     Existem outras opções úteis a que se pode aceder usando a tab \emph{Develop} (\ref{fig:html5_support}).
+    A opção "Show Inspector" abre a janela \emph{Webkit Development Tools} (\ref{sub:webkit_tools})
 
     \begin{figure}
       \begin{center}
         \includegraphics[width=0.6\textwidth]{html5_support.pdf}
       \end{center}
-      \caption{Caption here}
+      \caption{Menu \emph{Develop}}
       \label{fig:html5_support}
     \end{figure}
   
   % subsection subsection_name (end)
 
-  \begin{description}
-    \item[Webkit Development Tools - webkit.org] \hfill \\
-      A aplicação do Spotify foi desenvolvida com Webkit, e por isso, as aplicações Spotify também o são.
-    \item[Sublime Text - sublimetext.com] \hfill \\
-      Um editor de texto bastante orientado a desenvolvimento web. Um dos mais usados neste contexto
-    \item[Bower - bower.io] \hfill \\
-      Gestor de pacotes de software e dependências orientado para desenvolvimento web
-    \item[Gruntjs - gruntjs.com] \hfill \\
-      Programa de gestão de tarefas automatizadas. Muito útil para testes, compilação e otimização de código
-    \item[Arborjs - arborjs.org] \hfill \\
-      Framework de javascript para desenho de grafos. Foi já utilizada no desenvolvimento do RAMA (existe sempre a possibilidade de se usar outra ferramenta substituta caso esta não for adequada)
-  \end{description}
+  \subsection{Webkit Development Tools - webkit.org} % (fold)
+  \label{sub:webkit_tools}
+
+    A partir do \emph{webkit}, tem-se acesso a várias ferramentas úteis para o desenvolvimento \emph{web} (\ref{fig:webkit_inspector}).
+
+    \begin{figure}
+      \begin{center}
+        \includegraphics[width=\textwidth]{webkit_inspector.pdf}
+      \end{center}
+      \caption{Webkit: Vista da tab \emph{Inspector}. Outas ferramentas disponíveis (tabs): \emph{Resources, Network, Sources, Timeline, Profiles, Audits} e \emph{Console}.}
+
+      \label{fig:webkit_inspector}
+    \end{figure}
+
+    A mais importantes são:
+
+    \begin{description}
+      \item[Inspector] Permite inspecionar e editar o código \emph{HTML} e \emph{CSS} da aplicação diretamente  (\ref{fig:webkit_inspector}).
+      \item[Network] Permite, por exemplo, ver o tempo que cada componente da aplicação demorou a carregar (uma imagem ou um ficheiro \emph{css}) (\ref{fig:webkit_network}).
+      \item[Profile] Permite identificar que partes do código \emph{javascript} são as mais frequentemente executadas (\ref{fig:webkit_profile}).
+      \item[Audit] Ajuda a perceber quantos recursos estão a ser descarregados desnecessariamente, como por exemplo, regras de \emph{CSS} que não estão a ser usadas (\ref{fig:webkit_audit}).
+      \item[Console] Muito útil para \emph{debug} de \emph{javascript}.
+
+    \end{description}
+
+
+    \begin{figure}
+      \begin{center}
+        \includegraphics[width=\textwidth]{webkit_network.pdf}
+      \end{center}
+      \caption{Webkit Network}
+      \label{fig:webkit_network}
+    \end{figure}
+
+    \begin{figure}
+      \begin{center}
+        \includegraphics[width=\textwidth]{webkit_profile.pdf}
+      \end{center}
+      \caption{Webkit Profile: É possível ver que a renderização do grafo é o que ocupa mais tempo de processamento como esperado. No entanto, existe uma parte de \emph{JQuery} que ocupa 12.72\% do tempo de processamento, o que pode indicar um possível ponto de melhoria de performance.}
+      \label{fig:webkit_profile}
+    \end{figure}
+
+    \begin{figure}
+      \begin{center}
+        \includegraphics[width=\textwidth]{webkit_audit.pdf}
+      \end{center}
+      \caption{Webkit Audit: 96\% do código \emph{CSS} não está a ser usado, sendo por isso, um ponto de melhoria reduzir a quantidade de informação descarregada.}
+      \label{fig:webkit_audit}
+    \end{figure}
+
+    \begin{figure}
+      \begin{center}
+        \includegraphics[width=\textwidth]{webkit_console.pdf}
+      \end{center}
+      \caption{Webkit Console: Erros de \emph{Javascript} aparecem destacados para chamar a atenção.}
+      \label{fig:webkit_console}
+    \end{figure}
+
+  % subsection webkit_tools (end)
+
+  \subsection{Npmjs - npmjs.org} % (fold)
+  \label{sub:npm}
+    Gestor de pacotes de software e dependências.
+    Para usar \emph{npm} é necessário um ficheiro de configuração \emph{package.json} que permite identificar quais os pacotes de que a aplicação depende, e as suas versões. \\
+    Exemplo:
+
+    \lstinputlisting[caption={\emph{package.json}: ao indicar a versão com "*", significa que se deve usar sempre a mais recente.}]{snippets/package.json}
+
+  % subsection npm (end)
+
+  \subsection{Gruntjs - gruntjs.com} % (fold)
+    \label{sub:gruntjs} 
+      Programa de gestão de tarefas automatizadas.
+      Muito útil para testes, compilação e otimização de código.
+      É possível por exemplo, quando qualquer parte do código mudar, a aplicação automaticamente atualiza com as mudanças mais recentes, sem ser preciso refrescar manualmente a aplicação.
+  % subsection gruntjs (end)
+
+  \subsection{Arborjs - arborjs.org} % (fold)
+  \label{sub:arborjs}
+    Framework de javascript para desenho de grafos. Foi já utilizada no desenvolvimento do RAMA (existe sempre a possibilidade de se usar outra ferramenta substituta caso esta não for adequada).
+  
+  % subsection arborjs (end)
 
 % section tecnologias (end)
 
