@@ -242,8 +242,7 @@ O produto final deve de ir ao encontro do objetivo de contribuir para uma melhor
     Para isso foi apenas necessário criar uma aplicação com o seguinte código fonte:
 
     \begin{lstlisting}[caption={Elemento \emph{iframe} que embebe o \emph{website} do RAMA na aplicação}]
-      <iframe src="http://rama.inescporto.pt/app" frameborder="0"></iframe>
-    \end{lstlisting}
+      <iframe src="http://rama.inescporto.pt/app" frameborder="0"></iframe>\end{lstlisting}
 
     Desta forma, é possível embeber o RAMA na Aplicação Spotify (que usa o elemento \emph{canvas} para desenhar o grafo).
     Resultado final na figura \ref{fig:rama_spotifyed}.
@@ -290,7 +289,21 @@ O produto final deve de ir ao encontro do objetivo de contribuir para uma melhor
 
   \subsection{\emph{Spotify Desktop Client}} % (fold)
   \label{sub:subsection_name}
-    O desenvolvimento de aplicações Spotify é feito de forma integrada no programa.
+    O desenvolvimento de Aplicações Spotify é feito de forma integrada no programa.
+
+    Para abrir uma Aplicação Spotify, localmente, escreve-se o seguinte na barra de pesquisa: spotify:app:rama
+
+    Onde \emph{rama} deve ser o identificador da aplicação declarado no ficheiro \emph{manifest.json}\footnote{ficheiro situado na \emph{root} da pasta do projeto}. \\
+
+    Existem outras opções úteis a que se pode aceder usando a tab \emph{Develop} (\ref{fig:html5_support}).
+
+    \begin{figure}
+      \begin{center}
+        \includegraphics[width=0.6\textwidth]{html5_support.pdf}
+      \end{center}
+      \caption{Caption here}
+      \label{fig:html5_support}
+    \end{figure}
   
   % subsection subsection_name (end)
 
