@@ -48,15 +48,34 @@ O produto final deve de ir ao encontro do objetivo de contribuir para uma melhor
 
     \subsubsection{Spotify Apps} % (fold)
     \label{ssub:spotify_apps}
-      Serve para desenvolver Aplicações Spotify\footnote{https://developer.spotify.com/technologies/apps} que são usadas pelos utilizadores Spotify dentro do \emph{Spotify Desktop Client}.
-      
-      Para o seu desenvolvimento são disponibilizadas duas \emph{frameworks}: \emph{API Framework}\footnote{https://developer.spotify.com/docs/apps/api/1.0/} e \emph{Views Framework}\footnote{https://developer.spotify.com/docs/apps/views/1.0/}.
+      Serve para desenvolver Aplicações Spotify\footnote{https://developer.spotify.com/technologies/apps} que são usadas pelos utilizadores Spotify dentro do \emph{Spotify Desktop Client}. Estas são aplicação \emph{HTML5}\footnote{http://www.w3.org/TR/html5/}.
+
+      \begin{figure}
+        \begin{center}
+          \includegraphics[width=\textwidth]{spotify.pdf}
+        \end{center}
+        \caption{Spotify: interface do modo de descoberta do \emph{desktop client}}
+        \label{fig:spotify_apps}
+      \end{figure}
+
+      Na figura \ref{fig:spotify_apps} é possível ver o aspecto do \emph{Spotify Desktop Client}.
+      Na barra lateral esquerda, dentro do separador \emph{Apps}, aparece a lista de aplicações já instaladas, assim como o \emph{App Finder}, que permite procurar e instalar aplicações com apenas um clique.
+ 
+      Na figura \ref{fig:spotify_apps2} está aberta a aplicação da Last.fm. É possível ver que as Aplicações Spotify têm apenas um espaço reservado embutido no \emph{Spotify Desktop Client}.
+
+      \begin{figure}
+        \begin{center}
+          \includegraphics[width=\textwidth]{spotify_apps.pdf}
+        \end{center}
+        \caption{Spotify: Aplicação Last.fm aberta no \emph{Spotify Player}}
+        \label{fig:spotify_apps2}
+      \end{figure}
+
+      Para o seu desenvolvimento destas aplicações são disponibilizadas duas \emph{frameworks}: \emph{API Framework}\footnote{https://developer.spotify.com/docs/apps/api/1.0/} e \emph{Views Framework}\footnote{https://developer.spotify.com/docs/apps/views/1.0/}.
       A primeira fornece uma interface para recolher metadados de artistas, álbuns e músicas e controlar o reprodutor de música.
       A segunda fornece componentes de design como botões, listas, abas, entre outros, para o desenvolvimento da aplicação.
 
-      Para desenvolver os módulos \ref{item:obj4} e \ref{item:obj5} esta é a ferramenta mais apropriada obviamente.
-
-      ...
+      Para desenvolver os módulos \ref{item:obj4} e \ref{item:obj5} esta é a ferramenta mais apropriada.
 
     % subsubsection spotify_apps (end)
 
@@ -64,7 +83,23 @@ O produto final deve de ir ao encontro do objetivo de contribuir para uma melhor
     \subsubsection{Spotify Widgets} % (fold)
     \label{ssub:spotify_widgets}
       As Widgets\footnote{https://developer.spotify.com/technologies/widgets} são pequenos componentes que se podem embeber em \emph{websites}.
-      No momento da escrita deste relatório existem dois componentes: \emph{Play Button} e \emph{Follow Button}.
+      No momento da escrita deste relatório existem dois componentes: \emph{Play Button} (\ref{fig:spotify_play_button}) e \emph{Follow Button} (\ref{fig:spotify_follow_button}).
+
+      \begin{figure}
+        \begin{center}
+          \includegraphics{spotify_play_button.pdf}
+        \end{center}
+        \caption{Spotify: \emph{Play Button} pode ser embebido em \emph{websites}.}
+        \label{fig:spotify_play_button}
+      \end{figure}
+
+      \begin{figure}
+        \begin{center}
+          \includegraphics{spotify_follow_button.pdf}
+        \end{center}
+        \caption{Spotify: \emph{Follow Button} permite seguir um artista.}
+        \label{fig:spotify_follow_button}
+      \end{figure}
 
       No entanto, existe algumas limitações no uso destas componentes.
       No Spotify, apenas utilizadores que tenham criado conta no serviço Spotify é que podem usar o mesmo.
@@ -73,9 +108,13 @@ O produto final deve de ir ao encontro do objetivo de contribuir para uma melhor
       Outro problema surge quando a música do \emph{Play Button} não está disponível no País em que o utilizador está.
 
       Estas \emph{widgets} apenas servem de hiperligação ou ao \emph{Player} do Spotify ou ao \emph{WebPlayer} do Spotify.
-      Na realidade, usando estas \emph{widgets}, o stream de música do Spotify é sempre reproduzido dentro do ambiente do Spotify, e nunca em aplicações externas.
+      Na realidade, usando estas \emph{widgets}, o stream de música do Spotify é sempre reproduzido dentro do ambiente do Spotify, e nunca em aplicações externas. \\
 
-      ...
+      Para embeber as \emph{widgets} apenas é necessário introduzir um elemento \emph{iframe} no código \emph{HTML} fonte do \emph{website}:
+
+      \lstinputlisting[language=HTML,caption={Código \emph{HTML} para embeber um \emph{Play Button}}]{snippets/play_button.html}
+
+      As \emph{widgets} seriam úteis para desenvolver os módulos \ref{item:obj1} e \ref{item:obj3}.
 
     % subsubsection spotify_widgets (end)
 
@@ -84,16 +123,16 @@ O produto final deve de ir ao encontro do objetivo de contribuir para uma melhor
     
       Libspotify SDK\footnote{https://developer.spotify.com/technologies/libspotify} é uma API que permite adicionar os serviços do Spotify em aplicações externas.
       No entanto, existem algumas limitações para os utilizadores destas aplicações.
-
       
       Existem, dois tipos de conta a que o utilizador pode subscrever: conta grátis e conta \emph{premium}.
       Como foi referido anteriormente (\ref{ssub:spotify_widgets}) apenas utilizadores Spotify podem interagir com qualquer componente do Spotify, dentro ou fora das aplicações nativas do mesmo.
       Libspotify fornece uma interface que permite a um utilizador fazer \emph{login} no Spotify em aplicações externas por forma a poder ouvir música do Spotify, criar playlists e outras funcionalidades.
-      No entanto, o único tipo de utilizadores que pode fazer \emph{login} nestas aplicações que usam Libspotify, são utilizadores \emph{premium}.
+      No entanto, os únicos utilizadores que pode fazer \emph{login} nestas aplicações que usam Libspotify, são utilizadores \emph{premium}.
+      Para além de que, os \emph{developers} da própria aplicação também precisam de ser utilizadores \emph{premium}.
 
-      Neste sentido, uma aplicação que, para funcionar, necessita de que o utilizador, para além de possuir uma conta Spotify, também pague uma subscrição mensal de utilizador premium, é uma aplicação bastante restritiva.
+      Neste sentido, uma aplicação que, para funcionar, necessita de que o utilizador, para além de possuir uma conta Spotify, também pague uma subscrição mensal \emph{premium}, é uma aplicação bastante restritiva.
 
-      Esta ferramenta pode ser usada para desenvolver o módulo \ref{item:obj6}.
+      Esta ferramenta pode ser usada para desenvolver os módulos \ref{item:obj1}, \ref{item:obj2} e \ref{item:obj6}.
       
 
     % subsubsection libspotify_sdk (end)
@@ -104,12 +143,64 @@ O produto final deve de ir ao encontro do objetivo de contribuir para uma melhor
     
       A \emph{Metadata API}\footnote{https://developer.spotify.com/technologies/web-api} disponibiliza publicamente informação de músicas, álbuns e artistas da Base de dados do Spotify.
 
-      Através de pedidos HTTP
+      Através de pedidos HTTP é possível obter informação da base de dados do Spotify. Existe dois tipos de pedidos que esta API disponibiliza: \emph{search}\footnote{https://developer.spotify.com/technologies/web-api/search} e \emph{lookup}\footnote{https://developer.spotify.com/technologies/web-api/lookup}.
+      Para obter informação detalhada de, por exemplo, um artista, é necessário saber o deu identificador único.
+      Esse identificador é um \emph{URI} da forma:
 
-      ...
+      \url{spotify:artist:<artist_id>}, onde \emph{artist\_id} é um identificar único.
 
+      Exemplo:
 
+      \url{spotify:artist:65nZq8l5VZRG4X445F5kmN}, é o identificador único da fadista "Mariza". \\
 
+      Também existem identificadores únicos para álbuns:
+
+      \url{spotify:album:5d1LpIPmTTrvPltx26TlEU} (álbum "Fado Tradicional" de "Mariza") \\
+
+       e para faixas de música:
+
+       \url{spotify:track:2vqYasauhDLVjTt7CGWK6y} (música "Fado Vianinha" do mesmo álbum) \\
+
+      Para obter este \emph{URI} é preciso interrogar a base de dados com um método de pesquisa.
+      Para isso, usa-se o \emph{search}.
+
+      \begin{description}
+        \item[\emph{Search}] \hfill
+
+          O \emph{URL} base de utilização é:
+
+          \url{http://ws.spotify.com/search/1/album}, para pesquisa de álbuns.
+
+          Se se pretender pesquisar Artistas, usa-se \emph{artist}, se se pretender pesquisar Faixas de música, usa-se \emph{track}. \\
+
+          Exemplos:
+
+          \url{http://ws.spotify.com/search/1/album?q=foo} \\
+          \url{http://ws.spotify.com/search/1/artist.json?q=red+hot} \\
+
+          O resultado da \emph{query}, por defeito, tem o format \emph{XML}. No entanto, também se pode especificar o formato \emph{JSON} (como no segundo exemplo).
+
+          Dada a \emph{query}: \\
+          \url{http://ws.spotify.com/search/1/artist.json?q=camane} (fadista "Camané")
+
+          Obtemos o resultado:
+
+          \lstinputlisting[caption={Os resultados são ordenados pelo atributo "popularity"}]{snippets/search_camane.json}
+
+        \item[\emph{Lookup}] \hfill \\
+          Depois de obtido o \emph{URI} identificador, é possível obter mais informações de um conteúdo usando o \emph{lookup}.
+
+          A seguinte \emph{query}: \\
+          \url{http://ws.spotify.com/lookup/1/.json?uri=spotify:artist:3MLPFTe4BrpEV2eOVG0gLK}
+
+          Retorna:
+
+          \lstinputlisting[caption={Resultado do \emph{lookup} do fadista "Camané"}]{snippets/lookup_camane.json}
+
+      \end{description}
+
+      Esta API seria bastante útil para desenvolver qualquer um dos seis módulos propostos.
+      Aliás, até complementa as \emph{Widgets} e o \emph{Libspotify SDK}.
 
     % subsubsection metadata_api (end)
 
@@ -118,14 +209,74 @@ O produto final deve de ir ao encontro do objetivo de contribuir para uma melhor
   \subsection{Experimentações Feitas} % (fold)
   \label{sub:experimentacoes}
   
-    ...
+    Numa primeira experiência com as ferramentas, foi criado um pequeno \emph{website} que permite pesquisar e ouvir Música do Spotify usando a \emph{Metadata API} e \emph{Spotify Widgets}: \\
+
+    \url{http://carsy.github.io/spotify-playground} \\
+
+    Na figura \ref{fig:playground} é possível ver o resultado de uma pesquisa, e a \emph{Widget Play Button} com o resultado selecionado da pesquisa.
+
+    \begin{figure}
+      \centering
+
+      \begin{subfigure}[b]{0.38\textwidth}
+        \includegraphics[width=\textwidth]{playground.pdf}
+        \caption{Resultado da pesquisa "Mariza"}
+        \label{fig:playgroun_a}
+      \end{subfigure}
+
+      \begin{subfigure}[b]{0.38\textwidth}
+        \includegraphics[width=\textwidth]{playground2.pdf}
+        \caption{Depois de selecionado o álbum "Fado Tradicional" aparece o \emph{Play button} com as faixas do álbum.}
+        \label{fig:playground_b}
+      \end{subfigure}
+
+      \caption{Experiência com \emph{Metadata API} e \emph{Play Button Widget} (código fonte: \url{github.com/carsy/spotify-playground})}
+      \label{fig:playground}
+
+    \end{figure}
+
+    Verificou-se que as duas ferramentas estão bem documetadas e em constante actulização. \\
+
+    Outra experiência foi realizada para verificar se é possível usar o elemento \emph{canvas} numa Aplicação Spotify.
+    Isto é necessário pois será a única forma de poder desenhar graficamente o grafo.
+    Para isso foi apenas necessário criar uma aplicação com o seguinte código fonte:
+
+    \begin{lstlisting}[caption={Elemento \emph{iframe} que embebe o \emph{website} do RAMA na aplicação}]
+      <iframe src="http://rama.inescporto.pt/app" frameborder="0"></iframe>\end{lstlisting}
+
+    Desta forma, é possível embeber o RAMA na Aplicação Spotify (que usa o elemento \emph{canvas} para desenhar o grafo).
+    Resultado final na figura \ref{fig:rama_spotifyed}.
+
+    \begin{figure}
+      \begin{center}
+        \includegraphics[width=\textwidth]{rama.pdf}
+      \end{center}
+      \caption{\emph{Website} do RAMA embebido numa Aplicação Spotify}
+      \label{fig:rama_spotifyed}
+    \end{figure}
+
+    Apesar de \emph{iframes} serem suportadas, existem outros componentes que não o são.
+    A aplicação não é usável, pois não permite, por exemplo, reproduzir automaticamente faixas de artistas.
+
+    Mais tarde verificou-se que existe uma forma de testar quais os elementos de \emph{HTML5} suportados, usando uma aplicação interna do Spotify.
+    Na figura \ref{fig:canvas_support} é possível ver que o elemento \emph{canvas} é suportado a cem por cento.
+
+    \begin{figure}
+       \begin{center}
+         \includegraphics[width=0.5\textwidth]{canvas_support.pdf}
+       \end{center}
+       \caption{Resultado do teste do elemento \emph{canvas}}
+       \label{fig:canvas_support}
+     \end{figure}
 
   % subsection experimentacoes (end)
 
   \subsection{Conclusão} % (fold)
   \label{sub:conclusao}
   
-    A escolha final do módulo a desenvolver é a Aplicação Spotify.
+    A prova de conceito desenvolvida (\ref{fig:rama_spotifyed}) demonstrou-se a mais indicada para o objetivo final de criar um ambiente integrado entre o Spotify e o RAMA.
+
+    Assim, os módulos a serem desenvolvidos são \ref{item:obj4} e \ref{item:obj5}.
 
   % subsection conclusao (end)
 
@@ -134,11 +285,29 @@ O produto final deve de ir ao encontro do objetivo de contribuir para uma melhor
 \section{Tecnologias} % (fold)
 \label{sec:tecnologias}
 
-  Tecnologias a serem usadas:
+  As seguintes tecnologias serão utilizadas nas fase de desenvolvimento, testes e optimização da Aplicação Spotify.
+
+  \subsection{\emph{Spotify Desktop Client}} % (fold)
+  \label{sub:subsection_name}
+    O desenvolvimento de Aplicações Spotify é feito de forma integrada no programa.
+
+    Para abrir uma Aplicação Spotify, localmente, escreve-se o seguinte na barra de pesquisa: spotify:app:rama
+
+    Onde \emph{rama} deve ser o identificador da aplicação declarado no ficheiro \emph{manifest.json}\footnote{ficheiro situado na \emph{root} da pasta do projeto}. \\
+
+    Existem outras opções úteis a que se pode aceder usando a tab \emph{Develop} (\ref{fig:html5_support}).
+
+    \begin{figure}
+      \begin{center}
+        \includegraphics[width=0.6\textwidth]{html5_support.pdf}
+      \end{center}
+      \caption{Caption here}
+      \label{fig:html5_support}
+    \end{figure}
+  
+  % subsection subsection_name (end)
 
   \begin{description}
-    \item[Spotify Desktop Client] \hfill \\
-      O desenvolvimento de aplicações Spotify é feito de forma integrada no programa.
     \item[Webkit Development Tools - webkit.org] \hfill \\
       A aplicação do Spotify foi desenvolvida com Webkit, e por isso, as aplicações Spotify também o são.
     \item[Sublime Text - sublimetext.com] \hfill \\
