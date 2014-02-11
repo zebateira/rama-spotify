@@ -48,7 +48,7 @@ O produto final deve de ir ao encontro do objetivo de contribuir para uma melhor
 
     \subsubsection{Spotify Apps} % (fold)
     \label{ssub:spotify_apps}
-      Serve para desenvolver Aplicações Spotify\footnote{https://developer.spotify.com/technologies/apps} que são usadas pelos utilizadores Spotify dentro do \emph{Spotify Desktop Client}.
+      Serve para desenvolver Aplicações Spotify\footnote{https://developer.spotify.com/technologies/apps} que são usadas pelos utilizadores Spotify dentro do \emph{Spotify Desktop Client}. Estas são aplicação \emph{HTML5}\footnote{http://www.w3.org/TR/html5/}.
 
       \begin{figure}
         \begin{center}
@@ -200,6 +200,7 @@ O produto final deve de ir ao encontro do objetivo de contribuir para uma melhor
       \end{description}
 
       Esta API seria bastante útil para desenvolver qualquer um dos seis módulos propostos.
+      Aliás, até complementa as \emph{Widgets} e o \emph{Libspotify SDK}.
 
     % subsubsection metadata_api (end)
 
@@ -208,18 +209,75 @@ O produto final deve de ir ao encontro do objetivo de contribuir para uma melhor
   \subsection{Experimentações Feitas} % (fold)
   \label{sub:experimentacoes}
   
-    Numa primeira experiência com as ferramentas, foi criado um pequeno \emph{website} que permite pesquisar e ouvir Música do Spotify que usa a \emph{Metadata API} e \emph{Spotify Widgets} : \\
+    Numa primeira experiência com as ferramentas, foi criado um pequeno \emph{website} que permite pesquisar e ouvir Música do Spotify usando a \emph{Metadata API} e \emph{Spotify Widgets}: \\
 
     \url{http://carsy.github.io/spotify-playground} \\
 
-    
+    Na figura \ref{fig:playground} é possível ver o resultado de uma pesquisa, e a \emph{Widget Play Button} com o resultado selecionado da pesquisa.
+
+    \begin{figure}
+      \centering
+
+      \begin{subfigure}[b]{0.38\textwidth}
+        \includegraphics[width=\textwidth]{playground.pdf}
+        \caption{Resultado da pesquisa "Mariza"}
+        \label{fig:playgroun_a}
+      \end{subfigure}
+
+      \begin{subfigure}[b]{0.38\textwidth}
+        \includegraphics[width=\textwidth]{playground2.pdf}
+        \caption{Depois de selecionado o álbum "Fado Tradicional" aparece o \emph{Play button} com as faixas do álbum.}
+        \label{fig:playground_b}
+      \end{subfigure}
+
+      \caption{Experiência com \emph{Metadata API} e \emph{Play Button Widget} (código fonte: \url{github.com/carsy/spotify-playground})}
+      \label{fig:playground}
+
+    \end{figure}
+
+    Verificou-se que as duas ferramentas estão bem documetadas e em constante actulização. \\
+
+    Outra experiência foi realizada para verificar se é possível usar o elemento \emph{canvas} numa Aplicação Spotify.
+    Isto é necessário pois será a única forma de poder desenhar graficamente o grafo.
+    Para isso foi apenas necessário criar uma aplicação com o seguinte código fonte:
+
+    \begin{lstlisting}[caption={Elemento \emph{iframe} que embebe o \emph{website} do RAMA na aplicação}]
+      <iframe src="http://rama.inescporto.pt/app" frameborder="0"></iframe>
+    \end{lstlisting}
+
+    Desta forma, é possível embeber o RAMA na Aplicação Spotify (que usa o elemento \emph{canvas} para desenhar o grafo).
+    Resultado final na figura \ref{fig:rama_spotifyed}.
+
+    \begin{figure}
+      \begin{center}
+        \includegraphics[width=\textwidth]{rama.pdf}
+      \end{center}
+      \caption{\emph{Website} do RAMA embebido numa Aplicação Spotify}
+      \label{fig:rama_spotifyed}
+    \end{figure}
+
+    Apesar de \emph{iframes} serem suportadas, existem outros componentes que não o são.
+    A aplicação não é usável, pois não permite, por exemplo, reproduzir automaticamente faixas de artistas.
+
+    Mais tarde verificou-se que existe uma forma de testar quais os elementos de \emph{HTML5} suportados, usando uma aplicação interna do Spotify.
+    Na figura \ref{fig:canvas_support} é possível ver que o elemento \emph{canvas} é suportado a cem por cento.
+
+    \begin{figure}
+       \begin{center}
+         \includegraphics[width=0.5\textwidth]{canvas_support.pdf}
+       \end{center}
+       \caption{Resultado do teste do elemento \emph{canvas}}
+       \label{fig:canvas_support}
+     \end{figure}
 
   % subsection experimentacoes (end)
 
   \subsection{Conclusão} % (fold)
   \label{sub:conclusao}
   
-    A escolha final do módulo a desenvolver é a Aplicação Spotify.
+    A prova de conceito desenvolvida (\ref{fig:rama_spotifyed}) demonstrou-se a mais indicada para o objetivo final de criar um ambiente integrado entre o Spotify e o RAMA.
+
+    Assim, os módulos a serem desenvolvidos são \ref{item:obj4} e \ref{item:obj5}.
 
   % subsection conclusao (end)
 
@@ -228,11 +286,15 @@ O produto final deve de ir ao encontro do objetivo de contribuir para uma melhor
 \section{Tecnologias} % (fold)
 \label{sec:tecnologias}
 
-  Tecnologias a serem usadas:
+  As seguintes tecnologias serão utilizadas nas fase de desenvolvimento, testes e optimização da Aplicação Spotify.
+
+  \subsection{\emph{Spotify Desktop Client}} % (fold)
+  \label{sub:subsection_name}
+    O desenvolvimento de aplicações Spotify é feito de forma integrada no programa.
+  
+  % subsection subsection_name (end)
 
   \begin{description}
-    \item[Spotify Desktop Client] \hfill \\
-      O desenvolvimento de aplicações Spotify é feito de forma integrada no programa.
     \item[Webkit Development Tools - webkit.org] \hfill \\
       A aplicação do Spotify foi desenvolvida com Webkit, e por isso, as aplicações Spotify também o são.
     \item[Sublime Text - sublimetext.com] \hfill \\
