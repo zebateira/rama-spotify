@@ -5,25 +5,140 @@
 \section*{}
 
 
-\section{Tarefas a Realizar} % (fold)
-\label{sec:tarefas}
+\section{Fases do Projeto} % (fold)
+\label{sec:fases_projeto}
 
-  \subsection{Tarefa 1} % (fold)
-  \label{sub:tarefa_1}
+  Neste capítulo serão explicadas as diferentes fases desta dissertação.
+
+  Cada fase terá um conjunto de tarefas associadas, e cada uma deles tem um quantificador de \emph{esforço} (escala \emph{Fibonacci} de 1 a 8) por forma a ajudar a compreender a distribuição do tempo de trabalho para cada tarefa.
+  Para identificar uma tarefa, usou-se a nomenclatura:
+
+
+  \emph{<fase>.<tarefa>} \\
+
+  Exemplo: Tarefa 3.2 é a segunda tarefa da terceira fase do projeto.
+
+  \subsection{Fase 1 - Desenho da Aplicação} % (fold)
+  \label{sub:dev_desenho}
   
-  % subsection tarefa_1 (end)
+    Numa primeira fase, serão quantificadas as funcionalidades a implementar por forma a desenhar bem o espaço da aplicação.
 
-  \subsection{Tarefa 2} % (fold)
-  \label{sub:tarefa_2}
+    \begin{description}
+      \item[Tarefa 1.1 - Estudo detalhado das funcionalidades]
+      Perceber quais as funcionalidades que vai ter mais destaque na aplicação. \\
+      \emph{Esforço: 3}
+
+      \item[Tarefa 1.2 - Desenho global]
+      Especificação do \emph{layout} de todas as vistas da aplicação. \\
+      \emph{Esforço: 5}
+
+    \end{description}
+
+  % subsection dev_desenho (end)
+
+  \subsection{Fase 2 - Mapeamento de Metadados Spotify em Last.fm} % (fold)
+  \label{sub:dev_mapeamento}
+
+    O objetivo desta segunda fase da dissertação é conseguir fazer corresponder o conjunto de metadados da base de dados do Spotify na da Last.fm.
+    
+    Para isso, esta fase tem três tarefas associadas:
+    \begin{description}
+      \item[Tarefa 2.1 - Recolha de Informação] \hfill \\
+        Recolher informação relevante que ajude a perceber que tipos de metadados similares existem entre as duas bases de dados. \\
+        \emph{Esforço: 2}
+
+      \item[Tarefa 2.2 - Módulo de mapeamento] \hfill \\
+        Desenvolvimento de um módulo capaz de fazer esse mesmo mapeamento de uma forma modelar.
+        Deve tentar compilar a maior quantidade de metadados de cada parte numa entrada.\\
+        \emph{Esforço: 5}
+
+      \item[Tarefa 2.3 - Pesquisa de um Artista]
+        Desenvolvimento da funcionalidade de pesquisa de um artista, usando o módulo criado anteriormente. \\
+        \emph{Esforço: 3}
+
+    \end{description}
+
+  % subsection dev_mapeamento (end)
+
+  \subsection{Fase 3 - Criação e Edição do grafo} % (fold)
+  \label{sub:dev_grafo}
   
-  % subsection tarefa_2 (end)
+    Esta é a fase crítica da dissertação, pois contém as tarefas com maior classificação de esforço.
 
-% section tarefas (end)
+    \begin{description}
+      \item[Tarefa 3.1 - Representação em Grafo] \hfill \\
+      Representação abstrata das relações dos artistas de música em grafo.
+      Esta tarefa depende bastante da tarefa 2.3 no sentido em que ainda é incerto, se é possível utilizador a metodologia utilizada pelo RAMA para gerar o grafo. \\
+      \emph{Esforço: 8}
 
-\section{Avaliação e Validação dos Resultados} % (fold)
-\label{sec:avaliacao}
+      \item[Tarefa 3.2 - Desenho gráfico do grafo] \hfill \\
+      Desenho do grafo usando uma ferramenta de renderização de grafos 2D\ref{sub:arborjs}.
+      Se o desempenho da ferramenta impedir uma boa experiência de utilizador, será necessário investigar mais e procurar outras ferramentas que permitam uma melhor performance. \\
+      \emph{Esforço: 5}
 
-% section avaliacao (end)
+      \item[Tarefa 3.3 - Edição do grafo] \hfill \\
+      Disponibilizar funcionalidades de edição do grafo desenhado como eliminar, expandir e mover nó. \\
+      \emph{Esforço: 3}
+
+      \item[Tarefa 3.4 - Parâmetros do grafo] \hfill \\
+      Como funcionalidades mais avançadas, mostrar parâmetros editáveis do grafo.
+      Não esquecer de limitar alguns parâmetros por forma a evitar comportamentos erráticos do grafo.\\
+      \emph{Esforço: 3}
+
+    \end{description}
+
+  % subsection dev_grafo (end)
+
+  \subsection{Fase 4 - Reprodução de Música} % (fold)
+  \label{sub:dev_playlists}
+  
+    Nesta quarta fase da dissertação, serão implementadas mais funcionalidades essenciais à aplicação.
+
+    \begin{description}
+      \item[Tarefa 4.1 - Reproduzir música de artista] \hfill \\
+      Permitir selecionar um nó e reproduzir as música mais populares desse artista. \\
+      \emph{Esforço: 3}
+
+      \item[Tarefa 4.2 - Gerar \emph{Playlists}] \hfill \\
+      Gerar uma \emph{playlists} a partir de um grafo. \\
+      \emph{Esforço: 3}
+
+      \item[Tarefa 4.3 - Guardar \emph{Playlists}] \hfill \\
+      Permitir ao utilizador guarda a \emph{playlists} gerada. \\
+      \emph{Esforço: 1}
+
+      \item[Tarefa 4.4 - Seguir Artista] \hfill \\
+      Seguir artista de qualquer nó do grafo. \\
+      \emph{Esforço: 2}
+
+    \end{description}
+
+  % subsection dev_playlists (end)
+
+  \subsection{Fase 5 - Avaliação e Validação} % (fold)
+  \label{sub:dev_validacao}
+  
+    Esta fase final do projeto irá contemplar uma avaliação da aplicação utilizando o \emph{feedback} de utilizadores que irão experimentar a mesma, por forma a validar o objetivo desta dissertação: melhoria de uma experiência musical de um utilizador Spotify.
+
+    \begin{description}
+      \item[Tarefa 5.1 - Recolha de dados de utilização da Aplicação] \hfill \\
+      Os utilizadores inicialmente irão mostrar os seus hábitos de pesquisa de nova música.
+      De seguida, ser-lhes-á introduzida a aplicação desenvolvida para se ficar com uma perceção do uso que lhe é dada. \\
+      \emph{Esforço: 2}
+
+      \item[Tarefa 5.2 - Análise dos Dados recolhidos] \hfill \\
+      Tirar conclusões dos dados recolhidos por forma a tirar conclusões sobre a forma de utilização da aplicação. \\
+      \emph{Esforço: 3}
+
+      \item[Tarefa 5.3 - Melhorias na Aplicação] \hfill \\
+      Melhorias na aplicação de acordo com o \emph{feedback} dos utilizadores. \\
+      \emph{Esforço: 5}
+
+    \end{description}
+
+  % subsection dev_validacao (end)
+
+% section fases_projeto (end)
 
 \section{Calendarização} % (fold)
 \label{sec:calendarizacao}
@@ -32,4 +147,3 @@
 
 \section{Resumo ou Conclusões}
 
-\lipsum[1]
