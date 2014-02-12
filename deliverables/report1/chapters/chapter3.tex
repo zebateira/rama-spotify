@@ -19,7 +19,7 @@ Para tal, a proposta inicial desta dissertação consiste em desenvolver, no mí
 \end{enumerate}
 
 As três primeiras funcionalidades (\ref{item:obj1}, \ref{item:obj2} e \ref{item:obj3}) focam-se em melhorar o serviço do RAMA, usando API's do Spotify, ou seja, integrar o Spotify dentro do RAMA.
-Por outro lado, as funcionalidades \ref{item:obj4} e \ref{item:obj5} têm como objetivo integrar o RAMA dentro do Spotify, através de uma Aplicação Spotify, que funciona como plugin do programa principal do Spotify.
+Por outro lado, as funcionalidades \ref{item:obj4} e \ref{item:obj5} têm como objetivo integrar o RAMA dentro do Spotify, através de uma Aplicação Spotify, que funciona como \emph{plugin} do programa principal do Spotify.
 A última funcionalidade (\ref{item:obj6}) teria de implementar algumas das anteriores num Sistema Operativo Móvel (Android, iOS ou Windows Phone).
 
 Este capítulo procura analisar todas as condicionantes que afetam a escolha  dos módulos a desenvolver, e em que ambientes estes se encaixam melhor (Aplicação Spotify, aplicação móvel ou RAMA).
@@ -178,7 +178,7 @@ O produto final deve de ir ao encontro do objetivo de contribuir para uma melhor
           \url{http://ws.spotify.com/search/1/album?q=foo} \\
           \url{http://ws.spotify.com/search/1/artist.json?q=red+hot} \\
 
-          O resultado da \emph{query}, por defeito, tem o format \emph{XML}. No entanto, também se pode especificar o formato \emph{JSON} (como no segundo exemplo).
+          O resultado da \emph{query}, por defeito, tem o formato \emph{XML}. No entanto, também se pode especificar o formato \emph{JSON} (como no segundo exemplo).
 
           Dada a \emph{query}: \\
           \url{http://ws.spotify.com/search/1/artist.json?q=camane} (fadista "Camané")
@@ -285,7 +285,7 @@ O produto final deve de ir ao encontro do objetivo de contribuir para uma melhor
 \section{Tecnologias} % (fold)
 \label{sec:tecnologias}
 
-  As seguintes tecnologias serão utilizadas nas fase de desenvolvimento, testes e optimização da Aplicação Spotify.
+  As seguintes tecnologias serão utilizadas nas fase de desenvolvimento, testes e otimização da Aplicação Spotify.
 
   \subsection{\emph{Spotify Desktop Client}} % (fold)
   \label{sub:subsection_name}
@@ -401,5 +401,7 @@ O produto final deve de ir ao encontro do objetivo de contribuir para uma melhor
   A escolha final do módulo a desenvolver é a Aplicação Spotify.
 
   Apesar de as outras opções serem também viáveis, a possibilidade de poder integrar uma interface estilo RAMA num ambiente que os utilizadores já se sentem confortáveis (Spotify), é muito favorável a que seja melhor aceite pelos mesmos.
+
+  É esperado que as tecnologias a usar ajudem no desenvolvimento desta dissertação.
 
   Em suma, será desenvolvida uma Aplicação Spotify que implemente os módulos \ref{item:obj4} e \ref{item:obj5}.
