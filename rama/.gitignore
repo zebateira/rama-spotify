@@ -1,0 +1,5 @@
+*.swp
+*.sublime-workspace
+*.sublime-project
+.sass-cache/
+node_modules/
