@@ -284,7 +284,7 @@ a {
   display: table-cell;
   vertical-align: middle;
 }
-/* line 40, ../sass/_banner.scss */
+/* line 39, ../sass/_banner.scss */
 .banner-wrap .banner-link:after {
   content: url(../img/external_link-tiny-gray.png);
   display: inline-block;

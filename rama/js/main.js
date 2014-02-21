@@ -1,6 +1,7 @@
-require([
+spotify.require([
     '$api/models',
-    ], function(models) {
+    'js/now#NowPlaying'
+    ], function(models, Now) {
 
     // When application has loaded, run tabs function
     models.application.load('arguments').done(tabs);
@@ -9,7 +10,6 @@ require([
     models.application.addEventListener('arguments', tabs);
 
     function tabs() {
-
         var args = models.application.arguments;
         var current = document.getElementById(args[0]);
         var sections = document.getElementsByClassName('section');
@@ -19,5 +19,7 @@ require([
         current.style.display = 'block';
     }
 
+    console.log(new models.Playlist());
+    // new Now().load();
 
 });
