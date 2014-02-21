@@ -1,102 +1,92 @@
 %!TEX root = ../mieic.tex
 
-\chapter{Introdution} \label{chap:intro}
+\chapter{Introduction} \label{chap:intro}
 
 
 \section*{}
 
 \section{Context} \label{sec:context}
 
-Bem longe vão os tempos, antes da Internet, em que ouvir e descobrir música nova era um desafio por si só.
-Agora, com alguns cliques, temos acesso a um catálogo de música tão grande, que o nosso cérebro não consegue processar.
 
-Existem dezenas de serviços online que oferecem isso mesmo.
-Alguns especializam-se na criação/geração de playlists (que funcionam como rádios), outros em expandir o catálogo de música e outros focam-se mais na sugestão e recomendação de artistas/álbuns/músicas personalizada para os utilizadores.
-Estes últimos, apresentam as sugestões de conteúdo ao utilizador de uma forma rudimentar como listas ou em grelha.
+Not so long ago, before the Internet boom, listening or discovering new music was a challenge on its own.
+Now, with a few clicks one can have on their hands such a vast music catalogue that a human mind cannot compute it.
 
-No entanto, listas ou grelhas não fornecem ao utilizador qualquer tipo de informação adicional sobre a relação entre os artistas nem justificam a sua semelhança \cite{Lamere2008}.
-Até fazem parecer que não existe nenhuma relação/ligação entre os artistas recomendados, o que não é verdade.
+There are dozens of online services that offer  exactly that.
+Some focus on creation/generation of playlists, others try to expand their music catalogue even further, but others focus more on personalized music recommendation.
+And these ones present their results to the user with a list or a grid of music artists, for example.
 
-Essas relações existem e podem ser representadas como uma rede de artistas interligados num grafo, onde cada nó é um artista de música, e cada ligação entre nós representa uma ligação forte de parecença entre os artistas.
-Este é o conceito que o RAMA\footnote{http://rama.inescporto.pt}, projeto desenvolvido no INESC Porto\footnote{http://inescporto.pt}, usa. \cite{Costa2008} \cite{Sarmento2009} \cite{Costa2009} \cite{Gouyon2011}
+However, lists or grids do not give the user enough information about the relation between the results \cite{Lamere2008}.
+One could even say that they are not related to each other, which is not true.
+
+The relations exist and can be represented as a network of interconnected artists in a graph, where a node is a music artist, and each edge between them represents a strong connection.
+This is the concept that RAMA (Relational Artist MAps), a project developed at INESC Porto, uses. \cite{Costa2008} \cite{Sarmento2009} \cite{Costa2009} \cite{Gouyon2011}
+
+\section{Motivation and Goals} \label{sec:goals}
 
 
+From a single search, RAMA is able to draw a graph that helps the user to explore new music that might caught his/her interest in a much more natural way.
 
-\section{Motivação e Objetivos} \label{sec:goals}
+Nonetheless, when a user wants to listen to an artist's music, Youtube's stream is used.
+Although one can find a large catalogue of music in Youtube, this service is not music oriented and the sound quality is not adequate for a music streaming service.
 
+Youtube's stream needs to be replaced, and Spotify\footnote{http://spotify.com} can provide a quality stream and an accurate music catalogue.
 
-A partir de uma pesquisa de um artista de música, o RAMA cria e desenha um grafo que ajuda o utilizador a explorar música que lhe possa interessar de uma forma muito mais natural e informativa.
-A informação que o RAMA usa é retirada do serviço Last.fm\footnote{http://last.fm}.
+But how can RAMA and Spotify be integrated? \\
 
-No entanto, quando um utilizador pretende ouvir uma música de um artista, é usado \emph{stream} do Youtube\footnote{http://youtube.com}. 
-Apesar de este oferecer um catálogo alargado de música, o mesmo não é indicado para esta funcionalidade pois não fornece uma API\footnote{Application Programming Interface} nativamente orientada a música, nem a qualidade de som do \emph{stream} é adequada.
-
-A experiência musical do utilizador do RAMA poderá melhorar consideravelmente ao colmatar esta falha.
-Existe por isso uma necessidade de substituir o Youtube por outro serviço mais orientado a \emph{streaming} de música de qualidade.
-O Spotify\footnote{http://spotify.com} é um deles. Fornece API orientada a música \footnote{https://developer.spotify.com/technologies/web-api}, e o \emph{streaming} é de qualidade adequada para este tipo de funcionalidade.
-
-De que formas é que se pode integrar o RAMA e o Spotify?
-
-Por forma a resolver este problema, foram analisadas várias possibilidades:
+Several possibilities were analysed.
 
 \begin{description}
   \item[Spotify Play Button\footnote{https://developer.spotify.com/technologies/widgets/spotify-play-button/}] \hfill \\
-    \emph{Widget} do Spotify que pode ser embebida no RAMA.
-  \item[Integrar o Perfil de um utilizador Spotify no RAMA] \hfill \\
-    Para complementar as recomendações de artistas.
-  \item[Aplicação Spotify\footnote{https://developer.spotify.com/technologies/apps/}] \hfill \\
-    Serve como \emph{plugin} ao programa do Spotify, estendendo as funcionalidades do Spotify com visualização gráfica de recomendações e construção de playlists.
-  \item[Aplicação Móvel] \hfill \\
-    Com as funcionalidades acima descritas.
+    A Spotify widget that can be embedded in Spotify. 
+  \item[Integrate Spotify User's profile data in RAMA] \hfill \\
+    To help complement artist recommendations.
+  \item[Spotify App\footnote{https://developer.spotify.com/technologies/apps/}] \hfill \\
+    A plugin to Spotify's desktop client
 \end{description}
 
-A escolha final foi desenvolver uma aplicação (como \emph{plugin}) para o Spotify.
-Será que um utilizador Spotify ao descobrir música nova de uma forma mais gráfica terá uma experiência de utilizador mais rica e natural do que o modo de descoberta \emph{standard} do Spotify (em grelha)?
 
-Esse é o objetivo primordial desta dissertação: Tentar descobrir se utilizadores Spotify terão uma experiência melhorada ao usar a Aplicação Spotify proposta.
+This dissertation proposes a Spotify App.
+Will a Spotify user experience a more pleasant and natural way of music discovery from this graphical representation of artist relations within Spotify, than its standard discovery more (with grids)?
 
-No entanto, para avaliar e validar o resultado final, será necessário fazer testes com utilizadores finais para comparar a sua experiência no Spotify com e sem a aplicação desenvolvida.
+That is the main question that this dissertation urges to answer.
 
-Desta forma, o desenvolvimento da aplicação será feito de forma iterativa, implementando as funcionalidades que o RAMA oferece, e quando esta estiver ao nível do RAMA, serão realizados testes cuidados com os utilizadores à medida que se melhora a implementação com o seu \emph{feedback}.
+Moreover, to evaluate and validate the final product, end-user testing will be done to compare Spotify's user experience with and without the developed application. 
 
-\section{Projeto} \label{sec:proj}
 
-A aplicação a desenvolver será uma alternativa ao modo de descoberta do Spotify.
-No momento de escrita deste relatório, o modo de descoberta/recomendação de música do Spotify, comparativamente ao do Last.fm, é simples: apresenta recomendações em forma de grelha.
+\section{Project} \label{sec:proj}
 
-Desta forma, propõe-se uma representação visual em forma de grafo similar à do RAMA.
-A aplicação corre dentro do ambiente do Spotify como uma Aplicação Spotify.
-As suas principais funcionalidades serão: pesquisa de conteúdo, interação com o grafo e reproduzir música dos resultados da pesquisa.
-Estes são os requisitos mínimos que irão ser implementados.
+The app to be developed will be an alternative to the discovery mode in Spotify.
+
+This way, a visual representation of an artist network with a graph, similar to RAMA, is proposed.
+
+The application runs inside the Spotify environment (Spotify's Desktop Client) where its main features are: content search, graph interaction and play tracks from the search results.
+These are the minimum requirements to be implemented.
 \\
 \\
-Durante todo o desenvolvimento da aplicação, algumas das ferramentas a ser usadas serão:
+The tools to be used to develop are:
 
 \begin{description}
   \item[Spotify Desktop Client] \hfill \\
-    O desenvolvimento de aplicações Spotify é feito de forma integrada no programa.
+    Developed is integrated in the Spotify's desktop client.
   \item[Webkit Development Tools - webkit.org] \hfill \\
-    A aplicação do Spotify foi desenvolvida com Webkit, e por isso, as aplicações Spotify também o são.
+    This is the engine used to run Spotify Applications.
   \item[Npmjs - npmjs.org] \hfill \\
-    Gestor de pacotes de software e dependências.
+    Package manager.
   \item[Gruntjs - gruntjs.com] \hfill \\
-    Programa de gestão de tarefas automatizadas. Muito útil para testes, compilação e otimização de código.
+    Manager for automating tasks. Very usefull for tests, code optimization and more.
   \item[Arborjs - arborjs.org] \hfill \\
-    Framework de javascript para desenho de grafos. Foi já utilizada no desenvolvimento do RAMA (existe sempre a possibilidade de se usar outra ferramenta substituta caso esta não for adequada).
+    Graph drawing Javascript framework.
 \end{description}
 
 
+\section{Dissertation Structure} \label{sec:struct}
 
-\section{Estrutura da Dissertação} \label{sec:struct}
+This dissertation contains four additional chapters.
 
-Para além da introdução, este relatório contém mais 4 capítulos.
+In chapter~\ref{chap:chap2}, related works will be presented to evaluate the current state of the art.
 
-No capítulo~\ref{chap:chap2}, é descrito o estado da arte onde são
-apresentados trabalhos relacionados.
+In the ~\hyperref[chap:chap3]{third} chapter, the project's details will be explained, starting with an introduction to the Spotify Apps' development environment and the technologies that can be used (and the experiments done so far).
 
-No capítulo~\ref{chap:chap3}, é explicado em detalhe em que consiste o projeto, com uma introdução ao ambiente de desenvolvimento de Aplicações Spotify, às tecnologias a serem usadas e experimentação feita até ao momento.
+In chapter~\ref{chap:chap4}, the work plan will be introduced, describing the phases and tasks of the project.
 
-No capítulo~\ref{chap:chap4}, é descrito com detalhe todo o plano de trabalho que esta dissertação vai seguir. 
-Sempre que possível, será explicado com mais detalhe as tarefas mais importantes que estão previstas durante o desenvolvimento deste projeto.
-
-No capítulo~\ref{chap:concl}, são apresentadas conclusões sobre o planeamento do projeto até agora realizado.
+Chapter~\ref{chap:concl} concludes this report.
