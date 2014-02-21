@@ -1,7 +1,8 @@
 spotify.require([
     '$api/models',
-    'js/now#NowPlaying'
-    ], function(models, Now) {
+    'js/now#NowPlaying',
+    'js/top#TopList'
+    ], function(models, Now, TopList) {
 
     // When application has loaded, run tabs function
     models.application.load('arguments').done(tabs);
@@ -21,5 +22,5 @@ spotify.require([
 
     console.log(new models.Playlist());
     // new Now().load();
-
+    new TopList().load();
 });
