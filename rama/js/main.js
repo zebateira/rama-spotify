@@ -3,7 +3,7 @@ spotify.require([
     'js/now#NowPlaying',
     'js/top#TopList',
     'js/search#Search'
-    ], function(models, Now, TopList) {
+    ], function(models, Now, TopList, Search) {
 
     models.application.load('arguments').done(tabs);
 
@@ -19,7 +19,7 @@ spotify.require([
         current.style.display = 'block';
     }
 
-    // console.log(new models.Playlist());
-    // new Now().load();
+    new Now().load();
     new TopList().load();
+    new Search().load();
 });
