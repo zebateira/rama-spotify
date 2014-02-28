@@ -1,5 +1,5 @@
-@import url(http://fonts.googleapis.com/css?family=Ruda);
 /* Main Elements */
+@import url(http://fonts.googleapis.com/css?family=Ruda);
 /* line 2, ../sass/_spotify.scss */
 body {
   font-family: 'Lucida Grande',Tahoma,Calibri,Arial,sans-serif;
@@ -277,14 +277,17 @@ a {
   min-height: 30px;
   height: 30px;
   top: 25%;
-  padding-left: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: black;
+  margin-left: 10px;
 }
-/* line 34, ../sass/_banner.scss */
+/* line 38, ../sass/_banner.scss */
 .banner-wrap .banner-link a {
   display: table-cell;
   vertical-align: middle;
 }
-/* line 39, ../sass/_banner.scss */
+/* line 43, ../sass/_banner.scss */
 .banner-wrap .banner-link:after {
   content: url(../img/external_link-tiny-gray.png);
   display: inline-block;
@@ -292,4 +295,10 @@ a {
   width: 9px;
   margin-left: 5px;
   margin-top: -5px;
+}
+@media (max-width: 500px) {
+  /* line 25, ../sass/_banner.scss */
+  .banner-wrap .banner-link {
+    display: none;
+  }
 }

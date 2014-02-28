@@ -1,6 +1,6 @@
 require(['$api/models'], function(models) {
 
-  exports.NowPlaying = function() {
+  exports.Search = function() {
 
     this.load = function() {
  

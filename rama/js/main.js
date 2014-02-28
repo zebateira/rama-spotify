@@ -1,13 +1,12 @@
 spotify.require([
     '$api/models',
     'js/now#NowPlaying',
-    'js/top#TopList'
+    'js/top#TopList',
+    'js/search#Search'
     ], function(models, Now, TopList) {
 
-    // When application has loaded, run tabs function
     models.application.load('arguments').done(tabs);
 
-    // When arguments change, run tabs function
     models.application.addEventListener('arguments', tabs);
 
     function tabs() {
@@ -20,7 +19,7 @@ spotify.require([
         current.style.display = 'block';
     }
 
-    console.log(new models.Playlist());
+    // console.log(new models.Playlist());
     // new Now().load();
     new TopList().load();
 });

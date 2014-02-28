@@ -29,7 +29,11 @@
     height: 30px;
 
     top: 25%;
-    padding-left: 15px;
+
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: black;
+    margin-left: 10px;
 
     a {
       display: table-cell;
@@ -45,6 +49,9 @@
       width: 9px;
       margin-left: 5px;
       margin-top: -5px;
+    }
+    @media (max-width: 500px) {
+      display: none;
     }
   }
 }
