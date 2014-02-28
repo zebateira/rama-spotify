@@ -1,0 +1,22 @@
+{
+  "name": "RAMA",
+  "version": "0.1.0",
+  "description": "Relational Artist MAps",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:carsy/master-thesis.git"
+  },
+  "author": "José Bateira",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/carsy/master-thesis/issues"
+  },
+  "homepage": "https://github.com/carsy/master-thesis/",
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-jshint": "~0.8.0",
+    "grunt-contrib-jasmine": "~0.6.1",
+    "grunt-contrib-compass": "~0.7.2"
+  }
+}

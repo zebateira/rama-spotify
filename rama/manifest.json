@@ -1,0 +1,43 @@
+{
+  "AppName": {
+    "en": "RAMA"
+  },
+  "BundleIdentifier": "rama",
+  "AppDescription": {
+    "en": "RAMA: Relational Artist MAps"
+  },
+  "AcceptedLinkTypes": [
+    "playlist"
+  ],
+  "BundleType": "Application",
+  "BundleVersion": "0.2",
+  "DefaultTabs": [
+    {
+      "arguments": "index",
+      "title": {
+        "en": "Now Playing"
+      }
+    },
+    {
+      "arguments": "top",
+      "title": {
+        "en": "Top"
+      }
+    },
+    {
+      "arguments": "search",
+      "title": {
+        "en": "Search"
+      }
+    }
+  ],
+  "Dependencies": {
+    "api": "1.35",
+    "views": "1.56.3"
+  },
+  "SupportedDeviceClasses": ["Desktop"],
+  "SupportedLanguages": [
+    "en"
+  ],
+  "VendorIdentifier": "pt.inescporto"
+}
