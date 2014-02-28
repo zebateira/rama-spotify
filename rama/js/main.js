@@ -4,7 +4,7 @@ spotify.require([
     'js/top#TopList',
     'js/search#Search'
     ], function(models, Now, TopList, Search) {
-
+        
     models.application.load('arguments').done(tabs);
 
     models.application.addEventListener('arguments', tabs);

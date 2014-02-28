@@ -10,9 +10,10 @@ require(['$api/models'], function(models) {
 
     this.load = function() {
 
-      models.player.load('track', 'contexts').done(function(player) {
+      models.player.load('track').done(function(player) {
         var curArtistURI = player.track.artists[0].uri;
-        console.log(curArtistURI);
+          console.log(curArtistURI);
+
 
       });
     };
