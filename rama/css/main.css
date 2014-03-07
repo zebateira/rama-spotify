@@ -244,28 +244,35 @@ pre .regexp {
 /* line 7, ../sass/main.scss */
 body, html {
   margin: 0;
-  width: 100%;
-  height: 100%;
 }
 
-/* line 13, ../sass/main.scss */
+/* line 11, ../sass/main.scss */
 *, *:before, *:after {
   box-sizing: border-box;
 }
 
-/* line 17, ../sass/main.scss */
+/* line 15, ../sass/main.scss */
 a {
   text-decoration: none;
 }
 
-/* line 21, ../sass/main.scss */
+/* line 19, ../sass/main.scss */
+html, body {
+  height: 100%;
+}
+
+/* line 25, ../sass/main.scss */
 #main_container {
-  padding: 20px;
+  height: calc(100% - 60px);
+}
+/* line 29, ../sass/main.scss */
+#main_container .section {
+  height: 100%;
 }
 
 /* imports */
 /* Banner Styles */
-/* line 3, ../sass/_banner.scss */
+/* line 5, ../sass/_banner.scss */
 #banner_wrap {
   background-color: #333;
   max-height: 60px;
@@ -273,16 +280,16 @@ a {
   width: 100%;
   height: 60px;
 }
-/* line 13, ../sass/_banner.scss */
+/* line 15, ../sass/_banner.scss */
 #banner_wrap .banner-text a {
   color: #bbb;
 }
-/* line 19, ../sass/_banner.scss */
+/* line 21, ../sass/_banner.scss */
 #banner_wrap .banner {
   text-align: center;
   font-size: 3em;
 }
-/* line 25, ../sass/_banner.scss */
+/* line 27, ../sass/_banner.scss */
 #banner_wrap .banner-link {
   display: table;
   position: absolute;
@@ -294,12 +301,12 @@ a {
   background-color: black;
   margin-left: 10px;
 }
-/* line 38, ../sass/_banner.scss */
+/* line 40, ../sass/_banner.scss */
 #banner_wrap .banner-link a {
   display: table-cell;
   vertical-align: middle;
 }
-/* line 43, ../sass/_banner.scss */
+/* line 45, ../sass/_banner.scss */
 #banner_wrap .banner-link:after {
   content: url(../img/external_link-tiny-gray.png);
   display: inline-block;
@@ -309,19 +316,13 @@ a {
   margin-top: -5px;
 }
 @media (max-width: 500px) {
-  /* line 25, ../sass/_banner.scss */
+  /* line 27, ../sass/_banner.scss */
   #banner_wrap .banner-link {
     display: none;
   }
 }
 
-/* line 1, ../sass/_now_playing.scss */
-.now-playing {
-  text-align: center;
-}
-/* line 4, ../sass/_now_playing.scss */
-.now-playing .artist-cover {
-  margin: 5px;
-  display: inline-block;
-  box-shadow: 0px 0px 2px black;
+/* line 2, ../sass/_now_playing.scss */
+#graph {
+  height: 100%;
 }
