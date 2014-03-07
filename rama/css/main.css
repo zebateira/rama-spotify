@@ -251,10 +251,15 @@ a {
   text-decoration: none;
 }
 
+/* line 15, ../sass/main.scss */
+#main_container {
+  padding: 20px;
+}
+
 /* imports */
 /* Banner Styles */
 /* line 3, ../sass/_banner.scss */
-.banner-wrap {
+#banner_wrap {
   background-color: #333;
   max-height: 60px;
   position: relative;
@@ -262,16 +267,16 @@ a {
   height: 60px;
 }
 /* line 13, ../sass/_banner.scss */
-.banner-wrap .banner-text a {
+#banner_wrap .banner-text a {
   color: #bbb;
 }
 /* line 19, ../sass/_banner.scss */
-.banner-wrap .banner {
+#banner_wrap .banner {
   text-align: center;
   font-size: 3em;
 }
 /* line 25, ../sass/_banner.scss */
-.banner-wrap .banner-link {
+#banner_wrap .banner-link {
   display: table;
   position: absolute;
   min-height: 30px;
@@ -283,12 +288,12 @@ a {
   margin-left: 10px;
 }
 /* line 38, ../sass/_banner.scss */
-.banner-wrap .banner-link a {
+#banner_wrap .banner-link a {
   display: table-cell;
   vertical-align: middle;
 }
 /* line 43, ../sass/_banner.scss */
-.banner-wrap .banner-link:after {
+#banner_wrap .banner-link:after {
   content: url(../img/external_link-tiny-gray.png);
   display: inline-block;
   height: 9px;
@@ -298,7 +303,14 @@ a {
 }
 @media (max-width: 500px) {
   /* line 25, ../sass/_banner.scss */
-  .banner-wrap .banner-link {
+  #banner_wrap .banner-link {
     display: none;
   }
+}
+
+/* line 1, ../sass/_now_playing.scss */
+.artist-cover {
+  border-radius: 50px !important;
+  margin: 5px;
+  display: inline-block;
 }

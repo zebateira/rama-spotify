@@ -12,6 +12,11 @@ a {
   text-decoration: none;
 }
 
+#main_container {
+  padding: 20px;
+}
+
 
 /* imports */
 @import "banner";
+@import "now_playing";
