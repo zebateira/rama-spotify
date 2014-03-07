@@ -14,11 +14,10 @@ require(['$api/models', '$views/image'], function(models, image) {
 
             artists.forEach(function(artist) {
 
-              $('.now-playing').append(
-                $(image.Image.forArtist(artist, {width: 100, height: 100, player: true})
-                  .node).addClass('artist-cover')
-              );
+              var artistCover = image.Image.forArtist(artist, {width: 100, height: 100, player: true, playerCentered: true});
 
+              $('.now-playing').append($(artistCover.node).addClass('artist-cover'));
+              artistCover.setStyle('plain');
             });
           });
         });
