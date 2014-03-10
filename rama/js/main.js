@@ -38,7 +38,7 @@ spotify.require([
     .init({
       element: $('#index .graph')[0]
     })
-    .load();
+    .loadView();
 
   new top.TopList().load();
   new search.Search().load();

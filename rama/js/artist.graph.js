@@ -1,33 +1,33 @@
+/**
+  Defines the artist.graph model
+
+  Exports the ArtistGraph object to draw a graph of related artists in a DOM element
+*/
+
 require(['$api/models'], function(models) {
 
-  var ArtistGraph = {
+  var ArtistGraph = function(artist, options) {
+
+    this.artist = artist;
+
     // numbering for the id's of adjacent nodes
-    index: 1,
-    nodes: [],
-    edges: [],
-    data: {},
-    options: {},
+    this.index = 1;
 
-    init: function(artist, options) {
-      this.artist = artist;
+    this.nodes = [{
+      id: this.index,
+      label: this.artist.name
+    }];
+    this.edges = [];
 
-      this.index = 1;
-      this.nodes = [{
-        id: this.index,
-        label: this.artist.name
-      }];
-      this.edges = [];
+    // data of the graph: contains nodes and edges
+    this.data = {
+      nodes: this.nodes,
+      edges: this.edges
+    };
+    // options for the rendering of the graph
+    this.options = options;
 
-      this.data = {
-        nodes: this.nodes,
-        edges: this.edges
-      };
-      this.options = options;
-
-      return this;
-    },
-
-    drawGraph: function(element) {
+    this.drawGraph = function(element) {
       var self = this;
 
       this.graph = new vis.Graph(element, this.data, this.options);
@@ -53,18 +53,19 @@ require(['$api/models'], function(models) {
       });
 
       return this;
-    },
+    };
 
-    addNode: function(node) {
+    this.addNode = function(node) {
       // todo
-    },
-    addEdge: function(egde) {
-      // todo
-    },
+    };
 
-    redraw: function() {
+    this.addEdge = function(egde) {
       // todo
-    }
+    };
+
+    this.redraw = function() {
+      // todo
+    };
   };
 
   exports.ArtistGraph = ArtistGraph;

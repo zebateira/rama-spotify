@@ -9,7 +9,7 @@ require(['$api/models',
       return this;
     },
 
-    load: function() {
+    loadView: function() {
       this.drawGraph();
 
       return this;
@@ -20,8 +20,7 @@ require(['$api/models',
       models.player.load('track').done(function(player) {
         var currentArtist = models.Artist.fromURI(player.track.artists[0].uri);
 
-        ArtistGraph
-          .init(currentArtist)
+        new ArtistGraph(currentArtist)
           .drawGraph(self.element);
       });
 
