@@ -30,6 +30,7 @@ spotify.require([
     }]
   });
 
+  // loading header view
   $(ui.header).load('views/header.html');
 
   new now.NowPlaying().load();
