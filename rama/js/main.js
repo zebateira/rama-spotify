@@ -1,10 +1,10 @@
 spotify.require([
   '$api/models',
   '$views/ui#UI',
-  'js/now',
+  'js/now#NowPlaying',
   'js/top',
-  'js/search'
-], function(models, UI, now, top, search) {
+  'js/search',
+], function(models, UI, NowPlaying, top, search) {
 
   var ui = UI.init({
     header: true,
@@ -33,7 +33,13 @@ spotify.require([
   // loading header view
   $(ui.header).load('views/header.html');
 
-  new now.NowPlaying().load();
+  // initializes NowPlaying controller and draws the graph
+  NowPlaying
+    .init({
+      element: $('#index .graph')[0]
+    })
+    .load();
+
   new top.TopList().load();
   new search.Search().load();
 });

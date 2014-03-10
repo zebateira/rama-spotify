@@ -1,55 +1,34 @@
-require(['$api/models', '$views/image'], function(models, image) {
+require(['$api/models',
+  'js/artist.graph#ArtistGraph'
+], function(models, ArtistGraph) {
 
-  exports.NowPlaying = function() {
+  var NowPlaying = {
+    init: function(config) {
+      this.element = config.element;
 
-    this.drawGraph = function() {
+      return this;
+    },
+
+    load: function() {
+      this.drawGraph();
+
+      return this;
+    },
+    drawGraph: function() {
+      var self = this;
 
       models.player.load('track').done(function(player) {
         var currentArtist = models.Artist.fromURI(player.track.artists[0].uri);
-        var index = 1;
-        var nodes = [{
-          id: index,
-          label: currentArtist.name
-        }];
-        var edges = [];
 
-        var container = document.getElementById('graph');
-        var data = {
-          nodes: nodes,
-          edges: edges
-        };
-
-        var options = {};
-
-        var graph = new vis.Graph(container, data, options);
-
-        currentArtist.load('related').done(function(artist) {
-          artist.related.snapshot().done(function(snapshot) {
-
-            snapshot.loadAll('name').each(function(artist) {
-              data.nodes.push({
-                id: ++index,
-                label: artist.name
-              });
-
-              data.edges.push({
-                from: 1,
-                to: index
-              });
-
-              graph.setData(data);
-            });
-
-          });
-
-        });
+        ArtistGraph
+          .init(currentArtist)
+          .drawGraph(self.element);
       });
 
-    };
-
-    this.load = function() {
-      this.drawGraph();
-    };
+      return this;
+    }
 
   };
+
+  exports.NowPlaying = NowPlaying;
 });
