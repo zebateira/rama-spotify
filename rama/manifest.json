@@ -11,26 +11,26 @@
   ],
   "BundleType": "Application",
   "BundleVersion": "0.2",
-  "DefaultTabs": [
-    {
-      "arguments": "index",
-      "title": {
-        "en": "Now Playing"
-      }
-    },
-    {
-      "arguments": "top",
-      "title": {
-        "en": "Top"
-      }
-    },
-    {
-      "arguments": "search",
-      "title": {
-        "en": "Search"
-      }
-    }
-  ],
+  // "DefaultTabs": [
+  //   {
+  //     "arguments": "index",
+  //     "title": {
+  //       "en": "Now Playing"
+  //     }
+  //   },
+  //   {
+  //     "arguments": "top",
+  //     "title": {
+  //       "en": "Top"
+  //     }
+  //   },
+  //   {
+  //     "arguments": "search",
+  //     "title": {
+  //       "en": "Search"
+  //     }
+  //   }
+  // ],
   "Dependencies": {
     "api": "1.35",
     "views": "1.56.3"

@@ -20,18 +20,20 @@ html, body {
   height: 100%;
 }
 
-$content-height: calc(100% - 60px);
+$header-height: 100px;
+$tabs-height: 34px;
+$content-height: calc(100% - #{$header-height} - #{$tabs-height});
 
-#main_container {
+#view_container {
   // padding: 20px;
   height: $content-height;
   
-  .section {
+  .view {
     height: 100%;
   }
 }
 
 
 /* imports */
-@import "banner";
+@import "header";
 @import "now_playing";

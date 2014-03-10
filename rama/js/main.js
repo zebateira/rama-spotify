@@ -1,24 +1,36 @@
 spotify.require([
   '$api/models',
+  '$views/ui#UI',
   'js/now',
   'js/top',
   'js/search'
-], function(models, now, top, search) {
+], function(models, UI, now, top, search) {
 
-  models.application.load('arguments').done(tabs);
+  var ui = UI.init({
+    header: true,
+    views: [{
+      id: 'now',
+      element: document.getElementById('index')
+    }, {
+      id: 'top',
+      element: document.getElementById('top')
+    }, {
+      id: 'search',
+      element: document.getElementById('search')
+    }],
+    tabs: [{
+      viewId: 'now',
+      name: 'Now Playing'
+    }, {
+      viewId: 'top',
+      name: 'Top Artists'
+    }, {
+      viewId: 'search',
+      name: 'Search'
+    }]
+  });
 
-  models.application.addEventListener('arguments', tabs);
-
-  function tabs() {
-    var args = models.application.arguments;
-    var current = document.getElementById(args[0]);
-    var sections = document.getElementsByClassName('section');
-    for (var i = 0, l = sections.length; i < l; i++) {
-      sections[i].style.display = 'none';
-    }
-    current.style.display = 'block';
-  }
-
+  $(ui.header).load('views/header.html');
 
   new now.NowPlaying().load();
   new top.TopList().load();

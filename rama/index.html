@@ -14,32 +14,24 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-
-    <div id="banner_wrap">
-        <div class="banner banner-text">
-            <a href="spotify:app:rama">RAMA</a>
-        </div>
-        <div class="banner-text banner-link">
-            <a class="" href="http://rama.inescporto.pt/app">
-                rama.inescporto.pt
-            </a>
-        </div>
-    </div>
-
-    <div id="main_container">
-        <div id="index" class="section">
+    <div id="view_container">
+        <div id="index" class="view">
             <div id="graph"></div>
         </div>
-        <div id="top" class="section">
+        <div id="top" class="view">
             Top Tracks Tab
         </div>
-        <div id="search" class="section">
+        <div id="search" class="view">
             Search Tab
         </div>
     </div>
 
+
+    <!-- libs -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script type="text/javascript" src="bower_components/vis/dist/vis.js"></script>
+    <script src="bower_components/vis/dist/vis.js"></script>
+
+    <!-- main js -->
     <script src="/js/main.js"></script>
 </body>
 </html>

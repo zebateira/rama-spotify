@@ -1,36 +1,33 @@
-/* Banner Styles */
+/* Header Styles */
 
-$banner-height: 60px;
 
-#banner_wrap {
+.sp-header {
   background-color: #333;
-  max-height: $banner-height;
+  max-height: $header-height;
   position: relative;
 
-  width: 100%;
-  height: $banner-height;
+  min-height: $header-height;
 
-
-  .banner-text {
+  .header-text {
     a {
       color: #bbb;
     }
     
   }
 
-  .banner {
+  .header {
     text-align: center;
     font-size: 3em;
-
+    line-height: $header-height;
   }
 
-  .banner-link {
+  .header-link {
     display: table;
     position: absolute;
     min-height: 30px;
     height: 30px;
 
-    top: 25%;
+    top: 33%;
 
     padding-left: 10px;
     padding-right: 10px;
