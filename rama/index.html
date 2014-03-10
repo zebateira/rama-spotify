@@ -1,42 +1,45 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="$views/css/buttons.css">
-        <link rel="stylesheet" href="$views/css/image.css">
-        <link rel="stylesheet" href="$views/css/list.css">
-        <link rel="stylesheet" href="$views/css/popup.css">
-        <link rel="stylesheet" href="$views/css/scrollbar.css">
-        <link rel="stylesheet" href="$views/css/tabbar.css">
-        <link rel="stylesheet" href="$views/css/throbber.css">
-        <link rel="stylesheet" href="css/main.css">
-    </head>
-    <body>
+<head>
+    <link rel="stylesheet" href="$views/css/buttons.css">
+    <link rel="stylesheet" href="$views/css/image.css">
+    <link rel="stylesheet" href="$views/css/list.css">
+    <link rel="stylesheet" href="$views/css/popup.css">
+    <link rel="stylesheet" href="$views/css/scrollbar.css">
+    <link rel="stylesheet" href="$views/css/tabbar.css">
+    <link rel="stylesheet" href="$views/css/throbber.css">
 
-        <div class="banner-wrap">
-            <div class="banner banner-text">
-                <a href="spotify:app:rama">RAMA</a>
-            </div>
-            <div class="banner-text banner-link">
-                <a class="" href="http://rama.inescporto.pt/app">
-                    rama.inescporto.pt
-                </a>
-            </div>
+    <link rel="stylesheet" href="bower_components/normalize-css/normalize.css">
+
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+    <div id="banner_wrap">
+        <div class="banner banner-text">
+            <a href="spotify:app:rama">RAMA</a>
         </div>
-
-        <div class="main-container">
-            <div id="index" class="section">
-                <div class="list now-playing">
-                    
-                </div>
-            </div>
-            <div id="top" class="section">
-                Top Tracks Tab
-            </div>
-            <div id="search" class="section">
-                Search Tab
-            </div>
+        <div class="banner-text banner-link">
+            <a class="" href="http://rama.inescporto.pt/app">
+                rama.inescporto.pt
+            </a>
         </div>
+    </div>
 
-        <script src="/js/main.js"></script>
-    </body>
+    <div id="main_container">
+        <div id="index" class="section">
+            <div id="graph"></div>
+        </div>
+        <div id="top" class="section">
+            Top Tracks Tab
+        </div>
+        <div id="search" class="section">
+            Search Tab
+        </div>
+    </div>
+
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="bower_components/vis/dist/vis.js"></script>
+    <script src="/js/main.js"></script>
+</body>
 </html>
