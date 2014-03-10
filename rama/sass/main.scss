@@ -1,0 +1,39 @@
+@import "spotify";
+@import "github";
+
+@import url(http://fonts.googleapis.com/css?family=Ruda);
+
+/* overrides */
+body, html {
+  margin: 0;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+ }
+
+a {
+  text-decoration: none;
+}
+
+html, body {
+  height: 100%;
+}
+
+$header-height: 100px;
+$tabs-height: 34px;
+$content-height: calc(100% - #{$header-height} - #{$tabs-height});
+
+#view_container {
+  // padding: 20px;
+  height: $content-height;
+  
+  .view {
+    height: 100%;
+  }
+}
+
+
+/* imports */
+@import "header";
+@import "now_playing";

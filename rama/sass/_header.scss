@@ -1,0 +1,57 @@
+/* Header Styles */
+
+
+.sp-header {
+  background-color: #333;
+  max-height: $header-height;
+  position: relative;
+
+  min-height: $header-height;
+
+  .header-text {
+    a {
+      color: #bbb;
+    }
+    
+  }
+
+  .header {
+    text-align: center;
+    font-size: 3em;
+    line-height: $header-height;
+  }
+
+  .header-link {
+    display: table;
+    position: absolute;
+    min-height: 30px;
+    height: 30px;
+
+    top: 33%;
+
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: black;
+    margin-left: 10px;
+
+    a {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    &:after {
+      content: url(../img/external_link-tiny-gray.png);
+
+      display: inline-block;
+      
+      height: 9px;
+      width: 9px;
+      margin-left: 5px;
+      margin-top: -5px;
+    }
+    @media (max-width: 500px) {
+      display: none;
+    }
+  }
+}
+

@@ -1,0 +1,328 @@
+/* Main Elements */
+@import url(http://fonts.googleapis.com/css?family=Ruda);
+/* line 2, ../sass/_spotify.scss */
+body {
+  font-family: 'Lucida Grande',Tahoma,Calibri,Arial,sans-serif;
+  font-size: 12px;
+  line-height: 1.584;
+  color: #222;
+  background-color: #ecebe8;
+}
+
+/* line 10, ../sass/_spotify.scss */
+a {
+  color: #333;
+}
+
+/* line 14, ../sass/_spotify.scss */
+h1 {
+  font-size: 40px;
+}
+
+/* line 18, ../sass/_spotify.scss */
+h1, h2, h3 {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+/* line 23, ../sass/_spotify.scss */
+h1, h2, h3, h4, h5, h6, .hdr-xxl, .hdr-xl, .hdr-l, .hdr-m, .hdr-sm, .hdr-xsm {
+  font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-weight: bold;
+  line-height: 1.2;
+  color: #343434;
+}
+
+/* line 30, ../sass/_spotify.scss */
+.description {
+  font-size: 1.2em;
+}
+
+/* line 34, ../sass/_spotify.scss */
+.reference {
+  padding: 0.5em 0;
+  font-size: .9em;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+/* line 41, ../sass/_spotify.scss */
+#wrapper {
+  position: relative;
+  max-width: 800px;
+  min-height: 100%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* line 43, ../sass/_spotify.scss */
+section {
+  position: relative;
+  overflow: hidden;
+  margin: 0 0 40px;
+}
+
+/* line 45, ../sass/_spotify.scss */
+.breadcrumb {
+  list-style: none;
+  padding: 0;
+}
+
+/* line 50, ../sass/_spotify.scss */
+body::before {
+  content: '.';
+  /*background: url('/img/spotify-logo.png') no-repeat top right;*/
+  width: 400px;
+  height: 400px;
+  top: 0;
+  right: 0;
+  position: absolute;
+  opacity: 0.2;
+}
+
+/* Text */
+/* line 62, ../sass/_spotify.scss */
+ul {
+  margin: 0 0 20px;
+}
+
+/* Player */
+/* line 65, ../sass/_spotify.scss */
+#player {
+  min-height: 140px;
+}
+
+/* line 66, ../sass/_spotify.scss */
+#player .sp-player {
+  float: left;
+  margin-right: 10px;
+}
+
+/* line 67, ../sass/_spotify.scss */
+#player .sp-list {
+  width: inherit;
+  max-height: inherit;
+}
+
+/* Drop Box */
+/* line 70, ../sass/_spotify.scss */
+#drop-box {
+  border: 4px dashed #333;
+  width: 100%;
+  height: 200px;
+  padding: 10px;
+}
+
+/* line 71, ../sass/_spotify.scss */
+#drop-box.over {
+  opacity: 0.8;
+  border-color: #74c043;
+}
+
+/* Buttons */
+/* line 74, ../sass/_spotify.scss */
+.buttons button {
+  margin: 0 20px 0 0;
+}
+
+/* line 76, ../sass/_spotify.scss */
+body, html {
+  overflow: visible !important;
+}
+
+/* line 78, ../sass/_spotify.scss */
+code {
+  -webkit-user-select: auto;
+}
+
+/**
+ * GitHub theme
+ *
+ * @author Craig Campbell
+ * @version 1.0.2
+ */
+/* line 7, ../sass/_github.scss */
+pre {
+  border: 1px solid #ccc;
+  word-wrap: break-word;
+  padding: 6px 10px;
+  line-height: 19px;
+  margin-bottom: 20px;
+}
+
+/* line 15, ../sass/_github.scss */
+code {
+  border: 1px solid #eaeaea;
+  margin: 0px 2px;
+  padding: 0px 5px;
+  font-size: 12px;
+}
+
+/* line 22, ../sass/_github.scss */
+pre code {
+  border: 0px;
+  padding: 0px;
+  margin: 0px;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+}
+
+/* line 31, ../sass/_github.scss */
+pre, code {
+  font-family: 'Bitstream Vera Sans Mono', Courier, monospace;
+  color: #333;
+  background: #f8f8f8;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+
+/* line 40, ../sass/_github.scss */
+pre, pre code {
+  font-size: 13px;
+}
+
+/* line 44, ../sass/_github.scss */
+pre .comment {
+  color: #998;
+}
+
+/* line 48, ../sass/_github.scss */
+pre .support {
+  color: #0086B3;
+}
+
+/* line 52, ../sass/_github.scss */
+pre .tag, pre .tag-name {
+  color: navy;
+}
+
+/* line 56, ../sass/_github.scss */
+pre .keyword, pre .css-property, pre .vendor-prefix, pre .sass, pre .class, pre .id, pre .css-value, pre .entity.function, pre .storage.function {
+  font-weight: bold;
+}
+
+/* line 60, ../sass/_github.scss */
+pre .css-property, pre .css-value, pre .vendor-prefix, pre .support.namespace {
+  color: #333;
+}
+
+/* line 64, ../sass/_github.scss */
+pre .constant.numeric, pre .keyword.unit, pre .hex-color {
+  font-weight: normal;
+  color: #099;
+}
+
+/* line 69, ../sass/_github.scss */
+pre .entity.class {
+  color: #458;
+}
+
+/* line 73, ../sass/_github.scss */
+pre .entity.id, pre .entity.function {
+  color: #900;
+}
+
+/* line 77, ../sass/_github.scss */
+pre .attribute, pre .variable {
+  color: teal;
+}
+
+/* line 81, ../sass/_github.scss */
+pre .string, pre .support.value {
+  font-weight: normal;
+  color: #d14;
+}
+
+/* line 86, ../sass/_github.scss */
+pre .regexp {
+  color: #009926;
+}
+
+/* overrides */
+/* line 7, ../sass/main.scss */
+body, html {
+  margin: 0;
+}
+
+/* line 11, ../sass/main.scss */
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+/* line 15, ../sass/main.scss */
+a {
+  text-decoration: none;
+}
+
+/* line 19, ../sass/main.scss */
+html, body {
+  height: 100%;
+}
+
+/* line 27, ../sass/main.scss */
+#view_container {
+  height: calc(100% - 100px - 34px);
+}
+/* line 31, ../sass/main.scss */
+#view_container .view {
+  height: 100%;
+}
+
+/* imports */
+/* Header Styles */
+/* line 5, ../sass/_header.scss */
+.sp-header {
+  background-color: #333;
+  max-height: 100px;
+  position: relative;
+  min-height: 100px;
+}
+/* line 13, ../sass/_header.scss */
+.sp-header .header-text a {
+  color: #bbb;
+}
+/* line 19, ../sass/_header.scss */
+.sp-header .header {
+  text-align: center;
+  font-size: 3em;
+  line-height: 100px;
+}
+/* line 25, ../sass/_header.scss */
+.sp-header .header-link {
+  display: table;
+  position: absolute;
+  min-height: 30px;
+  height: 30px;
+  top: 33%;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: black;
+  margin-left: 10px;
+}
+/* line 38, ../sass/_header.scss */
+.sp-header .header-link a {
+  display: table-cell;
+  vertical-align: middle;
+}
+/* line 43, ../sass/_header.scss */
+.sp-header .header-link:after {
+  content: url(../img/external_link-tiny-gray.png);
+  display: inline-block;
+  height: 9px;
+  width: 9px;
+  margin-left: 5px;
+  margin-top: -5px;
+}
+@media (max-width: 500px) {
+  /* line 25, ../sass/_header.scss */
+  .sp-header .header-link {
+    display: none;
+  }
+}
+
+/* line 2, ../sass/_now_playing.scss */
+#graph {
+  height: 100%;
+}
