@@ -42,4 +42,10 @@ spotify.require([
 
   new top.TopList().load();
   new search.Search().load();
+
+  // todo manager for updating the views
+  // note: dont update the graphs when a commercial is playing
+  window.onresize = function() {
+    NowPlaying.updateView();
+  };
 });

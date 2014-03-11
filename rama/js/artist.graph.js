@@ -1,72 +1,85 @@
 /**
   Defines the artist.graph model
 
-  Exports the ArtistGraph object to draw a graph of related artists in a DOM element
+  Exports the ArtistGraph object to draw a graph of related artists
+  in a DOM element given a music artist and some optional options 8D
 */
 
 require(['$api/models'], function(models) {
 
-  var ArtistGraph = function(artist, options) {
+  function Promise() {
+    this.callback = function() {};
 
+    this.done = function(callback) {
+      this.callback = callback;
+    };
+  }
+
+  function ArtistGraph(element, artist, options) {
     this.artist = artist;
+
+    this.element = element;
+
+    this.relatedArtists = [];
 
     // numbering for the id's of adjacent nodes
     this.index = 1;
 
-    this.nodes = [{
-      id: this.index,
-      label: this.artist.name
-    }];
-    this.edges = [];
-
-    // data of the graph: contains nodes and edges
+    // data of the graph: should contain nodes and edges
     this.data = {
-      nodes: this.nodes,
-      edges: this.edges
+      nodes: [{
+        id: this.index,
+        label: this.artist.name
+      }],
+      edges: []
     };
     // options for the rendering of the graph
     this.options = options;
 
-    this.drawGraph = function(element) {
-      var self = this;
+    this.graph = new vis.Graph(this.element, this.data, this.options);
+  }
 
-      this.graph = new vis.Graph(element, this.data, this.options);
+  ArtistGraph.prototype = {
 
-      this.artist.load('related').done(function(artist) {
-        artist.related.snapshot().done(function(snapshot) {
+    setupGraph: function() {
+      var promise = new Promise();
 
-          snapshot.loadAll('name').each(function(artist) {
-            self.data.nodes.push({
-              id: ++self.index,
+      this.artist.load('related').done(this, function(artist) {
+        artist.related.snapshot().done(this, function(snapshot) {
+          snapshot.loadAll('name').each(this, function(artist) {
+
+            this.data.nodes.push({
+              id: ++this.index,
               label: artist.name
             });
 
-            self.data.edges.push({
+            this.data.edges.push({
               from: 1,
-              to: self.index
+              to: this.index
             });
-
-            self.graph.setData(self.data);
+          }).done(this, function() {
+            this.graph.setData(this.data, {
+              disableStart: true
+            });
+            promise.callback();
           });
-
         });
       });
 
+      return promise;
+    },
+    draw: function() {
+      this.graph.start();
+    },
+
+    redraw: function() {
+      this.graph.redraw();
+      this.graph.zoomExtent();
+
       return this;
-    };
-
-    this.addNode = function(node) {
-      // todo
-    };
-
-    this.addEdge = function(egde) {
-      // todo
-    };
-
-    this.redraw = function() {
-      // todo
-    };
+    }
   };
+
 
   exports.ArtistGraph = ArtistGraph;
 });
