@@ -272,24 +272,24 @@ html, body {
 
 /* imports */
 /* Header Styles */
-/* line 5, ../sass/_header.scss */
+/* line 4, ../sass/_header.scss */
 .sp-header {
   background-color: #333;
   max-height: 100px;
   position: relative;
   min-height: 100px;
 }
-/* line 13, ../sass/_header.scss */
+/* line 12, ../sass/_header.scss */
 .sp-header .header-text a {
   color: #bbb;
 }
-/* line 19, ../sass/_header.scss */
+/* line 18, ../sass/_header.scss */
 .sp-header .header {
   text-align: center;
   font-size: 3em;
   line-height: 100px;
 }
-/* line 25, ../sass/_header.scss */
+/* line 24, ../sass/_header.scss */
 .sp-header .header-link {
   display: table;
   position: absolute;
@@ -301,12 +301,12 @@ html, body {
   background-color: black;
   margin-left: 10px;
 }
-/* line 38, ../sass/_header.scss */
+/* line 37, ../sass/_header.scss */
 .sp-header .header-link a {
   display: table-cell;
   vertical-align: middle;
 }
-/* line 43, ../sass/_header.scss */
+/* line 42, ../sass/_header.scss */
 .sp-header .header-link:after {
   content: url(../img/external_link-tiny-gray.png);
   display: inline-block;
@@ -316,13 +316,13 @@ html, body {
   margin-top: -5px;
 }
 @media (max-width: 500px) {
-  /* line 25, ../sass/_header.scss */
+  /* line 24, ../sass/_header.scss */
   .sp-header .header-link {
     display: none;
   }
 }
 
 /* line 2, ../sass/_now_playing.scss */
-#graph {
+.graph {
   height: 100%;
 }
