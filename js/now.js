@@ -32,7 +32,7 @@ var NowPlaying = {
         },
         fontColor: '#eef',
         shape: 'box',
-        radius: 24
+        radius: 2
       }
     };
 

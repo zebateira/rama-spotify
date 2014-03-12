@@ -1,7 +1,7 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     jshint: {
-      all: ['Gruntfile.js', 'js/**/*.js', 'js/specs/*.js']
+      all: ['Gruntfile.js', 'js/**/*.js']
     },
     jasmine: {
       src: ['js/*.js'],
