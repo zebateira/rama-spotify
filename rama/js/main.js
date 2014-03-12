@@ -1,10 +1,10 @@
 spotify.require([
   '$api/models',
   '$views/ui#UI',
-  'js/now#NowPlaying',
+  'js/now',
   'js/top',
   'js/search',
-], function(models, UI, NowPlaying, top, search) {
+], function(models, UI, now, top, search) {
 
   var ui = UI.init({
     header: true,
@@ -34,7 +34,7 @@ spotify.require([
   $(ui.header).load('views/header.html');
 
   // initializes NowPlaying controller and draws the graph
-  NowPlaying
+  now.NowPlaying
     .init({
       element: $('#index .graph')[0]
     })
@@ -46,6 +46,6 @@ spotify.require([
   // todo manager for updating the views
   // note: dont update the graphs when a commercial is playing
   window.onresize = function() {
-    NowPlaying.updateView();
+    now.NowPlaying.updateView();
   };
 });

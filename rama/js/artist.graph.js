@@ -46,7 +46,11 @@ require(['$api/models'], function(models) {
 
       this.artist.load('related').done(this, function(artist) {
         artist.related.snapshot().done(this, function(snapshot) {
-          snapshot.loadAll('name').each(this, function(artist) {
+          snapshot.loadAll('name', 'uri').each(this, function(artist) {
+
+            this.relatedArtists.push(
+              models.Artist.fromURI(artist.uri)
+            );
 
             this.data.nodes.push({
               id: ++this.index,
