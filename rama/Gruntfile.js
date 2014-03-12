@@ -1,7 +1,14 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     jshint: {
-      files: ['Gruntfile.js', 'js/*.js']
+      all: ['Gruntfile.js', 'js/**/*.js', 'js/specs/*.js']
+    },
+    jasmine: {
+      src: ['js/*.js'],
+      options: {
+        helpers: ['js/specs/spechelper.js'],
+        specs: ['js/specs/*.spec.js']
+      }
     },
     compass: {
       dev: {
@@ -13,11 +20,12 @@ module.exports = function(grunt) {
     },
     watch: {
       files: ['Gruntfile.js', 'js/*.js', 'sass/*.scss'],
-      tasks: ['jshint', 'compass']
+      tasks: ['jshint', 'compass', 'jasmine']
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-compass');
 };

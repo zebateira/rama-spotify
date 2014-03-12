@@ -1,55 +1,83 @@
-require(['$api/models', '$views/image'], function(models, image) {
+/**
+  Now Playing Module.
 
-  exports.NowPlaying = function() {
+  Gets current playing artist and draws graph
+*/
 
-    this.drawGraph = function() {
 
-      models.player.load('track').done(function(player) {
-        var currentArtist = models.Artist.fromURI(player.track.artists[0].uri);
-        var index = 1;
-        var nodes = [{
-          id: index,
-          label: currentArtist.name
-        }];
-        var edges = [];
+var now = {};
 
-        var container = document.getElementById('graph');
-        var data = {
-          nodes: nodes,
-          edges: edges
-        };
+require([
+  '$api/models',
+  'js/artist.graph'
+], function(models, artistGraph) {
 
-        var options = {};
+  now.models = models;
+  now.artistGraph = artistGraph;
 
-        var graph = new vis.Graph(container, data, options);
-
-        currentArtist.load('related').done(function(artist) {
-          artist.related.snapshot().done(function(snapshot) {
-
-            snapshot.loadAll('name').each(function(artist) {
-              data.nodes.push({
-                id: ++index,
-                label: artist.name
-              });
-
-              data.edges.push({
-                from: 1,
-                to: index
-              });
-
-              graph.setData(data);
-            });
-
-          });
-
-        });
-      });
-
-    };
-
-    this.load = function() {
-      this.drawGraph();
-    };
-
-  };
+  exports.NowPlaying = NowPlaying;
 });
+
+var NowPlaying = {
+  init: function(config) {
+    this.element = config.element;
+
+    this.artist = {};
+
+    this.options = {
+      nodes: {
+        color: {
+          background: '#333',
+          border: '#333'
+        },
+        fontColor: '#eef',
+        shape: 'box',
+        radius: 24
+      }
+    };
+
+    this.artistGraph = {};
+
+    return this;
+  },
+
+  loadView: function() {
+    now.models.player.load('track').done(function(player) {
+      NowPlaying
+        .setArtistGraph(
+          now.models.Artist.fromURI(player.track.artists[0].uri))
+        .done(NowPlaying.drawGraph);
+    });
+
+    return this;
+  },
+
+  updateView: function() {
+    this.artistGraph.redraw();
+
+    return this;
+  },
+
+  drawGraph: function() {
+    NowPlaying.artistGraph.draw();
+
+    return this;
+  },
+
+  /**
+    Set artist from the current playing track.
+    Also creates the artistGraph.
+  */
+  setArtistGraph: function(artist) {
+    NowPlaying.artist = artist;
+
+    NowPlaying.artistGraph = new now.artistGraph.ArtistGraph(
+      NowPlaying.element,
+      NowPlaying.artist,
+      NowPlaying.options
+    );
+
+    return NowPlaying.artistGraph
+      .setupGraph();
+  }
+};
