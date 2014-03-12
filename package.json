@@ -6,8 +6,7 @@
     "type": "git",
     "url": "git@github.com:carsy/master-thesis.git"
   },
-  "author": "Z� Bateira",
-  "license": "BSD-2-Clause",
+  "author": "Zé Bateira",
   "bugs": {
     "url": "https://github.com/carsy/master-thesis/issues"
   },
@@ -21,5 +20,5 @@
   },
   "scripts": {
     "test": "grunt jshint jasmine --verbose"
-  },
+  }
 }
