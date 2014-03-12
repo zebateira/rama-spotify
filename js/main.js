@@ -1,51 +1,39 @@
 spotify.require([
-  '$api/models',
-  '$views/ui#UI',
-  'js/now',
-  'js/top',
-  'js/search',
-], function(models, UI, now, top, search) {
+  'js/views',
+], function(views) {
 
-  var ui = UI.init({
-    header: true,
-    views: [{
+  views.initConfig({
+    header: {
+      path: '../views/header.html'
+    },
+    tabs: [{
       id: 'now',
-      element: document.getElementById('index')
+      name: 'Now Playing',
+      element: $('#now .graph')
     }, {
       id: 'top',
-      element: document.getElementById('top')
+      name: 'Top List',
+      element: $('#top .graph')
     }, {
       id: 'search',
-      element: document.getElementById('search')
+      name: 'Search',
+      element: $('#search .graph')
     }],
-    tabs: [{
-      viewId: 'now',
-      name: 'Now Playing'
-    }, {
-      viewId: 'top',
-      name: 'Top Artists'
-    }, {
-      viewId: 'search',
-      name: 'Search'
-    }]
   });
 
-  // loading header view
-  $(ui.header).load('views/header.html');
-
   // initializes NowPlaying controller and draws the graph
-  now.NowPlaying
-    .init({
-      element: $('#index .graph')[0]
-    })
-    .loadView();
+  // now.NowPlaying
+  //   .init({
+  //     element: $('#index .graph')[0]
+  //   })
+  //   .loadView();
 
-  new top.TopList().load();
-  new search.Search().load();
+  // new top.TopList().load();
+  // new search.Search().load();
 
   // todo manager for updating the views
   // note: dont update the graphs when a commercial is playing
-  window.onresize = function() {
-    now.NowPlaying.updateView();
-  };
+  // window.onresize = function() {
+  //   now.NowPlaying.updateView();
+  // };
 });
