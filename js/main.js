@@ -8,18 +8,17 @@ spotify.require([
     },
     tabs: [{
       id: 'now',
-      name: 'Now Playing',
-      element: $('#now .graph')
+      name: 'Now Playing'
     }, {
       id: 'top',
-      name: 'Top List',
-      element: $('#top .graph')
+      name: 'Top List'
     }, {
       id: 'search',
-      name: 'Search',
-      element: $('#search .graph')
+      name: 'Search'
     }],
   });
+
+  views.start();
 
   // initializes NowPlaying controller and draws the graph
   // now.NowPlaying

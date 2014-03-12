@@ -13,15 +13,19 @@ var spUI;
 require(['$views/ui#UI'], function(ui) {
   spUI = ui;
   exports.initConfig = views.initConfig;
+  exports.start = views.start;
 });
 
 var views = {
   initConfig: function(config) {
     views.header.path = config.header.path;
   },
+  start: function() {
+    views.header.init();
+  },
   header: {
     init: function() {
-      var ui = spUI.UI.init({
+      var ui = spUI.init({
         header: true,
         views: [{
           id: 'now',
@@ -48,5 +52,8 @@ var views = {
       // loading header view
       $(ui.header).load('../views/header.html');
     }
+  },
+  tabs: {
+
   }
 };
