@@ -12,10 +12,7 @@ module.exports = function(grunt) {
             'bower_components/jasmine-jquery/lib/jasmine-jquery.js'
           ],
           helpers: ['test/spechelper.js'],
-          specs: ['test/*.spec.js'],
-          '--web-security': false,
-          '--local-to-remote-url-access': true,
-          '--ignore-ssl-errors': true
+          specs: ['test/*.spec.js']
         }
       }
     },
@@ -28,7 +25,7 @@ module.exports = function(grunt) {
       }
     },
     watch: {
-      files: ['Gruntfile.js', 'js/*.js', 'sass/*.scss'],
+      files: ['Gruntfile.js', 'js/*.js', 'test/*.js', 'sass/*.scss'],
       tasks: ['jshint', 'compass', 'jasmine'],
     }
   });
