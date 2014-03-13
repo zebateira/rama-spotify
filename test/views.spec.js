@@ -1,35 +1,58 @@
 describe('Views Module', function() {
   jasmine.getFixtures().fixturesPath = 'test/fixtures';
 
-  beforeEach(function() {
-    loadFixtures('header.html');
-  });
 
-  it('header: path should be set', function() {
-    var headerPath = '../../views/header.html';
+  describe('Header View', function() {
+    it('should set the path property', function() {
+      var headerPath = 'path/to/header/html/file';
 
-    views.initConfig({
-      header: {
-        path: headerPath
-      }
+      views.initConfig({
+        header: {
+          path: headerPath
+        }
+      });
+
+      expect(views.header.path).toBe(headerPath);
     });
 
-    expect(views.header.path).toBe(headerPath);
+    it('should throw and expection if no header or path are specified', function() {
+      function noHeader() {
+        views.initConfig({});
+      }
+
+      function noHeader2() {
+        views.initConfig({
+          header: {}
+        });
+      }
+      expect(noHeader).toThrow();
+      expect(noHeader2).toThrow();
+    });
+
+    it('should loaded link', function() {
+      appendLoadFixtures('header.html');
+
+      views.initConfig({
+        header: {
+          path: "path/to/file",
+          link: 'link.to.site'
+        }
+      });
+
+      expect($('.header-link')).toExist();
+    });
   });
 
-  it('header: link loaded', function() {
-
-    expect($('.header > a')).toContainText('RAMA');
-  });
-
-  it('tabs bar: ids and names should be set', function() {
+  it('should set ids and names', function() {
     var tab = {
       id: 'index',
       name: 'Main'
     };
 
     views.initConfig({
-      header: {},
+      header: {
+        path: "path/to/file"
+      },
       tabs: [tab]
     });
 

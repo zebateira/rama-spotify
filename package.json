@@ -4,13 +4,13 @@
   "description": "Relational Artist MAps",
   "repository": {
     "type": "git",
-    "url": "git@github.com:carsy/master-thesis.git"
+    "url": "git@github.com:carsy/rama-spotify.git"
   },
   "author": "Zé Bateira",
   "bugs": {
-    "url": "https://github.com/carsy/master-thesis/issues"
+    "url": "https://github.com/carsy/rama-spotify/issues"
   },
-  "homepage": "https://github.com/carsy/master-thesis/",
+  "homepage": "https://github.com/carsy/rama-spotify/",
   "devDependencies": {
     "grunt": "~0.4.2",
     "grunt-contrib-watch": "~0.5.3",

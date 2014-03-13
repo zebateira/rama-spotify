@@ -4,8 +4,6 @@
   Handles the views for the header, tabs bar, tabs content, etc...
 */
 
-// views module "exports"
-
 // spotify modules
 var spUI = {};
 
@@ -23,6 +21,9 @@ var views = {
   },
   header: {
     init: function(config) {
+      if (!config || !config.path)
+        throw "Views: No path for header.html specified!";
+
       views.header.path = config.path;
     },
   },
