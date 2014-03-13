@@ -8,17 +8,20 @@ spotify.require([
     },
     tabs: [{
       id: 'now',
-      name: 'Now Playing'
+      name: 'Now Playing',
+      path: '../views/now.html'
     }, {
       id: 'top',
-      name: 'Top List'
+      name: 'Top List',
+      path: '../views/top.html'
     }, {
       id: 'search',
-      name: 'Search'
+      name: 'Search',
+      path: '../views/search.html'
     }],
   });
 
-  views.start();
+  views.loadViews();
 
   // initializes NowPlaying controller and draws the graph
   // now.NowPlaying

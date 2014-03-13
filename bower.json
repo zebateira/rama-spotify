@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "normalize-css": "~3.0.0",
-    "vis": "~0.6.1"
+    "vis": "~0.6.1",
+    "jasmine-jquery": "~2.0.3"
   }
 }

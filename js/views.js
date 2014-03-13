@@ -7,53 +7,55 @@
 // views module "exports"
 
 // spotify modules
-var spUI;
+var spUI = {};
 
 // spotify exports
 require(['$views/ui#UI'], function(ui) {
   spUI = ui;
   exports.initConfig = views.initConfig;
-  exports.start = views.start;
+  exports.loadViews = views.loadViews;
 });
 
 var views = {
   initConfig: function(config) {
-    views.header.path = config.header.path;
-  },
-  start: function() {
-    views.header.init();
+    views.header.init(config.header);
+    views.tabBar.init(config.tabs);
   },
   header: {
-    init: function() {
-      var ui = spUI.init({
-        header: true,
-        views: [{
-          id: 'now',
-          element: document.getElementById('now')
-        }, {
-          id: 'top',
-          element: document.getElementById('top')
-        }, {
-          id: 'search',
-          element: document.getElementById('search')
-        }],
-        tabs: [{
-          viewId: 'now',
-          name: 'Now Playing'
-        }, {
-          viewId: 'top',
-          name: 'Top Artists'
-        }, {
-          viewId: 'search',
-          name: 'Search'
-        }]
-      });
-
-      // loading header view
-      $(ui.header).load('../views/header.html');
+    init: function(config) {
+      views.header.path = config.path;
+    },
+  },
+  tabBar: {
+    init: function(config) {
+      views.tabs = config;
     }
   },
-  tabs: {
+  loadViews: function() {
+    spUI = spUI.init({
+      header: true,
+      views: [{
+        id: 'now',
+        element: document.getElementById('now')
+      }, {
+        id: 'top',
+        element: document.getElementById('top')
+      }, {
+        id: 'search',
+        element: document.getElementById('search')
+      }],
+      tabs: [{
+        viewId: 'now',
+        name: 'Now Playing',
+      }, {
+        viewId: 'top',
+        name: 'Top Artists'
+      }, {
+        viewId: 'search',
+        name: 'Search'
+      }]
+    });
 
+    $(spUI.header).load(views.header.path);
   }
 };
