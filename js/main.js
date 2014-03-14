@@ -4,7 +4,8 @@ spotify.require([
 
   views.initConfig({
     header: {
-      path: '../views/header.html'
+      path: '../views/header.html',
+      link: 'http://rama.inescporto.pt/app'
     },
     tabs: [{
       id: 'now',

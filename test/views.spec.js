@@ -34,14 +34,19 @@ describe('Views Module', function() {
     it('should load link if property is specified', function() {
       appendLoadFixtures('header.html');
 
+      var linkAttr = 'link.to.site';
+
       views.initConfig({
         header: {
           path: "path/to/file",
-          link: 'link.to.site'
+          link: linkAttr
         }
       });
 
-      expect($('.header-link')).toExist();
+      views.header.afterLoad();
+
+      expect($('.header-link')).toBeVisible();
+      expect($('.header-link > a')).toHaveAttr('href', linkAttr);
     });
 
     it('shouldn\'t load link if property is not specified', function() {
@@ -49,12 +54,13 @@ describe('Views Module', function() {
 
       views.initConfig({
         header: {
-          path: "path/to/file",
-          link: 'link.to.site'
+          path: "path/to/file"
         }
       });
 
-      expect($('.header-link')).not.toExist();
+      views.header.afterLoad();
+
+      expect($('.header-link')).toBeHidden();
     });
   });
 
