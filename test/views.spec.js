@@ -64,20 +64,27 @@ describe('Views Module', function() {
     });
   });
 
-  it('should set ids and names', function() {
-    var tab = {
-      id: 'index',
-      name: 'Main'
-    };
+  describe('Tabs bar view', function() {
+    it('should set ids and names', function() {
+      var tab = {
+        id: 'index',
+        name: 'Main'
+      };
 
-    views.initConfig({
-      header: {
-        path: "path/to/file"
-      },
-      tabs: [tab]
+      views.initConfig({
+        header: {
+          path: "path/to/file"
+        },
+        tabs: [tab]
+      });
+
+      expect(views.tabs[0].id).toBe(tab.id);
+      expect(views.tabs[0].name).toBe(tab.name);
     });
-
-    expect(views.tabs[0].id).toBe(tab.id);
-    expect(views.tabs[0].name).toBe(tab.name);
   });
+
+  describe('Tabs view', function() {
+
+  });
+
 });
