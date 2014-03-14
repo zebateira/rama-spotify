@@ -3,6 +3,22 @@ describe('Views Module', function() {
 
 
   describe('Header View', function() {
+
+    it('should throw an exception if no header is specified', function() {
+      function noHeader() {
+        views.initConfig({});
+      }
+
+      expect(noHeader).toThrow(new HeaderMissingException().toString());
+    });
+    it('should set header path to default value if no path file is specified', function() {
+
+      views.initConfig({
+        header: {}
+      });
+
+      expect(views.header.path).toBe('../views/header.html');
+    });
     it('should set the path property', function() {
       var headerPath = 'path/to/header/html/file';
 
@@ -15,21 +31,7 @@ describe('Views Module', function() {
       expect(views.header.path).toBe(headerPath);
     });
 
-    it('should throw and expection if no header or path are specified', function() {
-      function noHeader() {
-        views.initConfig({});
-      }
-
-      function noHeader2() {
-        views.initConfig({
-          header: {}
-        });
-      }
-      expect(noHeader).toThrow();
-      expect(noHeader2).toThrow();
-    });
-
-    it('should loaded link', function() {
+    it('should load link if property is specified', function() {
       appendLoadFixtures('header.html');
 
       views.initConfig({
@@ -40,6 +42,19 @@ describe('Views Module', function() {
       });
 
       expect($('.header-link')).toExist();
+    });
+
+    it('shouldn\'t load link if property is not specified', function() {
+      appendLoadFixtures('header.html');
+
+      views.initConfig({
+        header: {
+          path: "path/to/file",
+          link: 'link.to.site'
+        }
+      });
+
+      expect($('.header-link')).not.toExist();
     });
   });
 

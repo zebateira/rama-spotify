@@ -4,27 +4,34 @@
   Handles the views for the header, tabs bar, tabs content, etc...
 */
 
-// spotify modules
-var spUI = {};
+// imported modules
+var spUI;
+var HeaderMissingException;
 
 // spotify exports
-require(['$views/ui#UI'], function(ui) {
+require(['$views/ui#UI', 'js/exceptions'], function(ui, _exceptions) {
   spUI = ui;
+
+  HeaderMissingException = _exceptions.HeaderMissingException;
+
+
   exports.initConfig = views.initConfig;
   exports.loadViews = views.loadViews;
 });
 
 var views = {
+  DEFAULT_HEADER_PATH: "../views/header.html",
+
   initConfig: function(config) {
     views.header.init(config.header);
     views.tabBar.init(config.tabs);
   },
   header: {
     init: function(config) {
-      if (!config || !config.path)
-        throw "Views: No path for header.html specified!";
+      if (!config)
+        throw new HeaderMissingException().toString();
 
-      views.header.path = config.path;
+      views.header.path = config.path || views.DEFAULT_HEADER_PATH;
     },
   },
   tabBar: {
