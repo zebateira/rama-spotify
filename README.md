@@ -26,8 +26,12 @@ spotify:app:rama-spotify
 
 You should now be in the app and seeing a graph thingy.
 
+### GNU/Linux
+
+With no official Spotify Desktop Client release there's nothing I can do about this. Try your luck with wine (playonlinux might be the best option).
+
 ### Windows
-If you happen to have commandlinephobia:
+If you happen to have commandlinephobia (I get that every other month... might be a thing):
 
 1. download the app from [here]
 2. extract and rename the folder to "rama-spotify"

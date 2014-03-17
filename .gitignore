@@ -1,4 +1,10 @@
+# tmp compass compilation
+.sass-cache
+
+# dev libs
 node_modules/
-bower_components/
-.sass-cache/
-css/main.min.css
+bower_components
+
+# build files
+.tmp
+dist

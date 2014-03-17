@@ -22,41 +22,73 @@ module.exports = function(grunt) {
       files: ['Gruntfile.js', 'js/*.js', 'sass/*.scss'],
       tasks: ['jshint', 'compass', 'jasmine']
     },
-    cssmin: {
-      compress: {
-        files: {
-          'css/main.min.css': ['css/main.css']
-        }
-      }
-    },
     useminPrepare: {
+      html: 'index.html',
       options: {
         dest: 'dist'
-      },
-      html: {
-        src: ['index.html', 'views/*.html']
-      },
-      css: {
-        src: 'css/main.min.css'
       }
     },
     usemin: {
+      html: ['dist/index.html'],
+      css: ['dist/css/{,*/}*.css'],
       options: {
-        dirs: ['dist']
-      },
-      html: ['dist/{,*/}*.html'],
-      css: ['dist/css/{,*/}*.css']
+        assetDirs: ['dist', 'dist/img']
+      }
     },
+    copy: {
+      dist: {
+        files: [{
+          expand: true,
+          dot: true,
+          cwd: '.',
+          dest: 'dist',
+          src: [
+            'index.html',
+            'css/main.css',
+            'img/*',
+            'views/*.html',
+            'js/*',
+            'manifest.json'
+          ]
+        }]
+      },
+      js: {
+        src: '.tmp/concat/js/vendor.js',
+        dest: 'dist/js/vendor.js'
+      },
+      css: {
+        src: '.tmp/concat/css/vendor.css',
+        dest: 'dist/css/vendor.css'
+      }
+    },
+    clean: {
+      dist: {
+        files: [{
+          dot: true,
+          src: [
+            '.tmp',
+            'dist/*',
+          ]
+        }]
+      },
+      server: '.tmp'
+    }
   });
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-compass');
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-usemin');
 
-  grunt.registerTask('build', ['useminPrepare', 'usemin', 'compass', 'cssmin', 'concat', 'uglify']);
+  grunt.registerTask('build', [
+    'clean:dist',
+    'useminPrepare',
+    'concat',
+    'copy',
+    'usemin'
+  ]);
 };
