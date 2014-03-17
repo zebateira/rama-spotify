@@ -1,5 +1,8 @@
 module.exports = function(grunt) {
   grunt.initConfig({
+    config: {
+      dist: 'rama-spotify'
+    },
     jshint: {
       all: ['Gruntfile.js', 'js/**/*.js', 'js/specs/*.js']
     },
@@ -25,14 +28,14 @@ module.exports = function(grunt) {
     useminPrepare: {
       html: 'index.html',
       options: {
-        dest: 'dist'
+        dest: '<%= config.dist %>'
       }
     },
     usemin: {
-      html: ['dist/index.html'],
-      css: ['dist/css/{,*/}*.css'],
+      html: ['<%= config.dist %>/index.html'],
+      css: ['<%= config.dist %>/css/{,*/}*.css'],
       options: {
-        assetDirs: ['dist', 'dist/img']
+        assetDirs: ['<%= config.dist %>', '<%= config.dist %>/img']
       }
     },
     copy: {
@@ -41,7 +44,7 @@ module.exports = function(grunt) {
           expand: true,
           dot: true,
           cwd: '.',
-          dest: 'dist',
+          dest: '<%= config.dist %>',
           src: [
             'index.html',
             'css/main.css',
@@ -54,11 +57,11 @@ module.exports = function(grunt) {
       },
       js: {
         src: '.tmp/concat/js/vendor.js',
-        dest: 'dist/js/vendor.js'
+        dest: '<%= config.dist %>/js/vendor.js'
       },
       css: {
         src: '.tmp/concat/css/vendor.css',
-        dest: 'dist/css/vendor.css'
+        dest: '<%= config.dist %>/css/vendor.css'
       }
     },
     clean: {
@@ -67,7 +70,7 @@ module.exports = function(grunt) {
           dot: true,
           src: [
             '.tmp',
-            'dist/*',
+            '<%= config.dist %>/*',
           ]
         }]
       },

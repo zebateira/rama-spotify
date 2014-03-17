@@ -7,4 +7,6 @@ bower_components
 
 # build files
 .tmp
-dist
+rama-spotify
+rama-spotify.zip
+rama-spotify.tar.gz
