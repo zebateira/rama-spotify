@@ -21,11 +21,11 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "~2.1.0"
+    "jquery": "~2.1.0",
+    "vis": "~0.7.0",
+    "normalize-css": "~3.0.0"
   },
   "devDependencies": {
-    "normalize-css": "~3.0.0",
-    "vis": "~0.6.1",
     "jasmine-jquery": "~2.0.3"
   }
 }
