@@ -51,6 +51,15 @@ var views = {
   tabBar: {
     init: function(config) {
       views.tabs = config;
+
+      _.each(views.tabs, function(tab) {
+        if (!tab.path) {
+          tab.path = views.tabBar.getDefaultPath(tab.id);
+        }
+      });
+    },
+    getDefaultPath: function(tabID) {
+      // return views.tabs
     }
   },
   loadViews: function() {

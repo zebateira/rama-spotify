@@ -19,7 +19,8 @@ describe('Views Module', function() {
         });
 
         expect(views.header.path).toBe(views.header.DEFAULT_PATH);
-      });
+      }
+    );
     it('should set the path property', function() {
       var headerPath = 'path/to/header/html/file';
 
@@ -84,8 +85,6 @@ describe('Views Module', function() {
     });
 
     it('should set default path if it\'s not specified', function() {
-      var default_path = '../views/index.html';
-
       var tab = {
         id: 'index',
         name: 'Main'
@@ -96,7 +95,7 @@ describe('Views Module', function() {
         tabs: [tab]
       });
 
-      expect(views.tabs[0].path).toBe(views.tabs.DEFAULT_PATH);
+      expect(views.tabs[0].path).toBe('../views/index.html');
     });
   });
 
