@@ -20,7 +20,7 @@ git clone https://github.com/carsy/rama-spotify.git
 
 Alternatively, If you happen to have commandlinephobia (I get that every other month... might be a thing):
 
-1. download the app from [here]
+1. download the latest version of the app from [here]
 2. extract and rename the folder to "rama-spotify"
 3. copy the folder to the Spotify folder that should be in your home directory (create it if it does not exist yet). In Windows should be your "My Documents" folder.
 
@@ -52,4 +52,4 @@ José Bateira
 [rama.inescporto.pt]:http://rama.inescporto.pt
 [carsy.github.io]:http://carsy.github.io
 [@\_carsy\_]:http://twitter.com/_carsy_
-[here]:https://github.com/carsy/rama-spotify/archive/master.zip
+[here]:https://github.com/carsy/rama-spotify/releases/tag/v0.1.0
