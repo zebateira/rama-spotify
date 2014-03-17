@@ -1,5 +1,8 @@
 module.exports = function(grunt) {
   grunt.initConfig({
+    config: {
+      dist: 'rama-spotify'
+    },
     jshint: {
       all: ['Gruntfile.js', 'js/**/*.js', 'js/specs/*.js']
     },
@@ -21,6 +24,57 @@ module.exports = function(grunt) {
     watch: {
       files: ['Gruntfile.js', 'js/*.js', 'sass/*.scss'],
       tasks: ['jshint', 'compass', 'jasmine']
+    },
+    useminPrepare: {
+      html: 'index.html',
+      options: {
+        dest: '<%= config.dist %>'
+      }
+    },
+    usemin: {
+      html: ['<%= config.dist %>/index.html'],
+      css: ['<%= config.dist %>/css/{,*/}*.css'],
+      options: {
+        assetDirs: ['<%= config.dist %>', '<%= config.dist %>/img']
+      }
+    },
+    copy: {
+      dist: {
+        files: [{
+          expand: true,
+          dot: true,
+          cwd: '.',
+          dest: '<%= config.dist %>',
+          src: [
+            'index.html',
+            'css/main.css',
+            'img/*',
+            'views/*.html',
+            'js/*',
+            'manifest.json'
+          ]
+        }]
+      },
+      js: {
+        src: '.tmp/concat/js/vendor.js',
+        dest: '<%= config.dist %>/js/vendor.js'
+      },
+      css: {
+        src: '.tmp/concat/css/vendor.css',
+        dest: '<%= config.dist %>/css/vendor.css'
+      }
+    },
+    clean: {
+      dist: {
+        files: [{
+          dot: true,
+          src: [
+            '.tmp',
+            '<%= config.dist %>/*',
+          ]
+        }]
+      },
+      server: '.tmp'
     }
   });
 
@@ -28,4 +82,16 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-compass');
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-usemin');
+
+  grunt.registerTask('build', [
+    'clean:dist',
+    'useminPrepare',
+    'concat',
+    'copy',
+    'usemin'
+  ]);
 };
