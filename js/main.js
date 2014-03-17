@@ -1,7 +1,6 @@
 spotify.require([
   'js/views',
 ], function(views) {
-
   views.initConfig({
     header: {
       path: '../views/header.html',
@@ -34,7 +33,8 @@ spotify.require([
   // new top.TopList().load();
   // new search.Search().load();
 
-  // todo manager for updating the views
+  // todo manager
+  // for updating the views
   // note: dont update the graphs when a commercial is playing
   // window.onresize = function() {
   //   now.NowPlaying.updateView();

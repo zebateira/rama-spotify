@@ -1,5 +1,6 @@
 var HeaderMissingException = function() {
-  this.message = "Header must be configured in views' options";
+  this.message = "Header must be configured in views' options. " +
+    "A simple 'true' value is enough";
 
   this.toString = function() {
     return this.message;

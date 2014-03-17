@@ -4,7 +4,6 @@
   Gets current playing artist and draws graph
 */
 
-
 var now = {};
 
 require([

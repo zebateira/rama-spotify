@@ -19,7 +19,7 @@ require(['$views/ui#UI', 'js/exceptions'], function(ui, _exceptions) {
 });
 
 var views = {
-  DEFAULT_HEADER_PATH: "../views/header.html",
+  DEFAULT_PATH: '../views/',
 
   initConfig: function(config) {
     views.header.init(config.header);
@@ -31,9 +31,10 @@ var views = {
       if (!config)
         throw new HeaderMissingException().toString();
 
+      views.header.DEFAULT_PATH =
+        views.DEFAULT_PATH + 'header.html';
       views.header.link = config.link || false;
-
-      views.header.path = config.path || views.DEFAULT_HEADER_PATH;
+      views.header.path = config.path || views.header.DEFAULT_PATH;
     },
     load: function() {
       $(views.header.selector)

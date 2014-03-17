@@ -11,14 +11,15 @@ describe('Views Module', function() {
 
       expect(noHeader).toThrow(new HeaderMissingException().toString());
     });
-    it('should set header path to default value if no path file is specified', function() {
+    it('should set header path to default value if no path file is specified',
+      function() {
 
-      views.initConfig({
-        header: {}
+        views.initConfig({
+          header: {}
+        });
+
+        expect(views.header.path).toBe(views.header.DEFAULT_PATH);
       });
-
-      expect(views.header.path).toBe('../views/header.html');
-    });
     it('should set the path property', function() {
       var headerPath = 'path/to/header/html/file';
 
@@ -68,18 +69,34 @@ describe('Views Module', function() {
     it('should set ids and names', function() {
       var tab = {
         id: 'index',
-        name: 'Main'
+        name: 'Main',
+        path: 'path/to/file/'
       };
 
       views.initConfig({
-        header: {
-          path: "path/to/file"
-        },
+        header: true,
         tabs: [tab]
       });
 
       expect(views.tabs[0].id).toBe(tab.id);
       expect(views.tabs[0].name).toBe(tab.name);
+      expect(views.tabs[0].path).toBe(tab.path);
+    });
+
+    it('should set default path if it\'s not specified', function() {
+      var default_path = '../views/index.html';
+
+      var tab = {
+        id: 'index',
+        name: 'Main'
+      };
+
+      views.initConfig({
+        header: true,
+        tabs: [tab]
+      });
+
+      expect(views.tabs[0].path).toBe(views.tabs.DEFAULT_PATH);
     });
   });
 
