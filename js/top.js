@@ -1,8 +1,18 @@
-require(['$api/toplists', '$views/list'], function(toplists, vlist) {
-  exports.TopList = function() {
+var toplist = {};
 
-    this.load = function() {
-
-    };
-  };
+require([
+  '$api/toplists',
+  '$views/list'
+], function(toplists, vlist) {
+  exports.toplist = toplist;
 });
+
+toplist = {
+  name: 'toplist',
+  init: function() {
+
+  },
+  loadView: function() {
+
+  }
+};

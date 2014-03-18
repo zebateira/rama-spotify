@@ -4,27 +4,29 @@
   Gets current playing artist and draws graph
 */
 
-
-var now = {};
+var models = {};
+var artistGraph = {};
+var nowplaying = {};
 
 require([
   '$api/models',
   'js/artist.graph'
-], function(models, artistGraph) {
+], function(_models, _artistGraph) {
 
-  now.models = models;
-  now.artistGraph = artistGraph;
+  models = _models;
+  artistGraph = _artistGraph;
 
-  exports.NowPlaying = NowPlaying;
+  exports.nowplaying = nowplaying;
 });
 
-var NowPlaying = {
-  init: function(config) {
-    this.element = config.element;
+nowplaying = {
+  name: 'nowplaying',
+  init: function(viewId) {
+    nowplaying.element = $('#' + viewId + ' .graph')[0];
 
-    this.artist = {};
+    nowplaying.artist = {};
 
-    this.options = {
+    nowplaying.options = {
       nodes: {
         color: {
           background: '#333',
@@ -32,36 +34,36 @@ var NowPlaying = {
         },
         fontColor: '#eef',
         shape: 'box',
-        radius: 2
+        radius: 1
       }
     };
 
-    this.artistGraph = {};
+    nowplaying.artistGraph = {};
 
-    return this;
+    return nowplaying;
   },
 
   loadView: function() {
-    now.models.player.load('track').done(function(player) {
-      NowPlaying
+    models.player.load('track').done(function(player) {
+      nowplaying
         .setArtistGraph(
-          now.models.Artist.fromURI(player.track.artists[0].uri))
-        .done(NowPlaying.drawGraph);
+          models.Artist.fromURI(player.track.artists[0].uri))
+        .done(nowplaying.drawGraph);
     });
 
-    return this;
+    return nowplaying;
   },
 
   updateView: function() {
-    this.artistGraph.redraw();
+    nowplaying.artistGraph.redraw();
 
-    return this;
+    return nowplaying;
   },
 
   drawGraph: function() {
-    NowPlaying.artistGraph.draw();
+    nowplaying.artistGraph.draw();
 
-    return this;
+    return nowplaying;
   },
 
   /**
@@ -69,15 +71,15 @@ var NowPlaying = {
     Also creates the artistGraph.
   */
   setArtistGraph: function(artist) {
-    NowPlaying.artist = artist;
+    nowplaying.artist = artist;
 
-    NowPlaying.artistGraph = new now.artistGraph.ArtistGraph(
-      NowPlaying.element,
-      NowPlaying.artist,
-      NowPlaying.options
+    nowplaying.artistGraph = new artistGraph.ArtistGraph(
+      nowplaying.element,
+      nowplaying.artist,
+      nowplaying.options
     );
 
-    return NowPlaying.artistGraph
+    return nowplaying.artistGraph
       .setupGraph();
   }
 };
