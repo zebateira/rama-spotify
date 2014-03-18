@@ -1,6 +1,7 @@
 spotify.require([
   'js/views',
 ], function(views) {
+
   views.initConfig({
     header: {
       path: '../views/header.html',

@@ -6,13 +6,19 @@
 
 // imported modules
 var spUI;
+
+// execptions
 var HeaderMissingException;
+var TabsMissingException;
+var TabInfoMissingException;
 
 // spotify exports
 require(['$views/ui#UI', 'js/exceptions'], function(ui, _exceptions) {
   spUI = ui;
 
   HeaderMissingException = _exceptions.HeaderMissingException;
+  TabsMissingException = _exceptions.TabsMissingException;
+  TabInfoMissingException = _exceptions.TabInfoMissingException;
 
   exports.initConfig = views.initConfig;
   exports.loadViews = views.loadViews;
@@ -29,7 +35,7 @@ var views = {
     selector: '.sp-header',
     init: function(config) {
       if (!config)
-        throw new HeaderMissingException().toString();
+        throw new HeaderMissingException();
 
       views.header.DEFAULT_PATH =
         views.DEFAULT_PATH + 'header.html';
@@ -46,20 +52,31 @@ var views = {
       else
         $('.header-link > a', views.header.selector)
           .attr('href', views.header.link);
+    },
+    reset: function() {
+      views.header.path = '';
+      views.header.link = '';
     }
   },
   tabBar: {
-    init: function(config) {
-      views.tabs = config;
+    init: function(tabs) {
+      if (!(tabs instanceof Array))
+        throw new TabsMissingException();
+
+      views.tabs = tabs;
 
       _.each(views.tabs, function(tab) {
-        if (!tab.path) {
-          tab.path = views.tabBar.getDefaultPath(tab.id);
-        }
+        if (!tab.id || !tab.name)
+          throw new TabInfoMissingException();
+
+        tab.path = tab.path || views.tabBar.getDefaultPath(tab.id);
       });
     },
+    reset: function() {
+      views.tabs = {};
+    },
     getDefaultPath: function(tabID) {
-      // return views.tabs
+      return views.DEFAULT_PATH + tabID + '.html';
     }
   },
   loadViews: function() {
@@ -88,5 +105,9 @@ var views = {
     });
 
     views.header.load();
+  },
+  reset: function() {
+    views.header.reset();
+    views.tabBar.reset();
   }
 };

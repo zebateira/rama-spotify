@@ -1,6 +1,9 @@
 describe('Views Module', function() {
   jasmine.getFixtures().fixturesPath = 'test/fixtures';
 
+  afterEach(function() {
+    views.reset();
+  });
 
   describe('Header View', function() {
 
@@ -9,13 +12,14 @@ describe('Views Module', function() {
         views.initConfig({});
       }
 
-      expect(noHeader).toThrow(new HeaderMissingException().toString());
+      expect(noHeader).toThrowError(HeaderMissingException);
     });
     it('should set header path to default value if no path file is specified',
       function() {
 
         views.initConfig({
-          header: {}
+          header: {},
+          tabs: []
         });
 
         expect(views.header.path).toBe(views.header.DEFAULT_PATH);
@@ -27,7 +31,8 @@ describe('Views Module', function() {
       views.initConfig({
         header: {
           path: headerPath
-        }
+        },
+        tabs: []
       });
 
       expect(views.header.path).toBe(headerPath);
@@ -42,7 +47,8 @@ describe('Views Module', function() {
         header: {
           path: "path/to/file",
           link: linkAttr
-        }
+        },
+        tabs: []
       });
 
       views.header.afterLoad();
@@ -57,7 +63,8 @@ describe('Views Module', function() {
       views.initConfig({
         header: {
           path: "path/to/file"
-        }
+        },
+        tabs: []
       });
 
       views.header.afterLoad();
@@ -67,7 +74,19 @@ describe('Views Module', function() {
   });
 
   describe('Tabs bar view', function() {
-    it('should set ids and names', function() {
+
+    it('should launch exception on tabs config missing', function() {
+
+      function noTabs() {
+        views.initConfig({
+          header: true
+        });
+      }
+
+      expect(noTabs).toThrowError(TabsMissingException);
+    });
+
+    it('should set id, name and path', function() {
       var tab = {
         id: 'index',
         name: 'Main',
@@ -83,24 +102,52 @@ describe('Views Module', function() {
       expect(views.tabs[0].name).toBe(tab.name);
       expect(views.tabs[0].path).toBe(tab.path);
     });
-
     it('should set default path if it\'s not specified', function() {
+
       var tab = {
         id: 'index',
         name: 'Main'
       };
+      var defaultPath = views.DEFAULT_PATH + tab.id + '.html';
 
       views.initConfig({
         header: true,
         tabs: [tab]
       });
 
-      expect(views.tabs[0].path).toBe('../views/index.html');
+      expect(views.tabs[0].path).toBe(defaultPath);
+    });
+    it('should throw exception if no id is specified', function() {
+      expect(function() {
+        views.initConfig({
+          header: true,
+          tabs: [{
+            name: 'asdf'
+          }]
+        });
+      }).toThrowError();
+    });
+    it('should throw exception if no name is specified', function() {
+      expect(function() {
+        views.initConfig({
+          header: true,
+          tabs: [{
+            id: 'asdf'
+          }]
+        });
+      }).toThrowError();
+    });
+    it('should throw exception if no name or id are specified', function() {
+      expect(function() {
+        views.initConfig({
+          header: true,
+          tabs: [{}]
+        });
+      }).toThrowError();
     });
   });
 
-  describe('Tabs view', function() {
+  // describe('Tabs view', function() {
 
-  });
-
+  // });
 });
