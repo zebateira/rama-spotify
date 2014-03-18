@@ -10,7 +10,7 @@ var nowplaying = {};
 
 require([
   '$api/models',
-  'js/artist.graph'
+  'js/artistgraph'
 ], function(_models, _artistGraph) {
 
   models = _models;

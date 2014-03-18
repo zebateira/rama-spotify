@@ -31,7 +31,7 @@ spotify.require([
   // todo manager
   // for updating the views
   // note: dont update the graphs when a commercial is playing
-  // window.onresize = function() {
-  //   now.NowPlaying.updateView();
-  // };
+  window.onresize = function() {
+    now.NowPlaying.updateView();
+  };
 });
