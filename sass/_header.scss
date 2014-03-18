@@ -15,7 +15,7 @@
     
   }
 
-  .header {
+  .header-title {
     text-align: center;
     font-size: 3em;
     line-height: $header-height;
@@ -27,7 +27,7 @@
     min-height: 30px;
     height: 30px;
 
-    top: 33%;
+    top:  $header-height / 4;
 
     padding-left: 10px;
     padding-right: 10px;

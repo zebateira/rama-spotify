@@ -1,51 +1,37 @@
 spotify.require([
-  '$api/models',
-  '$views/ui#UI',
-  'js/now',
-  'js/top',
-  'js/search',
-], function(models, UI, now, top, search) {
+  'js/views',
+  'js/controllers'
+], function(views, controllers) {
 
-  var ui = UI.init({
-    header: true,
-    views: [{
-      id: 'now',
-      element: document.getElementById('index')
-    }, {
-      id: 'top',
-      element: document.getElementById('top')
-    }, {
-      id: 'search',
-      element: document.getElementById('search')
-    }],
+  views.initConfig({
+    header: {
+      path: '../views/header.html',
+      link: 'http://rama.inescporto.pt/app'
+    },
     tabs: [{
       viewId: 'now',
-      name: 'Now Playing'
+      name: 'Now Playing',
+      path: '../views/now.html',
+      controller: controllers.nowplaying
     }, {
       viewId: 'top',
-      name: 'Top Artists'
+      name: 'Top List',
+      path: '../views/top.html',
+      controller: controllers.toplist
     }, {
       viewId: 'search',
-      name: 'Search'
-    }]
+      name: 'Search',
+      path: '../views/search.html',
+      controller: controllers.search
+    }],
   });
 
-  // loading header view
-  $(ui.header).load('views/header.html');
+  views.loadViews();
 
-  // initializes NowPlaying controller and draws the graph
-  now.NowPlaying
-    .init({
-      element: $('#index .graph')[0]
-    })
-    .loadView();
-
-  new top.TopList().load();
-  new search.Search().load();
-
-  // todo manager for updating the views
+  // todo manager
+  // for updating the views
   // note: dont update the graphs when a commercial is playing
-  window.onresize = function() {
-    now.NowPlaying.updateView();
-  };
+  // window.onresize = function() {
+  //   now.NowPlaying.updateView();
+  // };
 });
