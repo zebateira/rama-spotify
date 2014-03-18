@@ -5,6 +5,12 @@ describe('Views Module', function() {
     views.reset();
   });
 
+  var controllers = {
+    nowplaying: nowplaying,
+    toplist: toplist,
+    search: search
+  };
+
   describe('Header View', function() {
 
     it('should throw an exception if no header is specified', function() {
@@ -73,7 +79,7 @@ describe('Views Module', function() {
     });
   });
 
-  describe('Tabs bar view', function() {
+  describe('Tabs View', function() {
 
     it('should launch exception on tabs config missing', function() {
 
@@ -86,11 +92,12 @@ describe('Views Module', function() {
       expect(noTabs).toThrowError(TabsMissingException);
     });
 
-    it('should set id, name and path', function() {
+    it('should set viewId, name and path', function() {
       var tab = {
-        id: 'index',
+        viewId: 'index',
         name: 'Main',
-        path: 'path/to/file/'
+        path: 'path/to/file/',
+        controller: controllers.nowplaying
       };
 
       views.initConfig({
@@ -98,17 +105,18 @@ describe('Views Module', function() {
         tabs: [tab]
       });
 
-      expect(views.tabs[0].id).toBe(tab.id);
+      expect(views.tabs[0].viewId).toBe(tab.viewId);
       expect(views.tabs[0].name).toBe(tab.name);
       expect(views.tabs[0].path).toBe(tab.path);
     });
     it('should set default path if it\'s not specified', function() {
 
       var tab = {
-        id: 'index',
-        name: 'Main'
+        viewId: 'index',
+        name: 'Main',
+        controller: controllers.nowplaying
       };
-      var defaultPath = views.DEFAULT_PATH + tab.id + '.html';
+      var defaultPath = views.DEFAULT_PATH + tab.viewId + '.html';
 
       views.initConfig({
         header: true,
@@ -117,7 +125,7 @@ describe('Views Module', function() {
 
       expect(views.tabs[0].path).toBe(defaultPath);
     });
-    it('should throw exception if no id is specified', function() {
+    it('should throw exception if no viewId is specified', function() {
       expect(function() {
         views.initConfig({
           header: true,
@@ -132,22 +140,44 @@ describe('Views Module', function() {
         views.initConfig({
           header: true,
           tabs: [{
-            id: 'asdf'
+            viewId: 'asdf'
           }]
         });
-      }).toThrowError();
+      }).toThrowError(TabInfoMissingException);
     });
-    it('should throw exception if no name or id are specified', function() {
+    it('should throw exception if no name or viewId are specified', function() {
       expect(function() {
         views.initConfig({
           header: true,
           tabs: [{}]
         });
-      }).toThrowError();
+      }).toThrowError(TabInfoMissingException);
+    });
+
+    it('should set controller', function() {
+      views.initConfig({
+        header: true,
+        tabs: [{
+          viewId: 'id',
+          name: 'Fancy tab name',
+          controller: controllers.nowplaying
+        }]
+      });
+
+      expect(views.tabs[0].controller.name).toBe(controllers.nowplaying.name);
+    });
+
+    it('should throw exception if no controller was configured', function() {
+      expect(function() {
+        views.initConfig({
+          header: true,
+          tabs: [{
+            viewId: 'id',
+            name: 'fancy name'
+          }]
+        });
+      }).toThrowError(TabMissingControllerException);
     });
   });
 
-  // describe('Tabs view', function() {
-
-  // });
 });

@@ -8,17 +8,22 @@
 var spUI;
 
 // execptions
-var HeaderMissingException;
-var TabsMissingException;
-var TabInfoMissingException;
+var HeaderMissingException,
+  TabsMissingException,
+  TabInfoMissingException,
+  TabMissingControllerException;
 
 // spotify exports
-require(['$views/ui#UI', 'js/exceptions'], function(ui, _exceptions) {
+require([
+  '$views/ui#UI',
+  'js/exceptions'
+], function(ui, _exceptions) {
   spUI = ui;
 
   HeaderMissingException = _exceptions.HeaderMissingException;
   TabsMissingException = _exceptions.TabsMissingException;
   TabInfoMissingException = _exceptions.TabInfoMissingException;
+  TabMissingControllerException = _exceptions.TabMissingControllerException;
 
   exports.initConfig = views.initConfig;
   exports.loadViews = views.loadViews;
@@ -66,10 +71,22 @@ var views = {
       views.tabs = tabs;
 
       _.each(views.tabs, function(tab) {
-        if (!tab.id || !tab.name)
-          throw new TabInfoMissingException();
+        if (!tab.viewId || !tab.name)
+          throw new TabInfoMissingException(tab);
 
-        tab.path = tab.path || views.tabBar.getDefaultPath(tab.id);
+        tab.id = tab.viewId;
+        tab.element = document.getElementById(tab.id);
+        tab.path = tab.path || views.tabBar.getDefaultPath(tab.viewId);
+
+        if (!tab.controller || tab.controller === undefined || (typeof tab.controller.init) !== 'function')
+          throw new TabMissingControllerException();
+
+        tab.controller.init(tab.id);
+      });
+    },
+    load: function() {
+      _.each(views.tabs, function(tab) {
+        tab.controller.loadView();
       });
     },
     reset: function() {
@@ -82,29 +99,12 @@ var views = {
   loadViews: function() {
     spUI = spUI.init({
       header: true,
-      views: [{
-        id: 'now',
-        element: document.getElementById('now')
-      }, {
-        id: 'top',
-        element: document.getElementById('top')
-      }, {
-        id: 'search',
-        element: document.getElementById('search')
-      }],
-      tabs: [{
-        viewId: 'now',
-        name: 'Now Playing',
-      }, {
-        viewId: 'top',
-        name: 'Top Artists'
-      }, {
-        viewId: 'search',
-        name: 'Search'
-      }]
+      views: views.tabs,
+      tabs: views.tabs
     });
 
     views.header.load();
+    views.tabBar.load();
   },
   reset: function() {
     views.header.reset();

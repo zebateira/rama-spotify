@@ -1,6 +1,7 @@
 spotify.require([
   'js/views',
-], function(views) {
+  'js/controllers'
+], function(views, controllers) {
 
   views.initConfig({
     header: {
@@ -8,31 +9,24 @@ spotify.require([
       link: 'http://rama.inescporto.pt/app'
     },
     tabs: [{
-      id: 'now',
+      viewId: 'now',
       name: 'Now Playing',
-      path: '../views/now.html'
+      path: '../views/now.html',
+      controller: controllers.nowplaying
     }, {
-      id: 'top',
+      viewId: 'top',
       name: 'Top List',
-      path: '../views/top.html'
+      path: '../views/top.html',
+      controller: controllers.toplist
     }, {
-      id: 'search',
+      viewId: 'search',
       name: 'Search',
-      path: '../views/search.html'
+      path: '../views/search.html',
+      controller: controllers.search
     }],
   });
 
   views.loadViews();
-
-  // initializes NowPlaying controller and draws the graph
-  // now.NowPlaying
-  //   .init({
-  //     element: $('#index .graph')[0]
-  //   })
-  //   .loadView();
-
-  // new top.TopList().load();
-  // new search.Search().load();
 
   // todo manager
   // for updating the views
