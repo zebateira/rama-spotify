@@ -21,7 +21,7 @@ Alternatively, If you happen to have commandlinephobia (I get that every other m
 
 1. download the latest version of the app from [here]
 2. extract the folder
-3. Create the Spotify folder if it doesn't exist already: "~/Spotify" (Mac OS X and Linux) or "My Documents\Spotify" (Windows).
+3. create the Spotify folder if it doesn't exist already: "~/Spotify" (Mac OS X and Linux) or "My Documents\Spotify" (Windows).
 4. copy the extracted folder to the Spotify folder.
 
 Now open Spotify and type in the search bar:
