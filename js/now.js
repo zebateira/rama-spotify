@@ -69,7 +69,8 @@ nowplaying = {
   */
   setArtistGraph: function(artist) {
     nowplaying.artistGraph = new artistGraph.ArtistGraph({
-        maxChildNodes: 5
+        branching: 5,
+        depth: 4
       },
       nowplaying.element,
       artist,

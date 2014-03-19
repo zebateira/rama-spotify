@@ -15,12 +15,10 @@ function Promise() {
   };
 }
 
-
 var ArtistGraph = function(config, element, artist, options) {
   this.element = element;
   this.artist = artist;
-  this.maxChildNodes = config.maxChildNodes;
-
+  this.branching = config.branching;
 
   this.relatedArtists = [];
 
@@ -47,7 +45,7 @@ ArtistGraph.prototype = {
     var promise = new Promise();
 
     this.artist.load('related').done(this, function(artist) {
-      artist.related.snapshot(0, this.maxChildNodes).done(this, function(snapshot) {
+      artist.related.snapshot(0, this.branching).done(this, function(snapshot) {
         snapshot.loadAll('name', 'uri').each(this, function(artist) {
 
           this.relatedArtists.push(
