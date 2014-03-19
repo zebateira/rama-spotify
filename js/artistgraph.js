@@ -5,85 +5,90 @@
   in a DOM element given a music artist and some optional options 8D
 */
 
-require(['$api/models'], function(models) {
+var models;
 
-  function Promise() {
-    this.callback = function() {};
+function Promise() {
+  this.callback = function() {};
 
-    this.done = function(callback) {
-      this.callback = callback;
-    };
-  }
+  this.done = function(callback) {
+    this.callback = callback;
+  };
+}
 
-  function ArtistGraph(element, artist, options) {
-    this.artist = artist;
 
-    this.element = element;
+var ArtistGraph = function(config, element, artist, options) {
+  this.element = element;
+  this.artist = artist;
+  this.maxChildNodes = config.maxChildNodes;
 
-    this.relatedArtists = [];
 
-    // numbering for the id's of adjacent nodes
-    this.index = 1;
+  this.relatedArtists = [];
 
-    // data of the graph: should contain nodes and edges
-    this.data = {
-      nodes: [{
-        id: this.index,
-        label: this.artist.name
-      }],
-      edges: []
-    };
-    // options for the rendering of the graph
-    this.options = options;
+  // numbering for the id's of adjacent nodes
+  this.index = 1;
 
-    this.graph = new vis.Graph(this.element, this.data, this.options);
-  }
+  // data of the graph: should contain nodes and edges
+  this.data = {
+    nodes: [{
+      id: this.index,
+      label: this.artist.name
+    }],
+    edges: []
+  };
+  // options for the rendering of the graph
+  this.options = options;
 
-  ArtistGraph.prototype = {
+  this.graph = new vis.Graph(this.element, this.data, this.options);
+};
 
-    setupGraph: function() {
-      var promise = new Promise();
+ArtistGraph.prototype = {
 
-      this.artist.load('related').done(this, function(artist) {
-        artist.related.snapshot().done(this, function(snapshot) {
-          snapshot.loadAll('name', 'uri').each(this, function(artist) {
+  setupGraph: function() {
+    var promise = new Promise();
 
-            this.relatedArtists.push(
-              models.Artist.fromURI(artist.uri)
-            );
+    this.artist.load('related').done(this, function(artist) {
+      artist.related.snapshot(0, this.maxChildNodes).done(this, function(snapshot) {
+        snapshot.loadAll('name', 'uri').each(this, function(artist) {
 
-            this.data.nodes.push({
-              id: ++this.index,
-              label: artist.name
-            });
+          this.relatedArtists.push(
+            models.Artist.fromURI(artist.uri)
+          );
 
-            this.data.edges.push({
-              from: 1,
-              to: this.index
-            });
-          }).done(this, function() {
-            this.graph.setData(this.data, {
-              disableStart: true
-            });
-            promise.callback();
+          this.data.nodes.push({
+            id: ++this.index,
+            label: artist.name
           });
+
+          this.data.edges.push({
+            from: 1,
+            to: this.index
+          });
+        }).done(this, function() {
+          this.graph.setData(this.data, {
+            disableStart: true
+          });
+          promise.callback();
         });
       });
+    });
 
-      return promise;
-    },
-    draw: function() {
-      this.graph.start();
-    },
+    return promise;
+  },
+  draw: function() {
+    this.graph.start();
+  },
 
-    redraw: function() {
-      this.graph.redraw();
-      this.graph.zoomExtent();
-    }
-  };
+  redraw: function() {
+    this.graph.redraw();
+    this.graph.zoomExtent();
+  }
+};
 
-  ArtistGraph.prototype.constructor = ArtistGraph;
+ArtistGraph.prototype.constructor = ArtistGraph;
 
+
+require(['$api/models'], function(_models) {
+  models = _models;
 
   exports.ArtistGraph = ArtistGraph;
 });

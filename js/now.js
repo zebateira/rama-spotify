@@ -24,8 +24,6 @@ nowplaying = {
   init: function(viewId) {
     nowplaying.element = $('#' + viewId + ' .graph')[0];
 
-    nowplaying.artist = {};
-
     nowplaying.options = {
       nodes: {
         color: {
@@ -70,11 +68,11 @@ nowplaying = {
     Also creates the artistGraph.
   */
   setArtistGraph: function(artist) {
-    nowplaying.artist = artist;
-
-    nowplaying.artistGraph = new artistGraph.ArtistGraph(
+    nowplaying.artistGraph = new artistGraph.ArtistGraph({
+        maxChildNodes: 5
+      },
       nowplaying.element,
-      nowplaying.artist,
+      artist,
       nowplaying.options
     );
 
