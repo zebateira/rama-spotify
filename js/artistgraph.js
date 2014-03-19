@@ -45,62 +45,57 @@ var ArtistGraph = function(config, element, artist, options) {
 
 ArtistGraph.prototype = {
 
-  constructGraph: function(it, rootArtist) {
-    var promise = new Promise();
-
-    if (it <= 0) {
-      return promise;
-    }
-
-    rootArtist.load('related').done(this, function(artist) {
-      artist.related.snapshot(0, this.branching).done(this, function(snapshot) {
-        snapshot.loadAll('name', 'uri').each(this, function(artist) {
-
-          var duplicated = _.where(this.data.nodes, {
-            label: artist.name
-          });
-
-          if (duplicated.length > 0) {
-            // add edges to previous added nodes
-          } else {
-            this.data.nodes.push({
-              id: ++this.index,
-              label: artist.name
-            });
-
-            this.data.edges.push({
-              from: rootArtist.nodeid,
-              to: this.index
-            });
-
-            this.relatedArtists.push(artist);
-
-            artist.nodeid = this.index;
-          }
-
-
-          this.constructGraph(--it, artist);
-        }).done(this, function() {
-          this.graph.setData(this.data, {
-            disableStart: true
-          });
-          promise.callback();
-        });
-      });
-    });
-
-    return promise;
-  },
-
-  buildGraph: function() {
+  buildGraph: function(throbber) {
+    this.promise = new models.Promise();
 
     this.artist.nodeid = 1;
 
     return this.constructGraph(this.depth, this.artist);
   },
-  draw: function() {
+
+  constructGraph: function(it, rootArtist) {
+    if (it <= 0) {
+      return this.promise;
+    }
+
+    rootArtist.load('related').done(this, function(artist) {
+      artist.related.snapshot(0, this.branching).done(this, function(snapshot) {
+        this.promise = models.Promise.join(
+          snapshot.loadAll('name', 'uri').each(this, function(artist) {
+
+            var duplicated = _.where(this.data.nodes, {
+              label: artist.name
+            });
+
+            if (duplicated.length > 0) {
+              // add edges to previous added nodes
+            } else {
+              this.data.nodes.push({
+                id: ++this.index,
+                label: artist.name
+              });
+
+              this.data.edges.push({
+                from: rootArtist.nodeid,
+                to: this.index
+              });
+
+              this.relatedArtists.push(artist);
+
+              artist.nodeid = this.index;
+            }
+
+          }),
+          this.constructGraph(--it, artist));
+      });
+    });
+
+    return this.promise;
+  },
+  draw: function(throbber) {
     this.graph.start();
     this.graph.zoomExtent();
+    throbber.hide();
   },
 
   redraw: function() {

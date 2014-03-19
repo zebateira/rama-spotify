@@ -47,15 +47,16 @@ nowplaying = {
   },
 
   loadView: function() {
-    var throbber = Throbber.forElement(document.getElementById('now'));
+    this.throbber = Throbber.forElement(document.getElementById('now'));
+
     models.player.load('track').done(function(player) {
       nowplaying
         .setArtistGraph(
           models.Artist.fromURI(player.track.artists[0].uri))
         .done(function() {
+
+          nowplaying.drawGraph();
           console.log('artistgraph: draw');
-          nowplaying.drawGraph(throbber);
-          throbber.hide();
         });
     });
 
@@ -82,14 +83,13 @@ nowplaying = {
   setArtistGraph: function(artist) {
     nowplaying.artistGraph = new artistGraph.ArtistGraph({
         branching: 5,
-        depth: 10
+        depth: 3
       },
       nowplaying.element,
       artist,
       nowplaying.options
     );
 
-    return nowplaying.artistGraph
-      .buildGraph();
+    return nowplaying.artistGraph.buildGraph(this.throbber);
   }
 };
