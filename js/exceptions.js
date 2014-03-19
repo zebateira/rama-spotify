@@ -7,7 +7,6 @@ var HeaderMissingException = function() {
 HeaderMissingException.prototype = new Error();
 HeaderMissingException.prototype.constructor = HeaderMissingException;
 
-
 var TabsMissingException = function() {
   this.name = 'TabsMissingException';
   this.message = 'Array of tabs must be configured.';

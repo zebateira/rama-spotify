@@ -79,10 +79,10 @@ require(['$api/models'], function(models) {
     redraw: function() {
       this.graph.redraw();
       this.graph.zoomExtent();
-
-      return this;
     }
   };
+
+  ArtistGraph.prototype.constructor = ArtistGraph;
 
 
   exports.ArtistGraph = ArtistGraph;

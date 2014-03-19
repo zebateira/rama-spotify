@@ -38,8 +38,6 @@ nowplaying = {
       }
     };
 
-    nowplaying.artistGraph = {};
-
     return nowplaying;
   },
 
@@ -51,12 +49,16 @@ nowplaying = {
         .done(nowplaying.drawGraph);
     });
 
+    console.log(nowplaying.name + ' view loaded');
+
     return nowplaying;
   },
 
   updateView: function() {
-    nowplaying.artistGraph.redraw();
+    if (nowplaying.artistGraph)
+      nowplaying.artistGraph.redraw();
 
+    console.log(nowplaying.name + ' redrawing view...');
     return nowplaying;
   },
 
@@ -78,6 +80,8 @@ nowplaying = {
       nowplaying.artist,
       nowplaying.options
     );
+
+    console.log('artistgraph created...');
 
     return nowplaying.artistGraph
       .setupGraph();

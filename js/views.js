@@ -27,6 +27,7 @@ require([
 
   exports.initConfig = views.initConfig;
   exports.loadViews = views.loadViews;
+  exports.updateView = views.updateView;
 });
 
 var views = {
@@ -105,6 +106,17 @@ var views = {
 
     views.header.load();
     views.tabBar.load();
+
+    spUI.addEventListener('viewchange', views.updateView);
+
+  },
+  updateView: function(tab) {
+    var tabID = (tab ? tab.id : spUI.activeView);
+
+    _.where(views.tabs, {
+      id: tabID
+    })[0].controller.updateView();
+
   },
   reset: function() {
     views.header.reset();
