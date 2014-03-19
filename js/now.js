@@ -5,15 +5,20 @@
 */
 
 var models = {};
+var Throbber = {};
 var artistGraph = {};
+
+
 var nowplaying = {};
 
 require([
   '$api/models',
+  '$views/throbber#Throbber',
   'js/artistgraph'
-], function(_models, _artistGraph) {
+], function(_models, _throbber, _artistGraph) {
 
   models = _models;
+  Throbber = _throbber;
   artistGraph = _artistGraph;
 
   exports.nowplaying = nowplaying;
@@ -21,6 +26,7 @@ require([
 
 nowplaying = {
   name: 'nowplaying',
+
   init: function(viewId) {
     nowplaying.element = $('#' + viewId + ' .graph')[0];
 
@@ -33,18 +39,24 @@ nowplaying = {
         fontColor: '#eef',
         shape: 'box',
         radius: 1
-      }
+      },
+      clustering: true
     };
 
     return nowplaying;
   },
 
   loadView: function() {
+    var throbber = Throbber.forElement(document.getElementById('now'));
     models.player.load('track').done(function(player) {
       nowplaying
         .setArtistGraph(
           models.Artist.fromURI(player.track.artists[0].uri))
-        .done(nowplaying.drawGraph);
+        .done(function() {
+          console.log('artistgraph: draw');
+          nowplaying.drawGraph(throbber);
+          throbber.hide();
+        });
     });
 
     return nowplaying;
@@ -70,7 +82,7 @@ nowplaying = {
   setArtistGraph: function(artist) {
     nowplaying.artistGraph = new artistGraph.ArtistGraph({
         branching: 5,
-        depth: 4
+        depth: 10
       },
       nowplaying.element,
       artist,
@@ -78,6 +90,6 @@ nowplaying = {
     );
 
     return nowplaying.artistGraph
-      .setupGraph();
+      .buildGraph();
   }
 };

@@ -16,9 +16,13 @@ function Promise() {
 }
 
 var ArtistGraph = function(config, element, artist, options) {
+  this.DEFAULT_BRANCHING = 5;
+  this.DEFAULT_DEPTH = 4;
+
   this.element = element;
   this.artist = artist;
-  this.branching = config.branching;
+  this.branching = config.branching || this.DEFAULT_BRANCHING;
+  this.depth = config.depth || this.DEFAULT_DEPTH;
 
   this.relatedArtists = [];
 
@@ -41,26 +45,41 @@ var ArtistGraph = function(config, element, artist, options) {
 
 ArtistGraph.prototype = {
 
-  setupGraph: function() {
+  constructGraph: function(it, rootArtist) {
     var promise = new Promise();
 
-    this.artist.load('related').done(this, function(artist) {
+    if (it <= 0) {
+      return promise;
+    }
+
+    rootArtist.load('related').done(this, function(artist) {
       artist.related.snapshot(0, this.branching).done(this, function(snapshot) {
         snapshot.loadAll('name', 'uri').each(this, function(artist) {
 
-          this.relatedArtists.push(
-            models.Artist.fromURI(artist.uri)
-          );
-
-          this.data.nodes.push({
-            id: ++this.index,
+          var duplicated = _.where(this.data.nodes, {
             label: artist.name
           });
 
-          this.data.edges.push({
-            from: 1,
-            to: this.index
-          });
+          if (duplicated.length > 0) {
+            // add edges to previous added nodes
+          } else {
+            this.data.nodes.push({
+              id: ++this.index,
+              label: artist.name
+            });
+
+            this.data.edges.push({
+              from: rootArtist.nodeid,
+              to: this.index
+            });
+
+            this.relatedArtists.push(artist);
+
+            artist.nodeid = this.index;
+          }
+
+
+          this.constructGraph(--it, artist);
         }).done(this, function() {
           this.graph.setData(this.data, {
             disableStart: true
@@ -72,8 +91,16 @@ ArtistGraph.prototype = {
 
     return promise;
   },
+
+  buildGraph: function() {
+
+    this.artist.nodeid = 1;
+
+    return this.constructGraph(this.depth, this.artist);
+  },
   draw: function() {
     this.graph.start();
+    this.graph.zoomExtent();
   },
 
   redraw: function() {
