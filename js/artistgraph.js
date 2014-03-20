@@ -76,7 +76,6 @@ ArtistGraph.prototype = {
             from: rootArtist.nodeid,
             to: duplicated.id
           });
-
       } else {
         this.data.nodes.push({
           id: ++this.index,
@@ -91,9 +90,9 @@ ArtistGraph.prototype = {
         this.relatedArtists.push(artist);
 
         artist.nodeid = this.index;
+        this.constructGraph(--it, artist);
       }
 
-      this.constructGraph(--it, artist);
     };
 
     var relatedSnapshotDone = function(snapshot) {
@@ -120,7 +119,6 @@ ArtistGraph.prototype = {
 
   redraw: function() {
     this.graph.redraw();
-    // this.graph.zoomExtent();
   }
 };
 
