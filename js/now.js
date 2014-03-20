@@ -52,7 +52,7 @@ nowplaying = {
     models.player.load('track').done(function(player) {
       nowplaying.setArtistGraph(
         models.Artist.fromURI(player.track.artists[0].uri)
-      ).done(nowplaying.artistGraph, nowplaying.artistGraph.draw);
+      );
       // nowplaying.throbber.hide();
     });
 
@@ -80,6 +80,6 @@ nowplaying = {
       nowplaying.options
     );
 
-    return nowplaying.artistGraph.buildGraph();
+    nowplaying.artistGraph.buildGraph();
   }
 };
