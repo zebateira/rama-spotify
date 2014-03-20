@@ -45,57 +45,69 @@ var ArtistGraph = function(config, element, artist, options) {
 
 ArtistGraph.prototype = {
 
-  buildGraph: function(throbber) {
-    this.promise = new models.Promise();
-
+  buildGraph: function() {
     this.artist.nodeid = 1;
 
     return this.constructGraph(this.depth, this.artist);
   },
 
-  constructGraph: function(it, rootArtist) {
+  constructGraph: function(it, rootArtist, promise) {
     if (it <= 0) {
-      return this.promise;
+      return promise;
     }
 
-    rootArtist.load('related').done(this, function(artist) {
-      artist.related.snapshot(0, this.branching).done(this, function(snapshot) {
-        this.promise = models.Promise.join(
-          snapshot.loadAll('name', 'uri').each(this, function(artist) {
-
-            var duplicated = _.where(this.data.nodes, {
-              label: artist.name
-            });
-
-            if (duplicated.length > 0) {
-              // add edges to previous added nodes
-            } else {
-              this.data.nodes.push({
-                id: ++this.index,
-                label: artist.name
-              });
-
-              this.data.edges.push({
-                from: rootArtist.nodeid,
-                to: this.index
-              });
-
-              this.relatedArtists.push(artist);
-
-              artist.nodeid = this.index;
-            }
-
-          }),
-          this.constructGraph(--it, artist));
+    var forEachRelated = function(artist) {
+      var duplicated = _.where(this.data.nodes, {
+        label: artist.name
       });
+
+      if (duplicated.length > 0) {
+        // add edges to previous added nodes
+      } else {
+        this.data.nodes.push({
+          id: ++this.index,
+          label: artist.name
+        });
+
+        this.data.edges.push({
+          from: rootArtist.nodeid,
+          to: this.index
+        });
+
+        this.relatedArtists.push(artist);
+
+        artist.nodeid = this.index;
+      }
+
+      promise = models.Promise.join(promise, this.constructGraph(--it, artist, promise));
+    };
+
+    var relatedSnapshotDone = function(snapshot) {
+      var snapshotLoadAll = snapshot.loadAll(['name', 'uri']);
+      promise = models.Promise.join(promise, snapshotLoadAll);
+      snapshotLoadAll.each(this, forEachRelated);
+    };
+
+    var relatedDone = function(artist) {
+      var promiseRelatedSnapshot = artist.related.snapshot(0, this.branching);
+      promise = models.Promise.join(promise, promiseRelatedSnapshot);
+      promiseRelatedSnapshot.done(this, relatedSnapshotDone);
+    };
+
+    var promiseRelated = rootArtist.load('related');
+    promise = (promise ? models.Promise.join(promise, promiseRelated) : promiseRelated);
+    promiseRelated.done(this, relatedDone);
+
+    return promise;
+  },
+  draw: function() {
+    this.graph.setData(this.data, {
+      disableStart: true
     });
 
-    return this.promise;
-  },
-  draw: function(throbber) {
+    console.log(this.data);
     this.graph.start();
     this.graph.zoomExtent();
-    throbber.hide();
   },
 
   redraw: function() {

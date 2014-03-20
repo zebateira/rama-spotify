@@ -47,17 +47,13 @@ nowplaying = {
   },
 
   loadView: function() {
-    this.throbber = Throbber.forElement(document.getElementById('now'));
+    // nowplaying.throbber = Throbber.forElement(document.getElementById('now'));
 
     models.player.load('track').done(function(player) {
-      nowplaying
-        .setArtistGraph(
-          models.Artist.fromURI(player.track.artists[0].uri))
-        .done(function() {
-
-          nowplaying.drawGraph();
-          console.log('artistgraph: draw');
-        });
+      nowplaying.setArtistGraph(
+        models.Artist.fromURI(player.track.artists[0].uri)
+      ).done(nowplaying.artistGraph, nowplaying.artistGraph.draw);
+      // nowplaying.throbber.hide();
     });
 
     return nowplaying;
@@ -66,12 +62,6 @@ nowplaying = {
   updateView: function() {
     if (nowplaying.artistGraph)
       nowplaying.artistGraph.redraw();
-
-    return nowplaying;
-  },
-
-  drawGraph: function() {
-    nowplaying.artistGraph.draw();
 
     return nowplaying;
   },
@@ -90,6 +80,6 @@ nowplaying = {
       nowplaying.options
     );
 
-    return nowplaying.artistGraph.buildGraph(this.throbber);
+    return nowplaying.artistGraph.buildGraph();
   }
 };
