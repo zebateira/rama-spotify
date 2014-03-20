@@ -57,12 +57,26 @@ ArtistGraph.prototype = {
     }
 
     var forEachRelated = function(artist) {
-      var duplicated = _.where(this.data.nodes, {
+      var duplicated = _.findWhere(this.data.nodes, {
         label: artist.name
       });
 
-      if (duplicated.length > 0) {
-        // add edges to previous added nodes
+      if (duplicated) {
+        var inverseEdgeExists = _.findWhere(this.data.edges, {
+          from: duplicated.id,
+          to: rootArtist.nodeid
+        });
+        var edgeExists = _.findWhere(this.data.edges, {
+          to: duplicated.id,
+          from: rootArtist.nodeid
+        });
+
+        if (!inverseEdgeExists && !edgeExists)
+          this.data.edges.push({
+            from: rootArtist.nodeid,
+            to: duplicated.id
+          });
+
       } else {
         this.data.nodes.push({
           id: ++this.index,
@@ -100,7 +114,6 @@ ArtistGraph.prototype = {
     this.graph.setData(this.data, {
       disableStart: true
     });
-    console.log('draw');
     this.graph.start();
     this.graph.zoomExtent();
   },
