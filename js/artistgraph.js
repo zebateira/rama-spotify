@@ -48,7 +48,7 @@ ArtistGraph.prototype = {
   buildGraph: function() {
     this.artist.nodeid = 1;
 
-    return this.constructGraph(this.depth, this.artist);
+    return this.constructGraph(this.depth, this.artist, this.artist.load('related'));
   },
 
   constructGraph: function(it, rootArtist, promise) {
@@ -78,6 +78,7 @@ ArtistGraph.prototype = {
 
         artist.nodeid = this.index;
       }
+      // this.draw();
 
       promise = models.Promise.join(promise, this.constructGraph(--it, artist, promise));
     };
@@ -95,7 +96,7 @@ ArtistGraph.prototype = {
     };
 
     var promiseRelated = rootArtist.load('related');
-    promise = (promise ? models.Promise.join(promise, promiseRelated) : promiseRelated);
+    promise = models.Promise.join(promise, promiseRelated);
     promiseRelated.done(this, relatedDone);
 
     return promise;
@@ -104,15 +105,13 @@ ArtistGraph.prototype = {
     this.graph.setData(this.data, {
       disableStart: true
     });
-
-    console.log(this.data);
     this.graph.start();
     this.graph.zoomExtent();
   },
 
   redraw: function() {
     this.graph.redraw();
-    this.graph.zoomExtent();
+    // this.graph.zoomExtent();
   }
 };
 
