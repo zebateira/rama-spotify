@@ -11,6 +11,7 @@ module.exports = function(grunt) {
       options: {
         vendor: [
           'bower_components/jquery/dist/jquery.js',
+          'bower_components/vis/dist/vis.js',
           'bower_components/jasmine-jquery/lib/jasmine-jquery.js',
           'bower_components/underscore/underscore.js'
         ],
@@ -27,7 +28,7 @@ module.exports = function(grunt) {
       }
     },
     watch: {
-      files: ['Gruntfile.js', 'js/*.js', 'sass/*.scss'],
+      files: ['Gruntfile.js', 'js/*.js', 'sass/*.scss', 'test/*.js'],
       tasks: ['jshint', 'compass', 'jasmine']
     },
     useminPrepare: {

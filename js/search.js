@@ -5,6 +5,9 @@ var search = {
   },
   loadView: function() {
 
+  },
+  updateView: function() {
+
   }
 };
 

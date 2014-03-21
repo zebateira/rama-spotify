@@ -14,5 +14,8 @@ toplist = {
   },
   loadView: function() {
 
+  },
+  updateView: function() {
+
   }
 };

@@ -5,15 +5,20 @@
 */
 
 var models = {};
+var Throbber = {};
 var artistGraph = {};
+
+
 var nowplaying = {};
 
 require([
   '$api/models',
+  '$views/throbber#Throbber',
   'js/artistgraph'
-], function(_models, _artistGraph) {
+], function(_models, _throbber, _artistGraph) {
 
   models = _models;
+  Throbber = _throbber;
   artistGraph = _artistGraph;
 
   exports.nowplaying = nowplaying;
@@ -21,47 +26,42 @@ require([
 
 nowplaying = {
   name: 'nowplaying',
+
   init: function(viewId) {
     nowplaying.element = $('#' + viewId + ' .graph')[0];
-
-    nowplaying.artist = {};
 
     nowplaying.options = {
       nodes: {
         color: {
           background: '#333',
-          border: '#333'
+          border: '#555'
         },
         fontColor: '#eef',
         shape: 'box',
         radius: 1
-      }
+      },
+      clustering: true
     };
-
-    nowplaying.artistGraph = {};
 
     return nowplaying;
   },
 
   loadView: function() {
+    // nowplaying.throbber = Throbber.forElement(document.getElementById('now'));
+
     models.player.load('track').done(function(player) {
-      nowplaying
-        .setArtistGraph(
-          models.Artist.fromURI(player.track.artists[0].uri))
-        .done(nowplaying.drawGraph);
+      nowplaying.setArtistGraph(
+        models.Artist.fromURI(player.track.artists[0].uri)
+      );
+      // nowplaying.throbber.hide();
     });
 
     return nowplaying;
   },
 
   updateView: function() {
-    nowplaying.artistGraph.redraw();
-
-    return nowplaying;
-  },
-
-  drawGraph: function() {
-    nowplaying.artistGraph.draw();
+    if (nowplaying.artistGraph)
+      nowplaying.artistGraph.redraw();
 
     return nowplaying;
   },
@@ -71,15 +71,15 @@ nowplaying = {
     Also creates the artistGraph.
   */
   setArtistGraph: function(artist) {
-    nowplaying.artist = artist;
-
-    nowplaying.artistGraph = new artistGraph.ArtistGraph(
+    nowplaying.artistGraph = new artistGraph.ArtistGraph({
+        branching: 2,
+        depth: 10
+      },
       nowplaying.element,
-      nowplaying.artist,
+      artist,
       nowplaying.options
     );
 
-    return nowplaying.artistGraph
-      .setupGraph();
+    nowplaying.artistGraph.buildGraph();
   }
 };
