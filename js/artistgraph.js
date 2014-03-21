@@ -54,7 +54,7 @@ ArtistGraph.prototype = {
   buildGraph: function() {
     this.counter = 1;
     this.counter2 = 1;
-    this.maxNodes = Math.pow(this.branching, this.depth) + 2 * this.branching;
+    this.maxNodes = Math.pow(this.branching, this.depth + 1) - 1;
     console.log(this.maxNodes);
     this.constructGraph(this.depth, this.artist);
   },
