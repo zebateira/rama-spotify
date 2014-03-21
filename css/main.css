@@ -326,3 +326,8 @@ html, body {
 .graph {
   height: 100%;
 }
+
+/* line 6, ../sass/_now_playing.scss */
+#view_container {
+  overflow: hidden;
+}

@@ -21,6 +21,7 @@ var ArtistGraph = function(config, element, artist, options) {
 
   this.element = element;
   this.artist = artist;
+  this.artist.nodeid = 1;
   this.branching = config.branching || this.DEFAULT_BRANCHING;
   this.depth = config.depth || this.DEFAULT_DEPTH;
 
@@ -35,7 +36,10 @@ var ArtistGraph = function(config, element, artist, options) {
   this.data = {
     nodes: [{
       id: this.index,
-      label: this.artist.name
+      label: this.artist.name,
+      color: {
+        background: '#666'
+      }
     }],
     edges: []
   };
@@ -48,15 +52,15 @@ var ArtistGraph = function(config, element, artist, options) {
 ArtistGraph.prototype = {
 
   buildGraph: function() {
-    this.artist.nodeid = 1;
-
+    this.counter = 1;
+    this.counter2 = 1;
+    this.maxNodes = Math.pow(this.branching, this.depth) + 2 * this.branching;
+    console.log(this.maxNodes);
     this.constructGraph(this.depth, this.artist);
   },
 
-  constructGraph: function(it, rootArtist) {
-    if (it <= 0) {
-      return;
-    }
+  constructGraph: function(depth, rootArtist) {
+    console.log('depth:' + depth);
 
     var forEachRelated = function(artist) {
       var duplicated = _.findWhere(this.data.nodes, {
@@ -81,32 +85,44 @@ ArtistGraph.prototype = {
           };
 
           this.extraEdges.push(extraEdge);
-          this.data.edges.push(extraEdge);
+          // this.data.edges.push(extraEdge);
 
         }
       } else {
+        var nodeid = ++this.index;
+
         this.data.nodes.push({
-          id: ++this.index,
+          id: nodeid,
           label: artist.name
         });
 
         this.data.edges.push({
           from: rootArtist.nodeid,
-          to: this.index
+          to: nodeid
         });
 
         this.relatedArtists.push(artist);
 
-        artist.nodeid = this.index;
+        artist.nodeid = nodeid;
       }
-      this.constructGraph(it - 1, artist);
+      if (depth > 0)
+        this.constructGraph(depth - 1, artist);
 
+
+      this.counter++;
+      console.log('c: ' + this.counter);
+      console.log('#nodes: ' + this.data.nodes.length);
+      // if (this.counter === this.maxNodes)
+      this.draw();
     };
 
     var relatedSnapshotDone = function(snapshot) {
-      var snapshotLoadAll = snapshot.loadAll(['name', 'uri']);
-      this.promises = (this.promises ? models.Promise.join(this.promises, snapshotLoadAll.each(this, forEachRelated)) : snapshotLoadAll.each(this, forEachRelated));
-      this.promises.done(this, this.draw);
+      var snapshotLoadAll = snapshot.loadAll(['name', 'uri'])
+
+      snapshotLoadAll.each(this, forEachRelated).done(this, function(artists) {
+        this.counter2 += artists.length;
+        console.log('c2: ' + this.counter2);
+      });;
     };
 
     var relatedDone = function(artist) {
@@ -116,6 +132,8 @@ ArtistGraph.prototype = {
 
     var promiseRelated = rootArtist.load('related');
     promiseRelated.done(this, relatedDone);
+
+
   },
   draw: function() {
     this.graph.setData(this.data, {
@@ -123,9 +141,12 @@ ArtistGraph.prototype = {
     });
     this.graph.start();
     this.graph.zoomExtent();
+    if (this.throbber)
+      this.throbber.hide();
   },
 
   redraw: function() {
+    this.draw();
     this.graph.redraw();
   }
 };
