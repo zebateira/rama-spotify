@@ -117,12 +117,12 @@ ArtistGraph.prototype = {
     };
 
     var relatedSnapshotDone = function(snapshot) {
-      var snapshotLoadAll = snapshot.loadAll(['name', 'uri'])
+      var snapshotLoadAll = snapshot.loadAll(['name', 'uri']);
 
       snapshotLoadAll.each(this, forEachRelated).done(this, function(artists) {
         this.counter2 += artists.length;
         console.log('c2: ' + this.counter2);
-      });;
+      });
     };
 
     var relatedDone = function(artist) {
