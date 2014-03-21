@@ -34,7 +34,7 @@ nowplaying = {
       nodes: {
         color: {
           background: '#333',
-          border: '#333'
+          border: '#555'
         },
         fontColor: '#eef',
         shape: 'box',
@@ -72,8 +72,8 @@ nowplaying = {
   */
   setArtistGraph: function(artist) {
     nowplaying.artistGraph = new artistGraph.ArtistGraph({
-        branching: 30,
-        depth: 5
+        branching: 2,
+        depth: 10
       },
       nowplaying.element,
       artist,

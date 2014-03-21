@@ -25,6 +25,8 @@ var ArtistGraph = function(config, element, artist, options) {
   this.depth = config.depth || this.DEFAULT_DEPTH;
 
   this.relatedArtists = [];
+  this.extraEdges = [];
+
 
   // numbering for the id's of adjacent nodes
   this.index = 1;
@@ -71,11 +73,17 @@ ArtistGraph.prototype = {
           from: rootArtist.nodeid
         });
 
-        if (!inverseEdgeExists && !edgeExists)
-          this.data.edges.push({
+        if (!inverseEdgeExists && !edgeExists) {
+          var extraEdge = {
             from: rootArtist.nodeid,
-            to: duplicated.id
-          });
+            to: duplicated.id,
+            color: '#ddd'
+          };
+
+          this.extraEdges.push(extraEdge);
+          this.data.edges.push(extraEdge);
+
+        }
       } else {
         this.data.nodes.push({
           id: ++this.index,
@@ -90,8 +98,8 @@ ArtistGraph.prototype = {
         this.relatedArtists.push(artist);
 
         artist.nodeid = this.index;
-        this.constructGraph(--it, artist);
       }
+      this.constructGraph(it - 1, artist);
 
     };
 
