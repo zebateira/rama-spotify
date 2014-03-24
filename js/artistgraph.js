@@ -53,14 +53,17 @@ ArtistGraph.prototype = {
 
   buildGraph: function() {
     this.counter = 1;
-    this.counter2 = 1;
-    this.maxNodes = Math.pow(this.branching, this.depth + 1) - 1;
-    console.log(this.maxNodes);
-    this.constructGraph(this.depth, this.artist);
+
+    this.maxNodes = 0;
+    for (var i = 0; i <= this.depth; ++i) {
+      this.maxNodes += Math.pow(this.branching, i);
+    }
+
+    console.log('# iterations: ' + this.maxNodes);
+    this.constructGraph(this.depth - 1, this.artist);
   },
 
   constructGraph: function(depth, rootArtist) {
-    console.log('depth:' + depth);
 
     var forEachRelated = function(artist) {
       var duplicated = _.findWhere(this.data.nodes, {
@@ -85,8 +88,7 @@ ArtistGraph.prototype = {
           };
 
           this.extraEdges.push(extraEdge);
-          // this.data.edges.push(extraEdge);
-
+          this.data.edges.push(extraEdge);
         }
       } else {
         var nodeid = ++this.index;
@@ -105,24 +107,20 @@ ArtistGraph.prototype = {
 
         artist.nodeid = nodeid;
       }
+
       if (depth > 0)
         this.constructGraph(depth - 1, artist);
 
-
-      this.counter++;
-      console.log('c: ' + this.counter);
-      console.log('#nodes: ' + this.data.nodes.length);
-      // if (this.counter === this.maxNodes)
-      this.draw();
+      if (++this.counter === this.maxNodes) {
+        console.log('# nodes: ' + this.data.nodes.length);
+        this.draw();
+      }
     };
 
     var relatedSnapshotDone = function(snapshot) {
       var snapshotLoadAll = snapshot.loadAll(['name', 'uri']);
 
-      snapshotLoadAll.each(this, forEachRelated).done(this, function(artists) {
-        this.counter2 += artists.length;
-        console.log('c2: ' + this.counter2);
-      });
+      snapshotLoadAll.each(this, forEachRelated);
     };
 
     var relatedDone = function(artist) {
@@ -146,7 +144,6 @@ ArtistGraph.prototype = {
   },
 
   redraw: function() {
-    this.draw();
     this.graph.redraw();
   }
 };

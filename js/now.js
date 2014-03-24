@@ -40,8 +40,8 @@ nowplaying = {
         fontColor: '#eef',
         shape: 'box',
         radius: 1
-      },
-      clustering: true
+      }
+      // clustering: true
     };
 
     return nowplaying;
@@ -73,7 +73,7 @@ nowplaying = {
 
     nowplaying.artistGraph = new artistGraph.ArtistGraph({
         branching: 3,
-        depth: 3
+        depth: 6
       },
       nowplaying.element,
       artist,
@@ -81,6 +81,8 @@ nowplaying = {
     );
 
     nowplaying.artistGraph.throbber = Throbber.forElement(document.getElementById(nowplaying.viewId));
+    nowplaying.artistGraph.throbber.setPosition('center', 'center');
+
     nowplaying.artistGraph.buildGraph();
   }
 };
