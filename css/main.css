@@ -263,7 +263,7 @@ html, body {
 
 /* line 27, ../sass/main.scss */
 #view_container {
-  height: calc(100% - 100px - 34px);
+  height: calc(100% - 60px - 34px);
 }
 /* line 31, ../sass/main.scss */
 #view_container .view {
@@ -275,19 +275,19 @@ html, body {
 /* line 4, ../sass/_header.scss */
 .sp-header {
   background-color: #333;
-  max-height: 100px;
+  max-height: 60px;
   position: relative;
-  min-height: 100px;
+  min-height: 60px;
 }
 /* line 12, ../sass/_header.scss */
 .sp-header .header-text a {
   color: #bbb;
 }
 /* line 18, ../sass/_header.scss */
-.sp-header .header {
+.sp-header .header-title {
   text-align: center;
   font-size: 3em;
-  line-height: 100px;
+  line-height: 60px;
 }
 /* line 24, ../sass/_header.scss */
 .sp-header .header-link {
@@ -295,7 +295,7 @@ html, body {
   position: absolute;
   min-height: 30px;
   height: 30px;
-  top: 33%;
+  top: 15px;
   padding-left: 10px;
   padding-right: 10px;
   background-color: black;
@@ -325,4 +325,9 @@ html, body {
 /* line 2, ../sass/_now_playing.scss */
 .graph {
   height: 100%;
+}
+
+/* line 6, ../sass/_now_playing.scss */
+#view_container {
+  overflow: hidden;
 }

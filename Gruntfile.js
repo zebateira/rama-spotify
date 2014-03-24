@@ -4,13 +4,19 @@ module.exports = function(grunt) {
       dist: 'rama-spotify'
     },
     jshint: {
-      all: ['Gruntfile.js', 'js/**/*.js', 'js/specs/*.js']
+      all: ['Gruntfile.js', 'js/**/*.js', 'test/*.js']
     },
     jasmine: {
       src: ['js/*.js'],
       options: {
-        helpers: ['js/specs/spechelper.js'],
-        specs: ['js/specs/*.spec.js']
+        vendor: [
+          'bower_components/jquery/dist/jquery.js',
+          'bower_components/vis/dist/vis.js',
+          'bower_components/jasmine-jquery/lib/jasmine-jquery.js',
+          'bower_components/underscore/underscore.js'
+        ],
+        helpers: ['test/spechelper.js'],
+        specs: ['test/*.spec.js']
       }
     },
     compass: {
@@ -22,7 +28,7 @@ module.exports = function(grunt) {
       }
     },
     watch: {
-      files: ['Gruntfile.js', 'js/*.js', 'sass/*.scss'],
+      files: ['Gruntfile.js', 'js/*.js', 'sass/*.scss', 'test/*.js'],
       tasks: ['jshint', 'compass', 'jasmine']
     },
     useminPrepare: {
@@ -86,6 +92,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-usemin');
+
+  grunt.registerTask('test', [
+    'jshint',
+    'jasmine'
+  ]);
 
   grunt.registerTask('build', [
     'clean:dist',

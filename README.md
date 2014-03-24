@@ -38,9 +38,16 @@ With no official Spotify Desktop Client release, there's nothing I can do about 
 [Releases]
 ----
 
-[v0.1.0] - first release
+[v0.1.1] - Graph creation updated
+  - graph depth and branchin factor now dynamic
+  - nodes are now black
+  - root node is highlighted from the others
+  - loading throbber added while graph is being created.
 
-It is still in alfa, so please bear with the lack of functionalities.
+[v0.1.0] - First Release
+  - graph depth 1 displayed on app load.
+
+It is still in alfa, so please bear with the lack of functionalities (none for now really...).
 
 
 #### Author
@@ -53,6 +60,7 @@ José Bateira
 [rama.inescporto.pt]:http://rama.inescporto.pt
 [carsy.github.io]:http://carsy.github.io
 [@\_carsy\_]:http://twitter.com/_carsy_
-[here]:https://github.com/carsy/rama-spotify/releases/tag/v0.1.0
-[Releases]:https://github.com/carsy/rama-spotify/releases
+[here]:https://github.com/carsy/rama-spotify/releases/latest
+[Releases]:https://github.com/carsy/rama-spotify/releases/latest
+[v0.1.1]:https://github.com/carsy/rama-spotify/releases/tag/v0.1.1
 [v0.1.0]:https://github.com/carsy/rama-spotify/releases/tag/v0.1.0

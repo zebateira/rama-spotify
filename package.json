@@ -1,20 +1,20 @@
 {
   "name": "RAMA",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Relational Artist MAps",
   "repository": {
     "type": "git",
-    "url": "git@github.com:carsy/master-thesis.git"
+    "url": "git@github.com:carsy/rama-spotify.git"
   },
   "author": "Zé Bateira",
   "bugs": {
-    "url": "https://github.com/carsy/master-thesis/issues"
+    "url": "https://github.com/carsy/rama-spotify/issues"
   },
-  "homepage": "https://github.com/carsy/master-thesis/",
+  "homepage": "https://github.com/carsy/rama-spotify/",
   "devDependencies": {
     "grunt": "~0.4.2",
-    "grunt-contrib-watch": "~0.5.3",
-    "grunt-contrib-jshint": "~0.8.0",
+    "grunt-contrib-watch": "^0.6.0",
+    "grunt-contrib-jshint": "^0.9.2",
     "grunt-contrib-jasmine": "^0.6.1",
     "grunt-contrib-compass": "~0.7.2",
     "grunt-usemin": "^2.0.2",

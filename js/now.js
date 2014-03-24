@@ -4,64 +4,65 @@
   Gets current playing artist and draws graph
 */
 
+var models = {};
+var Throbber = {};
+var artistGraph = {};
 
-var now = {};
+
+var nowplaying = {};
 
 require([
   '$api/models',
-  'js/artist.graph'
-], function(models, artistGraph) {
+  '$views/throbber#Throbber',
+  'js/artistgraph'
+], function(_models, _throbber, _artistGraph) {
 
-  now.models = models;
-  now.artistGraph = artistGraph;
+  models = _models;
+  Throbber = _throbber;
+  artistGraph = _artistGraph;
 
-  exports.NowPlaying = NowPlaying;
+  exports.nowplaying = nowplaying;
 });
 
-var NowPlaying = {
-  init: function(config) {
-    this.element = config.element;
+nowplaying = {
+  name: 'nowplaying',
 
-    this.artist = {};
+  init: function(viewId) {
+    nowplaying.viewId = viewId;
+    nowplaying.element = $('#' + viewId + ' .graph')[0];
 
-    this.options = {
+    nowplaying.options = {
       nodes: {
         color: {
           background: '#333',
-          border: '#333'
+          border: '#555'
         },
         fontColor: '#eef',
         shape: 'box',
-        radius: 24
+        radius: 1
       }
+      // clustering: true
     };
 
-    this.artistGraph = {};
-
-    return this;
+    return nowplaying;
   },
 
   loadView: function() {
-    now.models.player.load('track').done(function(player) {
-      NowPlaying
-        .setArtistGraph(
-          now.models.Artist.fromURI(player.track.artists[0].uri))
-        .done(NowPlaying.drawGraph);
+
+    models.player.load('track').done(function(player) {
+      nowplaying.setArtistGraph(
+        models.Artist.fromURI(player.track.artists[0].uri)
+      );
     });
 
-    return this;
+    return nowplaying;
   },
 
   updateView: function() {
-    this.artistGraph.redraw();
+    if (nowplaying.artistGraph)
+      nowplaying.artistGraph.redraw();
 
-    return this;
-  },
-
-  drawGraph: function() {
-    NowPlaying.artistGraph.draw();
-
-    return this;
+    return nowplaying;
   },
 
   /**
@@ -69,15 +70,19 @@ var NowPlaying = {
     Also creates the artistGraph.
   */
   setArtistGraph: function(artist) {
-    NowPlaying.artist = artist;
 
-    NowPlaying.artistGraph = new now.artistGraph.ArtistGraph(
-      NowPlaying.element,
-      NowPlaying.artist,
-      NowPlaying.options
+    nowplaying.artistGraph = new artistGraph.ArtistGraph({
+        branching: 3,
+        depth: 6
+      },
+      nowplaying.element,
+      artist,
+      nowplaying.options
     );
 
-    return NowPlaying.artistGraph
-      .setupGraph();
+    nowplaying.artistGraph.throbber = Throbber.forElement(document.getElementById(nowplaying.viewId));
+    nowplaying.artistGraph.throbber.setPosition('center', 'center');
+
+    nowplaying.artistGraph.buildGraph();
   }
 };
