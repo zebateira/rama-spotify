@@ -28,6 +28,7 @@ nowplaying = {
   name: 'nowplaying',
 
   init: function(viewId) {
+    nowplaying.viewId = viewId;
     nowplaying.element = $('#' + viewId + ' .graph')[0];
 
     nowplaying.options = {
@@ -39,21 +40,19 @@ nowplaying = {
         fontColor: '#eef',
         shape: 'box',
         radius: 1
-      },
-      clustering: true
+      }
+      // clustering: true
     };
 
     return nowplaying;
   },
 
   loadView: function() {
-    // nowplaying.throbber = Throbber.forElement(document.getElementById('now'));
 
     models.player.load('track').done(function(player) {
       nowplaying.setArtistGraph(
         models.Artist.fromURI(player.track.artists[0].uri)
       );
-      // nowplaying.throbber.hide();
     });
 
     return nowplaying;
@@ -71,14 +70,18 @@ nowplaying = {
     Also creates the artistGraph.
   */
   setArtistGraph: function(artist) {
+
     nowplaying.artistGraph = new artistGraph.ArtistGraph({
-        branching: 2,
-        depth: 10
+        branching: 3,
+        depth: 6
       },
       nowplaying.element,
       artist,
       nowplaying.options
     );
+
+    nowplaying.artistGraph.throbber = Throbber.forElement(document.getElementById(nowplaying.viewId));
+    nowplaying.artistGraph.throbber.setPosition('center', 'center');
 
     nowplaying.artistGraph.buildGraph();
   }
