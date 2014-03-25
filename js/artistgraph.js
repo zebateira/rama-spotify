@@ -88,7 +88,7 @@ ArtistGraph.prototype = {
           };
 
           this.extraEdges.push(extraEdge);
-          this.data.edges.push(extraEdge);
+          // this.data.edges.push(extraEdge);
         }
       } else {
         var nodeid = ++this.index;
@@ -130,8 +130,6 @@ ArtistGraph.prototype = {
 
     var promiseRelated = rootArtist.load('related');
     promiseRelated.done(this, relatedDone);
-
-
   },
   draw: function() {
     this.graph.setData(this.data, {
@@ -139,6 +137,7 @@ ArtistGraph.prototype = {
     });
     this.graph.start();
     this.graph.zoomExtent();
+
     if (this.throbber)
       this.throbber.hide();
   },

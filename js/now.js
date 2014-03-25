@@ -49,11 +49,9 @@ nowplaying = {
 
   loadView: function() {
 
-    models.player.load('track').done(function(player) {
-      nowplaying.setArtistGraph(
-        models.Artist.fromURI(player.track.artists[0].uri)
-      );
-    });
+    nowplaying.currentArtist.load(nowplaying.setArtistGraph);
+
+    models.player.addEventListener('change', nowplaying.events.onPlayerChange);
 
     return nowplaying;
   },
@@ -63,6 +61,28 @@ nowplaying = {
       nowplaying.artistGraph.redraw();
 
     return nowplaying;
+  },
+  events: {
+    onPlayerChange: function(player) {
+
+      nowplaying.currentArtist.load(function(currentArtist, advertisement) {
+        var oldArtistURI = nowplaying.artistGraph.artist.uri;
+
+        if (advertisement)
+          return;
+
+        if (currentArtist.uri !== oldArtistURI)
+          nowplaying.setArtistGraph(currentArtist);
+      });
+    }
+  },
+
+  currentArtist: {
+    load: function(callback) {
+      models.player.load('track').done(function(player) {
+        callback(models.Artist.fromURI(player.track.artists[0].uri), player.track.advertisement);
+      });
+    }
   },
 
   /**

@@ -116,7 +116,6 @@ var views = {
     _.where(views.tabs, {
       id: tabID
     })[0].controller.updateView();
-
   },
   reset: function() {
     views.header.reset();
