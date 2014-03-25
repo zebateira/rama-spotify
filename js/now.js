@@ -100,6 +100,9 @@ nowplaying = {
       nowplaying.options
     );
 
+    if (nowplaying.artistGraph.throbber)
+      nowplaying.artistGraph.throbber.hide();
+
     nowplaying.artistGraph.throbber = Throbber.forElement(document.getElementById(nowplaying.viewId));
     nowplaying.artistGraph.throbber.setPosition('center', 'center');
 

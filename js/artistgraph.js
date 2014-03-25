@@ -59,6 +59,7 @@ ArtistGraph.prototype = {
       this.maxNodes += Math.pow(this.branching, i);
     }
 
+    console.log('#### Stats for ' + this.artist.name);
     console.log('# iterations: ' + this.maxNodes);
     this.constructGraph(this.depth - 1, this.artist);
   },
@@ -112,8 +113,7 @@ ArtistGraph.prototype = {
         this.constructGraph(depth - 1, artist);
 
       if (++this.counter === this.maxNodes) {
-        console.log('# nodes: ' + this.data.nodes.length);
-        this.draw();
+        this.draw(true);
       }
     };
 
@@ -131,15 +131,18 @@ ArtistGraph.prototype = {
     var promiseRelated = rootArtist.load('related');
     promiseRelated.done(this, relatedDone);
   },
-  draw: function() {
+  draw: function(debug) {
     this.graph.setData(this.data, {
       disableStart: true
     });
     this.graph.start();
     this.graph.zoomExtent();
+    this.throbber.hide();
 
-    if (this.throbber)
-      this.throbber.hide();
+    if (debug) {
+      console.log('# nodes: ' + this.data.nodes.length);
+      console.log('# edges: ' + this.data.edges.length);
+    }
   },
 
   redraw: function() {
