@@ -21,6 +21,8 @@ html, body {
 }
 
 $bg-color: #ecebe8;
+$bg-dark: #474747;
+$bg-light: #6b6b6b;
 
 $header-height: 60px;
 $tabs-height: 34px;
@@ -31,22 +33,6 @@ $content-height: calc(100% - #{$header-height} - #{$tabs-height});
   
   .view {
     height: 100%;
-  }
-}
-
-.settings {
-  display: none;
-
-  position: fixed;
-  z-index: 2;
-  right: 0;
-  background: transparent;
-
-  .settings-btn {
-    display: block;
-    background: url("../img/settings.png");
-    width: 50px;
-    height: 50px;
   }
 }
 

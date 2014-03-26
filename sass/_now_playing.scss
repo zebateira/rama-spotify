@@ -4,11 +4,47 @@
 
 #view_container  {
   overflow: hidden;
+  position: relative;
 }
 
-.graph-options {
-  input {
-    padding: 2px;
-    width: 30px;
+
+.settings {
+  position: absolute;
+  z-index: 2;
+  top: 10px;
+  right: 20px;
+
+
+  .settings-btn {
+    .img {
+      display: block;
+      float: right;
+
+      width: 20px;
+      height: 20px;
+
+      background: url(../img/settings-dark.png) no-repeat;
+      background-size: cover;
+
+      &:hover {
+        cursor: pointer;
+        background: url(../img/settings-light.png) no-repeat;
+        background-size: cover;
+        
+      }
+    }
+  }
+
+  .settings-tooltip {
+    display: none;
+
+    .graph-options {
+      float: right;
+      input {
+        padding: 2px;
+        width: 30px;
+      }
+    }
   }
 }
+
