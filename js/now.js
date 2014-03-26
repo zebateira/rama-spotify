@@ -92,8 +92,8 @@ nowplaying = {
   setArtistGraph: function(artist) {
 
     nowplaying.artistGraph = new artistGraph.ArtistGraph({
-        branching: 3,
-        depth: 6
+        branching: 4,
+        depth: 2
       },
       nowplaying.element,
       artist,

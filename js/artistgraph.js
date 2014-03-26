@@ -89,7 +89,7 @@ ArtistGraph.prototype = {
           };
 
           this.extraEdges.push(extraEdge);
-          // this.data.edges.push(extraEdge);
+          this.data.edges.push(extraEdge);
         }
       } else {
         var nodeid = ++this.index;

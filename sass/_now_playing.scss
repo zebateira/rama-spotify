@@ -1,8 +1,14 @@
-
 .graph {
  height: 100%;
 }
 
 #view_container  {
   overflow: hidden;
+}
+
+.graph-options {
+  input {
+    padding: 2px;
+    width: 30px;
+  }
 }

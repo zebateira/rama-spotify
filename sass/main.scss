@@ -10,7 +10,7 @@ body, html {
 
 *, *:before, *:after {
   box-sizing: border-box;
- }
+}
 
 a {
   text-decoration: none;
@@ -20,12 +20,13 @@ html, body {
   height: 100%;
 }
 
+$bg-color: #ecebe8;
+
 $header-height: 60px;
 $tabs-height: 34px;
 $content-height: calc(100% - #{$header-height} - #{$tabs-height});
 
 #view_container {
-  // padding: 20px;
   height: $content-height;
   
   .view {
@@ -33,6 +34,21 @@ $content-height: calc(100% - #{$header-height} - #{$tabs-height});
   }
 }
 
+.settings {
+  display: none;
+
+  position: fixed;
+  z-index: 2;
+  right: 0;
+  background: transparent;
+
+  .settings-btn {
+    display: block;
+    background: url("../img/settings.png");
+    width: 50px;
+    height: 50px;
+  }
+}
 
 /* imports */
 @import "header";

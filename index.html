@@ -20,10 +20,25 @@
 <body>
   <div id="view_container">
     <div id="now" class="view">
+      <div class="settings">
+        <div class="settings-btn"><img src="img/settings.png" height="40" width="40" alt=""></div>
+        <div class="tooltip">
+          <form class="graph-options">
+            <input min="2" max="4" value="2" type="number">
+            <label>depth</label>
+            <br>
+            <input min="2" max="4" value="4" type="number">
+            <label>branching</label>
+          </form>
+        </div>
+      </div>
       <div class="graph"></div>
     </div>
+
+
     <div id="top" class="view">
     </div>
+
     <div id="search" class="view">
     </div>
   </div>

@@ -261,13 +261,28 @@ html, body {
   height: 100%;
 }
 
-/* line 27, ../sass/main.scss */
+/* line 29, ../sass/main.scss */
 #view_container {
   height: calc(100% - 60px - 34px);
 }
-/* line 31, ../sass/main.scss */
+/* line 32, ../sass/main.scss */
 #view_container .view {
   height: 100%;
+}
+
+/* line 37, ../sass/main.scss */
+.settings {
+  position: fixed;
+  z-index: 2;
+  right: 0;
+  background: transparent;
+}
+/* line 43, ../sass/main.scss */
+.settings .settings-btn {
+  display: block;
+  background: url("../img/settings.png");
+  width: 50px;
+  height: 50px;
 }
 
 /* imports */
@@ -322,12 +337,18 @@ html, body {
   }
 }
 
-/* line 2, ../sass/_now_playing.scss */
+/* line 1, ../sass/_now_playing.scss */
 .graph {
   height: 100%;
 }
 
-/* line 6, ../sass/_now_playing.scss */
+/* line 5, ../sass/_now_playing.scss */
 #view_container {
   overflow: hidden;
+}
+
+/* line 10, ../sass/_now_playing.scss */
+.graph-options input {
+  padding: 2px;
+  width: 30px;
 }
