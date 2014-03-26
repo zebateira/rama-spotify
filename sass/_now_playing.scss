@@ -13,37 +13,59 @@
   z-index: 2;
   top: 10px;
   right: 20px;
-
+  text-align: right;
 
   .settings-btn {
-    .img {
-      display: block;
-      float: right;
+    display: inline-block;
 
-      width: 20px;
-      height: 20px;
+    width: 20px;
+    height: 20px;
+    margin-bottom: 6px;
 
-      background: url(../img/settings-dark.png) no-repeat;
+    background: url(../img/settings-dark.png) no-repeat;
+    background-size: cover;
+
+    &:hover {
+      cursor: pointer;
+      background: url(../img/settings-light.png) no-repeat;
       background-size: cover;
 
-      &:hover {
-        cursor: pointer;
-        background: url(../img/settings-light.png) no-repeat;
-        background-size: cover;
-        
-      }
     }
   }
 
   .settings-tooltip {
     display: none;
+    position: relative;
+    text-align: left;
 
-    .graph-options {
-      float: right;
-      input {
-        padding: 2px;
-        width: 30px;
-      }
+    padding: 10px 6px;
+
+    background-color: $bg-color;
+    border-radius: 2px;
+    border-width: 1px;
+    border-color: #bbb;
+    border-style: solid;
+
+    .tri {
+      position: absolute;
+      top: -5px;
+      right: 8px;
+
+      width: 10px;
+      height: 10px;
+      
+      background-color: $bg-color;
+      border-radius: 2px;
+      border-width: 1px;
+      border-color: #bbb transparent transparent #bbb;
+      border-style: solid;
+
+      -webkit-transform: rotate(45deg);
+    }
+
+    input {
+      padding: 2px;
+      width: 30px;
     }
   }
 }

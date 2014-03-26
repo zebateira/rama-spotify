@@ -51,6 +51,8 @@ nowplaying = {
 
     nowplaying.currentArtist.load(nowplaying.setArtistGraph);
 
+    nowplaying.loadSettingsMenu();
+
     models.player.addEventListener('change', nowplaying.events.onPlayerChange);
 
     return nowplaying;
@@ -74,7 +76,14 @@ nowplaying = {
         if (currentArtist.uri !== oldArtistURI)
           nowplaying.setArtistGraph(currentArtist);
       });
+    },
+    onSettingsBtnClick: function(event) {
+      $('#now .settings-tooltip').toggle();
     }
+  },
+
+  loadSettingsMenu: function() {
+    $('#now .settings-btn').click(nowplaying.events.onSettingsBtnClick);
   },
 
   currentArtist: {

@@ -339,32 +339,51 @@ html, body {
   z-index: 2;
   top: 10px;
   right: 20px;
+  text-align: right;
 }
-/* line 19, ../sass/_now_playing.scss */
-.settings .settings-btn .img {
-  display: block;
-  float: right;
+/* line 18, ../sass/_now_playing.scss */
+.settings .settings-btn {
+  display: inline-block;
   width: 20px;
   height: 20px;
+  margin-bottom: 6px;
   background: url(../img/settings-dark.png) no-repeat;
   background-size: cover;
 }
-/* line 29, ../sass/_now_playing.scss */
-.settings .settings-btn .img:hover {
+/* line 28, ../sass/_now_playing.scss */
+.settings .settings-btn:hover {
   cursor: pointer;
   background: url(../img/settings-light.png) no-repeat;
   background-size: cover;
 }
-/* line 38, ../sass/_now_playing.scss */
+/* line 36, ../sass/_now_playing.scss */
 .settings .settings-tooltip {
   display: none;
+  position: relative;
+  text-align: left;
+  padding: 10px 6px;
+  background-color: #ecebe8;
+  border-radius: 2px;
+  border-width: 1px;
+  border-color: #bbb;
+  border-style: solid;
 }
-/* line 41, ../sass/_now_playing.scss */
-.settings .settings-tooltip .graph-options {
-  float: right;
+/* line 49, ../sass/_now_playing.scss */
+.settings .settings-tooltip .tri {
+  position: absolute;
+  top: -5px;
+  right: 8px;
+  width: 10px;
+  height: 10px;
+  background-color: #ecebe8;
+  border-radius: 2px;
+  border-width: 1px;
+  border-color: #bbb transparent transparent #bbb;
+  border-style: solid;
+  -webkit-transform: rotate(45deg);
 }
-/* line 43, ../sass/_now_playing.scss */
-.settings .settings-tooltip .graph-options input {
+/* line 66, ../sass/_now_playing.scss */
+.settings .settings-tooltip input {
   padding: 2px;
   width: 30px;
 }
