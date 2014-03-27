@@ -26,14 +26,19 @@
         <br>
         <div class="settings-tooltip">
           <div class="tri"></div>
-          <input min="2" max="4" value="2" type="number">
-          <label>depth</label>
-          <br>
-          <input min="2" max="4" value="4" type="number">
-          <label>branching</label>
-          <br>
-          <input type="checkbox">
+
+          <div class="option first-child">
+            <label>depth</label>
+            <input min="2" max="4" value="2" type="number">
+          </div>
+
+          <div class="option">
+            <label>branching</label>
+            <input min="2" max="4" value="4" type="number">
+          </div>
+          <!--
           <label>extra edges</label>
+          <input type="checkbox"> -->
         </div>
       </div>
       <div class="graph"></div>

@@ -13,14 +13,14 @@
   z-index: 2;
   top: 10px;
   right: 20px;
-  text-align: right;
 
   .settings-btn {
-    display: inline-block;
+    float: right;
 
     width: 20px;
     height: 20px;
-    margin-bottom: 6px;
+    margin-bottom: 10px;
+    margin-right: 4px;
 
     background: url(../img/settings-dark.png) no-repeat;
     background-size: cover;
@@ -36,8 +36,8 @@
   .settings-tooltip {
     display: none;
     position: relative;
-    text-align: left;
-
+    float: right;
+  
     padding: 10px 6px;
 
     background-color: $bg-color;
@@ -63,9 +63,23 @@
       -webkit-transform: rotate(45deg);
     }
 
-    input {
-      padding: 2px;
-      width: 30px;
+    .option {
+      overflow: auto;
+
+      &:not(.first-child) {
+        margin-top: 5px;
+      }
+
+      label {
+        float: left;
+        margin-right: 5px;
+      }
+      input {
+        padding: 2px;
+        width: 30px;
+        float: right;
+      }
+      
     }
   }
 }

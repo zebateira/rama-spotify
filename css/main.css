@@ -339,14 +339,14 @@ html, body {
   z-index: 2;
   top: 10px;
   right: 20px;
-  text-align: right;
 }
-/* line 18, ../sass/_now_playing.scss */
+/* line 17, ../sass/_now_playing.scss */
 .settings .settings-btn {
-  display: inline-block;
+  float: right;
   width: 20px;
   height: 20px;
-  margin-bottom: 6px;
+  margin-bottom: 10px;
+  margin-right: 4px;
   background: url(../img/settings-dark.png) no-repeat;
   background-size: cover;
 }
@@ -360,7 +360,7 @@ html, body {
 .settings .settings-tooltip {
   display: none;
   position: relative;
-  text-align: left;
+  float: right;
   padding: 10px 6px;
   background-color: #ecebe8;
   border-radius: 2px;
@@ -383,7 +383,21 @@ html, body {
   -webkit-transform: rotate(45deg);
 }
 /* line 66, ../sass/_now_playing.scss */
-.settings .settings-tooltip input {
+.settings .settings-tooltip .option {
+  overflow: auto;
+}
+/* line 69, ../sass/_now_playing.scss */
+.settings .settings-tooltip .option:not(.first-child) {
+  margin-top: 5px;
+}
+/* line 73, ../sass/_now_playing.scss */
+.settings .settings-tooltip .option label {
+  float: left;
+  margin-right: 5px;
+}
+/* line 77, ../sass/_now_playing.scss */
+.settings .settings-tooltip .option input {
   padding: 2px;
   width: 30px;
+  float: right;
 }
