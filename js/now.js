@@ -51,6 +51,8 @@ nowplaying = {
 
     nowplaying.currentArtist.load(nowplaying.setArtistGraph);
 
+    nowplaying.loadSettingsMenu();
+
     models.player.addEventListener('change', nowplaying.events.onPlayerChange);
 
     return nowplaying;
@@ -74,7 +76,38 @@ nowplaying = {
         if (currentArtist.uri !== oldArtistURI)
           nowplaying.setArtistGraph(currentArtist);
       });
+    },
+    onSettingsBtnClick: function(event) {
+      $('#now .settings-tooltip').toggle();
     }
+  },
+
+  loadSettingsMenu: function() {
+    $('#now .settings-btn').click(nowplaying.events.onSettingsBtnClick);
+
+    $('#now .settings-tooltip input[name=branching]').on('change', function() {
+      nowplaying.showThrobber();
+      nowplaying.artistGraph.updateGraph({
+        branching: parseInt(this.value)
+      });
+      nowplaying.artistGraph.buildGraph();
+    });
+
+    $('#now .settings-tooltip input[name=depth]').on('change', function() {
+      nowplaying.showThrobber();
+      nowplaying.artistGraph.updateGraph({
+        depth: parseInt(this.value)
+      });
+      nowplaying.artistGraph.buildGraph();
+    });
+
+    $('#now .settings-tooltip input[name=treemode]').on('change', function() {
+      nowplaying.showThrobber();
+      nowplaying.artistGraph.updateGraph({
+        treemode: this.checked
+      });
+      nowplaying.artistGraph.buildGraph();
+    });
   },
 
   currentArtist: {
@@ -92,20 +125,22 @@ nowplaying = {
   setArtistGraph: function(artist) {
 
     nowplaying.artistGraph = new artistGraph.ArtistGraph({
-        branching: 3,
-        depth: 6
+        depth: 2,
+        branching: 4
       },
       nowplaying.element,
       artist,
       nowplaying.options
     );
 
+    nowplaying.showThrobber();
+    nowplaying.artistGraph.buildGraph();
+  },
+  showThrobber: function() {
     if (nowplaying.artistGraph.throbber)
       nowplaying.artistGraph.throbber.hide();
 
     nowplaying.artistGraph.throbber = Throbber.forElement(document.getElementById(nowplaying.viewId));
     nowplaying.artistGraph.throbber.setPosition('center', 'center');
-
-    nowplaying.artistGraph.buildGraph();
   }
 };
