@@ -261,11 +261,11 @@ html, body {
   height: 100%;
 }
 
-/* line 27, ../sass/main.scss */
+/* line 31, ../sass/main.scss */
 #view_container {
   height: calc(100% - 60px - 34px);
 }
-/* line 31, ../sass/main.scss */
+/* line 34, ../sass/main.scss */
 #view_container .view {
   height: 100%;
 }
@@ -322,12 +322,87 @@ html, body {
   }
 }
 
-/* line 2, ../sass/_now_playing.scss */
+/* line 1, ../sass/_now_playing.scss */
 .graph {
   height: 100%;
 }
 
-/* line 6, ../sass/_now_playing.scss */
+/* line 5, ../sass/_now_playing.scss */
 #view_container {
   overflow: hidden;
+  position: relative;
+}
+
+/* line 11, ../sass/_now_playing.scss */
+.settings {
+  position: absolute;
+  z-index: 2;
+  top: 10px;
+  right: 20px;
+}
+/* line 17, ../sass/_now_playing.scss */
+.settings .settings-btn {
+  float: right;
+  width: 20px;
+  height: 20px;
+  margin-bottom: 10px;
+  margin-right: 4px;
+  background: url(../img/settings-dark.png) no-repeat;
+  background-size: cover;
+}
+/* line 28, ../sass/_now_playing.scss */
+.settings .settings-btn:hover {
+  cursor: pointer;
+  background: url(../img/settings-light.png) no-repeat;
+  background-size: cover;
+}
+/* line 36, ../sass/_now_playing.scss */
+.settings .settings-tooltip {
+  display: none;
+  position: relative;
+  float: right;
+  padding: 10px 6px;
+  background-color: #ecebe8;
+  border-radius: 2px;
+  border-width: 1px;
+  border-color: #bbb;
+  border-style: solid;
+}
+/* line 49, ../sass/_now_playing.scss */
+.settings .settings-tooltip .tri {
+  position: absolute;
+  top: -5px;
+  right: 8px;
+  width: 10px;
+  height: 10px;
+  background-color: #ecebe8;
+  border-radius: 2px;
+  border-width: 1px;
+  border-color: #bbb transparent transparent #bbb;
+  border-style: solid;
+  -webkit-transform: rotate(45deg);
+}
+/* line 66, ../sass/_now_playing.scss */
+.settings .settings-tooltip .option {
+  overflow: auto;
+}
+/* line 69, ../sass/_now_playing.scss */
+.settings .settings-tooltip .option:not(.first-child) {
+  margin-top: 5px;
+}
+/* line 73, ../sass/_now_playing.scss */
+.settings .settings-tooltip .option label {
+  float: left;
+  margin-right: 5px;
+}
+/* line 77, ../sass/_now_playing.scss */
+.settings .settings-tooltip .option input {
+  padding: 2px;
+  width: 30px;
+  float: right;
+}
+/* line 82, ../sass/_now_playing.scss */
+.settings .settings-tooltip .option input[name=treemode] {
+  margin-top: 5px;
+  margin-left: 5px;
 }

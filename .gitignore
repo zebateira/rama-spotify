@@ -10,3 +10,6 @@ bower_components
 rama-spotify
 rama-spotify.zip
 rama-spotify.tar.gz
+
+# BE GONE DAMMIT
+.DS_STORE

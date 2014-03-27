@@ -1,8 +1,91 @@
-
 .graph {
  height: 100%;
 }
 
 #view_container  {
   overflow: hidden;
+  position: relative;
 }
+
+
+.settings {
+  position: absolute;
+  z-index: 2;
+  top: 10px;
+  right: 20px;
+
+  .settings-btn {
+    float: right;
+
+    width: 20px;
+    height: 20px;
+    margin-bottom: 10px;
+    margin-right: 4px;
+
+    background: url(../img/settings-dark.png) no-repeat;
+    background-size: cover;
+
+    &:hover {
+      cursor: pointer;
+      background: url(../img/settings-light.png) no-repeat;
+      background-size: cover;
+
+    }
+  }
+
+  .settings-tooltip {
+    display: none;
+    position: relative;
+    float: right;
+  
+    padding: 10px 6px;
+
+    background-color: $bg-color;
+    border-radius: 2px;
+    border-width: 1px;
+    border-color: #bbb;
+    border-style: solid;
+
+    .tri {
+      position: absolute;
+      top: -5px;
+      right: 8px;
+
+      width: 10px;
+      height: 10px;
+      
+      background-color: $bg-color;
+      border-radius: 2px;
+      border-width: 1px;
+      border-color: #bbb transparent transparent #bbb;
+      border-style: solid;
+
+      -webkit-transform: rotate(45deg);
+    }
+
+    .option {
+      overflow: auto;
+
+      &:not(.first-child) {
+        margin-top: 5px;
+      }
+
+      label {
+        float: left;
+        margin-right: 5px;
+      }
+      input {
+        padding: 2px;
+        width: 30px;
+        float: right;
+
+        &[name=treemode] {
+          margin-top: 5px;
+          margin-left: 5px;
+        }
+      }
+      
+    }
+  }
+}
+

@@ -38,6 +38,10 @@ With no official Spotify Desktop Client release, there's nothing I can do about 
 [Releases]
 ----
 
+[v0.1.2] - Settings Menu added
+  - settings menu added: depth, branching and treemode settings available
+  - title attributes on the options' labels give information as to what do the options do.
+
 [v0.1.1] - Graph creation updated
   - graph depth and branchin factor now dynamic
   - nodes are now black
@@ -62,5 +66,6 @@ José Bateira
 [@\_carsy\_]:http://twitter.com/_carsy_
 [here]:https://github.com/carsy/rama-spotify/releases/latest
 [Releases]:https://github.com/carsy/rama-spotify/releases/latest
+[v0.1.2]:https://github.com/carsy/rama-spotify/releases/tag/v0.1.2
 [v0.1.1]:https://github.com/carsy/rama-spotify/releases/tag/v0.1.1
 [v0.1.0]:https://github.com/carsy/rama-spotify/releases/tag/v0.1.0
