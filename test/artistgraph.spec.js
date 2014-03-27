@@ -48,7 +48,7 @@ describe('Artist Graph Module', function() {
     });
   });
 
-  describe('updateGraph()', function() {
+  describe('updateGraph', function() {
     it('should have config specified', function() {
       var ag = new ArtistGraph({},
         document.createElement('div'), {
