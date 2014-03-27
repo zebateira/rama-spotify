@@ -70,7 +70,8 @@ ArtistGraph.prototype = {
       edges: []
     };
 
-    this.treemode = config.treemode;
+    if (typeof config.treemode != 'undefined')
+      this.treemode = config.treemode;
   },
 
   buildGraph: function() {
