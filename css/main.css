@@ -401,3 +401,8 @@ html, body {
   width: 30px;
   float: right;
 }
+/* line 82, ../sass/_now_playing.scss */
+.settings .settings-tooltip .option input[name=treemode] {
+  margin-top: 5px;
+  margin-left: 5px;
+}

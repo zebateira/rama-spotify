@@ -78,6 +78,11 @@
         padding: 2px;
         width: 30px;
         float: right;
+
+        &[name=treemode] {
+          margin-top: 5px;
+          margin-left: 5px;
+        }
       }
       
     }

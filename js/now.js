@@ -100,6 +100,14 @@ nowplaying = {
       });
       nowplaying.artistGraph.buildGraph();
     });
+
+    $('#now .settings-tooltip input[name=treemode]').on('change', function() {
+      nowplaying.showThrobber();
+      nowplaying.artistGraph.updateGraph({
+        treemode: this.checked
+      });
+      nowplaying.artistGraph.buildGraph();
+    });
   },
 
   currentArtist: {

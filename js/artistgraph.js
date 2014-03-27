@@ -32,6 +32,8 @@ var ArtistGraph = function(config, element, artist, options) {
   // numbering for the id's of adjacent nodes
   this.index = 1;
 
+  this.treemode = true;
+
   // data of the graph: should contain nodes and edges
   this.data = {
     nodes: [{
@@ -67,6 +69,8 @@ ArtistGraph.prototype = {
       }],
       edges: []
     };
+
+    this.treemode = config.treemode;
   },
 
   buildGraph: function() {
@@ -107,7 +111,8 @@ ArtistGraph.prototype = {
           };
 
           this.extraEdges.push(extraEdge);
-          this.data.edges.push(extraEdge);
+          if (this.treemode)
+            this.data.edges.push(extraEdge);
         }
       } else {
         var nodeid = ++this.index;
