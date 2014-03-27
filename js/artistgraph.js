@@ -16,8 +16,8 @@ function Promise() {
 }
 
 var ArtistGraph = function(config, element, artist, options) {
-  this.DEFAULT_BRANCHING = 5;
-  this.DEFAULT_DEPTH = 4;
+  this.DEFAULT_BRANCHING = 4;
+  this.DEFAULT_DEPTH = 2;
 
   this.element = element;
   this.artist = artist;
@@ -50,6 +50,24 @@ var ArtistGraph = function(config, element, artist, options) {
 };
 
 ArtistGraph.prototype = {
+  updateGraph: function(config) {
+    this.branching = config.branching || this.branching;
+    this.depth = config.depth || this.depth;
+
+    this.index = 1;
+
+    this.extraEdges = [];
+    this.data = {
+      nodes: [{
+        id: this.index,
+        label: this.artist.name,
+        color: {
+          background: '#666'
+        }
+      }],
+      edges: []
+    };
+  },
 
   buildGraph: function() {
     this.counter = 1;
@@ -131,13 +149,16 @@ ArtistGraph.prototype = {
     var promiseRelated = rootArtist.load('related');
     promiseRelated.done(this, relatedDone);
   },
+
   draw: function(debug) {
     this.graph.setData(this.data, {
       disableStart: true
     });
     this.graph.start();
     this.graph.zoomExtent();
-    this.throbber.hide();
+
+    if (this.throbber)
+      this.throbber.hide();
 
     if (debug) {
       console.log('# nodes: ' + this.data.nodes.length);
