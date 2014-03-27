@@ -111,7 +111,7 @@ ArtistGraph.prototype = {
           };
 
           this.extraEdges.push(extraEdge);
-          if (this.treemode)
+          if (!this.treemode)
             this.data.edges.push(extraEdge);
         }
       } else {
