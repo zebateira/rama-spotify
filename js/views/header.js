@@ -1,7 +1,11 @@
-require(['$views/ui'], function(ui) {
+var HeaderMissingException;
+
+require(['$views/ui', 'js/exceptions'], function(ui, _exceptions) {
   exports.init = Header.init;
   exports.load = Header.load;
   exports.reset = Header.reset;
+
+  HeaderMissingException = _exceptions.HeaderMissingException;
 });
 
 var Header = {

@@ -105,9 +105,9 @@ describe('Views Module', function() {
         tabs: [tab]
       });
 
-      expect(Views.tabs[0].viewId).toBe(tab.viewId);
-      expect(Views.tabs[0].name).toBe(tab.name);
-      expect(Views.tabs[0].path).toBe(tab.path);
+      expect(TabBar.tabs[0].viewId).toBe(tab.viewId);
+      expect(TabBar.tabs[0].name).toBe(tab.name);
+      expect(TabBar.tabs[0].path).toBe(tab.path);
     });
     it('should set default path if it\'s not specified', function() {
 
@@ -123,7 +123,7 @@ describe('Views Module', function() {
         tabs: [tab]
       });
 
-      expect(Views.tabs[0].path).toBe(defaultPath);
+      expect(TabBar.tabs[0].path).toBe(defaultPath);
     });
     it('should throw exception if no viewId is specified', function() {
       expect(function() {
@@ -164,7 +164,7 @@ describe('Views Module', function() {
         }]
       });
 
-      expect(Views.tabs[0].controller.name).toBe(controllers.nowplaying.name);
+      expect(TabBar.tabs[0].controller.name).toBe(controllers.nowplaying.name);
     });
 
     it('should throw exception if no controller was configured', function() {
