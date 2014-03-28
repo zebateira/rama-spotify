@@ -11,7 +11,7 @@ spotify.require([
     tabs: [{
         viewId: 'now',
         name: 'Now Playing',
-        path: '../views/now.html',
+        path: 'nowplaying.html',
         controller: controllers.nowplaying
       }
       // , {
@@ -30,7 +30,6 @@ spotify.require([
 
   views.loadViews();
 
-  // todo: dont update the graphs when a commercial is playing
   window.onresize = function() {
     views.updateView();
   };

@@ -27,9 +27,10 @@ require([
 nowplaying = {
   name: 'nowplaying',
 
-  init: function(viewId) {
+  init: function(viewId, viewpath) {
     nowplaying.viewId = viewId;
-    nowplaying.element = $('#' + viewId + ' .graph')[0];
+    nowplaying.selector = '#' + viewId;
+    nowplaying.viewpath = viewpath;
 
     nowplaying.options = {
       nodes: {
@@ -49,13 +50,14 @@ nowplaying = {
 
   loadView: function() {
 
-    nowplaying.currentArtist.load(nowplaying.setArtistGraph);
-
-    nowplaying.loadSettingsMenu();
-
-    models.player.addEventListener('change', nowplaying.events.onPlayerChange);
+    $(nowplaying.selector).load(nowplaying.viewpath, nowplaying.afterLoad);
 
     return nowplaying;
+  },
+  afterLoad: function() {
+    nowplaying.currentArtist.load(nowplaying.setArtistGraph);
+    nowplaying.loadSettingsMenu();
+    models.player.addEventListener('change', nowplaying.events.onPlayerChange);
   },
 
   updateView: function() {
@@ -128,7 +130,7 @@ nowplaying = {
         depth: 2,
         branching: 4
       },
-      nowplaying.element,
+      $(nowplaying.selector + ' .graph')[0],
       artist,
       nowplaying.options
     );

@@ -82,7 +82,7 @@ var views = {
         if (!tab.controller || tab.controller === undefined || (typeof tab.controller.init) !== 'function')
           throw new TabMissingControllerException();
 
-        tab.controller.init(tab.id);
+        tab.controller.init(tab.id, views.DEFAULT_PATH + tab.path);
       });
     },
     load: function() {
