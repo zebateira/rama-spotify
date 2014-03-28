@@ -9,9 +9,9 @@ spotify.require([
       link: 'http://rama.inescporto.pt/app'
     },
     tabs: [{
-        viewId: 'now',
+        viewId: 'nowplaying',
         name: 'Now Playing',
-        path: 'nowplaying.html',
+        path: '../views/nowplaying.html',
         controller: controllers.nowplaying
       }
       // , {

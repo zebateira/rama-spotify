@@ -25,8 +25,6 @@ require([
 });
 
 nowplaying = {
-  name: 'nowplaying',
-
   init: function(viewId, viewpath) {
     nowplaying.viewId = viewId;
     nowplaying.selector = '#' + viewId;
@@ -49,12 +47,11 @@ nowplaying = {
   },
 
   loadView: function() {
-
-    $(nowplaying.selector).load(nowplaying.viewpath, nowplaying.afterLoad);
-
-    return nowplaying;
+    $(nowplaying.selector)
+      .load(nowplaying.viewpath, nowplaying.afterLoad);
   },
-  afterLoad: function() {
+  afterLoad: function(data) {
+    // console.log(data);
     nowplaying.currentArtist.load(nowplaying.setArtistGraph);
     nowplaying.loadSettingsMenu();
     models.player.addEventListener('change', nowplaying.events.onPlayerChange);
@@ -80,14 +77,14 @@ nowplaying = {
       });
     },
     onSettingsBtnClick: function(event) {
-      $('#now .settings-tooltip').toggle();
+      $(nowplaying.selector + ' .settings-tooltip').toggle();
     }
   },
 
   loadSettingsMenu: function() {
-    $('#now .settings-btn').click(nowplaying.events.onSettingsBtnClick);
+    $(nowplaying.selector + ' .settings-btn').click(nowplaying.events.onSettingsBtnClick);
 
-    $('#now .settings-tooltip input[name=branching]').on('change', function() {
+    $(nowplaying.selector + ' .settings-tooltip input[name=branching]').on('change', function() {
       nowplaying.showThrobber();
       nowplaying.artistGraph.updateGraph({
         branching: parseInt(this.value)
@@ -95,7 +92,7 @@ nowplaying = {
       nowplaying.artistGraph.buildGraph();
     });
 
-    $('#now .settings-tooltip input[name=depth]').on('change', function() {
+    $(nowplaying.selector + ' .settings-tooltip input[name=depth]').on('change', function() {
       nowplaying.showThrobber();
       nowplaying.artistGraph.updateGraph({
         depth: parseInt(this.value)
@@ -103,7 +100,7 @@ nowplaying = {
       nowplaying.artistGraph.buildGraph();
     });
 
-    $('#now .settings-tooltip input[name=treemode]').on('change', function() {
+    $(nowplaying.selector + ' .settings-tooltip input[name=treemode]').on('change', function() {
       nowplaying.showThrobber();
       nowplaying.artistGraph.updateGraph({
         treemode: this.checked
@@ -115,7 +112,8 @@ nowplaying = {
   currentArtist: {
     load: function(callback) {
       models.player.load('track').done(function(player) {
-        callback(models.Artist.fromURI(player.track.artists[0].uri), player.track.advertisement);
+        callback(models.Artist.fromURI(player.track.artists[0].uri),
+          player.track.advertisement);
       });
     }
   },

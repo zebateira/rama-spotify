@@ -82,7 +82,7 @@ var views = {
         if (!tab.controller || tab.controller === undefined || (typeof tab.controller.init) !== 'function')
           throw new TabMissingControllerException();
 
-        tab.controller.init(tab.id, views.DEFAULT_PATH + tab.path);
+        tab.controller.init(tab.id, tab.path);
       });
     },
     load: function() {
@@ -113,9 +113,9 @@ var views = {
   updateView: function(tab) {
     var tabID = (tab ? tab.id : spUI.activeView);
 
-    _.where(views.tabs, {
+    _.findWhere(views.tabs, {
       id: tabID
-    })[0].controller.updateView();
+    }).controller.updateView();
   },
   reset: function() {
     views.header.reset();
