@@ -1,36 +1,34 @@
 spotify.require([
   'js/views',
   'js/controllers'
-], function(views, controllers) {
+], function(Views, controllers) {
 
-  views.initConfig({
+  Views.initConfig({
     header: {
       path: '../views/header.html',
       link: 'http://rama.inescporto.pt/app'
     },
     tabs: [{
-        viewId: 'nowplaying',
-        name: 'Now Playing',
-        path: '../views/nowplaying.html',
-        controller: controllers.nowplaying
-      }
-      // , {
-      //   viewId: 'top',
-      //   name: 'Top List',
-      //   path: '../views/top.html',
-      //   controller: controllers.toplist
-      // }, {
-      //   viewId: 'search',
-      //   name: 'Search',
-      //   path: '../views/search.html',
-      //   controller: controllers.search
-      // }
-    ]
+      viewId: 'nowplaying',
+      name: 'Now Playing',
+      path: '../views/nowplaying.html',
+      controller: controllers.nowplaying
+    }, {
+      viewId: 'toplist',
+      name: 'Top List',
+      path: '../views/toplist.html',
+      controller: controllers.toplist
+    }, {
+      viewId: 'search',
+      name: 'Search',
+      path: '../views/search.html',
+      controller: controllers.search
+    }]
   });
 
-  views.loadViews();
+  Views.loadViews();
 
   window.onresize = function() {
-    views.updateView();
+    Views.updateView();
   };
 });

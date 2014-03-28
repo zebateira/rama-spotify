@@ -1,6 +1,6 @@
 require([
   'js/nowplaying#nowplaying',
-  'js/top#toplist',
+  'js/toplist#toplist',
   'js/search#search'
 ], function(nowplaying, toplist, search) {
 

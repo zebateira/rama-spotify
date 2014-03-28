@@ -8,7 +8,6 @@ var models = {};
 var Throbber = {};
 var artistGraph = {};
 
-
 var nowplaying = {};
 
 require([
@@ -51,7 +50,6 @@ nowplaying = {
       .load(nowplaying.viewpath, nowplaying.afterLoad);
   },
   afterLoad: function(data) {
-    // console.log(data);
     nowplaying.currentArtist.load(nowplaying.setArtistGraph);
     nowplaying.loadSettingsMenu();
     models.player.addEventListener('change', nowplaying.events.onPlayerChange);

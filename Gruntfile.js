@@ -7,7 +7,7 @@ module.exports = function(grunt) {
       all: ['Gruntfile.js', 'js/**/*.js', 'test/*.js']
     },
     jasmine: {
-      src: ['js/*.js'],
+      src: ['js/**/*.js'],
       options: {
         vendor: [
           'bower_components/jquery/dist/jquery.js',
@@ -56,7 +56,7 @@ module.exports = function(grunt) {
             'css/main.css',
             'img/*',
             'views/*.html',
-            'js/*',
+            'js/**/*',
             'manifest.json'
           ]
         }]
