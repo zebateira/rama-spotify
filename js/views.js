@@ -9,6 +9,8 @@ var UI;
 var Header;
 var TabBar;
 
+var Views = {};
+
 // spotify exports
 require([
   '$views/ui#UI',
@@ -20,12 +22,10 @@ require([
   Header = _header;
   TabBar = _tabbar;
 
-  exports.initConfig = Views.initConfig;
-  exports.loadViews = Views.loadViews;
-  exports.updateView = Views.updateView;
+  exports.views = Views;
 });
 
-var Views = {
+Views = {
   DEFAULT_PATH: '../views/',
 
   initConfig: function(config) {
@@ -33,20 +33,20 @@ var Views = {
     TabBar.init(config.tabs, Views.DEFAULT_PATH);
   },
   loadViews: function() {
-    UI = UI.init({
+    Views.spUI = UI.init({
       header: true,
       views: TabBar.tabs,
       tabs: TabBar.tabs
+      // history: true
     });
 
     Header.load();
     TabBar.load();
 
-    UI.addEventListener('viewchange', Views.updateView);
-
+    Views.spUI.addEventListener('viewchange', Views.updateView);
   },
   updateView: function(tab) {
-    var tabID = (tab ? tab.id : UI.activeView);
+    var tabID = (tab ? tab.id : Views.spUI.activeView);
 
     _.findWhere(TabBar.tabs, {
       id: tabID

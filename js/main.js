@@ -1,5 +1,5 @@
 spotify.require([
-  'js/views',
+  'js/views#views',
   'js/controllers'
 ], function(Views, controllers) {
 

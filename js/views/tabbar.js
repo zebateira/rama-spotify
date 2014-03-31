@@ -5,12 +5,11 @@
  var TabBar = {};
 
  require(['$views/ui', 'js/exceptions'], function(ui, _exceptions) {
-   exports.tabbar = TabBar;
-
-
    TabsMissingException = _exceptions.TabsMissingException;
    TabInfoMissingException = _exceptions.TabInfoMissingException;
    TabMissingControllerException = _exceptions.TabMissingControllerException;
+
+   exports.tabbar = TabBar;
  });
 
  TabBar = {

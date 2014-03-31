@@ -8,14 +8,6 @@
 
 var models;
 
-function Promise() {
-  this.callback = function() {};
-
-  this.done = function(callback) {
-    this.callback = callback;
-  };
-}
-
 var ArtistGraph = function(config, element, artist, options) {
   this.DEFAULT_BRANCHING = 4;
   this.DEFAULT_DEPTH = 2;
