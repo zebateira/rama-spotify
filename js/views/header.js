@@ -1,14 +1,14 @@
 var HeaderMissingException;
 
+var Header = {};
+
 require(['$views/ui', 'js/exceptions'], function(ui, _exceptions) {
-  exports.init = Header.init;
-  exports.load = Header.load;
-  exports.reset = Header.reset;
+  exports.header = Header;
 
   HeaderMissingException = _exceptions.HeaderMissingException;
 });
 
-var Header = {
+Header = {
   selector: '.sp-header',
   init: function(config, defaultPath) {
     if (!config)

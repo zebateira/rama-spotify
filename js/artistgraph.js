@@ -2,7 +2,8 @@
   Defines the artist.graph model
 
   Exports the ArtistGraph object to draw a graph of related artists
-  in a DOM element given a music artist and some optional options 8D
+  in a DOM element given a music artist and some optional options.
+  (no pun intended)
 */
 
 var models;
@@ -148,7 +149,8 @@ ArtistGraph.prototype = {
     };
 
     var relatedDone = function(artist) {
-      var promiseRelatedSnapshot = artist.related.snapshot(0, this.branching);
+      var promiseRelatedSnapshot =
+        artist.related.snapshot(0, this.branching);
       promiseRelatedSnapshot.done(this, relatedSnapshotDone);
     };
 

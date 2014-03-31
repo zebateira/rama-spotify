@@ -11,17 +11,14 @@ spotify.require([
     tabs: [{
       viewId: 'nowplaying',
       name: 'Now Playing',
-      path: '../views/nowplaying.html',
       controller: controllers.nowplaying
     }, {
       viewId: 'toplist',
       name: 'Top List',
-      path: '../views/toplist.html',
       controller: controllers.toplist
     }, {
       viewId: 'search',
       name: 'Search',
-      path: '../views/search.html',
       controller: controllers.search
     }]
   });

@@ -5,17 +5,17 @@
 */
 
 // imported modules
-var spUI;
+var UI;
 var Header;
 var TabBar;
 
 // spotify exports
 require([
   '$views/ui#UI',
-  'js/views/header',
-  'js/views/tabbar'
-], function(ui, _header, _tabbar) {
-  spUI = ui;
+  'js/views/header#header',
+  'js/views/tabbar#tabbar'
+], function(_ui, _header, _tabbar) {
+  UI = _ui;
 
   Header = _header;
   TabBar = _tabbar;
@@ -30,10 +30,10 @@ var Views = {
 
   initConfig: function(config) {
     Header.init(config.header, Views.DEFAULT_PATH);
-    TabBar.init(config.tabs);
+    TabBar.init(config.tabs, Views.DEFAULT_PATH);
   },
   loadViews: function() {
-    spUI = spUI.init({
+    UI = UI.init({
       header: true,
       views: TabBar.tabs,
       tabs: TabBar.tabs
@@ -42,11 +42,11 @@ var Views = {
     Header.load();
     TabBar.load();
 
-    spUI.addEventListener('viewchange', Views.updateView);
+    UI.addEventListener('viewchange', Views.updateView);
 
   },
   updateView: function(tab) {
-    var tabID = (tab ? tab.id : spUI.activeView);
+    var tabID = (tab ? tab.id : UI.activeView);
 
     _.findWhere(TabBar.tabs, {
       id: tabID
