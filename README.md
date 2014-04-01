@@ -1,7 +1,6 @@
 RAMA - Relational Artist MAps
 =========
-[![Build Status](https://travis-ci.org/carsy/rama-spotify.png?branch=master)](https://travis-ci.org/carsy/rama-spotify) [![Dependency Status](https://gemnasium.com/carsy/rama-spotify.png)](https://gemnasium.com/carsy/rama-spotify)
-[![Stories in Ready](https://badge.waffle.io/carsy/rama-spotify.png?label=ready&title=Ready)](https://waffle.io/carsy/rama-spotify)
+[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/) [![Build Status](https://travis-ci.org/carsy/rama-spotify.png?branch=master)](https://travis-ci.org/carsy/rama-spotify) [![Dependency Status](https://gemnasium.com/carsy/rama-spotify.png)](https://gemnasium.com/carsy/rama-spotify) [![Stories in Ready](https://badge.waffle.io/carsy/rama-spotify.png?label=ready&title=Ready)](https://waffle.io/carsy/rama-spotify)
 
 RAMA is a Spotify Application for visualizing and interacting with networks of music artists. For the original RAMA web application see [rama.inescporto.pt]
 
@@ -15,7 +14,8 @@ Tested on mac for now only.
 Run the following commands from the command prompt (for mac):
 ```sh
 $ mkdir ~/Spotify ; cd ~/Spotify
-$ git clone https://github.com/carsy/rama-spotify.git
+$ wget https://github.com/carsy/rama-spotify/releases/download/v0.1.2/rama-spotify_v0.1.2.tar.gz
+$ tar -xvf rama-spotify_v0.1.2.tar.gz
 ```
 
 Alternatively, If you happen to have commandlinephobia (I get that every other month... might be a thing):
@@ -24,6 +24,7 @@ Alternatively, If you happen to have commandlinephobia (I get that every other m
 2. extract the folder
 3. create the Spotify folder if it doesn't exist already: "~/Spotify" (Mac OS X and Linux) or "My Documents\Spotify" (Windows).
 4. copy the extracted folder to the Spotify folder.
+5. activate spotify developer account here: https://devaccount.spotify.com/my-account (no premium account needed).
 
 Now open Spotify and type in the search bar:
 ```sh
