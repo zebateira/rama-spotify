@@ -14,7 +14,8 @@ Tested on mac for now only.
 Run the following commands from the command prompt (for mac):
 ```sh
 $ mkdir ~/Spotify ; cd ~/Spotify
-$ git clone https://github.com/carsy/rama-spotify.git
+$ wget https://github.com/carsy/rama-spotify/releases/download/v0.1.2/rama-spotify_v0.1.2.tar.gz
+$ tar -xvf rama-spotify_v0.1.2.tar.gz
 ```
 
 Alternatively, If you happen to have commandlinephobia (I get that every other month... might be a thing):
@@ -23,7 +24,7 @@ Alternatively, If you happen to have commandlinephobia (I get that every other m
 2. extract the folder
 3. create the Spotify folder if it doesn't exist already: "~/Spotify" (Mac OS X and Linux) or "My Documents\Spotify" (Windows).
 4. copy the extracted folder to the Spotify folder.
-5. Activate your developer account here: https://devaccount.spotify.com/my-account (no premium account needed).
+5. activate spotify developer account here: https://devaccount.spotify.com/my-account (no premium account needed).
 
 Now open Spotify and type in the search bar:
 ```sh
