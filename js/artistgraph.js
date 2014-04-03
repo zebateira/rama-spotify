@@ -42,6 +42,11 @@ var ArtistGraph = function(config, element, artist, options) {
   this.options = options;
 
   this.graph = new vis.Graph(this.element, this.data, this.options);
+
+  this.graph.on('stabilized', function(iterations) {
+    this.zoomExtent();
+    console.log(iterations);
+  });
 };
 
 ArtistGraph.prototype = {
@@ -75,8 +80,6 @@ ArtistGraph.prototype = {
       this.maxNodes += Math.pow(this.branching, i);
     }
 
-    console.log('#### Stats for ' + this.artist.name);
-    console.log('# iterations: ' + this.maxNodes);
     this.constructGraph(this.depth - 1, this.artist);
   },
 
@@ -105,6 +108,7 @@ ArtistGraph.prototype = {
           };
 
           this.extraEdges.push(extraEdge);
+
           if (!this.treemode)
             this.data.edges.push(extraEdge);
         }
@@ -151,28 +155,31 @@ ArtistGraph.prototype = {
   },
 
   draw: function(debug) {
+
     this.graph.setData(this.data, {
       disableStart: true
     });
+
     this.graph.start();
-    this.graph.zoomExtent();
 
     if (this.throbber)
       this.throbber.hide();
 
     if (debug) {
+      console.log('#### Stats for ' + this.artist.name);
+      console.log('# iterations: ' + this.maxNodes);
       console.log('# nodes: ' + this.data.nodes.length);
       console.log('# edges: ' + this.data.edges.length);
     }
   },
 
   redraw: function() {
+    this.graph.zoomExtent();
     this.graph.redraw();
   }
 };
 
 ArtistGraph.prototype.constructor = ArtistGraph;
-
 
 require(['$api/models'], function(_models) {
   models = _models;

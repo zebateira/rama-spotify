@@ -38,7 +38,8 @@ nowplaying = {
         fontColor: '#eef',
         shape: 'box',
         radius: 1
-      }
+      },
+      stabilize: true
       // clustering: true
     };
 

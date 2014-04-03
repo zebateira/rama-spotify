@@ -31,6 +31,9 @@ Header = {
       $('.header-link > a', Header.selector)
         .attr('href', Header.link);
   },
+  updateView: function() {
+
+  },
   reset: function() {
     Header.path = '';
     Header.link = '';

@@ -45,12 +45,11 @@ Views = {
 
     Views.spUI.addEventListener('viewchange', Views.updateView);
   },
-  updateView: function(tab) {
-    var tabID = (tab ? tab.id : Views.spUI.activeView);
+  updateViews: function(tab) {
+    var tabID = tab ? tab.id : Views.spUI.activeView;
 
-    _.findWhere(TabBar.tabs, {
-      id: tabID
-    }).controller.updateView();
+    Header.updateView();
+    TabBar.updateView(tabID);
   },
   reset: function() {
     Header.reset();

@@ -38,6 +38,11 @@
        tab.controller.loadView();
      });
    },
+   updateView: function(tabID) {
+     _.findWhere(TabBar.tabs, {
+       id: tabID
+     }).controller.updateView();
+   },
    reset: function() {
      TabBar.tabs = {};
    },

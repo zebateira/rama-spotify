@@ -26,6 +26,6 @@ spotify.require([
   Views.loadViews();
 
   window.onresize = function() {
-    Views.updateView();
+    Views.updateViews();
   };
 });
