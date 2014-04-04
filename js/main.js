@@ -15,7 +15,7 @@ spotify.require([
     }, {
       viewId: 'toplist',
       name: 'Top List',
-      controller: controllers.toplist
+      controller: controllers.TopList
     }, {
       viewId: 'search',
       name: 'Search',

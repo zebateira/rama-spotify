@@ -8,7 +8,129 @@ var models = {};
 var Throbber = {};
 var artistGraph = {};
 
-var NowPlaying;
+var NowPlaying = function(viewId, viewpath) {
+  this.viewId = viewId;
+  this.selector = '#' + viewId;
+  this.viewpath = viewpath;
+
+  this.options = {
+    nodes: {
+      color: {
+        background: '#333',
+        border: '#555'
+      },
+      fontColor: '#eef',
+      shape: 'box',
+      radius: 1
+    },
+    stabilize: true
+    // clustering: true
+  };
+};
+
+NowPlaying.prototype = {
+  loadView: function() {
+    var self = this;
+
+    $(this.selector).load(this.viewpath, function() {
+      self.currentArtist.load(self, self.setArtistGraph);
+      self.loadSettingsMenu();
+      models.player.addEventListener('change', function(player) {
+        self.events.onPlayerChange(self, player);
+      });
+    });
+  },
+  updateView: function() {
+    if (this.artistGraph)
+      this.artistGraph.redraw();
+
+    return this;
+  },
+  events: {
+    onPlayerChange: function(self, player) {
+      self.currentArtist.load(self, function(self, currentArtist, advertisement) {
+        var oldArtistURI = self.artistGraph.artist.uri;
+
+        if (advertisement)
+          return;
+
+        if (currentArtist.uri !== oldArtistURI)
+          self.setArtistGraph(currentArtist);
+      });
+    },
+    onSettingsBtnClick: function(self) {
+      $(self.selector + ' .settings-tooltip').toggle();
+    }
+  },
+
+  loadSettingsMenu: function() {
+    var self = this;
+    $(self.selector + ' .settings-btn').click(function() {
+      self.events.onSettingsBtnClick(self);
+    });
+
+    $(self.selector + ' .settings-tooltip input[name=branching]').on('change', function() {
+      self.showThrobber();
+      self.artistGraph.updateGraph({
+        branching: parseInt(self.value)
+      });
+      self.artistGraph.buildGraph();
+    });
+
+    $(self.selector + ' .settings-tooltip input[name=depth]').on('change', function() {
+      self.showThrobber();
+      self.artistGraph.updateGraph({
+        depth: parseInt(self.value)
+      });
+      self.artistGraph.buildGraph();
+    });
+
+    $(self.selector + ' .settings-tooltip input[name=treemode]').on('change', function() {
+      self.showThrobber();
+      self.artistGraph.updateGraph({
+        treemode: self.checked
+      });
+      self.artistGraph.buildGraph();
+    });
+  },
+
+  currentArtist: {
+    load: function(self, callback) {
+      models.player.load('track').done(function(player) {
+        callback(self, models.Artist.fromURI(player.track.artists[0].uri),
+          player.track.advertisement);
+      });
+    }
+  },
+
+  /**
+    Set artist from the current playing track.
+    Also creates the artistGraph.
+  */
+  setArtistGraph: function(self, artist) {
+
+    self.artistGraph = new artistGraph.ArtistGraph({
+        depth: 2,
+        branching: 4
+      },
+      $(self.selector + ' .graph')[0],
+      artist,
+      self.options
+    );
+
+    self.showThrobber();
+    self.artistGraph.buildGraph();
+  },
+  showThrobber: function() {
+    if (this.artistGraph.throbber)
+      this.artistGraph.throbber.hide();
+
+    this.artistGraph.throbber = Throbber.forElement(document.getElementById(this.viewId));
+    this.artistGraph.throbber.setPosition('center', 'center');
+  }
+};
+
+NowPlaying.prototype.contructor = NowPlaying;
 
 require([
   '$api/models',
@@ -22,124 +144,3 @@ require([
 
   exports.NowPlaying = NowPlaying;
 });
-
-NowPlaying = {
-  init: function(viewId, viewpath) {
-    NowPlaying.viewId = viewId;
-    NowPlaying.selector = '#' + viewId;
-    NowPlaying.viewpath = viewpath;
-
-    NowPlaying.options = {
-      nodes: {
-        color: {
-          background: '#333',
-          border: '#555'
-        },
-        fontColor: '#eef',
-        shape: 'box',
-        radius: 1
-      },
-      stabilize: true
-      // clustering: true
-    };
-
-    return NowPlaying;
-  },
-
-  loadView: function() {
-    $(NowPlaying.selector)
-      .load(NowPlaying.viewpath, NowPlaying.afterLoad);
-  },
-  afterLoad: function(data) {
-    NowPlaying.currentArtist.load(NowPlaying.setArtistGraph);
-    NowPlaying.loadSettingsMenu();
-    models.player.addEventListener('change', NowPlaying.events.onPlayerChange);
-  },
-
-  updateView: function() {
-    if (NowPlaying.artistGraph)
-      NowPlaying.artistGraph.redraw();
-
-    return NowPlaying;
-  },
-  events: {
-    onPlayerChange: function(player) {
-
-      NowPlaying.currentArtist.load(function(currentArtist, advertisement) {
-        var oldArtistURI = NowPlaying.artistGraph.artist.uri;
-
-        if (advertisement)
-          return;
-
-        if (currentArtist.uri !== oldArtistURI)
-          NowPlaying.setArtistGraph(currentArtist);
-      });
-    },
-    onSettingsBtnClick: function(event) {
-      $(NowPlaying.selector + ' .settings-tooltip').toggle();
-    }
-  },
-
-  loadSettingsMenu: function() {
-    $(NowPlaying.selector + ' .settings-btn').click(NowPlaying.events.onSettingsBtnClick);
-
-    $(NowPlaying.selector + ' .settings-tooltip input[name=branching]').on('change', function() {
-      NowPlaying.showThrobber();
-      NowPlaying.artistGraph.updateGraph({
-        branching: parseInt(this.value)
-      });
-      NowPlaying.artistGraph.buildGraph();
-    });
-
-    $(NowPlaying.selector + ' .settings-tooltip input[name=depth]').on('change', function() {
-      NowPlaying.showThrobber();
-      NowPlaying.artistGraph.updateGraph({
-        depth: parseInt(this.value)
-      });
-      NowPlaying.artistGraph.buildGraph();
-    });
-
-    $(NowPlaying.selector + ' .settings-tooltip input[name=treemode]').on('change', function() {
-      NowPlaying.showThrobber();
-      NowPlaying.artistGraph.updateGraph({
-        treemode: this.checked
-      });
-      NowPlaying.artistGraph.buildGraph();
-    });
-  },
-
-  currentArtist: {
-    load: function(callback) {
-      models.player.load('track').done(function(player) {
-        callback(models.Artist.fromURI(player.track.artists[0].uri),
-          player.track.advertisement);
-      });
-    }
-  },
-
-  /**
-    Set artist from the current playing track.
-    Also creates the artistGraph.
-  */
-  setArtistGraph: function(artist) {
-
-    NowPlaying.artistGraph = new artistGraph.ArtistGraph({
-        depth: 2,
-        branching: 4
-      },
-      $(NowPlaying.selector + ' .graph')[0],
-      artist,
-      NowPlaying.options
-    );
-
-    NowPlaying.showThrobber();
-    NowPlaying.artistGraph.buildGraph();
-  },
-  showThrobber: function() {
-    if (NowPlaying.artistGraph.throbber)
-      NowPlaying.artistGraph.throbber.hide();
-
-    NowPlaying.artistGraph.throbber = Throbber.forElement(document.getElementById(NowPlaying.viewId));
-    NowPlaying.artistGraph.throbber.setPosition('center', 'center');
-  }
-};

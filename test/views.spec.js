@@ -7,8 +7,8 @@ describe('Components Module', function() {
 
   var controllers = {
     NowPlaying: NowPlaying,
-    toplist: toplist,
-    search: search
+    TopList: TopList,
+    Search: Search
   };
 
   describe('Header View', function() {
@@ -164,7 +164,7 @@ describe('Components Module', function() {
         }]
       });
 
-      expect(TabBar.tabs[0].controller.name).toBe(controllers.NowPlaying.name);
+      expect(TabBar.tabs[0].controller.viewId).toBe(new controllers.NowPlaying('id', 'path').viewId);
     });
 
     it('should throw exception if no controller was configured', function() {

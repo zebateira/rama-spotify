@@ -1,21 +1,23 @@
-var toplist = {};
+var TopList = function() {
+  this.name = 'toplist';
 
-require([
-  '$api/toplists',
-  '$views/list'
-], function(toplists, vlist) {
-  exports.toplist = toplist;
-});
+};
 
-toplist = {
-  name: 'toplist',
-  init: function() {
-
-  },
+TopList.prototype = {
   loadView: function() {
 
   },
   updateView: function() {
 
   }
+
 };
+
+TopList.prototype.constructor = TopList;
+
+require([
+  '$api/toplists',
+  '$views/list'
+], function(toplists, vlist) {
+  exports.TopList = TopList;
+});

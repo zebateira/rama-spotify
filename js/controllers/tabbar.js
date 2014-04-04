@@ -27,11 +27,10 @@ TabBar = {
       tab.element = document.getElementById(tab.viewId);
       tab.path = tab.path || defaultPath + tab.viewId + '.html';
 
-      if (!tab.controller || tab.controller === undefined ||
-        (typeof tab.controller.init) !== 'function')
+      if (!tab.controller)
         throw new TabMissingControllerException();
 
-      tab.controller.init(tab.viewId, tab.path);
+      tab.controller = new tab.controller(tab.viewId, tab.path);
     });
   },
   loadView: function() {

@@ -1,8 +1,8 @@
-var search = {
-  name: 'search',
-  init: function() {
+var Search = function() {
+  this.name = 'search';
+};
 
-  },
+Search.prototype = {
   loadView: function() {
 
   },
@@ -11,8 +11,10 @@ var search = {
   }
 };
 
+Search.prototype.constructor = Search;
+
 require([
   '$api/models'
 ], function(models) {
-  exports.search = search;
+  exports.Search = Search;
 });

@@ -30,7 +30,6 @@ Components = {
   initConfig: function(config) {
     Header.init(config.header, Components.DEFAULT_PATH);
     TabBar.init(config.tabs, Components.DEFAULT_PATH);
-
   },
   loadViews: function(config) {
     Components.spUI = UI.init({

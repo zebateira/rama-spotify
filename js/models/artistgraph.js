@@ -1,12 +1,10 @@
 /**
-  Defines the artist.graph model
+  Defines the artist graph model
 
-  Exports the ArtistGraph object to draw a graph of related artists
+  The ArtistGraph object Draws a graph of related artists
   in a DOM element given a music artist and some optional options.
   (no pun intended)
 */
-
-var models;
 
 var ArtistGraph = function(config, element, artist, options) {
   this.DEFAULT_BRANCHING = 4;
@@ -21,8 +19,7 @@ var ArtistGraph = function(config, element, artist, options) {
   this.relatedArtists = [];
   this.extraEdges = [];
 
-
-  // numbering for the id's of adjacent nodes
+  // numbering for the id's of the graph nodes
   this.index = 1;
 
   this.treemode = true;
@@ -38,12 +35,12 @@ var ArtistGraph = function(config, element, artist, options) {
     }],
     edges: []
   };
-  // options for the rendering of the graph
+  // options for rendering the graph
   this.options = options;
 
   this.graph = new vis.Graph(this.element, this.data, this.options);
 
-  this.graph.on('stabilized', function(iterations) {
+  this.graph.on('stabilized', function(iterations) { // Y U NO WORK
     this.zoomExtent();
     console.log(iterations);
   });
@@ -181,8 +178,8 @@ ArtistGraph.prototype = {
 
 ArtistGraph.prototype.constructor = ArtistGraph;
 
-require(['$api/models'], function(_models) {
-  models = _models;
 
+// Exports for the spotify's require system
+require(['$api/models'], function(_models) {
   exports.ArtistGraph = ArtistGraph;
 });

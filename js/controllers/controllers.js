@@ -1,10 +1,10 @@
 require([
   'js/controllers/nowplaying#NowPlaying',
-  'js/controllers/toplist#toplist',
-  'js/controllers/search#search'
-], function(NowPlaying, toplist, search) {
+  'js/controllers/toplist#TopList',
+  'js/controllers/search#Search'
+], function(NowPlaying, TopList, search) {
 
   exports.NowPlaying = NowPlaying;
-  exports.toplist = toplist;
+  exports.TopList = TopList;
   exports.search = search;
 });
