@@ -8,7 +8,7 @@ var models = {};
 var Throbber = {};
 var artistGraph = {};
 
-var nowplaying = {};
+var NowPlaying;
 
 require([
   '$api/models',
@@ -20,16 +20,16 @@ require([
   Throbber = _throbber;
   artistGraph = _artistGraph;
 
-  exports.nowplaying = nowplaying;
+  exports.NowPlaying = NowPlaying;
 });
 
-nowplaying = {
+NowPlaying = {
   init: function(viewId, viewpath) {
-    nowplaying.viewId = viewId;
-    nowplaying.selector = '#' + viewId;
-    nowplaying.viewpath = viewpath;
+    NowPlaying.viewId = viewId;
+    NowPlaying.selector = '#' + viewId;
+    NowPlaying.viewpath = viewpath;
 
-    nowplaying.options = {
+    NowPlaying.options = {
       nodes: {
         color: {
           background: '#333',
@@ -43,68 +43,68 @@ nowplaying = {
       // clustering: true
     };
 
-    return nowplaying;
+    return NowPlaying;
   },
 
   loadView: function() {
-    $(nowplaying.selector)
-      .load(nowplaying.viewpath, nowplaying.afterLoad);
+    $(NowPlaying.selector)
+      .load(NowPlaying.viewpath, NowPlaying.afterLoad);
   },
   afterLoad: function(data) {
-    nowplaying.currentArtist.load(nowplaying.setArtistGraph);
-    nowplaying.loadSettingsMenu();
-    models.player.addEventListener('change', nowplaying.events.onPlayerChange);
+    NowPlaying.currentArtist.load(NowPlaying.setArtistGraph);
+    NowPlaying.loadSettingsMenu();
+    models.player.addEventListener('change', NowPlaying.events.onPlayerChange);
   },
 
   updateView: function() {
-    if (nowplaying.artistGraph)
-      nowplaying.artistGraph.redraw();
+    if (NowPlaying.artistGraph)
+      NowPlaying.artistGraph.redraw();
 
-    return nowplaying;
+    return NowPlaying;
   },
   events: {
     onPlayerChange: function(player) {
 
-      nowplaying.currentArtist.load(function(currentArtist, advertisement) {
-        var oldArtistURI = nowplaying.artistGraph.artist.uri;
+      NowPlaying.currentArtist.load(function(currentArtist, advertisement) {
+        var oldArtistURI = NowPlaying.artistGraph.artist.uri;
 
         if (advertisement)
           return;
 
         if (currentArtist.uri !== oldArtistURI)
-          nowplaying.setArtistGraph(currentArtist);
+          NowPlaying.setArtistGraph(currentArtist);
       });
     },
     onSettingsBtnClick: function(event) {
-      $(nowplaying.selector + ' .settings-tooltip').toggle();
+      $(NowPlaying.selector + ' .settings-tooltip').toggle();
     }
   },
 
   loadSettingsMenu: function() {
-    $(nowplaying.selector + ' .settings-btn').click(nowplaying.events.onSettingsBtnClick);
+    $(NowPlaying.selector + ' .settings-btn').click(NowPlaying.events.onSettingsBtnClick);
 
-    $(nowplaying.selector + ' .settings-tooltip input[name=branching]').on('change', function() {
-      nowplaying.showThrobber();
-      nowplaying.artistGraph.updateGraph({
+    $(NowPlaying.selector + ' .settings-tooltip input[name=branching]').on('change', function() {
+      NowPlaying.showThrobber();
+      NowPlaying.artistGraph.updateGraph({
         branching: parseInt(this.value)
       });
-      nowplaying.artistGraph.buildGraph();
+      NowPlaying.artistGraph.buildGraph();
     });
 
-    $(nowplaying.selector + ' .settings-tooltip input[name=depth]').on('change', function() {
-      nowplaying.showThrobber();
-      nowplaying.artistGraph.updateGraph({
+    $(NowPlaying.selector + ' .settings-tooltip input[name=depth]').on('change', function() {
+      NowPlaying.showThrobber();
+      NowPlaying.artistGraph.updateGraph({
         depth: parseInt(this.value)
       });
-      nowplaying.artistGraph.buildGraph();
+      NowPlaying.artistGraph.buildGraph();
     });
 
-    $(nowplaying.selector + ' .settings-tooltip input[name=treemode]').on('change', function() {
-      nowplaying.showThrobber();
-      nowplaying.artistGraph.updateGraph({
+    $(NowPlaying.selector + ' .settings-tooltip input[name=treemode]').on('change', function() {
+      NowPlaying.showThrobber();
+      NowPlaying.artistGraph.updateGraph({
         treemode: this.checked
       });
-      nowplaying.artistGraph.buildGraph();
+      NowPlaying.artistGraph.buildGraph();
     });
   },
 
@@ -123,23 +123,23 @@ nowplaying = {
   */
   setArtistGraph: function(artist) {
 
-    nowplaying.artistGraph = new artistGraph.ArtistGraph({
+    NowPlaying.artistGraph = new artistGraph.ArtistGraph({
         depth: 2,
         branching: 4
       },
-      $(nowplaying.selector + ' .graph')[0],
+      $(NowPlaying.selector + ' .graph')[0],
       artist,
-      nowplaying.options
+      NowPlaying.options
     );
 
-    nowplaying.showThrobber();
-    nowplaying.artistGraph.buildGraph();
+    NowPlaying.showThrobber();
+    NowPlaying.artistGraph.buildGraph();
   },
   showThrobber: function() {
-    if (nowplaying.artistGraph.throbber)
-      nowplaying.artistGraph.throbber.hide();
+    if (NowPlaying.artistGraph.throbber)
+      NowPlaying.artistGraph.throbber.hide();
 
-    nowplaying.artistGraph.throbber = Throbber.forElement(document.getElementById(nowplaying.viewId));
-    nowplaying.artistGraph.throbber.setPosition('center', 'center');
+    NowPlaying.artistGraph.throbber = Throbber.forElement(document.getElementById(NowPlaying.viewId));
+    NowPlaying.artistGraph.throbber.setPosition('center', 'center');
   }
 };

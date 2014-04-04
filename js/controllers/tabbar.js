@@ -34,7 +34,7 @@ TabBar = {
       tab.controller.init(tab.viewId, tab.path);
     });
   },
-  load: function() {
+  loadView: function() {
     _.each(TabBar.tabs, function(tab) {
       tab.controller.loadView();
     });

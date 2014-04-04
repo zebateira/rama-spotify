@@ -11,7 +11,7 @@ spotify.require([
     tabs: [{
       viewId: 'nowplaying',
       name: 'Now Playing',
-      controller: controllers.nowplaying
+      controller: controllers.NowPlaying
     }, {
       viewId: 'toplist',
       name: 'Top List',
@@ -23,9 +23,10 @@ spotify.require([
     }]
   });
 
-  Components.loadViews();
-
-  window.onresize = function() {
-    Components.updateViews();
-  };
+  Components.loadViews({
+    events: {
+      'viewchange': Components.updateViews,
+      'windowresize': Components.updateViews
+    }
+  });
 });

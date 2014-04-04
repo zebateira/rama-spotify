@@ -6,7 +6,7 @@ describe('Components Module', function() {
   });
 
   var controllers = {
-    nowplaying: nowplaying,
+    NowPlaying: NowPlaying,
     toplist: toplist,
     search: search
   };
@@ -97,7 +97,7 @@ describe('Components Module', function() {
         viewId: 'index',
         name: 'Main',
         path: 'path/to/file/',
-        controller: controllers.nowplaying
+        controller: controllers.NowPlaying
       };
 
       Components.initConfig({
@@ -114,7 +114,7 @@ describe('Components Module', function() {
       var tab = {
         viewId: 'index',
         name: 'Main',
-        controller: controllers.nowplaying
+        controller: controllers.NowPlaying
       };
       var defaultPath = Components.DEFAULT_PATH + tab.viewId + '.html';
 
@@ -160,11 +160,11 @@ describe('Components Module', function() {
         tabs: [{
           viewId: 'id',
           name: 'Fancy tab name',
-          controller: controllers.nowplaying
+          controller: controllers.NowPlaying
         }]
       });
 
-      expect(TabBar.tabs[0].controller.name).toBe(controllers.nowplaying.name);
+      expect(TabBar.tabs[0].controller.name).toBe(controllers.NowPlaying.name);
     });
 
     it('should throw exception if no controller was configured', function() {

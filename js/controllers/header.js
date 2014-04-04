@@ -20,7 +20,7 @@ Header = {
     Header.link = config.link || false;
     Header.path = config.path || Header.DEFAULT_PATH;
   },
-  load: function() {
+  loadView: function() {
     $(Header.selector)
       .load(Header.path, Header.afterLoad);
   },
@@ -31,9 +31,7 @@ Header = {
       $('.header-link > a', Header.selector)
         .attr('href', Header.link);
   },
-  updateView: function() {
-
-  },
+  updateView: function() {},
   reset: function() {
     Header.path = '';
     Header.link = '';
