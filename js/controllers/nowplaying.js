@@ -13,7 +13,7 @@ var nowplaying = {};
 require([
   '$api/models',
   '$views/throbber#Throbber',
-  'js/artistgraph'
+  'js/models/artistgraph'
 ], function(_models, _throbber, _artistGraph) {
 
   models = _models;

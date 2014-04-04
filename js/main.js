@@ -1,9 +1,9 @@
 spotify.require([
-  'js/views#views',
-  'js/controllers'
-], function(Views, controllers) {
+  'js/controllers/components#Components',
+  'js/controllers/controllers'
+], function(Components, controllers) {
 
-  Views.initConfig({
+  Components.initConfig({
     header: {
       path: '../views/header.html',
       link: 'http://rama.inescporto.pt/app'
@@ -23,9 +23,9 @@ spotify.require([
     }]
   });
 
-  Views.loadViews();
+  Components.loadViews();
 
   window.onresize = function() {
-    Views.updateViews();
+    Components.updateViews();
   };
 });

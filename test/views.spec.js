@@ -1,8 +1,8 @@
-describe('Views Module', function() {
+describe('Components Module', function() {
   jasmine.getFixtures().fixturesPath = 'test/fixtures';
 
   afterEach(function() {
-    Views.reset();
+    Components.reset();
   });
 
   var controllers = {
@@ -15,7 +15,7 @@ describe('Views Module', function() {
 
     it('should throw an exception if no header is specified', function() {
       function noHeader() {
-        Views.initConfig({});
+        Components.initConfig({});
       }
 
       expect(noHeader).toThrowError(HeaderMissingException);
@@ -23,7 +23,7 @@ describe('Views Module', function() {
     it('should set header path to default value if no path file is specified',
       function() {
 
-        Views.initConfig({
+        Components.initConfig({
           header: {},
           tabs: []
         });
@@ -34,7 +34,7 @@ describe('Views Module', function() {
     it('should set the path property', function() {
       var headerPath = 'path/to/header/html/file';
 
-      Views.initConfig({
+      Components.initConfig({
         header: {
           path: headerPath
         },
@@ -49,7 +49,7 @@ describe('Views Module', function() {
 
       var linkAttr = 'link.to.site';
 
-      Views.initConfig({
+      Components.initConfig({
         header: {
           path: "path/to/file",
           link: linkAttr
@@ -66,7 +66,7 @@ describe('Views Module', function() {
     it('shouldn\'t load link if property is not specified', function() {
       appendLoadFixtures('header.html');
 
-      Views.initConfig({
+      Components.initConfig({
         header: {
           path: "path/to/file"
         },
@@ -84,7 +84,7 @@ describe('Views Module', function() {
     it('should launch exception on tabs config missing', function() {
 
       function noTabs() {
-        Views.initConfig({
+        Components.initConfig({
           header: true
         });
       }
@@ -100,7 +100,7 @@ describe('Views Module', function() {
         controller: controllers.nowplaying
       };
 
-      Views.initConfig({
+      Components.initConfig({
         header: true,
         tabs: [tab]
       });
@@ -116,9 +116,9 @@ describe('Views Module', function() {
         name: 'Main',
         controller: controllers.nowplaying
       };
-      var defaultPath = Views.DEFAULT_PATH + tab.viewId + '.html';
+      var defaultPath = Components.DEFAULT_PATH + tab.viewId + '.html';
 
-      Views.initConfig({
+      Components.initConfig({
         header: true,
         tabs: [tab]
       });
@@ -127,7 +127,7 @@ describe('Views Module', function() {
     });
     it('should throw exception if no viewId is specified', function() {
       expect(function() {
-        Views.initConfig({
+        Components.initConfig({
           header: true,
           tabs: [{
             name: 'asdf'
@@ -137,7 +137,7 @@ describe('Views Module', function() {
     });
     it('should throw exception if no name is specified', function() {
       expect(function() {
-        Views.initConfig({
+        Components.initConfig({
           header: true,
           tabs: [{
             viewId: 'asdf'
@@ -147,7 +147,7 @@ describe('Views Module', function() {
     });
     it('should throw exception if no name or viewId are specified', function() {
       expect(function() {
-        Views.initConfig({
+        Components.initConfig({
           header: true,
           tabs: [{}]
         });
@@ -155,7 +155,7 @@ describe('Views Module', function() {
     });
 
     it('should set controller', function() {
-      Views.initConfig({
+      Components.initConfig({
         header: true,
         tabs: [{
           viewId: 'id',
@@ -169,7 +169,7 @@ describe('Views Module', function() {
 
     it('should throw exception if no controller was configured', function() {
       expect(function() {
-        Views.initConfig({
+        Components.initConfig({
           header: true,
           tabs: [{
             viewId: 'id',

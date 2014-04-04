@@ -1,5 +1,5 @@
 /**
-  Views module
+  Components module
 
   Handles the views for the header, tabs bar, tabs content, etc...
 */
@@ -9,31 +9,30 @@ var UI;
 var Header;
 var TabBar;
 
-var Views = {};
+var Components = {};
 
-// spotify exports
 require([
   '$views/ui#UI',
-  'js/views/header#header',
-  'js/views/tabbar#tabbar'
+  'js/controllers/header#header',
+  'js/controllers/tabbar#tabbar'
 ], function(_ui, _header, _tabbar) {
   UI = _ui;
 
   Header = _header;
   TabBar = _tabbar;
 
-  exports.views = Views;
+  exports.Components = Components;
 });
 
-Views = {
+Components = {
   DEFAULT_PATH: '../views/',
 
   initConfig: function(config) {
-    Header.init(config.header, Views.DEFAULT_PATH);
-    TabBar.init(config.tabs, Views.DEFAULT_PATH);
+    Header.init(config.header, Components.DEFAULT_PATH);
+    TabBar.init(config.tabs, Components.DEFAULT_PATH);
   },
   loadViews: function() {
-    Views.spUI = UI.init({
+    Components.spUI = UI.init({
       header: true,
       views: TabBar.tabs,
       tabs: TabBar.tabs
@@ -43,10 +42,10 @@ Views = {
     Header.load();
     TabBar.load();
 
-    Views.spUI.addEventListener('viewchange', Views.updateView);
+    Components.spUI.addEventListener('viewchange', Components.updateViews);
   },
   updateViews: function(tab) {
-    var tabID = tab ? tab.id : Views.spUI.activeView;
+    var tabID = tab ? tab.id : Components.spUI.activeView;
 
     Header.updateView();
     TabBar.updateView(tabID);
