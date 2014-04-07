@@ -8,6 +8,7 @@ var models = {};
 var Throbber = {};
 var artistGraph = {};
 
+
 var NowPlaying = function(viewId, viewpath) {
   this.viewId = viewId;
   this.selector = '#' + viewId;
@@ -55,7 +56,7 @@ NowPlaying.prototype = {
           return;
 
         if (currentArtist.uri !== oldArtistURI)
-          self.setArtistGraph(currentArtist);
+          self.setArtistGraph(self, currentArtist);
       });
     },
     onSettingsBtnClick: function(self) {
