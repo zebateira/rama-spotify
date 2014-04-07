@@ -60,6 +60,7 @@ NowPlaying.prototype = {
       });
     },
     onSettingsBtnClick: function(self) {
+      $(self.selector + ' .settings-btn').toggleClass('opened');
       $(self.selector + ' .settings-tooltip').toggle();
     }
   },

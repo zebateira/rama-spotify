@@ -2,7 +2,7 @@
   Components module
 
   Handles the views for the header, tabs bar, tabs content, etc...
-  */
+*/
 
 // imported modules
 var UI;
@@ -26,7 +26,7 @@ var Components = {
     Header.loadView();
     TabBar.loadView();
 
-    Components.bindAll(config.events);
+    Components.bindEvents(config.events);
   },
   updateViews: function(tab) {
     var tabID = tab.id || Components.spUI.activeView;
@@ -34,7 +34,7 @@ var Components = {
     Header.updateView();
     TabBar.updateView(tabID);
   },
-  bindAll: function(events) {
+  bindEvents: function(events) {
     for (var event in events) {
       Components.on(event, events[event]);
     }
