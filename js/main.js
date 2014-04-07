@@ -16,11 +16,13 @@ spotify.require([
       viewId: 'toplist',
       name: 'Top List',
       controller: controllers.TopList
-    }, {
-      viewId: 'search',
-      name: 'Search',
-      controller: controllers.search
-    }]
+    }
+    // , {
+    //   viewId: 'search',
+    //   name: 'Search',
+    //   controller: controllers.search
+    // }
+    ]
   });
 
   Components.loadViews({

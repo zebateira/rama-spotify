@@ -66,30 +66,31 @@ NowPlaying.prototype = {
 
   loadSettingsMenu: function() {
     var self = this;
-    $(self.selector + ' .settings-btn').click(function() {
+
+    $(this.selector + ' .settings-btn').click(function() {
       self.events.onSettingsBtnClick(self);
     });
 
-    $(self.selector + ' .settings-tooltip input[name=branching]').on('change', function() {
+    $(this.selector + ' .settings-tooltip input[name=branching]').on('change', function() {
       self.showThrobber();
       self.artistGraph.updateGraph({
-        branching: parseInt(self.value)
+        branching: parseInt(this.value)
       });
       self.artistGraph.buildGraph();
     });
 
-    $(self.selector + ' .settings-tooltip input[name=depth]').on('change', function() {
+    $(this.selector + ' .settings-tooltip input[name=depth]').on('change', function() {
       self.showThrobber();
       self.artistGraph.updateGraph({
-        depth: parseInt(self.value)
+        depth: parseInt(this.value)
       });
       self.artistGraph.buildGraph();
     });
 
-    $(self.selector + ' .settings-tooltip input[name=treemode]').on('change', function() {
+    $(this.selector + ' .settings-tooltip input[name=treemode]').on('change', function() {
       self.showThrobber();
       self.artistGraph.updateGraph({
-        treemode: self.checked
+        treemode: this.checked
       });
       self.artistGraph.buildGraph();
     });

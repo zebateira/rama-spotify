@@ -9,22 +9,7 @@ var UI;
 var Header;
 var TabBar;
 
-var Components = {};
-
-require([
-  '$views/ui#UI',
-  'js/controllers/header#header',
-  'js/controllers/tabbar#tabbar'
-], function(_ui, _header, _tabbar) {
-  UI = _ui;
-
-  Header = _header;
-  TabBar = _tabbar;
-
-  exports.Components = Components;
-});
-
-Components = {
+var Components = {
   DEFAULT_PATH: '../views/',
 
   initConfig: function(config) {
@@ -74,3 +59,16 @@ Components = {
     TabBar.reset();
   }
 };
+
+require([
+  '$views/ui#UI',
+  'js/controllers/header#header',
+  'js/controllers/tabbar#tabbar'
+], function(_ui, _header, _tabbar) {
+  UI = _ui;
+
+  Header = _header;
+  TabBar = _tabbar;
+
+  exports.Components = Components;
+});
