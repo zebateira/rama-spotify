@@ -50,9 +50,9 @@ ArtistGraph.prototype = {
   updateGraph: function(config) {
     this.branching = config.branching || this.branching;
     this.depth = config.depth || this.depth;
-
     this.index = 1;
 
+    this.relatedArtists = [];
     this.extraEdges = [];
     this.data = {
       nodes: [{
@@ -67,6 +67,7 @@ ArtistGraph.prototype = {
 
     if (typeof config.treemode != 'undefined')
       this.treemode = config.treemode;
+
   },
 
   buildGraph: function() {

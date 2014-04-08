@@ -73,24 +73,15 @@ NowPlaying.prototype = {
     });
 
     this.settings.loadView(function() {
-      function updateGraph(input, value) {
+
+      self.settings.onChangeValue(function(input, value) {
+        var config = {};
+
+        config[input] = parseInt(value) || value;
+
         self.showThrobber();
-        self.artistGraph.updateGraph({
-          input: parseInt(value)
-        });
+        self.artistGraph.updateGraph(config);
         self.artistGraph.buildGraph();
-      }
-
-      self.settings.onChangeValue('branching', function() {
-        updateGraph('branching', this.value);
-      });
-
-      self.settings.onChangeValue('depth', function() {
-        updateGraph('depth', this.value);
-      });
-
-      self.settings.onChangeValue('treemode', function() {
-        updateGraph('treemode', this.checked);
       });
     });
 

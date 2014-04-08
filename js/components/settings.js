@@ -12,18 +12,20 @@ var Settings = function(config) {
     return self.form.selector + ' input[name=' + name + ']';
   };
 
-  var inputs = ['branching', 'depth', 'treemode'];
   this.form.inputs = {
     branching: {
       name: 'branching',
+      value: 'value',
       selector: this.form.getSelector('branching')
     },
     depth: {
       name: 'depth',
+      value: 'value',
       selector: this.form.getSelector('depth')
     },
     treemode: {
       name: 'treemode',
+      value: 'checked',
       selector: this.form.getSelector('treemode')
     }
   };
@@ -31,7 +33,6 @@ var Settings = function(config) {
   this.button = {
     selector: config.buttonSelector || this.selector + ' .settings-btn'
   };
-
 
   this.button.onclick = function(event) {
     self.button.jelement.toggleClass('opened');
@@ -58,8 +59,12 @@ Settings.prototype = {
   updateView: function() {},
   reset: function() {},
 
-  onChangeValue: function(event, eventHandler) {
-    $(this.form.inputs[event].selector).on('change', eventHandler);
+  onChangeValue: function(eventHandler) {
+    _.each(this.form.inputs, function(input) {
+      $(input.selector).on('change', function() {
+        eventHandler(input.name, this[input.value]);
+      });
+    });
   }
 };
 
