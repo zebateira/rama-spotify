@@ -7,8 +7,7 @@ describe('Components Module', function() {
 
   var controllers = {
     NowPlaying: NowPlaying,
-    TopList: TopList,
-    Search: Search
+    TopList: TopList
   };
 
   describe('Header View', function() {

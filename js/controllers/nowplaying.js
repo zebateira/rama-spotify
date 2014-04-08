@@ -4,9 +4,10 @@
   Gets current playing artist and draws graph
 */
 
-var models = {};
-var Throbber = {};
-var artistGraph = {};
+var models;
+var Throbber;
+var ArtistGraph;
+var Settings;
 
 
 var NowPlaying = function(viewId, viewpath) {
@@ -27,6 +28,7 @@ var NowPlaying = function(viewId, viewpath) {
     stabilize: true
     // clustering: true
   };
+
 };
 
 NowPlaying.prototype = {
@@ -35,7 +37,9 @@ NowPlaying.prototype = {
 
     $(this.selector).load(this.viewpath, function() {
       self.currentArtist.load(self, self.setArtistGraph);
+
       self.loadSettingsMenu();
+
       models.player.addEventListener('change', function(player) {
         self.events.onPlayerChange(self, player);
       });
@@ -58,43 +62,38 @@ NowPlaying.prototype = {
         if (currentArtist.uri !== oldArtistURI)
           self.setArtistGraph(self, currentArtist);
       });
-    },
-    onSettingsBtnClick: function(self) {
-      $(self.selector + ' .settings-btn').toggleClass('opened');
-      $(self.selector + ' .settings-tooltip').toggle();
     }
   },
 
   loadSettingsMenu: function() {
     var self = this;
 
-    $(this.selector + ' .settings-btn').click(function() {
-      self.events.onSettingsBtnClick(self);
+    this.settings = new Settings({
+      selector: this.selector + ' ' + '.settings'
     });
 
-    $(this.selector + ' .settings-tooltip input[name=branching]').on('change', function() {
-      self.showThrobber();
-      self.artistGraph.updateGraph({
-        branching: parseInt(this.value)
+    this.settings.loadView(function() {
+      function updateGraph(input, value) {
+        self.showThrobber();
+        self.artistGraph.updateGraph({
+          input: parseInt(value)
+        });
+        self.artistGraph.buildGraph();
+      }
+
+      self.settings.onChangeValue('branching', function() {
+        updateGraph('branching', this.value);
       });
-      self.artistGraph.buildGraph();
+
+      self.settings.onChangeValue('depth', function() {
+        updateGraph('depth', this.value);
+      });
+
+      self.settings.onChangeValue('treemode', function() {
+        updateGraph('treemode', this.checked);
+      });
     });
 
-    $(this.selector + ' .settings-tooltip input[name=depth]').on('change', function() {
-      self.showThrobber();
-      self.artistGraph.updateGraph({
-        depth: parseInt(this.value)
-      });
-      self.artistGraph.buildGraph();
-    });
-
-    $(this.selector + ' .settings-tooltip input[name=treemode]').on('change', function() {
-      self.showThrobber();
-      self.artistGraph.updateGraph({
-        treemode: this.checked
-      });
-      self.artistGraph.buildGraph();
-    });
   },
 
   currentArtist: {
@@ -112,7 +111,7 @@ NowPlaying.prototype = {
   */
   setArtistGraph: function(self, artist) {
 
-    self.artistGraph = new artistGraph.ArtistGraph({
+    self.artistGraph = new ArtistGraph({
         depth: 2,
         branching: 4
       },
@@ -138,12 +137,14 @@ NowPlaying.prototype.contructor = NowPlaying;
 require([
   '$api/models',
   '$views/throbber#Throbber',
-  'js/models/artistgraph'
-], function(_models, _throbber, _artistGraph) {
+  'js/models/artistgraph#ArtistGraph',
+  'js/components/settings#Settings'
+], function(_models, _throbber, _artistGraph, _settings) {
 
   models = _models;
   Throbber = _throbber;
-  artistGraph = _artistGraph;
+  ArtistGraph = _artistGraph;
+  Settings = _settings;
 
   exports.NowPlaying = NowPlaying;
 });

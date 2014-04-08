@@ -62,8 +62,8 @@ var Components = {
 
 require([
   '$views/ui#UI',
-  'js/controllers/header#header',
-  'js/controllers/tabbar#tabbar'
+  'js/components/header#header',
+  'js/components/tabbar#tabbar'
 ], function(_ui, _header, _tabbar) {
   UI = _ui;
 

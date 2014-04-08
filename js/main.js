@@ -1,5 +1,5 @@
 spotify.require([
-  'js/controllers/components#Components',
+  'js/components/components#Components',
   'js/controllers/controllers'
 ], function(Components, controllers) {
 
@@ -9,19 +9,19 @@ spotify.require([
       link: 'http://rama.inescporto.pt/app'
     },
     tabs: [{
-      viewId: 'nowplaying',
-      name: 'Now Playing',
-      controller: controllers.NowPlaying
-    }, {
-      viewId: 'toplist',
-      name: 'Top List',
-      controller: controllers.TopList
-    }
-    // , {
-    //   viewId: 'search',
-    //   name: 'Search',
-    //   controller: controllers.search
-    // }
+        viewId: 'nowplaying',
+        name: 'Now Playing',
+        controller: controllers.NowPlaying
+      }, {
+        viewId: 'toplist',
+        name: 'Top List',
+        controller: controllers.TopList
+      }
+      // , {
+      //   viewId: 'search',
+      //   name: 'Search',
+      //   controller: controllers.search
+      // }
     ]
   });
 

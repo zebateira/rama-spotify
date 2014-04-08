@@ -1,6 +1,5 @@
 var TopList = function() {
   this.name = 'toplist';
-
 };
 
 TopList.prototype = {
@@ -10,14 +9,12 @@ TopList.prototype = {
   updateView: function() {
 
   }
-
 };
 
 TopList.prototype.constructor = TopList;
 
 require([
-  '$api/toplists',
-  '$views/list'
-], function(toplists, vlist) {
+  '$api/models'
+], function(models) {
   exports.TopList = TopList;
 });

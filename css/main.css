@@ -363,7 +363,7 @@ html, body {
   -webkit-transform: scale(0.9, 0.9);
 }
 /* line 41, ../sass/_now_playing.scss */
-.settings .settings-tooltip {
+.settings .settings-form {
   display: none;
   position: relative;
   float: right;
@@ -375,7 +375,7 @@ html, body {
   border-style: solid;
 }
 /* line 54, ../sass/_now_playing.scss */
-.settings .settings-tooltip .tri {
+.settings .settings-form .tri {
   position: absolute;
   top: -5px;
   right: 8px;
@@ -389,26 +389,26 @@ html, body {
   -webkit-transform: rotate(45deg);
 }
 /* line 71, ../sass/_now_playing.scss */
-.settings .settings-tooltip .option {
+.settings .settings-form .option {
   overflow: auto;
 }
 /* line 74, ../sass/_now_playing.scss */
-.settings .settings-tooltip .option:not(.first-child) {
+.settings .settings-form .option:not(.first-child) {
   margin-top: 5px;
 }
 /* line 78, ../sass/_now_playing.scss */
-.settings .settings-tooltip .option label {
+.settings .settings-form .option label {
   float: left;
   margin-right: 5px;
 }
 /* line 82, ../sass/_now_playing.scss */
-.settings .settings-tooltip .option input {
+.settings .settings-form .option input {
   padding: 2px;
   width: 30px;
   float: right;
 }
 /* line 87, ../sass/_now_playing.scss */
-.settings .settings-tooltip .option input[name=treemode] {
+.settings .settings-form .option input[name=treemode] {
   margin-top: 5px;
   margin-left: 5px;
 }
