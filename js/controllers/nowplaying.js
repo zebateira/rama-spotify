@@ -53,15 +53,16 @@ NowPlaying.prototype = {
   },
   events: {
     onPlayerChange: function(self, player) {
-      self.currentArtist.load(self, function(self, currentArtist, advertisement) {
-        var oldArtistURI = self.artistGraph.artist.uri;
+      self.currentArtist.load(self,
+        function(self, currentArtist, advertisement) {
+          var oldArtistURI = self.artistGraph.artist.uri;
 
-        if (advertisement)
-          return;
+          if (advertisement)
+            return;
 
-        if (currentArtist.uri !== oldArtistURI)
-          self.setArtistGraph(self, currentArtist);
-      });
+          if (currentArtist.uri !== oldArtistURI)
+            self.setArtistGraph(self, currentArtist);
+        });
     }
   },
 
@@ -90,7 +91,8 @@ NowPlaying.prototype = {
   currentArtist: {
     load: function(self, callback) {
       models.player.load('track').done(function(player) {
-        callback(self, models.Artist.fromURI(player.track.artists[0].uri),
+        callback(self,
+          models.Artist.fromURI(player.track.artists[0].uri),
           player.track.advertisement);
       });
     }
@@ -102,13 +104,11 @@ NowPlaying.prototype = {
   */
   setArtistGraph: function(self, artist) {
 
-    self.artistGraph = new ArtistGraph({
-        depth: 2,
-        branching: 4
-      },
+    self.artistGraph = new ArtistGraph(
       $(self.selector + ' .graph')[0],
-      artist,
-      self.options
+      artist, {
+        options: self.options
+      }
     );
 
     self.showThrobber();
@@ -118,7 +118,8 @@ NowPlaying.prototype = {
     if (this.artistGraph.throbber)
       this.artistGraph.throbber.hide();
 
-    this.artistGraph.throbber = Throbber.forElement(document.getElementById(this.viewId));
+    this.artistGraph.throbber =
+      Throbber.forElement(document.getElementById(this.viewId));
     this.artistGraph.throbber.setPosition('center', 'center');
   }
 };
