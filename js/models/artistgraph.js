@@ -1,78 +1,43 @@
 /**
-  Defines the artist.graph model
+  Defines the artist graph model
 
-  Exports the ArtistGraph object to draw a graph of related artists
-  in a DOM element given a music artist and some optional options 8D
+  The ArtistGraph object Draws a graph of related artists
+  in a DOM element given a music artist and some optional config values.
 */
 
-var models;
-
-function Promise() {
-  this.callback = function() {};
-
-  this.done = function(callback) {
-    this.callback = callback;
-  };
-}
-
-var ArtistGraph = function(config, element, artist, options) {
-  this.DEFAULT_BRANCHING = 4;
-  this.DEFAULT_DEPTH = 2;
+var ArtistGraph = function(element, artist, config) {
 
   this.element = element;
   this.artist = artist;
   this.artist.nodeid = 1;
-  this.branching = config.branching || this.DEFAULT_BRANCHING;
-  this.depth = config.depth || this.DEFAULT_DEPTH;
-
-  this.relatedArtists = [];
-  this.extraEdges = [];
 
 
-  // numbering for the id's of adjacent nodes
-  this.index = 1;
+  this.branching = (config && config.branching) || ArtistGraph.DEFAULT_BRANCHING;
+  this.depth = (config && config.depth) || ArtistGraph.DEFAULT_DEPTH;
+  this.options = (config && config.options) || ArtistGraph.DEFAULT_OPTIONS;
+
 
   this.treemode = true;
 
-  // data of the graph: should contain nodes and edges
-  this.data = {
-    nodes: [{
-      id: this.index,
-      label: this.artist.name,
-      color: {
-        background: '#666'
-      }
-    }],
-    edges: []
-  };
-  // options for the rendering of the graph
-  this.options = options;
+  // options for rendering the graph
+
+  this.resetGraph();
 
   this.graph = new vis.Graph(this.element, this.data, this.options);
+
+  this.graph.on('stabilized', function(iterations) { // Y U NO WORK
+    this.zoomExtent();
+    console.log(iterations);
+  });
+};
+
+ArtistGraph.DEFAULT_BRANCHING = 4;
+ArtistGraph.DEFAULT_DEPTH = 2;
+ArtistGraph.DEFAULT_OPTIONS = {
+
 };
 
 ArtistGraph.prototype = {
-  updateGraph: function(config) {
-    this.branching = config.branching || this.branching;
-    this.depth = config.depth || this.depth;
-
-    this.index = 1;
-
-    this.extraEdges = [];
-    this.data = {
-      nodes: [{
-        id: this.index,
-        label: this.artist.name,
-        color: {
-          background: '#666'
-        }
-      }],
-      edges: []
-    };
-
-    if (typeof config.treemode != 'undefined')
-      this.treemode = config.treemode;
-  },
 
   buildGraph: function() {
     this.counter = 1;
@@ -82,8 +47,6 @@ ArtistGraph.prototype = {
       this.maxNodes += Math.pow(this.branching, i);
     }
 
-    console.log('#### Stats for ' + this.artist.name);
-    console.log('# iterations: ' + this.maxNodes);
     this.constructGraph(this.depth - 1, this.artist);
   },
 
@@ -112,6 +75,7 @@ ArtistGraph.prototype = {
           };
 
           this.extraEdges.push(extraEdge);
+
           if (!this.treemode)
             this.data.edges.push(extraEdge);
         }
@@ -137,7 +101,7 @@ ArtistGraph.prototype = {
         this.constructGraph(depth - 1, artist);
 
       if (++this.counter === this.maxNodes) {
-        this.draw(true);
+        this.drawGraph(true);
       }
     };
 
@@ -148,7 +112,8 @@ ArtistGraph.prototype = {
     };
 
     var relatedDone = function(artist) {
-      var promiseRelatedSnapshot = artist.related.snapshot(0, this.branching);
+      var promiseRelatedSnapshot =
+        artist.related.snapshot(0, this.branching);
       promiseRelatedSnapshot.done(this, relatedSnapshotDone);
     };
 
@@ -156,23 +121,51 @@ ArtistGraph.prototype = {
     promiseRelated.done(this, relatedDone);
   },
 
-  draw: function(debug) {
+  drawGraph: function(debug) {
+
     this.graph.setData(this.data, {
       disableStart: true
     });
+
     this.graph.start();
-    this.graph.zoomExtent();
 
     if (this.throbber)
       this.throbber.hide();
 
     if (debug) {
+      console.log('#### Stats for ' + this.artist.name);
+      console.log('# iterations: ' + this.maxNodes);
       console.log('# nodes: ' + this.data.nodes.length);
       console.log('# edges: ' + this.data.edges.length);
     }
   },
+  updateGraph: function(config) {
+    this.branching = config.branching || this.branching;
+    this.depth = config.depth || this.depth;
+    this.index = 1;
 
+    if (typeof config.treemode != 'undefined')
+      this.treemode = config.treemode;
+
+    this.resetGraph();
+  },
+  resetGraph: function() {
+    this.relatedArtists = [];
+    this.extraEdges = [];
+    this.index = 1;
+    this.data = {
+      nodes: [{
+        id: this.index,
+        label: this.artist.name,
+        color: {
+          background: '#666'
+        }
+      }],
+      edges: []
+    };
+  },
   redraw: function() {
+    this.graph.zoomExtent();
     this.graph.redraw();
   }
 };
@@ -180,8 +173,7 @@ ArtistGraph.prototype = {
 ArtistGraph.prototype.constructor = ArtistGraph;
 
 
+// Exports for the spotify's require system
 require(['$api/models'], function(_models) {
-  models = _models;
-
   exports.ArtistGraph = ArtistGraph;
 });
