@@ -18,41 +18,19 @@
   <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+
   <div id="view_container">
-    <div id="now" class="view">
-      <div class="settings">
-        <div title="Settings: Tweak them to your content" class="settings-btn">
-        </div>
-        <br>
-        <div class="settings-tooltip">
-          <div title="just a triangle mate... move along" class="tri"></div>
 
-          <div class="option first-child">
-            <label title="Maximum distance between the root node and any other node in the whole graph, given the shortest path between them. TLDR: the bigger the number the bigger the graph.">
-              depth
-            </label>
-            <input title="depth value" name="depth" min="2" max="8" value="2" type="number">
-          </div>
-
-          <div class="option">
-            <label  title="Maximum number of connections (edges) that a node can have. In practice, some nodes might have one more edge than this specified value, but you get the point. TLDR: the bigger the number the bigger the graph.">branching</label>
-            <input title="branching value" name="branching" min="2" max="8" value="4" type="number">
-          </div>
-          <div class="option">
-            <label title="Whether the tree mode is activated or not. If it's off, all the existent edges between the nodes will be drawn. Otherwise, if it's on, some edges might not be drawn, causing the graph to take the shape of a tree (or a flower or something. If you do start seeing trees or flowers please go to the nearest hospital). TLDR: graph gets cleaner and easier to read (when it's very clutered with nodes and edges)">tree mode</label>
-            <input title="treemode" name="treemode" type="checkbox" checked>
-          </div>
-        </div>
-      </div>
-      <div class="graph"></div>
+    <div id="nowplaying" class="view">
+    
     </div>
 
-
-    <div id="top" class="view">
+    <div id="toplist" class="view">
     </div>
 
     <div id="search" class="view">
     </div>
+
   </div>
 
   <!-- build:js js/vendor.js -->

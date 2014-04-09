@@ -27,13 +27,18 @@
 
     &:hover {
       cursor: pointer;
-      background: url(../img/settings-light.png) no-repeat;
-      background-size: cover;
+    }
 
+    &.opened {
+      opacity: 0.8;
+    }
+
+    &:active {
+      -webkit-transform: scale(0.9, 0.9);
     }
   }
 
-  .settings-tooltip {
+  .settings-form {
     display: none;
     position: relative;
     float: right;

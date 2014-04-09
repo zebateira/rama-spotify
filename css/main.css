@@ -1,5 +1,5 @@
 /* Main Elements */
-@import url(http://fonts.googleapis.com/css?family=Ruda);
+@import url("http://fonts.googleapis.com/css?family=Ruda");
 /* line 2, ../sass/_spotify.scss */
 body {
   font-family: 'Lucida Grande',Tahoma,Calibri,Arial,sans-serif;
@@ -353,11 +353,17 @@ html, body {
 /* line 28, ../sass/_now_playing.scss */
 .settings .settings-btn:hover {
   cursor: pointer;
-  background: url(../img/settings-light.png) no-repeat;
-  background-size: cover;
+}
+/* line 32, ../sass/_now_playing.scss */
+.settings .settings-btn.opened {
+  opacity: 0.8;
 }
 /* line 36, ../sass/_now_playing.scss */
-.settings .settings-tooltip {
+.settings .settings-btn:active {
+  -webkit-transform: scale(0.9, 0.9);
+}
+/* line 41, ../sass/_now_playing.scss */
+.settings .settings-form {
   display: none;
   position: relative;
   float: right;
@@ -368,8 +374,8 @@ html, body {
   border-color: #bbb;
   border-style: solid;
 }
-/* line 49, ../sass/_now_playing.scss */
-.settings .settings-tooltip .tri {
+/* line 54, ../sass/_now_playing.scss */
+.settings .settings-form .tri {
   position: absolute;
   top: -5px;
   right: 8px;
@@ -382,27 +388,27 @@ html, body {
   border-style: solid;
   -webkit-transform: rotate(45deg);
 }
-/* line 66, ../sass/_now_playing.scss */
-.settings .settings-tooltip .option {
+/* line 71, ../sass/_now_playing.scss */
+.settings .settings-form .option {
   overflow: auto;
 }
-/* line 69, ../sass/_now_playing.scss */
-.settings .settings-tooltip .option:not(.first-child) {
+/* line 74, ../sass/_now_playing.scss */
+.settings .settings-form .option:not(.first-child) {
   margin-top: 5px;
 }
-/* line 73, ../sass/_now_playing.scss */
-.settings .settings-tooltip .option label {
+/* line 78, ../sass/_now_playing.scss */
+.settings .settings-form .option label {
   float: left;
   margin-right: 5px;
 }
-/* line 77, ../sass/_now_playing.scss */
-.settings .settings-tooltip .option input {
+/* line 82, ../sass/_now_playing.scss */
+.settings .settings-form .option input {
   padding: 2px;
   width: 30px;
   float: right;
 }
-/* line 82, ../sass/_now_playing.scss */
-.settings .settings-tooltip .option input[name=treemode] {
+/* line 87, ../sass/_now_playing.scss */
+.settings .settings-form .option input[name=treemode] {
   margin-top: 5px;
   margin-left: 5px;
 }

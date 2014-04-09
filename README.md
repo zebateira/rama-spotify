@@ -6,28 +6,45 @@ RAMA is a Spotify Application for visualizing and interacting with networks of m
 
 For now, I do not intend to make this application available on the Spotify App Store, so to run it you need to set it up first.
 
+To open a downloaded app you need to **Activate Spotify Developer account** here: https://devaccount.spotify.com/my-account (no premium account needed).
+Tested on mac for now only.
 
 Installation
 --------------
-Tested on mac for now only.
 
+#### Automagic installer
 
+Execute the installer script.
 
-Run the following commands from the command prompt (for mac):
+```sh
+$ wget --no-check-certificate https://raw.githubusercontent.com/carsy/rama-spotify/master/install.sh -O - | sh
+```
+or with curl
+```sh
+$ curl -L https://raw.githubusercontent.com/carsy/rama-spotify/master/install.sh | sh
+```
+
+You should now be in the app and seeing a graph thingy.
+
+#### Manual installer
+
+These are the contents of the script:
+
 ```sh
 $ mkdir ~/Spotify ; cd ~/Spotify
-$ wget https://github.com/carsy/rama-spotify/releases/download/v0.1.2/rama-spotify_v0.1.2.tar.gz
-$ tar -xvf rama-spotify_v0.1.2.tar.gz
+$ rm -rf rama-spotify
+$ wget https://github.com/carsy/rama-spotify/releases/download/v0.1.3/rama-spotify_v0.1.3.tar.gz
+$ tar -xvf rama-spotify_v0.1.3.tar.gz
+$ open spotify:app:rama-spotify
 ```
+You should now be in the app and seeing a graph thingy.
 
 Alternatively, If you happen to have commandlinephobia (I get that every other month... might be a thing):
 
 1. download the latest version of the app from [here]
 2. extract the folder
-3. create the Spotify folder if it doesn't exist already: "~/Spotify" (Mac OS X and Linux) or "My Documents\Spotify" (Windows).
+3. create the Spotify folder if it doesn't exist already: "~/Spotify" (Mac OS X) or "My Documents\Spotify" (Windows).
 4. copy the extracted folder to the Spotify folder.
-
-Now **Activate Spotify Developer account** here: https://devaccount.spotify.com/my-account (no premium account needed).
 
 Now open Spotify and type in the search bar:
 ```sh
@@ -41,6 +58,10 @@ With no official release for the Spotify Desktop Client, there's nothing I can d
 
 [Releases]
 ----
+
+[v0.1.3] - Play tracks from artist node
+  - look and feel of the nodes updated
+  - on double click a node in the graph, top tracks of the artist are played
 
 [v0.1.2] - Settings Menu added
   - settings menu added: depth, branching and treemode settings available
@@ -70,6 +91,7 @@ José Bateira
 [@\_carsy\_]:http://twitter.com/_carsy_
 [here]:https://github.com/carsy/rama-spotify/releases/latest
 [Releases]:https://github.com/carsy/rama-spotify/releases/latest
+[v0.1.2]:https://github.com/carsy/rama-spotify/releases/tag/v0.1.3
 [v0.1.2]:https://github.com/carsy/rama-spotify/releases/tag/v0.1.2
 [v0.1.1]:https://github.com/carsy/rama-spotify/releases/tag/v0.1.1
 [v0.1.0]:https://github.com/carsy/rama-spotify/releases/tag/v0.1.0

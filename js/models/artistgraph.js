@@ -1,79 +1,65 @@
 /**
-  Defines the artist.graph model
+  Defines the artist graph model
 
-  Exports the ArtistGraph object to draw a graph of related artists
-  in a DOM element given a music artist and some optional options 8D
+  The ArtistGraph object Draws a graph of related artists
+  in a DOM element given a music artist and some optional config values.
 */
 
-var models;
-
-function Promise() {
-  this.callback = function() {};
-
-  this.done = function(callback) {
-    this.callback = callback;
-  };
-}
-
-var ArtistGraph = function(config, element, artist, options) {
-  this.DEFAULT_BRANCHING = 4;
-  this.DEFAULT_DEPTH = 2;
+var ArtistGraph = function(element, artist, config) {
 
   this.element = element;
   this.artist = artist;
   this.artist.nodeid = 1;
-  this.branching = config.branching || this.DEFAULT_BRANCHING;
-  this.depth = config.depth || this.DEFAULT_DEPTH;
 
-  this.relatedArtists = [];
-  this.extraEdges = [];
+  this.events = {};
 
+  this.branching = (config && config.branching) ||
+    ArtistGraph.DEFAULT_BRANCHING;
+  this.depth = (config && config.depth) || ArtistGraph.DEFAULT_DEPTH;
 
-  // numbering for the id's of adjacent nodes
-  this.index = 1;
+  if (config && typeof config.treemode !== 'undefined')
+    this.treemode = config.treemode;
+  else this.treemode = ArtistGraph.DEFAULT_TREEMODE;
 
-  this.treemode = true;
+  this.options = (config && config.options) || ArtistGraph.DEFAULT_OPTIONS;
 
-  // data of the graph: should contain nodes and edges
-  this.data = {
-    nodes: [{
-      id: this.index,
-      label: this.artist.name,
-      color: {
-        background: '#666'
-      }
-    }],
-    edges: []
-  };
-  // options for the rendering of the graph
-  this.options = options;
+  // options for rendering the graph
+
+  this.initGraph();
 
   this.graph = new vis.Graph(this.element, this.data, this.options);
+  var graph = this.graph;
+  this.graph.on('stabilized', function(iterations) { // Y U NO WORK
+    graph.zoomExtent();
+    console.log(iterations);
+  });
 };
 
+ArtistGraph.DEFAULT_BRANCHING = 4;
+ArtistGraph.DEFAULT_DEPTH = 2;
+ArtistGraph.DEFAULT_TREEMODE = true;
+ArtistGraph.DEFAULT_OPTIONS = {};
+
 ArtistGraph.prototype = {
-  updateGraph: function(config) {
-    this.branching = config.branching || this.branching;
-    this.depth = config.depth || this.depth;
-
-    this.index = 1;
-
+  initGraph: function() {
+    this.relatedArtists = [];
     this.extraEdges = [];
+    this.index = 1;
     this.data = {
       nodes: [{
         id: this.index,
         label: this.artist.name,
+        artist: this.artist,
         color: {
           background: '#666'
         }
       }],
       edges: []
     };
-
-    if (typeof config.treemode != 'undefined')
-      this.treemode = config.treemode;
   },
-
+  reset: function() {
+    this.initGraph();
+  },
   buildGraph: function() {
     this.counter = 1;
 
@@ -82,14 +68,12 @@ ArtistGraph.prototype = {
       this.maxNodes += Math.pow(this.branching, i);
     }
 
-    console.log('#### Stats for ' + this.artist.name);
-    console.log('# iterations: ' + this.maxNodes);
     this.constructGraph(this.depth - 1, this.artist);
   },
 
   constructGraph: function(depth, rootArtist) {
 
-    var forEachRelated = function(artist) {
+    function forEachRelated(artist) {
       var duplicated = _.findWhere(this.data.nodes, {
         label: artist.name
       });
@@ -112,6 +96,7 @@ ArtistGraph.prototype = {
           };
 
           this.extraEdges.push(extraEdge);
+
           if (!this.treemode)
             this.data.edges.push(extraEdge);
         }
@@ -120,7 +105,8 @@ ArtistGraph.prototype = {
 
         this.data.nodes.push({
           id: nodeid,
-          label: artist.name
+          label: artist.name,
+          artist: artist
         });
 
         this.data.edges.push({
@@ -137,51 +123,78 @@ ArtistGraph.prototype = {
         this.constructGraph(depth - 1, artist);
 
       if (++this.counter === this.maxNodes) {
-        this.draw(true);
+        this.drawGraph(true);
       }
-    };
+    }
 
-    var relatedSnapshotDone = function(snapshot) {
+    function relatedSnapshotDone(snapshot) {
       var snapshotLoadAll = snapshot.loadAll(['name', 'uri']);
 
       snapshotLoadAll.each(this, forEachRelated);
-    };
+    }
 
-    var relatedDone = function(artist) {
-      var promiseRelatedSnapshot = artist.related.snapshot(0, this.branching);
+    function relatedDone(artist) {
+      var promiseRelatedSnapshot =
+        artist.related.snapshot(0, this.branching);
       promiseRelatedSnapshot.done(this, relatedSnapshotDone);
-    };
+    }
 
     var promiseRelated = rootArtist.load('related');
     promiseRelated.done(this, relatedDone);
   },
-
-  draw: function(debug) {
+  drawGraph: function(debug) {
     this.graph.setData(this.data, {
       disableStart: true
     });
+
     this.graph.start();
-    this.graph.zoomExtent();
+
+    this.bindAllEvents();
 
     if (this.throbber)
       this.throbber.hide();
 
     if (debug) {
+      console.log('#### Stats for ' + this.artist.name);
+      console.log('# iterations: ' + this.maxNodes);
       console.log('# nodes: ' + this.data.nodes.length);
       console.log('# edges: ' + this.data.edges.length);
     }
   },
+  updateGraph: function(config) {
+    this.branching = config.branching || this.branching;
+    this.depth = config.depth || this.depth;
+    this.index = 1;
 
+    if (typeof config.treemode != 'undefined')
+      this.treemode = config.treemode;
+
+    this.reset();
+  },
   redraw: function() {
+    this.graph.zoomExtent();
     this.graph.redraw();
+  },
+
+  // events
+  on: function(event, eventHandler) {
+    this.events[event] = eventHandler;
+  },
+
+  bindAllEvents: function() {
+    var self = this;
+    _.each(this.events, function(event) {
+      self.graph.on(event.name, function(data) {
+        self.events[event.name](data);
+      });
+    });
   }
 };
 
 ArtistGraph.prototype.constructor = ArtistGraph;
 
 
+// Exports for the spotify's require system
 require(['$api/models'], function(_models) {
-  models = _models;
-
   exports.ArtistGraph = ArtistGraph;
 });

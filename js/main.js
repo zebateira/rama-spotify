@@ -1,37 +1,30 @@
 spotify.require([
-  'js/views',
-  'js/controllers'
-], function(views, controllers) {
+  'js/components/components#Components',
+  'js/controllers/controllers'
+], function(Components, controllers) {
 
-  views.initConfig({
+  Components.initConfig({
     header: {
       path: '../views/header.html',
       link: 'http://rama.inescporto.pt/app'
     },
     tabs: [{
-        viewId: 'now',
+        viewId: 'nowplaying',
         name: 'Now Playing',
-        path: '../views/now.html',
-        controller: controllers.nowplaying
+        controller: controllers.NowPlaying
       }
       // , {
-      //   viewId: 'top',
+      //   viewId: 'toplist',
       //   name: 'Top List',
-      //   path: '../views/top.html',
-      //   controller: controllers.toplist
-      // }, {
-      //   viewId: 'search',
-      //   name: 'Search',
-      //   path: '../views/search.html',
-      //   controller: controllers.search
+      //   controller: controllers.TopList
       // }
     ]
   });
 
-  views.loadViews();
-
-  // todo: dont update the graphs when a commercial is playing
-  window.onresize = function() {
-    views.updateView();
-  };
+  Components.loadViews({
+    events: {
+      'viewchange': Components.updateViews,
+      'windowresize': Components.updateViews
+    }
+  });
 });
