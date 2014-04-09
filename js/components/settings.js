@@ -55,22 +55,21 @@ Settings.prototype = {
       self.button.element.onclick = self.button.onclick;
 
       _.each(events, function(eventHandler) {
-        self.events[eventHandler.name](eventHandler);
+        self[eventHandler.name](eventHandler);
       });
     });
   },
-  updateView: function() {},
 
   reset: function() {},
 
-  events: {
-    onChangeValue: function(eventHandler) {
-      _.each(this.form.inputs, function(input) {
-        $(input.selector).on('change', function() {
-          eventHandler(input.name, this[input.value]);
-        });
+  // events 
+
+  onChangeValue: function(eventHandler) {
+    _.each(this.form.inputs, function(input) {
+      $(input.selector).on('change', function() {
+        eventHandler(input.name, this[input.value]);
       });
-    }
+    });
   }
 };
 

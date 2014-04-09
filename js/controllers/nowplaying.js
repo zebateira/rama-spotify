@@ -9,7 +9,6 @@ var Throbber;
 var ArtistGraph;
 var Settings;
 
-
 var NowPlaying = function(viewId, viewpath) {
   this.viewId = viewId;
   this.selector = '#' + viewId;
@@ -31,6 +30,15 @@ var NowPlaying = function(viewId, viewpath) {
 };
 
 NowPlaying.prototype = {
+  currentArtist: {
+    load: function(self, callback) {
+      models.player.load('track').done(function(player) {
+        callback(self,
+          models.Artist.fromURI(player.track.artists[0].uri),
+          player.track.advertisement);
+      });
+    }
+  },
   loadView: function() {
     var self = this;
 
@@ -85,27 +93,25 @@ NowPlaying.prototype = {
     ]);
   },
 
-  currentArtist: {
-    load: function(self, callback) {
-      models.player.load('track').done(function(player) {
-        callback(self,
-          models.Artist.fromURI(player.track.artists[0].uri),
-          player.track.advertisement);
-      });
-    }
-  },
-
   /**
     Set artist from the current playing track.
-    Also creates the artistGraph.
+    Creates the artistGraph.
   */
   setArtistGraph: function(self, artist) {
+    var config = {
+      options: self.options
+    };
+
+    if (self.artistGraph) {
+      config.branching = self.artistGraph.branching;
+      config.depth = self.artistGraph.depth;
+      config.treemode = self.artistGraph.treemode;
+    }
 
     self.artistGraph = new ArtistGraph(
       $(self.selector + ' .graph')[0],
-      artist, {
-        options: self.options
-      }
+      artist,
+      config
     );
 
     self.showThrobber();

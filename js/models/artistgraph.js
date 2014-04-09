@@ -11,14 +11,20 @@ var ArtistGraph = function(element, artist, config) {
   this.artist = artist;
   this.artist.nodeid = 1;
 
-  this.branching = (config && config.branching) || ArtistGraph.DEFAULT_BRANCHING;
+  this.branching = (config && config.branching) ||
+    ArtistGraph.DEFAULT_BRANCHING;
   this.depth = (config && config.depth) || ArtistGraph.DEFAULT_DEPTH;
+
+  if (typeof config.treemode != 'undefined')
+    this.treemode = config.treemode;
+  else this.treemode = ArtistGraph.DEFAULT_TREEMODE;
+
   this.options = (config && config.options) || ArtistGraph.DEFAULT_OPTIONS;
 
-
-  this.treemode = true;
-
   // options for rendering the graph
+
+  console.log('new artist graph created');
+  console.log(this);
 
   this.initGraph();
 
@@ -32,6 +38,7 @@ var ArtistGraph = function(element, artist, config) {
 
 ArtistGraph.DEFAULT_BRANCHING = 4;
 ArtistGraph.DEFAULT_DEPTH = 2;
+ArtistGraph.DEFAULT_TREEMODE = true;
 ArtistGraph.DEFAULT_OPTIONS = {};
 
 ArtistGraph.prototype = {
@@ -50,7 +57,9 @@ ArtistGraph.prototype = {
       edges: []
     };
   },
-
+  reset: function() {
+    this.initGraph();
+  },
   buildGraph: function() {
     this.counter = 1;
 
@@ -158,7 +167,7 @@ ArtistGraph.prototype = {
     if (typeof config.treemode != 'undefined')
       this.treemode = config.treemode;
 
-    this.initGraph();
+    this.reset();
   },
   redraw: function() {
     this.graph.zoomExtent();

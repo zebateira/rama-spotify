@@ -21,7 +21,6 @@ var Components = {
       header: true,
       views: TabBar.tabs,
       tabs: TabBar.tabs
-      // history: true
     });
     Header.loadView();
     TabBar.loadView();
@@ -34,6 +33,15 @@ var Components = {
     Header.updateView();
     TabBar.updateView(tabID);
   },
+  reset: function() {
+    Header.reset();
+    TabBar.reset();
+  },
+
+
+
+  // events
+
   bindEvents: function(events) {
     for (var event in events) {
       Components.on(event, events[event]);
@@ -53,12 +61,10 @@ var Components = {
   },
   on: function(event, eventHandler) {
     Components.events[event].bind(eventHandler);
-  },
-  reset: function() {
-    Header.reset();
-    TabBar.reset();
   }
 };
+
+// exporting module
 
 require([
   '$views/ui#UI',
