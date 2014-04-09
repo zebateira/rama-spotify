@@ -42,7 +42,6 @@ describe('Artist Graph Module', function() {
         }, {
           depth: 2
         }
-
       );
 
       expect(ag.depth).toBe(2);

@@ -15,16 +15,13 @@ var ArtistGraph = function(element, artist, config) {
     ArtistGraph.DEFAULT_BRANCHING;
   this.depth = (config && config.depth) || ArtistGraph.DEFAULT_DEPTH;
 
-  if (typeof config.treemode != 'undefined')
+  if (config && typeof config.treemode !== 'undefined')
     this.treemode = config.treemode;
   else this.treemode = ArtistGraph.DEFAULT_TREEMODE;
 
   this.options = (config && config.options) || ArtistGraph.DEFAULT_OPTIONS;
 
   // options for rendering the graph
-
-  console.log('new artist graph created');
-  console.log(this);
 
   this.initGraph();
 
