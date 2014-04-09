@@ -28,7 +28,6 @@ var NowPlaying = function(viewId, viewpath) {
     stabilize: true
     // clustering: true
   };
-
 };
 
 NowPlaying.prototype = {
@@ -73,19 +72,17 @@ NowPlaying.prototype = {
       selector: this.selector + ' ' + '.settings'
     });
 
-    this.settings.loadView(function() {
+    this.settings.loadView([
 
-      self.settings.onChangeValue(function(input, value) {
+      function onChangeValue(input, value) {
         var config = {};
-
         config[input] = parseInt(value) || value;
 
         self.showThrobber();
         self.artistGraph.updateGraph(config);
         self.artistGraph.buildGraph();
-      });
-    });
-
+      }
+    ]);
   },
 
   currentArtist: {

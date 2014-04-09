@@ -42,7 +42,7 @@ var Settings = function(config) {
 };
 
 Settings.prototype = {
-  loadView: function(done) {
+  loadView: function(events) {
     var self = this;
 
     $(this.selector).load(this.viewpath, function() {
@@ -53,23 +53,29 @@ Settings.prototype = {
       self.button.jelement = $(self.button.selector);
       self.button.element = self.button.jelement[0];
       self.button.element.onclick = self.button.onclick;
-      done();
+
+      _.each(events, function(eventHandler) {
+        self.events[eventHandler.name](eventHandler);
+      });
     });
   },
   updateView: function() {},
+
   reset: function() {},
 
-  onChangeValue: function(eventHandler) {
-    _.each(this.form.inputs, function(input) {
-      $(input.selector).on('change', function() {
-        eventHandler(input.name, this[input.value]);
+  events: {
+    onChangeValue: function(eventHandler) {
+      _.each(this.form.inputs, function(input) {
+        $(input.selector).on('change', function() {
+          eventHandler(input.name, this[input.value]);
+        });
       });
-    });
+    }
   }
 };
 
 Settings.prototype.constructor = Settings;
 
-require(['$api/models'], function(models) {
+require(['$api/models'], function(_models) {
   exports.Settings = Settings;
 });
