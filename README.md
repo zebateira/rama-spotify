@@ -6,28 +6,45 @@ RAMA is a Spotify Application for visualizing and interacting with networks of m
 
 For now, I do not intend to make this application available on the Spotify App Store, so to run it you need to set it up first.
 
+To open a downloaded app you need to **Activate Spotify Developer account** here: https://devaccount.spotify.com/my-account (no premium account needed).
+Tested on mac for now only.
 
 Installation
 --------------
-Tested on mac for now only.
 
+#### Automagic installer
 
+Execute the installer script.
 
-Run the following commands from the command prompt (for mac):
+```sh
+$ wget --no-check-certificate https://raw.githubusercontent.com/carsy/rama-spotify/master/install.sh -O - | sh
+```
+or with curl
+```sh
+$ curl -L https://raw.githubusercontent.com/carsy/rama-spotify/master/install.sh | sh
+```
+
+You should now be in the app and seeing a graph thingy.
+
+#### Manual installer
+
+These are the contents of the script:
+
 ```sh
 $ mkdir ~/Spotify ; cd ~/Spotify
+$ rm -rf rama-spotify
 $ wget https://github.com/carsy/rama-spotify/releases/download/v0.1.2/rama-spotify_v0.1.2.tar.gz
 $ tar -xvf rama-spotify_v0.1.2.tar.gz
+$ open spotify:app:rama-spotify
 ```
+You should now be in the app and seeing a graph thingy.
 
 Alternatively, If you happen to have commandlinephobia (I get that every other month... might be a thing):
 
 1. download the latest version of the app from [here]
 2. extract the folder
-3. create the Spotify folder if it doesn't exist already: "~/Spotify" (Mac OS X and Linux) or "My Documents\Spotify" (Windows).
+3. create the Spotify folder if it doesn't exist already: "~/Spotify" (Mac OS X) or "My Documents\Spotify" (Windows).
 4. copy the extracted folder to the Spotify folder.
-
-Now **Activate Spotify Developer account** here: https://devaccount.spotify.com/my-account (no premium account needed).
 
 Now open Spotify and type in the search bar:
 ```sh

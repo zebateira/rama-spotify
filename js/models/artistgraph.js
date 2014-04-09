@@ -11,6 +11,8 @@ var ArtistGraph = function(element, artist, config) {
   this.artist = artist;
   this.artist.nodeid = 1;
 
+  this.events = {};
+
   this.branching = (config && config.branching) ||
     ArtistGraph.DEFAULT_BRANCHING;
   this.depth = (config && config.depth) || ArtistGraph.DEFAULT_DEPTH;
@@ -26,9 +28,9 @@ var ArtistGraph = function(element, artist, config) {
   this.initGraph();
 
   this.graph = new vis.Graph(this.element, this.data, this.options);
-
+  var graph = this.graph;
   this.graph.on('stabilized', function(iterations) { // Y U NO WORK
-    this.zoomExtent();
+    graph.zoomExtent();
     console.log(iterations);
   });
 };
@@ -47,6 +49,7 @@ ArtistGraph.prototype = {
       nodes: [{
         id: this.index,
         label: this.artist.name,
+        artist: this.artist,
         color: {
           background: '#666'
         }
@@ -102,7 +105,8 @@ ArtistGraph.prototype = {
 
         this.data.nodes.push({
           id: nodeid,
-          label: artist.name
+          label: artist.name,
+          artist: artist
         });
 
         this.data.edges.push({
@@ -138,13 +142,14 @@ ArtistGraph.prototype = {
     var promiseRelated = rootArtist.load('related');
     promiseRelated.done(this, relatedDone);
   },
-
   drawGraph: function(debug) {
     this.graph.setData(this.data, {
       disableStart: true
     });
 
     this.graph.start();
+
+    this.bindAllEvents();
 
     if (this.throbber)
       this.throbber.hide();
@@ -169,6 +174,20 @@ ArtistGraph.prototype = {
   redraw: function() {
     this.graph.zoomExtent();
     this.graph.redraw();
+  },
+
+  // events
+  on: function(event, eventHandler) {
+    this.events[event] = eventHandler;
+  },
+
+  bindAllEvents: function() {
+    var self = this;
+    _.each(this.events, function(event) {
+      self.graph.on(event.name, function(data) {
+        self.events[event.name](data);
+      });
+    });
   }
 };
 

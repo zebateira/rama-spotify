@@ -9,14 +9,16 @@ spotify.require([
       link: 'http://rama.inescporto.pt/app'
     },
     tabs: [{
-      viewId: 'nowplaying',
-      name: 'Now Playing',
-      controller: controllers.NowPlaying
-    }, {
-      viewId: 'toplist',
-      name: 'Top List',
-      controller: controllers.TopList
-    }]
+        viewId: 'nowplaying',
+        name: 'Now Playing',
+        controller: controllers.NowPlaying
+      }
+      // , {
+      //   viewId: 'toplist',
+      //   name: 'Top List',
+      //   controller: controllers.TopList
+      // }
+    ]
   });
 
   Components.loadViews({

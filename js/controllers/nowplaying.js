@@ -17,12 +17,13 @@ var NowPlaying = function(viewId, viewpath) {
   this.options = {
     nodes: {
       color: {
-        background: '#333',
+        background: '#474747',
         border: '#555'
       },
-      fontColor: '#eef',
+      fontColor: '#ddd',
+      fontFace: '',
       shape: 'box',
-      radius: 1
+      radius: 1,
     },
     stabilize: true
     // clustering: true
@@ -70,6 +71,18 @@ NowPlaying.prototype = {
           if (currentArtist.uri !== oldArtistURI)
             self.setArtistGraph(self, currentArtist);
         });
+    },
+    onNodeDoubleClick: function(self, data) {
+      var node = _.findWhere(self.artistGraph.data.nodes, {
+        id: parseInt(data.nodes[0])
+      });
+
+      if (node.id === 1)
+        return;
+
+      node.artist.load('compilations').done(function(artist) {
+        models.player.playContext(artist.compilations);
+      });
     }
   },
 
@@ -116,6 +129,9 @@ NowPlaying.prototype = {
 
     self.showThrobber();
     self.artistGraph.buildGraph();
+    self.artistGraph.on('doubleClick', function doubleClick(data) {
+      self.events.onNodeDoubleClick(self, data);
+    });
   },
   showThrobber: function() {
     if (this.artistGraph.throbber)
