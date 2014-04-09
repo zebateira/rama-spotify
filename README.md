@@ -91,7 +91,7 @@ José Bateira
 [@\_carsy\_]:http://twitter.com/_carsy_
 [here]:https://github.com/carsy/rama-spotify/releases/latest
 [Releases]:https://github.com/carsy/rama-spotify/releases/latest
-[v0.1.2]:https://github.com/carsy/rama-spotify/releases/tag/v0.1.3
+[v0.1.3]:https://github.com/carsy/rama-spotify/releases/tag/v0.1.3
 [v0.1.2]:https://github.com/carsy/rama-spotify/releases/tag/v0.1.2
 [v0.1.1]:https://github.com/carsy/rama-spotify/releases/tag/v0.1.1
 [v0.1.0]:https://github.com/carsy/rama-spotify/releases/tag/v0.1.0
