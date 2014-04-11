@@ -12,28 +12,49 @@ body, html {
   box-sizing: border-box;
 }
 
+$bg-color: #ecebe8;
+$bg-dark: #474747;
+$bg-light: #6b6b6b;
+
+$new-bg: #222326;
+$new-bg-lighter1: #2e2f33;
+$new-bg-lighter2: #313336;
+$new-bg-darker: #1c1c1f;
+$new-white: #dfe0e6;
+
+$font-color: #a1a3a6;
+
+$header-height: 60px;
+$tabs-height: 34px;
+$content-height: calc(100% - #{$header-height});
+
 a {
   text-decoration: none;
 }
 
 html, body {
   height: 100%;
+
+  color: $font-color;
 }
 
-$bg-color: #ecebe8;
-$bg-dark: #474747;
-$bg-light: #6b6b6b;
 
-$header-height: 60px;
-$tabs-height: 34px;
-$content-height: calc(100% - #{$header-height} - #{$tabs-height});
 
 #view_container {
   height: $content-height;
+  background-color: $new-bg;
   
   .view {
     height: 100%;
   }
+}
+
+.sp-throbber-background {
+  background-color: $bg-color;
+}
+
+.sp-tabbar {
+  display: none !important;
 }
 
 /* imports */

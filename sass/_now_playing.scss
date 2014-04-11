@@ -5,6 +5,7 @@
 #view_container  {
   overflow: hidden;
   position: relative;
+  background-color: $new-bg-darker;
 }
 
 
@@ -12,17 +13,17 @@
   position: absolute;
   z-index: 2;
   top: 10px;
-  right: 20px;
+  right: 10px;
 
   .settings-btn {
     float: right;
 
     width: 20px;
     height: 20px;
-    margin-bottom: 10px;
-    margin-right: 4px;
+    margin: 10px 4px 10px 0;
+    opacity: 0.8;
 
-    background: url(../img/settings-dark.png) no-repeat;
+    background: url(../img/settings.png) no-repeat;
     background-size: cover;
 
     &:hover {
@@ -30,7 +31,7 @@
     }
 
     &.opened {
-      opacity: 0.8;
+      opacity: 1;
     }
 
     &:active {
@@ -45,10 +46,10 @@
   
     padding: 10px 6px;
 
-    background-color: $bg-color;
+    background-color: $new-bg;
     border-radius: 2px;
     border-width: 1px;
-    border-color: #bbb;
+    border-color: #999;
     border-style: solid;
 
     .tri {
@@ -59,10 +60,10 @@
       width: 10px;
       height: 10px;
       
-      background-color: $bg-color;
+      background-color: $new-bg;
       border-radius: 2px;
       border-width: 1px;
-      border-color: #bbb transparent transparent #bbb;
+      border-color: #999 transparent transparent #999;
       border-style: solid;
 
       -webkit-transform: rotate(45deg);
@@ -83,6 +84,8 @@
         padding: 2px;
         width: 30px;
         float: right;
+        background-color: $new-bg;
+        border-width: 1px;
 
         &[name=treemode] {
           margin-top: 5px;

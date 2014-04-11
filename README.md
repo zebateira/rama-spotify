@@ -59,6 +59,10 @@ With no official release for the Spotify Desktop Client, there's nothing I can d
 [Releases]
 ----
 
+[v0.2] - UI redesign
+  - UI updated to darker theme
+  - settings are kept when playing artist changes
+
 [v0.1.3] - Play tracks from artist node
   - look and feel of the nodes updated
   - on double click a node in the graph, top tracks of the artist are played
@@ -91,6 +95,7 @@ José Bateira
 [@\_carsy\_]:http://twitter.com/_carsy_
 [here]:https://github.com/carsy/rama-spotify/releases/latest
 [Releases]:https://github.com/carsy/rama-spotify/releases/latest
+[v0.2]:https://github.com/carsy/rama-spotify/releases/tag/v0.2
 [v0.1.3]:https://github.com/carsy/rama-spotify/releases/tag/v0.1.3
 [v0.1.2]:https://github.com/carsy/rama-spotify/releases/tag/v0.1.2
 [v0.1.1]:https://github.com/carsy/rama-spotify/releases/tag/v0.1.1
