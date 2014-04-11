@@ -25,6 +25,12 @@ var NowPlaying = function(viewId, viewpath) {
       shape: 'box',
       radius: 1,
     },
+    edges: {
+      color: {
+        color: '#8f9096',
+        highlight: '#8f9096'
+      }
+    },
     stabilize: true
     // clustering: true
   };
@@ -54,8 +60,13 @@ NowPlaying.prototype = {
     });
   },
   updateView: function() {
-    if (this.artistGraph)
+    if (this.artistGraph) {
       this.artistGraph.redraw();
+      if (this.artistGraph.throbber)
+        this.artistGraph.throbber.setPosition('center', 'center');
+    }
+
+
 
     return this;
   },
@@ -140,6 +151,7 @@ NowPlaying.prototype = {
     this.artistGraph.throbber =
       Throbber.forElement(document.getElementById(this.viewId));
     this.artistGraph.throbber.setPosition('center', 'center');
+    this.artistGraph.throbber._addBackground();
   }
 };
 

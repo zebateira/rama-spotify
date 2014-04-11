@@ -12,8 +12,9 @@
   "BundleType": "Application",
   "BundleVersion": "0.2",
   "Dependencies": {
-    "api": "1.35",
-    "views": "1.56.3"
+    "api": "1.0.0",
+    "views": "1.0.0",
+    "resources": "0.7.0"
   },
   "SupportedDeviceClasses": ["Desktop"],
   "SupportedLanguages": [

@@ -92,7 +92,7 @@ ArtistGraph.prototype = {
           var extraEdge = {
             from: rootArtist.nodeid,
             to: duplicated.id,
-            color: '#ddd'
+            color: '#aaa'
           };
 
           this.extraEdges.push(extraEdge);
@@ -160,6 +160,7 @@ ArtistGraph.prototype = {
       console.log('# nodes: ' + this.data.nodes.length);
       console.log('# edges: ' + this.data.edges.length);
     }
+
   },
   updateGraph: function(config) {
     this.branching = config.branching || this.branching;
