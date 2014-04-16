@@ -447,12 +447,12 @@ meter {
 #eqbar {
   margin: 0 auto;
   width: 400px;
+  opacity: 0.2;
 }
-/* line 34, ../sass/_eqbar.scss */
+/* line 35, ../sass/_eqbar.scss */
 #eqbar .bar {
   float: left;
   width: 3px;
   min-height: 1px;
-  background-color: #95dc00;
-  opacity: 0.4;
+  background-color: #dfe0e6;
 }

@@ -30,13 +30,12 @@ meter {
 #eqbar {
   margin: 0 auto;
   width: 400px;
+  opacity: 0.2;
 
   .bar {
     float: left;
     width: 3px;
     min-height: 1px;
-    background-color: $green2;
-
-    opacity: 0.4;
+    background-color: $new-white;
   }
 }
