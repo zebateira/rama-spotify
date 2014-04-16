@@ -33,8 +33,8 @@ These are the contents of the script:
 ```sh
 $ mkdir ~/Spotify ; cd ~/Spotify
 $ rm -rf rama-spotify
-$ wget https://github.com/carsy/rama-spotify/releases/download/v0.1.3/rama-spotify_v0.1.3.tar.gz
-$ tar -xvf rama-spotify_v0.1.3.tar.gz
+$ wget https://github.com/carsy/rama-spotify/releases/download/v0.3/rama-spotify_v0.3.tar.gz
+$ tar -xvf rama-spotify_v0.3.tar.gz
 $ open spotify:app:rama-spotify
 ```
 You should now be in the app and seeing a graph thingy.
@@ -59,6 +59,9 @@ With no official release for the Spotify Desktop Client, there's nothing I can d
 [Releases]
 ----
 
+[v0.3] - Equalizer graph
+  - Equalizer added using spotify's buffer analyzer api
+
 [v0.2] - UI redesign
   - UI updated to darker theme
   - settings are kept when playing artist changes
@@ -80,8 +83,6 @@ With no official release for the Spotify Desktop Client, there's nothing I can d
 [v0.1.0] - First Release
   - graph depth 1 displayed on app load.
 
-It is still in alfa, so please bear with the lack of functionalities (none for now really...).
-
 
 #### Author
 
@@ -95,6 +96,7 @@ José Bateira
 [@\_carsy\_]:http://twitter.com/_carsy_
 [here]:https://github.com/carsy/rama-spotify/releases/latest
 [Releases]:https://github.com/carsy/rama-spotify/releases/latest
+[v0.3]:https://github.com/carsy/rama-spotify/releases/tag/v0.3
 [v0.2]:https://github.com/carsy/rama-spotify/releases/tag/v0.2
 [v0.1.3]:https://github.com/carsy/rama-spotify/releases/tag/v0.1.3
 [v0.1.2]:https://github.com/carsy/rama-spotify/releases/tag/v0.1.2
