@@ -246,7 +246,7 @@ pre .regexp {
 }
 
 /* overrides */
-/* line 29, ../sass/main.scss */
+/* line 32, ../sass/main.scss */
 body, html {
   margin: 0;
   height: 100%;
@@ -254,27 +254,27 @@ body, html {
   overflow: hidden;
 }
 
-/* line 39, ../sass/main.scss */
+/* line 42, ../sass/main.scss */
 a {
   text-decoration: none;
 }
 
-/* line 43, ../sass/main.scss */
+/* line 46, ../sass/main.scss */
 #view_container {
   height: calc(100% - 60px);
   background-color: #222326;
 }
-/* line 47, ../sass/main.scss */
+/* line 50, ../sass/main.scss */
 #view_container .view {
   height: 100%;
 }
 
-/* line 52, ../sass/main.scss */
+/* line 55, ../sass/main.scss */
 .sp-throbber-background {
   background-color: #ecebe8;
 }
 
-/* line 56, ../sass/main.scss */
+/* line 59, ../sass/main.scss */
 .sp-tabbar {
   display: none !important;
 }
@@ -435,15 +435,24 @@ meter {
 }
 
 /* line 22, ../sass/_eqbar.scss */
-.eqbar {
+#eqbar-wrapper {
   position: absolute;
-  bottom: -5px;
-  right: 0;
   z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
-/* line 28, ../sass/_eqbar.scss */
-.eqbar .bar {
-  display: inline-block;
-  width: 5px;
-  background-color: #2e2f33;
+
+/* line 30, ../sass/_eqbar.scss */
+#eqbar {
+  margin: 0 auto;
+  width: 400px;
+}
+/* line 34, ../sass/_eqbar.scss */
+#eqbar .bar {
+  float: left;
+  width: 3px;
+  min-height: 1px;
+  background-color: #95dc00;
+  opacity: 0.4;
 }

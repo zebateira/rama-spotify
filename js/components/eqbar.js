@@ -17,6 +17,7 @@ EQBar = {
 
     EQBar.selector = config.selector;
     EQBar.numRows = config.numRows;
+    EQBar.step = 256 / EQBar.numRows;
   },
   loadView: function() {
     var numRows = EQBar.numRows;
@@ -34,12 +35,11 @@ EQBar = {
     var analyzer = audio.RealtimeAnalyzer.forPlayer(models.player);
 
     analyzer.addEventListener('audio', function(evt) {
-      // There will be 256 samples, but we want to only display every [step]
-      // samples because we have fewer than 256 rows.
-      var step = 256 / numRows;
       for (var i = 0; i < numRows; i++) {
-        bars[i * 2].style.height = evt.audio.wave.left[step * i] * 100 + 'px';
-        bars[i * 2 + 1].style.height = evt.audio.wave.right[step * i] * 100 + 'px';
+        bars[i * 2].style.height =
+          evt.audio.wave.left[EQBar.step * i] * 100 + 'px';
+        bars[i * 2 + 1].style.height =
+          evt.audio.wave.right[EQBar.step * i] * 100 + 'px';
       }
     });
 

@@ -30,9 +30,8 @@ var Components = {
 
     Components.bindEvents(config.events);
   },
-  updateViews: function(tab) {
-    var tabID = tab.id || Components.spUI.activeView;
-
+  updateViews: function(data) {
+    var tabID = data.id || Components.spUI.activeView;
     Header.updateView();
     TabBar.updateView(tabID);
   },

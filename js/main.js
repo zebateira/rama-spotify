@@ -20,8 +20,8 @@ spotify.require([
       // }
     ],
     eqbar: {
-      selector: '.eqbar',
-      numRows: 32
+      selector: '#eqbar',
+      numRows: 64
     }
   });
 
