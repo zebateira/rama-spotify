@@ -1,0 +1,41 @@
+
+meter {
+  box-shadow: 0 5px 5px -5px #999 inset;
+  background-image: linear-gradient(
+    90deg, 
+    #8bcf69 5%, 
+    #e6d450 5%,
+    #e6d450 15%,
+    #f28f68 15%,
+    #f28f68 55%,
+    #cf82bf 55%,
+    #cf82bf 95%,
+    #719fd1 95%,
+    #719fd1 100%
+    );
+  background-size: 100% 100%;
+  
+  -webkit-transform: rotate(-90deg);
+  margin-left: -48px;
+}
+
+#eqbar-wrapper {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+#eqbar {
+  margin: 0 auto;
+  width: 400px;
+  opacity: 0.2;
+
+  .bar {
+    float: left;
+    width: 3px;
+    min-height: 1px;
+    background-color: $new-white;
+  }
+}

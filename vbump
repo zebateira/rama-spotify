@@ -1,0 +1,10 @@
+#/bin/zsh
+
+version=$1
+buildfolder="rama-spotify"
+
+git tag $version
+git push --tags
+grunt build
+zip -r "$buildfolder"_"$version".zip "$buildfolder"/*
+tar -cf "$buildfolder"_"$version".tar.gz "$buildfolder"/*

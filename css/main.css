@@ -240,44 +240,41 @@ pre .regexp {
   color: #009926;
 }
 
-/* overrides */
 /* line 7, ../sass/main.scss */
-body, html {
-  margin: 0;
-}
-
-/* line 11, ../sass/main.scss */
 *, *:before, *:after {
   box-sizing: border-box;
 }
 
-/* line 31, ../sass/main.scss */
+/* overrides */
+/* line 32, ../sass/main.scss */
+body, html {
+  margin: 0;
+  height: 100%;
+  color: #a1a3a6;
+  overflow: hidden;
+}
+
+/* line 42, ../sass/main.scss */
 a {
   text-decoration: none;
 }
 
-/* line 35, ../sass/main.scss */
-html, body {
-  height: 100%;
-  color: #a1a3a6;
-}
-
-/* line 43, ../sass/main.scss */
+/* line 46, ../sass/main.scss */
 #view_container {
   height: calc(100% - 60px);
   background-color: #222326;
 }
-/* line 47, ../sass/main.scss */
+/* line 50, ../sass/main.scss */
 #view_container .view {
   height: 100%;
 }
 
-/* line 52, ../sass/main.scss */
+/* line 55, ../sass/main.scss */
 .sp-throbber-background {
   background-color: #ecebe8;
 }
 
-/* line 56, ../sass/main.scss */
+/* line 59, ../sass/main.scss */
 .sp-tabbar {
   display: none !important;
 }
@@ -426,4 +423,36 @@ html, body {
 .settings .settings-form .option input[name=treemode] {
   margin-top: 5px;
   margin-left: 5px;
+}
+
+/* line 2, ../sass/_eqbar.scss */
+meter {
+  box-shadow: 0 5px 5px -5px #999 inset;
+  background-image: linear-gradient(90deg, #8bcf69 5%, #e6d450 5%, #e6d450 15%, #f28f68 15%, #f28f68 55%, #cf82bf 55%, #cf82bf 95%, #719fd1 95%, #719fd1 100%);
+  background-size: 100% 100%;
+  -webkit-transform: rotate(-90deg);
+  margin-left: -48px;
+}
+
+/* line 22, ../sass/_eqbar.scss */
+#eqbar-wrapper {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+/* line 30, ../sass/_eqbar.scss */
+#eqbar {
+  margin: 0 auto;
+  width: 400px;
+  opacity: 0.2;
+}
+/* line 35, ../sass/_eqbar.scss */
+#eqbar .bar {
+  float: left;
+  width: 3px;
+  min-height: 1px;
+  background-color: #dfe0e6;
 }

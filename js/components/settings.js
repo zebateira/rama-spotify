@@ -1,3 +1,5 @@
+var Element;
+
 var Settings = function(config) {
   this.selector = config.selector || '.settings';
   this.viewpath = config.viewpath || '../views/settings.html';
@@ -5,40 +7,29 @@ var Settings = function(config) {
   var self = this;
 
   this.form = {
-    selector: config.formSelector || this.selector + ' .settings-form'
+    selector: config.formSelector || this.selector + ' .settings-form',
   };
 
-  this.form.getSelector = function(name) {
-    return self.form.selector + ' input[name=' + name + ']';
-  };
-
-  this.form.inputs = {
-    branching: {
-      name: 'branching',
-      value: 'value',
-      selector: this.form.getSelector('branching')
-    },
-    depth: {
-      name: 'depth',
-      value: 'value',
-      selector: this.form.getSelector('depth')
-    },
-    treemode: {
-      name: 'treemode',
-      value: 'checked',
-      selector: this.form.getSelector('treemode')
-    }
-  };
+  for (var input in Settings.INPUTS) {
+    Settings.INPUTS[input].selector =
+      this.form.selector + ' input[name=' + input + ']';
+  }
 
   this.button = {
     selector: config.buttonSelector || this.selector + ' .settings-btn'
   };
+};
 
-  this.button.onclick = function(event) {
-    self.button.jelement.toggleClass('opened');
-    self.form.jelement.toggle();
-  };
-
+Settings.INPUTS = {
+  branching: {
+    value: 'value'
+  },
+  depth: {
+    value: 'value'
+  },
+  treemode: {
+    value: 'checked'
+  }
 };
 
 Settings.prototype = {
@@ -46,13 +37,17 @@ Settings.prototype = {
     var self = this;
 
     $(this.selector).load(this.viewpath, function() {
+
       self.jelement = $(self.selector);
       self.element = self.jelement[0];
-      self.form.jelement = $(self.form.selector);
-      self.form.element = self.form.jelement[0];
-      self.button.jelement = $(self.button.selector);
-      self.button.element = self.button.jelement[0];
-      self.button.element.onclick = self.button.onclick;
+
+      self.form = new Element(self.form.selector);
+      self.button = new Element(self.button.selector);
+
+      self.button.element.onclick = function(event) {
+        self.button.jelement.toggleClass('opened');
+        self.form.jelement.toggle();
+      };
 
       _.each(events, function(eventHandler) {
         self[eventHandler.name](eventHandler);
@@ -63,11 +58,10 @@ Settings.prototype = {
   reset: function() {},
 
   // events 
-
   onChangeValue: function(eventHandler) {
-    _.each(this.form.inputs, function(input) {
+    _.each(Settings.INPUTS, function(input) {
       $(input.selector).on('change', function() {
-        eventHandler(input.name, this[input.value]);
+        eventHandler(this.name, this[input.value]);
       });
     });
   }
@@ -75,6 +69,7 @@ Settings.prototype = {
 
 Settings.prototype.constructor = Settings;
 
-require(['$api/models'], function(_models) {
+require(['js/models/element#Element'], function(_element) {
+  Element = _element;
   exports.Settings = Settings;
 });

@@ -3,10 +3,6 @@
 
 @import url("http://fonts.googleapis.com/css?family=Ruda");
 
-/* overrides */
-body, html {
-  margin: 0;
-}
 
 *, *:before, *:after {
   box-sizing: border-box;
@@ -18,9 +14,13 @@ $bg-light: #6b6b6b;
 
 $new-bg: #222326;
 $new-bg-lighter1: #2e2f33;
+$new-bg-lighter: $new-bg-lighter1;
 $new-bg-lighter2: #313336;
 $new-bg-darker: #1c1c1f;
 $new-white: #dfe0e6;
+
+$green1: #7fb701;
+$green2: #95dc00;
 
 $font-color: #a1a3a6;
 
@@ -28,17 +28,20 @@ $header-height: 60px;
 $tabs-height: 34px;
 $content-height: calc(100% - #{$header-height});
 
-a {
-  text-decoration: none;
-}
+/* overrides */
+body, html {
+  margin: 0;
 
-html, body {
   height: 100%;
 
   color: $font-color;
+
+  overflow: hidden;
 }
 
-
+a {
+  text-decoration: none;
+}
 
 #view_container {
   height: $content-height;
@@ -60,3 +63,4 @@ html, body {
 /* imports */
 @import "header";
 @import "now_playing";
+@import "eqbar";

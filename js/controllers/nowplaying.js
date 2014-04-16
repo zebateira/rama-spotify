@@ -23,7 +23,7 @@ var NowPlaying = function(viewId, viewpath) {
       fontColor: '#ddd',
       fontFace: '',
       shape: 'box',
-      radius: 1,
+      radius: 1
     },
     edges: {
       color: {
@@ -65,9 +65,6 @@ NowPlaying.prototype = {
       if (this.artistGraph.throbber)
         this.artistGraph.throbber.setPosition('center', 'center');
     }
-
-
-
     return this;
   },
   events: {

@@ -8,8 +8,8 @@ bower_components
 # build files
 .tmp
 rama-spotify
-rama-spotify.zip
-rama-spotify.tar.gz
+*.zip
+*.tar.gz
 
 # BE GONE DAMMIT
 .DS_STORE
