@@ -23,7 +23,8 @@ EQBar = {
     var bars = [];
 
     for (var i = 0; i < numRows * 2; i++) {
-      var bar = document.createElement('meter');
+      var bar = document.createElement('div');
+      bar.className = 'bar';
       bar.min = -1;
       $(EQBar.selector).append(bar);
 
@@ -37,8 +38,8 @@ EQBar = {
       // samples because we have fewer than 256 rows.
       var step = 256 / numRows;
       for (var i = 0; i < numRows; i++) {
-        bars[i * 2].value = evt.audio.wave.left[step * i];
-        bars[i * 2 + 1].value = evt.audio.wave.right[step * i];
+        bars[i * 2].style.height = evt.audio.wave.left[step * i] * 100 + 'px';
+        bars[i * 2 + 1].style.height = evt.audio.wave.right[step * i] * 100 + 'px';
       }
     });
 

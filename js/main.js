@@ -18,12 +18,11 @@ spotify.require([
       //   name: 'Top List',
       //   controller: controllers.TopList
       // }
-    ]
-    // ,
-    // eqbar: {
-    //   selector: '.eqbar',
-    //   numRows: 16
-    // }
+    ],
+    eqbar: {
+      selector: '.eqbar',
+      numRows: 32
+    }
   });
 
   Components.loadViews({

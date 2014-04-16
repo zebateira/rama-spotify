@@ -240,26 +240,23 @@ pre .regexp {
   color: #009926;
 }
 
-/* overrides */
 /* line 7, ../sass/main.scss */
-body, html {
-  margin: 0;
-}
-
-/* line 11, ../sass/main.scss */
 *, *:before, *:after {
   box-sizing: border-box;
 }
 
-/* line 31, ../sass/main.scss */
-a {
-  text-decoration: none;
-}
-
-/* line 35, ../sass/main.scss */
-html, body {
+/* overrides */
+/* line 29, ../sass/main.scss */
+body, html {
+  margin: 0;
   height: 100%;
   color: #a1a3a6;
+  overflow: hidden;
+}
+
+/* line 39, ../sass/main.scss */
+a {
+  text-decoration: none;
 }
 
 /* line 43, ../sass/main.scss */
@@ -280,23 +277,6 @@ html, body {
 /* line 56, ../sass/main.scss */
 .sp-tabbar {
   display: none !important;
-}
-
-/* line 60, ../sass/main.scss */
-meter {
-  box-shadow: 0 5px 5px -5px #999 inset;
-  background-image: linear-gradient(90deg, #8bcf69 5%, #e6d450 5%, #e6d450 15%, #f28f68 15%, #f28f68 55%, #cf82bf 55%, #cf82bf 95%, #719fd1 95%, #719fd1 100%);
-  background-size: 100% 100%;
-  -webkit-transform: rotate(-90deg);
-  margin-left: -48px;
-}
-
-/* line 80, ../sass/main.scss */
-.eqbar {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 40px;
 }
 
 /* imports */
@@ -443,4 +423,27 @@ meter {
 .settings .settings-form .option input[name=treemode] {
   margin-top: 5px;
   margin-left: 5px;
+}
+
+/* line 2, ../sass/_eqbar.scss */
+meter {
+  box-shadow: 0 5px 5px -5px #999 inset;
+  background-image: linear-gradient(90deg, #8bcf69 5%, #e6d450 5%, #e6d450 15%, #f28f68 15%, #f28f68 55%, #cf82bf 55%, #cf82bf 95%, #719fd1 95%, #719fd1 100%);
+  background-size: 100% 100%;
+  -webkit-transform: rotate(-90deg);
+  margin-left: -48px;
+}
+
+/* line 22, ../sass/_eqbar.scss */
+.eqbar {
+  position: absolute;
+  bottom: -5px;
+  right: 0;
+  z-index: 1;
+}
+/* line 28, ../sass/_eqbar.scss */
+.eqbar .bar {
+  display: inline-block;
+  width: 5px;
+  background-color: #2e2f33;
 }
