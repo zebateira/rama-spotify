@@ -458,6 +458,11 @@ meter {
 }
 
 /* line 1, ../sass/_artistmenu.scss */
-.artistmenu {
+#artist-menu {
+  position: absolute;
+  top: 25%;
+  left: 0;
+  overflow: auto;
+  border: 1px solid #222326;
   color: #dfe0e6;
 }

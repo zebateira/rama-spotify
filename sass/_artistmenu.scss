@@ -1,3 +1,11 @@
-.artistmenu {
+#artist-menu {
+  position: absolute;
+  top: 25%;
+  left: 0;
+  overflow: auto;
+
+  border: 1px solid $new-bg;
+
   color: $new-white;
+
 }

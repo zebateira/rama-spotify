@@ -23,8 +23,6 @@ var ArtistGraph = function(element, artist, config) {
 
   this.options = (config && config.options) || ArtistGraph.DEFAULT_OPTIONS;
 
-  // options for rendering the graph
-
   this.initGraph();
 
   this.graph = new vis.Graph(this.element, this.data, this.options);
