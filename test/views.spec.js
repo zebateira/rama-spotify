@@ -24,7 +24,11 @@ describe('Components Module', function() {
 
         Components.initConfig({
           header: {},
-          tabs: []
+          tabs: [],
+          artistmenu: {
+            selector: '.artistmenu',
+            path: '../views/artistmenu.html'
+          }
         });
 
         expect(Header.path).toBe(Header.DEFAULT_PATH);
@@ -37,7 +41,11 @@ describe('Components Module', function() {
         header: {
           path: headerPath
         },
-        tabs: []
+        tabs: [],
+        artistmenu: {
+          selector: '.artistmenu',
+          path: '../views/artistmenu.html'
+        }
       });
 
       expect(Header.path).toBe(headerPath);
@@ -53,7 +61,11 @@ describe('Components Module', function() {
           path: "path/to/file",
           link: linkAttr
         },
-        tabs: []
+        tabs: [],
+        artistmenu: {
+          selector: '.artistmenu',
+          path: '../views/artistmenu.html'
+        }
       });
 
       Header.afterLoad();
@@ -69,7 +81,11 @@ describe('Components Module', function() {
         header: {
           path: "path/to/file"
         },
-        tabs: []
+        tabs: [],
+        artistmenu: {
+          selector: '.artistmenu',
+          path: '../views/artistmenu.html'
+        }
       });
 
       Header.afterLoad();
@@ -101,7 +117,11 @@ describe('Components Module', function() {
 
       Components.initConfig({
         header: true,
-        tabs: [tab]
+        tabs: [tab],
+        artistmenu: {
+          selector: '.artistmenu',
+          path: '../views/artistmenu.html'
+        }
       });
 
       expect(TabBar.tabs[0].viewId).toBe(tab.viewId);
@@ -119,7 +139,11 @@ describe('Components Module', function() {
 
       Components.initConfig({
         header: true,
-        tabs: [tab]
+        tabs: [tab],
+        artistmenu: {
+          selector: '.artistmenu',
+          path: '../views/artistmenu.html'
+        }
       });
 
       expect(TabBar.tabs[0].path).toBe(defaultPath);
@@ -130,7 +154,11 @@ describe('Components Module', function() {
           header: true,
           tabs: [{
             name: 'asdf'
-          }]
+          }],
+          artistmenu: {
+            selector: '.artistmenu',
+            path: '../views/artistmenu.html'
+          }
         });
       }).toThrowError();
     });
@@ -140,7 +168,11 @@ describe('Components Module', function() {
           header: true,
           tabs: [{
             viewId: 'asdf'
-          }]
+          }],
+          artistmenu: {
+            selector: '.artistmenu',
+            path: '../views/artistmenu.html'
+          }
         });
       }).toThrowError(TabInfoMissingException);
     });
@@ -148,7 +180,11 @@ describe('Components Module', function() {
       expect(function() {
         Components.initConfig({
           header: true,
-          tabs: [{}]
+          tabs: [{}],
+          artistmenu: {
+            selector: '.artistmenu',
+            path: '../views/artistmenu.html'
+          }
         });
       }).toThrowError(TabInfoMissingException);
     });
@@ -160,7 +196,11 @@ describe('Components Module', function() {
           viewId: 'id',
           name: 'Fancy tab name',
           controller: controllers.NowPlaying
-        }]
+        }],
+        artistmenu: {
+          selector: '.artistmenu',
+          path: '../views/artistmenu.html'
+        }
       });
 
       expect(TabBar.tabs[0].controller.viewId).toBe(new controllers.NowPlaying('id', 'path').viewId);
@@ -173,7 +213,11 @@ describe('Components Module', function() {
           tabs: [{
             viewId: 'id',
             name: 'fancy name'
-          }]
+          }],
+          artistmenu: {
+            selector: '.artistmenu',
+            path: '../views/artistmenu.html'
+          }
         });
       }).toThrowError(TabMissingControllerException);
     });

@@ -50,8 +50,9 @@ ArtistGraph.prototype = {
         id: this.index,
         label: this.artist.name,
         artist: this.artist,
+        fontColor: '#313336',
         color: {
-          background: '#666'
+          background: '#afb0b6'
         }
       }],
       edges: []
@@ -78,7 +79,7 @@ ArtistGraph.prototype = {
         label: artist.name
       });
 
-      if (duplicated) {
+      if (duplicated && artist.name !== rootArtist.name) {
         var inverseEdgeExists = _.findWhere(this.data.edges, {
           from: duplicated.id,
           to: rootArtist.nodeid

@@ -1,3 +1,11 @@
+var ConfigObjectMissing = function() {
+  this.name = 'ConfigObjectMissing';
+  this.message = 'Config object is missing from the main config object';
+};
+
+ConfigObjectMissing.prototype = new Error();
+ConfigObjectMissing.prototype.constructor = ConfigObjectMissing;
+
 var HeaderMissingException = function() {
   this.name = 'HeaderMissingException';
   this.message = 'Header must be configured in views\' options. ' +
@@ -35,6 +43,8 @@ TabMissingControllerException.prototype.constructor = TabMissingControllerExcept
 
 
 require(['$api/models'], function(models) {
+  exports.ConfigObjectMissing = ConfigObjectMissing;
+
   exports.HeaderMissingException = HeaderMissingException;
   exports.TabsMissingException = TabsMissingException;
   exports.TabInfoMissingException = TabInfoMissingException;

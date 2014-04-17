@@ -2,7 +2,7 @@ var HeaderMissingException;
 
 var Header = {};
 
-require(['$views/ui', 'js/exceptions'], function(ui, _exceptions) {
+require(['js/exceptions'], function(_exceptions) {
   exports.header = Header;
 
   HeaderMissingException = _exceptions.HeaderMissingException;

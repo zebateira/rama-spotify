@@ -21,7 +21,11 @@ spotify.require([
     ],
     eqbar: {
       selector: '#eqbar',
-      numRows: 64
+      numRows: 256
+    },
+    artistmenu: {
+      selector: '#artist-menu',
+      path: '../views/artistmenu.html'
     }
   });
 

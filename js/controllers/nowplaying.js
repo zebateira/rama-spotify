@@ -130,7 +130,7 @@ NowPlaying.prototype = {
     }
 
     self.artistGraph = new ArtistGraph(
-      $(self.selector + ' .graph')[0],
+      $(self.selector + ' #graph')[0],
       artist,
       config
     );

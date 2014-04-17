@@ -16,26 +16,30 @@ meter {
   background-size: 100% 100%;
   
   -webkit-transform: rotate(-90deg);
-  margin-left: -48px;
 }
 
 #eqbar-wrapper {
   position: absolute;
-  z-index: 1;
   top: 0;
   left: 0;
   width: 100%;
 }
 
+$bar-width: 2px;
+$num-bars: 256;
+$eq-width: ($bar-width + 1) * $num-bars * 2;
+
 #eqbar {
   margin: 0 auto;
-  width: 400px;
-  opacity: 0.2;
+  width: $eq-width;
+  opacity: 0.1;
+  overflow: auto;
 
   .bar {
     float: left;
-    width: 3px;
+    width: $bar-width;
     min-height: 1px;
     background-color: $new-white;
+    margin-right: 1px;
   }
 }

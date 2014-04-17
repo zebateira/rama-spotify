@@ -17,11 +17,11 @@ EQBar = {
 
     EQBar.selector = config.selector;
     EQBar.numRows = config.numRows;
-    EQBar.step = 256 / EQBar.numRows;
   },
   loadView: function() {
     var numRows = EQBar.numRows;
     var bars = [];
+    var barHeightFactor = 80;
 
     for (var i = 0; i < numRows * 2; i++) {
       var bar = document.createElement('div');
@@ -35,11 +35,14 @@ EQBar = {
     var analyzer = audio.RealtimeAnalyzer.forPlayer(models.player);
 
     analyzer.addEventListener('audio', function(evt) {
+      var left = evt.audio.wave.left;
+      var right = evt.audio.wave.right;
+
       for (var i = 0; i < numRows; i++) {
         bars[i * 2].style.height =
-          evt.audio.wave.left[EQBar.step * i] * 100 + 'px';
+          left[i] * barHeightFactor + 'px';
         bars[i * 2 + 1].style.height =
-          evt.audio.wave.right[EQBar.step * i] * 100 + 'px';
+          right[i] * barHeightFactor + 'px';
       }
     });
 
