@@ -2,6 +2,8 @@
   Artist Menu
 */
 var ConfigObjectMissing;
+var models;
+var Image;
 
 var PlayQueue = {
   init: function(config) {
@@ -15,12 +17,12 @@ var PlayQueue = {
     $(PlayQueue.selector).load(PlayQueue.path, afterLoad);
 
     function afterLoad(data) {
-      var album = models.Album.fromURI('spotify:album:2mCuMNdJkoyiXFhsQCLLqw');
-      var image = Image.forAlbum(album, {
+      var artist = models.Artist.fromURI('spotify:artist:2UwJRAgSOi1zcLkvUNc8XL');
+      var image = Image.forArtist(artist, {
         width: 100,
         height: 100
       });
-      document.body.appendChild(image.node);
+      $(this).find('#playqueue_cover').append(image.node);
     }
   },
   updateView: function() {
@@ -32,8 +34,14 @@ var PlayQueue = {
   }
 };
 
-require(['js/exceptions'], function(_exceptions) {
-  exports.playqueue = PlayQueue;
+require(['js/exceptions',
+    '$api/models',
+    '$views/image#Image'
+  ],
+  function(_exceptions, _models, _image) {
+    exports.playqueue = PlayQueue;
 
-  ConfigObjectMissing = _exceptions.ConfigObjectMissing;
-});
+    models = _models;
+    Image = _image;
+    ConfigObjectMissing = _exceptions.ConfigObjectMissing;
+  });
