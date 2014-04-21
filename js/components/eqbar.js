@@ -21,12 +21,11 @@ EQBar = {
   loadView: function() {
     var numRows = EQBar.numRows;
     var bars = [];
-    var barHeightFactor = 80;
+    var barHeightFactor = 60;
 
-    for (var i = 0; i < numRows * 2; i++) {
+    for (var i = 0; i < numRows; i++) {
       var bar = document.createElement('div');
       bar.className = 'bar';
-      bar.min = -1;
       $(EQBar.selector).append(bar);
 
       bars.push(bar);
@@ -39,10 +38,8 @@ EQBar = {
       var right = evt.audio.wave.right;
 
       for (var i = 0; i < numRows; i++) {
-        bars[i * 2].style.height =
-          left[i] * barHeightFactor + 'px';
-        bars[i * 2 + 1].style.height =
-          right[i] * barHeightFactor + 'px';
+        bars[i].style.height =
+          (left[i] + right[i]) * barHeightFactor + 'px';
       }
     });
 

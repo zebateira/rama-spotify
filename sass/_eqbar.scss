@@ -25,14 +25,14 @@ meter {
   width: 100%;
 }
 
-$bar-width: 2px;
-$num-bars: 256;
-$eq-width: ($bar-width + 1) * $num-bars * 2;
+$bar-width: 3px;
+$num-bars: 128;
+$eq-width: ($bar-width + 1) * $num-bars;
 
 #eqbar {
   margin: 0 auto;
   width: $eq-width;
-  opacity: 0.1;
+  opacity: 0.05;
   overflow: auto;
 
   .bar {
