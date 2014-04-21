@@ -17,35 +17,29 @@ EQBar = {
 
     EQBar.selector = config.selector;
     EQBar.numRows = config.numRows;
+    EQBar.bars = [];
   },
   loadView: function() {
-    var numRows = EQBar.numRows;
-    var bars = [];
-    var barHeightFactor = 60;
-
-    for (var i = 0; i < numRows; i++) {
+    for (var i = 0; i < EQBar.numRows; i++) {
       var bar = document.createElement('div');
       bar.className = 'bar';
       $(EQBar.selector).append(bar);
 
-      bars.push(bar);
+      EQBar.bars.push(bar);
     }
 
-    var analyzer = audio.RealtimeAnalyzer.forPlayer(models.player);
-
-    analyzer.addEventListener('audio', function(evt) {
-      var left = evt.audio.wave.left;
-      var right = evt.audio.wave.right;
-
-      for (var i = 0; i < numRows; i++) {
-        bars[i].style.height =
-          (left[i] + right[i]) * barHeightFactor + 'px';
-      }
-    });
-
+    audio.RealtimeAnalyzer.forPlayer(models.player)
+      .addEventListener('audio', EQBar.updateView);
   },
-  updateView: function() {
+  updateView: function(event) {
+    var left = event.audio.wave.left;
+    var right = event.audio.wave.right;
+    var barHeightFactor = 60;
 
+    for (var i = 0; i < EQBar.numRows; i++) {
+      EQBar.bars[i].style.height =
+        (left[i] + right[i]) * barHeightFactor + 'px';
+    }
   },
   reset: function() {}
 };

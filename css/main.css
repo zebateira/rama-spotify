@@ -457,9 +457,8 @@ meter {
   margin-right: 1px;
 }
 
-/* line 1, ../sass/_artistmenu.scss */
-#artist-menu {
-  display: none;
+/* line 1, ../sass/_playqueue.scss */
+#playqueue {
   position: absolute;
   top: 25%;
   left: 0;

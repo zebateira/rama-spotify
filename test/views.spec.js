@@ -6,8 +6,7 @@ describe('Components Module', function() {
   });
 
   var controllers = {
-    NowPlaying: NowPlaying,
-    TopList: TopList
+    NowPlaying: NowPlaying
   };
 
   describe('Header View', function() {
@@ -25,9 +24,9 @@ describe('Components Module', function() {
         Components.initConfig({
           header: {},
           tabs: [],
-          artistmenu: {
-            selector: '.artistmenu',
-            path: '../views/artistmenu.html'
+          playqueue: {
+            selector: '.playqueue',
+            path: '../views/playqueue.html'
           }
         });
 
@@ -42,9 +41,9 @@ describe('Components Module', function() {
           path: headerPath
         },
         tabs: [],
-        artistmenu: {
-          selector: '.artistmenu',
-          path: '../views/artistmenu.html'
+        playqueue: {
+          selector: '.playqueue',
+          path: '../views/playqueue.html'
         }
       });
 
@@ -62,9 +61,9 @@ describe('Components Module', function() {
           link: linkAttr
         },
         tabs: [],
-        artistmenu: {
-          selector: '.artistmenu',
-          path: '../views/artistmenu.html'
+        playqueue: {
+          selector: '.playqueue',
+          path: '../views/playqueue.html'
         }
       });
 
@@ -82,9 +81,9 @@ describe('Components Module', function() {
           path: "path/to/file"
         },
         tabs: [],
-        artistmenu: {
-          selector: '.artistmenu',
-          path: '../views/artistmenu.html'
+        playqueue: {
+          selector: '.playqueue',
+          path: '../views/playqueue.html'
         }
       });
 
@@ -118,9 +117,9 @@ describe('Components Module', function() {
       Components.initConfig({
         header: true,
         tabs: [tab],
-        artistmenu: {
-          selector: '.artistmenu',
-          path: '../views/artistmenu.html'
+        playqueue: {
+          selector: '.playqueue',
+          path: '../views/playqueue.html'
         }
       });
 
@@ -140,9 +139,9 @@ describe('Components Module', function() {
       Components.initConfig({
         header: true,
         tabs: [tab],
-        artistmenu: {
-          selector: '.artistmenu',
-          path: '../views/artistmenu.html'
+        playqueue: {
+          selector: '.playqueue',
+          path: '../views/playqueue.html'
         }
       });
 
@@ -155,9 +154,9 @@ describe('Components Module', function() {
           tabs: [{
             name: 'asdf'
           }],
-          artistmenu: {
-            selector: '.artistmenu',
-            path: '../views/artistmenu.html'
+          playqueue: {
+            selector: '.playqueue',
+            path: '../views/playqueue.html'
           }
         });
       }).toThrowError();
@@ -169,9 +168,9 @@ describe('Components Module', function() {
           tabs: [{
             viewId: 'asdf'
           }],
-          artistmenu: {
-            selector: '.artistmenu',
-            path: '../views/artistmenu.html'
+          playqueue: {
+            selector: '.playqueue',
+            path: '../views/playqueue.html'
           }
         });
       }).toThrowError(TabInfoMissingException);
@@ -181,9 +180,9 @@ describe('Components Module', function() {
         Components.initConfig({
           header: true,
           tabs: [{}],
-          artistmenu: {
-            selector: '.artistmenu',
-            path: '../views/artistmenu.html'
+          playqueue: {
+            selector: '.playqueue',
+            path: '../views/playqueue.html'
           }
         });
       }).toThrowError(TabInfoMissingException);
@@ -197,9 +196,9 @@ describe('Components Module', function() {
           name: 'Fancy tab name',
           controller: controllers.NowPlaying
         }],
-        artistmenu: {
-          selector: '.artistmenu',
-          path: '../views/artistmenu.html'
+        playqueue: {
+          selector: '.playqueue',
+          path: '../views/playqueue.html'
         }
       });
 
@@ -214,9 +213,9 @@ describe('Components Module', function() {
             viewId: 'id',
             name: 'fancy name'
           }],
-          artistmenu: {
-            selector: '.artistmenu',
-            path: '../views/artistmenu.html'
+          playqueue: {
+            selector: '.playqueue',
+            path: '../views/playqueue.html'
           }
         });
       }).toThrowError(TabMissingControllerException);

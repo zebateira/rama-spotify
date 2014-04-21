@@ -9,7 +9,7 @@ var UI;
 var Header;
 var TabBar;
 var EQBar;
-var ArtistMenu;
+var PlayQueue;
 
 var Components = {
   DEFAULT_PATH: '../views/',
@@ -18,7 +18,7 @@ var Components = {
     Header.init(config.header, Components.DEFAULT_PATH);
     TabBar.init(config.tabs, Components.DEFAULT_PATH);
     EQBar.init(config.eqbar, Components.DEFAULT_PATH);
-    ArtistMenu.init(config.artistmenu);
+    PlayQueue.init(config.playqueue);
   },
   loadViews: function(config) {
     Components.spUI = UI.init({
@@ -29,7 +29,7 @@ var Components = {
     Header.loadView();
     TabBar.loadView();
     EQBar.loadView();
-    ArtistMenu.loadView();
+    PlayQueue.loadView();
 
     Components.bindEvents(config.events);
   },
@@ -74,14 +74,14 @@ require([
   'js/components/header#header',
   'js/components/tabbar#tabbar',
   'js/components/eqbar#eqbar',
-  'js/components/artistmenu#artistmenu'
-], function(_ui, _header, _tabbar, _eqbar, _artistmenu) {
+  'js/components/playqueue#playqueue'
+], function(_ui, _header, _tabbar, _eqbar, _playqueue) {
   UI = _ui;
 
   Header = _header;
   TabBar = _tabbar;
   EQBar = _eqbar;
-  ArtistMenu = _artistmenu;
+  PlayQueue = _playqueue;
 
   exports.Components = Components;
 });
