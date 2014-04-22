@@ -8,6 +8,7 @@ var models;
 var Throbber;
 var ArtistGraph;
 var Settings;
+var PlayQueue;
 
 var NowPlaying = function(viewId, viewpath) {
   this.viewId = viewId;
@@ -76,8 +77,10 @@ NowPlaying.prototype = {
           if (advertisement)
             return;
 
-          if (currentArtist.uri !== oldArtistURI)
+          if (currentArtist.uri !== oldArtistURI) {
             self.setArtistGraph(self, currentArtist);
+            PlayQueue.updateView();
+          }
         });
     },
     onNodeDoubleClick: function(self, data) {
@@ -85,7 +88,7 @@ NowPlaying.prototype = {
         id: parseInt(data.nodes[0])
       });
 
-      if (node.id === 1)
+      if (!node || node.id === 1)
         return;
 
       node.artist.load('compilations').done(function(artist) {
@@ -158,13 +161,15 @@ require([
   '$api/models',
   '$views/throbber#Throbber',
   'js/models/artistgraph#ArtistGraph',
-  'js/components/settings#Settings'
-], function(_models, _throbber, _artistGraph, _settings) {
+  'js/components/settings#Settings',
+  'js/components/playqueue#playqueue'
+], function(_models, _throbber, _artistGraph, _settings, _playqueue) {
 
   models = _models;
   Throbber = _throbber;
   ArtistGraph = _artistGraph;
   Settings = _settings;
+  PlayQueue = _playqueue;
 
   exports.NowPlaying = NowPlaying;
 });

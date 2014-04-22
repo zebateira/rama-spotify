@@ -37,6 +37,8 @@ var Components = {
     var tabID = data.id || Components.spUI.activeView;
     Header.updateView();
     TabBar.updateView(tabID);
+    EQBar.updateView();
+    PlayQueue.updateView();
   },
   reset: function() {
     Header.reset();

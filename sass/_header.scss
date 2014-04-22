@@ -5,6 +5,7 @@
   background-color: $new-bg;
   max-height: $header-height;
   position: relative;
+  border-bottom: 1px solid lighten($new-bg-lighter, 20%);
 
   min-height: $header-height;
 

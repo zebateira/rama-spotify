@@ -29,9 +29,9 @@ EQBar = {
     }
 
     audio.RealtimeAnalyzer.forPlayer(models.player)
-      .addEventListener('audio', EQBar.updateView);
+      .addEventListener('audio', EQBar.onAudio);
   },
-  updateView: function(event) {
+  onAudio: function(event) {
     var left = event.audio.wave.left;
     var right = event.audio.wave.right;
     var barHeightFactor = 60;
@@ -41,5 +41,6 @@ EQBar = {
         (left[i] + right[i]) * barHeightFactor + 'px';
     }
   },
+  updateView: function() {},
   reset: function() {}
 };

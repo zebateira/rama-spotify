@@ -14,19 +14,29 @@ var PlayQueue = {
     PlayQueue.selector = config.selector || '#playqueue';
   },
   loadView: function() {
-    $(PlayQueue.selector).load(PlayQueue.path, afterLoad);
-
-    function afterLoad(data) {
-      var artist = models.Artist.fromURI('spotify:artist:2UwJRAgSOi1zcLkvUNc8XL');
-      var image = Image.forArtist(artist, {
-        width: 100,
-        height: 100
-      });
-      $(this).find('#playqueue_cover').append(image.node);
-    }
+    var playqueue = this;
+    $(PlayQueue.selector).load(PlayQueue.path, function() {
+      playqueue.loadImage();
+    });
   },
   updateView: function() {
+    this.loadImage();
+  },
+  loadImage: function() {
+    models.player.load('track').done(this, function(player) {
+      var artist = models.Artist.fromURI(
+        models.Artist.fromURI(player.track.artists[0].uri)
+      );
+      console.log(player.track.album.uri);
 
+      this.image = Image.forArtist(artist, {
+        width: 50,
+        height: 50,
+        style: 'plain',
+      });
+      var wrapper = $(this.selector).find('#playqueue_cover').html('');
+      $(wrapper).append(this.image.node);
+    });
   },
   reset: function() {
     PlayQueue.path = '';
