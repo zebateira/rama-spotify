@@ -20,5 +20,6 @@
   "SupportedLanguages": [
     "en"
   ],
-  "VendorIdentifier": "pt.inescporto"
+  "VendorIdentifier": "pt.inescporto",
+  "RequiredPermissions": ["https://ssl.google-analytics.com", "http://fonts.googleapis.com"]
 }

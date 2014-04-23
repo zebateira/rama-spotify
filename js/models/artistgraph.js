@@ -172,7 +172,6 @@ ArtistGraph.prototype = {
     this.reset();
   },
   redraw: function() {
-    this.graph.zoomExtent();
     this.graph.redraw();
   },
 

@@ -45,8 +45,7 @@ var Components = {
     TabBar.reset();
   },
 
-  // events
-
+  // events helpers
   bindEvents: function(events) {
     for (var event in events) {
       Components.on(event, events[event]);

@@ -53,6 +53,8 @@ NowPlaying.prototype = {
     $(this.selector).load(this.viewpath, function() {
       self.currentArtist.load(self, self.setArtistGraph);
 
+      // models.player.load('track')
+
       self.loadSettingsMenu();
 
       models.player.addEventListener('change', function(player) {
