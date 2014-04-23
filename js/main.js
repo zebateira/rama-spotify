@@ -4,22 +4,48 @@ spotify.require([
 ], function(Components, controllers) {
 
   Components.initConfig({
-    header: {
-      path: '../views/header.html',
-      link: 'http://rama.inescporto.pt/app'
+    config: {
+      viewspath: '../views/',
+      template: '.html',
+      selectorPrefix: '#'
     },
-    tabs: [{
-      viewId: 'nowplaying',
-      name: 'Now Playing',
-      controller: controllers.NowPlaying
-    }],
-    eqbar: {
-      selector: '#eqbar',
-      numRows: 128
-    },
-    playqueue: {
-      selector: '#playqueue',
-      path: '../views/playqueue.html'
+    components: {
+      header: {
+        loadtemplate: true,
+        applink: 'http://rama.inescporto.pt/app',
+        selector: '.custom-header',
+        controller: controllers.Header,
+        events: {
+          afterLoad: function(self) {
+            if (!self.link)
+              $('.header-link', self.selector).hide();
+            else
+              $('.header-link > a', self.selector)
+                .attr('href', self.applink);
+          }
+        }
+      },
+      graph: {
+        loadtemplate: false,
+        // controller: controllers.GraphController
+      },
+      settingsmenu: {
+        loadtemplate: true,
+        // controller: controllers.Settings
+      },
+      eqbar: {
+        loadtemplate: false,
+        numRows: 128,
+        // controller: controllers.EQBar
+      },
+      tracklist: {
+        loadtemplate: true,
+        // controller: controllers.TrackList
+      },
+      artistmenu: {
+        loadtemplate: false,
+        // controller: controllers.ArtistMenu
+      }
     }
   });
 

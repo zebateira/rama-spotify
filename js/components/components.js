@@ -1,35 +1,77 @@
 /**
   Components module
 
-  Handles the views for the header, tabs bar, tabs content, etc...
-*/
+  Handles the views for the header, graph and all the menus
+  */
 
 // imported modules
 var UI;
-var Header;
-var TabBar;
-var EQBar;
-var PlayQueue;
+var Controller;
 
 var Components = {
   DEFAULT_PATH: '../views/',
+  DEFAULT_TEMPLATE: '.html',
+  DEFAULT_SELECTOR_PREFIX: '#',
 
-  initConfig: function(config) {
-    Header.init(config.header, Components.DEFAULT_PATH);
-    TabBar.init(config.tabs, Components.DEFAULT_PATH);
-    EQBar.init(config.eqbar, Components.DEFAULT_PATH);
-    PlayQueue.init(config.playqueue);
+  components: {},
+
+  initConfig: function(initConfig) {
+    this.config = {
+      viewspath: initConfig.config.viewspath || Components.DEFAULT_PATH,
+      template: initConfig.config.template || Components.DEFAULT_TEMPLATE,
+      selectorPrefix: initConfig.config.selectorPrefix || Components.DEFAULT_SELECTOR_PREFIX
+    };
+
+    this.components = initConfig.components;
+    var comps = this.components;
+
+    for (var componentName in comps) {
+      var component = comps[componentName];
+
+      component.selector = component.selector ||
+        Components.DEFAULT_SELECTOR_PREFIX + componentName;
+
+      if (component.loadtemplate) {
+        component.viewpath = component.viewpath ||
+          Components.DEFAULT_PATH + componentName + Components.DEFAULT_TEMPLATE;
+      }
+
+      if (component.controller) {
+        component.controller =
+          new component.controller(componentName, component);
+        component.controller.init();
+      }
+
+      this.components[componentName] = component;
+    }
   },
   loadViews: function(config) {
-    Components.spUI = UI.init({
-      header: true,
-      views: TabBar.tabs,
-      tabs: TabBar.tabs
-    });
-    Header.loadView();
-    TabBar.loadView();
-    EQBar.loadView();
-    PlayQueue.loadView();
+    Components.spUI = UI.init({});
+
+    var comps = this.components;
+
+    function done(self) {
+      return function() {
+        self.events.afterLoad(self);
+      };
+    }
+
+    for (var componentName in comps) {
+      var component = comps[componentName];
+
+      if (component.controller) {
+        var controller = component.controller;
+
+        if (controller.config.loadtemplate) {
+          $(controller.selector).load(
+            controller.config.viewpath,
+            done(controller)
+          );
+        }
+        self.jelement = $(self.selector);
+        self.element = self.jelement[0];
+      }
+    }
 
     Components.bindEvents(config.events);
   },
@@ -72,17 +114,10 @@ var Components = {
 
 require([
   '$views/ui#UI',
-  'js/components/header#header',
-  'js/components/tabbar#tabbar',
-  'js/components/eqbar#eqbar',
-  'js/components/playqueue#playqueue'
-], function(_ui, _header, _tabbar, _eqbar, _playqueue) {
+  'js/controllers/controller'
+], function(_ui, _controller) {
   UI = _ui;
-
-  Header = _header;
-  TabBar = _tabbar;
-  EQBar = _eqbar;
-  PlayQueue = _playqueue;
+  Controller = _controller;
 
   exports.Components = Components;
 });

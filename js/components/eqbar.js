@@ -11,7 +11,7 @@ require(['$api/audio', '$api/models'], function(_audio, _models) {
 
 
 EQBar = {
-  init: function(config, defaultPath) {
+  init: function(config) {
     if (!config)
       return;
 

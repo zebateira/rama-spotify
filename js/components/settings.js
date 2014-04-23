@@ -44,10 +44,10 @@ Settings.prototype = {
       self.form = new Element(self.form.selector);
       self.button = new Element(self.button.selector);
 
-      self.button.element.onclick = function(event) {
-        self.button.jelement.toggleClass('opened');
-        self.form.jelement.toggle();
-      };
+      // self.button.element.onclick = function(event) {
+      //   self.button.jelement.toggleClass('opened');
+      //   self.form.jelement.toggle();
+      // };
 
       _.each(events, function(eventHandler) {
         self[eventHandler.name](eventHandler);

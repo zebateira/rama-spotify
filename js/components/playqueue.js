@@ -44,16 +44,16 @@ var PlayQueue = {
 
       $(PlayQueue.selectors.list).html('More from ' + artist.name);
 
-      artist.load('compilations').done(function(artist) {
-        artist.compilations.loadAll('type').each(function(track) {
-          console.log(track);
-        });
-        artist.compilations.snapshot(0, 10).done(function(snapshot) {
-          snapshot.loadAll('name').each(function(track) {
-            console.log(track);
-          });
-        });
-      });
+      // artist.load('compilations').done(function(artist) {
+      //   artist.compilations.loadAll('type').each(function(track) {
+      //     console.log(track);
+      //   });
+      //   artist.compilations.snapshot(0, 10).done(function(snapshot) {
+      //     snapshot.loadAll('name').each(function(track) {
+      //       console.log(track);
+      //     });
+      //   });
+      // });
     });
   },
   reset: function() {

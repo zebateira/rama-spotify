@@ -51,16 +51,18 @@ NowPlaying.prototype = {
     var self = this;
 
     $(this.selector).load(this.viewpath, function() {
-      self.currentArtist.load(self, self.setArtistGraph);
-
-      // models.player.load('track')
-
+      models.player.load('track').done(self, self.setArtistGraph);
+      console.log(this);
       self.loadSettingsMenu();
 
       models.player.addEventListener('change', function(player) {
         self.events.onPlayerChange(self, player);
       });
     });
+
+
+
+    // $(this.selector).load(this.viewpath, this.eventsuite.afterLoad);
   },
   updateView: function() {
     if (this.artistGraph) {
@@ -123,27 +125,28 @@ NowPlaying.prototype = {
     Set artist from the current playing track.
     Creates the artistGraph.
   */
-  setArtistGraph: function(self, artist) {
+  setArtistGraph: function(player) {
     var config = {
-      options: self.options
+      options: this.options
     };
 
-    if (self.artistGraph) {
-      config.branching = self.artistGraph.branching;
-      config.depth = self.artistGraph.depth;
-      config.treemode = self.artistGraph.treemode;
+    if (this.artistGraph) {
+      config.branching = this.artistGraph.branching;
+      config.depth = this.artistGraph.depth;
+      config.treemode = this.artistGraph.treemode;
     }
 
-    self.artistGraph = new ArtistGraph(
-      $(self.selector + ' #graph')[0],
-      artist,
+    this.artistGraph = new ArtistGraph(
+      $(this.selector + ' #graph')[0],
+      player.track.artists[0],
       config
     );
 
-    self.showThrobber();
-    self.artistGraph.buildGraph();
-    self.artistGraph.on('doubleClick', function doubleClick(data) {
-      self.events.onNodeDoubleClick(self, data);
+    this.showThrobber();
+    this.artistGraph.buildGraph();
+    var self = this;
+    this.artistGraph.on('doubleClick', function doubleClick(data) {
+      this.events.onNodeDoubleClick(self, data);
     });
   },
   showThrobber: function() {

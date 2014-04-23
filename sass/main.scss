@@ -44,8 +44,10 @@ a {
 }
 
 #view_container {
+  position: relative;
   height: $content-height;
-  background-color: $new-bg;
+  overflow: hidden;
+  background-color: $new-bg-darker;
   
   .view {
     height: 100%;
@@ -62,6 +64,6 @@ a {
 
 /* imports */
 @import "header";
-@import "now_playing";
+@import "settings";
 @import "eqbar";
 @import "playqueue";

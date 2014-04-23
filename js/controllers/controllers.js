@@ -1,8 +1,6 @@
 require([
-  'js/controllers/nowplaying#NowPlaying',
-  'js/controllers/toplist#TopList'
-], function(NowPlaying, TopList) {
+  'js/controllers/header#header'
+], function(_header) {
 
-  exports.NowPlaying = NowPlaying;
-  exports.TopList = TopList;
+  exports.Header = _header;
 });
