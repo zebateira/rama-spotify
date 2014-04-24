@@ -13,18 +13,13 @@ require([
 
   Header.implement({
     afterLoad: function() {
-      this.jelement = $(this.selector);
-      this.element = this.jelement[0];
-
       if (!this.applink)
         this.jelement.find('.header-link').hide();
       else
         this.jelement.find('.header-link > a')
           .attr('href', this.applink);
-    },
-    updateView: function() {
-
     }
+
   });
 
   exports.header = Header;

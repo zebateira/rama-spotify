@@ -2,22 +2,8 @@ require([
   'js/controllers/controller#controller',
   '$api/models',
   '$views/throbber#Throbber',
-  'js/models/artistgraph#ArtistGraph',
-  'js/components/settings#Settings',
-  'js/components/playqueue#playqueue'
-], function(Controller, _models, _throbber, _artistGraph, _settings, _playqueue) {
-
-  var models;
-  var Throbber;
-  var ArtistGraph;
-  var Settings;
-  var PlayQueue;
-
-  models = _models;
-  Throbber = _throbber;
-  ArtistGraph = _artistGraph;
-  Settings = _settings;
-  PlayQueue = _playqueue;
+  'js/models/artistgraph#ArtistGraph'
+], function(Controller, models, Throbber, ArtistGraph) {
 
   var GraphController = new Class({
     Extends: Controller,
@@ -26,18 +12,19 @@ require([
       this.parent(name, config);
 
       this.options = config.options;
-
     }
   });
 
   GraphController.implement({
+    loadView: function() {
+      this.jelement = $(this.selector);
+      this.element = this.jelement[0];
+      models.player.load('track').done(this, this.setArtistGraph);
+      // this.loadSettingsMenu(); // todo move to settings controller
 
-  });
-
-  GraphController.prototype = {
-
-    afterLoad: function() {
-      console.log(this);
+      // models.player.addEventListener('change', function(this, player) {
+      //   this.events.onPlayerChange(this, player);
+      // });
     },
     currentArtist: {
       load: function(self, callback) {
@@ -47,23 +34,6 @@ require([
             player.track.advertisement);
         });
       }
-    },
-    loadView: function() {
-      var self = this;
-
-      $(this.selector).load(this.viewpath, function() {
-        models.player.load('track').done(self, self.setArtistGraph);
-        console.log(this);
-        self.loadSettingsMenu();
-
-        models.player.addEventListener('change', function(player) {
-          self.events.onPlayerChange(self, player);
-        });
-      });
-
-
-
-      // $(this.selector).load(this.viewpath, this.eventsuite.afterLoad);
     },
     updateView: function() {
       if (this.artistGraph) {
@@ -123,9 +93,9 @@ require([
     },
 
     /**
-    Set artist from the current playing track.
-    Creates the artistGraph.
-  */
+      Set artist from the current playing track.
+      Creates the artistGraph.
+    */
     setArtistGraph: function(player) {
       var config = {
         options: this.options
@@ -138,28 +108,28 @@ require([
       }
 
       this.artistGraph = new ArtistGraph(
-        $(this.selector + ' #graph')[0],
+        this.element,
         player.track.artists[0],
         config
       );
 
       this.showThrobber();
       this.artistGraph.buildGraph();
-      var self = this;
-      this.artistGraph.on('doubleClick', function doubleClick(data) {
-        this.events.onNodeDoubleClick(self, data);
-      });
+      // var self = this;
+      // this.artistGraph.on('doubleClick', function doubleClick(data) {
+      //   self.events.onNodeDoubleClick(self, data);
+      // });
     },
     showThrobber: function() {
       if (this.artistGraph.throbber)
         this.artistGraph.throbber.hide();
 
       this.artistGraph.throbber =
-        Throbber.forElement(document.getElementById(this.viewId));
+        Throbber.forElement(document.getElementById(this.name));
       this.artistGraph.throbber.setPosition('center', 'center');
       this.artistGraph.throbber._addBackground();
     }
-  };
+  });
 
   exports.graphcontroller = GraphController;
 });

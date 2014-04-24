@@ -10,6 +10,9 @@ require(['$api/models'], function(_models) {
 
   function afterLoad(controller) {
     return function() {
+      controller.jelement = $(controller.selector);
+      controller.element = controller.jelement[0];
+
       controller.afterLoad();
     };
   }
@@ -22,7 +25,8 @@ require(['$api/models'], function(_models) {
           afterLoad(this)
         );
       }
-    }
+    },
+    updateView: function() {}
   });
 
   exports.controller = Controller;
