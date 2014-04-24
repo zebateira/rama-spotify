@@ -22,11 +22,10 @@ var Components = {
       selectorPrefix: initConfig.config.selectorPrefix || Components.DEFAULT_SELECTOR_PREFIX
     };
 
-    this.components = initConfig.components;
-    var comps = this.components;
+    this.components = Object.create(initConfig.components);
 
-    for (var componentName in comps) {
-      var component = comps[componentName];
+    for (var componentName in this.components) {
+      var component = this.components[componentName];
 
       component.selector = component.selector ||
         Components.DEFAULT_SELECTOR_PREFIX + componentName;
@@ -40,6 +39,7 @@ var Components = {
         component.controller =
           new component.controller(componentName, component);
         component.controller.init();
+        component.controller.component = component;
       }
 
       this.components[componentName] = component;
@@ -48,16 +48,14 @@ var Components = {
   loadViews: function(config) {
     Components.spUI = UI.init({});
 
-    var comps = this.components;
-
-    function done(self) {
+    function afterLoad(self) {
       return function() {
         self.events.afterLoad(self);
       };
     }
 
-    for (var componentName in comps) {
-      var component = comps[componentName];
+    for (var componentName in this.components) {
+      var component = this.components[componentName];
 
       if (component.controller) {
         var controller = component.controller;
@@ -65,27 +63,25 @@ var Components = {
         if (controller.config.loadtemplate) {
           $(controller.selector).load(
             controller.config.viewpath,
-            done(controller)
+            afterLoad(controller)
           );
         }
-        self.jelement = $(self.selector);
-        self.element = self.jelement[0];
+        component.jelement = $(component.selector);
+        component.element = component.jelement[0];
       }
     }
 
     Components.bindEvents(config.events);
   },
   updateViews: function(data) {
-    var tabID = data.id || Components.spUI.activeView;
-    Header.updateView();
-    TabBar.updateView(tabID);
-    EQBar.updateView();
-    PlayQueue.updateView();
+    for (var componentName in Components.components) {
+      var comp = Components.components[componentName];
+      if (comp.controller) {
+        comp.controller.updateView();
+      }
+    }
   },
-  reset: function() {
-    Header.reset();
-    TabBar.reset();
-  },
+  reset: function() {},
 
   // events helpers
   bindEvents: function(events) {

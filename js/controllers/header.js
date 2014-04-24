@@ -1,10 +1,6 @@
-var Controller;
-
-
 require([
-  'js/controllers/controller#controller'
-], function(_controller) {
-  Controller = _controller;
+  '$api/models'
+], function(spModels) {
 
   function Header(name, config) {
     this.name = name;
@@ -19,6 +15,9 @@ require([
   Header.prototype = {
     init: function() {
       this.link = this.config.applink || false;
+    },
+    updateView: function() {
+
     }
   };
 

@@ -13,21 +13,20 @@ spotify.require([
       header: {
         loadtemplate: true,
         applink: 'http://rama.inescporto.pt/app',
-        selector: '.custom-header',
         controller: controllers.Header,
         events: {
-          afterLoad: function(self) {
-            if (!self.link)
-              $('.header-link', self.selector).hide();
+          afterLoad: function(_this) {
+            if (!_this.link)
+              $('.header-link', _this.selector).hide();
             else
-              $('.header-link > a', self.selector)
-                .attr('href', self.applink);
+              $('.header-link > a', _this.selector)
+                .attr('href', _this.applink);
           }
         }
       },
       graph: {
         loadtemplate: false,
-        // controller: controllers.GraphController
+        controller: controllers.GraphController
       },
       settingsmenu: {
         loadtemplate: true,

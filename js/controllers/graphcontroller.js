@@ -10,34 +10,35 @@ var ArtistGraph;
 var Settings;
 var PlayQueue;
 
-var NowPlaying = function(viewId, viewpath) {
-  this.viewId = viewId;
-  this.selector = '#' + viewId;
-  this.viewpath = viewpath;
-
-  this.options = {
-    nodes: {
-      color: {
-        background: '#474747',
-        border: '#555'
-      },
-      fontColor: '#ddd',
-      fontFace: '',
-      shape: 'box',
-      radius: 1
-    },
-    edges: {
-      color: {
-        color: '#8f9096',
-        highlight: '#8f9096'
-      }
-    },
-    stabilize: true
-    // clustering: true
-  };
+var GraphController = function(name, config) {
+  this.name = name;
+  this.config = config;
+  this.options = {};
 };
 
-NowPlaying.prototype = {
+GraphController.prototype = {
+  init: function(options) {
+    this.options = {
+      nodes: {
+        color: {
+          background: '#474747',
+          border: '#555'
+        },
+        fontColor: '#ddd',
+        fontFace: '',
+        shape: 'box',
+        radius: 1
+      },
+      edges: {
+        color: {
+          color: '#8f9096',
+          highlight: '#8f9096'
+        }
+      },
+      stabilize: true
+      // clustering: true
+    };
+  },
   currentArtist: {
     load: function(self, callback) {
       models.player.load('track').done(function(player) {
@@ -160,7 +161,7 @@ NowPlaying.prototype = {
   }
 };
 
-NowPlaying.prototype.contructor = NowPlaying;
+GraphController.prototype.contructor = GraphController;
 
 require([
   '$api/models',
@@ -176,5 +177,5 @@ require([
   Settings = _settings;
   PlayQueue = _playqueue;
 
-  exports.NowPlaying = NowPlaying;
+  exports.graphcontroller = GraphController;
 });
