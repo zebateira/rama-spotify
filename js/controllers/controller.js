@@ -1,19 +1,29 @@
 require(['$api/models'], function(_models) {
-  exports.controller = {
-    loadView: function(self) {
 
-      if (self.config.loadtemplate) {
-
-        $(self.selector).load(self.config.viewPath, function done(response, status, xhr) {
-          self.jelement = $(this);
-          self.element = this;
-
-          self.events.afterLoad(self);
-        });
-      }
-    },
-    updateView: function() {
-      this.events.updateView(this);
+  var Controller = new Class({
+    initialize: function(name, config) {
+      this.name = name;
+      this.config = config;
+      this.selector = config.selector;
     }
-  };
+  });
+
+  function afterLoad(controller) {
+    return function() {
+      controller.afterLoad();
+    };
+  }
+
+  Controller.implement({
+    loadView: function() {
+      if (this.config.loadtemplate) {
+        $(this.selector).load(
+          this.config.viewpath,
+          afterLoad(this)
+        );
+      }
+    }
+  });
+
+  exports.controller = Controller;
 });

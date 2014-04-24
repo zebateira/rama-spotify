@@ -1,25 +1,31 @@
 require([
-  '$api/models'
-], function(spModels) {
+  'js/controllers/controller#controller'
+], function(Controller) {
 
-  function Header(name, config) {
-    this.name = name;
-    this.config = config;
-    this.events = config.events;
+  var Header = new Class({
+    Extends: Controller,
 
-    this.selector = config.selector;
-  }
+    initialize: function(name, config) {
+      this.parent(name, config);
+      this.applink = this.config.applink || false;
+    }
+  });
 
-  Header.prototype.constructor = Header;
+  Header.implement({
+    afterLoad: function() {
+      this.jelement = $(this.selector);
+      this.element = this.jelement[0];
 
-  Header.prototype = {
-    init: function() {
-      this.link = this.config.applink || false;
+      if (!this.applink)
+        this.jelement.find('.header-link').hide();
+      else
+        this.jelement.find('.header-link > a')
+          .attr('href', this.applink);
     },
     updateView: function() {
 
     }
-  };
+  });
 
   exports.header = Header;
 });

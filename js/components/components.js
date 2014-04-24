@@ -6,7 +6,6 @@
 
 // imported modules
 var UI;
-var Controller;
 
 var Components = {
   DEFAULT_PATH: '../views/',
@@ -38,7 +37,6 @@ var Components = {
       if (component.controller) {
         component.controller =
           new component.controller(componentName, component);
-        component.controller.init();
         component.controller.component = component;
       }
 
@@ -48,26 +46,19 @@ var Components = {
   loadViews: function(config) {
     Components.spUI = UI.init({});
 
-    function afterLoad(self) {
-      return function() {
-        self.events.afterLoad(self);
-      };
-    }
 
+    // var header = this.components.header.controller;
+
+    // $(header.selector).load(header.config.viewpath, function() {
+    //   console.log(arguments);
+    // });
     for (var componentName in this.components) {
       var component = this.components[componentName];
 
       if (component.controller) {
         var controller = component.controller;
 
-        if (controller.config.loadtemplate) {
-          $(controller.selector).load(
-            controller.config.viewpath,
-            afterLoad(controller)
-          );
-        }
-        component.jelement = $(component.selector);
-        component.element = component.jelement[0];
+        controller.loadView();
       }
     }
 
@@ -110,10 +101,8 @@ var Components = {
 
 require([
   '$views/ui#UI',
-  'js/controllers/controller'
-], function(_ui, _controller) {
+], function(_ui) {
   UI = _ui;
-  Controller = _controller;
 
   exports.Components = Components;
 });

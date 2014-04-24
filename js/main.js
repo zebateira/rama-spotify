@@ -13,20 +13,31 @@ spotify.require([
       header: {
         loadtemplate: true,
         applink: 'http://rama.inescporto.pt/app',
-        controller: controllers.Header,
-        events: {
-          afterLoad: function(_this) {
-            if (!_this.link)
-              $('.header-link', _this.selector).hide();
-            else
-              $('.header-link > a', _this.selector)
-                .attr('href', _this.applink);
-          }
-        }
+        controller: controllers.Header
       },
       graph: {
         loadtemplate: false,
-        controller: controllers.GraphController
+        controller: controllers.GraphController,
+        options: {
+          nodes: {
+            color: {
+              background: '#474747',
+              border: '#555'
+            },
+            fontColor: '#ddd',
+            fontFace: '',
+            shape: 'box',
+            radius: 1
+          },
+          edges: {
+            color: {
+              color: '#8f9096',
+              highlight: '#8f9096'
+            }
+          },
+          stabilize: true
+          // clustering: true
+        }
       },
       settingsmenu: {
         loadtemplate: true,
