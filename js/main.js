@@ -48,7 +48,7 @@ spotify.require([
       eqbar: {
         loadtemplate: false,
         numRows: 128,
-        // controller: controllers.EQBar
+        controller: controllers.EQBar
       },
       tracklist: {
         loadtemplate: true,

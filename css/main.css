@@ -448,8 +448,8 @@ meter {
   margin-right: 1px;
 }
 
-/* line 1, ../sass/_playqueue.scss */
-#playqueue {
+/* line 1, ../sass/_tracklist.scss */
+#tracklist {
   position: absolute;
   z-index: 1;
   bottom: 0;
@@ -461,11 +461,11 @@ meter {
   background-color: #222326;
   color: #dfe0e6;
 }
-/* line 15, ../sass/_playqueue.scss */
-#playqueue .column {
+/* line 15, ../sass/_tracklist.scss */
+#tracklist .column {
   float: left;
 }
-/* line 19, ../sass/_playqueue.scss */
-#playqueue .right-content {
+/* line 19, ../sass/_tracklist.scss */
+#tracklist .right-content {
   padding: 2px 5px;
 }
