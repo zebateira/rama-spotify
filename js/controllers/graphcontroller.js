@@ -31,32 +31,7 @@ require([
           self.artistGraph.buildGraph();
         });
       });
-
-      // models.player.addEventListener('change', function(this, player) {
-      //   this.events.onPlayerChange(this, player);
-      // });
-
-      // _.each([
-
-      //     function onChangeValue(input, value) {
-      //       var config = {};
-      //       config[input] = parseInt(value) || value;
-      //       self.showThrobber();
-      //       self.artistGraph.updateGraph(config);
-      //       self.artistGraph.buildGraph();
-      //     }
-      //   ],
-      //   function(eventHandler) {
-      //     self[eventHandler.name](eventHandler);
-      //   });
     },
-    // onChangeValue: function(eventHandler) {
-    //   _.each(this.inputs, function(input) {
-    //     $(input.selector).on('change', function() {
-    //       eventHandler(this.name, this[input.value]);
-    //     });
-    //   });
-    // },
     currentArtist: {
       load: function(self, callback) {
         models.player.load('track').done(function(player) {
@@ -85,7 +60,6 @@ require([
 
             if (currentArtist.uri !== oldArtistURI) {
               self.setArtistGraph(self, currentArtist);
-              PlayQueue.updateView();
             }
           });
       },
