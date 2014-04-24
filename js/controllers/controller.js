@@ -9,27 +9,28 @@ require(['$api/models'], function(_models) {
   });
 
   var Utils = {
-    afterLoad: function(controller) {
-      return function() {
+    afterLoad: function(controller, supports) {
+      return function(dependency) {
         controller.jelement = $(controller.selector);
         controller.element = controller.jelement[0];
-        console.log(controller);
 
-        controller.afterLoad();
+        controller.afterLoad(dependency);
+
+        if (supports && supports.controller)
+          supports.controller.loadView(null, controller);
       };
     }
   };
 
   Controller.implement({
-    loadView: function() {
+    loadView: function(supports, dependency) {
       if (this.config.loadtemplate) {
-        console.log(this.config.viewpath + ' on ' + this.selector);
         $(this.selector).load(
           this.config.viewpath,
-          Utils.afterLoad(this)
+          Utils.afterLoad(this, supports)
         );
       } else
-        Utils.afterLoad(this)();
+        Utils.afterLoad(this, supports)(dependency);
     },
     updateView: function() {}
   });

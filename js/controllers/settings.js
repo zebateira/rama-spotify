@@ -17,6 +17,22 @@ require([
         selector: config.formSelector || this.selector + ' .settings-form',
       };
 
+      this.inputs = {
+        branching: {
+          value: 'value'
+        },
+        depth: {
+          value: 'value'
+        },
+        treemode: {
+          value: 'checked'
+        }
+      };
+
+      for (var input in this.inputs) {
+        this.inputs[input].selector =
+          this.settings.selector + ' input[name=' + input + ']';
+      }
     }
   });
 

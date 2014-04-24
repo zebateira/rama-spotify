@@ -15,6 +15,11 @@ spotify.require([
         applink: 'http://rama.inescporto.pt/app',
         controller: controllers.Header
       },
+      settings: {
+        loadtemplate: true,
+        controller: controllers.Settings,
+        supports: 'graph'
+      },
       graph: {
         loadtemplate: false,
         controller: controllers.GraphController,
@@ -37,11 +42,8 @@ spotify.require([
           },
           stabilize: true
           // clustering: true
-        }
-      },
-      settings: {
-        loadtemplate: true,
-        controller: controllers.Settings
+        },
+        hasDependencies: true
       },
       eqbar: {
         loadtemplate: false,

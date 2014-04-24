@@ -13,66 +13,50 @@ require([
       this.parent(name, config);
 
       this.options = config.options;
-
-      this.settings = {
-        selector: config.formSelector || this.selector + ' .settings-form',
-      };
-
-      this.inputs = {
-        branching: {
-          value: 'value'
-        },
-        depth: {
-          value: 'value'
-        },
-        treemode: {
-          value: 'checked'
-        }
-      };
-
-      for (var input in this.inputs) {
-        this.inputs[input].selector =
-          this.selector + ' input[name=' + input + ']';
-      }
-
-
     }
   });
 
   GraphController.implement({
-    afterLoad: function() {
-
-      this.settings = new Element(this.settings.selector);
+    afterLoad: function(settings) {
 
       models.player.load('track').done(this, this.setArtistGraph);
       var self = this;
 
-      _.each([
-
-          function onChangeValue(input, value) {
-            var config = {};
-            config[input] = parseInt(value) || value;
-
-            self.showThrobber();
-            self.artistGraph.updateGraph(config);
-            self.artistGraph.buildGraph();
-          }
-        ],
-        function(eventHandler) {
-          self[eventHandler.name](eventHandler);
+      _.each(settings.inputs, function(input) {
+        $(input.selector).on('change', function() {
+          var config = {};
+          config[this.name] = parseInt(this[input.value]) || this[input.value];
+          self.showThrobber();
+          self.artistGraph.updateGraph(config);
+          self.artistGraph.buildGraph();
         });
+      });
 
       // models.player.addEventListener('change', function(this, player) {
       //   this.events.onPlayerChange(this, player);
       // });
+
+      // _.each([
+
+      //     function onChangeValue(input, value) {
+      //       var config = {};
+      //       config[input] = parseInt(value) || value;
+      //       self.showThrobber();
+      //       self.artistGraph.updateGraph(config);
+      //       self.artistGraph.buildGraph();
+      //     }
+      //   ],
+      //   function(eventHandler) {
+      //     self[eventHandler.name](eventHandler);
+      //   });
     },
-    onChangeValue: function(eventHandler) {
-      _.each(this.inputs, function(input) {
-        $(input.selector).on('change', function() {
-          eventHandler(this.name, this[input.value]);
-        });
-      });
-    },
+    // onChangeValue: function(eventHandler) {
+    //   _.each(this.inputs, function(input) {
+    //     $(input.selector).on('change', function() {
+    //       eventHandler(this.name, this[input.value]);
+    //     });
+    //   });
+    // },
     currentArtist: {
       load: function(self, callback) {
         models.player.load('track').done(function(player) {
