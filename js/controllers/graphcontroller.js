@@ -2,8 +2,9 @@ require([
   'js/controllers/controller#controller',
   '$api/models',
   '$views/throbber#Throbber',
-  'js/models/artistgraph#ArtistGraph'
-], function(Controller, models, Throbber, ArtistGraph) {
+  'js/models/artistgraph#ArtistGraph',
+  'js/models/element#element'
+], function(Controller, models, Throbber, ArtistGraph, Element) {
 
   var GraphController = new Class({
     Extends: Controller,
@@ -12,19 +13,65 @@ require([
       this.parent(name, config);
 
       this.options = config.options;
+
+      this.settings = {
+        selector: config.formSelector || this.selector + ' .settings-form',
+      };
+
+      this.inputs = {
+        branching: {
+          value: 'value'
+        },
+        depth: {
+          value: 'value'
+        },
+        treemode: {
+          value: 'checked'
+        }
+      };
+
+      for (var input in this.inputs) {
+        this.inputs[input].selector =
+          this.selector + ' input[name=' + input + ']';
+      }
+
+
     }
   });
 
   GraphController.implement({
-    loadView: function() {
-      this.jelement = $(this.selector);
-      this.element = this.jelement[0];
+    afterLoad: function() {
+
+      this.settings = new Element(this.settings.selector);
+
       models.player.load('track').done(this, this.setArtistGraph);
-      // this.loadSettingsMenu(); // todo move to settings controller
+      var self = this;
+
+      _.each([
+
+          function onChangeValue(input, value) {
+            var config = {};
+            config[input] = parseInt(value) || value;
+
+            self.showThrobber();
+            self.artistGraph.updateGraph(config);
+            self.artistGraph.buildGraph();
+          }
+        ],
+        function(eventHandler) {
+          self[eventHandler.name](eventHandler);
+        });
 
       // models.player.addEventListener('change', function(this, player) {
       //   this.events.onPlayerChange(this, player);
       // });
+    },
+    onChangeValue: function(eventHandler) {
+      _.each(this.inputs, function(input) {
+        $(input.selector).on('change', function() {
+          eventHandler(this.name, this[input.value]);
+        });
+      });
     },
     currentArtist: {
       load: function(self, callback) {
@@ -72,26 +119,6 @@ require([
       }
     },
 
-    loadSettingsMenu: function() {
-      var self = this;
-
-      this.settings = new Settings({
-        selector: this.selector + ' ' + '.settings'
-      });
-
-      this.settings.loadView([
-
-        function onChangeValue(input, value) {
-          var config = {};
-          config[input] = parseInt(value) || value;
-
-          self.showThrobber();
-          self.artistGraph.updateGraph(config);
-          self.artistGraph.buildGraph();
-        }
-      ]);
-    },
-
     /**
       Set artist from the current playing track.
       Creates the artistGraph.
@@ -115,10 +142,10 @@ require([
 
       this.showThrobber();
       this.artistGraph.buildGraph();
-      // var self = this;
-      // this.artistGraph.on('doubleClick', function doubleClick(data) {
-      //   self.events.onNodeDoubleClick(self, data);
-      // });
+      var self = this;
+      this.artistGraph.on('doubleClick', function doubleClick(data) {
+        self.events.onNodeDoubleClick(self, data);
+      });
     },
     showThrobber: function() {
       if (this.artistGraph.throbber)

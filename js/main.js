@@ -39,9 +39,9 @@ spotify.require([
           // clustering: true
         }
       },
-      settingsmenu: {
+      settings: {
         loadtemplate: true,
-        // controller: controllers.Settings
+        controller: controllers.Settings
       },
       eqbar: {
         loadtemplate: false,

@@ -335,14 +335,14 @@ a {
 }
 
 /* line 3, ../sass/_settings.scss */
-.settings {
+#settings {
   position: absolute;
   z-index: 2;
   top: 10px;
   right: 10px;
 }
 /* line 9, ../sass/_settings.scss */
-.settings .settings-btn {
+#settings .settings-btn {
   float: right;
   width: 20px;
   height: 20px;
@@ -352,19 +352,19 @@ a {
   background-size: cover;
 }
 /* line 20, ../sass/_settings.scss */
-.settings .settings-btn:hover {
+#settings .settings-btn:hover {
   cursor: pointer;
 }
 /* line 24, ../sass/_settings.scss */
-.settings .settings-btn.opened {
+#settings .settings-btn.opened {
   opacity: 1;
 }
 /* line 28, ../sass/_settings.scss */
-.settings .settings-btn:active {
+#settings .settings-btn:active {
   -webkit-transform: scale(0.9, 0.9);
 }
 /* line 33, ../sass/_settings.scss */
-.settings .settings-form {
+#settings .settings-form {
   display: none;
   position: relative;
   float: right;
@@ -376,7 +376,7 @@ a {
   border-style: solid;
 }
 /* line 46, ../sass/_settings.scss */
-.settings .settings-form .tri {
+#settings .settings-form .tri {
   position: absolute;
   top: -5px;
   right: 8px;
@@ -390,20 +390,20 @@ a {
   -webkit-transform: rotate(45deg);
 }
 /* line 63, ../sass/_settings.scss */
-.settings .settings-form .option {
+#settings .settings-form .option {
   overflow: auto;
 }
 /* line 66, ../sass/_settings.scss */
-.settings .settings-form .option:not(.first-child) {
+#settings .settings-form .option:not(.first-child) {
   margin-top: 5px;
 }
 /* line 70, ../sass/_settings.scss */
-.settings .settings-form .option label {
+#settings .settings-form .option label {
   float: left;
   margin-right: 5px;
 }
 /* line 74, ../sass/_settings.scss */
-.settings .settings-form .option input {
+#settings .settings-form .option input {
   padding: 2px;
   width: 30px;
   float: right;
@@ -411,7 +411,7 @@ a {
   border-width: 1px;
 }
 /* line 81, ../sass/_settings.scss */
-.settings .settings-form .option input[name=treemode] {
+#settings .settings-form .option input[name=treemode] {
   margin-top: 5px;
   margin-left: 5px;
 }

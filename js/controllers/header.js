@@ -19,7 +19,6 @@ require([
         this.jelement.find('.header-link > a')
           .attr('href', this.applink);
     }
-
   });
 
   exports.header = Header;

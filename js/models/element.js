@@ -13,5 +13,5 @@ Element.prototype = {
 Element.prototype.constructor = Element;
 
 require(['$api/models'], function(_models) {
-  exports.Element = Element;
+  exports.element = Element;
 });

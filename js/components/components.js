@@ -21,7 +21,7 @@ var Components = {
       selectorPrefix: initConfig.config.selectorPrefix || Components.DEFAULT_SELECTOR_PREFIX
     };
 
-    this.components = Object.create(initConfig.components);
+    this.components = initConfig.components;
 
     for (var componentName in this.components) {
       var component = this.components[componentName];
@@ -46,12 +46,6 @@ var Components = {
   loadViews: function(config) {
     Components.spUI = UI.init({});
 
-
-    // var header = this.components.header.controller;
-
-    // $(header.selector).load(header.config.viewpath, function() {
-    //   console.log(arguments);
-    // });
     for (var componentName in this.components) {
       var component = this.components[componentName];
 

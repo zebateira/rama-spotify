@@ -8,26 +8,33 @@ require(['$api/models'], function(_models) {
     }
   });
 
-  function afterLoad(controller) {
-    return function() {
-      controller.jelement = $(controller.selector);
-      controller.element = controller.jelement[0];
+  var Utils = {
+    afterLoad: function(controller) {
+      return function() {
+        controller.jelement = $(controller.selector);
+        controller.element = controller.jelement[0];
+        console.log(controller);
 
-      controller.afterLoad();
-    };
-  }
+        controller.afterLoad();
+      };
+    }
+  };
 
   Controller.implement({
     loadView: function() {
       if (this.config.loadtemplate) {
+        console.log(this.config.viewpath + ' on ' + this.selector);
         $(this.selector).load(
           this.config.viewpath,
-          afterLoad(this)
+          Utils.afterLoad(this)
         );
-      }
+      } else
+        Utils.afterLoad(this)();
     },
     updateView: function() {}
   });
 
+
   exports.controller = Controller;
+  exports.utils = Utils;
 });
