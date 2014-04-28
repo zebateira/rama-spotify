@@ -31,15 +31,12 @@ require([
           self.artistGraph.buildGraph();
         });
       });
-    },
-    currentArtist: {
-      load: function(self, callback) {
+
+      models.player.addEventListener('change', function(player) {
         models.player.load('track').done(function(player) {
-          callback(self,
-            models.Artist.fromURI(player.track.artists[0].uri),
-            player.track.advertisement);
-        });
-      }
+          self.setArtistGraph(player, self);
+        })
+      });
     },
     updateView: function() {
       if (this.artistGraph) {
@@ -50,18 +47,15 @@ require([
       return this;
     },
     events: {
-      onPlayerChange: function(self, player) {
-        self.currentArtist.load(self,
-          function(self, currentArtist, advertisement) {
-            var oldArtistURI = self.artistGraph.artist.uri;
+      onPlayerChange: function(player) {
+        if (player.track.advertisement)
+          return;
 
-            if (advertisement)
-              return;
+        var oldArtistURI = this.artistGraph.artist.uri;
 
-            if (currentArtist.uri !== oldArtistURI) {
-              self.setArtistGraph(self, currentArtist);
-            }
-          });
+        if (player.track.artists[0].uri !== oldArtistURI) {
+          self.setArtistGraph(player);
+        }
       },
       onNodeDoubleClick: function(self, data) {
         var node = _.findWhere(self.artistGraph.data.nodes, {
@@ -81,27 +75,28 @@ require([
       Set artist from the current playing track.
       Creates the artistGraph.
     */
-    setArtistGraph: function(player) {
+    setArtistGraph: function(player, _self) {
+      var self = (this.name === 'graph' ? this : _self);
       var config = {
-        options: this.options
+        options: self.options
       };
 
-      if (this.artistGraph) {
-        config.branching = this.artistGraph.branching;
-        config.depth = this.artistGraph.depth;
-        config.treemode = this.artistGraph.treemode;
+      if (self.artistGraph) {
+        config.branching = self.artistGraph.branching;
+        config.depth = self.artistGraph.depth;
+        config.treemode = self.artistGraph.treemode;
       }
 
-      this.artistGraph = new ArtistGraph(
-        this.element,
+      self.artistGraph = new ArtistGraph(
+        self.element,
         player.track.artists[0],
         config
       );
 
-      this.showThrobber();
-      this.artistGraph.buildGraph();
-      var self = this;
-      this.artistGraph.on('doubleClick', function doubleClick(data) {
+      self.showThrobber();
+      self.artistGraph.buildGraph();
+
+      self.artistGraph.on('doubleClick', function doubleClick(data) {
         self.events.onNodeDoubleClick(self, data);
       });
     },

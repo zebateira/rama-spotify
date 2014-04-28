@@ -1,7 +1,8 @@
 spotify.require([
   'js/components/components#Components',
-  'js/controllers/controllers'
-], function(Components, controllers) {
+  'js/controllers/controllers',
+  '$api/models'
+], function(Components, controllers, models) {
 
   Components.initConfig({
     config: {
@@ -41,7 +42,7 @@ spotify.require([
             }
           },
           stabilize: true
-          // clustering: true
+          //, clustering: true
         },
         hasDependencies: true
       },
@@ -67,4 +68,5 @@ spotify.require([
       'windowresize': Components.updateViews
     }
   });
+
 });

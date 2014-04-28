@@ -67,7 +67,7 @@ require(['js/exceptions',
     '$views/image#Image'
   ],
   function(_exceptions, _models, _image) {
-    exports.playqueue = PlayQueue;
+    exports.tracklist = PlayQueue;
 
     models = _models;
     Image = _image;
