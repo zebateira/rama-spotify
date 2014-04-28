@@ -448,7 +448,7 @@ meter {
   margin-right: 1px;
 }
 
-/* line 1, ../sass/_tracklist.scss */
+/* line 4, ../sass/_tracklist.scss */
 #tracklist {
   position: absolute;
   z-index: 1;
@@ -461,11 +461,34 @@ meter {
   background-color: #222326;
   color: #dfe0e6;
 }
-/* line 15, ../sass/_tracklist.scss */
+/* line 18, ../sass/_tracklist.scss */
 #tracklist .column {
   float: left;
 }
-/* line 19, ../sass/_tracklist.scss */
+/* line 22, ../sass/_tracklist.scss */
 #tracklist .right-content {
   padding: 2px 5px;
+}
+/* line 26, ../sass/_tracklist.scss */
+#tracklist #tracklist_list {
+  position: relative;
+  height: 100%;
+  max-width: calc(100% - 50px);
+  overflow: hidden;
+}
+/* line 35, ../sass/_tracklist.scss */
+#tracklist #list_title, #tracklist #list_items {
+  height: 50%;
+}
+/* line 40, ../sass/_tracklist.scss */
+#tracklist .list-track {
+  display: inline-block;
+  padding: 2px 5px;
+  margin-left: 5px;
+  border-radius: 1px;
+  background-color: #2e2f33;
+}
+/* line 48, ../sass/_tracklist.scss */
+#tracklist .list-track a {
+  color: #dfe0e6;
 }

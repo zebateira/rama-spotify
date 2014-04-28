@@ -19,7 +19,8 @@ require([
   GraphController.implement({
     afterLoad: function(settings) {
 
-      models.player.load('track').done(this, this.setArtistGraph);
+      models.player.load('track')
+        .done(this, this.setArtistGraph);
       var self = this;
 
       _.each(settings.inputs, function(input) {
@@ -33,9 +34,7 @@ require([
       });
 
       models.player.addEventListener('change', function(player) {
-        models.player.load('track').done(function(player) {
-          self.setArtistGraph(player, self);
-        });
+        models.player.load('track').done(self, self.events.onPlayerChange);
       });
     },
     updateView: function() {
@@ -48,13 +47,16 @@ require([
     },
     events: {
       onPlayerChange: function(player) {
+        if (!this.artistGraph)
+          this.setArtistGraph(player);
+
         if (player.track.advertisement)
           return;
 
         var oldArtistURI = this.artistGraph.artist.uri;
 
         if (player.track.artists[0].uri !== oldArtistURI) {
-          self.setArtistGraph(player);
+          this.setArtistGraph(player);
         }
       },
       onNodeDoubleClick: function(self, data) {

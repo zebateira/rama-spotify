@@ -48,12 +48,17 @@ spotify.require([
       },
       eqbar: {
         loadtemplate: false,
-        numRows: 128,
-        controller: controllers.EQBar
+        controller: controllers.EQBar,
+        numRows: 128
       },
       tracklist: {
         loadtemplate: true,
-        controller: controllers.TrackList
+        controller: controllers.TrackList,
+        selectors: {
+          cover: '#tracklist_cover',
+          title: '#list_title',
+          list: '#list_items'
+        }
       },
       artistmenu: {
         loadtemplate: false,
