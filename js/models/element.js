@@ -5,9 +5,7 @@ var Element = function(selector) {
 };
 
 Element.prototype = {
-  refresh: function() {
-
-  }
+  refresh: function() {}
 };
 
 Element.prototype.constructor = Element;

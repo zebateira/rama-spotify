@@ -1,5 +1,7 @@
 var EventSuite = function(suitename) {
   this.suitename = suitename;
+
+  this.events = [];
 };
 
 EventSuite.prototype = {

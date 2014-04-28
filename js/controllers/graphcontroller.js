@@ -35,7 +35,7 @@ require([
       models.player.addEventListener('change', function(player) {
         models.player.load('track').done(function(player) {
           self.setArtistGraph(player, self);
-        })
+        });
       });
     },
     updateView: function() {
