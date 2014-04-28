@@ -18,26 +18,30 @@
   <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+  <div id="header"></div>
 
   <div id="view_container">
 
-    <div id="nowplaying" class="view">
-    
-    </div>
-    
-    <div id="eqbar-wrapper">
+    <div id="graph"></div>
+
+    <div id="eqbar_wrapper">
       <div id="eqbar"></div>
     </div>
 
-    <div id="playqueue"></div>
+    <div id="settings"></div>
+
+    <div id="tracklist"></div>
+
+    <div id="artistmenu"></div>
 
   </div>
 
   <!-- build:js js/vendor.js -->
+  <script src="node_modules/mootools/lib/mootools-core-1.4.5-server.js"></script>
   <!-- bower:js -->
+  <script src="bower_components/underscore/underscore.js"></script>
   <script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="bower_components/vis/dist/vis.js"></script>
-  <script src="bower_components/underscore/underscore.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
 

@@ -24,7 +24,8 @@
     "jquery": "^2.1.0",
     "vis": "^0.7.0",
     "normalize-css": "^3.0.0",
-    "underscore": "^1.6.0"
+    "underscore": "^1.6.0",
+    "mootools": "~1.4.5"
   },
   "devDependencies": {
     "jasmine-jquery": "^2.0.3"

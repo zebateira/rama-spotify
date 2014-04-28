@@ -2,7 +2,8 @@
   Defines the artist graph model
 
   The ArtistGraph object Draws a graph of related artists
-  in a DOM element given a music artist and some optional config values.
+  in a DOM element given a music artist and 
+  some optional configuration values.
 */
 
 var ArtistGraph = function(element, artist, config) {
@@ -26,6 +27,7 @@ var ArtistGraph = function(element, artist, config) {
   this.initGraph();
 
   this.graph = new vis.Graph(this.element, this.data, this.options);
+
   var graph = this.graph;
   this.graph.on('stabilized', function(iterations) { // Y U NO WORK
     graph.zoomExtent();

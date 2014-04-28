@@ -261,20 +261,22 @@ a {
 
 /* line 46, ../sass/main.scss */
 #view_container {
+  position: relative;
   height: calc(100% - 60px);
-  background-color: #222326;
+  overflow: hidden;
+  background-color: #1c1c1f;
 }
-/* line 50, ../sass/main.scss */
+/* line 52, ../sass/main.scss */
 #view_container .view {
   height: 100%;
 }
 
-/* line 55, ../sass/main.scss */
+/* line 57, ../sass/main.scss */
 .sp-throbber-background {
   background-color: #ecebe8;
 }
 
-/* line 59, ../sass/main.scss */
+/* line 61, ../sass/main.scss */
 .sp-tabbar {
   display: none !important;
 }
@@ -282,7 +284,7 @@ a {
 /* imports */
 /* Header Styles */
 /* line 4, ../sass/_header.scss */
-.sp-header {
+#header {
   background-color: #222326;
   max-height: 60px;
   position: relative;
@@ -290,17 +292,17 @@ a {
   min-height: 60px;
 }
 /* line 13, ../sass/_header.scss */
-.sp-header .header-text a {
+#header .header-text a {
   color: #bbb;
 }
 /* line 19, ../sass/_header.scss */
-.sp-header .header-title {
+#header .header-title {
   text-align: center;
   font-size: 3em;
   line-height: 60px;
 }
 /* line 25, ../sass/_header.scss */
-.sp-header .header-link {
+#header .header-link {
   display: table;
   position: absolute;
   min-height: 30px;
@@ -312,12 +314,12 @@ a {
   margin-left: 10px;
 }
 /* line 38, ../sass/_header.scss */
-.sp-header .header-link a {
+#header .header-link a {
   display: table-cell;
   vertical-align: middle;
 }
 /* line 43, ../sass/_header.scss */
-.sp-header .header-link:after {
+#header .header-link:after {
   content: url(../img/external_link-tiny-gray.png);
   display: inline-block;
   height: 9px;
@@ -327,32 +329,20 @@ a {
 }
 @media (max-width: 500px) {
   /* line 25, ../sass/_header.scss */
-  .sp-header .header-link {
+  #header .header-link {
     display: none;
   }
 }
 
-/* line 1, ../sass/_now_playing.scss */
-.graph {
-  height: 100%;
-}
-
-/* line 5, ../sass/_now_playing.scss */
-#view_container {
-  overflow: hidden;
-  position: relative;
-  background-color: #1c1c1f;
-}
-
-/* line 12, ../sass/_now_playing.scss */
-.settings {
+/* line 3, ../sass/_settings.scss */
+#settings {
   position: absolute;
   z-index: 2;
   top: 10px;
   right: 10px;
 }
-/* line 18, ../sass/_now_playing.scss */
-.settings .settings-btn {
+/* line 9, ../sass/_settings.scss */
+#settings .settings-btn {
   float: right;
   width: 20px;
   height: 20px;
@@ -361,20 +351,20 @@ a {
   background: url(../img/settings.png) no-repeat;
   background-size: cover;
 }
-/* line 29, ../sass/_now_playing.scss */
-.settings .settings-btn:hover {
+/* line 20, ../sass/_settings.scss */
+#settings .settings-btn:hover {
   cursor: pointer;
 }
-/* line 33, ../sass/_now_playing.scss */
-.settings .settings-btn.opened {
+/* line 24, ../sass/_settings.scss */
+#settings .settings-btn.opened {
   opacity: 1;
 }
-/* line 37, ../sass/_now_playing.scss */
-.settings .settings-btn:active {
+/* line 28, ../sass/_settings.scss */
+#settings .settings-btn:active {
   -webkit-transform: scale(0.9, 0.9);
 }
-/* line 42, ../sass/_now_playing.scss */
-.settings .settings-form {
+/* line 33, ../sass/_settings.scss */
+#settings .settings-form {
   display: none;
   position: relative;
   float: right;
@@ -385,8 +375,8 @@ a {
   border-color: #999;
   border-style: solid;
 }
-/* line 55, ../sass/_now_playing.scss */
-.settings .settings-form .tri {
+/* line 46, ../sass/_settings.scss */
+#settings .settings-form .tri {
   position: absolute;
   top: -5px;
   right: 8px;
@@ -399,29 +389,29 @@ a {
   border-style: solid;
   -webkit-transform: rotate(45deg);
 }
-/* line 72, ../sass/_now_playing.scss */
-.settings .settings-form .option {
+/* line 63, ../sass/_settings.scss */
+#settings .settings-form .option {
   overflow: auto;
 }
-/* line 75, ../sass/_now_playing.scss */
-.settings .settings-form .option:not(.first-child) {
+/* line 66, ../sass/_settings.scss */
+#settings .settings-form .option:not(.first-child) {
   margin-top: 5px;
 }
-/* line 79, ../sass/_now_playing.scss */
-.settings .settings-form .option label {
+/* line 70, ../sass/_settings.scss */
+#settings .settings-form .option label {
   float: left;
   margin-right: 5px;
 }
-/* line 83, ../sass/_now_playing.scss */
-.settings .settings-form .option input {
+/* line 74, ../sass/_settings.scss */
+#settings .settings-form .option input {
   padding: 2px;
   width: 30px;
   float: right;
   background-color: #222326;
   border-width: 1px;
 }
-/* line 90, ../sass/_now_playing.scss */
-.settings .settings-form .option input[name=treemode] {
+/* line 81, ../sass/_settings.scss */
+#settings .settings-form .option input[name=treemode] {
   margin-top: 5px;
   margin-left: 5px;
 }
@@ -435,7 +425,7 @@ meter {
 }
 
 /* line 21, ../sass/_eqbar.scss */
-#eqbar-wrapper {
+#eqbar_wrapper {
   position: absolute;
   top: 0;
   left: 0;
@@ -458,8 +448,8 @@ meter {
   margin-right: 1px;
 }
 
-/* line 1, ../sass/_playqueue.scss */
-#playqueue {
+/* line 1, ../sass/_tracklist.scss */
+#tracklist {
   position: absolute;
   z-index: 1;
   bottom: 0;
@@ -471,11 +461,11 @@ meter {
   background-color: #222326;
   color: #dfe0e6;
 }
-/* line 15, ../sass/_playqueue.scss */
-#playqueue .column {
+/* line 15, ../sass/_tracklist.scss */
+#tracklist .column {
   float: left;
 }
-/* line 19, ../sass/_playqueue.scss */
-#playqueue .right-content {
+/* line 19, ../sass/_tracklist.scss */
+#tracklist .right-content {
   padding: 2px 5px;
 }
