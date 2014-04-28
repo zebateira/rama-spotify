@@ -55,40 +55,17 @@ var Components = {
         controller.loadView(this.components[component.supports]);
       }
     }
-
-    Components.bindEvents(config.events);
   },
   updateViews: function(data) {
     for (var componentName in Components.components) {
       var comp = Components.components[componentName];
+
       if (comp.controller) {
         comp.controller.updateView();
       }
     }
   },
   reset: function() {},
-
-  // events helpers
-  bindEvents: function(events) {
-    for (var event in events) {
-      Components.on(event, events[event]);
-    }
-  },
-  events: {
-    windowresize: {
-      bind: function(eventHandler) {
-        window.onresize = eventHandler;
-      }
-    },
-    viewchange: {
-      bind: function(eventHandler) {
-        Components.spUI.addEventListener('viewchange', eventHandler);
-      }
-    }
-  },
-  on: function(event, eventHandler) {
-    Components.events[event].bind(eventHandler);
-  }
 };
 
 // exporting module

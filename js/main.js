@@ -24,6 +24,8 @@ spotify.require([
       graph: {
         loadtemplate: false,
         controller: controllers.GraphController,
+        hasDependencies: true,
+        events: ['onPlayerChange'],
         options: {
           nodes: {
             color: {
@@ -44,7 +46,6 @@ spotify.require([
           stabilize: true
           //, clustering: true
         },
-        hasDependencies: true
       },
       eqbar: {
         loadtemplate: false,
@@ -54,6 +55,7 @@ spotify.require([
       tracklist: {
         loadtemplate: true,
         controller: controllers.TrackList,
+        events: ['onPlayerChange'],
         selectors: {
           cover: '#tracklist_cover',
           title: '#list_title',
@@ -67,11 +69,7 @@ spotify.require([
     }
   });
 
-  Components.loadViews({
-    events: {
-      'viewchange': Components.updateViews,
-      'windowresize': Components.updateViews
-    }
-  });
+  Components.loadViews();
 
+  window.onresize = Components.updateViews;
 });

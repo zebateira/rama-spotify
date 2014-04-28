@@ -36,7 +36,6 @@ $width: $height; // omg its a square
     height: 50%;
   }
 
-    // height: 50%;
   .list-track {
     display: inline-block;
     padding: 2px 5px;
@@ -44,6 +43,10 @@ $width: $height; // omg its a square
     border-radius: 1px;
 
     background-color: $new-bg-lighter;
+
+    &:hover {
+      cursor: pointer;
+    }
 
     a {
       color: $new-white;

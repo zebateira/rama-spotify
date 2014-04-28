@@ -194,7 +194,6 @@ ArtistGraph.prototype = {
 
 ArtistGraph.prototype.constructor = ArtistGraph;
 
-
 // Exports for the spotify's require system
 require(['$api/models'], function(_models) {
   exports.ArtistGraph = ArtistGraph;

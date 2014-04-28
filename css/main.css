@@ -480,7 +480,7 @@ meter {
 #tracklist #list_title, #tracklist #list_items {
   height: 50%;
 }
-/* line 40, ../sass/_tracklist.scss */
+/* line 39, ../sass/_tracklist.scss */
 #tracklist .list-track {
   display: inline-block;
   padding: 2px 5px;
@@ -488,7 +488,11 @@ meter {
   border-radius: 1px;
   background-color: #2e2f33;
 }
-/* line 48, ../sass/_tracklist.scss */
+/* line 47, ../sass/_tracklist.scss */
+#tracklist .list-track:hover {
+  cursor: pointer;
+}
+/* line 51, ../sass/_tracklist.scss */
 #tracklist .list-track a {
   color: #dfe0e6;
 }

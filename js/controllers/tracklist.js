@@ -56,18 +56,26 @@
                   var track = tracks[i];
                   var element = document.createElement('span');
 
-                  element.innerHTML = '<a href="' + track.uri + '">' +
-                    track.name + '</a>';
+                  element.innerHTML = track.name;
+                  element.uri = track.uri;
                   element.className = 'list-track';
+                  element.onclick = this.events.onTrackClick;
 
                   this.jelement.find(this.config.selectors.list)
                     .append(element);
-
                 }
               });
             });
           });
-
+        },
+        events: {
+          onPlayerChange: function(player) {
+            this.load();
+          },
+          onTrackClick: function(event) {
+            models.player.playTrack(models.Track.fromURI(event.target.uri));
+            // event.preventDefault();
+          }
         }
       });
 

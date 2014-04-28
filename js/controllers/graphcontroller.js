@@ -32,10 +32,6 @@ require([
           self.artistGraph.buildGraph();
         });
       });
-
-      models.player.addEventListener('change', function(player) {
-        models.player.load('track').done(self, self.events.onPlayerChange);
-      });
     },
     updateView: function() {
       if (this.artistGraph) {
@@ -46,7 +42,7 @@ require([
       return this;
     },
     events: {
-      onPlayerChange: function(player) {
+      onPlayerChange: function(player) { // TODO refactor same artist verification
         if (!this.artistGraph)
           this.setArtistGraph(player);
 
@@ -77,29 +73,29 @@ require([
       Set artist from the current playing track.
       Creates the artistGraph.
     */
-    setArtistGraph: function(player, _self) {
-      var self = (this.name === 'graph' ? this : _self);
+    setArtistGraph: function(player) {
       var config = {
-        options: self.options
+        options: this.options
       };
 
-      if (self.artistGraph) {
-        config.branching = self.artistGraph.branching;
-        config.depth = self.artistGraph.depth;
-        config.treemode = self.artistGraph.treemode;
+      if (this.artistGraph) {
+        config.branching = this.artistGraph.branching;
+        config.depth = this.artistGraph.depth;
+        config.treemode = this.artistGraph.treemode;
       }
 
-      self.artistGraph = new ArtistGraph(
-        self.element,
+      this.artistGraph = new ArtistGraph(
+        this.element,
         player.track.artists[0],
         config
       );
 
-      self.showThrobber();
-      self.artistGraph.buildGraph();
+      this.showThrobber();
+      this.artistGraph.buildGraph();
 
-      self.artistGraph.on('doubleClick', function doubleClick(data) {
-        self.events.onNodeDoubleClick(self, data);
+      var graphcontroller = this;
+      this.artistGraph.on('doubleClick', function doubleClick(data) {
+        graphcontroller.events.onNodeDoubleClick(graphcontroller, data);
       });
     },
     showThrobber: function() {
