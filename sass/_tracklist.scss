@@ -20,7 +20,7 @@ $width: $height; // omg its a square
   }
 
   .right-content {
-    padding: 2px 5px;
+    padding: 1px 5px;
   }
 
   #tracklist_list {
@@ -33,13 +33,15 @@ $width: $height; // omg its a square
   }
 
   #list_title, #list_items {
-    height: 50%;
+    // height: 50%;
   }
 
   .list-track {
     display: inline-block;
+
     padding: 2px 5px;
     margin-left: 5px;
+    margin-bottom: 5px;
     border-radius: 1px;
 
     background-color: $new-bg-lighter;

@@ -467,7 +467,7 @@ meter {
 }
 /* line 22, ../sass/_tracklist.scss */
 #tracklist .right-content {
-  padding: 2px 5px;
+  padding: 1px 5px;
 }
 /* line 26, ../sass/_tracklist.scss */
 #tracklist #tracklist_list {
@@ -476,23 +476,20 @@ meter {
   max-width: calc(100% - 50px);
   overflow: hidden;
 }
-/* line 35, ../sass/_tracklist.scss */
-#tracklist #list_title, #tracklist #list_items {
-  height: 50%;
-}
 /* line 39, ../sass/_tracklist.scss */
 #tracklist .list-track {
   display: inline-block;
   padding: 2px 5px;
   margin-left: 5px;
+  margin-bottom: 5px;
   border-radius: 1px;
   background-color: #2e2f33;
 }
-/* line 47, ../sass/_tracklist.scss */
+/* line 49, ../sass/_tracklist.scss */
 #tracklist .list-track:hover {
   cursor: pointer;
 }
-/* line 51, ../sass/_tracklist.scss */
+/* line 53, ../sass/_tracklist.scss */
 #tracklist .list-track a {
   color: #dfe0e6;
 }
