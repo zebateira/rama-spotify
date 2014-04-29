@@ -24,7 +24,7 @@ require([
         .done(this, this.setArtistGraph);
       var self = this;
 
-      _.each(settings.inputs, function(input) {
+      _.each(settings.inputs, function(input) { // TODO remove self
         $(input.selector).on('change', function() {
           var config = {};
           config[this.name] = parseInt(this[input.value]) || this[input.value];

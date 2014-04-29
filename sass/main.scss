@@ -18,6 +18,7 @@ $new-bg-lighter: $new-bg-lighter1;
 $new-bg-lighter2: #313336;
 $new-bg-darker: #1c1c1f;
 $new-white: #dfe0e6;
+$border-color: #3e3e40;
 
 $green1: #7fb701;
 $green2: #95dc00;
@@ -67,3 +68,4 @@ a {
 @import "settings";
 @import "eqbar";
 @import "tracklist";
+@import "artistmenu";

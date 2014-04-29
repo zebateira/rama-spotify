@@ -10,7 +10,7 @@ $width: $height; // omg its a square
   overflow: auto;
   width: 100%;
   height: $height + 1px;
-  border-top: 1px solid #3e3e40;
+  border-top: 1px solid $border-color;
 
   background-color: $new-bg;
   color: $new-white;
@@ -30,10 +30,6 @@ $width: $height; // omg its a square
     max-width: calc(100% - #{$width});
 
     overflow: hidden;
-  }
-
-  #list_title, #list_items {
-    // height: 50%;
   }
 
   .list-track {

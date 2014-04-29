@@ -25,6 +25,7 @@ spotify.require([
         loadtemplate: false,
         controller: controllers.GraphController,
         hasDependencies: true,
+        supports: 'artistmenu',
         events: ['onPlayerChange'],
         options: {
           nodes: {
@@ -64,7 +65,8 @@ spotify.require([
       },
       artistmenu: {
         loadtemplate: true,
-        // controller: controllers.ArtistMenu
+        controller: controllers.ArtistMenu,
+        hasDependencies: true
       }
     }
   });

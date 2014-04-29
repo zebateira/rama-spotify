@@ -48,7 +48,6 @@ var Components = {
 
     for (var componentName in this.components) {
       var component = this.components[componentName];
-
       if (component.controller && !component.hasDependencies) {
         var controller = component.controller;
 

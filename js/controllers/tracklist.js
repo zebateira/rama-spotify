@@ -35,7 +35,8 @@
               models.Artist.fromURI(player.track.artists[0].uri)
             );
 
-            if (this.artist && this.artist.uri === artist.uri) {
+            if ((this.artist && this.artist.uri === artist.uri) ||
+              player.track.advertisement) {
               return;
             }
 
