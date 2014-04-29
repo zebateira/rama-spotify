@@ -2,7 +2,8 @@
   Defines the artist graph model
 
   The ArtistGraph object Draws a graph of related artists
-  in a DOM element given a music artist and some optional config values.
+  in a DOM element given a music artist and 
+  some optional configuration values.
 */
 
 var ArtistGraph = function(element, artist, config) {
@@ -23,11 +24,10 @@ var ArtistGraph = function(element, artist, config) {
 
   this.options = (config && config.options) || ArtistGraph.DEFAULT_OPTIONS;
 
-  // options for rendering the graph
-
   this.initGraph();
 
   this.graph = new vis.Graph(this.element, this.data, this.options);
+
   var graph = this.graph;
   this.graph.on('stabilized', function(iterations) { // Y U NO WORK
     graph.zoomExtent();
@@ -50,8 +50,9 @@ ArtistGraph.prototype = {
         id: this.index,
         label: this.artist.name,
         artist: this.artist,
+        fontColor: '#313336',
         color: {
-          background: '#666'
+          background: '#afb0b6'
         }
       }],
       edges: []
@@ -78,7 +79,7 @@ ArtistGraph.prototype = {
         label: artist.name
       });
 
-      if (duplicated) {
+      if (duplicated && artist.name !== rootArtist.name) {
         var inverseEdgeExists = _.findWhere(this.data.edges, {
           from: duplicated.id,
           to: rootArtist.nodeid
@@ -173,7 +174,6 @@ ArtistGraph.prototype = {
     this.reset();
   },
   redraw: function() {
-    this.graph.zoomExtent();
     this.graph.redraw();
   },
 
@@ -193,7 +193,6 @@ ArtistGraph.prototype = {
 };
 
 ArtistGraph.prototype.constructor = ArtistGraph;
-
 
 // Exports for the spotify's require system
 require(['$api/models'], function(_models) {

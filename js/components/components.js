@@ -1,84 +1,79 @@
 /**
   Components module
 
-  Handles the views for the header, tabs bar, tabs content, etc...
-*/
+  Handles the views for the header, graph and all the menus
+  */
 
 // imported modules
 var UI;
-var Header;
-var TabBar;
-var EQBar;
 
 var Components = {
   DEFAULT_PATH: '../views/',
+  DEFAULT_TEMPLATE: '.html',
+  DEFAULT_SELECTOR_PREFIX: '#',
 
-  initConfig: function(config) {
-    Header.init(config.header, Components.DEFAULT_PATH);
-    TabBar.init(config.tabs, Components.DEFAULT_PATH);
-    EQBar.init(config.eqbar, Components.DEFAULT_PATH);
+  components: {},
+
+  initConfig: function(initConfig) {
+    this.config = {
+      viewspath: initConfig.config.viewspath || Components.DEFAULT_PATH,
+      template: initConfig.config.template || Components.DEFAULT_TEMPLATE,
+      selectorPrefix: initConfig.config.selectorPrefix || Components.DEFAULT_SELECTOR_PREFIX
+    };
+
+    this.components = initConfig.components;
+
+    for (var componentName in this.components) {
+      var component = this.components[componentName];
+
+      component.selector = component.selector ||
+        Components.DEFAULT_SELECTOR_PREFIX + componentName;
+
+      if (component.loadtemplate) {
+        component.viewpath = component.viewpath ||
+          Components.DEFAULT_PATH + componentName + Components.DEFAULT_TEMPLATE;
+      }
+
+      if (component.controller) {
+        component.controller =
+          new component.controller(componentName, component);
+        component.controller.component = component;
+      }
+
+      this.components[componentName] = component;
+    }
   },
   loadViews: function(config) {
-    Components.spUI = UI.init({
-      header: true,
-      views: TabBar.tabs,
-      tabs: TabBar.tabs
-    });
-    Header.loadView();
-    TabBar.loadView();
-    EQBar.loadView();
+    Components.spUI = UI.init({});
 
-    Components.bindEvents(config.events);
+    for (var componentName in this.components) {
+      var component = this.components[componentName];
+
+      if (component.controller && !component.hasDependencies) {
+        var controller = component.controller;
+
+        controller.loadView(this.components[component.supports]);
+      }
+    }
   },
   updateViews: function(data) {
-    var tabID = data.id || Components.spUI.activeView;
-    Header.updateView();
-    TabBar.updateView(tabID);
-  },
-  reset: function() {
-    Header.reset();
-    TabBar.reset();
-  },
+    for (var componentName in Components.components) {
+      var comp = Components.components[componentName];
 
-
-
-  // events
-
-  bindEvents: function(events) {
-    for (var event in events) {
-      Components.on(event, events[event]);
-    }
-  },
-  events: {
-    windowresize: {
-      bind: function(eventHandler) {
-        window.onresize = eventHandler;
-      }
-    },
-    viewchange: {
-      bind: function(eventHandler) {
-        Components.spUI.addEventListener('viewchange', eventHandler);
+      if (comp.controller) {
+        comp.controller.updateView();
       }
     }
   },
-  on: function(event, eventHandler) {
-    Components.events[event].bind(eventHandler);
-  }
+  reset: function() {},
 };
 
 // exporting module
 
 require([
   '$views/ui#UI',
-  'js/components/header#header',
-  'js/components/tabbar#tabbar',
-  'js/components/eqbar#eqbar'
-], function(_ui, _header, _tabbar, _eqbar) {
+], function(_ui) {
   UI = _ui;
-
-  Header = _header;
-  TabBar = _tabbar;
-  EQBar = _eqbar;
 
   exports.Components = Components;
 });

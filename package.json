@@ -26,5 +26,8 @@
   },
   "scripts": {
     "test": "grunt jshint jasmine --verbose"
+  },
+  "dependencies": {
+    "mootools": "^1.4.5-2"
   }
 }
