@@ -1,0 +1,57 @@
+$height: 50px;
+$width: $height; // omg its a square
+
+#tracklist {
+
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+  width: 100%;
+  height: $height + 1px;
+  border-top: 1px solid #3e3e40;
+
+  background-color: $new-bg;
+  color: $new-white;
+
+  .column {
+    float: left;
+  }
+
+  .right-content {
+    padding: 1px 5px;
+  }
+
+  #tracklist_list {
+    position: relative;
+    
+    height: 100%;
+    max-width: calc(100% - #{$width});
+
+    overflow: hidden;
+  }
+
+  #list_title, #list_items {
+    // height: 50%;
+  }
+
+  .list-track {
+    display: inline-block;
+
+    padding: 2px 5px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    border-radius: 1px;
+
+    background-color: $new-bg-lighter;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    a {
+      color: $new-white;
+    }
+  }
+}

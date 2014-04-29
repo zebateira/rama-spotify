@@ -1,15 +1,6 @@
-.graph {
- height: 100%;
-}
-
-#view_container  {
-  overflow: hidden;
-  position: relative;
-  background-color: $new-bg-darker;
-}
 
 
-.settings {
+#settings {
   position: absolute;
   z-index: 2;
   top: 10px;
@@ -96,4 +87,3 @@
     }
   }
 }
-

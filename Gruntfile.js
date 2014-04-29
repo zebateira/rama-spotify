@@ -1,7 +1,7 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     config: {
-      dist: 'rama-spotify'
+      dist: 'rama'
     },
     jshint: {
       all: ['Gruntfile.js', 'js/**/*.js', 'test/*.js']
@@ -29,7 +29,7 @@ module.exports = function(grunt) {
     },
     watch: {
       files: ['Gruntfile.js', 'js/**/*.js', 'sass/*.scss', 'test/*.js'],
-      tasks: ['jshint', 'compass', 'jasmine']
+      tasks: ['compass', 'jshint', 'jasmine']
     },
     useminPrepare: {
       html: 'index.html',

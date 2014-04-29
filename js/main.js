@@ -1,34 +1,75 @@
 spotify.require([
   'js/components/components#Components',
-  'js/controllers/controllers'
-], function(Components, controllers) {
+  'js/controllers/controllers',
+  '$api/models'
+], function(Components, controllers, models) {
 
   Components.initConfig({
-    header: {
-      path: '../views/header.html',
-      link: 'http://rama.inescporto.pt/app'
+    config: {
+      viewspath: '../views/',
+      template: '.html',
+      selectorPrefix: '#'
     },
-    tabs: [{
-        viewId: 'nowplaying',
-        name: 'Now Playing',
-        controller: controllers.NowPlaying
+    components: {
+      header: {
+        loadtemplate: true,
+        applink: 'http://rama.inescporto.pt/app',
+        controller: controllers.Header
+      },
+      settings: {
+        loadtemplate: true,
+        controller: controllers.Settings,
+        supports: 'graph'
+      },
+      graph: {
+        loadtemplate: false,
+        controller: controllers.GraphController,
+        hasDependencies: true,
+        events: ['onPlayerChange'],
+        options: {
+          nodes: {
+            color: {
+              background: '#474747',
+              border: '#555'
+            },
+            fontColor: '#ddd',
+            fontFace: '',
+            shape: 'box',
+            radius: 1
+          },
+          edges: {
+            color: {
+              color: '#8f9096',
+              highlight: '#8f9096'
+            }
+          },
+          stabilize: true
+          //, clustering: true
+        },
+      },
+      eqbar: {
+        loadtemplate: false,
+        controller: controllers.EQBar,
+        numRows: 128
+      },
+      tracklist: {
+        loadtemplate: true,
+        controller: controllers.TrackList,
+        events: ['onPlayerChange'],
+        selectors: {
+          cover: '#tracklist_cover',
+          title: '#list_title',
+          list: '#list_items'
+        }
+      },
+      artistmenu: {
+        loadtemplate: false,
+        // controller: controllers.ArtistMenu
       }
-      // , {
-      //   viewId: 'toplist',
-      //   name: 'Top List',
-      //   controller: controllers.TopList
-      // }
-    ],
-    eqbar: {
-      selector: '#eqbar',
-      numRows: 64
     }
   });
 
-  Components.loadViews({
-    events: {
-      'viewchange': Components.updateViews,
-      'windowresize': Components.updateViews
-    }
-  });
+  Components.loadViews();
+
+  window.onresize = Components.updateViews;
 });
