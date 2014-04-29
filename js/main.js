@@ -63,7 +63,7 @@ spotify.require([
         }
       },
       artistmenu: {
-        loadtemplate: false,
+        loadtemplate: true,
         // controller: controllers.ArtistMenu
       }
     }

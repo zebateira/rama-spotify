@@ -15,6 +15,7 @@
 
           _.bindAll(this, 'onPlayerChange');
           var onPlayerChange = this.onPlayerChange;
+
           models.player.addEventListener('change', function(player) {
             models.player.load('track').done(onPlayerChange);
           });
@@ -26,18 +27,22 @@
         afterLoad: function() {
           this.load();
         },
-        updateView: function() {
-          // this.load();
-        },
+        updateView: function() {},
         load: function() {
-
-          this.jelement.find(this.config.selectors.cover).html('');
-          this.jelement.find(this.config.selectors.list).html('');
 
           models.player.load('track').done(this, function(player) {
             var artist = models.Artist.fromURI(
               models.Artist.fromURI(player.track.artists[0].uri)
             );
+
+            if (this.artist && this.artist.uri === artist.uri) {
+              return;
+            }
+
+            this.artist = artist;
+
+            this.jelement.find(this.config.selectors.cover).html('');
+            this.jelement.find(this.config.selectors.list).html('');
 
             this.image = Image.forArtist(artist, {
               width: 50,
