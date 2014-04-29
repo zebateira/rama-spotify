@@ -63,6 +63,7 @@ With no official release for the Spotify Desktop Client, there's nothing I can d
 
 [v0.5] - Artist track list
   - Track list of current playing artist added.
+  - App name changed to only "rama"
 
 [v0.3] - Equalizer graph
   - Equalizer added using spotify's buffer analyzer api
