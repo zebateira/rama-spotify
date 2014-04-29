@@ -2,12 +2,13 @@
   "AppName": {
     "en": "RAMA"
   },
-  "BundleIdentifier": "rama-spotify",
+  "BundleIdentifier": "rama",
   "AppDescription": {
     "en": "RAMA: Relational Artist MAps"
   },
   "AcceptedLinkTypes": [
-    "playlist"
+    "artist",
+    "track"
   ],
   "BundleType": "Application",
   "BundleVersion": "0.2",

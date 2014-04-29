@@ -7,12 +7,13 @@ RAMA is a Spotify Application for visualizing and interacting with networks of m
 For now, I do not intend to make this application available on the Spotify App Store, so to run it you need to set it up first.
 
 To open a downloaded app you need to **Activate Spotify Developer account** here: https://devaccount.spotify.com/my-account (no premium account needed).
-Tested on mac for now only.
+
+I've tested the app in mac and windows. Please report any [issues] you encounter in both mac or windows please.
 
 Installation
 --------------
 
-#### Automagic installer
+#### Automagic installer (for mac only)
 
 Execute the installer script.
 
@@ -26,16 +27,17 @@ $ curl -L https://raw.githubusercontent.com/carsy/rama-spotify/master/install.sh
 
 You should now be in the app and seeing a graph thingy.
 
-#### Manual installer
+#### Manual installer (windows and mac)
 
 These are the contents of the script:
 
 ```sh
 $ mkdir ~/Spotify ; cd ~/Spotify
+$ rm -rf rama
 $ rm -rf rama-spotify
-$ wget https://github.com/carsy/rama-spotify/releases/download/v0.3/rama-spotify_v0.3.tar.gz
-$ tar -xvf rama-spotify_v0.3.tar.gz
-$ open spotify:app:rama-spotify
+$ wget https://github.com/carsy/rama-spotify/releases/download/v0.5/rama_v0.5.tar.gz
+$ tar -xvf rama_v0.5.tar.gz
+$ open spotify:app:rama
 ```
 You should now be in the app and seeing a graph thingy.
 
@@ -48,7 +50,7 @@ Alternatively, If you happen to have commandlinephobia (I get that every other m
 
 Now open Spotify and type in the search bar:
 ```sh
-spotify:app:rama-spotify
+spotify:app:rama
 ```
 You should now be in the app and seeing a graph thingy.
 
@@ -58,6 +60,9 @@ With no official release for the Spotify Desktop Client, there's nothing I can d
 
 [Releases]
 ----
+
+[v0.5] - Artist track list
+  - Track list of current playing artist added.
 
 [v0.3] - Equalizer graph
   - Equalizer added using spotify's buffer analyzer api
@@ -96,6 +101,8 @@ José Bateira
 [@\_carsy\_]:http://twitter.com/_carsy_
 [here]:https://github.com/carsy/rama-spotify/releases/latest
 [Releases]:https://github.com/carsy/rama-spotify/releases/latest
+[issues]:https://github.com/carsy/rama-spotify/issues
+[v0.5]:https://github.com/carsy/rama-spotify/releases/tag/v0.5
 [v0.3]:https://github.com/carsy/rama-spotify/releases/tag/v0.3
 [v0.2]:https://github.com/carsy/rama-spotify/releases/tag/v0.2
 [v0.1.3]:https://github.com/carsy/rama-spotify/releases/tag/v0.1.3

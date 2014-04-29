@@ -1,7 +1,7 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     config: {
-      dist: 'rama-spotify'
+      dist: 'rama'
     },
     jshint: {
       all: ['Gruntfile.js', 'js/**/*.js', 'test/*.js']
