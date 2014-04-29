@@ -17,8 +17,6 @@ require(['$api/models'], function(models) {
 
       if (supports && supports.controller)
         supports.controller.loadView(null, controller);
-
-      controller.bindEvents();
     };
   }
 
@@ -33,24 +31,6 @@ require(['$api/models'], function(models) {
         afterLoad(this, supports)(dependency);
     },
     updateView: function() {},
-
-    // events helpers
-    bindEvents: function() {
-      for (var event in this.events) {
-        this.on(event, this.events[event]);
-      }
-    },
-    bind: {
-      onPlayerChange: function(eventHandler, context) {
-        models.player.addEventListener('change', function(player) {
-          models.player.load('track').done(context, eventHandler);
-        });
-      }
-    },
-    on: function(event, eventHandler) {
-      if (this.bind[event])
-        this.bind[event](eventHandler, this);
-    }
   });
 
   exports.controller = Controller;

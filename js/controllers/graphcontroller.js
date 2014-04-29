@@ -13,6 +13,7 @@ require([
       this.parent(name, config);
 
       this.options = config.options;
+
     }
   });
 
@@ -41,33 +42,6 @@ require([
       }
       return this;
     },
-    events: {
-      onPlayerChange: function(player) { // TODO refactor same artist verification
-        if (!this.artistGraph)
-          this.setArtistGraph(player);
-
-        if (player.track.advertisement)
-          return;
-
-        var oldArtistURI = this.artistGraph.artist.uri;
-
-        if (player.track.artists[0].uri !== oldArtistURI) {
-          this.setArtistGraph(player);
-        }
-      },
-      onNodeDoubleClick: function(self, data) {
-        var node = _.findWhere(self.artistGraph.data.nodes, {
-          id: parseInt(data.nodes[0])
-        });
-
-        if (!node || node.id === 1)
-          return;
-
-        node.artist.load('compilations').done(function(artist) {
-          models.player.playContext(artist.compilations);
-        });
-      }
-    },
 
     /**
       Set artist from the current playing track.
@@ -93,10 +67,7 @@ require([
       this.showThrobber();
       this.artistGraph.buildGraph();
 
-      var graphcontroller = this;
-      this.artistGraph.on('doubleClick', function doubleClick(data) {
-        graphcontroller.events.onNodeDoubleClick(graphcontroller, data);
-      });
+      this.bindAllEvents();
     },
     showThrobber: function() {
       if (this.artistGraph.throbber)
@@ -106,6 +77,43 @@ require([
         Throbber.forElement(document.getElementById(this.name));
       this.artistGraph.throbber.setPosition('center', 'center');
       this.artistGraph.throbber._addBackground();
+    },
+    bindAllEvents: function() {
+      _.bindAll(this,
+        'onNodeDoubleClick',
+        'onPlayerChange');
+
+      this.artistGraph.on('doubleClick', this.onNodeDoubleClick);
+
+      var onPlayerChange = this.onPlayerChange;
+      models.player.addEventListener('change', function(player) {
+        models.player.load('track').done(onPlayerChange);
+      });
+    },
+    onPlayerChange: function(player) { // TODO refactor same artist verification
+      if (!this.artistGraph)
+        this.setArtistGraph(player);
+
+      if (player.track.advertisement)
+        return;
+
+      var oldArtistURI = this.artistGraph.artist.uri;
+
+      if (player.track.artists[0].uri !== oldArtistURI) {
+        this.setArtistGraph(player);
+      }
+    },
+    onNodeDoubleClick: function(data) {
+      var node = _.findWhere(this.artistGraph.data.nodes, {
+        id: parseInt(data.nodes[0])
+      });
+
+      if (!node || node.id === 1)
+        return;
+
+      node.artist.load('compilations').done(function(artist) {
+        models.player.playContext(artist.compilations);
+      });
     }
   });
 

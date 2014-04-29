@@ -10,10 +10,10 @@ module.exports = function(grunt) {
       src: ['js/**/*.js'],
       options: {
         vendor: [
+          'bower_components/underscore/underscore.js',
           'bower_components/jquery/dist/jquery.js',
           'bower_components/vis/dist/vis.js',
-          'bower_components/jasmine-jquery/lib/jasmine-jquery.js',
-          'bower_components/underscore/underscore.js'
+          'bower_components/jasmine-jquery/lib/jasmine-jquery.js'
         ],
         helpers: ['test/spechelper.js'],
         specs: ['test/*.spec.js']

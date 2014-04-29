@@ -12,6 +12,12 @@
 
         initialize: function(name, config) {
           this.parent(name, config);
+
+          _.bindAll(this, 'onPlayerChange');
+          var onPlayerChange = this.onPlayerChange;
+          models.player.addEventListener('change', function(player) {
+            models.player.load('track').done(onPlayerChange);
+          });
         }
 
       });
@@ -59,7 +65,7 @@
                   element.innerHTML = track.name;
                   element.uri = track.uri;
                   element.className = 'list-track';
-                  element.onclick = this.events.onTrackClick;
+                  element.onclick = this.onTrackClick;
 
                   this.jelement.find(this.config.selectors.list)
                     .append(element);
@@ -68,14 +74,11 @@
             });
           });
         },
-        events: {
-          onPlayerChange: function(player) {
-            this.load();
-          },
-          onTrackClick: function(event) {
-            models.player.playTrack(models.Track.fromURI(event.target.uri));
-            // event.preventDefault();
-          }
+        onPlayerChange: function(player) {
+          this.load();
+        },
+        onTrackClick: function(event) {
+          models.player.playTrack(models.Track.fromURI(event.target.uri));
         }
       });
 
