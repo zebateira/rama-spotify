@@ -1,9 +1,9 @@
 /*
 Syntax error: Undefined variable: "$new-bg".
-        on line 11 of /Users/josebateira/workspace/rama/sass/artistmenu.scss
+        on line 12 of /Users/josebateira/workspace/rama/sass/artistmenu.scss
 
 Backtrace:
-/Users/josebateira/workspace/rama/sass/artistmenu.scss:11
+/Users/josebateira/workspace/rama/sass/artistmenu.scss:12
 /Library/Ruby/Gems/2.0.0/gems/sass-3.2.14/lib/sass/script/variable.rb:49:in `_perform'
 /Library/Ruby/Gems/2.0.0/gems/sass-3.2.14/lib/sass/script/node.rb:40:in `perform'
 /Library/Ruby/Gems/2.0.0/gems/sass-3.2.14/lib/sass/tree/visitors/perform.rb:298:in `visit_prop'
@@ -58,4 +58,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Syntax error: Undefined variable: \"$new-bg\".\A         on line 11 of /Users/josebateira/workspace/rama/sass/artistmenu.scss"; }
+  content: "Syntax error: Undefined variable: \"$new-bg\".\A         on line 12 of /Users/josebateira/workspace/rama/sass/artistmenu.scss"; }

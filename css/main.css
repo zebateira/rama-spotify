@@ -1,5 +1,4 @@
 /* Main Elements */
-@import url("http://fonts.googleapis.com/css?family=Ruda");
 /* line 2, ../sass/_spotify.scss */
 body {
   font-family: 'Lucida Grande',Tahoma,Calibri,Arial,sans-serif;
@@ -240,13 +239,13 @@ pre .regexp {
   color: #009926;
 }
 
-/* line 7, ../sass/main.scss */
+/* line 4, ../sass/main.scss */
 *, *:before, *:after {
   box-sizing: border-box;
 }
 
 /* overrides */
-/* line 33, ../sass/main.scss */
+/* line 30, ../sass/main.scss */
 body, html {
   margin: 0;
   height: 100%;
@@ -254,29 +253,29 @@ body, html {
   overflow: hidden;
 }
 
-/* line 43, ../sass/main.scss */
+/* line 40, ../sass/main.scss */
 a {
   text-decoration: none;
 }
 
-/* line 47, ../sass/main.scss */
+/* line 44, ../sass/main.scss */
 #view_container {
   position: relative;
   height: calc(100% - 60px);
   overflow: hidden;
   background-color: #1c1c1f;
 }
-/* line 53, ../sass/main.scss */
+/* line 50, ../sass/main.scss */
 #view_container .view {
   height: 100%;
 }
 
-/* line 58, ../sass/main.scss */
+/* line 55, ../sass/main.scss */
 .sp-throbber-background {
   background-color: #ecebe8;
 }
 
-/* line 62, ../sass/main.scss */
+/* line 59, ../sass/main.scss */
 .sp-tabbar {
   display: none !important;
 }
@@ -497,12 +496,12 @@ meter {
 
 /* line 1, ../sass/artistmenu.scss */
 #artistmenu {
-  display: none;
   position: absolute;
   left: 0;
   top: 15%;
   height: 50%;
   width: 200px;
+  opacity: 0.9;
   background-color: #222326;
   border-color: #3e3e40;
   border-width: 1px;

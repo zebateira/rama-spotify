@@ -13,7 +13,6 @@ require([
       this.parent(name, config);
 
       this.options = config.options;
-
     }
   });
 
@@ -22,15 +21,15 @@ require([
 
       models.player.load('track')
         .done(this, this.setArtistGraph);
-      var self = this;
+      var controller = this;
 
-      _.each(settings.inputs, function(input) { // TODO remove self
+      _.each(settings.inputs, function(input) { // TODO remove controller
         $(input.selector).on('change', function() {
           var config = {};
           config[this.name] = parseInt(this[input.value]) || this[input.value];
-          self.showThrobber();
-          self.artistGraph.updateGraph(config);
-          self.artistGraph.buildGraph();
+          controller.showThrobber();
+          controller.artistGraph.updateGraph(config);
+          controller.artistGraph.buildGraph();
         });
       });
     },

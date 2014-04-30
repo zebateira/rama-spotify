@@ -13,6 +13,8 @@
         initialize: function(name, config) {
           this.parent(name, config);
 
+          this.selectors = config.selectors;
+
           _.bindAll(this, 'onPlayerChange');
           var onPlayerChange = this.onPlayerChange;
 
@@ -31,9 +33,7 @@
         load: function() {
 
           models.player.load('track').done(this, function(player) {
-            var artist = models.Artist.fromURI(
-              models.Artist.fromURI(player.track.artists[0].uri)
-            );
+            var artist = models.Artist.fromURI(player.track.artists[0].uri);
 
             if ((this.artist && this.artist.uri === artist.uri) ||
               player.track.advertisement) {
@@ -42,8 +42,8 @@
 
             this.artist = artist;
 
-            this.jelement.find(this.config.selectors.cover).html('');
-            this.jelement.find(this.config.selectors.list).html('');
+            this.jelement.find(this.selectors.cover).html('');
+            this.jelement.find(this.selectors.list).html('');
 
             this.image = Image.forArtist(artist, {
               width: 50,
@@ -51,11 +51,10 @@
               style: 'plain',
             });
             var wrapper =
-              $(this.selector).find(this.config.selectors.cover);
+              $(this.selector).find(this.selectors.cover);
 
             $(wrapper).append(this.image.node);
-
-            $(this.config.selectors.title).html('More from ' + artist.name);
+            $(this.selectors.title).html('More from ' + artist.name);
 
             var compilations = models.Playlist.fromURI(artist.uri);
 
@@ -73,7 +72,7 @@
                   element.className = 'list-track';
                   element.onclick = this.onTrackClick;
 
-                  this.jelement.find(this.config.selectors.list)
+                  this.jelement.find(this.selectors.list)
                     .append(element);
                 }
               });

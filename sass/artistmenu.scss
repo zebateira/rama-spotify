@@ -1,5 +1,5 @@
 #artistmenu {
-  display: none;
+  // display: none;
 
   position: absolute;
   left: 0;
@@ -8,6 +8,7 @@
   height: 50%;
   width: 200px;
 
+  opacity: 0.9;
   background-color: $new-bg;
   border-color: $border-color;
   border-width: 1px;

@@ -1,7 +1,9 @@
 require([
   '$api/models',
-  'js/controllers/controller#controller'
-], function(models, Controller) {
+  'js/controllers/controller#controller',
+  '$views/image#Image'
+], function(models, Controller, Image) {
+
   var ArtistMenu = new Class({
     Extends: Controller,
 
@@ -10,7 +12,7 @@ require([
 
       _.bindAll(this, 'onPlayerChange');
       var onPlayerChange = this.onPlayerChange;
-      models.player.addEventListener('change', function(player) {
+      models.player.addEventListener('change', function() {
         models.player.load('track').done(onPlayerChange);
       });
     }
@@ -20,16 +22,29 @@ require([
     afterLoad: function(graphcontroller) {
       this.artistGraph = graphcontroller.artistGraph;
 
-      var jelement = this.jelement;
+      var artistmenu = this;
+
       this.artistGraph.on('click', function(data) {
-        console.log(data);
-        jelement.toggle();
+        models.player.load('track').done(this, function(player) {
+          var artist = models.Artist.fromURI(player.track.artists[0].uri);
+
+          this.image = Image.forArtist(artist, {
+            width: 200,
+            height: 200,
+            style: 'plain',
+            overlay: [artist.name]
+          });
+
+          this.jelement.html('');
+          artistmenu.jelement.append(this.image.node);
+
+        });
       });
     },
     updateView: function() {
 
     },
-    onPlayerChange: function(player) {
+    onPlayerChange: function() {
       models.player.load('track').done(this, function(player) {
         var artist = models.Artist.fromURI(
           models.Artist.fromURI(player.track.artists[0].uri)
@@ -42,13 +57,16 @@ require([
 
         this.artist = artist;
 
-        this.jelement.find(this.config.selectors.cover).html('');
-        this.jelement.find(this.config.selectors.list).html('');
-
-        this.artistGraph.on('click', function(data) {
-          console.log(data);
+        this.image = Image.forArtist(artist, {
+          width: 200,
+          height: 200,
+          style: 'plain',
+          overlay: [artist.name]
         });
 
+        this.jelement.html('');
+
+        this.jelement.append(this.image.node);
       });
     }
   });
