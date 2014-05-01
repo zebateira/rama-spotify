@@ -6,11 +6,12 @@
   top: 15%;
 
   height: 50%;
-  width: 200px;
+  width: 100px;
 
   opacity: 0.9;
   background-color: $new-bg;
   border-color: $border-color;
+  border-top-color: none;
   border-width: 1px;
   border-style: solid;
   border-left: 0;

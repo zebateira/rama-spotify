@@ -32,11 +32,11 @@
         updateView: function() {},
         load: function() {
 
-          models.player.load('track').done(this, function(player) {
-            var artist = models.Artist.fromURI(player.track.artists[0].uri);
+          models.player.load('track').done(this, function() {
+            var artist = models.Artist.fromURI(models.player.track.artists[0].uri);
 
             if ((this.artist && this.artist.uri === artist.uri) ||
-              player.track.advertisement) {
+              models.player.track.advertisement) {
               return;
             }
 

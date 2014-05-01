@@ -78,13 +78,9 @@ require([
       this.artistGraph.throbber._addBackground();
     },
     bindAllEvents: function() {
-      _.bindAll(this,
-        'onNodeDoubleClick',
-        'onPlayerChange');
+      this.artistGraph.on('doubleClick', this.onNodeDoubleClick.bind(this));
 
-      this.artistGraph.on('doubleClick', this.onNodeDoubleClick);
-
-      var onPlayerChange = this.onPlayerChange;
+      var onPlayerChange = this.onPlayerChange.bind(this);
       models.player.addEventListener('change', function(player) {
         models.player.load('track').done(onPlayerChange);
       });

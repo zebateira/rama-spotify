@@ -500,10 +500,11 @@ meter {
   left: 0;
   top: 15%;
   height: 50%;
-  width: 200px;
+  width: 100px;
   opacity: 0.9;
   background-color: #222326;
   border-color: #3e3e40;
+  border-top-color: none;
   border-width: 1px;
   border-style: solid;
   border-left: 0;
