@@ -3,7 +3,7 @@
 #settings {
   position: absolute;
   z-index: 2;
-  top: 10px;
+  top: $header-height + 5px;
   right: 10px;
 
   .settings-btn {
@@ -34,6 +34,7 @@
     display: none;
     position: relative;
     float: right;
+    opacity: 0.9;
   
     padding: 10px 6px;
 
