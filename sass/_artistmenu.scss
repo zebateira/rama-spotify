@@ -5,7 +5,7 @@
   left: 0;
   top: 20%; // $header-height + 20px;
 
-  height: 60%;
+  // height: 60%;
   width: 151px;
 
   opacity: 0.9;
@@ -33,6 +33,7 @@
 
 
   #artist_controls {
+    display: none;
     position: absolute;
     bottom: 0;
     width: 100%;

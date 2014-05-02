@@ -517,7 +517,6 @@ meter {
   position: absolute;
   left: 0;
   top: 20%;
-  height: 60%;
   width: 151px;
   opacity: 0.9;
   background-color: #222326;
@@ -543,15 +542,16 @@ meter {
 }
 /* line 35, ../sass/_artistmenu.scss */
 #artistmenu #artist_controls {
+  display: none;
   position: absolute;
   bottom: 0;
   width: 100%;
 }
-/* line 40, ../sass/_artistmenu.scss */
+/* line 41, ../sass/_artistmenu.scss */
 #artistmenu #artist_controls .control:first-child {
   margin-top: 10px;
 }
-/* line 43, ../sass/_artistmenu.scss */
+/* line 44, ../sass/_artistmenu.scss */
 #artistmenu #artist_controls .control {
   background-color: #2e2f33;
   max-width: 80%;
@@ -564,7 +564,7 @@ meter {
   cursor: pointer;
   text-align: center;
 }
-/* line 56, ../sass/_artistmenu.scss */
+/* line 57, ../sass/_artistmenu.scss */
 #artistmenu #artist_controls .control:hover {
   opacity: 0.95;
 }

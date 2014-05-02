@@ -80,30 +80,32 @@ require([
           var jalbums = this.jelement.find(this.selectors.albums);
           artist.albums.snapshot(0, 7).done(this, function(snapshot) {
 
+            var albumLoaded = function(album) {
+              var albumImage = Image.forAlbum(album, {
+                width: 50,
+                height: 50,
+                style: 'plain',
+                player: true,
+                placeholder: 'album',
+                link: 'auto',
+                title: album.name
+              });
+              var albumElement = document.createElement('span');
+              albumElement.className = 'artist-album';
+
+              albumImage.node.className += ' artist-album-cover';
+
+              $(albumElement).append(albumImage.node);
+
+              jalbums.append(albumElement);
+            };
+
             for (var i = 0; i <= 7; ++i) {
               if (snapshot.get(i)) {
                 var album = snapshot.get(i).albums[0];
 
                 if (album && album.playable) {
-                  album.load(['uri', 'name', 'popularity']).done(this, function(album) {
-                    var albumImage = Image.forAlbum(album, {
-                      width: 50,
-                      height: 50,
-                      style: 'plain',
-                      player: true,
-                      placeholder: 'album',
-                      link: 'auto',
-                      title: album.name
-                    });
-                    var albumElement = document.createElement('span');
-                    albumElement.className = 'artist-album';
-
-                    albumImage.node.className += ' artist-album-cover';
-
-                    $(albumElement).append(albumImage.node);
-
-                    jalbums.append(albumElement);
-                  });
+                  album.load(['uri', 'name', 'popularity']).done(this, albumLoaded);
                 }
 
               }
