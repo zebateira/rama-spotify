@@ -41,9 +41,14 @@ $width: $height; // omg its a square
     border-radius: 1px;
 
     background-color: $new-bg-lighter;
+    border-color: $border-color;
+    border-width: 1px;
+    border-style: solid;
+
+    cursor: pointer;
 
     &:hover {
-      cursor: pointer;
+      opacity: 0.95;
     }
 
     a {

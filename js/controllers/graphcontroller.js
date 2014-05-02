@@ -13,6 +13,7 @@ require([
       this.parent(name, config);
 
       this.options = config.options;
+      this.externalevents = [];
     }
   });
 
@@ -23,10 +24,13 @@ require([
         .done(this, this.setArtistGraph);
       var controller = this;
 
-      _.each(settings.inputs, function(input) { // TODO remove controller
+      _.each(settings.inputs, function(input) {
+        // TODO remove controller
         $(input.selector).on('change', function() {
           var config = {};
-          config[this.name] = parseInt(this[input.value]) || this[input.value];
+
+          config[this.name] =
+            parseInt(this[input.value]) || this[input.value];
           controller.showThrobber();
           controller.artistGraph.updateGraph(config);
           controller.artistGraph.buildGraph();
@@ -78,14 +82,22 @@ require([
       this.artistGraph.throbber._addBackground();
     },
     bindAllEvents: function() {
-      this.artistGraph.on('doubleClick', this.onNodeDoubleClick.bind(this));
+      this.artistGraph.on('doubleClick',
+        this.onNodeDoubleClick.bind(this));
 
       var onPlayerChange = this.onPlayerChange.bind(this);
       models.player.addEventListener('change', function(player) {
         models.player.load('track').done(onPlayerChange);
       });
+
+      var graph = this.artistGraph;
+
+      _.each(this.externalevents, function(event) {
+        graph.on(event.eventName, event.eventHandler);
+      });
     },
-    onPlayerChange: function(player) { // TODO refactor same artist verification
+    onPlayerChange: function(player) {
+      // TODO refactor same artist verification
       if (!this.artistGraph)
         this.setArtistGraph(player);
 
@@ -108,6 +120,14 @@ require([
 
       node.artist.load('compilations').done(function(artist) {
         models.player.playContext(artist.compilations);
+      });
+    },
+    addGraphEvent: function(eventName, eventHandler) {
+      this.artistGraph.on(eventName, eventHandler);
+
+      this.externalevents.push({
+        eventName: eventName,
+        eventHandler: eventHandler
       });
     }
   });

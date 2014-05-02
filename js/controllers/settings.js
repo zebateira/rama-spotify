@@ -10,11 +10,13 @@ require([
       this.parent(name, config);
 
       this.button = {
-        selector: config.buttonSelector || this.selector + ' .settings-btn'
+        selector: config.buttonSelector ||
+          this.selector + ' .settings-btn'
       };
 
       this.settings = {
-        selector: config.formSelector || this.selector + ' .settings-form',
+        selector: config.formSelector ||
+          this.selector + ' .settings-form'
       };
 
       this.inputs = {

@@ -435,16 +435,23 @@ meter {
   left: 0;
   z-index: 1;
   width: 100%;
+  height: 60px;
 }
 
-/* line 33, ../sass/_eqbar.scss */
+/* line 34, ../sass/_eqbar.scss */
 #eqbar {
   margin: 0 auto;
-  width: 512px;
+  width: 448px;
+  height: 60px;
   opacity: 0.05;
-  overflow: auto;
+  overflow: hidden;
 }
-/* line 39, ../sass/_eqbar.scss */
+/* line 41, ../sass/_eqbar.scss */
+#eqbar canvas {
+  height: 60px;
+  width: 100%;
+}
+/* line 46, ../sass/_eqbar.scss */
 #eqbar .bar {
   float: left;
   width: 3px;
@@ -491,12 +498,16 @@ meter {
   margin-bottom: 5px;
   border-radius: 1px;
   background-color: #2e2f33;
-}
-/* line 45, ../sass/_tracklist.scss */
-#tracklist .list-track:hover {
+  border-color: #3e3e40;
+  border-width: 1px;
+  border-style: solid;
   cursor: pointer;
 }
-/* line 49, ../sass/_tracklist.scss */
+/* line 50, ../sass/_tracklist.scss */
+#tracklist .list-track:hover {
+  opacity: 0.95;
+}
+/* line 54, ../sass/_tracklist.scss */
 #tracklist .list-track a {
   color: #dfe0e6;
 }
@@ -514,4 +525,46 @@ meter {
   border-width: 1px;
   border-style: solid;
   border-left: 0;
+  color: #dfe0e6;
+}
+/* line 20, ../sass/_artistmenu.scss */
+#artistmenu .artist-info-field {
+  margin: 5px;
+}
+/* line 24, ../sass/_artistmenu.scss */
+#artistmenu #artist_albums {
+  width: 120px;
+  margin: 5px auto;
+}
+/* line 28, ../sass/_artistmenu.scss */
+#artistmenu #artist_albums .artist-album {
+  display: inline-block;
+  margin: 5px;
+}
+/* line 35, ../sass/_artistmenu.scss */
+#artistmenu #artist_controls {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+/* line 40, ../sass/_artistmenu.scss */
+#artistmenu #artist_controls .control:first-child {
+  margin-top: 10px;
+}
+/* line 43, ../sass/_artistmenu.scss */
+#artistmenu #artist_controls .control {
+  background-color: #2e2f33;
+  max-width: 80%;
+  border-color: #3e3e40;
+  border-width: 1px;
+  border-style: solid;
+  padding: 4px;
+  margin: 10px auto;
+  border-radius: 1px;
+  cursor: pointer;
+  text-align: center;
+}
+/* line 56, ../sass/_artistmenu.scss */
+#artistmenu #artist_controls .control:hover {
+  opacity: 0.95;
 }

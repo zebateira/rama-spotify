@@ -14,20 +14,20 @@ require([
         return;
 
       this.numRows = config.numRows;
-      this.bars = [];
-      this.barHeightFactor = 60;
+      this.barHeightFactor = 100.0;
+      this.barwidth = 3.0;
     }
   });
 
   EQBar.implement({
     afterLoad: function() {
-      for (var i = 0; i < this.numRows; i++) {
-        var bar = document.createElement('div');
-        bar.className = 'bar';
-        $(this.selector).append(bar);
 
-        this.bars.push(bar);
-      }
+      this.canvas = document.createElement('canvas');
+      this.context = this.canvas.getContext('2d');
+
+      $(this.selector).append(this.canvas);
+
+      this.context.fillStyle = "#dfe0e6";
 
       audio.RealtimeAnalyzer.forPlayer(models.player)
         .addEventListener('audio', this.onRealtimeAudio.bind(this));
@@ -36,9 +36,13 @@ require([
       var left = event.audio.wave.left;
       var right = event.audio.wave.right;
 
-      for (var i = 0; i < this.numRows; i++) {
-        this.bars[i].style.height =
-          (left[i] + right[i]) * this.barHeightFactor + 'px';
+      this.context.clearRect(0, 0, 600, 600);
+
+      for (var i = 0, x = 0; i < this.numRows; i++, x += this.barwidth + 0.5) {
+        var height =
+          (Math.abs(left[i]) + Math.abs(right[i])) * this.barHeightFactor;
+
+        this.context.fillRect(x, -1, this.barwidth, height);
       }
     },
     updateView: function() {},

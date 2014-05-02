@@ -9,6 +9,7 @@ require([
 
     initialize: function(name, config) {
       this.parent(name, config);
+      this.selectors = config.selectors;
 
       var onPlayerChange = this.onPlayerChange.bind(this);
       models.player.addEventListener('change', function() {
@@ -19,39 +20,109 @@ require([
 
   ArtistMenu.implement({
     afterLoad: function(graphcontroller) {
-      this.artistGraph = graphcontroller.artistGraph;
+      this.graphcontroller = graphcontroller;
 
       models.player.load('track').done(this, function() {
-        this.artist = models.Artist.fromURI(models.player.track.artists[0].uri);
-        this.loadImage(this.artist);
-        this.artistGraph.on('click', this.onClickNode.bind(this));
+        this.artist = models.Artist.fromURI(
+          models.player.track.artists[0].uri);
+
+
+        this.updateView(this.artist);
+
+        this.bindEvents();
       });
-
     },
-    updateView: function() {
-
+    bindEvents: function() {
+      this.graphcontroller.addGraphEvent('click',
+        this.onClickNode.bind(this));
     },
-    loadImage: function(artist) {
-      this.image = Image.forArtist(artist, {
-        width: 150,
-        height: 100,
-        style: 'plain',
-        overlay: [artist.name],
-        player: true
-      });
+    updateView: function(artist) {
+      if (!artist)
+        return;
 
-      this.jelement.html('');
-      this.jelement.append(this.image.node);
+      if (!this.image) {
+        this.image = Image.forArtist(artist, {
+          width: 150,
+          height: 100,
+          style: 'plain',
+          overlay: [artist.name],
+          player: true,
+          placeholder: 'artist',
+          link: 'auto'
+        });
+
+        this.jelement.find(this.selectors.cover).append(this.image.node);
+      }
+
+      this.image.setImage(artist);
+      this.image.setOverlay(artist.name);
+
+      this.jelement.find(this.selectors.albums).html('');
+
+      artist.load(['popularity', 'years', 'albums'])
+        .done(this, function(artist) {
+          if (artist.popularity)
+            this.jelement.find(this.selectors.popularity)
+              .html('Popularity: ' + artist.popularity + '/100');
+          else
+            this.jelement.find(this.selectors.popularity).html('');
+
+          if (artist.years.from !== 0)
+            this.jelement.find(this.selectors.years).html(
+              'Years active:<br> ' +
+              artist.years.from +
+              ' - ' +
+              (artist.years.to === 0 ? 'present' : artist.years.to)
+            );
+          else
+            this.jelement.find(this.selectors.years).html('');
+
+          var jalbums = this.jelement.find(this.selectors.albums);
+          artist.albums.snapshot(0, 7).done(this, function(snapshot) {
+
+            for (var i = 0; i <= 7; ++i) {
+              if (snapshot.get(i)) {
+                var album = snapshot.get(i).albums[0];
+
+                if (album && album.playable) {
+                  album.load(['uri', 'name', 'popularity']).done(this, function(album) {
+                    var albumImage = Image.forAlbum(album, {
+                      width: 50,
+                      height: 50,
+                      style: 'plain',
+                      player: true,
+                      placeholder: 'album',
+                      link: 'auto',
+                      title: album.name
+                    });
+                    var albumElement = document.createElement('span');
+                    albumElement.className = 'artist-album';
+
+                    albumImage.node.className += ' artist-album-cover';
+
+                    $(albumElement).append(albumImage.node);
+
+                    jalbums.append(albumElement);
+                  });
+                }
+
+              }
+            }
+
+          });
+        });
+
     },
     onClickNode: function(data) {
-      var node = _.findWhere(this.artistGraph.data.nodes, {
-        id: parseInt(data.nodes[0])
-      });
+      var node = _.findWhere(
+        this.graphcontroller.artistGraph.data.nodes, {
+          id: parseInt(data.nodes[0])
+        });
 
       if (!node)
         return;
 
-      this.loadImage(node.artist);
+      this.updateView(node.artist);
     },
     onPlayerChange: function() {
       models.player.load('track').done(this, function(player) {
@@ -65,7 +136,7 @@ require([
         }
 
         this.artist = artist;
-        this.loadImage(this.artist);
+        this.updateView(this.artist);
       });
     }
   });

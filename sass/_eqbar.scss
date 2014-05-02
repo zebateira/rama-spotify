@@ -24,17 +24,24 @@ meter {
   left: 0;
   z-index: 1;
   width: 100%;
+  height: $header-height;
 }
 
 $bar-width: 3px;
 $num-bars: 128;
-$eq-width: ($bar-width + 1) * $num-bars;
+$eq-width: ($bar-width + 0.5) * $num-bars;
 
 #eqbar {
   margin: 0 auto;
   width: $eq-width;
+  height: $header-height;
   opacity: 0.05;
-  overflow: auto;
+  overflow: hidden;
+
+  canvas {
+    height: $header-height;
+    width: 100%;
+  }
 
   .bar {
     float: left;

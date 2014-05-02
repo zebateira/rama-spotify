@@ -54,7 +54,7 @@
               $(this.selector).find(this.selectors.cover);
 
             $(wrapper).append(this.image.node);
-            $(this.selectors.title).html('More from ' + artist.name);
+            $(this.selectors.title).html('More popular tracks from ' + artist.name);
 
             var compilations = models.Playlist.fromURI(artist.uri);
 

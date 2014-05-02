@@ -14,4 +14,48 @@
   border-width: 1px;
   border-style: solid;
   border-left: 0;
+
+  color: $new-white;
+
+  .artist-info-field {
+    margin: 5px;
+  }
+
+  #artist_albums {
+    width: 120px;
+    margin: 5px auto;
+
+    .artist-album {
+      display: inline-block;
+      margin: 5px;
+    }
+  }
+
+
+  #artist_controls {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    
+    .control:first-child {
+      margin-top: 10px;
+    }
+    .control {
+      background-color: $new-bg-lighter;
+      max-width: 80%;
+
+      border-color: $border-color;
+      border-width: 1px;
+      border-style: solid;
+      padding: 4px;
+      margin: 10px auto;
+      border-radius: 1px;
+      cursor: pointer;
+      text-align: center;
+
+      &:hover {
+        opacity: 0.95;
+      }
+    }
+  }
 }
