@@ -1,4 +1,4 @@
-require(['$api/models'], function(models) {
+require(['$api/models', 'js/components/components#Components'], function(models, Components) {
 
   var Controller = new Class({
     initialize: function(name, config) {
@@ -14,43 +14,25 @@ require(['$api/models'], function(models) {
       controller.element = controller.jelement[0];
 
       controller.afterLoad(dependency);
-
       if (supports && supports.controller)
-        supports.controller.loadView(null, controller);
-
-      controller.bindEvents();
+        supports.controller.loadView(Components.components[supports.supports], controller);
     };
   }
 
   Controller.implement({
     loadView: function(supports, dependency) {
       if (this.config.loadtemplate) {
+        var controller = this;
         $(this.selector).load(
           this.config.viewpath,
-          afterLoad(this, supports)
+          function() {
+            afterLoad(controller, supports)(dependency);
+          }
         );
       } else
         afterLoad(this, supports)(dependency);
     },
     updateView: function() {},
-
-    // events helpers
-    bindEvents: function() {
-      for (var event in this.events) {
-        this.on(event, this.events[event]);
-      }
-    },
-    bind: {
-      onPlayerChange: function(eventHandler, context) {
-        models.player.addEventListener('change', function(player) {
-          models.player.load('track').done(context, eventHandler);
-        });
-      }
-    },
-    on: function(event, eventHandler) {
-      if (this.bind[event])
-        this.bind[event](eventHandler, this);
-    }
   });
 
   exports.controller = Controller;

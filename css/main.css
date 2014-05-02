@@ -1,5 +1,4 @@
 /* Main Elements */
-@import url("http://fonts.googleapis.com/css?family=Ruda");
 /* line 2, ../sass/_spotify.scss */
 body {
   font-family: 'Lucida Grande',Tahoma,Calibri,Arial,sans-serif;
@@ -240,13 +239,13 @@ pre .regexp {
   color: #009926;
 }
 
-/* line 7, ../sass/main.scss */
+/* line 4, ../sass/main.scss */
 *, *:before, *:after {
   box-sizing: border-box;
 }
 
 /* overrides */
-/* line 32, ../sass/main.scss */
+/* line 30, ../sass/main.scss */
 body, html {
   margin: 0;
   height: 100%;
@@ -254,29 +253,29 @@ body, html {
   overflow: hidden;
 }
 
-/* line 42, ../sass/main.scss */
+/* line 40, ../sass/main.scss */
 a {
   text-decoration: none;
 }
 
-/* line 46, ../sass/main.scss */
+/* line 44, ../sass/main.scss */
 #view_container {
   position: relative;
-  height: calc(100% - 60px);
+  height: 100%;
   overflow: hidden;
   background-color: #1c1c1f;
 }
-/* line 52, ../sass/main.scss */
+/* line 50, ../sass/main.scss */
 #view_container .view {
   height: 100%;
 }
 
-/* line 57, ../sass/main.scss */
+/* line 55, ../sass/main.scss */
 .sp-throbber-background {
   background-color: #ecebe8;
 }
 
-/* line 61, ../sass/main.scss */
+/* line 59, ../sass/main.scss */
 .sp-tabbar {
   display: none !important;
 }
@@ -287,21 +286,24 @@ a {
 #header {
   background-color: #222326;
   max-height: 60px;
-  position: relative;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+  opacity: 0.9;
   border-bottom: 1px solid #5e6069;
   min-height: 60px;
 }
-/* line 13, ../sass/_header.scss */
+/* line 16, ../sass/_header.scss */
 #header .header-text a {
   color: #bbb;
 }
-/* line 19, ../sass/_header.scss */
+/* line 21, ../sass/_header.scss */
 #header .header-title {
   text-align: center;
   font-size: 3em;
   line-height: 60px;
 }
-/* line 25, ../sass/_header.scss */
+/* line 27, ../sass/_header.scss */
 #header .header-link {
   display: table;
   position: absolute;
@@ -313,12 +315,12 @@ a {
   background-color: #313336;
   margin-left: 10px;
 }
-/* line 38, ../sass/_header.scss */
+/* line 40, ../sass/_header.scss */
 #header .header-link a {
   display: table-cell;
   vertical-align: middle;
 }
-/* line 43, ../sass/_header.scss */
+/* line 45, ../sass/_header.scss */
 #header .header-link:after {
   content: url(../img/external_link-tiny-gray.png);
   display: inline-block;
@@ -328,7 +330,7 @@ a {
   margin-top: -5px;
 }
 @media (max-width: 500px) {
-  /* line 25, ../sass/_header.scss */
+  /* line 27, ../sass/_header.scss */
   #header .header-link {
     display: none;
   }
@@ -338,7 +340,7 @@ a {
 #settings {
   position: absolute;
   z-index: 2;
-  top: 10px;
+  top: 65px;
   right: 10px;
 }
 /* line 9, ../sass/_settings.scss */
@@ -368,14 +370,15 @@ a {
   display: none;
   position: relative;
   float: right;
+  opacity: 0.9;
   padding: 10px 6px;
   background-color: #222326;
   border-radius: 2px;
   border-width: 1px;
-  border-color: #999;
+  border-color: #3e3e40;
   border-style: solid;
 }
-/* line 46, ../sass/_settings.scss */
+/* line 47, ../sass/_settings.scss */
 #settings .settings-form .tri {
   position: absolute;
   top: -5px;
@@ -385,32 +388,33 @@ a {
   background-color: #222326;
   border-radius: 2px;
   border-width: 1px;
-  border-color: #999 transparent transparent #999;
+  border-color: #3e3e40 transparent transparent #3e3e40;
   border-style: solid;
   -webkit-transform: rotate(45deg);
 }
-/* line 63, ../sass/_settings.scss */
+/* line 64, ../sass/_settings.scss */
 #settings .settings-form .option {
   overflow: auto;
 }
-/* line 66, ../sass/_settings.scss */
+/* line 67, ../sass/_settings.scss */
 #settings .settings-form .option:not(.first-child) {
   margin-top: 5px;
 }
-/* line 70, ../sass/_settings.scss */
+/* line 71, ../sass/_settings.scss */
 #settings .settings-form .option label {
   float: left;
   margin-right: 5px;
 }
-/* line 74, ../sass/_settings.scss */
+/* line 75, ../sass/_settings.scss */
 #settings .settings-form .option input {
   padding: 2px;
   width: 30px;
   float: right;
   background-color: #222326;
   border-width: 1px;
+  border-color: #3e3e40;
 }
-/* line 81, ../sass/_settings.scss */
+/* line 83, ../sass/_settings.scss */
 #settings .settings-form .option input[name=treemode] {
   margin-top: 5px;
   margin-left: 5px;
@@ -429,27 +433,37 @@ meter {
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 1;
   width: 100%;
+  height: 60px;
 }
 
-/* line 32, ../sass/_eqbar.scss */
+/* line 34, ../sass/_eqbar.scss */
 #eqbar {
   margin: 0 auto;
-  width: 512px;
+  width: 448px;
+  height: 60px;
   opacity: 0.05;
-  overflow: auto;
+  overflow: hidden;
 }
-/* line 38, ../sass/_eqbar.scss */
+/* line 41, ../sass/_eqbar.scss */
+#eqbar canvas {
+  height: 60px;
+  width: 100%;
+}
+/* line 46, ../sass/_eqbar.scss */
 #eqbar .bar {
   float: left;
   width: 3px;
   min-height: 1px;
+  max-height: 60px;
   background-color: #dfe0e6;
   margin-right: 1px;
 }
 
 /* line 4, ../sass/_tracklist.scss */
 #tracklist {
+  opacity: 0.9;
   position: absolute;
   z-index: 1;
   bottom: 0;
@@ -476,7 +490,7 @@ meter {
   max-width: calc(100% - 50px);
   overflow: hidden;
 }
-/* line 39, ../sass/_tracklist.scss */
+/* line 35, ../sass/_tracklist.scss */
 #tracklist .list-track {
   display: inline-block;
   padding: 2px 5px;
@@ -484,12 +498,73 @@ meter {
   margin-bottom: 5px;
   border-radius: 1px;
   background-color: #2e2f33;
-}
-/* line 49, ../sass/_tracklist.scss */
-#tracklist .list-track:hover {
+  border-color: #3e3e40;
+  border-width: 1px;
+  border-style: solid;
   cursor: pointer;
 }
-/* line 53, ../sass/_tracklist.scss */
+/* line 50, ../sass/_tracklist.scss */
+#tracklist .list-track:hover {
+  opacity: 0.95;
+}
+/* line 54, ../sass/_tracklist.scss */
 #tracklist .list-track a {
   color: #dfe0e6;
+}
+
+/* line 1, ../sass/_artistmenu.scss */
+#artistmenu {
+  position: absolute;
+  left: 0;
+  top: 20%;
+  width: 151px;
+  opacity: 0.9;
+  background-color: #222326;
+  border-color: #3e3e40;
+  border-width: 1px;
+  border-style: solid;
+  border-left: 0;
+  color: #dfe0e6;
+}
+/* line 20, ../sass/_artistmenu.scss */
+#artistmenu .artist-info-field {
+  margin: 5px;
+}
+/* line 24, ../sass/_artistmenu.scss */
+#artistmenu #artist_albums {
+  width: 120px;
+  margin: 5px auto;
+}
+/* line 28, ../sass/_artistmenu.scss */
+#artistmenu #artist_albums .artist-album {
+  display: inline-block;
+  margin: 5px;
+}
+/* line 35, ../sass/_artistmenu.scss */
+#artistmenu #artist_controls {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+/* line 41, ../sass/_artistmenu.scss */
+#artistmenu #artist_controls .control:first-child {
+  margin-top: 10px;
+}
+/* line 44, ../sass/_artistmenu.scss */
+#artistmenu #artist_controls .control {
+  background-color: #2e2f33;
+  max-width: 80%;
+  border-color: #3e3e40;
+  border-width: 1px;
+  border-style: solid;
+  padding: 4px;
+  margin: 10px auto;
+  border-radius: 1px;
+  cursor: pointer;
+  text-align: center;
+}
+/* line 57, ../sass/_artistmenu.scss */
+#artistmenu #artist_controls .control:hover {
+  opacity: 0.95;
 }

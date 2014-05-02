@@ -2,7 +2,7 @@ $height: 50px;
 $width: $height; // omg its a square
 
 #tracklist {
-
+  opacity: 0.9;
   position: absolute;
   z-index: 1;
   bottom: 0;
@@ -10,7 +10,7 @@ $width: $height; // omg its a square
   overflow: auto;
   width: 100%;
   height: $height + 1px;
-  border-top: 1px solid #3e3e40;
+  border-top: 1px solid $border-color;
 
   background-color: $new-bg;
   color: $new-white;
@@ -32,10 +32,6 @@ $width: $height; // omg its a square
     overflow: hidden;
   }
 
-  #list_title, #list_items {
-    // height: 50%;
-  }
-
   .list-track {
     display: inline-block;
 
@@ -45,9 +41,14 @@ $width: $height; // omg its a square
     border-radius: 1px;
 
     background-color: $new-bg-lighter;
+    border-color: $border-color;
+    border-width: 1px;
+    border-style: solid;
+
+    cursor: pointer;
 
     &:hover {
-      cursor: pointer;
+      opacity: 0.95;
     }
 
     a {

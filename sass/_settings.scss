@@ -3,7 +3,7 @@
 #settings {
   position: absolute;
   z-index: 2;
-  top: 10px;
+  top: $header-height + 5px;
   right: 10px;
 
   .settings-btn {
@@ -34,13 +34,14 @@
     display: none;
     position: relative;
     float: right;
+    opacity: 0.9;
   
     padding: 10px 6px;
 
     background-color: $new-bg;
     border-radius: 2px;
     border-width: 1px;
-    border-color: #999;
+    border-color: $border-color;
     border-style: solid;
 
     .tri {
@@ -54,7 +55,7 @@
       background-color: $new-bg;
       border-radius: 2px;
       border-width: 1px;
-      border-color: #999 transparent transparent #999;
+      border-color: $border-color transparent transparent $border-color;
       border-style: solid;
 
       -webkit-transform: rotate(45deg);
@@ -77,6 +78,7 @@
         float: right;
         background-color: $new-bg;
         border-width: 1px;
+        border-color: $border-color;
 
         &[name=treemode] {
           margin-top: 5px;

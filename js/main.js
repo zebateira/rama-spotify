@@ -25,6 +25,7 @@ spotify.require([
         loadtemplate: false,
         controller: controllers.GraphController,
         hasDependencies: true,
+        supports: 'artistmenu',
         events: ['onPlayerChange'],
         options: {
           nodes: {
@@ -47,11 +48,11 @@ spotify.require([
           //, clustering: true
         },
       },
-      eqbar: {
-        loadtemplate: false,
-        controller: controllers.EQBar,
-        numRows: 128
-      },
+      // eqbar: {
+      //   loadtemplate: false,
+      //   controller: controllers.EQBar,
+      //   numRows: 128
+      // },
       tracklist: {
         loadtemplate: true,
         controller: controllers.TrackList,
@@ -63,8 +64,16 @@ spotify.require([
         }
       },
       artistmenu: {
-        loadtemplate: false,
-        // controller: controllers.ArtistMenu
+        loadtemplate: true,
+        controller: controllers.ArtistMenu,
+        selectors: {
+          cover: '#artist_cover',
+          popularity: '#artist_pop',
+          years: '#artist_years',
+          albums: '#artist_albums',
+          controls: '#artist_controls',
+        },
+        hasDependencies: true
       }
     }
   });

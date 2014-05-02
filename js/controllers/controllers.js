@@ -3,13 +3,15 @@ require([
   'js/controllers/graphcontroller#graphcontroller',
   'js/controllers/settings#settings',
   'js/controllers/eqbar#eqbar',
-  'js/controllers/tracklist#tracklist'
+  'js/controllers/tracklist#tracklist',
+  'js/controllers/artistmenu#artistmenu'
 ], function(
   _header,
   _graphcontroller,
   _settings,
   _eqbar,
-  _tracklist
+  _tracklist,
+  _artistmenu
 ) {
 
   exports.Header = _header;
@@ -17,4 +19,5 @@ require([
   exports.Settings = _settings;
   exports.EQBar = _eqbar;
   exports.TrackList = _tracklist;
+  exports.ArtistMenu = _artistmenu;
 });

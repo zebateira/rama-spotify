@@ -26,6 +26,7 @@ var ArtistGraph = function(element, artist, config) {
 
   this.initGraph();
 
+  // todo check the branching and depth for valid values
   this.graph = new vis.Graph(this.element, this.data, this.options);
 
   var graph = this.graph;
@@ -183,12 +184,9 @@ ArtistGraph.prototype = {
   },
 
   bindAllEvents: function() {
-    var self = this;
-    _.each(this.events, function(event) {
-      self.graph.on(event.name, function(data) {
-        self.events[event.name](data);
-      });
-    });
+    for (var event in this.events) {
+      this.graph.on(event, this.events[event]);
+    }
   }
 };
 

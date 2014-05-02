@@ -12,6 +12,15 @@
 
         initialize: function(name, config) {
           this.parent(name, config);
+
+          this.selectors = config.selectors;
+
+          _.bindAll(this, 'onPlayerChange');
+          var onPlayerChange = this.onPlayerChange;
+
+          models.player.addEventListener('change', function(player) {
+            models.player.load('track').done(onPlayerChange);
+          });
         }
 
       });
@@ -20,18 +29,21 @@
         afterLoad: function() {
           this.load();
         },
-        updateView: function() {
-          // this.load();
-        },
+        updateView: function() {},
         load: function() {
 
-          this.jelement.find(this.config.selectors.cover).html('');
-          this.jelement.find(this.config.selectors.list).html('');
+          models.player.load('track').done(this, function() {
+            var artist = models.Artist.fromURI(models.player.track.artists[0].uri);
 
-          models.player.load('track').done(this, function(player) {
-            var artist = models.Artist.fromURI(
-              models.Artist.fromURI(player.track.artists[0].uri)
-            );
+            if ((this.artist && this.artist.uri === artist.uri) ||
+              models.player.track.advertisement) {
+              return;
+            }
+
+            this.artist = artist;
+
+            this.jelement.find(this.selectors.cover).html('');
+            this.jelement.find(this.selectors.list).html('');
 
             this.image = Image.forArtist(artist, {
               width: 50,
@@ -39,11 +51,10 @@
               style: 'plain',
             });
             var wrapper =
-              $(this.selector).find(this.config.selectors.cover);
+              $(this.selector).find(this.selectors.cover);
 
             $(wrapper).append(this.image.node);
-
-            $(this.config.selectors.title).html('More from ' + artist.name);
+            $(this.selectors.title).html('More popular tracks from ' + artist.name);
 
             var compilations = models.Playlist.fromURI(artist.uri);
 
@@ -59,23 +70,20 @@
                   element.innerHTML = track.name;
                   element.uri = track.uri;
                   element.className = 'list-track';
-                  element.onclick = this.events.onTrackClick;
+                  element.onclick = this.onTrackClick;
 
-                  this.jelement.find(this.config.selectors.list)
+                  this.jelement.find(this.selectors.list)
                     .append(element);
                 }
               });
             });
           });
         },
-        events: {
-          onPlayerChange: function(player) {
-            this.load();
-          },
-          onTrackClick: function(event) {
-            models.player.playTrack(models.Track.fromURI(event.target.uri));
-            // event.preventDefault();
-          }
+        onPlayerChange: function(player) {
+          this.load();
+        },
+        onTrackClick: function(event) {
+          models.player.playTrack(models.Track.fromURI(event.target.uri));
         }
       });
 

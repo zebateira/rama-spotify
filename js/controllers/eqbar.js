@@ -14,34 +14,35 @@ require([
         return;
 
       this.numRows = config.numRows;
-      this.bars = [];
+      this.barHeightFactor = 100.0;
+      this.barwidth = 3.0;
     }
   });
 
   EQBar.implement({
     afterLoad: function() {
-      for (var i = 0; i < this.numRows; i++) {
-        var bar = document.createElement('div');
-        bar.className = 'bar';
-        $(this.selector).append(bar);
 
-        this.bars.push(bar);
-      }
+      this.canvas = document.createElement('canvas');
+      this.context = this.canvas.getContext('2d');
 
-      var self = this;
+      $(this.selector).append(this.canvas);
+
+      this.context.fillStyle = "#dfe0e6";
+
       audio.RealtimeAnalyzer.forPlayer(models.player)
-        .addEventListener('audio', function(evt) {
-          self.onAudio(evt, self);
-        });
+        .addEventListener('audio', this.onRealtimeAudio.bind(this));
     },
-    onAudio: function(event, self) {
+    onRealtimeAudio: function(event) {
       var left = event.audio.wave.left;
       var right = event.audio.wave.right;
-      var barHeightFactor = 60;
 
-      for (var i = 0; i < self.numRows; i++) {
-        self.bars[i].style.height =
-          (left[i] + right[i]) * barHeightFactor + 'px';
+      this.context.clearRect(0, 0, 600, 600);
+
+      for (var i = 0, x = 0; i < this.numRows; i++, x += this.barwidth + 0.5) {
+        var height =
+          (Math.abs(left[i]) + Math.abs(right[i])) * this.barHeightFactor;
+
+        this.context.fillRect(x, -1, this.barwidth, height);
       }
     },
     updateView: function() {},

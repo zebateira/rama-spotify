@@ -1,9 +1,6 @@
 @import "spotify";
 @import "github";
 
-@import url("http://fonts.googleapis.com/css?family=Ruda");
-
-
 *, *:before, *:after {
   box-sizing: border-box;
 }
@@ -18,6 +15,7 @@ $new-bg-lighter: $new-bg-lighter1;
 $new-bg-lighter2: #313336;
 $new-bg-darker: #1c1c1f;
 $new-white: #dfe0e6;
+$border-color: #3e3e40;
 
 $green1: #7fb701;
 $green2: #95dc00;
@@ -45,7 +43,7 @@ a {
 
 #view_container {
   position: relative;
-  height: $content-height;
+  height: 100%; // $content-height;
   overflow: hidden;
   background-color: $new-bg-darker;
   
@@ -67,3 +65,4 @@ a {
 @import "settings";
 @import "eqbar";
 @import "tracklist";
+@import "artistmenu";
