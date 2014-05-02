@@ -34,9 +34,10 @@ require([
     loadImage: function(artist) {
       this.image = Image.forArtist(artist, {
         width: 150,
-        height: 150,
+        height: 100,
         style: 'plain',
-        overlay: [artist.name]
+        overlay: [artist.name],
+        player: true
       });
 
       this.jelement.html('');

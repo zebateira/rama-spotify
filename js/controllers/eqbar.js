@@ -15,6 +15,7 @@ require([
 
       this.numRows = config.numRows;
       this.bars = [];
+      this.barHeightFactor = 60;
     }
   });
 
@@ -28,20 +29,16 @@ require([
         this.bars.push(bar);
       }
 
-      var self = this;
       audio.RealtimeAnalyzer.forPlayer(models.player)
-        .addEventListener('audio', function(evt) {
-          self.onAudio(evt, self);
-        });
+        .addEventListener('audio', this.onRealtimeAudio.bind(this));
     },
-    onAudio: function(event, self) {
+    onRealtimeAudio: function(event) {
       var left = event.audio.wave.left;
       var right = event.audio.wave.right;
-      var barHeightFactor = 60;
 
-      for (var i = 0; i < self.numRows; i++) {
-        self.bars[i].style.height =
-          (left[i] + right[i]) * barHeightFactor + 'px';
+      for (var i = 0; i < this.numRows; i++) {
+        this.bars[i].style.height =
+          (left[i] + right[i]) * this.barHeightFactor + 'px';
       }
     },
     updateView: function() {},
