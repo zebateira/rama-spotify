@@ -51,6 +51,7 @@ ArtistGraph.prototype = {
         id: this.index,
         label: this.artist.name,
         artist: this.artist,
+        isLeaf: false,
         fontColor: '#313336',
         color: {
           background: '#dfe0e6',
@@ -110,7 +111,8 @@ ArtistGraph.prototype = {
         this.data.nodes.push({
           id: nodeid,
           label: artist.name,
-          artist: artist
+          artist: artist,
+          isLeaf: depth <= 0
         });
 
         this.data.edges.push({
@@ -152,6 +154,7 @@ ArtistGraph.prototype = {
     });
 
     this.graph.start();
+    this.graph.storePosition();
 
     this.bindAllEvents();
 

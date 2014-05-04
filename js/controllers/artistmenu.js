@@ -42,10 +42,8 @@ require([
       };
 
       for (var control in controls) {
-        var element =
-          document.getElementById('control_' + control);
-
-        element.onclick = this[controls[control]].bind(this);
+        document.getElementById('control_' + control)
+          .onclick = this[controls[control]].bind(this);
       }
     },
     updateView: function(artist) {
@@ -154,8 +152,18 @@ require([
 
       if (node.id === 1) {
         this.jelement.find(this.selectors.controls).hide();
-      } else
+      } else {
+        $(this.selectors.control_new).show();
         this.jelement.find(this.selectors.controls).show();
+      }
+
+      // if (node.isLeaf) {
+      //   this.jelement.find(this.selectors.control_expand).show();
+      //   this.jelement.find(this.selectors.control_delete).show();
+      // } else {
+      //   this.jelement.find(this.selectors.control_expand).hide();
+      //   this.jelement.find(this.selectors.control_delete).hide();
+      // }
 
       this.updateView(node.artist);
       this.artist = node.artist;
@@ -169,6 +177,7 @@ require([
     },
     onBtnNewClick: function(event) {
       this.graphcontroller.updateArtist(this.artist);
+      $(this.selectors.control_new).hide();
     },
     onBtnDeleteClick: function(event) {
       // TODO delete node from graph
@@ -176,6 +185,15 @@ require([
       // delete node from graph
       // create new graph from updated data
       // 
+      var node = _.findWhere(
+        this.graphcontroller.artistGraph.data.nodes, {
+          id: this.artist.nodeid
+        });
+
+      var index = this.graphcontroller.artistGraph.data.nodes.indexOf(node);
+      this.graphcontroller.artistGraph.data.nodes.splice(index, 1);
+      console.log(this.graphcontroller.artistGraph.data);
+      this.graphcontroller.artistGraph.graph.setData(this.graphcontroller.artistGraph.data);
     }
 
   });

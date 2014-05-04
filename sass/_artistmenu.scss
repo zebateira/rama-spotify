@@ -50,6 +50,10 @@
       cursor: pointer;
       text-align: center;
 
+      &#control_expand, &#control_delete {
+        display: none;
+      }
+
       &:hover {
         opacity: 0.95;
       }

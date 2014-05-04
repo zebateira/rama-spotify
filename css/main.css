@@ -569,10 +569,14 @@ meter {
   text-align: center;
 }
 /* line 53, ../sass/_artistmenu.scss */
+#artistmenu #artist_controls .control#control_expand, #artistmenu #artist_controls .control#control_delete {
+  display: none;
+}
+/* line 57, ../sass/_artistmenu.scss */
 #artistmenu #artist_controls .control:hover {
   opacity: 0.95;
 }
-/* line 57, ../sass/_artistmenu.scss */
+/* line 61, ../sass/_artistmenu.scss */
 #artistmenu #artist_controls .control:active {
   border-color: #7fb701;
   -webkit-transform: scale(0.98, 0.98);
