@@ -70,6 +70,7 @@ require([
       this.image.setOverlay(artist.name);
 
       this.jelement.find(this.selectors.albums).html('');
+      this.jelement.find(this.selectors.albumsTitle).html('');
 
       artist.load(['popularity', 'years', 'albums'])
         .done(this, function(artist) {
@@ -115,6 +116,11 @@ require([
                     jalbums.append(albumElement);
                   }
                 }
+
+                if (i === 8 && jalbums.html() !== '') {
+                  this.jelement
+                    .find(this.selectors.albumsTitle).html('Albums: <br>');
+                }
               }
             });
         });
@@ -158,7 +164,6 @@ require([
       // setPosition(savedPositions)
     },
     onBtnNewClick: function(event) {
-      // TODO create new map from selected node
       this.graphcontroller.updateArtist(this.artist);
     },
     onBtnDeleteClick: function(event) {

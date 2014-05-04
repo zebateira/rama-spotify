@@ -30,8 +30,8 @@ spotify.require([
         options: {
           nodes: {
             color: {
-              background: '#474747',
-              border: '#555'
+              background: '#2e2f33',
+              border: '#3e3e40'
             },
             fontColor: '#ddd',
             fontFace: '',
@@ -40,8 +40,8 @@ spotify.require([
           },
           edges: {
             color: {
-              color: '#8f9096',
-              highlight: '#8f9096'
+              color: '#3e3e40',
+              highlight: '#3e3e40'
             }
           },
           stabilize: true
@@ -70,6 +70,7 @@ spotify.require([
           cover: '#artist_cover',
           popularity: '#artist_pop',
           years: '#artist_years',
+          albumsTitle: '#artist_albums_title',
           albums: '#artist_albums',
           controls: '#artist_controls',
           control_expand: '#control_expand',

@@ -53,7 +53,7 @@ ArtistGraph.prototype = {
         artist: this.artist,
         fontColor: '#313336',
         color: {
-          background: '#afb0b6'
+          background: '#dfe0e6'
         }
       }],
       edges: []
