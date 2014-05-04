@@ -34,9 +34,22 @@ require([
     bindEvents: function() {
       this.graphcontroller.addGraphEvent('click',
         this.onClickNode.bind(this));
+
+      var controls = {
+        expand: 'onBtnExpandClick',
+        new: 'onBtnNewClick',
+        delete: 'onBtnDeleteClick',
+      };
+
+      for (var control in controls) {
+        var element =
+          document.getElementById('control_' + control);
+
+        element.onclick = this[controls[control]].bind(this);
+      }
     },
     updateView: function(artist) {
-      if (!artist)
+      if (!artist || this.artist === artist.uri)
         return;
 
       if (!this.image) {
@@ -126,7 +139,7 @@ require([
           id: parseInt(data.nodes[0])
         });
 
-      if (!node)
+      if (!node || node.artist.uri === this.artist.uri)
         return;
 
       if (node.id === 1) {
@@ -135,6 +148,7 @@ require([
         this.jelement.find(this.selectors.controls).show();
 
       this.updateView(node.artist);
+      this.artist = node.artist;
     },
     onBtnExpandClick: function(event) {
       // TODO expand node (depth one)
@@ -143,8 +157,9 @@ require([
       // create new graph with updated nodes and edges
       // setPosition(savedPositions)
     },
-    onBtnNewMapClick: function(event) {
+    onBtnNewClick: function(event) {
       // TODO create new map from selected node
+      this.graphcontroller.updateArtist(this.artist);
     },
     onBtnDeleteClick: function(event) {
       // TODO delete node from graph

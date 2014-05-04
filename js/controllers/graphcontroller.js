@@ -21,7 +21,10 @@ require([
     afterLoad: function(settings) {
 
       models.player.load('track')
-        .done(this, this.setArtistGraph);
+        .done(this, function(player) {
+          this.nowplayingArtist = player.track.artists[0];
+          this.setArtistGraph(player);
+        });
       var controller = this;
 
       _.each(settings.inputs, function(input) {
@@ -72,6 +75,19 @@ require([
 
       this.bindAllEvents();
     },
+    updateArtist: function(artist) {
+      this.artistGraph = new ArtistGraph(
+        this.element,
+        artist, {
+          options: this.options
+        }
+      );
+
+      this.showThrobber();
+      this.artistGraph.buildGraph();
+
+      this.bindAllEvents();
+    },
     showThrobber: function() {
       if (this.artistGraph.throbber)
         this.artistGraph.throbber.hide();
@@ -98,16 +114,18 @@ require([
     },
     onPlayerChange: function(player) {
       // TODO refactor same artist verification
-      if (!this.artistGraph)
-        this.setArtistGraph(player);
+      // if (!this.artistGraph)
+      //   this.setArtistGraph(player);
 
       if (player.track.advertisement)
         return;
 
+      this.nowplayingArtist = player.track.artists[0];
+
       var oldArtistURI = this.artistGraph.artist.uri;
 
       if (player.track.artists[0].uri !== oldArtistURI) {
-        this.setArtistGraph(player);
+        // this.setArtistGraph(player);
       }
     },
     onNodeDoubleClick: function(data) {
@@ -115,7 +133,8 @@ require([
         id: parseInt(data.nodes[0])
       });
 
-      if (!node || node.id === 1)
+      if (!node || node.id === 1 ||
+        this.nowplayingArtist.uri === node.artist.uri)
         return;
 
       node.artist.load('compilations').done(function(artist) {

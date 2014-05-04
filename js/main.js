@@ -72,6 +72,9 @@ spotify.require([
           years: '#artist_years',
           albums: '#artist_albums',
           controls: '#artist_controls',
+          control_expand: '#control_expand',
+          control_new: '#control_new',
+          control_delete: '#control_delete'
         },
         hasDependencies: true
       }
