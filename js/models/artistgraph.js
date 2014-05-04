@@ -53,7 +53,10 @@ ArtistGraph.prototype = {
         artist: this.artist,
         fontColor: '#313336',
         color: {
-          background: '#dfe0e6'
+          background: '#dfe0e6',
+          highlight: {
+            border: '#7fb701'
+          }
         }
       }],
       edges: []
@@ -94,7 +97,6 @@ ArtistGraph.prototype = {
           var extraEdge = {
             from: rootArtist.nodeid,
             to: duplicated.id,
-            color: '#aaa'
           };
 
           this.extraEdges.push(extraEdge);

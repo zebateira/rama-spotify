@@ -31,9 +31,13 @@ spotify.require([
           nodes: {
             color: {
               background: '#2e2f33',
-              border: '#3e3e40'
+              border: '#3e3e40',
+              highlight: {
+                border: '#7fb701',
+                background: '#313336'
+              }
             },
-            fontColor: '#ddd',
+            fontColor: '#dfe0e6',
             fontFace: '',
             shape: 'box',
             radius: 1
@@ -41,7 +45,7 @@ spotify.require([
           edges: {
             color: {
               color: '#3e3e40',
-              highlight: '#3e3e40'
+              highlight: '#dfe0e6'
             }
           },
           stabilize: true

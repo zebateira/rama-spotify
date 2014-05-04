@@ -113,20 +113,11 @@ require([
       });
     },
     onPlayerChange: function(player) {
-      // TODO refactor same artist verification
-      // if (!this.artistGraph)
-      //   this.setArtistGraph(player);
 
       if (player.track.advertisement)
         return;
 
       this.nowplayingArtist = player.track.artists[0];
-
-      var oldArtistURI = this.artistGraph.artist.uri;
-
-      if (player.track.artists[0].uri !== oldArtistURI) {
-        // this.setArtistGraph(player);
-      }
     },
     onNodeDoubleClick: function(data) {
       var node = _.findWhere(this.artistGraph.data.nodes, {

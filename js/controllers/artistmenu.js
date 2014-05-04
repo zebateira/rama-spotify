@@ -128,6 +128,10 @@ require([
     },
     onPlayerChange: function() {
       models.player.load('track').done(this, function(player) {
+
+        if (player.track.advertisement)
+          return;
+
         var artist = models.Artist.fromURI(player.track.artists[0].uri);
 
         if ((this.artist && this.artist.uri === artist.uri) ||

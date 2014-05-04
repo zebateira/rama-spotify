@@ -53,6 +53,11 @@
       &:hover {
         opacity: 0.95;
       }
+
+      &:active {
+        border-color: $green1;
+        -webkit-transform: scale(0.98, 0.98);
+      }
     }
   }
 }

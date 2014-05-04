@@ -295,7 +295,7 @@ a {
 }
 /* line 16, ../sass/_header.scss */
 #header .header-text a {
-  color: #bbb;
+  color: #dfe0e6;
 }
 /* line 21, ../sass/_header.scss */
 #header .header-title {
@@ -342,8 +342,9 @@ a {
   z-index: 2;
   top: 65px;
   right: 10px;
+  color: #dfe0e6;
 }
-/* line 9, ../sass/_settings.scss */
+/* line 11, ../sass/_settings.scss */
 #settings .settings-btn {
   float: right;
   width: 20px;
@@ -353,19 +354,19 @@ a {
   background: url(../img/settings.png) no-repeat;
   background-size: cover;
 }
-/* line 20, ../sass/_settings.scss */
+/* line 22, ../sass/_settings.scss */
 #settings .settings-btn:hover {
   cursor: pointer;
 }
-/* line 24, ../sass/_settings.scss */
+/* line 26, ../sass/_settings.scss */
 #settings .settings-btn.opened {
   opacity: 1;
 }
-/* line 28, ../sass/_settings.scss */
+/* line 30, ../sass/_settings.scss */
 #settings .settings-btn:active {
   -webkit-transform: scale(0.9, 0.9);
 }
-/* line 33, ../sass/_settings.scss */
+/* line 35, ../sass/_settings.scss */
 #settings .settings-form {
   display: none;
   position: relative;
@@ -378,7 +379,7 @@ a {
   border-color: #3e3e40;
   border-style: solid;
 }
-/* line 47, ../sass/_settings.scss */
+/* line 49, ../sass/_settings.scss */
 #settings .settings-form .tri {
   position: absolute;
   top: -5px;
@@ -392,20 +393,20 @@ a {
   border-style: solid;
   -webkit-transform: rotate(45deg);
 }
-/* line 64, ../sass/_settings.scss */
+/* line 66, ../sass/_settings.scss */
 #settings .settings-form .option {
   overflow: auto;
 }
-/* line 67, ../sass/_settings.scss */
+/* line 69, ../sass/_settings.scss */
 #settings .settings-form .option:not(.first-child) {
   margin-top: 5px;
 }
-/* line 71, ../sass/_settings.scss */
+/* line 73, ../sass/_settings.scss */
 #settings .settings-form .option label {
   float: left;
   margin-right: 5px;
 }
-/* line 75, ../sass/_settings.scss */
+/* line 77, ../sass/_settings.scss */
 #settings .settings-form .option input {
   padding: 2px;
   width: 30px;
@@ -414,7 +415,7 @@ a {
   border-width: 1px;
   border-color: #3e3e40;
 }
-/* line 83, ../sass/_settings.scss */
+/* line 85, ../sass/_settings.scss */
 #settings .settings-form .option input[name=treemode] {
   margin-top: 5px;
   margin-left: 5px;
@@ -508,6 +509,11 @@ meter {
   opacity: 0.95;
 }
 /* line 54, ../sass/_tracklist.scss */
+#tracklist .list-track:active {
+  border-color: #7fb701;
+  -webkit-transform: scale(0.98, 0.98);
+}
+/* line 59, ../sass/_tracklist.scss */
 #tracklist .list-track a {
   color: #dfe0e6;
 }
@@ -565,4 +571,9 @@ meter {
 /* line 53, ../sass/_artistmenu.scss */
 #artistmenu #artist_controls .control:hover {
   opacity: 0.95;
+}
+/* line 57, ../sass/_artistmenu.scss */
+#artistmenu #artist_controls .control:active {
+  border-color: #7fb701;
+  -webkit-transform: scale(0.96, 0.96);
 }
