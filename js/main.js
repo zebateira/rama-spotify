@@ -48,11 +48,11 @@ spotify.require([
           //, clustering: true
         },
       },
-      // eqbar: {
-      //   loadtemplate: false,
-      //   controller: controllers.EQBar,
-      //   numRows: 128
-      // },
+      eqbar: {
+        loadtemplate: false,
+        controller: controllers.EQBar,
+        numRows: 128
+      },
       tracklist: {
         loadtemplate: true,
         controller: controllers.TrackList,

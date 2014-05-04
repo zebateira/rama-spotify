@@ -1,5 +1,4 @@
 #artistmenu {
-  // display: none;
 
   position: absolute;
   left: 0;
@@ -31,11 +30,8 @@
     }
   }
 
-
   #artist_controls {
     display: none;
-    position: absolute;
-    bottom: 0;
     width: 100%;
     
     .control:first-child {

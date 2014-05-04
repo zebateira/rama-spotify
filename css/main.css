@@ -526,32 +526,30 @@ meter {
   border-left: 0;
   color: #dfe0e6;
 }
-/* line 20, ../sass/_artistmenu.scss */
+/* line 19, ../sass/_artistmenu.scss */
 #artistmenu .artist-info-field {
   margin: 5px;
 }
-/* line 24, ../sass/_artistmenu.scss */
+/* line 23, ../sass/_artistmenu.scss */
 #artistmenu #artist_albums {
   width: 120px;
   margin: 5px auto;
 }
-/* line 28, ../sass/_artistmenu.scss */
+/* line 27, ../sass/_artistmenu.scss */
 #artistmenu #artist_albums .artist-album {
   display: inline-block;
   margin: 5px;
 }
-/* line 35, ../sass/_artistmenu.scss */
+/* line 33, ../sass/_artistmenu.scss */
 #artistmenu #artist_controls {
   display: none;
-  position: absolute;
-  bottom: 0;
   width: 100%;
 }
-/* line 41, ../sass/_artistmenu.scss */
+/* line 37, ../sass/_artistmenu.scss */
 #artistmenu #artist_controls .control:first-child {
   margin-top: 10px;
 }
-/* line 44, ../sass/_artistmenu.scss */
+/* line 40, ../sass/_artistmenu.scss */
 #artistmenu #artist_controls .control {
   background-color: #2e2f33;
   max-width: 80%;
@@ -564,7 +562,7 @@ meter {
   cursor: pointer;
   text-align: center;
 }
-/* line 57, ../sass/_artistmenu.scss */
+/* line 53, ../sass/_artistmenu.scss */
 #artistmenu #artist_controls .control:hover {
   opacity: 0.95;
 }
