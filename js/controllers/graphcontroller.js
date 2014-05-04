@@ -76,11 +76,18 @@ require([
       this.bindAllEvents();
     },
     updateArtist: function(artist) {
+      var config = {
+        options: this.options
+      };
+
+      config.branching = this.artistGraph.branching;
+      config.depth = this.artistGraph.depth;
+      config.treemode = this.artistGraph.treemode;
+
       this.artistGraph = new ArtistGraph(
         this.element,
-        artist, {
-          options: this.options
-        }
+        artist,
+        config
       );
 
       this.showThrobber();

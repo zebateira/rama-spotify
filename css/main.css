@@ -575,5 +575,5 @@ meter {
 /* line 57, ../sass/_artistmenu.scss */
 #artistmenu #artist_controls .control:active {
   border-color: #7fb701;
-  -webkit-transform: scale(0.96, 0.96);
+  -webkit-transform: scale(0.98, 0.98);
 }
