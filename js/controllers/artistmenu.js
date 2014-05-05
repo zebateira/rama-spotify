@@ -50,10 +50,13 @@ require([
       if (!artist || this.artist === artist.uri)
         return;
 
+      this.artist = artist;
+
+
       if (!this.image) {
         this.image = Image.forArtist(artist, {
-          width: 150,
-          height: 100,
+          width: 125,
+          height: 80,
           style: 'plain',
           overlay: [artist.name],
           player: true,
@@ -137,8 +140,10 @@ require([
           return;
         }
 
-        this.artist = artist;
+
         this.updateView(this.artist);
+
+        this.jelement.find(this.selectors.control_new).show();
       });
     },
     onClickNode: function(data) {
@@ -158,15 +163,14 @@ require([
       }
 
       // if (node.isLeaf) {
-      //   this.jelement.find(this.selectors.control_expand).show();
+      //   // this.jelement.find(this.selectors.control_expand).show();
       //   this.jelement.find(this.selectors.control_delete).show();
       // } else {
-      //   this.jelement.find(this.selectors.control_expand).hide();
+      //   // this.jelement.find(this.selectors.control_expand).hide();
       //   this.jelement.find(this.selectors.control_delete).hide();
       // }
 
       this.updateView(node.artist);
-      this.artist = node.artist;
     },
     onBtnExpandClick: function(event) {
       // TODO expand node (depth one)
@@ -177,7 +181,8 @@ require([
     },
     onBtnNewClick: function(event) {
       this.graphcontroller.updateArtist(this.artist);
-      $(this.selectors.control_new).hide();
+      this.jelement.find(this.selectors.control_new).hide();
+      this.jelement.find(this.selectors.control_delete).hide();
     },
     onBtnDeleteClick: function(event) {
       // TODO delete node from graph
@@ -190,10 +195,15 @@ require([
           id: this.artist.nodeid
         });
 
+      var edges = _.where(this.graphcontroller.artistGraph.data.edges, {
+        to: this.artist.nodeid
+      });
+
       var index = this.graphcontroller.artistGraph.data.nodes.indexOf(node);
-      this.graphcontroller.artistGraph.data.nodes.splice(index, 1);
-      console.log(this.graphcontroller.artistGraph.data);
       this.graphcontroller.artistGraph.graph.setData(this.graphcontroller.artistGraph.data);
+      // this.graphcontroller.updateGraph();
+      console.log(this.artist);
+      console.log(this.artist.nodeid);
     }
 
   });

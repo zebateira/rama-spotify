@@ -31,8 +31,9 @@ var ArtistGraph = function(element, artist, config) {
 
   var graph = this.graph;
   this.graph.on('stabilized', function(iterations) { // Y U NO WORK
-    graph.zoomExtent();
+    // graph.zoomExtent();
     console.log(iterations);
+    // this.storePosition();
   });
 };
 

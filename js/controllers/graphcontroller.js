@@ -64,6 +64,8 @@ require([
         config.treemode = this.artistGraph.treemode;
       }
 
+      this.artist = player.track.artists[0];
+
       this.artistGraph = new ArtistGraph(
         this.element,
         player.track.artists[0],
@@ -84,9 +86,30 @@ require([
       config.depth = this.artistGraph.depth;
       config.treemode = this.artistGraph.treemode;
 
+      this.artist = artist;
       this.artistGraph = new ArtistGraph(
         this.element,
         artist,
+        config
+      );
+
+      this.showThrobber();
+      this.artistGraph.buildGraph();
+
+      this.bindAllEvents();
+    },
+    updateGraph: function() {
+      var config = {
+        options: this.options
+      };
+
+      config.branching = this.artistGraph.branching;
+      config.depth = this.artistGraph.depth;
+      config.treemode = this.artistGraph.treemode;
+
+      this.artistGraph = new ArtistGraph(
+        this.element,
+        this.artist,
         config
       );
 
