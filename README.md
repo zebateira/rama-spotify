@@ -35,8 +35,8 @@ These are the contents of the script:
 $ mkdir ~/Spotify ; cd ~/Spotify
 $ rm -rf rama
 $ rm -rf rama-spotify
-$ wget https://github.com/carsy/rama-spotify/releases/download/v0.6/rama_v0.6.tar.gz
-$ tar -xvf rama_v0.6.tar.gz
+$ wget https://github.com/carsy/rama-spotify/releases/download/v0.8/rama_v0.8.tar.gz
+$ tar -xvf rama_v0.8.tar.gz
 $ open spotify:app:rama
 ```
 You should now be in the app and seeing a graph thingy.
@@ -60,6 +60,11 @@ With no official release for the Spotify Desktop Client, there's nothing I can d
 
 [Releases]
 ----
+
+[v0.8] - UX update
+  - Look and feel of nodes and buttons updated
+  - [bugfix] on double click node does not refresh graph
+  - new map button added to artist menu
 
 [v0.6] - Artist menu
   - Artist menu added
@@ -107,6 +112,7 @@ José Bateira
 [here]:https://github.com/carsy/rama-spotify/releases/latest
 [Releases]:https://github.com/carsy/rama-spotify/releases/latest
 [issues]:https://github.com/carsy/rama-spotify/issues
+[v0.8]:https://github.com/carsy/rama-spotify/releases/tag/v0.8
 [v0.6]:https://github.com/carsy/rama-spotify/releases/tag/v0.6
 [v0.5]:https://github.com/carsy/rama-spotify/releases/tag/v0.5
 [v0.3]:https://github.com/carsy/rama-spotify/releases/tag/v0.3

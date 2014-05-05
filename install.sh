@@ -1,6 +1,6 @@
 #!/bin/sh
 
-version="v0.6"
+version="v0.8"
 
 mkdir ~/Spotify ; cd ~/Spotify
 rm -rf rama-spotify
