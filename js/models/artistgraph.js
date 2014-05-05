@@ -31,8 +31,9 @@ var ArtistGraph = function(element, artist, config) {
 
   var graph = this.graph;
   this.graph.on('stabilized', function(iterations) { // Y U NO WORK
-    graph.zoomExtent();
+    // graph.zoomExtent();
     console.log(iterations);
+    // this.storePosition();
   });
 };
 
@@ -51,9 +52,13 @@ ArtistGraph.prototype = {
         id: this.index,
         label: this.artist.name,
         artist: this.artist,
+        isLeaf: false,
         fontColor: '#313336',
         color: {
-          background: '#afb0b6'
+          background: '#dfe0e6',
+          highlight: {
+            border: '#7fb701'
+          }
         }
       }],
       edges: []
@@ -94,7 +99,6 @@ ArtistGraph.prototype = {
           var extraEdge = {
             from: rootArtist.nodeid,
             to: duplicated.id,
-            color: '#aaa'
           };
 
           this.extraEdges.push(extraEdge);
@@ -108,7 +112,8 @@ ArtistGraph.prototype = {
         this.data.nodes.push({
           id: nodeid,
           label: artist.name,
-          artist: artist
+          artist: artist,
+          isLeaf: depth <= 0
         });
 
         this.data.edges.push({
@@ -150,6 +155,7 @@ ArtistGraph.prototype = {
     });
 
     this.graph.start();
+    this.graph.storePosition();
 
     this.bindAllEvents();
 

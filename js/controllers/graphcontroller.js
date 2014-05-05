@@ -21,7 +21,10 @@ require([
     afterLoad: function(settings) {
 
       models.player.load('track')
-        .done(this, this.setArtistGraph);
+        .done(this, function(player) {
+          this.nowplayingArtist = player.track.artists[0];
+          this.setArtistGraph(player);
+        });
       var controller = this;
 
       _.each(settings.inputs, function(input) {
@@ -61,9 +64,52 @@ require([
         config.treemode = this.artistGraph.treemode;
       }
 
+      this.artist = player.track.artists[0];
+
       this.artistGraph = new ArtistGraph(
         this.element,
         player.track.artists[0],
+        config
+      );
+
+      this.showThrobber();
+      this.artistGraph.buildGraph();
+
+      this.bindAllEvents();
+    },
+    updateArtist: function(artist) {
+      var config = {
+        options: this.options
+      };
+
+      config.branching = this.artistGraph.branching;
+      config.depth = this.artistGraph.depth;
+      config.treemode = this.artistGraph.treemode;
+
+      this.artist = artist;
+      this.artistGraph = new ArtistGraph(
+        this.element,
+        artist,
+        config
+      );
+
+      this.showThrobber();
+      this.artistGraph.buildGraph();
+
+      this.bindAllEvents();
+    },
+    updateGraph: function() {
+      var config = {
+        options: this.options
+      };
+
+      config.branching = this.artistGraph.branching;
+      config.depth = this.artistGraph.depth;
+      config.treemode = this.artistGraph.treemode;
+
+      this.artistGraph = new ArtistGraph(
+        this.element,
+        this.artist,
         config
       );
 
@@ -97,25 +143,19 @@ require([
       });
     },
     onPlayerChange: function(player) {
-      // TODO refactor same artist verification
-      if (!this.artistGraph)
-        this.setArtistGraph(player);
 
       if (player.track.advertisement)
         return;
 
-      var oldArtistURI = this.artistGraph.artist.uri;
-
-      if (player.track.artists[0].uri !== oldArtistURI) {
-        this.setArtistGraph(player);
-      }
+      this.nowplayingArtist = player.track.artists[0];
     },
     onNodeDoubleClick: function(data) {
       var node = _.findWhere(this.artistGraph.data.nodes, {
         id: parseInt(data.nodes[0])
       });
 
-      if (!node || node.id === 1)
+      if (!node || node.id === 1 ||
+        this.nowplayingArtist.uri === node.artist.uri)
         return;
 
       node.artist.load('compilations').done(function(artist) {

@@ -30,29 +30,33 @@ spotify.require([
         options: {
           nodes: {
             color: {
-              background: '#474747',
-              border: '#555'
+              background: '#2e2f33',
+              border: '#3e3e40',
+              highlight: {
+                border: '#7fb701',
+                background: '#313336'
+              }
             },
-            fontColor: '#ddd',
+            fontColor: '#dfe0e6',
             fontFace: '',
             shape: 'box',
             radius: 1
           },
           edges: {
             color: {
-              color: '#8f9096',
-              highlight: '#8f9096'
+              color: '#3e3e40',
+              highlight: '#dfe0e6'
             }
           },
           stabilize: true
           //, clustering: true
         },
       },
-      // eqbar: {
-      //   loadtemplate: false,
-      //   controller: controllers.EQBar,
-      //   numRows: 128
-      // },
+      eqbar: {
+        loadtemplate: false,
+        controller: controllers.EQBar,
+        numRows: 128
+      },
       tracklist: {
         loadtemplate: true,
         controller: controllers.TrackList,
@@ -70,8 +74,12 @@ spotify.require([
           cover: '#artist_cover',
           popularity: '#artist_pop',
           years: '#artist_years',
+          albumsTitle: '#artist_albums_title',
           albums: '#artist_albums',
           controls: '#artist_controls',
+          control_expand: '#control_expand',
+          control_new: '#control_new',
+          control_delete: '#control_delete'
         },
         hasDependencies: true
       }

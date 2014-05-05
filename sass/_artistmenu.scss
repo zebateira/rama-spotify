@@ -1,12 +1,11 @@
 #artistmenu {
-  // display: none;
 
   position: absolute;
   left: 0;
   top: 20%; // $header-height + 20px;
 
   // height: 60%;
-  width: 151px;
+  width: 126px;
 
   opacity: 0.9;
   background-color: $new-bg;
@@ -31,11 +30,8 @@
     }
   }
 
-
   #artist_controls {
     display: none;
-    position: absolute;
-    bottom: 0;
     width: 100%;
     
     .control:first-child {
@@ -54,8 +50,17 @@
       cursor: pointer;
       text-align: center;
 
+      &#control_expand, &#control_delete {
+        display: none;
+      }
+
       &:hover {
         opacity: 0.95;
+      }
+
+      &:active {
+        border-color: $green1;
+        -webkit-transform: scale(0.98, 0.98);
       }
     }
   }
