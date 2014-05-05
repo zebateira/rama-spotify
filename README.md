@@ -18,10 +18,6 @@ Installation
 Execute the installer script.
 
 ```sh
-$ wget --no-check-certificate https://raw.githubusercontent.com/carsy/rama-spotify/master/install.sh -O - | sh
-```
-or with curl
-```sh
 $ curl -L https://raw.githubusercontent.com/carsy/rama-spotify/master/install.sh | sh
 ```
 
@@ -35,7 +31,9 @@ These are the contents of the script:
 $ mkdir ~/Spotify ; cd ~/Spotify
 $ rm -rf rama
 $ rm -rf rama-spotify
-$ wget https://github.com/carsy/rama-spotify/releases/download/v0.8/rama_v0.8.tar.gz
+$ rm rama_v0.8.tar.gz
+$ rm rama_v0.8.zip
+$ curl https://github.com/carsy/rama-spotify/releases/download/v0.8/rama_v0.8.tar.gz
 $ tar -xvf rama_v0.8.tar.gz
 $ open spotify:app:rama
 ```
