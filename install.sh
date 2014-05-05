@@ -7,6 +7,6 @@ rm -rf rama-spotify
 rm -rf rama
 rm rama_"$version".tar.gz
 rm rama_"$version".zip
-curl -O https://github.com/carsy/rama-spotify/releases/download/"$version"/rama_"$version".tar.gz
-tar -xvf rama_"$version".tar.gz
+curl -L -O https://github.com/carsy/rama-spotify/releases/download/"$version"/rama_"$version".tar.gz
+tar -xf rama_"$version".tar.gz
 open spotify:app:rama

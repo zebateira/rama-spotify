@@ -140,8 +140,7 @@ require([
           return;
         }
 
-
-        this.updateView(this.artist);
+        this.updateView(models.player.track.artists[0]);
 
         this.jelement.find(this.selectors.control_new).show();
       });
@@ -162,13 +161,13 @@ require([
         this.jelement.find(this.selectors.controls).show();
       }
 
-      // if (node.isLeaf) {
-      //   // this.jelement.find(this.selectors.control_expand).show();
-      //   this.jelement.find(this.selectors.control_delete).show();
-      // } else {
-      //   // this.jelement.find(this.selectors.control_expand).hide();
-      //   this.jelement.find(this.selectors.control_delete).hide();
-      // }
+      if (node.isLeaf) {
+        this.jelement.find(this.selectors.control_expand).show();
+        // this.jelement.find(this.selectors.control_delete).show();
+      } else {
+        this.jelement.find(this.selectors.control_expand).hide();
+        // this.jelement.find(this.selectors.control_delete).hide();
+      }
 
       this.updateView(node.artist);
     },
@@ -178,6 +177,19 @@ require([
       // then add nodes and edges
       // create new graph with updated nodes and edges
       // setPosition(savedPositions)
+
+      var node = _.findWhere(
+        this.graphcontroller.artistGraph.data.nodes, {
+          id: this.artist.nodeid
+        });
+
+      console.log(this.artist.related);
+      this.artist.load('related').done(this, function(artist) {
+
+      });
+
+      this.graphcontroller.updateData();
+      this.jelement.find(this.selectors.control_expand).hide();
     },
     onBtnNewClick: function(event) {
       this.graphcontroller.updateArtist(this.artist);
@@ -185,25 +197,13 @@ require([
       this.jelement.find(this.selectors.control_delete).hide();
     },
     onBtnDeleteClick: function(event) {
-      // TODO delete node from graph
-      // save nodes' positions
-      // delete node from graph
-      // create new graph from updated data
-      // 
       var node = _.findWhere(
         this.graphcontroller.artistGraph.data.nodes, {
           id: this.artist.nodeid
         });
 
-      var edges = _.where(this.graphcontroller.artistGraph.data.edges, {
-        to: this.artist.nodeid
-      });
-
       var index = this.graphcontroller.artistGraph.data.nodes.indexOf(node);
-      this.graphcontroller.artistGraph.graph.setData(this.graphcontroller.artistGraph.data);
-      // this.graphcontroller.updateGraph();
-      console.log(this.artist);
-      console.log(this.artist.nodeid);
+      this.graphcontroller.updateData();
     }
 
   });

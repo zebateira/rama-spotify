@@ -118,6 +118,9 @@ require([
 
       this.bindAllEvents();
     },
+    updateData: function() {
+      this.artistGraph.graph.setData(this.artistGraph.data);
+    },
     showThrobber: function() {
       if (this.artistGraph.throbber)
         this.artistGraph.throbber.hide();
