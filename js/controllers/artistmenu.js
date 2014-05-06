@@ -142,7 +142,9 @@ require([
 
         this.updateView(models.player.track.artists[0]);
 
+        this.jelement.find(this.selectors.controls).show();
         this.jelement.find(this.selectors.control_new).show();
+        this.jelement.find(this.selectors.control_expand).hide();
       });
     },
     onClickNode: function(data) {
@@ -182,13 +184,71 @@ require([
         this.graphcontroller.artistGraph.data.nodes, {
           id: this.artist.nodeid
         });
+      node.color = {
+        border: '#7fb701',
+        background: '#313336'
+      };
 
-      console.log(this.artist.related);
       this.artist.load('related').done(this, function(artist) {
+        var rootArtist = artist;
+        artist.related.snapshot(0,
+          this.graphcontroller.artistGraph.branching).done(this,
+          function(snapshot) {
+            snapshot.loadAll(['name', 'uri']).each(this, function(artist) {
+              var artistGraph = this.graphcontroller.artistGraph;
 
+              var duplicated = _.findWhere(artistGraph.data.nodes, {
+                label: artist.name
+              });
+
+              if (duplicated && artist.name !== rootArtist.name) {
+                var inverseEdgeExists = _.findWhere(artistGraph.data.edges, {
+                  from: duplicated.id,
+                  to: rootArtist.nodeid
+                });
+                var edgeExists = _.findWhere(artistGraph.data.edges, {
+                  to: duplicated.id,
+                  from: rootArtist.nodeid
+                });
+
+                if (!inverseEdgeExists && !edgeExists) {
+                  var extraEdge = {
+                    from: rootArtist.nodeid,
+                    to: duplicated.id,
+                  };
+
+                  artistGraph.extraEdges.push(extraEdge);
+
+                  if (!artistGraph.treemode)
+                    artistGraph.data.edges.push(extraEdge);
+                }
+              } else {
+                var nodeid = ++artistGraph.index;
+
+                artistGraph.data.nodes.push({
+                  id: nodeid,
+                  label: artist.name,
+                  artist: artist,
+                  isLeaf: true
+                });
+
+                artistGraph.data.edges.push({
+                  from: rootArtist.nodeid,
+                  to: nodeid
+                });
+
+                artistGraph.relatedArtists.push(artist);
+
+                artist.nodeid = nodeid;
+              }
+            }).done(this, function() {
+
+              this.graphcontroller.updateData();
+
+            });
+          });
       });
 
-      this.graphcontroller.updateData();
       this.jelement.find(this.selectors.control_expand).hide();
     },
     onBtnNewClick: function(event) {
@@ -197,13 +257,13 @@ require([
       this.jelement.find(this.selectors.control_delete).hide();
     },
     onBtnDeleteClick: function(event) {
-      var node = _.findWhere(
-        this.graphcontroller.artistGraph.data.nodes, {
-          id: this.artist.nodeid
-        });
+      // var node = _.findWhere(
+      //   this.graphcontroller.artistGraph.data.nodes, {
+      //     id: this.artist.nodeid
+      //   });
 
-      var index = this.graphcontroller.artistGraph.data.nodes.indexOf(node);
-      this.graphcontroller.updateData();
+      // var index = this.graphcontroller.artistGraph.data.nodes.indexOf(node);
+      // this.graphcontroller.updateData();
     }
 
   });
