@@ -184,6 +184,7 @@ require([
         this.graphcontroller.artistGraph.data.nodes, {
           id: this.artist.nodeid
         });
+
       node.color = {
         border: '#7fb701',
         background: '#313336'

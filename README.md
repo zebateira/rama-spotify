@@ -30,14 +30,14 @@ These are the contents of the script:
 ```sh
 $ mkdir ~/Spotify ; cd ~/Spotify
 $ rm -rf rama
-$ rm -rf rama-spotify
-$ rm rama_v0.8.tar.gz
-$ rm rama_v0.8.zip
-$ curl https://github.com/carsy/rama-spotify/releases/download/v0.8/rama_v0.8.tar.gz
-$ tar -xvf rama_v0.8.tar.gz
+$ rm rama_v0.9.tar.gz
+$ curl https://github.com/carsy/rama-spotify/releases/download/v0.9/rama_v0.9.tar.gz
+$ tar -xvf rama_v0.9.tar.gz
 $ open spotify:app:rama
 ```
+
 You should now be in the app and seeing a graph thingy.
+If not, restart Spotify (open the app by typing spotify:app:rama in the search bar).
 
 Alternatively, If you happen to have commandlinephobia (I get that every other month... might be a thing):
 
@@ -50,7 +50,7 @@ Now open Spotify and type in the search bar:
 ```sh
 spotify:app:rama
 ```
-You should now be in the app and seeing a graph thingy.
+You should now be in the app and seeing a graph thingy. If not, restart Spotify
 
 ### GNU/Linux Support
 
@@ -58,6 +58,9 @@ With no official release for the Spotify Desktop Client, there's nothing I can d
 
 [Releases]
 ----
+
+[v0.9] - Exploring the graph
+  - Expand control button added.
 
 [v0.8] - UX update
   - Look and feel of nodes and buttons updated
