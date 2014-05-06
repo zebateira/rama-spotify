@@ -174,11 +174,6 @@ require([
       this.updateView(node.artist);
     },
     onBtnExpandClick: function(event) {
-      // TODO expand node (depth one)
-      // try to save nodes positions
-      // then add nodes and edges
-      // create new graph with updated nodes and edges
-      // setPosition(savedPositions)
 
       var node = _.findWhere(
         this.graphcontroller.artistGraph.data.nodes, {
@@ -189,6 +184,7 @@ require([
         border: '#7fb701',
         background: '#313336'
       };
+      node.isLeaf = false;
 
       this.artist.load('related').done(this, function(artist) {
         var rootArtist = artist;
