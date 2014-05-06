@@ -140,10 +140,11 @@ require([
           return;
         }
 
+        this.updateView(models.player.track.artists[0]);
 
-        this.updateView(this.artist);
-
+        this.jelement.find(this.selectors.controls).show();
         this.jelement.find(this.selectors.control_new).show();
+        this.jelement.find(this.selectors.control_expand).hide();
       });
     },
     onClickNode: function(data) {
@@ -162,13 +163,13 @@ require([
         this.jelement.find(this.selectors.controls).show();
       }
 
-      // if (node.isLeaf) {
-      //   // this.jelement.find(this.selectors.control_expand).show();
-      //   this.jelement.find(this.selectors.control_delete).show();
-      // } else {
-      //   // this.jelement.find(this.selectors.control_expand).hide();
-      //   this.jelement.find(this.selectors.control_delete).hide();
-      // }
+      if (node.isLeaf) {
+        this.jelement.find(this.selectors.control_expand).show();
+        // this.jelement.find(this.selectors.control_delete).show();
+      } else {
+        this.jelement.find(this.selectors.control_expand).hide();
+        // this.jelement.find(this.selectors.control_delete).hide();
+      }
 
       this.updateView(node.artist);
     },
@@ -178,6 +179,78 @@ require([
       // then add nodes and edges
       // create new graph with updated nodes and edges
       // setPosition(savedPositions)
+
+      var node = _.findWhere(
+        this.graphcontroller.artistGraph.data.nodes, {
+          id: this.artist.nodeid
+        });
+
+      node.color = {
+        border: '#7fb701',
+        background: '#313336'
+      };
+
+      this.artist.load('related').done(this, function(artist) {
+        var rootArtist = artist;
+        artist.related.snapshot(0,
+          this.graphcontroller.artistGraph.branching).done(this,
+          function(snapshot) {
+            snapshot.loadAll(['name', 'uri']).each(this, function(artist) {
+              var artistGraph = this.graphcontroller.artistGraph;
+
+              var duplicated = _.findWhere(artistGraph.data.nodes, {
+                label: artist.name
+              });
+
+              if (duplicated && artist.name !== rootArtist.name) {
+                var inverseEdgeExists = _.findWhere(artistGraph.data.edges, {
+                  from: duplicated.id,
+                  to: rootArtist.nodeid
+                });
+                var edgeExists = _.findWhere(artistGraph.data.edges, {
+                  to: duplicated.id,
+                  from: rootArtist.nodeid
+                });
+
+                if (!inverseEdgeExists && !edgeExists) {
+                  var extraEdge = {
+                    from: rootArtist.nodeid,
+                    to: duplicated.id,
+                  };
+
+                  artistGraph.extraEdges.push(extraEdge);
+
+                  if (!artistGraph.treemode)
+                    artistGraph.data.edges.push(extraEdge);
+                }
+              } else {
+                var nodeid = ++artistGraph.index;
+
+                artistGraph.data.nodes.push({
+                  id: nodeid,
+                  label: artist.name,
+                  artist: artist,
+                  isLeaf: true
+                });
+
+                artistGraph.data.edges.push({
+                  from: rootArtist.nodeid,
+                  to: nodeid
+                });
+
+                artistGraph.relatedArtists.push(artist);
+
+                artist.nodeid = nodeid;
+              }
+            }).done(this, function() {
+
+              this.graphcontroller.updateData();
+
+            });
+          });
+      });
+
+      this.jelement.find(this.selectors.control_expand).hide();
     },
     onBtnNewClick: function(event) {
       this.graphcontroller.updateArtist(this.artist);
@@ -185,25 +258,13 @@ require([
       this.jelement.find(this.selectors.control_delete).hide();
     },
     onBtnDeleteClick: function(event) {
-      // TODO delete node from graph
-      // save nodes' positions
-      // delete node from graph
-      // create new graph from updated data
-      // 
-      var node = _.findWhere(
-        this.graphcontroller.artistGraph.data.nodes, {
-          id: this.artist.nodeid
-        });
+      // var node = _.findWhere(
+      //   this.graphcontroller.artistGraph.data.nodes, {
+      //     id: this.artist.nodeid
+      //   });
 
-      var edges = _.where(this.graphcontroller.artistGraph.data.edges, {
-        to: this.artist.nodeid
-      });
-
-      var index = this.graphcontroller.artistGraph.data.nodes.indexOf(node);
-      this.graphcontroller.artistGraph.graph.setData(this.graphcontroller.artistGraph.data);
-      // this.graphcontroller.updateGraph();
-      console.log(this.artist);
-      console.log(this.artist.nodeid);
+      // var index = this.graphcontroller.artistGraph.data.nodes.indexOf(node);
+      // this.graphcontroller.updateData();
     }
 
   });
