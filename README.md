@@ -113,6 +113,7 @@ José Bateira
 [here]:https://github.com/carsy/rama-spotify/releases/latest
 [Releases]:https://github.com/carsy/rama-spotify/releases/latest
 [issues]:https://github.com/carsy/rama-spotify/issues
+[v0.9]:https://github.com/carsy/rama-spotify/releases/tag/v0.9
 [v0.8]:https://github.com/carsy/rama-spotify/releases/tag/v0.8
 [v0.6]:https://github.com/carsy/rama-spotify/releases/tag/v0.6
 [v0.5]:https://github.com/carsy/rama-spotify/releases/tag/v0.5
