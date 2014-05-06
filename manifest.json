@@ -11,7 +11,7 @@
     "track"
   ],
   "BundleType": "Application",
-  "BundleVersion": "0.9",
+  "BundleVersion": "0.9.1",
   "Dependencies": {
     "api": "1.0.0",
     "views": "1.0.0",
