@@ -45,6 +45,8 @@ require([
         document.getElementById('control_' + control)
           .onclick = this[controls[control]].bind(this);
       }
+
+
     },
     updateView: function(artist) {
       if (!artist || this.artist === artist.uri)
@@ -172,6 +174,15 @@ require([
       }
 
       this.updateView(node.artist);
+
+      var url = "http://developer.echonest.com/api/v4/artist/terms?api_key=29N71ZBQUW4XN0QXF&name=Machinae%20Supremacy&format=json";
+
+      $.ajax({
+        url: url,
+        sucess: function(data) {
+          console.log(data);
+        }
+      });
     },
     onBtnExpandClick: function(event) {
 
