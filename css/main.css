@@ -522,7 +522,7 @@ meter {
 #artistmenu {
   position: absolute;
   left: 0;
-  top: 20%;
+  top: 70px;
   width: 126px;
   opacity: 0.9;
   background-color: #222326;
@@ -532,51 +532,71 @@ meter {
   border-left: 0;
   color: #dfe0e6;
 }
-/* line 19, ../sass/_artistmenu.scss */
+/* line 18, ../sass/_artistmenu.scss */
 #artistmenu .artist-info-field {
   margin: 5px;
 }
-/* line 23, ../sass/_artistmenu.scss */
+/* line 22, ../sass/_artistmenu.scss */
 #artistmenu #artist_albums {
   width: 120px;
   margin: 5px auto;
+  text-align: center;
 }
 /* line 27, ../sass/_artistmenu.scss */
 #artistmenu #artist_albums .artist-album {
   display: inline-block;
-  margin: 5px;
+  margin: 0px 2px;
 }
 /* line 33, ../sass/_artistmenu.scss */
+#artistmenu #artist_tags {
+  width: 120px;
+  margin: 5px auto;
+  text-align: center;
+  overflow: hidden;
+}
+/* line 39, ../sass/_artistmenu.scss */
+#artistmenu #artist_tags .artist-tag {
+  display: inline-block;
+  margin: 1px;
+  background-color: #2e2f33;
+  border-color: #3e3e40;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 1px;
+  padding: 2px 4px;
+  text-align: center;
+}
+/* line 53, ../sass/_artistmenu.scss */
 #artistmenu #artist_controls {
   display: none;
   width: 100%;
 }
-/* line 37, ../sass/_artistmenu.scss */
+/* line 57, ../sass/_artistmenu.scss */
 #artistmenu #artist_controls .control:first-child {
   margin-top: 10px;
 }
-/* line 40, ../sass/_artistmenu.scss */
+/* line 60, ../sass/_artistmenu.scss */
 #artistmenu #artist_controls .control {
-  background-color: #2e2f33;
   max-width: 80%;
+  background-color: #2e2f33;
   border-color: #3e3e40;
   border-width: 1px;
   border-style: solid;
-  padding: 4px;
-  margin: 10px auto;
   border-radius: 1px;
-  cursor: pointer;
+  padding: 4px;
   text-align: center;
+  margin: 10px auto;
+  cursor: pointer;
 }
-/* line 53, ../sass/_artistmenu.scss */
+/* line 74, ../sass/_artistmenu.scss */
 #artistmenu #artist_controls .control#control_expand, #artistmenu #artist_controls .control#control_delete {
   display: none;
 }
-/* line 57, ../sass/_artistmenu.scss */
+/* line 78, ../sass/_artistmenu.scss */
 #artistmenu #artist_controls .control:hover {
   opacity: 0.95;
 }
-/* line 61, ../sass/_artistmenu.scss */
+/* line 82, ../sass/_artistmenu.scss */
 #artistmenu #artist_controls .control:active {
   border-color: #7fb701;
   -webkit-transform: scale(0.98, 0.98);

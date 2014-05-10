@@ -54,7 +54,6 @@ require([
 
       this.artist = artist;
 
-
       if (!this.image) {
         this.image = Image.forArtist(artist, {
           width: 125,
@@ -128,26 +127,33 @@ require([
             });
         });
 
-    },
-    onPlayerChange: function() {
-      models.player.load('track').done(this, function(player) {
+      var url = "http://developer.echonest.com/api/v4/artist/terms?api_key=29N71ZBQUW4XN0QXF&format=json&name=" + this.artist.name;
 
-        if (player.track.advertisement)
-          return;
+      $.ajax({
+        url: url,
+        context: this
+      }).done(function(data) {
+        this.tags = data.response.terms;
 
-        var artist = models.Artist.fromURI(player.track.artists[0].uri);
+        $(this.selectors.tags).html('');
 
-        if ((this.artist && this.artist.uri === artist.uri) ||
-          player.track.advertisement) {
-          return;
+        if (this.tags.length > 0)
+          $(this.selectors.tagsTitle).html('Tags: <br>');
+
+        for (var i = 0; i < this.tags.length && i < 6; ++i) {
+          if (this.tags[i]) {
+            var tagElement = document.createElement('span');
+            tagElement.className = 'artist-tag';
+            tagElement.innerHTML = this.tags[i].name;
+
+            $(this.selectors.tags).append(tagElement);
+          }
         }
 
-        this.updateView(models.player.track.artists[0]);
-
-        this.jelement.find(this.selectors.controls).show();
-        this.jelement.find(this.selectors.control_new).show();
-        this.jelement.find(this.selectors.control_expand).hide();
+      }).fail(function() {
+        console.log(arguments);
       });
+
     },
     onClickNode: function(data) {
       var node = _.findWhere(
@@ -175,13 +181,25 @@ require([
 
       this.updateView(node.artist);
 
-      var url = "http://developer.echonest.com/api/v4/artist/terms?api_key=29N71ZBQUW4XN0QXF&name=Machinae%20Supremacy&format=json";
+    },
+    onPlayerChange: function() {
+      models.player.load('track').done(this, function(player) {
 
-      $.ajax({
-        url: url,
-        sucess: function(data) {
-          console.log(data);
+        if (player.track.advertisement)
+          return;
+
+        var artist = models.Artist.fromURI(player.track.artists[0].uri);
+
+        if ((this.artist && this.artist.uri === artist.uri) ||
+          player.track.advertisement) {
+          return;
         }
+
+        this.updateView(models.player.track.artists[0]);
+
+        this.jelement.find(this.selectors.controls).show();
+        this.jelement.find(this.selectors.control_new).show();
+        this.jelement.find(this.selectors.control_expand).hide();
       });
     },
     onBtnExpandClick: function(event) {
@@ -268,9 +286,11 @@ require([
       // var node = _.findWhere(
       //   this.graphcontroller.artistGraph.data.nodes, {
       //     id: this.artist.nodeid
-      //   });
+      //   }
+      // );
 
       // var index = this.graphcontroller.artistGraph.data.nodes.indexOf(node);
+      // this.graphcontroller.artistGraph.data.nodes.splice(index, 1);
       // this.graphcontroller.updateData();
     }
 

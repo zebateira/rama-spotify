@@ -79,7 +79,9 @@ spotify.require([
           controls: '#artist_controls',
           control_expand: '#control_expand',
           control_new: '#control_new',
-          control_delete: '#control_delete'
+          control_delete: '#control_delete',
+          tagsTitle: '#artist_tags_title',
+          tags: '#artist_tags'
         },
         hasDependencies: true
       }
