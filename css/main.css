@@ -545,7 +545,7 @@ meter {
 /* line 27, ../sass/_artistmenu.scss */
 #artistmenu #artist_albums .artist-album {
   display: inline-block;
-  margin: 0px 2px;
+  margin: 0px 3px;
 }
 /* line 33, ../sass/_artistmenu.scss */
 #artistmenu #artist_tags {
