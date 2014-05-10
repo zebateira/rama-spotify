@@ -1,8 +1,9 @@
 require([
   '$api/models',
   'js/controllers/controller#controller',
-  '$views/image#Image'
-], function(models, Controller, Image) {
+  '$views/image#Image',
+  '$views/throbber#Throbber'
+], function(models, Controller, Image, Throbber) {
 
   var ArtistMenu = new Class({
     Extends: Controller,
@@ -127,7 +128,9 @@ require([
             });
         });
 
-      var url = "http://developer.echonest.com/api/v4/artist/terms?api_key=29N71ZBQUW4XN0QXF&format=json&name=" + this.artist.name;
+      var url = "http://developer.echonest.com/api/v4/artist/" +
+        "terms?api_key=29N71ZBQUW4XN0QXF&format=json&name=" +
+        this.artist.name;
 
       $.ajax({
         url: url,
@@ -203,6 +206,7 @@ require([
       });
     },
     onBtnExpandClick: function(event) {
+      this.graphcontroller.showThrobber();
 
       var node = _.findWhere(
         this.graphcontroller.artistGraph.data.nodes, {
@@ -270,6 +274,7 @@ require([
             }).done(this, function() {
 
               this.graphcontroller.updateData();
+              this.graphcontroller.artistGraph.throbber.hide();
 
             });
           });
