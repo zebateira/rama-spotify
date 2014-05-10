@@ -19,6 +19,8 @@ require([
     }
   });
 
+  ArtistMenu.MAX_ALBUMS = 8;
+
   ArtistMenu.implement({
     afterLoad: function(graphcontroller) {
       this.graphcontroller = graphcontroller;
@@ -92,37 +94,40 @@ require([
             );
           else
             this.jelement.find(this.selectors.years).html('');
-
+          var albumsAdded = 0;
           var jalbums = this.jelement.find(this.selectors.albums);
-          artist.albums.snapshot(0, 8).done(this,
+          artist.albums.snapshot().done(this,
             function(snapshot) {
-              for (var i = 0; i <= 8; ++i) {
-                if (snapshot.get(i) && snapshot.get(i).albums[0] &&
-                  snapshot.get(i).albums[0].playable) {
-                  var album = snapshot.get(i).albums[0];
+              for (var i = 0; i <= snapshot.length && albumsAdded < ArtistMenu.MAX_ALBUMS; ++i) {
+                if (snapshot.get(i)) {
 
-                  if (!jalbums.find("a[href='" + album.uri + "']")[0]) {
-                    var albumImage = Image.forAlbum(album, {
-                      width: 50,
-                      height: 50,
-                      style: 'plain',
-                      player: true,
-                      placeholder: 'album',
-                      link: 'auto',
-                      title: album.name
-                    });
+                  if (snapshot.get(i).albums[0] && snapshot.get(i).albums[0].playable) {
+                    var album = snapshot.get(i).albums[0];
 
-                    var albumElement = document.createElement('span');
-                    albumElement.className = 'artist-album';
-                    albumImage.node.className += ' artist-album-cover';
-                    $(albumElement).append(albumImage.node);
-                    jalbums.append(albumElement);
+                    if (!jalbums.find("a[href='" + album.uri + "']")[0]) {
+                      var albumImage = Image.forAlbum(album, {
+                        width: 50,
+                        height: 50,
+                        style: 'plain',
+                        player: true,
+                        placeholder: 'album',
+                        link: 'auto',
+                        title: album.name
+                      });
+
+                      var albumElement = document.createElement('span');
+                      albumElement.className = 'artist-album';
+                      albumImage.node.className += ' artist-album-cover';
+                      $(albumElement).append(albumImage.node);
+                      jalbums.append(albumElement);
+                      albumsAdded++;
+                    }
                   }
-                }
 
-                if (i === 8 && jalbums.html() !== '') {
-                  this.jelement
-                    .find(this.selectors.albumsTitle).html('Albums: <br>');
+                  if (jalbums.html() !== '') {
+                    this.jelement
+                      .find(this.selectors.albumsTitle).html('Albums: <br>');
+                  }
                 }
               }
             });
