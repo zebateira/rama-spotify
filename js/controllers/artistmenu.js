@@ -133,8 +133,29 @@ require([
             });
         });
 
-      var url = "http://developer.echonest.com/api/v4/artist/" +
-        "terms?api_key=29N71ZBQUW4XN0QXF&format=json&name=" +
+      // Paul Lamere
+      // http://developer.echonest.com/forums/thread/353
+      // Artist terms -> what is the difference between weight and frequency
+
+      // term frequency is directly proportional to how often 
+      // that term is used to describe that artist. 
+      // Term weight is a measure of how important that term is 
+      // in describing the artist. As an example of the difference, 
+      // the term 'rock' may be the most frequently applied term 
+      // for The Beatles. However, 'rock' is not very descriptive 
+      // since many bands have 'rock' as the most frequent term. 
+      // However, the most highly weighted terms for The Beatles 
+      // are 'merseybeat' and 'british invasion', which give you 
+      // a better idea of what The Beatles are all about than 'rock' does. 
+      // We don't publish the details of our algorithms, 
+      // but I can tell you that frequency is related to the 
+      // simple counting of appearance of a term, whereas 
+      // weight is related to TF-IDF as described 
+      // here (http://en.wikipedia.org/wiki/Tf%E2%80%93idf).
+
+      var url =
+        "http://developer.echonest.com/api/v4/artist/" +
+        "terms?api_key=29N71ZBQUW4XN0QXF&format=json&sort=weight&name=" +
         this.artist.name;
 
       $.ajax({
@@ -145,18 +166,22 @@ require([
 
         $(this.selectors.tags).html('');
 
-        if (this.tags.length > 0)
+        if (this.tags.length > 0) {
           $(this.selectors.tagsTitle).html('Tags: <br>');
 
-        for (var i = 0; i < this.tags.length && i < 6; ++i) {
-          if (this.tags[i]) {
-            var tagElement = document.createElement('span');
-            tagElement.className = 'artist-tag';
-            tagElement.innerHTML = this.tags[i].name;
+          for (var i = 0; i < this.tags.length && i < 6; ++i) {
+            if (this.tags[i]) {
+              var tagElement = document.createElement('span');
+              tagElement.className = 'artist-tag';
+              tagElement.innerHTML = this.tags[i].name;
 
-            $(this.selectors.tags).append(tagElement);
+              $(this.selectors.tags).append(tagElement);
+            }
           }
+
+          this.artist.tags = this.tags;
         }
+
 
       }).fail(function() {
         console.log(arguments);
