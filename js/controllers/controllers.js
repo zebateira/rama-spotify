@@ -4,20 +4,22 @@ require([
   'js/controllers/settings#settings',
   'js/controllers/eqbar#eqbar',
   'js/controllers/tracklist#tracklist',
-  'js/controllers/artistmenu#artistmenu'
+  'js/controllers/artistmenu#artistmenu',
+  'js/controllers/tagsmenu#tagsmenu',
 ], function(
   _header,
   _graphcontroller,
   _settings,
   _eqbar,
   _tracklist,
-  _artistmenu
+  _artistmenu,
+  _tagsmenu
 ) {
-
   exports.Header = _header;
   exports.GraphController = _graphcontroller;
   exports.Settings = _settings;
   exports.EQBar = _eqbar;
   exports.TrackList = _tracklist;
   exports.ArtistMenu = _artistmenu;
+  exports.TagsMenu = _tagsmenu;
 });
