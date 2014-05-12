@@ -24,7 +24,8 @@ require([
   ArtistMenu.implement({
     afterLoad: function(graphcontroller) {
       this.graphcontroller = graphcontroller;
-
+      console.log('## artistmenu');
+      console.log(this.graphcontroller);
       models.player.load('track').done(this, function() {
         this.artist = models.Artist.fromURI(
           models.player.track.artists[0].uri);

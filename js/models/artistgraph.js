@@ -13,6 +13,7 @@ var ArtistGraph = function(element, artist, config) {
   this.artist.nodeid = 1;
 
   this.events = {};
+  this.customEvents = {};
 
   this.branching = (config && config.branching) ||
     ArtistGraph.DEFAULT_BRANCHING;
@@ -157,6 +158,9 @@ ArtistGraph.prototype = {
     this.graph.start();
 
     this.bindAllEvents();
+    console.log(this.customEvents);
+    this.customEvents.update();
+
 
     if (this.throbber)
       this.throbber.hide();
@@ -187,7 +191,9 @@ ArtistGraph.prototype = {
   on: function(event, eventHandler) {
     this.events[event] = eventHandler;
   },
-
+  onCustomEvent: function(event, eventHandler) {
+    this.customEvents[event] = eventHandler;
+  },
   bindAllEvents: function() {
     for (var event in this.events) {
       this.graph.on(event, this.events[event]);

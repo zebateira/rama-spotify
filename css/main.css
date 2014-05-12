@@ -601,3 +601,17 @@ meter {
   border-color: #7fb701;
   -webkit-transform: scale(0.98, 0.98);
 }
+
+/* line 1, ../sass/_tagsmenu.scss */
+#tagsmenu {
+  position: absolute;
+  width: 100px;
+  height: 50px;
+  left: calc(50% - 50px);
+  top: 60px;
+  opacity: 0.9;
+  background-color: #222326;
+  border-color: #3e3e40;
+  border-width: 1px;
+  border-style: solid;
+}

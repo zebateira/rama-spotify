@@ -19,13 +19,13 @@ spotify.require([
       settings: {
         loadtemplate: true,
         controller: controllers.Settings,
-        supports: 'graph'
+        supports: ['graph']
       },
       graph: {
         loadtemplate: false,
         controller: controllers.GraphController,
         hasDependencies: true,
-        supports: 'artistmenu',
+        supports: ['artistmenu', 'tagsmenu'],
         events: ['onPlayerChange'],
         options: {
           nodes: {
@@ -82,6 +82,11 @@ spotify.require([
           tagsTitle: '#artist_tags_title',
           tags: '#artist_tags'
         },
+        hasDependencies: true
+      },
+      tagsmenu: {
+        loadtemplate: false,
+        controller: controllers.TagsMenu,
         hasDependencies: true
       }
     }
