@@ -158,7 +158,6 @@ ArtistGraph.prototype = {
     this.graph.start();
 
     this.bindAllEvents();
-    console.log(this.customEvents);
     this.customEvents.update();
 
 

@@ -8,7 +8,7 @@ require([
     initialize: function(name, config) {
       this.parent(name, config);
 
-      this.commonTags = {};
+      this.commonTags = [];
     }
   });
 
@@ -24,6 +24,7 @@ require([
       function ajaxDone(index, data) {
         node.tags = data.response.terms;
 
+        this.commonTags = _.union(this.commonTags, node.tags);
       }
 
       for (var i = 0; i < nodes.length; ++i) {
@@ -31,7 +32,7 @@ require([
         var url =
           "http://developer.echonest.com/api/v4/artist/" +
           "terms?api_key=29N71ZBQUW4XN0QXF&format=json&sort=weight&name=" +
-          node.label;
+          encodeURIComponent(node.label);
 
         $.ajax({
           url: url,
@@ -39,6 +40,8 @@ require([
           async: false
         }).done(ajaxDone.bind(this, i));
       }
+
+      // TODO parse commonTags
     },
     bindEvents: function() {
       this.graphcontroller
