@@ -46,11 +46,10 @@ require([
       this.commonTags = _.sortBy(_.map(_.countBy(this.commonTags, function(tag) {
         return tag.name;
       }), function(num, key) {
-        var value = {
+        return {
           name: key,
           count: num
         };
-        return value;
       }), 'count').reverse();
 
       console.log(this.commonTags);
