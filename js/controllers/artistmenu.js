@@ -40,8 +40,7 @@ require([
 
       var controls = {
         expand: 'onBtnExpandClick',
-        new: 'onBtnNewClick',
-        delete: 'onBtnDeleteClick',
+        new: 'onBtnNewClick'
       };
 
       for (var control in controls) {
@@ -206,10 +205,8 @@ require([
 
       if (node.isLeaf) {
         this.jelement.find(this.selectors.control_expand).show();
-        // this.jelement.find(this.selectors.control_delete).show();
       } else {
         this.jelement.find(this.selectors.control_expand).hide();
-        // this.jelement.find(this.selectors.control_delete).hide();
       }
 
       this.updateView(node.artist);
@@ -316,17 +313,6 @@ require([
       this.graphcontroller.updateArtist(this.artist);
       this.jelement.find(this.selectors.control_new).hide();
       this.jelement.find(this.selectors.control_delete).hide();
-    },
-    onBtnDeleteClick: function(event) {
-      // var node = _.findWhere(
-      //   this.graphcontroller.artistGraph.data.nodes, {
-      //     id: this.artist.nodeid
-      //   }
-      // );
-
-      // var index = this.graphcontroller.artistGraph.data.nodes.indexOf(node);
-      // this.graphcontroller.artistGraph.data.nodes.splice(index, 1);
-      // this.graphcontroller.updateData();
     }
 
   });

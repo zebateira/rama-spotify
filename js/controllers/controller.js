@@ -1,4 +1,4 @@
-require(['$api/models', 'js/components/components#Components'], function(models, Components) {
+require(['$api/models', 'js/components#Components'], function(models, Components) {
 
   var Controller = new Class({
     initialize: function(name, config) {
