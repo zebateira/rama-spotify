@@ -42,6 +42,18 @@ require([
       }
 
       // TODO parse commonTags
+
+      this.commonTags = _.sortBy(_.map(_.countBy(this.commonTags, function(tag) {
+        return tag.name;
+      }), function(num, key) {
+        var value = {
+          name: key,
+          count: num
+        };
+        return value;
+      }), 'count').reverse();
+
+      console.log(this.commonTags);
     },
     bindEvents: function() {
       this.graphcontroller
