@@ -120,7 +120,7 @@ require([
       this.bindAllEvents();
     },
     updateData: function() {
-      this.artistGraph.graph.setData(this.artistGraph.data);
+      this.artistGraph.updateData();
     },
     showThrobber: function() {
       if (this.artistGraph.throbber)

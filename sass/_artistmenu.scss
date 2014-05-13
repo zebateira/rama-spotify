@@ -6,11 +6,7 @@
 
   width: 126px;
 
-  opacity: 0.9;
-  background-color: $new-bg;
-  border-color: $border-color;
-  border-width: 1px;
-  border-style: solid;
+  @include menubox();
   border-left: 0;
 
   color: $new-white;
@@ -40,13 +36,7 @@
       display: inline-block;
       margin: 1px;
 
-      background-color: $new-bg-lighter;
-      border-color: $border-color;
-      border-width: 1px;
-      border-style: solid;
-      border-radius: 1px;
-      padding: 2px 4px;
-      text-align: center;
+      @include label();
     }
   }
 
@@ -60,29 +50,17 @@
     .control {
       max-width: 80%;
 
-      background-color: $new-bg-lighter;
-      border-color: $border-color;
-      border-width: 1px;
-      border-style: solid;
-      border-radius: 1px;
+      @include label();
       padding: 4px;
-      text-align: center;
+
+      @include clickableBtn();
 
       margin: 10px auto;
-      cursor: pointer;
 
-      &#control_expand, &#control_delete {
+      &#control_expand {
         display: none;
       }
 
-      &:hover {
-        opacity: 0.95;
-      }
-
-      &:active {
-        border-color: $green1;
-        -webkit-transform: scale(0.98, 0.98);
-      }
     }
   }
 }

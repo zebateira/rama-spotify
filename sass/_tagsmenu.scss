@@ -1,13 +1,22 @@
-#tagsmenu {
+#tagsmenu_wrapper {
   position: absolute;
-  width: 100px;
-  height: 50px;
-  left: calc(50% - 50px);
-  top: $header-height;
+  top: $header-height - 1;
+  height: auto;
+  width: 100%;
 
-  opacity: 0.9;
-  background-color: $new-bg;
-  border-color: $border-color;
-  border-width: 1px;
-  border-style: solid;
+  text-align: center;
+}
+
+#tagsmenu {
+  display: inline-block;
+
+  padding: 5px;
+
+  @include menubox();
+
+  .common-tag {
+    @include label();
+
+    margin: 1px;
+  }
 }

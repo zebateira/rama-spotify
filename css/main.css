@@ -280,30 +280,31 @@ a {
   display: none !important;
 }
 
+/* mixins */
 /* imports */
 /* Header Styles */
 /* line 4, ../sass/_header.scss */
 #header {
-  background-color: #222326;
   max-height: 60px;
   position: fixed;
   width: 100%;
   z-index: 1;
+  background-color: #222326;
   opacity: 0.9;
   border-bottom: 1px solid #5e6069;
   min-height: 60px;
 }
-/* line 16, ../sass/_header.scss */
+/* line 17, ../sass/_header.scss */
 #header .header-text a {
   color: #dfe0e6;
 }
-/* line 21, ../sass/_header.scss */
+/* line 22, ../sass/_header.scss */
 #header .header-title {
   text-align: center;
   font-size: 3em;
   line-height: 60px;
 }
-/* line 27, ../sass/_header.scss */
+/* line 28, ../sass/_header.scss */
 #header .header-link {
   display: table;
   position: absolute;
@@ -315,12 +316,12 @@ a {
   background-color: #313336;
   margin-left: 10px;
 }
-/* line 40, ../sass/_header.scss */
+/* line 41, ../sass/_header.scss */
 #header .header-link a {
   display: table-cell;
   vertical-align: middle;
 }
-/* line 45, ../sass/_header.scss */
+/* line 46, ../sass/_header.scss */
 #header .header-link:after {
   content: url(../img/external_link-tiny-gray.png);
   display: inline-block;
@@ -330,7 +331,7 @@ a {
   margin-top: -5px;
 }
 @media (max-width: 500px) {
-  /* line 27, ../sass/_header.scss */
+  /* line 28, ../sass/_header.scss */
   #header .header-link {
     display: none;
   }
@@ -371,15 +372,15 @@ a {
   display: none;
   position: relative;
   float: right;
-  opacity: 0.9;
   padding: 10px 6px;
+  opacity: 0.9;
   background-color: #222326;
-  border-radius: 2px;
-  border-width: 1px;
   border-color: #3e3e40;
+  border-width: 1px;
   border-style: solid;
+  border-radius: 2px;
 }
-/* line 49, ../sass/_settings.scss */
+/* line 45, ../sass/_settings.scss */
 #settings .settings-form .tri {
   position: absolute;
   top: -5px;
@@ -393,20 +394,20 @@ a {
   border-style: solid;
   -webkit-transform: rotate(45deg);
 }
-/* line 66, ../sass/_settings.scss */
+/* line 62, ../sass/_settings.scss */
 #settings .settings-form .option {
   overflow: auto;
 }
-/* line 69, ../sass/_settings.scss */
+/* line 65, ../sass/_settings.scss */
 #settings .settings-form .option:not(.first-child) {
   margin-top: 5px;
 }
-/* line 73, ../sass/_settings.scss */
+/* line 69, ../sass/_settings.scss */
 #settings .settings-form .option label {
   float: left;
   margin-right: 5px;
 }
-/* line 77, ../sass/_settings.scss */
+/* line 73, ../sass/_settings.scss */
 #settings .settings-form .option input {
   padding: 2px;
   width: 30px;
@@ -415,7 +416,7 @@ a {
   border-width: 1px;
   border-color: #3e3e40;
 }
-/* line 85, ../sass/_settings.scss */
+/* line 81, ../sass/_settings.scss */
 #settings .settings-form .option input[name=treemode] {
   margin-top: 5px;
   margin-left: 5px;
@@ -464,7 +465,6 @@ meter {
 
 /* line 4, ../sass/_tracklist.scss */
 #tracklist {
-  opacity: 0.9;
   position: absolute;
   z-index: 1;
   bottom: 0;
@@ -472,26 +472,30 @@ meter {
   overflow: auto;
   width: 100%;
   height: 51px;
-  border-top: 1px solid #3e3e40;
-  background-color: #222326;
   color: #dfe0e6;
+  opacity: 0.9;
+  background-color: #222326;
+  border-color: #3e3e40;
+  border-width: 1px;
+  border-style: solid;
+  border-bottom-width: 0;
 }
-/* line 18, ../sass/_tracklist.scss */
+/* line 17, ../sass/_tracklist.scss */
 #tracklist .column {
   float: left;
 }
-/* line 22, ../sass/_tracklist.scss */
+/* line 21, ../sass/_tracklist.scss */
 #tracklist .right-content {
   padding: 1px 5px;
 }
-/* line 26, ../sass/_tracklist.scss */
+/* line 25, ../sass/_tracklist.scss */
 #tracklist #tracklist_list {
   position: relative;
   height: 100%;
   max-width: calc(100% - 50px);
   overflow: hidden;
 }
-/* line 35, ../sass/_tracklist.scss */
+/* line 34, ../sass/_tracklist.scss */
 #tracklist .list-track {
   display: inline-block;
   padding: 2px 5px;
@@ -504,16 +508,16 @@ meter {
   border-style: solid;
   cursor: pointer;
 }
-/* line 50, ../sass/_tracklist.scss */
+/* line 49, ../sass/_tracklist.scss */
 #tracklist .list-track:hover {
   opacity: 0.95;
 }
-/* line 54, ../sass/_tracklist.scss */
+/* line 53, ../sass/_tracklist.scss */
 #tracklist .list-track:active {
   border-color: #7fb701;
   -webkit-transform: scale(0.98, 0.98);
 }
-/* line 59, ../sass/_tracklist.scss */
+/* line 58, ../sass/_tracklist.scss */
 #tracklist .list-track a {
   color: #dfe0e6;
 }
@@ -532,29 +536,29 @@ meter {
   border-left: 0;
   color: #dfe0e6;
 }
-/* line 18, ../sass/_artistmenu.scss */
+/* line 14, ../sass/_artistmenu.scss */
 #artistmenu .artist-info-field {
   margin: 5px;
 }
-/* line 22, ../sass/_artistmenu.scss */
+/* line 18, ../sass/_artistmenu.scss */
 #artistmenu #artist_albums {
   width: 120px;
   margin: 5px auto;
   text-align: center;
 }
-/* line 27, ../sass/_artistmenu.scss */
+/* line 23, ../sass/_artistmenu.scss */
 #artistmenu #artist_albums .artist-album {
   display: inline-block;
   margin: 0px 3px;
 }
-/* line 33, ../sass/_artistmenu.scss */
+/* line 29, ../sass/_artistmenu.scss */
 #artistmenu #artist_tags {
   width: 120px;
   margin: 5px auto;
   text-align: center;
   overflow: hidden;
 }
-/* line 39, ../sass/_artistmenu.scss */
+/* line 35, ../sass/_artistmenu.scss */
 #artistmenu #artist_tags .artist-tag {
   display: inline-block;
   margin: 1px;
@@ -566,16 +570,16 @@ meter {
   padding: 2px 4px;
   text-align: center;
 }
-/* line 53, ../sass/_artistmenu.scss */
+/* line 43, ../sass/_artistmenu.scss */
 #artistmenu #artist_controls {
   display: none;
   width: 100%;
 }
-/* line 57, ../sass/_artistmenu.scss */
+/* line 47, ../sass/_artistmenu.scss */
 #artistmenu #artist_controls .control:first-child {
   margin-top: 10px;
 }
-/* line 60, ../sass/_artistmenu.scss */
+/* line 50, ../sass/_artistmenu.scss */
 #artistmenu #artist_controls .control {
   max-width: 80%;
   background-color: #2e2f33;
@@ -583,35 +587,53 @@ meter {
   border-width: 1px;
   border-style: solid;
   border-radius: 1px;
-  padding: 4px;
+  padding: 2px 4px;
   text-align: center;
-  margin: 10px auto;
+  padding: 4px;
   cursor: pointer;
+  margin: 10px auto;
 }
-/* line 74, ../sass/_artistmenu.scss */
-#artistmenu #artist_controls .control#control_expand, #artistmenu #artist_controls .control#control_delete {
-  display: none;
-}
-/* line 78, ../sass/_artistmenu.scss */
+/* line 86, ../sass/main.scss */
 #artistmenu #artist_controls .control:hover {
   opacity: 0.95;
 }
-/* line 82, ../sass/_artistmenu.scss */
+/* line 90, ../sass/main.scss */
 #artistmenu #artist_controls .control:active {
   border-color: #7fb701;
   -webkit-transform: scale(0.98, 0.98);
 }
+/* line 60, ../sass/_artistmenu.scss */
+#artistmenu #artist_controls .control#control_expand {
+  display: none;
+}
 
 /* line 1, ../sass/_tagsmenu.scss */
-#tagsmenu {
+#tagsmenu_wrapper {
   position: absolute;
-  width: 100px;
-  height: 50px;
-  left: calc(50% - 50px);
-  top: 60px;
+  top: 59px;
+  height: auto;
+  width: 100%;
+  text-align: center;
+}
+
+/* line 10, ../sass/_tagsmenu.scss */
+#tagsmenu {
+  display: inline-block;
+  padding: 5px;
   opacity: 0.9;
   background-color: #222326;
   border-color: #3e3e40;
   border-width: 1px;
   border-style: solid;
+}
+/* line 17, ../sass/_tagsmenu.scss */
+#tagsmenu .common-tag {
+  background-color: #2e2f33;
+  border-color: #3e3e40;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 1px;
+  padding: 2px 4px;
+  text-align: center;
+  margin: 1px;
 }
