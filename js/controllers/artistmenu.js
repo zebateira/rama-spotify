@@ -1,8 +1,9 @@
 require([
   '$api/models',
   'js/controllers/controller#controller',
-  '$views/image#Image'
-], function(models, Controller, Image) {
+  '$views/image#Image',
+  '$views/throbber#Throbber'
+], function(models, Controller, Image, Throbber) {
 
   var ArtistMenu = new Class({
     Extends: Controller,
@@ -17,6 +18,8 @@ require([
       });
     }
   });
+
+  ArtistMenu.MAX_ALBUMS = 8;
 
   ArtistMenu.implement({
     afterLoad: function(graphcontroller) {
@@ -37,21 +40,21 @@ require([
 
       var controls = {
         expand: 'onBtnExpandClick',
-        new: 'onBtnNewClick',
-        delete: 'onBtnDeleteClick',
+        new: 'onBtnNewClick'
       };
 
       for (var control in controls) {
         document.getElementById('control_' + control)
           .onclick = this[controls[control]].bind(this);
       }
+
+
     },
     updateView: function(artist) {
       if (!artist || this.artist === artist.uri)
         return;
 
       this.artist = artist;
-
 
       if (!this.image) {
         this.image = Image.forArtist(artist, {
@@ -90,41 +93,125 @@ require([
             );
           else
             this.jelement.find(this.selectors.years).html('');
-
+          var albumsAdded = 0;
           var jalbums = this.jelement.find(this.selectors.albums);
-          artist.albums.snapshot(0, 8).done(this,
+          artist.albums.snapshot().done(this,
             function(snapshot) {
-              for (var i = 0; i <= 8; ++i) {
-                if (snapshot.get(i) && snapshot.get(i).albums[0] &&
-                  snapshot.get(i).albums[0].playable) {
-                  var album = snapshot.get(i).albums[0];
+              for (var i = 0; i <= snapshot.length && albumsAdded < ArtistMenu.MAX_ALBUMS; ++i) {
+                if (snapshot.get(i)) {
 
-                  if (!jalbums.find("a[href='" + album.uri + "']")[0]) {
-                    var albumImage = Image.forAlbum(album, {
-                      width: 50,
-                      height: 50,
-                      style: 'plain',
-                      player: true,
-                      placeholder: 'album',
-                      link: 'auto',
-                      title: album.name
-                    });
+                  if (snapshot.get(i).albums[0] && snapshot.get(i).albums[0].playable) {
+                    var album = snapshot.get(i).albums[0];
 
-                    var albumElement = document.createElement('span');
-                    albumElement.className = 'artist-album';
-                    albumImage.node.className += ' artist-album-cover';
-                    $(albumElement).append(albumImage.node);
-                    jalbums.append(albumElement);
+                    if (!jalbums.find("a[href='" + album.uri + "']")[0]) {
+                      var albumImage = Image.forAlbum(album, {
+                        width: 50,
+                        height: 50,
+                        style: 'plain',
+                        player: true,
+                        placeholder: 'album',
+                        link: 'auto',
+                        title: album.name
+                      });
+
+                      var albumElement = document.createElement('span');
+                      albumElement.className = 'artist-album';
+                      albumImage.node.className += ' artist-album-cover';
+                      $(albumElement).append(albumImage.node);
+                      jalbums.append(albumElement);
+                      albumsAdded++;
+                    }
                   }
-                }
 
-                if (i === 8 && jalbums.html() !== '') {
-                  this.jelement
-                    .find(this.selectors.albumsTitle).html('Albums: <br>');
+                  if (jalbums.html() !== '') {
+                    this.jelement
+                      .find(this.selectors.albumsTitle).html('Albums: <br>');
+                  }
                 }
               }
             });
         });
+
+      // Paul Lamere
+      // http://developer.echonest.com/forums/thread/353
+      // Artist terms -> what is the difference between weight and frequency
+
+      // term frequency is directly proportional to how often 
+      // that term is used to describe that artist. 
+      // Term weight is a measure of how important that term is 
+      // in describing the artist. As an example of the difference, 
+      // the term 'rock' may be the most frequently applied term 
+      // for The Beatles. However, 'rock' is not very descriptive 
+      // since many bands have 'rock' as the most frequent term. 
+      // However, the most highly weighted terms for The Beatles 
+      // are 'merseybeat' and 'british invasion', which give you 
+      // a better idea of what The Beatles are all about than 'rock' does. 
+      // We don't publish the details of our algorithms, 
+      // but I can tell you that frequency is related to the 
+      // simple counting of appearance of a term, whereas 
+      // weight is related to TF-IDF as described 
+      // here (http://en.wikipedia.org/wiki/Tf%E2%80%93idf).
+
+      var url =
+        "http://developer.echonest.com/api/v4/artist/" +
+        "terms?api_key=29N71ZBQUW4XN0QXF&format=json&sort=weight&name=" +
+        this.artist.name;
+
+      $.ajax({
+        url: url,
+        context: this
+      }).done(function(data) {
+        this.tags = data.response.terms;
+
+        $(this.selectors.tags).html('');
+
+        if (this.tags.length > 0) {
+          $(this.selectors.tagsTitle).html('Tags: <br>');
+
+          for (var i = 0; i < this.tags.length && i < 6; ++i) {
+            if (this.tags[i]) {
+              var tagElement = document.createElement('span');
+              tagElement.className = 'artist-tag';
+              tagElement.innerHTML = this.tags[i].name;
+
+              $(this.selectors.tags).append(tagElement);
+            }
+          }
+
+          this.artist.tags = this.tags;
+        }
+
+
+      }).fail(function() {
+        // Temporary fix for not found artist from echonest
+        $(this.selectors.tagsTitle).html('');
+        console.log(arguments);
+      });
+
+    },
+    onClickNode: function(data) {
+      var node = _.findWhere(
+        this.graphcontroller.artistGraph.data.nodes, {
+          id: parseInt(data.nodes[0])
+        });
+
+      if (!node || node.artist.uri === this.artist.uri)
+        return;
+
+      if (node.id === 1) {
+        this.jelement.find(this.selectors.controls).hide();
+      } else {
+        $(this.selectors.control_new).show();
+        this.jelement.find(this.selectors.controls).show();
+      }
+
+      if (node.isLeaf) {
+        this.jelement.find(this.selectors.control_expand).show();
+      } else {
+        this.jelement.find(this.selectors.control_expand).hide();
+      }
+
+      this.updateView(node.artist);
 
     },
     onPlayerChange: function() {
@@ -147,33 +234,8 @@ require([
         this.jelement.find(this.selectors.control_expand).hide();
       });
     },
-    onClickNode: function(data) {
-      var node = _.findWhere(
-        this.graphcontroller.artistGraph.data.nodes, {
-          id: parseInt(data.nodes[0])
-        });
-
-      if (!node || node.artist.uri === this.artist.uri)
-        return;
-
-      if (node.id === 1) {
-        this.jelement.find(this.selectors.controls).hide();
-      } else {
-        $(this.selectors.control_new).show();
-        this.jelement.find(this.selectors.controls).show();
-      }
-
-      if (node.isLeaf) {
-        this.jelement.find(this.selectors.control_expand).show();
-        // this.jelement.find(this.selectors.control_delete).show();
-      } else {
-        this.jelement.find(this.selectors.control_expand).hide();
-        // this.jelement.find(this.selectors.control_delete).hide();
-      }
-
-      this.updateView(node.artist);
-    },
     onBtnExpandClick: function(event) {
+      this.graphcontroller.showThrobber();
 
       var node = _.findWhere(
         this.graphcontroller.artistGraph.data.nodes, {
@@ -241,6 +303,7 @@ require([
             }).done(this, function() {
 
               this.graphcontroller.updateData();
+              this.graphcontroller.artistGraph.throbber.hide();
 
             });
           });
@@ -252,15 +315,6 @@ require([
       this.graphcontroller.updateArtist(this.artist);
       this.jelement.find(this.selectors.control_new).hide();
       this.jelement.find(this.selectors.control_delete).hide();
-    },
-    onBtnDeleteClick: function(event) {
-      // var node = _.findWhere(
-      //   this.graphcontroller.artistGraph.data.nodes, {
-      //     id: this.artist.nodeid
-      //   });
-
-      // var index = this.graphcontroller.artistGraph.data.nodes.indexOf(node);
-      // this.graphcontroller.updateData();
     }
 
   });

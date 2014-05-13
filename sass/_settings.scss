@@ -36,15 +36,11 @@
     display: none;
     position: relative;
     float: right;
-    opacity: 0.9;
   
     padding: 10px 6px;
 
-    background-color: $new-bg;
+    @include menubox();
     border-radius: 2px;
-    border-width: 1px;
-    border-color: $border-color;
-    border-style: solid;
 
     .tri {
       position: absolute;

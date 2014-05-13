@@ -14,6 +14,7 @@ require([
 
       this.options = config.options;
       this.externalevents = [];
+      this.externalCustomEvents = [];
     }
   });
 
@@ -119,7 +120,7 @@ require([
       this.bindAllEvents();
     },
     updateData: function() {
-      this.artistGraph.graph.setData(this.artistGraph.data);
+      this.artistGraph.updateData();
     },
     showThrobber: function() {
       if (this.artistGraph.throbber)
@@ -143,6 +144,10 @@ require([
 
       _.each(this.externalevents, function(event) {
         graph.on(event.eventName, event.eventHandler);
+      });
+
+      _.each(this.externalCustomEvents, function(event) {
+        graph.onCustomEvent(event.eventName, event.eventHandler);
       });
     },
     onPlayerChange: function(player) {
@@ -169,6 +174,15 @@ require([
       this.artistGraph.on(eventName, eventHandler);
 
       this.externalevents.push({
+        eventName: eventName,
+        eventHandler: eventHandler
+      });
+    },
+    addCustomGraphEvent: function(eventName, eventHandler) {
+      if (this.artistGraph)
+        this.artistGraph.onCustomEvent(eventName, eventHandler);
+
+      this.externalCustomEvents.push({
         eventName: eventName,
         eventHandler: eventHandler
       });

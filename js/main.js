@@ -1,5 +1,5 @@
 spotify.require([
-  'js/components/components#Components',
+  'js/components#Components',
   'js/controllers/controllers',
   '$api/models'
 ], function(Components, controllers, models) {
@@ -19,13 +19,13 @@ spotify.require([
       settings: {
         loadtemplate: true,
         controller: controllers.Settings,
-        supports: 'graph'
+        supports: ['graph']
       },
       graph: {
         loadtemplate: false,
         controller: controllers.GraphController,
         hasDependencies: true,
-        supports: 'artistmenu',
+        supports: ['artistmenu', 'tagsmenu'],
         events: ['onPlayerChange'],
         options: {
           nodes: {
@@ -79,8 +79,14 @@ spotify.require([
           controls: '#artist_controls',
           control_expand: '#control_expand',
           control_new: '#control_new',
-          control_delete: '#control_delete'
+          tagsTitle: '#artist_tags_title',
+          tags: '#artist_tags'
         },
+        hasDependencies: true
+      },
+      tagsmenu: {
+        loadtemplate: false,
+        controller: controllers.TagsMenu,
         hasDependencies: true
       }
     }

@@ -2,16 +2,11 @@
 
   position: absolute;
   left: 0;
-  top: 20%; // $header-height + 20px;
+  top: $header-height + 20px;
 
-  // height: 60%;
   width: 126px;
 
-  opacity: 0.9;
-  background-color: $new-bg;
-  border-color: $border-color;
-  border-width: 1px;
-  border-style: solid;
+  @include menubox();
   border-left: 0;
 
   color: $new-white;
@@ -23,10 +18,25 @@
   #artist_albums {
     width: 120px;
     margin: 5px auto;
+    text-align: center;
 
     .artist-album {
       display: inline-block;
-      margin: 5px;
+      margin: 0px 3px;
+    }
+  }
+
+  #artist_tags {
+    width: 120px;
+    margin: 5px auto;
+    text-align: center;
+    overflow: hidden;
+
+    .artist-tag {
+      display: inline-block;
+      margin: 1px;
+
+      @include label();
     }
   }
 
@@ -38,30 +48,19 @@
       margin-top: 10px;
     }
     .control {
-      background-color: $new-bg-lighter;
       max-width: 80%;
 
-      border-color: $border-color;
-      border-width: 1px;
-      border-style: solid;
+      @include label();
       padding: 4px;
-      margin: 10px auto;
-      border-radius: 1px;
-      cursor: pointer;
-      text-align: center;
 
-      &#control_expand, &#control_delete {
+      @include clickableBtn();
+
+      margin: 10px auto;
+
+      &#control_expand {
         display: none;
       }
 
-      &:hover {
-        opacity: 0.95;
-      }
-
-      &:active {
-        border-color: $green1;
-        -webkit-transform: scale(0.98, 0.98);
-      }
     }
   }
 }
