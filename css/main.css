@@ -619,6 +619,7 @@ meter {
 /* line 10, ../sass/_tagsmenu.scss */
 #tagsmenu {
   display: inline-block;
+  color: #dfe0e6;
   padding: 5px;
   opacity: 0.9;
   background-color: #222326;
@@ -626,7 +627,7 @@ meter {
   border-width: 1px;
   border-style: solid;
 }
-/* line 17, ../sass/_tagsmenu.scss */
+/* line 18, ../sass/_tagsmenu.scss */
 #tagsmenu .common-tag {
   background-color: #2e2f33;
   border-color: #3e3e40;
@@ -635,5 +636,15 @@ meter {
   border-radius: 1px;
   padding: 2px 4px;
   text-align: center;
+  cursor: pointer;
   margin: 1px;
+}
+/* line 86, ../sass/main.scss */
+#tagsmenu .common-tag:hover {
+  opacity: 0.95;
+}
+/* line 90, ../sass/main.scss */
+#tagsmenu .common-tag:active {
+  border-color: #7fb701;
+  -webkit-transform: scale(0.98, 0.98);
 }

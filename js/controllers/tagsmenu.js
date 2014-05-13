@@ -12,39 +12,103 @@ require([
     }
   });
 
+  TagsMenu.MAX_TAGS = 5;
+
   TagsMenu.implement({
     afterLoad: function(graphcontroller) {
       this.graphcontroller = graphcontroller;
 
       this.bindEvents();
     },
-    updateTags: function() {
+    updateView: function() {
       var nodes = this.graphcontroller.artistGraph.data.nodes;
 
       this.commonTags = [];
 
+      function addTags(node, index) {
+
+        _.each(node.tags, function(newTag) {
+          var isPresent = false;
+          var lastEqual = {};
+          _.each(this.commonTags, function(tag) {
+            var areTheSame = newTag.name === tag.name;
+
+            if (areTheSame)
+              lastEqual = tag;
+
+            isPresent = isPresent || areTheSame;
+          });
+
+          if (isPresent) {
+            lastEqual.count++;
+            lastEqual.nodes.push(node);
+          } else {
+            newTag.count = 1;
+            newTag.nodes = [];
+            newTag.nodes.push(node);
+
+            this.commonTags.push(newTag);
+          }
+
+        }, this);
+
+        getTagsFromArtist.bind(this)(index + 1);
+      }
+
       function getTagsFromArtist(index) {
         if (index === nodes.length) {
 
-          this.commonTags = _.sortBy(_.map(_.countBy(this.commonTags, function(tag) {
-            return tag.name;
-          }), function(num, key) {
-            return {
-              name: key,
-              count: num
-            };
-          }), 'count').reverse();
+          this.commonTags = _.sortBy(this.commonTags, 'count').reverse();
 
           var tagsContainer = this.jelement.html('');
+          var graphcontroller = this.graphcontroller;
 
-          _.each(this.commonTags.slice(0, 5), function(tag) {
+          _.each(this.commonTags.slice(0, TagsMenu.MAX_TAGS), function(tag) {
             var tagElement = document.createElement('span');
 
             tagElement.className = 'common-tag';
+            tagElement.id = tag.name;
             tagElement.innerHTML = tag.name;
+            tagElement.nodes = tag.nodes;
+
+
+            function onTagClick(event) {
+              _.each(this.nodes, function(node) {
+                if (node.id !== 1)
+                  node.color = {
+                    background: '#313336',
+                    border: '#7fb701'
+                  };
+                else
+                  node.color = {
+                    border: '#7fb701'
+                  };
+              });
+
+              graphcontroller.updateData();
+
+              _.each(this.nodes, function(node) {
+                if (node.id !== 1)
+                  node.color = {
+                    background: '#313336',
+                    highlight: {
+                      border: '#7fb701'
+                    }
+                  };
+                else
+                  node.color = {
+                    highlight: {
+                      border: '#7fb701'
+                    }
+                  };
+              });
+            }
+
+            tagElement.onclick = onTagClick;
 
             tagsContainer.append(tagElement);
           });
+
         } else {
           var node = nodes[index];
 
@@ -57,23 +121,16 @@ require([
             }).done(
               function(data) {
                 node.tags = data.response.terms;
-                this.commonTags = _.union(this.commonTags, node.tags);
-                getTagsFromArtist.bind(this)(index + 1);
+                addTags.bind(this)(node, index);
               }
             );
           } else {
-            this.commonTags = _.union(this.commonTags, node.tags);
-            getTagsFromArtist.bind(this)(index + 1);
+            addTags.bind(this)(node, index);
           }
         }
       }
 
       getTagsFromArtist.bind(this)(0);
-
-    },
-    updateView: function() {
-      this.updateTags();
-
     },
     bindEvents: function() {
       this.graphcontroller

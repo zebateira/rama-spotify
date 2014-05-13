@@ -10,12 +10,14 @@
 #tagsmenu {
   display: inline-block;
 
+  color: $new-white;
   padding: 5px;
 
   @include menubox();
 
   .common-tag {
     @include label();
+    @include clickableBtn();
 
     margin: 1px;
   }
