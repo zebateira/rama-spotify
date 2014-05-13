@@ -648,3 +648,7 @@ meter {
   border-color: #7fb701;
   -webkit-transform: scale(0.98, 0.98);
 }
+/* line 23, ../sass/_tagsmenu.scss */
+#tagsmenu .common-tag.selected {
+  border-color: #95dc00;
+}

@@ -18,7 +18,10 @@
   .common-tag {
     @include label();
     @include clickableBtn();
-
     margin: 1px;
+
+    &.selected {
+      border-color: $green2;
+    }
   }
 }

@@ -71,8 +71,12 @@ require([
             tagElement.innerHTML = tag.name;
             tagElement.nodes = tag.nodes;
 
+            tagElement.onclick = function onTagClick(event) {
+              $('.common-tag').removeClass('selected');
 
-            function onTagClick(event) {
+              this.className += ' selected'; // y u no work o0
+              console.log(this.className);
+
               _.each(this.nodes, function(node) {
                 if (node.id !== 1)
                   node.color = {
@@ -102,9 +106,7 @@ require([
                     }
                   };
               });
-            }
-
-            tagElement.onclick = onTagClick;
+            };
 
             tagsContainer.append(tagElement);
           });
@@ -113,10 +115,11 @@ require([
           var node = nodes[index];
 
           if (!node.tags) {
+            var url = "http://developer.echonest.com/api/v4/artist/" +
+              "terms?api_key=29N71ZBQUW4XN0QXF&format=json&sort=weight&name=" +
+              encodeURIComponent(node.label);
             $.ajax({
-              url: "http://developer.echonest.com/api/v4/artist/" +
-                "terms?api_key=29N71ZBQUW4XN0QXF&format=json&sort=weight&name=" +
-                encodeURIComponent(node.label),
+              url: url,
               context: this
             }).done(
               function(data) {

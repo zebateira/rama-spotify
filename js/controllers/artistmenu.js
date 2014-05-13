@@ -183,6 +183,8 @@ require([
 
 
       }).fail(function() {
+        // Temporary fix for not found artist from echonest
+        $(this.selectors.tagsTitle).html('');
         console.log(arguments);
       });
 
