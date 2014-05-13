@@ -11,7 +11,7 @@
     "track"
   ],
   "BundleType": "Application",
-  "BundleVersion": "0.9.1",
+  "BundleVersion": "0.10",
   "Dependencies": {
     "api": "1.0.0",
     "views": "1.0.0",
@@ -21,5 +21,6 @@
   "SupportedLanguages": [
     "en"
   ],
-  "VendorIdentifier": "pt.inescporto"
+  "VendorIdentifier": "pt.inescporto",
+  "RequiredPermissions": ["http://developer.echonest.com"]
 }

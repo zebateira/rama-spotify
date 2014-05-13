@@ -13,6 +13,7 @@ var ArtistGraph = function(element, artist, config) {
   this.artist.nodeid = 1;
 
   this.events = {};
+  this.customEvents = {};
 
   this.branching = (config && config.branching) ||
     ArtistGraph.DEFAULT_BRANCHING;
@@ -26,7 +27,6 @@ var ArtistGraph = function(element, artist, config) {
 
   this.initGraph();
 
-  // todo check the branching and depth for valid values
   this.graph = new vis.Graph(this.element, this.data, this.options);
 
   var graph = this.graph;
@@ -157,6 +157,8 @@ ArtistGraph.prototype = {
     this.graph.start();
 
     this.bindAllEvents();
+    this.customEvents.update();
+
 
     if (this.throbber)
       this.throbber.hide();
@@ -179,6 +181,10 @@ ArtistGraph.prototype = {
 
     this.reset();
   },
+  updateData: function() {
+    this.customEvents.update();
+    this.graph.setData(this.data);
+  },
   redraw: function() {
     this.graph.redraw();
   },
@@ -187,7 +193,9 @@ ArtistGraph.prototype = {
   on: function(event, eventHandler) {
     this.events[event] = eventHandler;
   },
-
+  onCustomEvent: function(event, eventHandler) {
+    this.customEvents[event] = eventHandler;
+  },
   bindAllEvents: function() {
     for (var event in this.events) {
       this.graph.on(event, this.events[event]);

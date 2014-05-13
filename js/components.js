@@ -51,7 +51,7 @@ var Components = {
       if (component.controller && !component.hasDependencies) {
         var controller = component.controller;
 
-        controller.loadView(this.components[component.supports]);
+        controller.loadView(component.supports);
       }
     }
   },

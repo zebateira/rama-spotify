@@ -1,4 +1,4 @@
-require(['$api/models', 'js/components/components#Components'], function(models, Components) {
+require(['$api/models', 'js/components#Components'], function(models, Components) {
 
   var Controller = new Class({
     initialize: function(name, config) {
@@ -14,8 +14,16 @@ require(['$api/models', 'js/components/components#Components'], function(models,
       controller.element = controller.jelement[0];
 
       controller.afterLoad(dependency);
-      if (supports && supports.controller)
-        supports.controller.loadView(Components.components[supports.supports], controller);
+
+      if (!supports)
+        return;
+
+      for (var i = 0; i < supports.length; ++i) {
+        var support = Components.components[supports[i]];
+        if (support && support.controller) {
+          support.controller.loadView(support.supports, controller);
+        }
+      }
     };
   }
 

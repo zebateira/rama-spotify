@@ -32,9 +32,9 @@ These are the contents of the script:
 ```sh
 $ mkdir ~/Spotify ; cd ~/Spotify
 $ rm -rf rama
-$ rm rama_v0.9.1.tar.gz
-$ curl https://github.com/carsy/rama-spotify/releases/download/v0.9.1/rama_v0.9.1.tar.gz
-$ tar -xvf rama_v0.9.1.tar.gz
+$ rm rama_v0.10.tar.gz
+$ curl https://github.com/carsy/rama-spotify/releases/download/v0.10/rama_v0.10.tar.gz
+$ tar -xvf rama_v0.10.tar.gz
 $ open spotify:app:rama
 ```
 
@@ -63,6 +63,11 @@ With no official release for the Spotify Desktop Client, there's nothing I can d
 
 [Releases]
 ----
+
+[v0.10] - Tags menu
+  - Tags menu added
+  - Clicking on tags highlights the artists that have that tag
+  - Tags are retrieved from echonest (as well as for the artist menu)
 
 [v0.9.1] - Expand button bugfix
   - expand button shown after expand.
@@ -121,6 +126,7 @@ José Bateira
 [here]:https://github.com/carsy/rama-spotify/releases/latest
 [Releases]:https://github.com/carsy/rama-spotify/releases/latest
 [issues]:https://github.com/carsy/rama-spotify/issues
+[v0.10]:https://github.com/carsy/rama-spotify/releases/tag/v0.10
 [v0.9.1]:https://github.com/carsy/rama-spotify/releases/tag/v0.9.1
 [v0.9]:https://github.com/carsy/rama-spotify/releases/tag/v0.9
 [v0.8]:https://github.com/carsy/rama-spotify/releases/tag/v0.8

@@ -43,7 +43,7 @@ a {
 
 #view_container {
   position: relative;
-  height: 100%; // $content-height;
+  height: 100%;
   overflow: hidden;
   background-color: $new-bg-darker;
   
@@ -60,9 +60,43 @@ a {
   display: none !important;
 }
 
+/* mixins */
+
+@mixin menubox() {
+  opacity: 0.9;
+  background-color: $new-bg;
+  border-color: $border-color;
+  border-width: 1px;
+  border-style: solid;
+}
+
+@mixin label() {
+  background-color: $new-bg-lighter;
+  border-color: $border-color;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 1px;
+  padding: 2px 4px;
+  text-align: center;
+}
+
+@mixin clickableBtn() {
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.95;
+  }
+
+  &:active {
+    border-color: $green1;
+    -webkit-transform: scale(0.98, 0.98);
+  }
+}
+
 /* imports */
 @import "header";
 @import "settings";
 @import "eqbar";
 @import "tracklist";
 @import "artistmenu";
+@import "tagsmenu";
