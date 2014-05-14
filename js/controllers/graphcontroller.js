@@ -123,13 +123,17 @@ require([
       this.artistGraph.updateData();
     },
     showThrobber: function() {
-      if (this.artistGraph.throbber)
+      if (this.artistGraph.throbber) {
         this.artistGraph.throbber.hide();
+      }
 
       this.artistGraph.throbber =
         Throbber.forElement(document.getElementById(this.name));
       this.artistGraph.throbber.setPosition('center', 'center');
       this.artistGraph.throbber._addBackground();
+    },
+    hideThrobber: function() {
+      this.artistGraph.throbber.hide();
     },
     bindAllEvents: function() {
       this.artistGraph.on('doubleClick',

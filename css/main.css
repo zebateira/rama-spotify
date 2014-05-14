@@ -341,7 +341,7 @@ a {
 #settings {
   position: absolute;
   z-index: 2;
-  top: 65px;
+  top: 260px;
   right: 10px;
   color: #dfe0e6;
 }
@@ -526,7 +526,7 @@ meter {
 #artistmenu {
   position: absolute;
   left: 0;
-  top: 80px;
+  top: 260px;
   width: 126px;
   opacity: 0.9;
   background-color: #222326;
@@ -638,6 +638,7 @@ meter {
   text-align: center;
   cursor: pointer;
   margin: 1px;
+  display: inline-block;
 }
 /* line 86, ../sass/main.scss */
 #tagsmenu .common-tag:hover {
@@ -648,7 +649,7 @@ meter {
   border-color: #7fb701;
   -webkit-transform: scale(0.98, 0.98);
 }
-/* line 23, ../sass/_tagsmenu.scss */
+/* line 24, ../sass/_tagsmenu.scss */
 #tagsmenu .common-tag.selected {
   border-color: #95dc00;
 }

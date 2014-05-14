@@ -1,7 +1,8 @@
 require([
   '$api/models',
-  'js/controllers/controller#controller'
-], function(models, Controller) {
+  'js/controllers/controller#controller',
+  '$views/throbber#Throbber'
+], function(models, Controller, Throbber) {
   var TagsMenu = new Class({
     Extends: Controller,
 
@@ -12,7 +13,8 @@ require([
     }
   });
 
-  TagsMenu.MAX_TAGS = 5;
+  TagsMenu.MAX_TAGS = 2000;
+  TagsMenu.COMMON_TAG = '.common-tag';
 
   TagsMenu.implement({
     afterLoad: function(graphcontroller) {
@@ -20,10 +22,13 @@ require([
 
       this.bindEvents();
     },
+    clearView: function() {
+      this.commonTags = [];
+      $(this.element).html('loading tags...');
+    },
     updateView: function() {
       var nodes = this.graphcontroller.artistGraph.data.nodes;
-
-      this.commonTags = [];
+      this.clearView();
 
       function addTags(node, index) {
 
@@ -66,16 +71,31 @@ require([
           _.each(this.commonTags.slice(0, TagsMenu.MAX_TAGS), function(tag) {
             var tagElement = document.createElement('span');
 
-            tagElement.className = 'common-tag';
+            tagElement.className = ' ' + TagsMenu.COMMON_TAG.replace('.', '');
             tagElement.id = tag.name;
             tagElement.innerHTML = tag.name;
             tagElement.nodes = tag.nodes;
 
             tagElement.onclick = function onTagClick(event) {
-              $('.common-tag').removeClass('selected');
+              $(TagsMenu.COMMON_TAG).removeClass('selected');
 
-              this.className += ' selected'; // y u no work o0
-              console.log(this.className);
+              _.each(graphcontroller.artistGraph.data.nodes, function(node) {
+                if (node.id !== 1)
+                  node.color = {
+                    background: '#313336',
+                    highlight: {
+                      border: '#dfe0e6'
+                    }
+                  };
+                else
+                  node.color = {
+                    highlight: {
+                      border: '#dfe0e6'
+                    }
+                  };
+              });
+
+              this.className += ' selected';
 
               _.each(this.nodes, function(node) {
                 if (node.id !== 1)
@@ -90,22 +110,6 @@ require([
               });
 
               graphcontroller.updateData();
-
-              _.each(this.nodes, function(node) {
-                if (node.id !== 1)
-                  node.color = {
-                    background: '#313336',
-                    highlight: {
-                      border: '#7fb701'
-                    }
-                  };
-                else
-                  node.color = {
-                    highlight: {
-                      border: '#7fb701'
-                    }
-                  };
-              });
             };
 
             tagsContainer.append(tagElement);

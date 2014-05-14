@@ -1,6 +1,6 @@
 #tagsmenu_wrapper {
   position: absolute;
-  top: $header-height - 1;
+  top: $header-height - 1px;
   height: auto;
   width: 100%;
 
@@ -19,6 +19,7 @@
     @include label();
     @include clickableBtn();
     margin: 1px;
+    display: inline-block;
 
     &.selected {
       border-color: $green2;

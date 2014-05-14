@@ -23,7 +23,7 @@ $green2: #95dc00;
 $font-color: #a1a3a6;
 
 $header-height: 60px;
-$tabs-height: 34px;
+$header-height-offset: $header-height + 200px;
 $content-height: calc(100% - #{$header-height});
 
 /* overrides */

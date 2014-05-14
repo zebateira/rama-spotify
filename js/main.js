@@ -47,8 +47,8 @@ spotify.require([
               color: '#3e3e40',
               highlight: '#dfe0e6'
             }
-          }
-          //, stabilize: true
+          },
+          stabilize: true
           //, clustering: true
         },
       },
