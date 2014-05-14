@@ -337,91 +337,6 @@ a {
   }
 }
 
-/* line 3, ../sass/_settings.scss */
-#settings {
-  position: absolute;
-  z-index: 2;
-  top: 260px;
-  right: 10px;
-  color: #dfe0e6;
-}
-/* line 11, ../sass/_settings.scss */
-#settings .settings-btn {
-  float: right;
-  width: 20px;
-  height: 20px;
-  margin: 10px 4px 10px 0;
-  opacity: 0.8;
-  background: url(../img/settings.png) no-repeat;
-  background-size: cover;
-}
-/* line 22, ../sass/_settings.scss */
-#settings .settings-btn:hover {
-  cursor: pointer;
-}
-/* line 26, ../sass/_settings.scss */
-#settings .settings-btn.opened {
-  opacity: 1;
-}
-/* line 30, ../sass/_settings.scss */
-#settings .settings-btn:active {
-  -webkit-transform: scale(0.9, 0.9);
-}
-/* line 35, ../sass/_settings.scss */
-#settings .settings-form {
-  display: none;
-  position: relative;
-  float: right;
-  padding: 10px 6px;
-  opacity: 0.9;
-  background-color: #222326;
-  border-color: #3e3e40;
-  border-width: 1px;
-  border-style: solid;
-  border-radius: 2px;
-}
-/* line 45, ../sass/_settings.scss */
-#settings .settings-form .tri {
-  position: absolute;
-  top: -5px;
-  right: 8px;
-  width: 10px;
-  height: 10px;
-  background-color: #222326;
-  border-radius: 2px;
-  border-width: 1px;
-  border-color: #3e3e40 transparent transparent #3e3e40;
-  border-style: solid;
-  -webkit-transform: rotate(45deg);
-}
-/* line 62, ../sass/_settings.scss */
-#settings .settings-form .option {
-  overflow: auto;
-}
-/* line 65, ../sass/_settings.scss */
-#settings .settings-form .option:not(.first-child) {
-  margin-top: 5px;
-}
-/* line 69, ../sass/_settings.scss */
-#settings .settings-form .option label {
-  float: left;
-  margin-right: 5px;
-}
-/* line 73, ../sass/_settings.scss */
-#settings .settings-form .option input {
-  padding: 2px;
-  width: 30px;
-  float: right;
-  background-color: #222326;
-  border-width: 1px;
-  border-color: #3e3e40;
-}
-/* line 81, ../sass/_settings.scss */
-#settings .settings-form .option input[name=treemode] {
-  margin-top: 5px;
-  margin-left: 5px;
-}
-
 /* line 2, ../sass/_eqbar.scss */
 meter {
   box-shadow: 0 5px 5px -5px #999 inset;
@@ -526,7 +441,7 @@ meter {
 #artistmenu {
   position: absolute;
   left: 0;
-  top: 260px;
+  bottom: 70px;
   width: 126px;
   opacity: 0.9;
   background-color: #222326;
@@ -652,4 +567,89 @@ meter {
 /* line 24, ../sass/_tagsmenu.scss */
 #tagsmenu .common-tag.selected {
   border-color: #95dc00;
+}
+
+/* line 3, ../sass/_settings.scss */
+#settings {
+  position: absolute;
+  z-index: 2;
+  bottom: 70px;
+  right: 10px;
+  color: #dfe0e6;
+}
+/* line 11, ../sass/_settings.scss */
+#settings .settings-btn {
+  float: right;
+  width: 20px;
+  height: 20px;
+  margin: 10px 4px 10px 0;
+  opacity: 0.8;
+  background: url(../img/settings.png) no-repeat;
+  background-size: cover;
+}
+/* line 22, ../sass/_settings.scss */
+#settings .settings-btn:hover {
+  cursor: pointer;
+}
+/* line 26, ../sass/_settings.scss */
+#settings .settings-btn.opened {
+  opacity: 1;
+}
+/* line 30, ../sass/_settings.scss */
+#settings .settings-btn:active {
+  -webkit-transform: scale(0.9, 0.9);
+}
+/* line 35, ../sass/_settings.scss */
+#settings .settings-form {
+  display: none;
+  position: relative;
+  float: right;
+  padding: 10px 6px;
+  opacity: 0.9;
+  background-color: #222326;
+  border-color: #3e3e40;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 2px;
+}
+/* line 45, ../sass/_settings.scss */
+#settings .settings-form .tri {
+  position: absolute;
+  top: -5px;
+  right: 8px;
+  width: 10px;
+  height: 10px;
+  background-color: #222326;
+  border-radius: 2px;
+  border-width: 1px;
+  border-color: #3e3e40 transparent transparent #3e3e40;
+  border-style: solid;
+  -webkit-transform: rotate(45deg);
+}
+/* line 62, ../sass/_settings.scss */
+#settings .settings-form .option {
+  overflow: auto;
+}
+/* line 65, ../sass/_settings.scss */
+#settings .settings-form .option:not(.first-child) {
+  margin-top: 5px;
+}
+/* line 69, ../sass/_settings.scss */
+#settings .settings-form .option label {
+  float: left;
+  margin-right: 5px;
+}
+/* line 73, ../sass/_settings.scss */
+#settings .settings-form .option input {
+  padding: 2px;
+  width: 30px;
+  float: right;
+  background-color: #222326;
+  border-width: 1px;
+  border-color: #3e3e40;
+}
+/* line 81, ../sass/_settings.scss */
+#settings .settings-form .option input[name=treemode] {
+  margin-top: 5px;
+  margin-left: 5px;
 }
