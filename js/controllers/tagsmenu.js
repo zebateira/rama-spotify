@@ -12,7 +12,7 @@ require([
     }
   });
 
-  TagsMenu.MAX_TAGS = 8;
+  TagsMenu.MAX_TAGS = 10;
 
   TagsMenu.implement({
     afterLoad: function(graphcontroller) {

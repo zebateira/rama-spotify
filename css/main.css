@@ -622,13 +622,14 @@ meter {
   display: inline-block;
   color: #dfe0e6;
   padding: 5px;
+  max-width: 50%;
   opacity: 0.9;
   background-color: #222326;
   border-color: #3e3e40;
   border-width: 1px;
   border-style: solid;
 }
-/* line 18, ../sass/_tagsmenu.scss */
+/* line 19, ../sass/_tagsmenu.scss */
 #tagsmenu .common-tag {
   background-color: #2e2f33;
   border-color: #3e3e40;
@@ -650,7 +651,7 @@ meter {
   border-color: #7fb701;
   -webkit-transform: scale(0.98, 0.98);
 }
-/* line 24, ../sass/_tagsmenu.scss */
+/* line 25, ../sass/_tagsmenu.scss */
 #tagsmenu .common-tag.selected {
   border-color: #95dc00;
 }
