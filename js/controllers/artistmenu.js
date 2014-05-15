@@ -154,8 +154,8 @@ require([
 
       var url =
         "http://developer.echonest.com/api/v4/artist/" +
-        "terms?api_key=29N71ZBQUW4XN0QXF&format=json&sort=weight&name=" +
-        this.artist.name;
+        "terms?api_key=29N71ZBQUW4XN0QXF&format=json&sort=weight&id=" +
+        this.artist.uri.replace('spotify', 'spotify-WW');
 
       $.ajax({
         url: url,

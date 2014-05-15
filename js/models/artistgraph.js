@@ -30,11 +30,6 @@ var ArtistGraph = function(element, artist, config) {
   this.graph = new vis.Graph(this.element, this.data, this.options);
 
   var graph = this.graph;
-  // this.graph.on('stabilized', function(iterations) { // Y U NO WORK
-  //   // graph.zoomExtent();
-  //   console.log(iterations);
-  //   // this.storePosition();
-  // });
 };
 
 ArtistGraph.DEFAULT_BRANCHING = 4;

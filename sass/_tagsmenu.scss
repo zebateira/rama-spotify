@@ -19,6 +19,7 @@
     @include label();
     @include clickableBtn();
     margin: 1px;
+    display: inline-block;
 
     &.selected {
       border-color: $green2;

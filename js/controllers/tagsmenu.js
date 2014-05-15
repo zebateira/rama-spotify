@@ -12,7 +12,7 @@ require([
     }
   });
 
-  TagsMenu.MAX_TAGS = 5;
+  TagsMenu.MAX_TAGS = 8;
 
   TagsMenu.implement({
     afterLoad: function(graphcontroller) {
@@ -20,11 +20,14 @@ require([
 
       this.bindEvents();
     },
+    resetView: function() {
+      this.commonTags = [];
+      this.element.innerHTML = 'Loading tags...';
+    },
     updateView: function() {
       var nodes = this.graphcontroller.artistGraph.data.nodes;
 
-      this.commonTags = [];
-      this.element.innerHTML = 'Loading tags...';
+      this.resetView();
 
       function addTags(node, index) {
 
@@ -119,17 +122,21 @@ require([
 
           if (!node.tags) {
             var url = "http://developer.echonest.com/api/v4/artist/" +
-              "terms?api_key=29N71ZBQUW4XN0QXF&format=json&sort=weight&name=" +
-              encodeURIComponent(node.label);
+              "terms?api_key=29N71ZBQUW4XN0QXF&format=json&sort=weight&id=" +
+              node.artist.uri.replace('spotify', 'spotify-WW');
+
             $.ajax({
               url: url,
               context: this
             }).done(
               function(data) {
                 node.tags = data.response.terms;
+
                 addTags.bind(this)(node, index);
               }
-            );
+            ).fail(function() {
+              getTagsFromArtist.bind(this)(index + 1);
+            });
           } else {
             addTags.bind(this)(node, index);
           }
