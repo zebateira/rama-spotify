@@ -8,7 +8,7 @@ require([
     initialize: function(name, config) {
       this.parent(name, config);
 
-      this.commonTags = [];
+      this.commmonTags = [];
     }
   });
 
@@ -21,7 +21,7 @@ require([
       this.bindEvents();
     },
     resetView: function() {
-      this.commonTags = [];
+      this.commmonTags = [];
       this.element.innerHTML = 'Loading tags...';
     },
     updateView: function() {
@@ -34,7 +34,7 @@ require([
         _.each(node.tags, function(newTag) {
           var isPresent = false;
           var lastEqual = {};
-          _.each(this.commonTags, function(tag) {
+          _.each(this.commmonTags, function(tag) {
             var areTheSame = newTag.name === tag.name;
 
             if (areTheSame)
@@ -51,7 +51,7 @@ require([
             newTag.nodes = [];
             newTag.nodes.push(node);
 
-            this.commonTags.push(newTag);
+            this.commmonTags.push(newTag);
           }
 
         }, this);
@@ -62,12 +62,12 @@ require([
       function getTagsFromArtist(index) {
         if (index === nodes.length) {
 
-          this.commonTags = _.sortBy(this.commonTags, 'count').reverse();
+          this.commmonTags = _.sortBy(this.commmonTags, 'count').reverse();
 
           var tagsContainer = this.jelement.html('');
           var graphcontroller = this.graphcontroller;
 
-          _.each(this.commonTags.slice(0, TagsMenu.MAX_TAGS), function(tag) {
+          _.each(this.commmonTags.slice(0, TagsMenu.MAX_TAGS), function(tag) {
             var tagElement = document.createElement('span');
 
             tagElement.className = 'common-tag';

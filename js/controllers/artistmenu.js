@@ -20,6 +20,7 @@ require([
   });
 
   ArtistMenu.MAX_ALBUMS = 8;
+  ArtistMenu.MAX_TAGS = 6;
 
   ArtistMenu.implement({
     afterLoad: function(graphcontroller) {
@@ -303,14 +304,18 @@ require([
 
         if (this.tags.length > 0) {
           $(this.selectors.tagsTitle).html('Tags: <br>');
+          var tagsInserted = 0;
 
-          for (var i = 0; i < this.tags.length && i < 6; ++i) {
-            if (this.tags[i]) {
+          for (var i = 0; i < this.tags.length && tagsInserted < ArtistMenu.MAX_TAGS; ++i) {
+            var tag = this.tags[i];
+
+            if (tag) {
               var tagElement = document.createElement('span');
               tagElement.className = 'artist-tag';
-              tagElement.innerHTML = this.tags[i].name;
+              tagElement.innerHTML = tag.name;
 
               $(this.selectors.tags).append(tagElement);
+              tagsInserted++;
             }
           }
 
@@ -319,7 +324,7 @@ require([
 
 
       }).fail(function() {
-        // Temporary fix for not requests limit from echonest
+        // Temporary fix for requests limit from echonest
         $(this.selectors.tagsTitle).html('');
       });
 
