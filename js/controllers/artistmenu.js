@@ -50,145 +50,6 @@ require([
 
 
     },
-    updateView: function(artist) {
-      if (!artist || this.artist === artist.uri)
-        return;
-
-      this.artist = artist;
-
-      if (!this.image) {
-        this.image = Image.forArtist(artist, {
-          width: 125,
-          height: 80,
-          style: 'plain',
-          overlay: [artist.name],
-          player: true,
-          placeholder: 'artist',
-          link: 'auto'
-        });
-
-        this.jelement.find(this.selectors.cover).append(this.image.node);
-      }
-
-      this.image.setImage(artist);
-      this.image.setOverlay(artist.name);
-
-      this.jelement.find(this.selectors.albums).html('');
-      this.jelement.find(this.selectors.albumsTitle).html('');
-
-      artist.load(['popularity', 'years', 'albums'])
-        .done(this, function(artist) {
-          if (artist.popularity)
-            this.jelement.find(this.selectors.popularity)
-              .html('Popularity: ' + artist.popularity + '/100');
-          else
-            this.jelement.find(this.selectors.popularity).html('');
-
-          if (artist.years.from !== 0)
-            this.jelement.find(this.selectors.years).html(
-              'Years active:<br> ' +
-              artist.years.from +
-              ' - ' +
-              (artist.years.to === 0 ? 'present' : artist.years.to)
-            );
-          else
-            this.jelement.find(this.selectors.years).html('');
-          var albumsAdded = 0;
-          var jalbums = this.jelement.find(this.selectors.albums);
-          artist.albums.snapshot().done(this,
-            function(snapshot) {
-              for (var i = 0; i <= snapshot.length && albumsAdded < ArtistMenu.MAX_ALBUMS; ++i) {
-                if (snapshot.get(i)) {
-
-                  if (snapshot.get(i).albums[0] && snapshot.get(i).albums[0].playable) {
-                    var album = snapshot.get(i).albums[0];
-
-                    if (!jalbums.find("a[href='" + album.uri + "']")[0]) {
-                      var albumImage = Image.forAlbum(album, {
-                        width: 50,
-                        height: 50,
-                        style: 'plain',
-                        player: true,
-                        placeholder: 'album',
-                        link: 'auto',
-                        title: album.name
-                      });
-
-                      var albumElement = document.createElement('span');
-                      albumElement.className = 'artist-album';
-                      albumImage.node.className += ' artist-album-cover';
-                      $(albumElement).append(albumImage.node);
-                      jalbums.append(albumElement);
-                      albumsAdded++;
-                    }
-                  }
-
-                  if (jalbums.html() !== '') {
-                    this.jelement
-                      .find(this.selectors.albumsTitle).html('Albums: <br>');
-                  }
-                }
-              }
-            });
-        });
-
-      // Paul Lamere
-      // http://developer.echonest.com/forums/thread/353
-      // Artist terms -> what is the difference between weight and frequency
-
-      // term frequency is directly proportional to how often 
-      // that term is used to describe that artist. 
-      // Term weight is a measure of how important that term is 
-      // in describing the artist. As an example of the difference, 
-      // the term 'rock' may be the most frequently applied term 
-      // for The Beatles. However, 'rock' is not very descriptive 
-      // since many bands have 'rock' as the most frequent term. 
-      // However, the most highly weighted terms for The Beatles 
-      // are 'merseybeat' and 'british invasion', which give you 
-      // a better idea of what The Beatles are all about than 'rock' does. 
-      // We don't publish the details of our algorithms, 
-      // but I can tell you that frequency is related to the 
-      // simple counting of appearance of a term, whereas 
-      // weight is related to TF-IDF as described 
-      // here (http://en.wikipedia.org/wiki/Tf%E2%80%93idf).
-
-      var url =
-        "http://developer.echonest.com/api/v4/artist/" +
-        "terms?api_key=29N71ZBQUW4XN0QXF&format=json&sort=weight&id=" +
-        this.artist.uri.replace('spotify', 'spotify-WW');
-
-      $.ajax({
-        url: url,
-        context: this
-      }).done(function(data) {
-        this.tags = data.response.terms;
-
-        $(this.selectors.tags).html('');
-
-        if (this.tags.length > 0) {
-          $(this.selectors.tagsTitle).html('Tags: <br>');
-
-          for (var i = 0; i < this.tags.length && i < 6; ++i) {
-            if (this.tags[i]) {
-              var tagElement = document.createElement('span');
-              tagElement.className = 'artist-tag';
-              tagElement.innerHTML = this.tags[i].name;
-
-              $(this.selectors.tags).append(tagElement);
-            }
-          }
-
-          this.artist.tags = this.tags;
-        }
-
-
-      }).fail(function() {
-        // Temporary fix for not found artist from echonest
-        $(this.selectors.tagsTitle).html('');
-        console.log(arguments);
-      });
-
-    },
     onClickNode: function(data) {
       var node = _.findWhere(
         this.graphcontroller.artistGraph.data.nodes, {
@@ -315,6 +176,153 @@ require([
       this.graphcontroller.updateArtist(this.artist);
       this.jelement.find(this.selectors.control_new).hide();
       this.jelement.find(this.selectors.control_delete).hide();
+    },
+    updateView: function(artist) {
+      if (!artist || this.artist === artist.uri)
+        return;
+
+      this.artist = artist;
+
+      this.updateImage(artist);
+      this.updateInfo(artist);
+      this.updateTags(artist);
+    },
+    updateImage: function(artist) {
+      if (!this.image) {
+        this.image = Image.forArtist(artist, {
+          width: 125,
+          height: 80,
+          style: 'plain',
+          overlay: [artist.name],
+          player: true,
+          placeholder: 'artist',
+          link: 'auto'
+        });
+
+        this.jelement.find(this.selectors.cover).append(this.image.node);
+      }
+
+      this.image.setImage(artist);
+      this.image.setOverlay(artist.name);
+
+    },
+    updateInfo: function(artist) {
+      this.jelement.find(this.selectors.albums).html('');
+      this.jelement.find(this.selectors.albumsTitle).html('');
+
+      artist.load(['popularity', 'years', 'albums'])
+        .done(this, function(artist) {
+          if (artist.popularity)
+            this.jelement.find(this.selectors.popularity)
+              .html('Popularity: ' + artist.popularity + '/100');
+          else
+            this.jelement.find(this.selectors.popularity).html('');
+
+          if (artist.years.from !== 0)
+            this.jelement.find(this.selectors.years).html(
+              'Years active:<br> ' +
+              artist.years.from +
+              ' - ' +
+              (artist.years.to === 0 ? 'present' : artist.years.to)
+            );
+          else
+            this.jelement.find(this.selectors.years).html('');
+          var albumsAdded = 0;
+          var jalbums = this.jelement.find(this.selectors.albums);
+          artist.albums.snapshot().done(this,
+            function(snapshot) {
+              for (var i = 0; i <= snapshot.length && albumsAdded < ArtistMenu.MAX_ALBUMS; ++i) {
+                if (snapshot.get(i)) {
+
+                  if (snapshot.get(i).albums[0]) {
+                    var album = snapshot.get(i).albums[0];
+
+                    if (!jalbums.find("a[href='" + album.uri + "']")[0]) {
+                      var albumImage = Image.forAlbum(album, {
+                        width: 50,
+                        height: 50,
+                        style: 'plain',
+                        player: true,
+                        placeholder: 'album',
+                        link: 'auto',
+                        title: album.name
+                      });
+
+                      var albumElement = document.createElement('span');
+                      albumElement.className = 'artist-album';
+                      albumImage.node.className += ' artist-album-cover';
+                      $(albumElement).append(albumImage.node);
+                      jalbums.append(albumElement);
+                      albumsAdded++;
+                    }
+                  }
+
+                  if (jalbums.html() !== '') {
+                    this.jelement
+                      .find(this.selectors.albumsTitle).html('Albums: <br>');
+                  }
+                }
+              }
+            });
+        });
+
+    },
+    updateTags: function(artist) {
+      // Paul Lamere
+      // http://developer.echonest.com/forums/thread/353
+      // Artist terms -> what is the difference between weight and frequency
+
+      // term frequency is directly proportional to how often 
+      // that term is used to describe that artist. 
+      // Term weight is a measure of how important that term is 
+      // in describing the artist. As an example of the difference, 
+      // the term 'rock' may be the most frequently applied term 
+      // for The Beatles. However, 'rock' is not very descriptive 
+      // since many bands have 'rock' as the most frequent term. 
+      // However, the most highly weighted terms for The Beatles 
+      // are 'merseybeat' and 'british invasion', which give you 
+      // a better idea of what The Beatles are all about than 'rock' does. 
+      // We don't publish the details of our algorithms, 
+      // but I can tell you that frequency is related to the 
+      // simple counting of appearance of a term, whereas 
+      // weight is related to TF-IDF as described 
+      // here (http://en.wikipedia.org/wiki/Tf%E2%80%93idf).
+
+      var url =
+        "http://developer.echonest.com/api/v4/artist/" +
+        "terms?api_key=29N71ZBQUW4XN0QXF&format=json&sort=weight&id=" +
+        this.artist.uri.replace('spotify', 'spotify-WW');
+
+      $.ajax({
+        url: url,
+        context: this
+      }).done(function(data) {
+        this.tags = data.response.terms;
+
+        $(this.selectors.tags).html('');
+
+        if (this.tags.length > 0) {
+          $(this.selectors.tagsTitle).html('Tags: <br>');
+
+          for (var i = 0; i < this.tags.length && i < 6; ++i) {
+            if (this.tags[i]) {
+              var tagElement = document.createElement('span');
+              tagElement.className = 'artist-tag';
+              tagElement.innerHTML = this.tags[i].name;
+
+              $(this.selectors.tags).append(tagElement);
+            }
+          }
+
+          this.artist.tags = this.tags;
+        }
+
+
+      }).fail(function() {
+        // Temporary fix for not requests limit from echonest
+        $(this.selectors.tagsTitle).html('');
+      });
+
     }
 
   });
