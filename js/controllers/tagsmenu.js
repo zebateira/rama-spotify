@@ -24,6 +24,7 @@ require([
       var nodes = this.graphcontroller.artistGraph.data.nodes;
 
       this.commonTags = [];
+      this.element.innerHTML = 'Loading tags...';
 
       function addTags(node, index) {
 
@@ -72,10 +73,12 @@ require([
             tagElement.nodes = tag.nodes;
 
             tagElement.onclick = function onTagClick(event) {
+              if (this.className.contains('selected'))
+                return;
+
               $('.common-tag').removeClass('selected');
 
-              this.className += ' selected'; // y u no work o0
-              console.log(this.className);
+              this.className += ' selected';
 
               _.each(this.nodes, function(node) {
                 if (node.id !== 1)

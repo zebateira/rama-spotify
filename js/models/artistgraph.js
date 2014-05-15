@@ -182,7 +182,6 @@ ArtistGraph.prototype = {
     this.reset();
   },
   updateData: function() {
-    this.customEvents.update();
     this.graph.setData(this.data);
   },
   redraw: function() {
