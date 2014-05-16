@@ -145,15 +145,15 @@ ArtistGraph.prototype = {
     promiseRelated.done(this, relatedDone);
   },
   drawGraph: function(debug) {
+    this.bindAllEvents();
+
     this.graph.setData(this.data, {
       disableStart: true
     });
 
     this.graph.start();
 
-    this.bindAllEvents();
     this.customEvents.update();
-
 
     if (this.throbber)
       this.throbber.hide();

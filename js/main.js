@@ -28,6 +28,7 @@ spotify.require([
         supports: ['artistmenu', 'tagsmenu'],
         events: ['onPlayerChange'],
         options: {
+          keyboard: true,
           nodes: {
             color: {
               background: '#2e2f33',
@@ -48,8 +49,6 @@ spotify.require([
               highlight: '#dfe0e6'
             }
           }
-          //, stabilize: true
-          //, clustering: true
         },
       },
       eqbar: {

@@ -29,6 +29,8 @@ require([
 
       this.resetView();
 
+      getTagsFromArtist.bind(this)(0);
+
       function addTags(node, index) {
 
         _.each(node.tags, function(newTag) {
@@ -48,8 +50,7 @@ require([
             lastEqual.nodes.push(node);
           } else {
             newTag.count = 1;
-            newTag.nodes = [];
-            newTag.nodes.push(node);
+            newTag.nodes = [node];
 
             this.commmonTags.push(newTag);
           }
@@ -67,7 +68,9 @@ require([
           var tagsContainer = this.jelement.html('');
           var graphcontroller = this.graphcontroller;
 
-          _.each(this.commmonTags.slice(0, TagsMenu.MAX_TAGS), function(tag) {
+          this.viewTags = _.sortBy(this.commmonTags.slice(0, TagsMenu.MAX_TAGS), 'name');
+
+          _.each(this.viewTags, function(tag) {
             var tagElement = document.createElement('span');
 
             tagElement.className = 'common-tag';
@@ -143,7 +146,6 @@ require([
         }
       }
 
-      getTagsFromArtist.bind(this)(0);
     },
     bindEvents: function() {
       this.graphcontroller
