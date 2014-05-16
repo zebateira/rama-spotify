@@ -78,9 +78,9 @@ ArtistGraph.prototype = {
     function forEachRelated(artist) {
       var duplicated = _.findWhere(this.data.nodes, {
         label: artist.name
-      });
+      }) && artist.name !== rootArtist.name;
 
-      if (duplicated && artist.name !== rootArtist.name) {
+      if (duplicated) {
         var inverseEdgeExists = _.findWhere(this.data.edges, {
           from: duplicated.id,
           to: rootArtist.nodeid
@@ -119,6 +119,8 @@ ArtistGraph.prototype = {
         this.relatedArtists.push(artist);
 
         artist.nodeid = nodeid;
+
+        var added = true;
       }
 
       if (depth > 0)
@@ -127,6 +129,9 @@ ArtistGraph.prototype = {
       if (++this.counter === this.maxNodes) {
         this.drawGraph(true);
       }
+
+      console.log(artist.name + ' returned added = ' + added);
+      return added;
     }
 
     function relatedSnapshotDone(snapshot) {
@@ -136,13 +141,25 @@ ArtistGraph.prototype = {
     }
 
     function relatedDone(artist) {
-      var promiseRelatedSnapshot =
-        artist.related.snapshot(0, this.branching);
-      promiseRelatedSnapshot.done(this, relatedSnapshotDone);
+      artist.related.snapshot().done(this, function(snapshot) {
+        var artistsAdded = 0;
+
+        for (var i = 0; i < snapshot.length && artistsAdded < this.branching; ++i) {
+          var artist = snapshot.get(i);
+
+          if (!artist)
+            console.err('ERROR: artist is ' + artist);
+          else {
+            if (forEachRelated.bind(this)(artist)) {
+              console.log(artist.name + ' added one related');
+              artistsAdded++;
+            }
+          }
+        }
+      });
     }
 
-    var promiseRelated = rootArtist.load('related');
-    promiseRelated.done(this, relatedDone);
+    rootArtist.load('related').done(this, relatedDone);
   },
   drawGraph: function(debug) {
     this.bindAllEvents();
