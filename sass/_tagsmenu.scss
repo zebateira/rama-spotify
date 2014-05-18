@@ -14,7 +14,7 @@
   padding: 5px;
   max-width: 50%;
 
-  @include menubox();
+  opacity: 0.9;
 
   .common-tag {
     @include label();

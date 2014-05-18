@@ -624,10 +624,6 @@ meter {
   padding: 5px;
   max-width: 50%;
   opacity: 0.9;
-  background-color: #222326;
-  border-color: #3e3e40;
-  border-width: 1px;
-  border-style: solid;
 }
 /* line 19, ../sass/_tagsmenu.scss */
 #tagsmenu .common-tag {
