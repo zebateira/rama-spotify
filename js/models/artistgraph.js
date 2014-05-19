@@ -1,33 +1,49 @@
 /**
-  Defines the artist graph model
+  Artist Graph Model
 
-  The ArtistGraph object Draws a graph of related artists
-  in a DOM element given a music artist and 
-  some optional configuration values.
+  Bridge between the artist model and the vis.Graph object.
 */
 
 var ArtistGraph = function(element, artist, config) {
 
+  // the DOM element where the canvas should be put
+  // to be passed on to the vis.Graph object
   this.element = element;
+
+  // spotify's models.Artist object
   this.artist = artist;
+  // id of the node to be passed on to the vis.Graph object
   this.artist.nodeid = 1;
 
+  // ArtistGraph Events
   this.events = {};
-  this.customEvents = {};
+  // vis.Graph Events
+  this.graphEvents = {};
 
+  // load branching value from config if present
+  // otherwise, load ArtistGraph.DEFAULT_BRANCHING
   this.branching = (config && config.branching) ||
     ArtistGraph.DEFAULT_BRANCHING;
-  this.depth = (config && config.depth) || ArtistGraph.DEFAULT_DEPTH;
+  // load depth value from config if present
+  // otherwise, load ArtistGraph.DEFAULT_DEPTH
+  this.depth = (config && config.depth) ||
+    ArtistGraph.DEFAULT_DEPTH;
 
+  // load treemode value from config if present
+  // otherwise, load ArtistGraph.DEFAULT_TREEMODE
   if (config && typeof config.treemode !== 'undefined')
     this.treemode = config.treemode;
   else this.treemode = ArtistGraph.DEFAULT_TREEMODE;
 
-  this.options = (config && config.options) || ArtistGraph.DEFAULT_OPTIONS;
+  // options to be passed on to vis.Graph object
+  this.options = (config && config.options) ||
+    ArtistGraph.DEFAULT_OPTIONS;
+
 
   this.initGraph();
 
-  this.graph = new vis.Graph(this.element, this.data, this.options);
+  this.graph =
+    new vis.Graph(this.element, this.data, this.options);
 
   var graph = this.graph;
 };
@@ -73,8 +89,27 @@ ArtistGraph.prototype = {
     this.constructGraph(this.depth - 1, this.artist);
   },
 
+  // Constructs the graph by recursively decreasing the depth
+  // parameter and using the correct rootArtist on each
+  // recursive call
   constructGraph: function(depth, rootArtist) {
 
+    // load the related artists property
+    rootArtist.load('related').done(this, function(artist) {
+      // when done loading, load the current snapshot of the array
+      // of artists, with this.branching length
+      artist.related
+        .snapshot(0, this.branching).done(this, function(snapshot) {
+          // when done loading, load name and uri properties
+          // of each artist in the snapshot
+          snapshot.loadAll(['name', 'uri'])
+          // when done, call forEachRelated on each artist
+          .each(this, forEachRelated);
+        });
+    });
+
+    // Updates the graph given the artist parameter.
+    // 
     function forEachRelated(artist) {
       var duplicated = _.findWhere(this.data.nodes, {
         label: artist.name
@@ -129,23 +164,11 @@ ArtistGraph.prototype = {
       }
     }
 
-    function relatedSnapshotDone(snapshot) {
-      var snapshotLoadAll = snapshot.loadAll(['name', 'uri']);
 
-      snapshotLoadAll.each(this, forEachRelated);
-    }
 
-    function relatedDone(artist) {
-      var promiseRelatedSnapshot =
-        artist.related.snapshot(0, this.branching);
-      promiseRelatedSnapshot.done(this, relatedSnapshotDone);
-    }
-
-    var promiseRelated = rootArtist.load('related');
-    promiseRelated.done(this, relatedDone);
   },
   drawGraph: function(debug) {
-    this.bindAllEvents();
+    this.bindAllGraphEvents();
 
     this.graph.setData(this.data, {
       disableStart: true
@@ -153,7 +176,7 @@ ArtistGraph.prototype = {
 
     this.graph.start();
 
-    this.customEvents.update();
+    this.events.update();
 
     if (this.throbber)
       this.throbber.hide();
@@ -184,17 +207,17 @@ ArtistGraph.prototype = {
   },
 
   // events
+  onGraph: function(event, eventHandler) {
+    this.graphEvents[event] = eventHandler;
+  },
+  bindAllGraphEvents: function() {
+    for (var event in this.graphEvents) {
+      this.graph.on(event, this.graphEvents[event]);
+    }
+  },
   on: function(event, eventHandler) {
     this.events[event] = eventHandler;
   },
-  onCustomEvent: function(event, eventHandler) {
-    this.customEvents[event] = eventHandler;
-  },
-  bindAllEvents: function() {
-    for (var event in this.events) {
-      this.graph.on(event, this.events[event]);
-    }
-  }
 };
 
 ArtistGraph.prototype.constructor = ArtistGraph;

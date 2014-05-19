@@ -22,6 +22,7 @@ require([
     },
     resetView: function() {
       this.commmonTags = [];
+      this.viewTags = [];
       this.element.innerHTML = 'Loading tags...';
     },
     updateView: function() {
@@ -36,6 +37,7 @@ require([
         _.each(node.tags, function(newTag) {
           var isPresent = false;
           var lastEqual = {};
+
           _.each(this.commmonTags, function(tag) {
             var areTheSame = newTag.name === tag.name;
 

@@ -142,12 +142,12 @@ require([
 
       var graph = this.artistGraph;
 
-      _.each(this.externalevents, function(event) {
+      _.each(this.externalCustomEvents, function(event) {
         graph.on(event.eventName, event.eventHandler);
       });
 
-      _.each(this.externalCustomEvents, function(event) {
-        graph.onCustomEvent(event.eventName, event.eventHandler);
+      _.each(this.externalevents, function(event) {
+        graph.onGraph(event.eventName, event.eventHandler);
       });
     },
     onPlayerChange: function(player) {
@@ -171,7 +171,7 @@ require([
       });
     },
     addGraphEvent: function(eventName, eventHandler) {
-      this.artistGraph.on(eventName, eventHandler);
+      this.artistGraph.onGraph(eventName, eventHandler);
 
       this.externalevents.push({
         eventName: eventName,
@@ -180,7 +180,7 @@ require([
     },
     addCustomGraphEvent: function(eventName, eventHandler) {
       if (this.artistGraph)
-        this.artistGraph.onCustomEvent(eventName, eventHandler);
+        this.artistGraph.on(eventName, eventHandler);
 
       this.externalCustomEvents.push({
         eventName: eventName,
