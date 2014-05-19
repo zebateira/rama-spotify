@@ -6,26 +6,29 @@
 
 \section{Introduction}
 
-Neste capítulo será feita uma análise dos serviços já disponíveis que são relevantes para esta dissertação.
+In this chapter, the most relevant web services for this thesis will be analysed.
 
-Esta dissertação foca-se mais na forma como se apresenta o conteúdo que se pretende recomendar ao utilizador, e menos com qual o conteúdo que é sugerido (não obstante da sua importância óbvia).
-No entanto, é quase impossível, no estudo do estado da arte, não se referir outros projetos que se focam também no conteúdo.
-Regra geral, os projetos que de seguida serão analisados, utilizam bases de dados externas, como o last.fm, para obter metadata que, convenientemente, também oferecem um tipo de recomendação de música com base numa pesquisa inicial.
+The proposed methodology focus on how the content is presented and less on what the content is (without discarding its importance).
+Even so, some projects that focus on the content will be analysed.
 
-\section{Projetos Relacionados} % (fold)
+The presented projects often use external data bases (like last.fm) to fetch metadata from.
+This is the preferred way, since those are the most complete sets of information. 
+
+\section{Related and Similar Services} % (fold)
 \label{sec:projetos_relacionados}
 
 \subsection{Liveplasma - liveplasma.com} % (fold)
 \label{sub:liveplasma}
 
-O liveplasma.com é uma aplicação em flash que mostra relações de artistas de música em forma de grafo, para além de também permitir criar grafos com livros e filmes.
-Este não permite editar o grafo e, ao clicar num nó o grafo, é novamente gerado a partir desse nó.
+liveplasma.com is a \emph{flash}\footnote{http://get.adobe.com/flashplayer} application that not only it allows to see a graph of music artists, but also of books and movies.
 
-\begin{figure}[tb]
+The interaction with the graph is very faulted: no changes to the graph are allowed, and the user can easily make a mistake and perform unwanted actions like redrawing the graph with another artist as the root node.
+
+\begin{figure}
   \begin{center}
     \includegraphics[width=\textwidth]{liveplasma.pdf}
   \end{center}
-  \caption{liveplasma: resultado da pesquisa "Amália Rodrigues". Canto superior esquerdo: álbums da artista; Canto inferior esquerdo: \emph{mini-player} do youtube.}
+  \caption{liveplasma: search result for "Amália Rodrigues"; upper left corner: artist albums; lower left corner: youtube's \emph{mini-player}}
   \label{fig:sota_liveplasma}
 \end{figure}
 
