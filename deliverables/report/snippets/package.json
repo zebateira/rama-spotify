@@ -1,0 +1,10 @@
+{
+  "name": "RAMA",
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-jasmine": "*",
+    "grunt-contrib-watch": "*"
+  },
+  "version": "0.1.0"
+}
