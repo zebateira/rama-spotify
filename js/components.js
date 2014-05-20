@@ -93,7 +93,8 @@ var Components = {
     }
   },
 
-  // Simply calls the updateView function on all the UI components.
+  // Simply calls the updateView function on all the 
+  // UI components' controllers.
   updateViews: function() {
     for (var componentName in Components.components) {
       var comp = Components.components[componentName];

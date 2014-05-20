@@ -1,3 +1,8 @@
+/**
+  Compilation of the available controllers.
+  Each controller should apply to a UI component.
+*/
+
 require([
   'js/controllers/header#header',
   'js/controllers/graphcontroller#graphcontroller',

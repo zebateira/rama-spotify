@@ -52,6 +52,8 @@ require([
       if (!supports)
         return;
 
+      // call loadView on all the controllers that depend on
+      // this controller.
       for (var i = 0; i < supports.length; ++i) {
         var support = Components.components[supports[i]];
         if (support && support.controller) {
