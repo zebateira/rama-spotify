@@ -126,8 +126,8 @@ ArtistGraph.prototype = {
     //   |___
     //   i = 0
 
-    for (this.maxIterations = 0,
-      i = 0; i <= this.depth; ++i) {
+    this.maxIterations = 0;
+    for (var i = 0; i <= this.depth; ++i) {
       this.maxIterations += Math.pow(this.branching, i);
     }
 
@@ -175,12 +175,12 @@ ArtistGraph.prototype = {
 
         // try to find repeated edges in the graph
         var edgeExists = _.findWhere(this.data.edges, {
-          to: duplicated.id, // TODO use artist.id instead?
+          to: artist.id, // TODO use artist.id instead?
           from: rootArtist.nodeid
         });
         // find repeated edges (even if inverse)
         var inverseEdgeExists = _.findWhere(this.data.edges, {
-          from: duplicated.id,
+          from: artist.id,
           to: rootArtist.nodeid
         });
 
