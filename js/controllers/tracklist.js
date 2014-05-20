@@ -25,7 +25,7 @@
       });
 
       TrackList.implement({
-        afterLoad: function() {
+        loadController: function() {
           this.load();
         },
         updateView: function() {},

@@ -30,24 +30,18 @@ require([
 
         $(this.selector).load(
           this.config.viewpath,
-          afterLoad(this, supports, dependency));
-
+          this.afterLoad.bind(this, supports, dependency));
       } else
-        afterLoad(this, supports, dependency)();
+        this.afterLoad(supports, dependency);
+    },
+    // helper function for setting configurations
+    // after the loadView function as finished
+    afterLoad: function(supports, dependency) {
+      this.jelement = $(this.selector);
+      this.element = this.jelement[0];
 
-    }
-
-  });
-
-  // helper function for setting configurations
-  // after the loadView function as finished
-  function afterLoad(controller, supports, dependency) {
-    return function() {
-      controller.jelement = $(controller.selector);
-      controller.element = controller.jelement[0];
-
-      if (controller.afterLoad)
-        controller.afterLoad(dependency);
+      if (this.loadController)
+        this.loadController(dependency);
 
       if (!supports)
         return;
@@ -57,11 +51,16 @@ require([
       for (var i = 0; i < supports.length; ++i) {
         var support = Components.components[supports[i]];
         if (support && support.controller) {
-          support.controller.loadView(support.supports, controller);
+          support.controller.loadView(support.supports, this);
         }
       }
-    };
-  }
+
+    },
+    updateView: function() {
+
+    }
+
+  });
 
   exports.controller = Controller;
 });

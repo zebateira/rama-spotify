@@ -20,7 +20,7 @@ require([
   });
 
   EQBar.implement({
-    afterLoad: function() {
+    loadController: function() {
 
       this.canvas = document.createElement('canvas');
       this.context = this.canvas.getContext('2d');

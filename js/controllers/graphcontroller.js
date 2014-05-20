@@ -22,7 +22,7 @@ require([
   });
 
   GraphController.implement({
-    afterLoad: function(settings) {
+    loadController: function(settings) {
 
       models.player.load('track')
         .done(this, function(player) {

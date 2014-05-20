@@ -39,7 +39,7 @@ require([
   });
 
   Settings.implement({
-    afterLoad: function() {
+    loadController: function() {
       this.button = new Element(this.button.selector);
       this.settings = new Element(this.settings.selector);
 

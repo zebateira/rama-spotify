@@ -15,7 +15,7 @@ require([
   TagsMenu.MAX_TAGS = 10;
 
   TagsMenu.implement({
-    afterLoad: function(graphcontroller) {
+    loadController: function(graphcontroller) {
       this.graphcontroller = graphcontroller;
 
       this.bindEvents();

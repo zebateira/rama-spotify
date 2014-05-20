@@ -23,7 +23,7 @@ require([
   ArtistMenu.MAX_TAGS = 6;
 
   ArtistMenu.implement({
-    afterLoad: function(graphcontroller) {
+    loadController: function(graphcontroller) {
       this.graphcontroller = graphcontroller;
 
       models.player.load('track').done(this, function() {
