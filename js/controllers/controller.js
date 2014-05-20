@@ -25,22 +25,21 @@ require([
     //    Loads template from file if available.
     //    When view is ready, afterLoad helper function is called
     loadView: function(supports, dependency) {
+
       if (this.config.loadtemplate) {
 
-        var controller = this;
         $(this.selector).load(
           this.config.viewpath,
-          function() {
-            afterLoad(controller, supports, dependency)();
-          }
-        );
+          afterLoad(this, supports, dependency));
+
       } else
         afterLoad(this, supports, dependency)();
-    },
-    updateView: function() {},
+
+    }
+
   });
 
-  // helper function for handling configurations
+  // helper function for setting configurations
   // after the loadView function as finished
   function afterLoad(controller, supports, dependency) {
     return function() {
