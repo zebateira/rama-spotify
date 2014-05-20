@@ -1,5 +1,13 @@
-require(['$api/models', 'js/components#Components'], function(models, Components) {
+require([
+  '$api/models',
+  'js/components#Components'
+], function(models, Components) {
 
+  /**
+    Controller Object
+
+    Generic controller object
+  */
   var Controller = new Class({
     initialize: function(name, config) {
       this.name = name;

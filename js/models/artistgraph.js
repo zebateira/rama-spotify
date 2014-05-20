@@ -7,8 +7,8 @@
 
 var ArtistGraph = function(element, artist, config) {
 
-  // the DOM element where the canvas should be put
-  // to be passed on to the vis.Graph object
+  // the DOM element where the canvas should be put on
+  // to be later on passed to the vis.Graph object
   this.element = element;
 
   // Spotify's models.Artist object
@@ -103,11 +103,15 @@ ArtistGraph.prototype = {
     // done to construct the graph
     this.currentIterations = 1;
 
-    // this.maxIterations
     // Maximum number of iterations that will be performed
     // to construct the graph.
-    //
-    // This value is equal to:
+    this.maxIterations =
+      (function lambda(i) {
+      return Math.pow(this.branching, i) +
+        (i < this.depth ? lambda.bind(this)(i + 1) : 0);
+    }).bind(this)(0);
+
+    // this.maxIterations is equal to:
     // 
     //   d
     //   ∑ b^i
@@ -115,21 +119,14 @@ ArtistGraph.prototype = {
     //
     //  which is the sum of the branching value to the power
     //  of i, given that i goes from zero to the depth value.
-
+    //
     //   depth
     //    ___
     //   |
-    //    \
-    //     \    branching ^ i
-    //    /
-    //   /
+    //    \    
+    //    /    branching ^ i
     //   |___
     //   i = 0
-
-    this.maxIterations = 0;
-    for (var i = 0; i <= this.depth; ++i) {
-      this.maxIterations += Math.pow(this.branching, i);
-    }
 
     // start constructing the graph recursively
     this.constructGraph(this.depth - 1, this.artist);
