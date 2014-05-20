@@ -4,7 +4,6 @@
 */
 
 require([
-  'js/controllers/header#header',
   'js/controllers/graphcontroller#graphcontroller',
   'js/controllers/settings#settings',
   'js/controllers/eqbar#eqbar',
@@ -12,7 +11,6 @@ require([
   'js/controllers/artistmenu#artistmenu',
   'js/controllers/tagsmenu#tagsmenu',
 ], function(
-  _header,
   _graphcontroller,
   _settings,
   _eqbar,
@@ -20,7 +18,6 @@ require([
   _artistmenu,
   _tagsmenu
 ) {
-  exports.Header = _header;
   exports.GraphController = _graphcontroller;
   exports.Settings = _settings;
   exports.EQBar = _eqbar;

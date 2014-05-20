@@ -2,10 +2,9 @@
       'js/controllers/controller#controller',
       '$api/models',
       '$views/image#Image',
-      'js/exceptions#ConfigObjectMissing',
       '$views/throbber#Throbber',
     ],
-    function(Controller, models, Image, ConfigObjectMissing, Throbber) {
+    function(Controller, models, Image, Throbber) {
 
       var TrackList = new Class({
         Extends: Controller,

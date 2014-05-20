@@ -47,7 +47,8 @@ require([
       controller.jelement = $(controller.selector);
       controller.element = controller.jelement[0];
 
-      controller.afterLoad(dependency);
+      if (controller.afterLoad)
+        controller.afterLoad(dependency);
 
       if (!supports)
         return;

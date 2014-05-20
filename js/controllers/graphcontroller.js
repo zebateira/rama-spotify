@@ -2,9 +2,12 @@ require([
   'js/controllers/controller#controller',
   '$api/models',
   '$views/throbber#Throbber',
-  'js/models/artistgraph#ArtistGraph',
-  'js/models/element#element'
-], function(Controller, models, Throbber, ArtistGraph, Element) {
+  'js/models/artistgraph#ArtistGraph'
+], function(
+  Controller,
+  models,
+  Throbber,
+  ArtistGraph) {
 
   var GraphController = new Class({
     Extends: Controller,

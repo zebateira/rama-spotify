@@ -1,7 +1,8 @@
 spotify.require([
   'js/components#Components',
-  'js/controllers/controllers'
-], function(Components, controllers) {
+  'js/controllers/controllers',
+  'js/controllers/controller#controller'
+], function(Components, controllers, Controller) {
 
   // Components object initial configuration  for the UI components
   //
@@ -44,8 +45,7 @@ spotify.require([
       //   controller:
       //     Controller object for the UI component.
       //     The object should be of type
-      //     controllers.Controller and implement the
-      //     afterLoad function handler.
+      //     controllers.Controller.
       //
       //   supports:
       //     Specifies the objects that this component supports.
@@ -67,9 +67,7 @@ spotify.require([
       //     any custom properties can (and should) be defined.
       header: {
         loadtemplate: true,
-        controller: controllers.Header,
-        // link for the external RAMA app
-        applink: 'http://rama.inescporto.pt/app',
+        controller: Controller
       },
       settings: {
         loadtemplate: true,
