@@ -29,7 +29,6 @@ require([
       var controller = this;
 
       _.each(settings.inputs, function(input) {
-        // TODO remove controller
         $(input.selector).on('change', function() {
           var config = {};
 

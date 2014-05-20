@@ -175,7 +175,7 @@ ArtistGraph.prototype = {
 
         // try to find repeated edges in the graph
         var edgeExists = _.findWhere(this.data.edges, {
-          to: artist.id, // TODO use artist.id instead?
+          to: artist.id,
           from: rootArtist.nodeid
         });
         // find repeated edges (even if inverse)
@@ -191,7 +191,6 @@ ArtistGraph.prototype = {
             from: rootArtist.nodeid,
             to: duplicated.id,
           };
-
           this.extraEdges.push(extraEdge);
 
           // The extra edge concept is related to the treemode of
@@ -266,8 +265,8 @@ ArtistGraph.prototype = {
     // starts the animation to draw the graph
     this.graph.start();
 
-    // updates the UI components that depend on the content of
-    //    the graph
+    // updates the UI components that are dependent on the content of
+    // the graph
     this.events.update();
 
     // The Spotify's views.Throbber object was initialized in the
@@ -300,6 +299,8 @@ ArtistGraph.prototype = {
 
     this.reset();
   },
+
+  // Refresh vis.Graph's data object
   updateData: function() {
     this.graph.setData(this.data);
   },
@@ -309,21 +310,22 @@ ArtistGraph.prototype = {
 
   // Events
 
-  // saves the given vis.Graph event, given the proper eventHandler
+  // saves a vis.Graph event, given the proper eventHandler
   onGraph: function(event, eventHandler) {
     this.graphEvents[event] = eventHandler;
   },
+
+  // saves the given event, given the proper eventHandler.
+  on: function(event, eventHandler) {
+    this.events[event] = eventHandler;
+  },
+
   // binds the previously saved vis.Graph's events to the
   // graph object
   bindAllGraphEvents: function() {
     for (var event in this.graphEvents) {
       this.graph.on(event, this.graphEvents[event]);
     }
-  },
-
-  // saves the given event, given the proper eventHandler.
-  on: function(event, eventHandler) {
-    this.events[event] = eventHandler;
   },
 };
 
