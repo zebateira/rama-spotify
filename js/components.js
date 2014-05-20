@@ -19,9 +19,11 @@ var Components = {
     // Global configuration options
     this.config = {
       // path of the view files templates
-      viewspath: initConfig.config.viewspath || Components.DEFAULT_PATH,
+      viewspath: initConfig.config.viewspath ||
+        Components.DEFAULT_PATH,
       // format of the templates
-      template: initConfig.config.template || Components.DEFAULT_TEMPLATE,
+      template: initConfig.config.template ||
+        Components.DEFAULT_TEMPLATE,
       // prefix for the DOM selectors
       selectorPrefix: initConfig.config.selectorPrefix ||
         Components.DEFAULT_SELECTOR_PREFIX
