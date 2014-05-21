@@ -75,7 +75,7 @@ require([
 
       this.artistGraph = new ArtistGraph(
         this.element,
-        artist || this.artist,
+        artist || this.nowplayingArtist,
         config
       );
 
