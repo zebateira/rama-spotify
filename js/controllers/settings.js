@@ -48,12 +48,12 @@ require([
         input.element = document.querySelector(input.selector);
 
         input.element.onchange = function() {
-          var inputName = this.name;
+          var config = {};
 
-          graphcontroller.updateGraph({
-            inputName: parseInt(this[input.value]) ||
-              this[input.value]
-          });
+          config[this.name] = parseInt(this[input.value]) ||
+            this[input.value];
+
+          graphcontroller.updateGraph(config);
         };
       });
 
