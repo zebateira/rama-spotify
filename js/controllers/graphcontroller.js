@@ -9,6 +9,12 @@ require([
   Throbber,
   ArtistGraph) {
 
+  /** 
+    Controller for the Graph UI component
+
+    Extends the controllers.Controller generic class
+  */
+
   var GraphController = new Class({
     Extends: Controller,
 

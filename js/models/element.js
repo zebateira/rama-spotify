@@ -5,7 +5,10 @@ var Element = function(selector) {
 };
 
 Element.prototype = {
-  refresh: function() {}
+  addDOMEvent: function(config) {
+    this.element[config.eventName] =
+      config.handler.bind(config.context);
+  }
 };
 
 Element.prototype.constructor = Element;

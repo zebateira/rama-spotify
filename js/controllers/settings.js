@@ -11,12 +11,12 @@ require([
 
       this.button = {
         selector: config.buttonSelector ||
-          this.selector + ' .settings-btn'
+          this.selector + ' ' + Settings.DEFAULT_BUTTON_SELECTOR
       };
 
-      this.settings = {
+      this.form = {
         selector: config.formSelector ||
-          this.selector + ' .settings-form'
+          this.selector + ' ' + Settings.DEFAULT_FORM_SELECTOR
       };
 
       this.inputs = {
@@ -33,23 +33,27 @@ require([
 
       for (var input in this.inputs) {
         this.inputs[input].selector =
-          this.settings.selector + ' input[name=' + input + ']';
+          this.form.selector + ' input[name=' + input + ']';
       }
     }
   });
 
+  Settings.DEFAULT_BUTTON_SELECTOR = '.settings-btn';
+  Settings.DEFAULT_FORM_SELECTOR = '.settings-form';
+
   Settings.implement({
     loadController: function() {
       this.button = new Element(this.button.selector);
-      this.settings = new Element(this.settings.selector);
+      this.form = new Element(this.form.selector);
 
-      var btn = this.button.jelement;
-      var settings = this.settings.jelement;
-
-      this.button.element.onclick = function(event) {
-        btn.toggleClass('opened');
-        settings.toggle();
-      };
+      this.button.addDOMEvent({
+        eventName: 'onclick',
+        context: this,
+        handler: function(event) {
+          this.button.jelement.toggleClass('opened');
+          this.form.jelement.toggle();
+        }
+      });
     }
   });
 

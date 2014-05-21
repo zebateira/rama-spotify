@@ -172,12 +172,12 @@ ArtistGraph.prototype = {
 
         // try to find repeated edges in the graph
         var edgeExists = _.findWhere(this.data.edges, {
-          to: artist.id,
+          to: duplicated.id,
           from: rootArtist.nodeid
         });
         // find repeated edges (even if inverse)
         var inverseEdgeExists = _.findWhere(this.data.edges, {
-          from: artist.id,
+          from: duplicated.id,
           to: rootArtist.nodeid
         });
 
