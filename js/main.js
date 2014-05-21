@@ -72,7 +72,11 @@ spotify.require([
       settings: {
         loadtemplate: true,
         controller: controllers.Settings,
-        supports: ['graph']
+        supports: ['graph'],
+        selectors: {
+          button: '#settings_button',
+          form: '#settings_form'
+        }
       },
       graph: {
         loadtemplate: false,

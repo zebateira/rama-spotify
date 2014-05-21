@@ -346,7 +346,7 @@ a {
   color: #dfe0e6;
 }
 /* line 11, ../sass/_settings.scss */
-#settings .settings-btn {
+#settings #settings_button {
   float: right;
   width: 20px;
   height: 20px;
@@ -356,19 +356,19 @@ a {
   background-size: cover;
 }
 /* line 22, ../sass/_settings.scss */
-#settings .settings-btn:hover {
+#settings #settings_button:hover {
   cursor: pointer;
 }
 /* line 26, ../sass/_settings.scss */
-#settings .settings-btn.opened {
+#settings #settings_button.opened {
   opacity: 1;
 }
 /* line 30, ../sass/_settings.scss */
-#settings .settings-btn:active {
+#settings #settings_button:active {
   -webkit-transform: scale(0.9, 0.9);
 }
 /* line 35, ../sass/_settings.scss */
-#settings .settings-form {
+#settings #settings_form {
   display: none;
   position: relative;
   float: right;
@@ -381,7 +381,7 @@ a {
   border-radius: 2px;
 }
 /* line 45, ../sass/_settings.scss */
-#settings .settings-form .tri {
+#settings #settings_form .tri {
   position: absolute;
   top: -5px;
   right: 8px;
@@ -395,20 +395,20 @@ a {
   -webkit-transform: rotate(45deg);
 }
 /* line 62, ../sass/_settings.scss */
-#settings .settings-form .option {
+#settings #settings_form .option {
   overflow: auto;
 }
 /* line 65, ../sass/_settings.scss */
-#settings .settings-form .option:not(.first-child) {
+#settings #settings_form .option:not(.first-child) {
   margin-top: 5px;
 }
 /* line 69, ../sass/_settings.scss */
-#settings .settings-form .option label {
+#settings #settings_form .option label {
   float: left;
   margin-right: 5px;
 }
 /* line 73, ../sass/_settings.scss */
-#settings .settings-form .option input {
+#settings #settings_form .option input {
   padding: 2px;
   width: 30px;
   float: right;
@@ -417,7 +417,7 @@ a {
   border-color: #3e3e40;
 }
 /* line 81, ../sass/_settings.scss */
-#settings .settings-form .option input[name=treemode] {
+#settings #settings_form .option input[name=treemode] {
   margin-top: 5px;
   margin-left: 5px;
 }

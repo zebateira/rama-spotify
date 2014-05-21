@@ -307,14 +307,14 @@ ArtistGraph.prototype = {
 
   // Events
 
-  // saves a vis.Graph event, given the proper eventHandler
-  onGraph: function(event, eventHandler) {
-    this.graphEvents[event] = eventHandler;
-  },
-
   // saves the given event, given the proper eventHandler.
   on: function(event, eventHandler) {
     this.events[event] = eventHandler;
+  },
+
+  // saves a vis.Graph event, given the proper eventHandler
+  onGraph: function(event, eventHandler) {
+    this.graphEvents[event] = eventHandler;
   },
 
   // binds the previously saved vis.Graph's events to the

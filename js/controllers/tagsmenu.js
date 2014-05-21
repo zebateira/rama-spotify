@@ -65,12 +65,15 @@ require([
       function getTagsFromArtist(index) {
         if (index === nodes.length) {
 
-          this.commmonTags = _.sortBy(this.commmonTags, 'count').reverse();
+          this.commmonTags = _.sortBy(this.commmonTags, 'count')
+            .reverse();
 
           var tagsContainer = this.jelement.html('');
           var graphcontroller = this.graphcontroller;
 
-          this.viewTags = _.sortBy(this.commmonTags.slice(0, TagsMenu.MAX_TAGS), 'name');
+          this.viewTags = _.sortBy(
+            this.commmonTags.slice(0, TagsMenu.MAX_TAGS),
+            'name');
 
           _.each(this.viewTags, function(tag) {
             var tagElement = document.createElement('span');

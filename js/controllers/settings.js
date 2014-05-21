@@ -9,15 +9,7 @@ require([
     initialize: function(name, config) {
       this.parent(name, config);
 
-      this.button = {
-        selector: config.buttonSelector ||
-          this.selector + ' ' + Settings.DEFAULT_BUTTON_SELECTOR
-      };
-
-      this.form = {
-        selector: config.formSelector ||
-          this.selector + ' ' + Settings.DEFAULT_FORM_SELECTOR
-      };
+      this.selectors = config.selectors;
 
       this.inputs = {
         branching: {
@@ -33,18 +25,15 @@ require([
 
       for (var input in this.inputs) {
         this.inputs[input].selector =
-          this.form.selector + ' input[name=' + input + ']';
+          this.selectors.form + ' input[name=' + input + ']';
       }
     }
   });
 
-  Settings.DEFAULT_BUTTON_SELECTOR = '.settings-btn';
-  Settings.DEFAULT_FORM_SELECTOR = '.settings-form';
-
   Settings.implement({
     loadController: function() {
-      this.button = new Element(this.button.selector);
-      this.form = new Element(this.form.selector);
+      this.button = new Element(this.selectors.button);
+      this.form = new Element(this.selectors.form);
 
       this.button.addDOMEvent({
         eventName: 'onclick',

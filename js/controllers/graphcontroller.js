@@ -22,8 +22,8 @@ require([
       this.parent(name, config);
 
       this.options = config.options;
-      this.externalevents = [];
-      this.externalCustomEvents = [];
+      this.graphevents = [];
+      this.events = [];
     }
   });
 
@@ -33,7 +33,7 @@ require([
       models.player.load('track')
         .done(this, function(player) {
           this.nowplayingArtist = player.track.artists[0];
-          this.setArtistGraph(player);
+          this.setArtistGraph(this.nowplayingArtist);
         });
       var controller = this;
 
@@ -62,7 +62,7 @@ require([
       Set artist from the current playing track.
       Creates the artistGraph.
     */
-    setArtistGraph: function(player) {
+    setArtistGraph: function(artist) {
       var config = {
         options: this.options
       };
@@ -73,52 +73,9 @@ require([
         config.treemode = this.artistGraph.treemode;
       }
 
-      this.artist = player.track.artists[0];
-
       this.artistGraph = new ArtistGraph(
         this.element,
-        player.track.artists[0],
-        config
-      );
-
-      this.showThrobber();
-      this.artistGraph.buildGraph();
-
-      this.bindAllEvents();
-    },
-    updateArtist: function(artist) {
-      var config = {
-        options: this.options
-      };
-
-      config.branching = this.artistGraph.branching;
-      config.depth = this.artistGraph.depth;
-      config.treemode = this.artistGraph.treemode;
-
-      this.artist = artist;
-      this.artistGraph = new ArtistGraph(
-        this.element,
-        artist,
-        config
-      );
-
-      this.showThrobber();
-      this.artistGraph.buildGraph();
-
-      this.bindAllEvents();
-    },
-    updateGraph: function() {
-      var config = {
-        options: this.options
-      };
-
-      config.branching = this.artistGraph.branching;
-      config.depth = this.artistGraph.depth;
-      config.treemode = this.artistGraph.treemode;
-
-      this.artistGraph = new ArtistGraph(
-        this.element,
-        this.artist,
+        artist || this.artist,
         config
       );
 
@@ -148,14 +105,14 @@ require([
         models.player.load('track').done(onPlayerChange);
       });
 
-      var graph = this.artistGraph;
+      var artistgraph = this.artistGraph;
 
-      _.each(this.externalCustomEvents, function(event) {
-        graph.on(event.eventName, event.eventHandler);
+      _.each(this.events, function(event) {
+        artistgraph.on(event.eventName, event.eventHandler);
       });
 
-      _.each(this.externalevents, function(event) {
-        graph.onGraph(event.eventName, event.eventHandler);
+      _.each(this.graphevents, function(event) {
+        artistgraph.onGraph(event.eventName, event.eventHandler);
       });
     },
     onPlayerChange: function(player) {
@@ -181,7 +138,7 @@ require([
     addGraphEvent: function(eventName, eventHandler) {
       this.artistGraph.onGraph(eventName, eventHandler);
 
-      this.externalevents.push({
+      this.graphevents.push({
         eventName: eventName,
         eventHandler: eventHandler
       });
@@ -190,7 +147,7 @@ require([
       if (this.artistGraph)
         this.artistGraph.on(eventName, eventHandler);
 
-      this.externalCustomEvents.push({
+      this.events.push({
         eventName: eventName,
         eventHandler: eventHandler
       });

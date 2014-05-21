@@ -28,7 +28,6 @@
         loadController: function() {
           this.load();
         },
-        updateView: function() {},
         load: function() {
 
           models.player.load('track').done(this, function() {

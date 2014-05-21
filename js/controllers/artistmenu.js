@@ -144,7 +144,7 @@ require([
                     artistGraph.data.edges.push(extraEdge);
                 }
               } else {
-                var nodeid = ++artistGraph.index;
+                var nodeid = ++artistGraph.currentNodeId;
 
                 artistGraph.data.nodes.push({
                   id: nodeid,
@@ -174,7 +174,7 @@ require([
       this.jelement.find(this.selectors.control_expand).hide();
     },
     onBtnNewClick: function(event) {
-      this.graphcontroller.updateArtist(this.artist);
+      this.graphcontroller.setArtistGraph(this.artist);
       this.jelement.find(this.selectors.control_new).hide();
       this.jelement.find(this.selectors.control_delete).hide();
     },
