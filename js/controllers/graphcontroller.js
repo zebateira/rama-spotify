@@ -34,61 +34,62 @@ require([
     // parameter settings is a dependency.
     // this means that at this point (when loadController runs)
     // the settings' DOM element will be done loading
-    loadController: function(settings) {
-
+    loadController: function() {
       models.player.load('track')
         .done(this, function(player) {
+
+          // this.nowplayingArtist refers to the artist
+          // of the current playing track
           this.nowplayingArtist = player.track.artists[0];
           this.setArtistGraph(this.nowplayingArtist);
         });
-      var controller = this;
-
-      _.each(settings.inputs, function(input) {
-        $(input.selector).on('change', function() {
-          var config = {};
-
-          config[this.name] =
-            parseInt(this[input.value]) || this[input.value];
-          controller.showThrobber();
-          controller.artistGraph.updateGraph(config);
-          controller.artistGraph.buildGraph();
-        });
-      });
     },
+
+    // this.updateView
+    // Redraws the graph and centers the throbber if being shown.
+    // This is useful when the window is being resized and
+    // the throbbers is not aligned at the center of the screen.
     updateView: function() {
       if (this.artistGraph) {
         this.artistGraph.redraw();
+
         if (this.artistGraph.throbber)
           this.artistGraph.throbber.setPosition('center', 'center');
       }
-      return this;
     },
 
     /**
       Set artist from the current playing track.
-      Creates the artistGraph.
+      Creates this.artistGraph object.
+
+      The parameter artist (if defined) is used as the root node.
+      Otherwise, the this.nowplayingArtist is used.
     */
     setArtistGraph: function(artist) {
-      var config = {
+      var options = {
         options: this.options
       };
 
       if (this.artistGraph) {
-        config.branching = this.artistGraph.branching;
-        config.depth = this.artistGraph.depth;
-        config.treemode = this.artistGraph.treemode;
+        options.branching = this.artistGraph.branching;
+        options.depth = this.artistGraph.depth;
+        options.treemode = this.artistGraph.treemode;
       }
 
       this.artistGraph = new ArtistGraph(
         this.element,
         artist || this.nowplayingArtist,
-        config
+        options
       );
 
       this.showThrobber();
       this.artistGraph.buildGraph();
 
       this.bindAllEvents();
+    },
+    updateGraph: function(config) {
+      this.showThrobber();
+      this.artistGraph.updateGraph(config);
     },
     updateData: function() {
       this.artistGraph.updateData();

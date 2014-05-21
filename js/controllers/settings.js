@@ -31,7 +31,7 @@ require([
   });
 
   Settings.implement({
-    loadController: function() {
+    loadController: function(graphcontroller) {
       this.button = new Element(this.selectors.button);
       this.form = new Element(this.selectors.form);
 
@@ -43,6 +43,20 @@ require([
           this.form.jelement.toggle();
         }
       });
+
+      _.each(this.inputs, function(input) {
+        input.element = document.querySelector(input.selector);
+
+        input.element.onchange = function() {
+          var inputName = this.name;
+
+          graphcontroller.updateGraph({
+            inputName: parseInt(this[input.value]) ||
+              this[input.value]
+          });
+        };
+      });
+
     }
   });
 

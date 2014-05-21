@@ -47,21 +47,4 @@ describe('Artist Graph Module', function() {
       expect(ag.depth).toBe(2);
     });
   });
-
-  describe('updateGraph', function() {
-    it('should have config specified', function() {
-      var ag = new ArtistGraph(
-        document.createElement('div'), {
-          name: 'Anamanaguchi'
-        });
-
-      ag.updateGraph({
-        depth: 3,
-        branching: 2
-      });
-
-      expect(ag.depth).toBe(3);
-      expect(ag.branching).toBe(2);
-    });
-  });
 });

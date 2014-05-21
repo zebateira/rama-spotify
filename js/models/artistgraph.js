@@ -202,7 +202,6 @@ ArtistGraph.prototype = {
           // possible edges will be added to the vis.Graph object,
           // which means that the graph will not be a tree, but
           // one of a graph, with a much higher number of edges
-
           if (!this.treemode)
             this.data.edges.push(extraEdge);
         }
@@ -270,7 +269,7 @@ ArtistGraph.prototype = {
     // controllers.GraphController object to hide the graph canvas
     // while the graph is being computed.
     // Since that at this point the graph is ready to be shown,
-    // the throbber can be hidden.
+    // the throbber can now be hidden, and show the graph.
     if (this.throbber)
       this.throbber.hide();
 
@@ -289,12 +288,12 @@ ArtistGraph.prototype = {
   updateGraph: function(config) {
     this.branching = config.branching || this.branching;
     this.depth = config.depth || this.depth;
-    this.currentNodeId = 1;
 
     if (typeof config.treemode != 'undefined')
       this.treemode = config.treemode;
 
     this.reset();
+    this.buildGraph();
   },
 
   // Refresh vis.Graph's data object

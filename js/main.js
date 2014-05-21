@@ -72,7 +72,7 @@ spotify.require([
       settings: {
         loadtemplate: true,
         controller: controllers.Settings,
-        supports: ['graph'],
+        hasDependencies: true,
         selectors: {
           button: '#settings_button',
           form: '#settings_form'
@@ -81,8 +81,7 @@ spotify.require([
       graph: {
         loadtemplate: false,
         controller: controllers.GraphController,
-        hasDependencies: true,
-        supports: ['artistmenu', 'tagsmenu'],
+        supports: ['artistmenu', 'tagsmenu', 'settings'],
         // options for the vis.Graph's object
         options: {
           keyboard: true,
