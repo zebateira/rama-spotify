@@ -79,16 +79,7 @@ var Components = {
       //   have finished the afterLoad function, to initialize.
       //   Related to the supports property.
       if (component.controller && !component.hasDependencies) {
-        var controller = component.controller;
-
-        // supports:
-        //   Specifies the objects that this component supports.
-        //   This means that only after this component's controller 
-        //   finishes the afterLoad function, can the supported
-        //   controllers be initialized. The supported controllers
-        //   will get this controller in the afterLoad parameter.
-        //   Related to the hasDependencies property.
-        controller.loadView(component.supports);
+        component.controller.loadView();
       }
     }
   },
@@ -97,10 +88,10 @@ var Components = {
   // UI components' controllers.
   updateViews: function() {
     for (var componentName in Components.components) {
-      var comp = Components.components[componentName];
+      var controller = Components.components[componentName].controller;
 
-      if (comp.controller) {
-        comp.controller.updateView();
+      if (controller && controller.updateView) {
+        controller.updateView();
       }
     }
   }
