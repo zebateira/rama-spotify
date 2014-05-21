@@ -59,7 +59,7 @@ require([
     loadController: function() {
       // handler that will be called after the DOM element
       // of the component has been loaded.
-      // note: child classes should implement this method
+      // note: child classes should implement this method as needed.
     }
   });
 

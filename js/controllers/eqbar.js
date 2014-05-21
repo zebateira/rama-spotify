@@ -10,12 +10,13 @@ require([
     initialize: function(name, config) {
       this.parent(name, config);
 
-      if (!config)
-        return;
+      this.numRows = config.numRows || 128;
+      this.barHeightFactor = config.bar_height_factor || 100.0;
+      this.barwidth = config.barwidth || 3.0;
+      this.barmargin = config.barmargin || 0.5;
 
-      this.numRows = config.numRows;
-      this.barHeightFactor = 100.0;
-      this.barwidth = 3.0;
+      this.elementWidth =
+        this.numRows * (this.barwidth + this.barmargin);
     }
   });
 
@@ -27,6 +28,8 @@ require([
 
       $(this.selector).append(this.canvas);
 
+      this.canvas.width = this.elementWidth;
+
       this.context.fillStyle = "#dfe0e6";
 
       audio.RealtimeAnalyzer.forPlayer(models.player)
@@ -36,13 +39,12 @@ require([
       var left = event.audio.wave.left;
       var right = event.audio.wave.right;
 
-      this.context.clearRect(0, 0, 600, 600);
+      this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-      for (var i = 0, x = 0; i < this.numRows; i++, x += this.barwidth + 0.5) {
+      for (var i = 0, x = 0; i < this.numRows; i++, x += this.barwidth + this.barmargin) {
         var height =
           (Math.abs(left[i]) + Math.abs(right[i])) * this.barHeightFactor;
-
-        this.context.fillRect(x, -1, this.barwidth, height);
+        this.context.fillRect(x, 0, this.barwidth, height);
       }
     },
     updateView: function() {},
