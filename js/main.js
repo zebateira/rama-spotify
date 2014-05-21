@@ -83,7 +83,6 @@ spotify.require([
         controller: controllers.GraphController,
         hasDependencies: true,
         supports: ['artistmenu', 'tagsmenu'],
-        events: ['onPlayerChange'],
         // options for the vis.Graph's object
         options: {
           keyboard: true,
@@ -118,7 +117,6 @@ spotify.require([
       tracklist: {
         loadtemplate: true,
         controller: controllers.TrackList,
-        events: ['onPlayerChange'],
         // tracklist's specific DOM selectors
         selectors: {
           cover: '#tracklist_cover',

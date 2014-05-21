@@ -19,7 +19,7 @@ var ArtistGraph = function(element, artist, config) {
   // ArtistGraph Events
   this.events = {};
   // vis.Graph Events
-  this.graphEvents = {};
+  this.graphevents = {};
 
   // load branching value from config if present
   // otherwise, load ArtistGraph.DEFAULT_BRANCHING
@@ -314,14 +314,14 @@ ArtistGraph.prototype = {
 
   // saves a vis.Graph event, given the proper eventHandler
   onGraph: function(event, eventHandler) {
-    this.graphEvents[event] = eventHandler;
+    this.graphevents[event] = eventHandler;
   },
 
   // binds the previously saved vis.Graph's events to the
   // graph object
   bindAllGraphEvents: function() {
-    for (var event in this.graphEvents) {
-      this.graph.on(event, this.graphEvents[event]);
+    for (var event in this.graphevents) {
+      this.graph.on(event, this.graphevents[event]);
     }
   },
 };

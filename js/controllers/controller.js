@@ -40,8 +40,7 @@ require([
       this.jelement = $(this.selector);
       this.element = this.jelement[0];
 
-      if (this.loadController)
-        this.loadController(dependency);
+      this.loadController(dependency);
 
       var supports = this.component.supports;
 
@@ -56,6 +55,11 @@ require([
           support.controller.loadView(this);
         }
       }
+    },
+    loadController: function() {
+      // handler that will be called after the DOM element
+      // of the component has been loaded.
+      // note: child classes should implement this method
     }
   });
 

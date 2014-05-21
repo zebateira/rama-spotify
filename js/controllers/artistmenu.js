@@ -49,7 +49,6 @@ require([
           .onclick = this[controls[control]].bind(this);
       }
 
-
     },
     onClickNode: function(data) {
       var node = _.findWhere(

@@ -22,12 +22,18 @@ require([
       this.parent(name, config);
 
       this.options = config.options;
-      this.graphevents = [];
+
+      // Graph's component specific events
       this.events = [];
+      // vis.Graph's events
+      this.graphevents = [];
     }
   });
 
   GraphController.implement({
+    // parameter settings is a dependency.
+    // this means that at this point (when loadController runs)
+    // the settings' DOM element will be done loading
     loadController: function(settings) {
 
       models.player.load('track')
@@ -97,7 +103,7 @@ require([
       this.artistGraph.throbber._addBackground();
     },
     bindAllEvents: function() {
-      this.artistGraph.on('doubleClick',
+      this.artistGraph.onGraph('doubleClick',
         this.onNodeDoubleClick.bind(this));
 
       var onPlayerChange = this.onPlayerChange.bind(this);
