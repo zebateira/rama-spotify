@@ -12,24 +12,32 @@ require([
     }
   });
 
-  TagsMenu.MAX_TAGS = 5;
+  TagsMenu.MAX_TAGS = 10;
 
   TagsMenu.implement({
-    afterLoad: function(graphcontroller) {
+    loadController: function(graphcontroller) {
       this.graphcontroller = graphcontroller;
 
       this.bindEvents();
     },
+    resetView: function() {
+      this.commonTags = [];
+      this.viewTags = [];
+      this.element.innerHTML = 'Loading tags...';
+    },
     updateView: function() {
       var nodes = this.graphcontroller.artistGraph.data.nodes;
 
-      this.commonTags = [];
+      this.resetView();
+
+      getTagsFromArtist.bind(this)(0);
 
       function addTags(node, index) {
 
         _.each(node.tags, function(newTag) {
           var isPresent = false;
           var lastEqual = {};
+
           _.each(this.commonTags, function(tag) {
             var areTheSame = newTag.name === tag.name;
 
@@ -44,8 +52,7 @@ require([
             lastEqual.nodes.push(node);
           } else {
             newTag.count = 1;
-            newTag.nodes = [];
-            newTag.nodes.push(node);
+            newTag.nodes = [node];
 
             this.commonTags.push(newTag);
           }
@@ -58,24 +65,32 @@ require([
       function getTagsFromArtist(index) {
         if (index === nodes.length) {
 
-          this.commonTags = _.sortBy(this.commonTags, 'count').reverse();
+          this.commonTags = _.sortBy(this.commonTags, 'count')
+            .reverse();
 
           var tagsContainer = this.jelement.html('');
           var graphcontroller = this.graphcontroller;
+          var commontagClass = this.selectors.commontag;
 
-          _.each(this.commonTags.slice(0, TagsMenu.MAX_TAGS), function(tag) {
+          this.viewTags = _.sortBy(
+            this.commonTags.slice(0, TagsMenu.MAX_TAGS),
+            'name');
+
+          _.each(this.viewTags, function(tag) {
             var tagElement = document.createElement('span');
 
-            tagElement.className = 'common-tag';
+            tagElement.className = commontagClass.replace('.', '');
             tagElement.id = tag.name;
             tagElement.innerHTML = tag.name;
             tagElement.nodes = tag.nodes;
 
             tagElement.onclick = function onTagClick(event) {
-              $('.common-tag').removeClass('selected');
+              if (this.className.contains('selected'))
+                return;
 
-              this.className += ' selected'; // y u no work o0
-              console.log(this.className);
+              $(commontagClass).removeClass('selected');
+
+              this.className += ' selected';
 
               _.each(this.nodes, function(node) {
                 if (node.id !== 1)
@@ -116,24 +131,28 @@ require([
 
           if (!node.tags) {
             var url = "http://developer.echonest.com/api/v4/artist/" +
-              "terms?api_key=29N71ZBQUW4XN0QXF&format=json&sort=weight&name=" +
-              encodeURIComponent(node.label);
+              "terms?api_key=29N71ZBQUW4XN0QXF&" +
+              "format=json&sort=weight&" +
+              "id=" + node.artist.uri.replace('spotify', 'spotify-WW');
+
             $.ajax({
               url: url,
               context: this
             }).done(
               function(data) {
                 node.tags = data.response.terms;
+
                 addTags.bind(this)(node, index);
               }
-            );
+            ).fail(function() {
+              getTagsFromArtist.bind(this)(index + 1);
+            });
           } else {
             addTags.bind(this)(node, index);
           }
         }
       }
 
-      getTagsFromArtist.bind(this)(0);
     },
     bindEvents: function() {
       this.graphcontroller
