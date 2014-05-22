@@ -14,6 +14,7 @@ require([
       this.name = name;
       this.config = config;
       this.selector = config.selector;
+      this.selectors = config.selectors;
     }
   });
 

@@ -163,9 +163,7 @@ require([
               }
             }).done(this, function() {
 
-              this.graphcontroller.updateData();
-              this.graphcontroller.artistGraph.throbber.hide();
-
+              this.graphcontroller.artistGraph.drawGraph(true);
             });
           });
       });

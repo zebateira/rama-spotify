@@ -150,7 +150,10 @@ spotify.require([
       tagsmenu: {
         loadtemplate: false,
         controller: controllers.TagsMenu,
-        hasDependencies: true
+        hasDependencies: true,
+        selectors: {
+          commontag: '.common-tag'
+        }
       }
     }
   });
