@@ -3,6 +3,10 @@ require([
   'js/models/element#element'
 ], function(Controller, Element) {
 
+  /**
+    Controller for the Settings UI Component
+  */
+
   var Settings = new Class({
     Extends: Controller,
 
@@ -11,6 +15,9 @@ require([
 
       this.selectors = config.selectors;
 
+      // inputs of the form
+      // the value parameter refers to the DOM attribute of
+      // the element to listen to changes (to update the graph)
       this.inputs = {
         branching: {
           value: 'value'
@@ -23,6 +30,7 @@ require([
         }
       };
 
+      // generate selectors for each input
       for (var input in this.inputs) {
         this.inputs[input].selector =
           this.selectors.form + ' input[name=' + input + ']';
@@ -31,10 +39,16 @@ require([
   });
 
   Settings.implement({
+
+    // this.loadController
+    // Creates for each DOM Element a Element object and
+    // sets their events
     loadController: function(graphcontroller) {
+      // initiate the elements
       this.button = new Element(this.selectors.button);
       this.form = new Element(this.selectors.form);
 
+      // bind events
       this.button.addDOMEvent({
         eventName: 'onclick',
         context: this,
@@ -44,6 +58,8 @@ require([
         }
       });
 
+      // event for input change: for every input onchange,
+      // update graph with new setting
       _.each(this.inputs, function(input) {
         input.element = document.querySelector(input.selector);
 

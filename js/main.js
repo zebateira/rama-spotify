@@ -69,6 +69,8 @@ spotify.require([
         loadtemplate: true,
         controller: Controller
       },
+      // TODO max, min and default values
+      // for depth and branching
       settings: {
         loadtemplate: true,
         controller: controllers.Settings,
@@ -109,15 +111,7 @@ spotify.require([
       },
       eqbar: {
         loadtemplate: false,
-        controller: controllers.EQBar,
-        // number of rows for the equalizer
-        numRows: 126,
-        // width of the bars in px
-        barwidth: 8.0,
-        // margin between the bars in px
-        barmargin: 2.0,
-        // height factor (scale factor) for the bars.
-        bar_height_factor: 100.0
+        controller: controllers.EQBar
       },
       tracklist: {
         loadtemplate: true,

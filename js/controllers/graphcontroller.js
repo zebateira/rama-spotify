@@ -66,20 +66,22 @@ require([
       Otherwise, the this.nowplayingArtist is used.
     */
     setArtistGraph: function(artist) {
-      var options = {
+      var config = {
         options: this.options
       };
 
+      // if the artistGraph object as already been defined
+      // then use the previous settings
       if (this.artistGraph) {
-        options.branching = this.artistGraph.branching;
-        options.depth = this.artistGraph.depth;
-        options.treemode = this.artistGraph.treemode;
+        config.branching = this.artistGraph.branching;
+        config.depth = this.artistGraph.depth;
+        config.treemode = this.artistGraph.treemode;
       }
 
       this.artistGraph = new ArtistGraph(
         this.element,
         artist || this.nowplayingArtist,
-        options
+        config
       );
 
       this.showThrobber();

@@ -4,7 +4,6 @@
   Bridge between Spotify's models.Artist model and 
   the vis.Graph object.
 */
-
 var ArtistGraph = function(element, artist, config) {
 
   // the DOM element where the canvas should be put on
