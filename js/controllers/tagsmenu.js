@@ -8,20 +8,20 @@ require([
     initialize: function(name, config) {
       this.parent(name, config);
 
-      this.commmonTags = [];
+      this.commonTags = [];
     }
   });
 
   TagsMenu.MAX_TAGS = 10;
 
   TagsMenu.implement({
-    afterLoad: function(graphcontroller) {
+    loadController: function(graphcontroller) {
       this.graphcontroller = graphcontroller;
 
       this.bindEvents();
     },
     resetView: function() {
-      this.commmonTags = [];
+      this.commonTags = [];
       this.viewTags = [];
       this.element.innerHTML = 'Loading tags...';
     },
@@ -38,7 +38,7 @@ require([
           var isPresent = false;
           var lastEqual = {};
 
-          _.each(this.commmonTags, function(tag) {
+          _.each(this.commonTags, function(tag) {
             var areTheSame = newTag.name === tag.name;
 
             if (areTheSame)
@@ -54,7 +54,7 @@ require([
             newTag.count = 1;
             newTag.nodes = [node];
 
-            this.commmonTags.push(newTag);
+            this.commonTags.push(newTag);
           }
 
         }, this);
@@ -65,17 +65,21 @@ require([
       function getTagsFromArtist(index) {
         if (index === nodes.length) {
 
-          this.commmonTags = _.sortBy(this.commmonTags, 'count').reverse();
+          this.commonTags = _.sortBy(this.commonTags, 'count')
+            .reverse();
 
           var tagsContainer = this.jelement.html('');
           var graphcontroller = this.graphcontroller;
+          var commontagClass = this.selectors.commontag;
 
-          this.viewTags = _.sortBy(this.commmonTags.slice(0, TagsMenu.MAX_TAGS), 'name');
+          this.viewTags = _.sortBy(
+            this.commonTags.slice(0, TagsMenu.MAX_TAGS),
+            'name');
 
           _.each(this.viewTags, function(tag) {
             var tagElement = document.createElement('span');
 
-            tagElement.className = 'common-tag';
+            tagElement.className = commontagClass.replace('.', '');
             tagElement.id = tag.name;
             tagElement.innerHTML = tag.name;
             tagElement.nodes = tag.nodes;
@@ -84,7 +88,7 @@ require([
               if (this.className.contains('selected'))
                 return;
 
-              $('.common-tag').removeClass('selected');
+              $(commontagClass).removeClass('selected');
 
               this.className += ' selected';
 
@@ -127,8 +131,9 @@ require([
 
           if (!node.tags) {
             var url = "http://developer.echonest.com/api/v4/artist/" +
-              "terms?api_key=29N71ZBQUW4XN0QXF&format=json&sort=weight&id=" +
-              node.artist.uri.replace('spotify', 'spotify-WW');
+              "terms?api_key=29N71ZBQUW4XN0QXF&" +
+              "format=json&sort=weight&" +
+              "id=" + node.artist.uri.replace('spotify', 'spotify-WW');
 
             $.ajax({
               url: url,

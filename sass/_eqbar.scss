@@ -1,54 +1,16 @@
-
-meter {
-  box-shadow: 0 5px 5px -5px #999 inset;
-  background-image: linear-gradient(
-    90deg, 
-    #8bcf69 5%, 
-    #e6d450 5%,
-    #e6d450 15%,
-    #f28f68 15%,
-    #f28f68 55%,
-    #cf82bf 55%,
-    #cf82bf 95%,
-    #719fd1 95%,
-    #719fd1 100%
-    );
-  background-size: 100% 100%;
-  
-  -webkit-transform: rotate(-90deg);
-}
-
-#eqbar_wrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  width: 100%;
-  height: $header-height;
-}
-
-$bar-width: 3px;
-$num-bars: 128;
-$eq-width: ($bar-width + 0.5) * $num-bars;
-
 #eqbar {
-  margin: 0 auto;
-  width: $eq-width;
+  position: absolute;
   height: $header-height;
-  opacity: 0.05;
+  width: 100%;
+  opacity: 0.95;
   overflow: hidden;
+  top: 0;
+  z-index: 0;
+
+  text-align: center;
 
   canvas {
     height: $header-height;
-    width: 100%;
-  }
-
-  .bar {
-    float: left;
-    width: $bar-width;
-    min-height: 1px;
-    max-height: $header-height;
-    background-color: $new-white;
-    margin-right: 1px;
+    display: inline-block;
   }
 }
