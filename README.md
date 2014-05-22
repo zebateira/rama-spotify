@@ -18,7 +18,7 @@ Installation
 Execute the installer script.
 
 ```sh
-$ curl -L https://raw.githubusercontent.com/carsy/rama-spotify/master/install.sh | sh
+$ curl -L https://raw.githubusercontent.com/carsy/rama-spotify/master/install.sh | bash
 ```
 
 You should now be in the app and seeing a graph thingy.
