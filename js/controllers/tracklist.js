@@ -29,6 +29,8 @@ require([
 
   });
 
+  TrackList.MAX_TRACKS = 6;
+
   TrackList.implement({
     loadController: function() {
 
@@ -88,13 +90,13 @@ require([
         .done(this, function(playlist) {
 
           //  create a snapshot of the current playlist
-          playlist.tracks.snapshot(0, 6)
+          playlist.tracks.snapshot(0, TrackList.MAX_TRACKS)
             .done(this, function(snapshot) {
 
               // create a DOM element span for each track
               // and add it to the DOM.
               var tracks = snapshot.toArray();
-              for (var i = 0; i < 6; ++i) {
+              for (var i = 0; i < TrackList.MAX_TRACKS; ++i) {
                 var track = tracks[i];
                 var element = document.createElement('span');
 
@@ -117,7 +119,6 @@ require([
     // Events
     onPlayerChange: function(player) {
       this.loadController();
-
     },
 
     // 

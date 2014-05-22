@@ -1,3 +1,7 @@
+/** 
+  DOM Element Wrapper
+*/
+
 var Element = function(selector) {
   this.selector = selector;
   this.jelement = $(this.selector);
@@ -24,6 +28,9 @@ Element.prototype = {
   addDOMEvent: function(config) {
     this.element[config.eventName] =
       config.handler.bind(config.context);
+  },
+  html: function(html) {
+    this.jelement.html(html);
   },
   reset: function() {
     this.jelement.html('');

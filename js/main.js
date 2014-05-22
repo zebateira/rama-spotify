@@ -133,11 +133,11 @@ spotify.require([
           years: '#artist_years',
           albumsTitle: '#artist_albums_title',
           albums: '#artist_albums',
+          tagsTitle: '#artist_tags_title',
+          tags: '#artist_tags',
           controls: '#artist_controls',
           control_expand: '#control_expand',
-          control_new: '#control_new',
-          tagsTitle: '#artist_tags_title',
-          tags: '#artist_tags'
+          control_new: '#control_new'
         },
         hasDependencies: true
       },
