@@ -87,13 +87,17 @@ require([
 
       this.bindAllEvents();
     },
+    // Updates the graph given the new config values
     updateGraph: function(config) {
       this.showThrobber();
       this.artistGraph.updateGraph(config);
     },
+    // Updates graph's data (nodes and edges)
     updateData: function() {
       this.artistGraph.updateData();
     },
+
+    // Displays a loading throbber and hides the graph canvas
     showThrobber: function() {
       if (this.artistGraph.throbber)
         this.artistGraph.throbber.hide();
@@ -103,8 +107,11 @@ require([
       this.artistGraph.throbber.setPosition('center', 'center');
       this.artistGraph.throbber._addBackground();
     },
+
+    // Binds all the events related to the graph components.
     bindAllEvents: function() {
-      this.artistGraph.onGraph('doubleClick',
+
+      this.addGraphEvent('doubleClick',
         this.onNodeDoubleClick.bind(this));
 
       var onPlayerChange = this.onPlayerChange.bind(this);
@@ -122,26 +129,38 @@ require([
         artistgraph.onGraph(event.eventName, event.eventHandler);
       });
     },
+
+    // When the player changes the playing track,
+    // update this.nowplayingArtist with the track's artist.
     onPlayerChange: function(player) {
 
+      // ignore change if it's playing an ad.
       if (player.track.advertisement)
         return;
 
       this.nowplayingArtist = player.track.artists[0];
     },
+
+    // Event for double clicking a graph node
     onNodeDoubleClick: function(data) {
+
+      // find the clicked node.
       var node = _.findWhere(this.artistGraph.data.nodes, {
         id: parseInt(data.nodes[0])
       });
 
-      if (!node || node.id === 1 ||
-        this.nowplayingArtist.uri === node.artist.uri)
+      // ignore event if it's the same artist
+      if (!node || this.nowplayingArtist.uri === node.artist.uri)
         return;
 
+      // play top list tracks from artist.
       node.artist.load('compilations').done(function(artist) {
         models.player.playContext(artist.compilations);
       });
     },
+
+    // Adds eventName to the ArtistGraph object given eventHandler,
+    // as a graph event.
     addGraphEvent: function(eventName, eventHandler) {
       this.artistGraph.onGraph(eventName, eventHandler);
 
@@ -150,6 +169,10 @@ require([
         eventHandler: eventHandler
       });
     },
+
+    // Adds eventName to the ArtistGraph object given eventHandler,
+    // as a custom event. The event should be run by ArtistGraph
+    // accordingly.
     addCustomGraphEvent: function(eventName, eventHandler) {
       if (this.artistGraph)
         this.artistGraph.on(eventName, eventHandler);
