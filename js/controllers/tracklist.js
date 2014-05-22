@@ -100,13 +100,13 @@ require([
                 var track = tracks[i];
                 var element = document.createElement('span');
 
-                element.innerHTML = track.name;
 
                 // the spotify's uri of the track
                 // is added to the element
                 // to be later on used to play the track
                 // on the onTrackClick event
                 element.uri = track.uri;
+                element.innerHTML = track.name;
                 element.className = 'list-track';
                 element.onclick = this.onTrackClick;
 

@@ -109,10 +109,10 @@ require([
     },
     updateAlbums: function(albumSnapshot) {
       var jalbums = this.elements.albums.jelement;
-      // number of added albums
-      // used to limit the number of albums added, since that
-      // sometimes the API returns null albums
 
+      // albumsAdded - number of added albums
+      // used to limit the number of albums added.
+      // sometimes the API returns null albums
       for (var i = 0, albumsAdded = 0; i <= albumSnapshot.length &&
         albumsAdded < ArtistMenu.MAX_ALBUMS; ++i) {
         var albumgroup = albumSnapshot.get(i);
@@ -132,7 +132,7 @@ require([
 
           var albumElement = document.createElement('span');
           albumElement.className = 'artist-album artist-album-cover';
-          $(albumElement).append(albumImage.node);
+          albumElement.appendChild(albumImage.node);
 
           jalbums.append(albumElement);
           albumsAdded++;
