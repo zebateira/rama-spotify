@@ -14,7 +14,6 @@ require([
 
     Extends the controllers.Controller generic class
   */
-
   var GraphController = new Class({
     Extends: Controller,
 

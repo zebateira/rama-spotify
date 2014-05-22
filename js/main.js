@@ -119,8 +119,8 @@ spotify.require([
         // tracklist's specific DOM selectors
         selectors: {
           cover: '#tracklist_cover',
-          title: '#list_title',
-          list: '#list_items'
+          title: '#tracklist_title',
+          list: '#tracklist_items'
         }
       },
       artistmenu: {
