@@ -132,7 +132,7 @@ require([
           if (!node.tags) {
             var url = "http://developer.echonest.com/api/v4/artist/" +
               "terms?api_key=29N71ZBQUW4XN0QXF&" +
-              "format=json&sort=weight&" +
+              "format=json&sort=frequency&" +
               "id=" + node.artist.uri.replace('spotify', 'spotify-WW');
 
             $.ajax({

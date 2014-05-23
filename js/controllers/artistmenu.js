@@ -40,6 +40,7 @@ require([
         this.bindAllEvents();
       });
     },
+
     // Update the UI component given the newArtist parameter
     updateView: function(newArtist) {
       // if no parameter has been given or if it's the same artist
@@ -112,7 +113,7 @@ require([
 
       // albumsAdded - number of added albums
       // used to limit the number of albums added.
-      // sometimes the API returns null albums
+      // note: sometimes the API returns null albums
       for (var i = 0, albumsAdded = 0; i <= albumSnapshot.length &&
         albumsAdded < ArtistMenu.MAX_ALBUMS; ++i) {
         var albumgroup = albumSnapshot.get(i);
@@ -124,16 +125,19 @@ require([
             width: 50,
             height: 50,
             style: 'plain',
+            link: 'auto',
             player: true,
             placeholder: 'album',
-            link: 'auto',
             title: album.name
           });
 
+          // for each album create a DOM element
           var albumElement = document.createElement('span');
-          albumElement.className = 'artist-album artist-album-cover';
+          albumElement.className =
+            'artist-album artist-album-cover';
           albumElement.appendChild(albumImage.node);
 
+          // and append it to the albums wrapper
           jalbums.append(albumElement);
           albumsAdded++;
         }
@@ -178,56 +182,63 @@ require([
         url: url,
         context: this
       }).done(function(data) {
-        this.tags = data.response.terms;
-
+        // the echonest's tags are called terms
+        this.tags = _.sortBy(data.response.terms
+          .splice(0, ArtistMenu.MAX_TAGS), 'name');
+        // clear the displayed tags
         this.elements.tags.reset();
 
-        if (this.tags.length > 0) {
-          this.elements.tagsTitle.html('Tags: <br>');
+        if (this.tags.length <= 0)
+          return;
 
-          for (var i = 0, tagsAdded = 0; i < this.tags.length &&
-            tagsAdded < ArtistMenu.MAX_TAGS; ++i) {
+        this.elements.tagsTitle.html('Tags: <br>');
 
-            if (this.tags[i]) {
-              var tagElement = document.createElement('span');
-              tagElement.className = 'artist-tag';
-              tagElement.innerHTML = this.tags[i].name;
+        for (var i = 0, tagsAdded = 0; i < this.tags.length; ++i) {
+          // for each tag, create a DOM element
+          var tagElement = document.createElement('span');
+          tagElement.className = 'artist-tag';
+          tagElement.innerHTML = this.tags[i].name;
 
-              this.elements.tags.jelement.append(tagElement);
-              tagsAdded++;
-            }
-          }
-
-          this.artist.tags = this.tags;
+          // and append it to the tags' wrapper
+          this.elements.tags.jelement.append(tagElement);
         }
+
+        this.artist.tags = this.tags;
 
       }).fail(function() {
         // Temporary fix for requests limit from echonest
         // just... don't show any tags.
-        $(this.selectors.tagsTitle).html('');
+        // Note: since the API key being used has request limits,
+        // sometimes the limit is reached very easily. If so
+        // don't show anything.
+        this.elements.tagsTitle.reset();
       });
-
     },
 
     // Events
-
     bindAllEvents: function() {
+      // the artistmenu is always in sync with 
+      // the current playing track
       models.player.addEventListener('change',
         this.onPlayerChange.bind(this));
 
+      // the artistmenu always updates when a new node
+      // as been selected
       this.graphcontroller.addGraphEvent('click',
         this.onClickNode.bind(this));
 
-      var controls = {
-        expand: 'onBtnExpandClick',
-        new: 'onBtnNewClick'
-      };
+      // Controls' Events
+      this.elements.controlExpand.addDOMEvent({
+        eventName: 'onclick',
+        handler: this.onBtnExpandClick,
+        context: this
+      });
 
-      for (var control in controls) {
-        document.getElementById('control_' + control)
-          .onclick = this[controls[control]].bind(this);
-      }
-
+      this.elements.controlNew.addDOMEvent({
+        eventName: 'onclick',
+        handler: this.onBtnNewClick,
+        context: this
+      });
     },
     onClickNode: function(data) {
       var node = _.findWhere(
@@ -239,16 +250,16 @@ require([
         return;
 
       if (node.id === 1) {
-        this.jelement.find(this.selectors.controls).hide();
+        this.elements.controls.jelement.hide();
       } else {
-        $(this.selectors.control_new).show();
-        this.jelement.find(this.selectors.controls).show();
+        this.elements.controlNew.jelement.show();
+        this.elements.controls.jelement.show();
       }
 
       if (node.isLeaf) {
-        this.jelement.find(this.selectors.control_expand).show();
+        this.elements.controlExpand.jelement.show();
       } else {
-        this.jelement.find(this.selectors.control_expand).hide();
+        this.elements.controlExpand.jelement.hide();
       }
 
       this.updateView(node.artist);
@@ -267,9 +278,9 @@ require([
 
         this.updateView(artist);
 
-        this.jelement.find(this.selectors.controls).show();
-        this.jelement.find(this.selectors.control_new).show();
-        this.jelement.find(this.selectors.control_expand).hide();
+        this.elements.controls.jelement.show();
+        this.elements.controlNew.jelement.show();
+        this.elements.controlExpand.jelement.hide();
       });
     },
     onBtnExpandClick: function(event) {
@@ -345,12 +356,11 @@ require([
           });
       });
 
-      this.jelement.find(this.selectors.control_expand).hide();
+      this.elements.controlExpand.jelement.hide();
     },
     onBtnNewClick: function(event) {
       this.graphcontroller.setArtistGraph(this.artist);
-      this.jelement.find(this.selectors.control_new).hide();
-      this.jelement.find(this.selectors.control_delete).hide();
+      this.elements.controlNew.jelement.hide();
     }
 
   });
