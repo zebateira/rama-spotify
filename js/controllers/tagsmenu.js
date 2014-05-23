@@ -12,7 +12,7 @@ require([
     }
   });
 
-  TagsMenu.MAX_TAGS = 10;
+  TagsMenu.MAX_TAGS = 12;
 
   TagsMenu.implement({
     loadController: function(graphcontroller) {
@@ -26,7 +26,7 @@ require([
       this.element.innerHTML = 'Loading tags...';
     },
     updateView: function() {
-      var nodes = this.graphcontroller.artistGraph.data.nodes;
+      var nodes = this.graphcontroller.artistgraph.data.nodes;
 
       this.resetView();
 

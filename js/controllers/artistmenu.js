@@ -225,7 +225,7 @@ require([
     // based on the artist
     updateControls: function(artist) {
       var node = _.findWhere(
-        this.graphcontroller.artistGraph.data.nodes, {
+        this.graphcontroller.getData().nodes, {
           label: artist.name
         });
 
@@ -283,7 +283,7 @@ require([
       // onclick a graph node event
       onClickNode: function(data) {
         var node = _.findWhere(
-          this.graphcontroller.artistGraph.data.nodes, {
+          this.graphcontroller.getData().nodes, {
             id: parseInt(data.nodes[0])
           });
 
@@ -309,28 +309,17 @@ require([
           this.updateView(artist);
         });
       },
+      // Expand control button click event
       onBtnExpandClick: function(event) {
-        var node = _.findWhere(
-          this.graphcontroller.artistGraph.data.nodes, {
-            id: this.artist.nodeid
-          }
-        );
-
-        node.color = {
-          border: '#7fb701',
-          background: '#313336'
-        };
-        node.isLeaf = false;
-
         this.graphcontroller.expandNode(this.artist);
         this.elements.controlExpand.jelement.hide();
       },
+      // New control button click event
       onBtnNewClick: function(event) {
         this.graphcontroller.newGraph(this.artist);
         this.elements.controlNew.jelement.hide();
       }
     }
-
   });
 
   exports.artistmenu = ArtistMenu;

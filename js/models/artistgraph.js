@@ -118,7 +118,7 @@ ArtistGraph.prototype = {
   },
 
   // Resets state variables and starts constructing the graph
-  buildGraph: function() {
+  buildGraph: function(done) {
     // Current number of iterations (recursive calls)
     // done to construct the graph
     var currentIteration = 1;
@@ -149,7 +149,7 @@ ArtistGraph.prototype = {
     //   i = 0
 
     // start constructing the graph recursively
-    this.constructGraph(
+    this.expandNode(
       this.depth - 1,
       this.artist,
       iterationUpdate.bind(this)
@@ -164,23 +164,24 @@ ArtistGraph.prototype = {
       // draw the final graph.
       if (currentIteration === this.maxIterations) {
         this.drawGraph(true);
+        if (done)
+          done();
       }
     }
   },
 
-  // Constructs the graph by recursively decreasing the depth
-  // parameter and using the correct rootArtist on each
-  // recursive call.
-  // The update parameter is a callback to be called
-  // after all the callbacks of the nodes of a node expansion
+  // Expands the node of the parent artist by this.branching.
+  // It recursively decreases the depth parameter.
+  // The update parameter is the callback to be called
+  // after all the callbacks of the child nodes of the root node
   // have finished.
-  constructGraph: function(depth, rootArtist, update) {
+  expandNode: function(depth, parentArtist, update) {
 
     // load the related artists property
-    rootArtist.load('related').done(this, function(artist) {
+    parentArtist.load('related').done(this, function(parentArtist) {
       // when done loading, load the current snapshot of the array
       // of artists, with this.branching length
-      artist.related
+      parentArtist.related
         .snapshot(0, this.branching).done(this, function(snapshot) {
           // when done loading, load name and uri properties
           // of each artist in the snapshot
@@ -193,40 +194,45 @@ ArtistGraph.prototype = {
     });
 
     // Updates the graph given the artist parameter.
-    function forEachRelated(artist) {
+    // This function will be called on each child node
+    // (artist parameter) of the root node.
+    // note: this means that this function will be called
+    //       exactly this.branching times.
+    function forEachRelated(childArtist) {
       // Try to find repeated nodes in the graph
       // given the name of the artist is the same
       var duplicated = _.findWhere(this.data.nodes, {
-        label: artist.name
+        label: childArtist.name
       });
 
       // Is the artist node already in the graph?
       // If there is a duplicate and if its not the same one,
       // then create and edge between the two artists:
-      // artist and rootArtist
+      // the child artist and parent artist
       // 
       // The latter test was added after metadata errors were found:
-      // sometimes, an artist would exist itself in the related
+      // sometimes, an artist would exist itself in its related
       // artists list, which created a edge that went from it to 
       // itself.
-      if (duplicated && artist.name !== rootArtist.name) {
+      if (duplicated && childArtist.name !== parentArtist.name) {
 
         // try to find repeated edges in the graph
         var edgeExists = _.findWhere(this.data.edges, {
           to: duplicated.id,
-          from: rootArtist.nodeid
+          from: parentArtist.nodeid
         });
-        // find repeated edges (even if inverse)
+        // try to find repeated edges (even if inverse)
         var inverseEdgeExists = _.findWhere(this.data.edges, {
           from: duplicated.id,
-          to: rootArtist.nodeid
+          to: parentArtist.nodeid
         });
 
+        // If no 
         if (!edgeExists && !inverseEdgeExists) {
 
           // Create the extra edge.
           var extraEdge = {
-            from: rootArtist.nodeid,
+            from: parentArtist.nodeid,
             to: duplicated.id,
           };
           this.extraEdges.push(extraEdge);
@@ -253,8 +259,8 @@ ArtistGraph.prototype = {
         // then add it to the list of nodes
         this.data.nodes.push({
           id: ++this.currentNodeId,
-          label: artist.name,
-          artist: artist,
+          label: childArtist.name,
+          artist: childArtist,
           // if the depth value of the graph is zero
           // then this is most definitely a leaf node
           isLeaf: depth <= 0
@@ -263,20 +269,21 @@ ArtistGraph.prototype = {
         // also create the edge to connect the new node to
         // its parent
         this.data.edges.push({
-          from: rootArtist.nodeid,
+          from: parentArtist.nodeid,
           to: this.currentNodeId
         });
 
-        this.relatedArtists.push(artist);
+        this.relatedArtists.push(childArtist);
 
-        artist.nodeid = this.currentNodeId;
+        childArtist.nodeid = this.currentNodeId;
       }
 
       // if a leaf node as not been reached, then continue
-      // constructing the graph, now with the current artist
-      // as the rootArtist
+      // constructing the graph, now with this child node
+      // as the root node
       if (depth > 0)
-        this.constructGraph(depth - 1, artist, update);
+        this.expandNode(depth - 1, childArtist, update);
+      // note: the condition to end the recursion is: if depth <= 0
     }
 
   },
@@ -287,6 +294,7 @@ ArtistGraph.prototype = {
     this.bindAllGraphEvents();
 
     // sets the previously computed graph data
+    // note: no animation starts at this point
     this.graph.setData(this.data, {
       disableStart: true
     });
@@ -298,14 +306,6 @@ ArtistGraph.prototype = {
     // the graph
     this.events.update();
 
-    // The Spotify's views.Throbber object was initialized in the
-    // controllers.GraphController object to hide the graph canvas
-    // while the graph is being computed.
-    // Since that at this point the graph is ready to be shown,
-    // the throbber can now be hidden, and show the graph.
-    if (this.throbber)
-      this.throbber.hide();
-
     // Debug information about the graph creation
     if (debug) {
       console.log('#### Stats for ' + this.artist.name);
@@ -315,10 +315,13 @@ ArtistGraph.prototype = {
     }
 
   },
+  redrawGraph: function() {
+    this.graph.redraw();
+  },
 
   // Updates the graph with the given config object
   // it is expected that config is defined
-  updateGraph: function(config) {
+  updateGraph: function(config, done) {
     this.branching = config.branching || this.branching;
     this.depth = config.depth || this.depth;
 
@@ -326,18 +329,38 @@ ArtistGraph.prototype = {
       this.treemode = config.treemode;
 
     this.reset();
-    this.buildGraph();
+    this.buildGraph(done);
   },
 
   // Refresh vis.Graph's data object
   updateData: function() {
     this.graph.setData(this.data);
   },
-  redraw: function() {
-    this.graph.redraw();
+  highlightNode: function(artist) {
+    var node = _.findWhere(
+      this.data.nodes, {
+        id: artist.nodeid
+      }
+    );
+
+    // highlight the node
+    node.color = {
+      border: '#7fb701',
+      background: '#313336'
+    };
+    // after expanding, the node will stop being a leaf
+    node.isLeaf = false;
   },
 
   // Events
+
+  // binds the previously saved vis.Graph's events to the
+  // graph object
+  bindAllGraphEvents: function() {
+    for (var event in this.graphevents) {
+      this.graph.on(event, this.graphevents[event]);
+    }
+  },
 
   // saves the given event, given the proper eventHandler.
   on: function(event, eventHandler) {
@@ -347,15 +370,7 @@ ArtistGraph.prototype = {
   // saves a vis.Graph event, given the proper eventHandler
   onGraph: function(event, eventHandler) {
     this.graphevents[event] = eventHandler;
-  },
-
-  // binds the previously saved vis.Graph's events to the
-  // graph object
-  bindAllGraphEvents: function() {
-    for (var event in this.graphevents) {
-      this.graph.on(event, this.graphevents[event]);
-    }
-  },
+  }
 };
 
 ArtistGraph.prototype.constructor = ArtistGraph;

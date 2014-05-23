@@ -49,17 +49,17 @@ require([
     // This is useful when the window is being resized and
     // the throbbers is not aligned at the center of the screen.
     updateView: function() {
-      if (this.artistGraph) {
-        this.artistGraph.redraw();
+      if (this.artistgraph) {
+        this.artistgraph.redrawGraph();
 
-        if (this.artistGraph.throbber)
-          this.artistGraph.throbber.setPosition('center', 'center');
+        if (this.artistgraph.throbber)
+          this.artistgraph.throbber.setPosition('center', 'center');
       }
     },
 
     /**
       Set artist from the current playing track.
-      Creates this.artistGraph object.
+      Creates this.artistgraph object.
 
       The parameter artist (if defined) is used as the root node.
       Otherwise, the this.nowplayingArtist is used.
@@ -71,34 +71,44 @@ require([
 
       // if the artistGraph object as already been defined
       // then use the previous settings
-      if (this.artistGraph) {
-        config.branching = this.artistGraph.branching;
-        config.depth = this.artistGraph.depth;
-        config.treemode = this.artistGraph.treemode;
+      if (this.artistgraph) {
+        config.branching = this.artistgraph.branching;
+        config.depth = this.artistgraph.depth;
+        config.treemode = this.artistgraph.treemode;
       }
 
-      this.artistGraph = new ArtistGraph(
+      this.artistgraph = new ArtistGraph(
         this.element,
         artist,
         config
       );
 
       this.showThrobber();
-      this.artistGraph.buildGraph();
+      this.artistgraph.buildGraph(
+        this.hideThrobber.bind(this)
+      );
 
       this.bindAllEvents();
     },
     // Updates the graph given the new config values
     updateGraph: function(config) {
       this.showThrobber();
-      this.artistGraph.updateGraph(config);
+      this.artistgraph.updateGraph(config,
+        this.hideThrobber.bind(this)
+      );
     },
     // Updates graph's data (nodes and edges)
     updateData: function() {
-      this.artistGraph.updateData();
+      this.artistgraph.updateData();
     },
+    getData: function() {
+      return this.artistgraph.data;
+    },
+    // Expands the specific given artist in the graph.
+    // the artist is required to be in the graph
     expandNode: function(artist) {
-      this.artistGraph.constructGraph(
+      this.artistgraph.highlightNode(artist);
+      this.artistgraph.expandNode(
         0,
         artist,
         this.updateData.bind(this)
@@ -106,14 +116,22 @@ require([
     },
     // Displays a loading throbber and hides the graph canvas
     showThrobber: function() {
-      if (this.artistGraph.throbber)
-        this.artistGraph.throbber.hide();
+      if (this.throbber) {
+        this.throbber.hide();
+        this.throbber.show();
+      } else
+        this.throbber =
+          Throbber.forElement(document.getElementById(this.name));
 
-      this.artistGraph.throbber =
-        Throbber.forElement(document.getElementById(this.name));
-      this.artistGraph.throbber.setPosition('center', 'center');
-      this.artistGraph.throbber._addBackground();
+      this.throbber.setPosition('center', 'center');
+      this.throbber._addBackground();
     },
+    hideThrobber: function() {
+      if (this.throbber)
+        this.throbber.hide();
+    },
+
+    // Events
 
     // Binds all the events related to the graph components.
     bindAllEvents: function() {
@@ -126,14 +144,35 @@ require([
         models.player.load('track').done(onPlayerChange);
       });
 
-      var artistgraph = this.artistGraph;
-
       _.each(this.events, function(event) {
-        artistgraph.on(event.eventName, event.eventHandler);
-      });
+        this.artistgraph.on(event.eventName, event.eventHandler);
+      }, this);
 
       _.each(this.graphevents, function(event) {
-        artistgraph.onGraph(event.eventName, event.eventHandler);
+        this.artistgraph.onGraph(event.eventName, event.eventHandler);
+      }, this);
+    },
+    // Adds eventName to the ArtistGraph object given eventHandler,
+    // as a graph event.
+    addGraphEvent: function(eventName, eventHandler) {
+      this.artistgraph.onGraph(eventName, eventHandler);
+
+      this.graphevents.push({
+        eventName: eventName,
+        eventHandler: eventHandler
+      });
+    },
+
+    // Adds eventName to the ArtistGraph object given eventHandler,
+    // as a custom event. The event should be run by ArtistGraph
+    // accordingly.
+    addCustomGraphEvent: function(eventName, eventHandler) {
+      if (this.artistgraph)
+        this.artistgraph.on(eventName, eventHandler);
+
+      this.events.push({
+        eventName: eventName,
+        eventHandler: eventHandler
       });
     },
 
@@ -152,7 +191,7 @@ require([
     onNodeDoubleClick: function(data) {
 
       // find the clicked node.
-      var node = _.findWhere(this.artistGraph.data.nodes, {
+      var node = _.findWhere(this.artistgraph.data.nodes, {
         id: parseInt(data.nodes[0])
       });
 
@@ -164,31 +203,8 @@ require([
       node.artist.load('compilations').done(function(artist) {
         models.player.playContext(artist.compilations);
       });
-    },
-
-    // Adds eventName to the ArtistGraph object given eventHandler,
-    // as a graph event.
-    addGraphEvent: function(eventName, eventHandler) {
-      this.artistGraph.onGraph(eventName, eventHandler);
-
-      this.graphevents.push({
-        eventName: eventName,
-        eventHandler: eventHandler
-      });
-    },
-
-    // Adds eventName to the ArtistGraph object given eventHandler,
-    // as a custom event. The event should be run by ArtistGraph
-    // accordingly.
-    addCustomGraphEvent: function(eventName, eventHandler) {
-      if (this.artistGraph)
-        this.artistGraph.on(eventName, eventHandler);
-
-      this.events.push({
-        eventName: eventName,
-        eventHandler: eventHandler
-      });
     }
+
   });
 
   exports.graphcontroller = GraphController;
