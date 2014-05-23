@@ -54,6 +54,25 @@ ArtistGraph.DEFAULT_DEPTH = 2;
 ArtistGraph.DEFAULT_TREEMODE = true;
 ArtistGraph.DEFAULT_OPTIONS = {};
 
+// ArtistGraph.colors = {
+//   node: {
+//     border: "white",
+//     background: "black",
+//     highlight: {
+//       border: "white",
+//       background: "black"
+//     }
+//   },
+//   edge: {
+//     border: "white",
+//     background: "black",
+//     highlight: {
+//       border: "white",
+//       background: "black"
+//     }
+//   }
+// };
+
 ArtistGraph.prototype = {
 
   // initiates state properties of the graph
@@ -85,7 +104,9 @@ ArtistGraph.prototype = {
         artist: this.artist,
         // isLeaf simply indicates if the node is a leaf
         // in the graph or not
-        isLeaf: false
+        isLeaf: false,
+        // is this the root node?
+        isRoot: true
       }],
       edges: []
     };
@@ -100,7 +121,7 @@ ArtistGraph.prototype = {
   buildGraph: function() {
     // Current number of iterations (recursive calls)
     // done to construct the graph
-    this.currentIterations = 1;
+    var currentIteration = 1;
 
     // Maximum number of iterations that will be performed
     // to construct the graph.
@@ -110,7 +131,7 @@ ArtistGraph.prototype = {
         (i < this.depth ? lambda.bind(this)(i + 1) : 0);
     }).bind(this)(0);
 
-    // this.maxIterations is equal to:
+    // maxIterations is equal to:
     // 
     //   d
     //   ∑ b^i
@@ -128,13 +149,32 @@ ArtistGraph.prototype = {
     //   i = 0
 
     // start constructing the graph recursively
-    this.constructGraph(this.depth - 1, this.artist);
+    this.constructGraph(
+      this.depth - 1,
+      this.artist,
+      iterationUpdate.bind(this)
+    );
+
+    function iterationUpdate() {
+      // Update the number of iterations done and
+      currentIteration += this.branching;
+
+      // If the number of iterations done is enough to have the
+      // full graph constructed, then stop recursion and
+      // draw the final graph.
+      if (currentIteration === this.maxIterations) {
+        this.drawGraph(true);
+      }
+    }
   },
 
   // Constructs the graph by recursively decreasing the depth
   // parameter and using the correct rootArtist on each
-  // recursive call
-  constructGraph: function(depth, rootArtist) {
+  // recursive call.
+  // The update parameter is a callback to be called
+  // after all the callbacks of the nodes of a node expansion
+  // have finished.
+  constructGraph: function(depth, rootArtist, update) {
 
     // load the related artists property
     rootArtist.load('related').done(this, function(artist) {
@@ -145,8 +185,10 @@ ArtistGraph.prototype = {
           // when done loading, load name and uri properties
           // of each artist in the snapshot
           snapshot.loadAll(['name', 'uri'])
-          // when done, call forEachRelated on each artist
-          .each(this, forEachRelated);
+          // call forEachRelated on each artist
+          .each(this, forEachRelated)
+          // when done on each artist update the number of iterations
+          .done(update);
         });
     });
 
@@ -234,15 +276,7 @@ ArtistGraph.prototype = {
       // constructing the graph, now with the current artist
       // as the rootArtist
       if (depth > 0)
-        this.constructGraph(depth - 1, artist);
-
-      // Update the number of iterations done and
-      // If the number of iterations done is enough to have the
-      // full graph constructed, then stop recursion and
-      // draw the final graph.
-      if (++this.currentIterations === this.maxIterations) {
-        this.drawGraph(true);
-      }
+        this.constructGraph(depth - 1, artist, update);
     }
 
   },

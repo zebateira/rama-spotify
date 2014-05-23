@@ -58,6 +58,8 @@ require([
         .done(this, this.updateInfo.bind(this));
 
       this.updateTags(this.artist);
+
+      this.updateControls(this.artist);
     },
     updateImage: function(artist) {
 
@@ -150,7 +152,7 @@ require([
     updateTags: function(artist) {
       // Paul Lamere
       // http://developer.echonest.com/forums/thread/353
-      // Artist terms -> 
+      // Artist terms (tags) -> 
       //      what is the difference between weight and frequency
 
       // term frequency is directly proportional to how often 
@@ -182,14 +184,19 @@ require([
         url: url,
         context: this
       }).done(function(data) {
+
+        // clear the displayed tags
+        this.elements.tags.reset();
+        this.elements.tagsTitle.reset();
+
+        // not a success response
+        if (data.response.status.code !== 0 ||
+          (data.response.terms && data.response.terms.length <= 0))
+          return;
+
         // the echonest's tags are called terms
         this.tags = _.sortBy(data.response.terms
           .splice(0, ArtistMenu.MAX_TAGS), 'name');
-        // clear the displayed tags
-        this.elements.tags.reset();
-
-        if (this.tags.length <= 0)
-          return;
 
         this.elements.tagsTitle.html('Tags: <br>');
 
@@ -214,153 +221,114 @@ require([
         this.elements.tagsTitle.reset();
       });
     },
+    // control buttons update: shows/hides controls
+    // based on the artist
+    updateControls: function(artist) {
+      var node = _.findWhere(
+        this.graphcontroller.artistGraph.data.nodes, {
+          label: artist.name
+        });
+
+      // no node found for given artist.
+      // This means the artist is not on the graph.
+      if (!node) {
+        this.elements.controls.jelement.show();
+        this.elements.controlNew.jelement.show();
+        this.elements.controlExpand.jelement.hide();
+        return;
+      }
+
+      if (node.isRoot)
+      // if the node is root, hide all the controls
+        this.elements.controls.jelement.hide();
+      else {
+        // else show the new control
+        this.elements.controls.jelement.show();
+        this.elements.controlNew.jelement.show();
+      }
+
+      // only show the expand control in leaf nodes
+      if (node.isLeaf)
+        this.elements.controlExpand.jelement.show();
+      else
+        this.elements.controlExpand.jelement.hide();
+    },
 
     // Events
     bindAllEvents: function() {
       // the artistmenu is always in sync with 
       // the current playing track
       models.player.addEventListener('change',
-        this.onPlayerChange.bind(this));
+        this.events.onPlayerChange.bind(this));
 
       // the artistmenu always updates when a new node
       // as been selected
       this.graphcontroller.addGraphEvent('click',
-        this.onClickNode.bind(this));
+        this.events.onClickNode.bind(this));
 
       // Controls' Events
       this.elements.controlExpand.addDOMEvent({
         eventName: 'onclick',
-        handler: this.onBtnExpandClick,
+        handler: this.events.onBtnExpandClick,
         context: this
       });
 
       this.elements.controlNew.addDOMEvent({
         eventName: 'onclick',
-        handler: this.onBtnNewClick,
+        handler: this.events.onBtnNewClick,
         context: this
       });
     },
-    onClickNode: function(data) {
-      var node = _.findWhere(
-        this.graphcontroller.artistGraph.data.nodes, {
-          id: parseInt(data.nodes[0])
+    events: {
+      // onclick a graph node event
+      onClickNode: function(data) {
+        var node = _.findWhere(
+          this.graphcontroller.artistGraph.data.nodes, {
+            id: parseInt(data.nodes[0])
+          });
+
+        if (!node)
+          return;
+
+        this.updateView(node.artist);
+      },
+      // on track change event
+      onPlayerChange: function() {
+        models.player.load('track').done(this, function(player) {
+
+          var artist = models.Artist.fromURI(
+            models.player.track.artists[0].uri
+          );
+
+          // ignore if it's the same artist or an ad is playing
+          if ((this.artist && this.artist.uri === artist.uri) ||
+            models.player.track.advertisement) {
+            return;
+          }
+
+          this.updateView(artist);
         });
-
-      if (!node || node.artist.uri === this.artist.uri)
-        return;
-
-      if (node.id === 1) {
-        this.elements.controls.jelement.hide();
-      } else {
-        this.elements.controlNew.jelement.show();
-        this.elements.controls.jelement.show();
-      }
-
-      if (node.isLeaf) {
-        this.elements.controlExpand.jelement.show();
-      } else {
-        this.elements.controlExpand.jelement.hide();
-      }
-
-      this.updateView(node.artist);
-    },
-    onPlayerChange: function() {
-      models.player.load('track').done(this, function(player) {
-
-        var artist = models.Artist.fromURI(
-          models.player.track.artists[0].uri
+      },
+      onBtnExpandClick: function(event) {
+        var node = _.findWhere(
+          this.graphcontroller.artistGraph.data.nodes, {
+            id: this.artist.nodeid
+          }
         );
 
-        if ((this.artist && this.artist.uri === artist.uri) ||
-          models.player.track.advertisement) {
-          return;
-        }
+        node.color = {
+          border: '#7fb701',
+          background: '#313336'
+        };
+        node.isLeaf = false;
 
-        this.updateView(artist);
-
-        this.elements.controls.jelement.show();
-        this.elements.controlNew.jelement.show();
+        this.graphcontroller.expandNode(this.artist);
         this.elements.controlExpand.jelement.hide();
-      });
-    },
-    onBtnExpandClick: function(event) {
-      this.graphcontroller.showThrobber();
-
-      var node = _.findWhere(
-        this.graphcontroller.artistGraph.data.nodes, {
-          id: this.artist.nodeid
-        });
-
-      node.color = {
-        border: '#7fb701',
-        background: '#313336'
-      };
-      node.isLeaf = false;
-
-      this.artist.load('related').done(this, function(artist) {
-        var rootArtist = artist;
-        artist.related.snapshot(0,
-          this.graphcontroller.artistGraph.branching).done(this,
-          function(snapshot) {
-            snapshot.loadAll(['name', 'uri']).each(this, function(artist) {
-              var artistGraph = this.graphcontroller.artistGraph;
-
-              var duplicated = _.findWhere(artistGraph.data.nodes, {
-                label: artist.name
-              });
-
-              if (duplicated && artist.name !== rootArtist.name) {
-                var inverseEdgeExists = _.findWhere(artistGraph.data.edges, {
-                  from: duplicated.id,
-                  to: rootArtist.nodeid
-                });
-                var edgeExists = _.findWhere(artistGraph.data.edges, {
-                  to: duplicated.id,
-                  from: rootArtist.nodeid
-                });
-
-                if (!inverseEdgeExists && !edgeExists) {
-                  var extraEdge = {
-                    from: rootArtist.nodeid,
-                    to: duplicated.id,
-                  };
-
-                  artistGraph.extraEdges.push(extraEdge);
-
-                  if (!artistGraph.treemode)
-                    artistGraph.data.edges.push(extraEdge);
-                }
-              } else {
-                var nodeid = ++artistGraph.currentNodeId;
-
-                artistGraph.data.nodes.push({
-                  id: nodeid,
-                  label: artist.name,
-                  artist: artist,
-                  isLeaf: true
-                });
-
-                artistGraph.data.edges.push({
-                  from: rootArtist.nodeid,
-                  to: nodeid
-                });
-
-                artistGraph.relatedArtists.push(artist);
-
-                artist.nodeid = nodeid;
-              }
-            }).done(this, function() {
-
-              this.graphcontroller.artistGraph.drawGraph(true);
-            });
-          });
-      });
-
-      this.elements.controlExpand.jelement.hide();
-    },
-    onBtnNewClick: function(event) {
-      this.graphcontroller.setArtistGraph(this.artist);
-      this.elements.controlNew.jelement.hide();
+      },
+      onBtnNewClick: function(event) {
+        this.graphcontroller.newGraph(this.artist);
+        this.elements.controlNew.jelement.hide();
+      }
     }
 
   });

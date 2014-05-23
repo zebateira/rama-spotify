@@ -40,7 +40,7 @@ require([
           // this.nowplayingArtist refers to the artist
           // of the current playing track
           this.nowplayingArtist = player.track.artists[0];
-          this.setArtistGraph(this.nowplayingArtist);
+          this.newGraph(this.nowplayingArtist);
         });
     },
 
@@ -64,7 +64,7 @@ require([
       The parameter artist (if defined) is used as the root node.
       Otherwise, the this.nowplayingArtist is used.
     */
-    setArtistGraph: function(artist) {
+    newGraph: function(artist) {
       var config = {
         options: this.options
       };
@@ -79,7 +79,7 @@ require([
 
       this.artistGraph = new ArtistGraph(
         this.element,
-        artist || this.nowplayingArtist,
+        artist,
         config
       );
 
@@ -97,7 +97,13 @@ require([
     updateData: function() {
       this.artistGraph.updateData();
     },
-
+    expandNode: function(artist) {
+      this.artistGraph.constructGraph(
+        0,
+        artist,
+        this.updateData.bind(this)
+      );
+    },
     // Displays a loading throbber and hides the graph canvas
     showThrobber: function() {
       if (this.artistGraph.throbber)
