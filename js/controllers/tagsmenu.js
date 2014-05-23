@@ -2,6 +2,7 @@ require([
   '$api/models',
   'js/controllers/controller#controller'
 ], function(models, Controller) {
+
   var TagsMenu = new Class({
     Extends: Controller,
 
@@ -12,9 +13,11 @@ require([
     }
   });
 
-  TagsMenu.MAX_TAGS = 10;
+  // Maximum number of tags shown
+  TagsMenu.MAX_TAGS = 12;
 
   TagsMenu.implement({
+
     loadController: function(graphcontroller) {
       this.graphcontroller = graphcontroller;
 
@@ -26,7 +29,7 @@ require([
       this.element.innerHTML = 'Loading tags...';
     },
     updateView: function() {
-      var nodes = this.graphcontroller.artistGraph.data.nodes;
+      var nodes = this.graphcontroller.getData().nodes;
 
       this.resetView();
 
@@ -104,7 +107,7 @@ require([
                   };
               });
 
-              graphcontroller.updateData();
+              graphcontroller.updateNodes();
 
               _.each(this.nodes, function(node) {
                 if (node.id !== 1)
@@ -132,7 +135,7 @@ require([
           if (!node.tags) {
             var url = "http://developer.echonest.com/api/v4/artist/" +
               "terms?api_key=29N71ZBQUW4XN0QXF&" +
-              "format=json&sort=weight&" +
+              "format=json&sort=frequency&" +
               "id=" + node.artist.uri.replace('spotify', 'spotify-WW');
 
             $.ajax({
