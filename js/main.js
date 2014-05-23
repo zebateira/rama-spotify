@@ -136,8 +136,8 @@ spotify.require([
           tagsTitle: '#artist_tags_title',
           tags: '#artist_tags',
           controls: '#artist_controls',
-          control_expand: '#control_expand',
-          control_new: '#control_new'
+          controlExpand: '#control_expand',
+          controlNew: '#control_new'
         },
         hasDependencies: true
       },
