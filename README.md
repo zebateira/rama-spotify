@@ -18,7 +18,7 @@ Installation
 Execute the installer script.
 
 ```sh
-$ curl -L https://raw.githubusercontent.com/carsy/rama-spotify/master/install.sh | sh
+$ curl -L https://raw.githubusercontent.com/carsy/rama-spotify/master/install.sh | bash
 ```
 
 You should now be in the app and seeing a graph thingy.
@@ -38,7 +38,8 @@ $ open spotify:app:rama
 ```
 
 You should now be in the app and seeing a graph thingy.
-If not, restart Spotify and then open the app by typing spotify:app:rama in the search bar.
+
+If not, restart Spotify (open the app by typing spotify:app:rama in the search bar).
 
 Alternatively, If you happen to have commandlinephobia (I get that every other month... might be a thing):
 
@@ -51,6 +52,9 @@ Now open Spotify and type in the search bar:
 ```sh
 spotify:app:rama
 ```
+
+You should now be in the app and seeing a graph thingy.
+
 If not, restart Spotify and then open the app by typing spotify:app:rama in the search bar.
 
 [Releases]
