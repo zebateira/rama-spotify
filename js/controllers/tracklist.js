@@ -74,6 +74,10 @@ require([
           width: 50,
           height: 50,
           style: 'plain',
+          link: 'auto',
+          player: true,
+          placeholder: 'artist',
+          title: artist.name
         }).node);
     },
     // load the appropriate title into the UI component

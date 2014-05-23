@@ -8,6 +8,23 @@ var Element = function(selector) {
   this.element = this.jelement[0];
 };
 
+// Instance only methods
+Element.prototype = {
+  addDOMEvent: function(config) {
+    this.element[config.eventName] =
+      config.handler.bind(config.context);
+  },
+  html: function(html) {
+    this.jelement.html(html);
+  },
+  reset: function() {
+    this.jelement.html('');
+  }
+};
+
+Element.prototype.constructor = Element;
+
+// Object only methods
 Element.createElements = function(selectors) {
   var elements = {};
 
@@ -23,21 +40,6 @@ Element.resetAll = function(elements) {
     element.reset();
   });
 };
-
-Element.prototype = {
-  addDOMEvent: function(config) {
-    this.element[config.eventName] =
-      config.handler.bind(config.context);
-  },
-  html: function(html) {
-    this.jelement.html(html);
-  },
-  reset: function() {
-    this.jelement.html('');
-  }
-};
-
-Element.prototype.constructor = Element;
 
 require(['$api/models'], function(_models) {
   exports.element = Element;
