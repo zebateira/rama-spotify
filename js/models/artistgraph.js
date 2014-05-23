@@ -332,9 +332,15 @@ ArtistGraph.prototype = {
     this.buildGraph(done);
   },
 
-  // Refresh vis.Graph's data object
+  // Refresh vis.Graph's data objects
   updateData: function() {
-    this.graph.setData(this.data);
+    this.graph.nodesData.update(this.data.nodes);
+    this.graph.edgesData.update(this.data.edges);
+
+    this.events.update();
+  },
+  updateNodes: function() {
+    this.graph.nodesData.update(this.data.nodes);
   },
   highlightNode: function(artist) {
     var node = _.findWhere(

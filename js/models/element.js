@@ -8,7 +8,7 @@ var Element = function(selector) {
   this.element = this.jelement[0];
 };
 
-// Instances only methods
+// Instance only methods
 Element.prototype = {
   addDOMEvent: function(config) {
     this.element[config.eventName] =

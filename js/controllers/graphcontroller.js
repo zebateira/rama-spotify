@@ -101,6 +101,9 @@ require([
     updateData: function() {
       this.artistgraph.updateData();
     },
+    updateNodes: function() {
+      this.artistgraph.updateNodes();
+    },
     getData: function() {
       return this.artistgraph.data;
     },
