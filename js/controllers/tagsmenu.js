@@ -10,6 +10,7 @@ require([
       this.parent(name, config);
 
       this.commonTags = [];
+      this.viewTags = [];
     }
   });
 
@@ -18,20 +19,23 @@ require([
 
   TagsMenu.implement({
 
+    // not much to set here...
     loadController: function(graphcontroller) {
       this.graphcontroller = graphcontroller;
 
       this.bindEvents();
     },
-    resetView: function() {
-      this.commonTags = [];
-      this.viewTags = [];
-      this.element.innerHTML = 'Loading tags...';
-    },
+
+    // updates the current list of tags shown
     updateView: function() {
       var nodes = this.graphcontroller.getData().nodes;
 
       this.resetView();
+
+      _.each(nodes, function(node) {
+
+      }, this);
+
 
       getTagsFromArtist.bind(this)(0);
 
@@ -157,9 +161,17 @@ require([
       }
 
     },
+
+    // reset the properties to their initial states
+    resetView: function() {
+      this.commonTags = [];
+      this.viewTags = [];
+      this.element.innerHTML = 'Loading tags...';
+    },
+
     bindEvents: function() {
       this.graphcontroller
-        .addCustomGraphEvent('update', this.updateView.bind(this));
+        .addCustomGraphEvent('updateTagsMenu', this.updateView.bind(this));
     }
   });
 

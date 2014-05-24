@@ -177,6 +177,9 @@ ArtistGraph.prototype = {
   // have finished.
   expandNode: function(depth, parentArtist, update) {
 
+    // after expanding, the node will stop being a leaf
+    this.getNode(parentArtist).isLeaf = false;
+
     // load the related artists property
     parentArtist.load('related').done(this, function(parentArtist) {
       // when done loading, load the current snapshot of the array
@@ -302,9 +305,8 @@ ArtistGraph.prototype = {
     // starts the animation to draw the graph
     this.graph.start();
 
-    // updates the UI components that are dependent on the content of
-    // the graph
-    this.events.update();
+    // updates the tagsmenu UI component
+    this.events.updateTagsMenu();
 
     // Debug information about the graph creation
     if (debug) {
@@ -337,26 +339,30 @@ ArtistGraph.prototype = {
     this.graph.nodesData.update(this.data.nodes);
     this.graph.edgesData.update(this.data.edges);
 
-    this.events.update();
+    this.events.updateTagsMenu();
   },
   updateNodes: function() {
     this.graph.nodesData.update(this.data.nodes);
   },
+
+  // highlights the artist's node
   highlightNode: function(artist) {
-    var node = _.findWhere(
+    this.getNode(artist).color = {
+      border: '#7fb701',
+      background: '#313336'
+    };
+  },
+
+  // Get the node of the given artist.
+  // return undefined if not found.
+  getNode: function(artist) {
+    return _.findWhere(
       this.data.nodes, {
         id: artist.nodeid
       }
     );
-
-    // highlight the node
-    node.color = {
-      border: '#7fb701',
-      background: '#313336'
-    };
-    // after expanding, the node will stop being a leaf
-    node.isLeaf = false;
   },
+
 
   // Events
 
@@ -373,7 +379,7 @@ ArtistGraph.prototype = {
     this.events[event] = eventHandler;
   },
 
-  // saves a vis.Graph event, given the proper eventHandler
+  // saves a vis.Graph event, given the proper eventHandler.
   onGraph: function(event, eventHandler) {
     this.graphevents[event] = eventHandler;
   }
