@@ -230,7 +230,6 @@ ArtistGraph.prototype = {
           to: parentArtist.nodeid
         });
 
-        // If no 
         if (!edgeExists && !inverseEdgeExists) {
 
           // Create the extra edge.

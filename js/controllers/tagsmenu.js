@@ -26,20 +26,34 @@ require([
       this.bindEvents();
     },
 
-    // updates the current list of tags shown
+    // updates the current list of shown tags 
     updateView: function() {
       var nodes = this.graphcontroller.getData().nodes;
 
       this.resetView();
 
-      _.each(nodes, function(node) {
+      var numRequests = 0;
 
+      _.each(nodes, function(nodeArtist) {
+        if (!nodeArtist.tags) {
+
+          this.graphcontroller.fetchTags(nodeArtist.artist.uri,
+            'frequency',
+            addTags.bind(this, nodeArtist),
+            fail
+          );
+        } else {
+          addTags.bind(this)(nodeArtist, null);
+        }
       }, this);
 
+      function fail() {
+        ++numRequests;
+      }
 
-      getTagsFromArtist.bind(this)(0);
-
-      function addTags(node, index) {
+      function addTags(node, data) {
+        if (data && data.response)
+          node.tags = data.response.terms;
 
         _.each(node.tags, function(newTag) {
           var isPresent = false;
@@ -66,99 +80,75 @@ require([
 
         }, this);
 
-        getTagsFromArtist.bind(this)(index + 1);
-      }
-
-      function getTagsFromArtist(index) {
-        if (index === nodes.length) {
-
-          this.commonTags = _.sortBy(this.commonTags, 'count')
-            .reverse();
-
-          var tagsContainer = this.jelement.html('');
-          var graphcontroller = this.graphcontroller;
-          var commontagClass = this.selectors.commontag;
-
-          this.viewTags = _.sortBy(
-            this.commonTags.slice(0, TagsMenu.MAX_TAGS),
-            'name');
-
-          _.each(this.viewTags, function(tag) {
-            var tagElement = document.createElement('span');
-
-            tagElement.className = commontagClass.replace('.', '');
-            tagElement.id = tag.name;
-            tagElement.innerHTML = tag.name;
-            tagElement.nodes = tag.nodes;
-
-            tagElement.onclick = function onTagClick(event) {
-              if (this.className.contains('selected'))
-                return;
-
-              $(commontagClass).removeClass('selected');
-
-              this.className += ' selected';
-
-              _.each(this.nodes, function(node) {
-                if (node.id !== 1)
-                  node.color = {
-                    background: '#313336',
-                    border: '#7fb701'
-                  };
-                else
-                  node.color = {
-                    border: '#7fb701'
-                  };
-              });
-
-              graphcontroller.updateNodes();
-
-              _.each(this.nodes, function(node) {
-                if (node.id !== 1)
-                  node.color = {
-                    background: '#313336',
-                    highlight: {
-                      border: '#7fb701'
-                    }
-                  };
-                else
-                  node.color = {
-                    highlight: {
-                      border: '#7fb701'
-                    }
-                  };
-              });
-            };
-
-            tagsContainer.append(tagElement);
-          });
-
-        } else {
-          var node = nodes[index];
-
-          if (!node.tags) {
-            var url = "http://developer.echonest.com/api/v4/artist/" +
-              "terms?api_key=29N71ZBQUW4XN0QXF&" +
-              "format=json&sort=frequency&" +
-              "id=" + node.artist.uri.replace('spotify', 'spotify-WW');
-
-            $.ajax({
-              url: url,
-              context: this
-            }).done(
-              function(data) {
-                node.tags = data.response.terms;
-
-                addTags.bind(this)(node, index);
-              }
-            ).fail(function() {
-              getTagsFromArtist.bind(this)(index + 1);
-            });
-          } else {
-            addTags.bind(this)(node, index);
-          }
+        if (++numRequests === nodes.length) {
+          allDone.bind(this)();
         }
       }
+
+      function allDone() {
+        this.commonTags = _.sortBy(this.commonTags, 'count')
+          .reverse();
+
+        var tagsContainer = this.jelement.html('');
+        var graphcontroller = this.graphcontroller;
+        var commontagClass = this.selectors.commontag;
+
+        this.viewTags = _.sortBy(
+          this.commonTags.slice(0, TagsMenu.MAX_TAGS),
+          'name');
+
+        _.each(this.viewTags, function(tag) {
+          var tagElement = document.createElement('span');
+
+          tagElement.className = commontagClass.replace('.', '');
+          tagElement.id = tag.name;
+          tagElement.innerHTML = tag.name;
+          tagElement.nodes = tag.nodes;
+
+          tagElement.onclick = function onTagClick(event) {
+            if (this.className.contains('selected'))
+              return;
+
+            $(commontagClass).removeClass('selected');
+
+            this.className += ' selected';
+
+            _.each(this.nodes, function(node) {
+              if (node.id !== 1)
+                node.color = {
+                  background: '#313336',
+                  border: '#7fb701'
+                };
+              else
+                node.color = {
+                  border: '#7fb701'
+                };
+            });
+
+            graphcontroller.updateNodes();
+
+            _.each(this.nodes, function(node) {
+              if (node.id !== 1)
+                node.color = {
+                  background: '#313336',
+                  highlight: {
+                    border: '#7fb701'
+                  }
+                };
+              else
+                node.color = {
+                  highlight: {
+                    border: '#7fb701'
+                  }
+                };
+            });
+          };
+
+          tagsContainer.append(tagElement);
+        });
+      }
+
+
 
     },
 

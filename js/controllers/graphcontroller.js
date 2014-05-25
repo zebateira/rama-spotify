@@ -29,6 +29,10 @@ require([
     }
   });
 
+  GraphController.BASE_URL =
+    'http://developer.echonest.com/api/v4/artist/terms';
+  GraphController.API_KEY = '29N71ZBQUW4XN0QXF';
+
   GraphController.implement({
     // parameter settings is a dependency.
     // this means that at this point (when loadController runs)
@@ -104,9 +108,23 @@ require([
     updateNodes: function() {
       this.artistgraph.updateNodes();
     },
+
     getData: function() {
       return this.artistgraph.data;
     },
+
+    fetchTags: function(artistURI, sortType, done, fail) {
+      $.ajax({
+        url: GraphController.BASE_URL + '?' +
+          'api_key=' + GraphController.API_KEY + '&' +
+          'format=json' + '&' +
+          'sort=' + sortType + '&' +
+          'id=' + artistURI.replace('spotify', 'spotify-WW')
+      })
+        .done(done)
+        .fail(fail);
+    },
+
     // Expands the specific given artist in the graph.
     // the artist is required to be in the graph
     expandNode: function(artist) {
