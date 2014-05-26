@@ -8,18 +8,15 @@ require([
 
     Generic controller object
   */
-  var Controller = new Class({
-    // constructor
-    initialize: function(name, config) {
-      this.name = name;
-      this.config = config;
-      this.selector = config.selector;
-      this.selectors = config.selectors;
-    }
-  });
+  var Controller = function(name, config) {
+    this.name = name;
+    this.config = config;
+    this.selector = config.selector;
+    this.selectors = config.selectors;
+  };
 
   // class specific methods
-  Controller.implement({
+  Controller.prototype = {
 
     // Controller.loadView
     //    To be called by components.Components
@@ -62,7 +59,9 @@ require([
       // of the component has been loaded.
       // note: child classes should implement this method as needed.
     }
-  });
+  };
+
+  Controller.prototype.constructor = Controller;
 
   exports.controller = Controller;
 });
