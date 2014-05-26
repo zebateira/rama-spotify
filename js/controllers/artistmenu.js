@@ -150,41 +150,8 @@ require([
       }
     },
     updateTags: function(artist) {
-      // Paul Lamere
-      // http://developer.echonest.com/forums/thread/353
-      // Artist terms (tags) -> 
-      //      what is the difference between weight and frequency
 
-      // term frequency is directly proportional to how often 
-      // that term is used to describe that artist. 
-      // Term weight is a measure of how important that term is 
-      // in describing the artist. As an example of the difference, 
-      // the term 'rock' may be the most frequently applied term 
-      // for The Beatles. However, 'rock' is not very descriptive 
-      // since many bands have 'rock' as the most frequent term. 
-      // However, the most highly weighted terms for The Beatles 
-      // are 'merseybeat' and 'british invasion', which give you 
-      // a better idea of what The Beatles are all about 
-      // than 'rock' does. 
-      // We don't publish the details of our algorithms, 
-      // but I can tell you that frequency is related to the 
-      // simple counting of appearance of a term, whereas 
-      // weight is related to TF-IDF as described 
-      // here (http://en.wikipedia.org/wiki/Tf%E2%80%93idf).
-
-      // the url to query echonest's API
-      // the list of tags being sorted by weight.
-      var url =
-        "http://developer.echonest.com/api/v4/artist/" +
-        "terms?api_key=29N71ZBQUW4XN0QXF&format=json" +
-        "&sort=weight" +
-        "&id=" + this.artist.uri.replace('spotify', 'spotify-WW');
-
-      $.ajax({
-        url: url,
-        context: this
-      }).done(function(data) {
-
+      var fetchDone = function(data) {
         // clear the displayed tags
         this.elements.tags.reset();
         this.elements.tagsTitle.reset();
@@ -211,15 +178,20 @@ require([
         }
 
         this.artist.tags = this.tags;
+      };
 
-      }).fail(function() {
+      var fetchFail = function() {
         // Temporary fix for requests limit from echonest
         // just... don't show any tags.
         // Note: since the API key being used has request limits,
         // sometimes the limit is reached very easily. If so
         // don't show anything.
         this.elements.tagsTitle.reset();
-      });
+      };
+
+      this.graphcontroller.fetchTags(this.artist.uri, 'weight')
+        .done(fetchDone.bind(this))
+        .fail(fetchFail.bind(this));
     },
     // control buttons update: shows/hides controls
     // based on the artist

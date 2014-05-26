@@ -162,7 +162,7 @@ ArtistGraph.prototype = {
       // If the number of iterations done is enough to have the
       // full graph constructed, then stop recursion and
       // draw the final graph.
-      if (currentIteration === this.maxIterations) {
+      if (currentIteration >= this.maxIterations) {
         this.drawGraph(true);
         if (done)
           done();
@@ -175,10 +175,13 @@ ArtistGraph.prototype = {
   // The update parameter is the callback to be called
   // after all the callbacks of the child nodes of the root node
   // have finished.
-  expandNode: function(depth, parentArtist, update) {
+  expandNode: function(depth, parentArtist, done) {
 
     // after expanding, the node will stop being a leaf
-    this.getNode(parentArtist).isLeaf = false;
+    var node = this.getNode(parentArtist);
+
+    if (node)
+      node.isLeaf = false;
 
     // load the related artists property
     parentArtist.load('related').done(this, function(parentArtist) {
@@ -192,7 +195,7 @@ ArtistGraph.prototype = {
           // call forEachRelated on each artist
           .each(this, forEachRelated)
           // when done on each artist update the number of iterations
-          .done(update);
+          .done(done);
         });
     });
 
@@ -204,20 +207,13 @@ ArtistGraph.prototype = {
     function forEachRelated(childArtist) {
       // Try to find repeated nodes in the graph
       // given the name of the artist is the same
-      var duplicated = _.findWhere(this.data.nodes, {
-        label: childArtist.name
-      });
+      var duplicated = this.getNode(childArtist);
 
       // Is the artist node already in the graph?
-      // If there is a duplicate and if its not the same one,
-      // then create and edge between the two artists:
+      // If there is a duplicate then create an
+      // edge between the two artists:
       // the child artist and parent artist
-      // 
-      // The latter test was added after metadata errors were found:
-      // sometimes, an artist would exist itself in its related
-      // artists list, which created a edge that went from it to 
-      // itself.
-      if (duplicated && childArtist.name !== parentArtist.name) {
+      if (duplicated) {
 
         // try to find repeated edges in the graph
         var edgeExists = _.findWhere(this.data.edges, {
@@ -230,7 +226,17 @@ ArtistGraph.prototype = {
           to: parentArtist.nodeid
         });
 
-        if (!edgeExists && !inverseEdgeExists) {
+        // if the edge we are trying to insert 
+        // does not exist in the graph yet AND
+        // the two nodes connecting the edge are not the same one
+        // then insert edge.
+        // 
+        // The latter test was added after metadata errors were found:
+        // sometimes, an artist would exist itself in its related
+        // artists list, which created a edge that went from it to 
+        // itself.
+        if (!edgeExists && !inverseEdgeExists &&
+          childArtist.uri !== parentArtist.uri) {
 
           // Create the extra edge.
           var extraEdge = {
@@ -249,8 +255,8 @@ ArtistGraph.prototype = {
           // 
           // Otherwise, if treemode is DISABLED, then all the
           // possible edges will be added to the vis.Graph object,
-          // which means that the graph will not be a tree, but
-          // one of a graph, with a much higher number of edges
+          // which means that the graph will not be a tree, 
+          // with a much higher number of edges.
           if (!this.treemode)
             this.data.edges.push(extraEdge);
         }
@@ -284,7 +290,7 @@ ArtistGraph.prototype = {
       // constructing the graph, now with this child node
       // as the root node
       if (depth > 0)
-        this.expandNode(depth - 1, childArtist, update);
+        this.expandNode(depth - 1, childArtist, done);
       // note: the condition to end the recursion is: if depth <= 0
     }
 
@@ -357,7 +363,7 @@ ArtistGraph.prototype = {
   getNode: function(artist) {
     return _.findWhere(
       this.data.nodes, {
-        id: artist.nodeid
+        label: artist.name
       }
     );
   },

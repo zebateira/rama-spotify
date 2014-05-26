@@ -27,29 +27,29 @@ require([
     },
 
     // updates the current list of shown tags 
-    updateView: function() {
+    updateTags: function() {
       var nodes = this.graphcontroller.getData().nodes;
 
       this.resetView();
 
+      // number of requests completed.
       var numRequests = 0;
 
       _.each(nodes, function(nodeArtist) {
         if (!nodeArtist.tags) {
 
           this.graphcontroller.fetchTags(nodeArtist.artist.uri,
-            'frequency',
-            addTags.bind(this, nodeArtist),
-            fail
-          );
+            'frequency')
+            .done(addTags.bind(this, nodeArtist))
+            .complete((function onComplete() {
+              if (++numRequests === nodes.length) {
+                allDone.bind(this)();
+              }
+            }).bind(this));
         } else {
           addTags.bind(this)(nodeArtist, null);
         }
       }, this);
-
-      function fail() {
-        ++numRequests;
-      }
 
       function addTags(node, data) {
         if (data && data.response)
@@ -79,10 +79,6 @@ require([
           }
 
         }, this);
-
-        if (++numRequests === nodes.length) {
-          allDone.bind(this)();
-        }
       }
 
       function allDone() {
@@ -148,8 +144,6 @@ require([
         });
       }
 
-
-
     },
 
     // reset the properties to their initial states
@@ -161,7 +155,7 @@ require([
 
     bindEvents: function() {
       this.graphcontroller
-        .addCustomGraphEvent('updateTagsMenu', this.updateView.bind(this));
+        .addCustomGraphEvent('updateTagsMenu', this.updateTags.bind(this));
     }
   });
 
