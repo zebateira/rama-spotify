@@ -363,7 +363,7 @@ ArtistGraph.prototype = {
   getNode: function(artist) {
     return _.findWhere(
       this.data.nodes, {
-        label: artist.name
+        id: artist.nodeid
       }
     );
   },
