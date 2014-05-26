@@ -152,7 +152,7 @@ require([
     // Expands the specific given artist in the graph.
     // the artist is required to be in the graph
     expandNode: function(artist) {
-      this.artistgraph.highlightNode(artist);
+      this.highlightArtist(artist);
       this.artistgraph.expandNode(
         0,
         artist,
@@ -174,6 +174,42 @@ require([
     hideThrobber: function() {
       if (this.throbber)
         this.throbber.hide();
+    },
+
+    highlightNodes: function(nodes) {
+      _.each(nodes, this.highlightNode);
+      this.updateNodes();
+      _.each(nodes, this.unHighlightNode);
+    },
+
+    highlightArtist: function(artist) {
+      this.highlightNode(this.artistgraph.getNode(artist));
+    },
+    highlightNode: function(node) {
+      if (node.isRoot)
+        node.color = {
+          border: '#7fb701'
+        };
+      else
+        node.color = {
+          border: '#7fb701',
+          background: '#313336'
+        };
+    },
+    unHighlightNode: function(node) {
+      if (node.isRoot)
+        node.color = {
+          highlight: {
+            border: '#7fb701'
+          }
+        };
+      else
+        node.color = {
+          background: '#313336',
+          highlight: {
+            border: '#7fb701'
+          }
+        };
     },
 
     // Events

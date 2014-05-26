@@ -341,21 +341,16 @@ ArtistGraph.prototype = {
 
   // Refresh vis.Graph's data objects
   updateData: function() {
-    this.graph.nodesData.update(this.data.nodes);
-    this.graph.edgesData.update(this.data.edges);
+    this.updateNodes();
+    this.updateEdges();
 
     this.events.updateTagsMenu();
   },
   updateNodes: function() {
     this.graph.nodesData.update(this.data.nodes);
   },
-
-  // highlights the artist's node
-  highlightNode: function(artist) {
-    this.getNode(artist).color = {
-      border: '#7fb701',
-      background: '#313336'
-    };
+  updateEdges: function() {
+    this.graph.edgesData.update(this.data.edges);
   },
 
   // Get the node of the given artist.
