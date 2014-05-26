@@ -11,11 +11,10 @@
     "track"
   ],
   "BundleType": "Application",
-  "BundleVersion": "0.10",
+  "BundleVersion": "0.10.6",
   "Dependencies": {
     "api": "1.0.0",
-    "views": "1.0.0",
-    "resources": "0.7.0"
+    "views": "1.0.0"
   },
   "SupportedDeviceClasses": ["Desktop"],
   "SupportedLanguages": [

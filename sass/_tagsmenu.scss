@@ -12,13 +12,15 @@
 
   color: $new-white;
   padding: 5px;
+  max-width: 50%;
 
-  @include menubox();
+  opacity: 0.9;
 
   .common-tag {
     @include label();
     @include clickableBtn();
     margin: 1px;
+    display: inline-block;
 
     &.selected {
       border-color: $green2;

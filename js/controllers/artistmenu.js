@@ -1,10 +1,15 @@
 require([
-  '$api/models',
   'js/controllers/controller#controller',
+  'js/models/element#element',
+  '$api/models',
   '$views/image#Image',
   '$views/throbber#Throbber'
-], function(models, Controller, Image, Throbber) {
+], function(Controller, Element, models, Image, Throbber) {
 
+
+  /**
+    Controller for the Artist Menu UI Component
+  */
   var ArtistMenu = new Class({
     Extends: Controller,
 
@@ -12,311 +17,281 @@ require([
       this.parent(name, config);
       this.selectors = config.selectors;
 
-      var onPlayerChange = this.onPlayerChange.bind(this);
-      models.player.addEventListener('change', function() {
-        models.player.load('track').done(onPlayerChange);
-      });
+      this.elements = {};
     }
   });
 
+  // Maximum number of albums shown
   ArtistMenu.MAX_ALBUMS = 8;
+  // Maximum number of tags shown
+  ArtistMenu.MAX_TAGS = 6;
+
 
   ArtistMenu.implement({
-    afterLoad: function(graphcontroller) {
+
+    // controllers.ArtistMenu depends on controllers.GraphController
+    loadController: function(graphcontroller) {
       this.graphcontroller = graphcontroller;
 
+      this.elements = Element.createElements(this.selectors);
+
       models.player.load('track').done(this, function() {
-        this.artist = models.Artist.fromURI(
-          models.player.track.artists[0].uri);
-
-        this.updateView(this.artist);
-
-        this.bindEvents();
+        this.updateView(models.player.track.artists[0]);
+        this.bindAllEvents();
       });
     },
-    bindEvents: function() {
-      this.graphcontroller.addGraphEvent('click',
-        this.onClickNode.bind(this));
 
-      var controls = {
-        expand: 'onBtnExpandClick',
-        new: 'onBtnNewClick'
-      };
-
-      for (var control in controls) {
-        document.getElementById('control_' + control)
-          .onclick = this[controls[control]].bind(this);
-      }
-
-
-    },
-    updateView: function(artist) {
-      if (!artist || this.artist === artist.uri)
+    // Update the UI component given the newArtist parameter
+    updateView: function(newArtist) {
+      // if no parameter has been given or if it's the same artist
+      if (!newArtist ||
+        (this.artist && this.artist.uri === newArtist.uri))
         return;
 
-      this.artist = artist;
+      // update the artist of the menu
+      this.artist = newArtist;
 
-      if (!this.image) {
-        this.image = Image.forArtist(artist, {
-          width: 125,
-          height: 80,
-          style: 'plain',
-          overlay: [artist.name],
-          player: true,
-          placeholder: 'artist',
-          link: 'auto'
-        });
+      // update all the components
+      this.updateImage(this.artist);
 
-        this.jelement.find(this.selectors.cover).append(this.image.node);
+      this.artist.load(['popularity', 'years', 'albums'])
+        .done(this, this.updateInfo.bind(this));
+
+      this.updateTags(this.artist);
+
+      this.updateControls(this.artist);
+    },
+    updateImage: function(artist) {
+
+      // the object views.Image is saved in the Element object
+      if (!this.elements.cover.image) {
+        this.elements.cover.image =
+          Image.forArtist(artist, {
+            width: 125,
+            height: 80,
+            style: 'plain',
+            overlay: [artist.name],
+            player: true,
+            placeholder: 'artist',
+            link: 'auto'
+          });
+
+        this.elements.cover
+          .jelement.append(this.elements.cover.image.node);
       }
 
-      this.image.setImage(artist);
-      this.image.setOverlay(artist.name);
+      // update the views.Image object with the new artist's info
+      this.elements.cover.image.setImage(artist);
+      this.elements.cover.image.setOverlay(artist.name);
+    },
+    updateInfo: function(artist) {
+      Element.resetAll(
+        [this.elements.albums, this.elements.albumsTitle]
+      );
 
-      this.jelement.find(this.selectors.albums).html('');
-      this.jelement.find(this.selectors.albumsTitle).html('');
+      // update popularity if defined
+      this.elements.popularity.html(
+        artist.popularity ?
+        'Popularity: ' + artist.popularity + '/100' :
+        ''
+      );
 
-      artist.load(['popularity', 'years', 'albums'])
-        .done(this, function(artist) {
-          if (artist.popularity)
-            this.jelement.find(this.selectors.popularity)
-              .html('Popularity: ' + artist.popularity + '/100');
-          else
-            this.jelement.find(this.selectors.popularity).html('');
+      // update active years if defined
+      this.elements.years.html(
+        artist.years.from !== 0 ?
+        'Years active:<br> ' +
+        artist.years.from +
+        ' - ' +
+        (artist.years.to === 0 ? 'present' : artist.years.to) :
+        ''
+      );
 
-          if (artist.years.from !== 0)
-            this.jelement.find(this.selectors.years).html(
-              'Years active:<br> ' +
-              artist.years.from +
-              ' - ' +
-              (artist.years.to === 0 ? 'present' : artist.years.to)
-            );
-          else
-            this.jelement.find(this.selectors.years).html('');
-          var albumsAdded = 0;
-          var jalbums = this.jelement.find(this.selectors.albums);
-          artist.albums.snapshot().done(this,
-            function(snapshot) {
-              for (var i = 0; i <= snapshot.length && albumsAdded < ArtistMenu.MAX_ALBUMS; ++i) {
-                if (snapshot.get(i)) {
+      // load snapshot of the artist's albums
+      artist.albums.snapshot()
+        .done(this, this.updateAlbums.bind(this));
+    },
+    updateAlbums: function(albumSnapshot) {
+      var jalbums = this.elements.albums.jelement;
 
-                  if (snapshot.get(i).albums[0] && snapshot.get(i).albums[0].playable) {
-                    var album = snapshot.get(i).albums[0];
+      // albumsAdded - number of added albums
+      // used to limit the number of albums added.
+      // note: sometimes the API returns null albums
+      for (var i = 0, albumsAdded = 0; i <= albumSnapshot.length &&
+        albumsAdded < ArtistMenu.MAX_ALBUMS; ++i) {
+        var albumgroup = albumSnapshot.get(i);
 
-                    if (!jalbums.find("a[href='" + album.uri + "']")[0]) {
-                      var albumImage = Image.forAlbum(album, {
-                        width: 50,
-                        height: 50,
-                        style: 'plain',
-                        player: true,
-                        placeholder: 'album',
-                        link: 'auto',
-                        title: album.name
-                      });
+        if (albumgroup && albumgroup.albums[0]) {
+          var album = albumgroup.albums[0];
 
-                      var albumElement = document.createElement('span');
-                      albumElement.className = 'artist-album';
-                      albumImage.node.className += ' artist-album-cover';
-                      $(albumElement).append(albumImage.node);
-                      jalbums.append(albumElement);
-                      albumsAdded++;
-                    }
-                  }
+          var albumImage = Image.forAlbum(album, {
+            width: 50,
+            height: 50,
+            style: 'plain',
+            link: 'auto',
+            player: true,
+            placeholder: 'album',
+            title: album.name
+          });
 
-                  if (jalbums.html() !== '') {
-                    this.jelement
-                      .find(this.selectors.albumsTitle).html('Albums: <br>');
-                  }
-                }
-              }
-            });
+          // for each album create a DOM element
+          var albumElement = document.createElement('span');
+          albumElement.className =
+            'artist-album artist-album-cover';
+          albumElement.appendChild(albumImage.node);
+
+          // and append it to the albums wrapper
+          jalbums.append(albumElement);
+          albumsAdded++;
+        }
+
+        if (jalbums.html() !== '') {
+          this.elements.albumsTitle.html('Albums: <br>');
+        }
+      }
+    },
+    updateTags: function(artist) {
+
+      var fetchDone = function(data) {
+        // clear the displayed tags
+        this.elements.tags.reset();
+        this.elements.tagsTitle.reset();
+
+        // not a success response
+        if (data.response.status.code !== 0 ||
+          (data.response.terms && data.response.terms.length <= 0))
+          return;
+
+        // the echonest's tags are called terms
+        this.tags = _.sortBy(data.response.terms
+          .splice(0, ArtistMenu.MAX_TAGS), 'name');
+
+        this.elements.tagsTitle.html('Tags: <br>');
+
+        for (var i = 0, tagsAdded = 0; i < this.tags.length; ++i) {
+          // for each tag, create a DOM element
+          var tagElement = document.createElement('span');
+          tagElement.className = 'artist-tag';
+          tagElement.innerHTML = this.tags[i].name;
+
+          // and append it to the tags' wrapper
+          this.elements.tags.jelement.append(tagElement);
+        }
+
+        this.artist.tags = this.tags;
+      };
+
+      var fetchFail = function() {
+        // Temporary fix for requests limit from echonest
+        // just... don't show any tags.
+        // Note: since the API key being used has request limits,
+        // sometimes the limit is reached very easily. If so
+        // don't show anything.
+        this.elements.tagsTitle.reset();
+      };
+
+      this.graphcontroller.fetchTags(this.artist.uri, 'weight')
+        .done(fetchDone.bind(this))
+        .fail(fetchFail.bind(this));
+    },
+    // control buttons update: shows/hides controls
+    // based on the artist
+    updateControls: function(artist) {
+      var node = _.findWhere(
+        this.graphcontroller.getData().nodes, {
+          label: artist.name
         });
 
-      // Paul Lamere
-      // http://developer.echonest.com/forums/thread/353
-      // Artist terms -> what is the difference between weight and frequency
+      // no node found for given artist.
+      // This means the artist is not on the graph.
+      if (!node) {
+        this.elements.controls.jelement.show();
+        this.elements.controlNew.jelement.show();
+        this.elements.controlExpand.jelement.hide();
+        return;
+      }
 
-      // term frequency is directly proportional to how often 
-      // that term is used to describe that artist. 
-      // Term weight is a measure of how important that term is 
-      // in describing the artist. As an example of the difference, 
-      // the term 'rock' may be the most frequently applied term 
-      // for The Beatles. However, 'rock' is not very descriptive 
-      // since many bands have 'rock' as the most frequent term. 
-      // However, the most highly weighted terms for The Beatles 
-      // are 'merseybeat' and 'british invasion', which give you 
-      // a better idea of what The Beatles are all about than 'rock' does. 
-      // We don't publish the details of our algorithms, 
-      // but I can tell you that frequency is related to the 
-      // simple counting of appearance of a term, whereas 
-      // weight is related to TF-IDF as described 
-      // here (http://en.wikipedia.org/wiki/Tf%E2%80%93idf).
+      if (node.isRoot)
+      // if the node is root, hide all the controls
+        this.elements.controls.jelement.hide();
+      else {
+        // else show the new control
+        this.elements.controls.jelement.show();
+        this.elements.controlNew.jelement.show();
+      }
 
-      var url =
-        "http://developer.echonest.com/api/v4/artist/" +
-        "terms?api_key=29N71ZBQUW4XN0QXF&format=json&sort=weight&name=" +
-        this.artist.name;
+      // only show the expand control in leaf nodes
+      if (node.isLeaf)
+        this.elements.controlExpand.jelement.show();
+      else
+        this.elements.controlExpand.jelement.hide();
+    },
 
-      $.ajax({
-        url: url,
+    // Events
+    bindAllEvents: function() {
+      // the artistmenu is always in sync with 
+      // the current playing track
+      models.player.addEventListener('change',
+        this.events.onPlayerChange.bind(this));
+
+      // the artistmenu always updates when a new node
+      // as been selected
+      this.graphcontroller.addGraphEvent('click',
+        this.events.onClickNode.bind(this));
+
+      // Controls' Events
+      this.elements.controlExpand.addDOMEvent({
+        eventName: 'onclick',
+        handler: this.events.onBtnExpandClick,
         context: this
-      }).done(function(data) {
-        this.tags = data.response.terms;
+      });
 
-        $(this.selectors.tags).html('');
+      this.elements.controlNew.addDOMEvent({
+        eventName: 'onclick',
+        handler: this.events.onBtnNewClick,
+        context: this
+      });
+    },
+    events: {
+      // onclick a graph node event
+      onClickNode: function(data) {
+        var node = _.findWhere(
+          this.graphcontroller.getData().nodes, {
+            id: parseInt(data.nodes[0])
+          });
 
-        if (this.tags.length > 0) {
-          $(this.selectors.tagsTitle).html('Tags: <br>');
+        if (!node)
+          return;
 
-          for (var i = 0; i < this.tags.length && i < 6; ++i) {
-            if (this.tags[i]) {
-              var tagElement = document.createElement('span');
-              tagElement.className = 'artist-tag';
-              tagElement.innerHTML = this.tags[i].name;
+        this.updateView(node.artist);
+      },
+      // on track change event
+      onPlayerChange: function() {
+        models.player.load('track').done(this, function(player) {
 
-              $(this.selectors.tags).append(tagElement);
-            }
+          var artist = models.Artist.fromURI(
+            models.player.track.artists[0].uri
+          );
+
+          // ignore if it's the same artist or an ad is playing
+          if ((this.artist && this.artist.uri === artist.uri) ||
+            models.player.track.advertisement) {
+            return;
           }
 
-          this.artist.tags = this.tags;
-        }
-
-
-      }).fail(function() {
-        // Temporary fix for not found artist from echonest
-        $(this.selectors.tagsTitle).html('');
-        console.log(arguments);
-      });
-
-    },
-    onClickNode: function(data) {
-      var node = _.findWhere(
-        this.graphcontroller.artistGraph.data.nodes, {
-          id: parseInt(data.nodes[0])
+          this.updateView(artist);
         });
-
-      if (!node || node.artist.uri === this.artist.uri)
-        return;
-
-      if (node.id === 1) {
-        this.jelement.find(this.selectors.controls).hide();
-      } else {
-        $(this.selectors.control_new).show();
-        this.jelement.find(this.selectors.controls).show();
+      },
+      // Expand control button click event
+      onBtnExpandClick: function(event) {
+        this.graphcontroller.expandNode(this.artist);
+        this.elements.controlExpand.jelement.hide();
+      },
+      // New control button click event
+      onBtnNewClick: function(event) {
+        this.graphcontroller.newGraph(this.artist);
+        this.elements.controlNew.jelement.hide();
       }
-
-      if (node.isLeaf) {
-        this.jelement.find(this.selectors.control_expand).show();
-      } else {
-        this.jelement.find(this.selectors.control_expand).hide();
-      }
-
-      this.updateView(node.artist);
-
-    },
-    onPlayerChange: function() {
-      models.player.load('track').done(this, function(player) {
-
-        if (player.track.advertisement)
-          return;
-
-        var artist = models.Artist.fromURI(player.track.artists[0].uri);
-
-        if ((this.artist && this.artist.uri === artist.uri) ||
-          player.track.advertisement) {
-          return;
-        }
-
-        this.updateView(models.player.track.artists[0]);
-
-        this.jelement.find(this.selectors.controls).show();
-        this.jelement.find(this.selectors.control_new).show();
-        this.jelement.find(this.selectors.control_expand).hide();
-      });
-    },
-    onBtnExpandClick: function(event) {
-      this.graphcontroller.showThrobber();
-
-      var node = _.findWhere(
-        this.graphcontroller.artistGraph.data.nodes, {
-          id: this.artist.nodeid
-        });
-
-      node.color = {
-        border: '#7fb701',
-        background: '#313336'
-      };
-      node.isLeaf = false;
-
-      this.artist.load('related').done(this, function(artist) {
-        var rootArtist = artist;
-        artist.related.snapshot(0,
-          this.graphcontroller.artistGraph.branching).done(this,
-          function(snapshot) {
-            snapshot.loadAll(['name', 'uri']).each(this, function(artist) {
-              var artistGraph = this.graphcontroller.artistGraph;
-
-              var duplicated = _.findWhere(artistGraph.data.nodes, {
-                label: artist.name
-              });
-
-              if (duplicated && artist.name !== rootArtist.name) {
-                var inverseEdgeExists = _.findWhere(artistGraph.data.edges, {
-                  from: duplicated.id,
-                  to: rootArtist.nodeid
-                });
-                var edgeExists = _.findWhere(artistGraph.data.edges, {
-                  to: duplicated.id,
-                  from: rootArtist.nodeid
-                });
-
-                if (!inverseEdgeExists && !edgeExists) {
-                  var extraEdge = {
-                    from: rootArtist.nodeid,
-                    to: duplicated.id,
-                  };
-
-                  artistGraph.extraEdges.push(extraEdge);
-
-                  if (!artistGraph.treemode)
-                    artistGraph.data.edges.push(extraEdge);
-                }
-              } else {
-                var nodeid = ++artistGraph.index;
-
-                artistGraph.data.nodes.push({
-                  id: nodeid,
-                  label: artist.name,
-                  artist: artist,
-                  isLeaf: true
-                });
-
-                artistGraph.data.edges.push({
-                  from: rootArtist.nodeid,
-                  to: nodeid
-                });
-
-                artistGraph.relatedArtists.push(artist);
-
-                artist.nodeid = nodeid;
-              }
-            }).done(this, function() {
-
-              this.graphcontroller.updateData();
-              this.graphcontroller.artistGraph.throbber.hide();
-
-            });
-          });
-      });
-
-      this.jelement.find(this.selectors.control_expand).hide();
-    },
-    onBtnNewClick: function(event) {
-      this.graphcontroller.updateArtist(this.artist);
-      this.jelement.find(this.selectors.control_new).hide();
-      this.jelement.find(this.selectors.control_delete).hide();
     }
-
   });
 
   exports.artistmenu = ArtistMenu;

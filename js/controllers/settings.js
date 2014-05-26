@@ -3,22 +3,21 @@ require([
   'js/models/element#element'
 ], function(Controller, Element) {
 
+  /**
+    Controller for the Settings UI Component
+  */
+
   var Settings = new Class({
     Extends: Controller,
 
     initialize: function(name, config) {
       this.parent(name, config);
 
-      this.button = {
-        selector: config.buttonSelector ||
-          this.selector + ' .settings-btn'
-      };
+      this.selectors = config.selectors;
 
-      this.settings = {
-        selector: config.formSelector ||
-          this.selector + ' .settings-form'
-      };
-
+      // inputs of the form
+      // the value parameter refers to the DOM attribute of
+      // the element to listen to changes (to update the graph)
       this.inputs = {
         branching: {
           value: 'value'
@@ -31,25 +30,49 @@ require([
         }
       };
 
+      // generate selectors for each input
       for (var input in this.inputs) {
         this.inputs[input].selector =
-          this.settings.selector + ' input[name=' + input + ']';
+          this.selectors.form + ' input[name=' + input + ']';
       }
     }
   });
 
   Settings.implement({
-    afterLoad: function() {
-      this.button = new Element(this.button.selector);
-      this.settings = new Element(this.settings.selector);
 
-      var btn = this.button.jelement;
-      var settings = this.settings.jelement;
+    // this.loadController
+    // Creates for each DOM Element a Element object and
+    // sets their events
+    loadController: function(graphcontroller) {
+      // initiate the elements
+      this.button = new Element(this.selectors.button);
+      this.form = new Element(this.selectors.form);
 
-      this.button.element.onclick = function(event) {
-        btn.toggleClass('opened');
-        settings.toggle();
-      };
+      // bind events
+      this.button.addDOMEvent({
+        eventName: 'onclick',
+        context: this,
+        handler: function(event) {
+          this.button.jelement.toggleClass('opened');
+          this.form.jelement.toggle();
+        }
+      });
+
+      // event for input change: for every input onchange,
+      // update graph with new setting
+      _.each(this.inputs, function(input) {
+        input.element = document.querySelector(input.selector);
+
+        input.element.onchange = function() {
+          var config = {};
+
+          config[this.name] = parseInt(this[input.value]) ||
+            this[input.value];
+
+          graphcontroller.updateGraph(config);
+        };
+      });
+
     }
   });
 

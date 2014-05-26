@@ -1,6 +1,6 @@
 RAMA - Relational Artist MAps
 =========
-[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/) [![Build Status](https://travis-ci.org/carsy/rama-spotify.png?branch=master)](https://travis-ci.org/carsy/rama-spotify) [![Dependency Status](https://gemnasium.com/carsy/rama-spotify.png)](https://gemnasium.com/carsy/rama-spotify) [![Stories in Ready](https://badge.waffle.io/carsy/rama-spotify.png?label=ready&title=Ready)](https://waffle.io/carsy/rama-spotify)
+[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/) [![Build Status](https://travis-ci.org/carsy/rama-spotify.png?branch=master)](https://travis-ci.org/carsy/rama-spotify) [![Dependency Status](https://gemnasium.com/carsy/rama-spotify.png)](https://gemnasium.com/carsy/rama-spotify) [![Stories in Ready](https://badge.waffle.io/carsy/rama-spotify.png?label=ready&title=Ready)](https://waffle.io/carsy/rama-spotify) [![DOI](https://zenodo.org/badge/3432/carsy/rama-spotify.png)](http://dx.doi.org/10.5281/zenodo.9745)
 
 RAMA is a Spotify Application for visualizing and interacting with networks of music artists. For the original RAMA web application see [rama.inescporto.pt]
 
@@ -8,35 +8,37 @@ For now, I do not intend to make this application available on the Spotify App S
 
 To open a downloaded app you need to **Activate Spotify Developer account** here: https://devaccount.spotify.com/my-account (no premium account needed).
 
-I've tested the app in mac and windows. Please report any [issues] you encounter in both mac or windows please.
+I've tested the app in mac, windows and linux. Please report any [issues] you encounter please.
 
 Installation
 --------------
 
-#### Automagic installer (for mac only)
+#### Automagic installer (mac and linux only)
 
 Execute the installer script.
 
 ```sh
-$ curl -L https://raw.githubusercontent.com/carsy/rama-spotify/master/install.sh | sh
+$ curl -L https://raw.githubusercontent.com/carsy/rama-spotify/master/install.sh | bash
 ```
 
 You should now be in the app and seeing a graph thingy.
+If not, restart Spotify and then open the app by typing spotify:app:rama in the search bar.
 
-#### Manual installer (windows and mac)
+#### Manual installer (windows, mac and linux)
 
 These are the contents of the script:
 
 ```sh
 $ mkdir ~/Spotify ; cd ~/Spotify
 $ rm -rf rama
-$ rm rama_v0.10.tar.gz
-$ curl https://github.com/carsy/rama-spotify/releases/download/v0.10/rama_v0.10.tar.gz
-$ tar -xvf rama_v0.10.tar.gz
+$ rm rama_v0.10.6.tar.gz
+$ curl https://github.com/carsy/rama-spotify/releases/download/v0.10.6/rama_v0.10.6.tar.gz
+$ tar -xvf rama_v0.10.6.tar.gz
 $ open spotify:app:rama
 ```
 
 You should now be in the app and seeing a graph thingy.
+
 If not, restart Spotify (open the app by typing spotify:app:rama in the search bar).
 
 Alternatively, If you happen to have commandlinephobia (I get that every other month... might be a thing):
@@ -50,14 +52,22 @@ Now open Spotify and type in the search bar:
 ```sh
 spotify:app:rama
 ```
-You should now be in the app and seeing a graph thingy. If not, restart Spotify
 
-### GNU/Linux Support
+You should now be in the app and seeing a graph thingy.
 
-With no official release for the Spotify Desktop Client, there's nothing I can do about this. Try your luck with wine (playonlinux might be the best option).
+If not, restart Spotify and then open the app by typing spotify:app:rama in the search bar.
 
 [Releases]
 ----
+
+[v0.10.6] - GraphController bug fixes
+  - handling metadata errors
+
+[v0.10.5] - GraphController bug fixes
+  - when data is updated, the graph does not re-render
+
+[v0.10.2] - Tags menu bug fixes
+  - nodes inserted by expanding node were not being highlighted by tags
 
 [v0.10] - Tags menu
   - Tags menu added
@@ -111,7 +121,7 @@ With no official release for the Spotify Desktop Client, there's nothing I can d
 #### Author
 
 José Bateira
-[@\_carsy\_]
+[@zebateira]
 
 [carsy.github.io]
 
@@ -121,6 +131,9 @@ José Bateira
 [here]:https://github.com/carsy/rama-spotify/releases/latest
 [Releases]:https://github.com/carsy/rama-spotify/releases/latest
 [issues]:https://github.com/carsy/rama-spotify/issues
+[v0.10.6]:https://github.com/carsy/rama-spotify/releases/tag/v0.10.6
+[v0.10.5]:https://github.com/carsy/rama-spotify/releases/tag/v0.10.5
+[v0.10.2]:https://github.com/carsy/rama-spotify/releases/tag/v0.10.2
 [v0.10]:https://github.com/carsy/rama-spotify/releases/tag/v0.10
 [v0.9.1]:https://github.com/carsy/rama-spotify/releases/tag/v0.9.1
 [v0.9]:https://github.com/carsy/rama-spotify/releases/tag/v0.9
