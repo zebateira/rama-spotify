@@ -31,9 +31,9 @@ These are the contents of the script:
 ```sh
 $ mkdir ~/Spotify ; cd ~/Spotify
 $ rm -rf rama
-$ rm rama_v0.10.5.tar.gz
-$ curl https://github.com/carsy/rama-spotify/releases/download/v0.10.5/rama_v0.10.5.tar.gz
-$ tar -xvf rama_v0.10.5.tar.gz
+$ rm rama_v0.10.6.tar.gz
+$ curl https://github.com/carsy/rama-spotify/releases/download/v0.10.6/rama_v0.10.6.tar.gz
+$ tar -xvf rama_v0.10.6.tar.gz
 $ open spotify:app:rama
 ```
 
@@ -59,6 +59,9 @@ If not, restart Spotify and then open the app by typing spotify:app:rama in the 
 
 [Releases]
 ----
+
+[v0.10.6] - GraphController bug fixes
+  - handling metadata errors
 
 [v0.10.5] - GraphController bug fixes
   - when data is updated, the graph does not re-render
@@ -128,6 +131,7 @@ José Bateira
 [here]:https://github.com/carsy/rama-spotify/releases/latest
 [Releases]:https://github.com/carsy/rama-spotify/releases/latest
 [issues]:https://github.com/carsy/rama-spotify/issues
+[v0.10.6]:https://github.com/carsy/rama-spotify/releases/tag/v0.10.6
 [v0.10.5]:https://github.com/carsy/rama-spotify/releases/tag/v0.10.5
 [v0.10.2]:https://github.com/carsy/rama-spotify/releases/tag/v0.10.2
 [v0.10]:https://github.com/carsy/rama-spotify/releases/tag/v0.10

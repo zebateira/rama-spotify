@@ -29,6 +29,10 @@ require([
     }
   });
 
+  GraphController.BASE_URL =
+    'http://developer.echonest.com/api/v4/artist/terms';
+  GraphController.API_KEY = '29N71ZBQUW4XN0QXF';
+
   GraphController.implement({
     // parameter settings is a dependency.
     // this means that at this point (when loadController runs)
@@ -104,13 +108,51 @@ require([
     updateNodes: function() {
       this.artistgraph.updateNodes();
     },
+
     getData: function() {
       return this.artistgraph.data;
     },
+
+
+    fetchTags: function(artistURI, sortType) {
+      // Paul Lamere
+      // http://developer.echonest.com/forums/thread/353
+      // Artist terms (tags) -> 
+      //      what is the difference between weight and frequency
+      //                          (values of sortType)
+
+      // term frequency is directly proportional to how often 
+      // that term is used to describe that artist. 
+      // Term weight is a measure of how important that term is 
+      // in describing the artist. As an example of the difference, 
+      // the term 'rock' may be the most frequently applied term 
+      // for The Beatles. However, 'rock' is not very descriptive 
+      // since many bands have 'rock' as the most frequent term. 
+      // However, the most highly weighted terms for The Beatles 
+      // are 'merseybeat' and 'british invasion', which give you 
+      // a better idea of what The Beatles are all about 
+      // than 'rock' does. 
+      // We don't publish the details of our algorithms, 
+      // but I can tell you that frequency is related to the 
+      // simple counting of appearance of a term, whereas 
+      // weight is related to TF-IDF as described 
+      // here (http://en.wikipedia.org/wiki/Tf%E2%80%93idf).
+
+      // the url to query echonest's API.
+      // the list of tags are being sorted by weight.
+      return $.ajax({
+        url: GraphController.BASE_URL + '?' +
+          'api_key=' + GraphController.API_KEY + '&' +
+          'format=json' + '&' +
+          'sort=' + sortType + '&' +
+          'id=' + artistURI.replace('spotify', 'spotify-WW')
+      });
+    },
+
     // Expands the specific given artist in the graph.
     // the artist is required to be in the graph
     expandNode: function(artist) {
-      this.artistgraph.highlightNode(artist);
+      this.highlightArtist(artist);
       this.artistgraph.expandNode(
         0,
         artist,
@@ -132,6 +174,42 @@ require([
     hideThrobber: function() {
       if (this.throbber)
         this.throbber.hide();
+    },
+
+    highlightNodes: function(nodes) {
+      _.each(nodes, this.highlightNode);
+      this.updateNodes();
+      _.each(nodes, this.unHighlightNode);
+    },
+
+    highlightArtist: function(artist) {
+      this.highlightNode(this.artistgraph.getNode(artist));
+    },
+    highlightNode: function(node) {
+      if (node.isRoot)
+        node.color = {
+          border: '#7fb701'
+        };
+      else
+        node.color = {
+          border: '#7fb701',
+          background: '#313336'
+        };
+    },
+    unHighlightNode: function(node) {
+      if (node.isRoot)
+        node.color = {
+          highlight: {
+            border: '#7fb701'
+          }
+        };
+      else
+        node.color = {
+          background: '#313336',
+          highlight: {
+            border: '#7fb701'
+          }
+        };
     },
 
     // Events
@@ -182,6 +260,9 @@ require([
     // When the player changes the playing track,
     // update this.nowplayingArtist with the track's artist.
     onPlayerChange: function(player) {
+
+      if (!player.track)
+        return;
 
       // ignore change if it's playing an ad.
       if (player.track.advertisement)

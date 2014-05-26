@@ -104,6 +104,9 @@ require([
                 var track = tracks[i];
                 var element = document.createElement('span');
 
+                // sometimes the API returns null for some reason
+                if (!track)
+                  continue;
 
                 // the spotify's uri of the track
                 // is added to the element
