@@ -31,9 +31,9 @@ These are the contents of the script:
 ```sh
 $ mkdir ~/Spotify ; cd ~/Spotify
 $ rm -rf rama
-$ rm rama_v0.10.6.tar.gz
-$ curl https://github.com/carsy/rama-spotify/releases/download/v0.10.6/rama_v0.10.6.tar.gz
-$ tar -xvf rama_v0.10.6.tar.gz
+$ rm rama_v0.11.tar.gz
+$ curl https://github.com/carsy/rama-spotify/releases/download/v0.11/rama_v0.11.tar.gz
+$ tar -xvf rama_v0.11.tar.gz
 $ open spotify:app:rama
 ```
 
@@ -59,6 +59,11 @@ If not, restart Spotify and then open the app by typing spotify:app:rama in the 
 
 [Releases]
 ----
+
+[v0.11] - Drop and draw
+  - Spotify items can now be dropped into the application to update the graph (closes #38)
+  - tags can now be selected (closes #40)
+  - bug fix on graph creation: some nodes where not being added.
 
 [v0.10.6] - GraphController bug fixes
   - handling metadata errors
@@ -131,6 +136,7 @@ José Bateira
 [here]:https://github.com/carsy/rama-spotify/releases/latest
 [Releases]:https://github.com/carsy/rama-spotify/releases/latest
 [issues]:https://github.com/carsy/rama-spotify/issues
+[v0.11]:https://github.com/carsy/rama-spotify/releases/tag/v0.11
 [v0.10.6]:https://github.com/carsy/rama-spotify/releases/tag/v0.10.6
 [v0.10.5]:https://github.com/carsy/rama-spotify/releases/tag/v0.10.5
 [v0.10.2]:https://github.com/carsy/rama-spotify/releases/tag/v0.10.2
