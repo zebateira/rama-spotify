@@ -141,7 +141,6 @@ require([
           graphcontroller.highlightNodes(this.nodes);
         else
           graphcontroller.unHighlightNodes(this.nodes);
-
       };
 
       // finally append it to the tag's container

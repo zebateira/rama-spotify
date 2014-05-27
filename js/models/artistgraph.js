@@ -6,6 +6,9 @@
 */
 var ArtistGraph = function(element, artist, config) {
 
+  // indicates if the
+  this.isBuildingGraph = false;
+
   // the DOM element where the canvas should be put on
   // to be later on passed to the vis.Graph object
   this.element = element;
@@ -119,6 +122,7 @@ ArtistGraph.prototype = {
 
   // Resets state variables and starts constructing the graph
   buildGraph: function(done) {
+    this.isBuildingGraph = true;
     // Current number of iterations (recursive calls)
     // done to construct the graph
     var currentIteration = 1;
@@ -164,8 +168,10 @@ ArtistGraph.prototype = {
       // draw the final graph.
       if (currentIteration >= this.maxIterations) {
         this.drawGraph(true);
-        if (done)
+        if (done) {
+          this.isBuildingGraph = false;
           done();
+        }
       }
     }
   },

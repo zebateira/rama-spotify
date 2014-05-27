@@ -157,21 +157,17 @@ require([
   };
   // Displays a loading throbber and hides the graph canvas
   GraphController.prototype.showThrobber = function() {
-    if (this.throbber) {
-      this.throbber.hide();
-      this.throbber.show();
-    } else
-      this.throbber =
-        Throbber.forElement(document.getElementById(this.name));
+    this.throbber =
+      Throbber.forElement(document.getElementById(this.name));
 
     this.throbber.setPosition('center', 'center');
     this.throbber._addBackground();
+    this.throbber.show();
   };
   GraphController.prototype.hideThrobber = function() {
     if (this.throbber)
       this.throbber.hide();
   };
-
 
   GraphController.prototype.highlightNodes = function(nodes) {
     _.each(nodes, this.highlightNode);
@@ -225,6 +221,9 @@ require([
       models.player.load('track').done(onPlayerChange);
     });
 
+    models.application.addEventListener('dropped',
+      this.onItemDropped.bind(this));
+
     _.each(this.events, function(event) {
       this.artistgraph.on(event.eventName, event.eventHandler);
     }, this);
@@ -257,20 +256,6 @@ require([
     });
   };
 
-  // When the player changes the playing track,
-  // update this.nowplayingArtist with the track's artist.
-  GraphController.prototype.onPlayerChange = function(player) {
-
-    if (!player.track)
-      return;
-
-    // ignore change if it's playing an ad.
-    if (player.track.advertisement)
-      return;
-
-    this.nowplayingArtist = player.track.artists[0];
-  };
-
   // Event for double clicking a graph node
   GraphController.prototype.onNodeDoubleClick = function(data) {
 
@@ -289,7 +274,47 @@ require([
     });
   };
 
-  GraphController.prototype.constructos = GraphController;
+  // Spotify events
+
+  // When the player changes the playing track,
+  // update this.nowplayingArtist with the track's artist.
+  GraphController.prototype.onPlayerChange = function(player) {
+
+    if (!player.track)
+      return;
+
+    // ignore change if it's playing an ad.
+    if (player.track.advertisement)
+      return;
+
+    this.nowplayingArtist = player.track.artists[0];
+  };
+
+  // When spotify items (artist, track, album)
+  // are drag and dropped to the application
+  // draw the graph of the artist of the item
+  GraphController.prototype.onItemDropped = function(event) {
+    var itemURI = event.data.dropped[0];
+
+    if (itemURI.contains('artist')) {
+      models.Artist.fromURI(itemURI).load('name')
+        .done(this, this.newGraph);
+    } else if (itemURI.contains('track')) {
+      models.Track.fromURI(itemURI).load('artists')
+        .done(this, function(track) {
+          track.artists[0].load('name')
+            .done(this, this.newGraph);
+        });
+    } else if (itemURI.contains('album')) {
+      models.Album.fromURI(itemURI).load('artists')
+        .done(this, function(album) {
+          album.artists[0].load('name')
+            .done(this, this.newGraph);
+        });
+    }
+  };
+
+  GraphController.prototype.constructor = GraphController;
 
   exports.graphcontroller = GraphController;
 });
