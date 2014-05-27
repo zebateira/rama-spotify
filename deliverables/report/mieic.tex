@@ -12,6 +12,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{subcaption}
 
+\usepackage{indentfirst}
 
 \usepackage{listings}
 \usepackage{color}
@@ -55,7 +56,7 @@
 %% Portuguese version
 
 %% MIEIC options
-\usepackage[portugues,mieic]{styles/feupteses}
+\usepackage[english,mieic]{styles/feupteses}
 %\usepackage[portugues,mieic,juri]{feupteses}
 %\usepackage[portugues,mieic,final]{feupteses}
 %\usepackage[portugues,mieic,final,onpaper]{feupteses}
@@ -65,7 +66,7 @@
 %\usepackage{graphicx}
 %\usepackage{float}
 
-\usepackage{color}
+\usepackage{xcolor}
 \definecolor{cloudwhite}{cmyk}{0,0,0,0.025}
 
 %% Include source-code listings package
@@ -115,9 +116,9 @@
 \title{Spotify-ed: Music Recommendation and Discovery in Spotify}
 \author{José Lage Bateira}
 
-\thesisdate{11 de Fevereiro de 2014}
+\thesisdate{June 23, 2014}
 
-\supervisor{Orientador}{Fabien Gouyon}
+\supervisor{Supervisor}{Fabien Gouyon}
 
 %% Uncomment committee stuff in the final version
 % \committeetext{Aprovado em provas públicas pelo Júri:}
@@ -129,18 +130,16 @@
 %% Specify cover logo (in folder ``figures'')
 \logo{uporto-feup.pdf}
 
-\additionalfronttext{Preparação da Dissertação}
-
 %% Preliminary materials
 \begin{Prolog}
   \include{prolog/abstract} % the abstract
   % \include{prolog/acknows}  % the acknowledgments
   % \include{prolog/quote}    % initial quotation if desired
   \cleardoublepage
-  \pdfbookmark[0]{Conteúdo}{contents}
+  \pdfbookmark[0]{Content}{contents}
   \tableofcontents
   \cleardoublepage
-  \pdfbookmark[0]{Lista de Figuras}{figures}
+  \pdfbookmark[0]{List of Figures}{figures}
   \listoffigures
   \cleardoublepage
   % \pdfbookmark[0]{Lista de Tabelas}{tables}
@@ -161,7 +160,7 @@
 
 %% Bibliography
 
-\renewcommand{\bibname}{Referências}
+\renewcommand{\bibname}{References}
 
 \bibliography{bib/myrefs}
 \bibliographystyle{bib/unsrt-pt}

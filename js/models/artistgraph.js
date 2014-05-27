@@ -102,6 +102,7 @@ ArtistGraph.prototype = {
         // artist and isLeaf are helper properties
         // for future reference
         artist: this.artist,
+        uri: this.artist.uri,
         // isLeaf simply indicates if the node is a leaf
         // in the graph or not
         isLeaf: false,
@@ -119,6 +120,7 @@ ArtistGraph.prototype = {
 
   // Resets state variables and starts constructing the graph
   buildGraph: function(done) {
+    this.isBuildingGraph = true;
     // Current number of iterations (recursive calls)
     // done to construct the graph
     var currentIteration = 1;
@@ -205,6 +207,7 @@ ArtistGraph.prototype = {
     // note: this means that this function will be called
     //       exactly this.branching times.
     function forEachRelated(childArtist) {
+
       // Try to find repeated nodes in the graph
       // given the name of the artist is the same
       var duplicated = this.getNode(childArtist);
@@ -269,6 +272,7 @@ ArtistGraph.prototype = {
           id: ++this.currentNodeId,
           label: childArtist.name,
           artist: childArtist,
+          uri: childArtist.uri,
           // if the depth value of the graph is zero
           // then this is most definitely a leaf node
           isLeaf: depth <= 0
@@ -358,11 +362,10 @@ ArtistGraph.prototype = {
   getNode: function(artist) {
     return _.findWhere(
       this.data.nodes, {
-        id: artist.nodeid
+        uri: artist.uri
       }
     );
   },
-
 
   // Events
 
