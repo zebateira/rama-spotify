@@ -4,6 +4,14 @@ spotify.require([
   'js/controllers/controller#controller'
 ], function(Components, controllers, Controller) {
 
+  // Polyfills
+
+  if (!String.prototype.contains) {
+    String.prototype.contains = function() {
+      return String.prototype.indexOf.apply(this, arguments) !== -1;
+    };
+  }
+
   // Components object initial configuration  for the UI components
   //
   // A configuration object is passed on to the initConfig function
