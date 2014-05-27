@@ -16,6 +16,11 @@
 \@portuguesfalse
 \DeclareOption{portugues}{\@portuguestrue}
 
+%% Option for English
+\newif\if@english
+\@portuguesfalse
+\DeclareOption{english}{\@englishtrue}
+
 %% Option mieec
 \newif\if@mieec
 \@mieecfalse
@@ -247,25 +252,25 @@ with the `report' document style}{}}{}
   \center{\noindent\large #1: #2}}}
 
 %% Working version
-\if@provisional
- \if@mieec
-    \if@portugues
-       \additionalfronttext{Vers\~{a}o de trabalho}
-    \else
-       \additionalfronttext{Working version}
-    \fi
- \fi
-\fi
+%\if@provisional
+% \if@mieec
+%    \if@portugues
+%       \additionalfronttext{Vers\~{a}o de trabalho}
+%    \else
+%       \additionalfronttext{Working version}
+%    \fi
+% \fi
+%\fi
 
-\if@provisional
- \if@mieic
-    \if@portugues
-       \additionalfronttext{Vers\~{a}o de trabalho}
-    \else
-       \additionalfronttext{Working version}
-    \fi
- \fi
-\fi
+%\if@provisional
+% \if@mieic
+%    \if@portugues
+%       \additionalfronttext{Vers\~{a}o de trabalho}
+%    \else
+%       \additionalfronttext{Working version}
+%    \fi
+% \fi
+%\fi
 
 %% For Jury Evaluation
 \if@juri
