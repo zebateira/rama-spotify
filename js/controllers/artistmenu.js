@@ -150,7 +150,11 @@ require([
 
   ArtistMenu.prototype.updateTags = function(artist) {
 
-    var fetchDone = function(data) {
+    this.graphcontroller.fetchTags(this.artist.uri, 'weight')
+      .done(fetchDone.bind(this))
+      .fail(fetchFail.bind(this));
+
+    function fetchDone(data) {
       // clear the displayed tags
       this.elements.tags.reset();
       this.elements.tagsTitle.reset();
@@ -160,9 +164,11 @@ require([
         (data.response.terms && data.response.terms.length <= 0))
         return;
 
+      this.artist.responseTags = data.response.terms;
+
       // the echonest's tags are called terms
       this.tags = _.sortBy(data.response.terms
-        .splice(0, ArtistMenu.MAX_TAGS), 'name');
+        .slice(0, ArtistMenu.MAX_TAGS), 'name');
 
       this.elements.tagsTitle.html('Tags: <br>');
 
@@ -177,20 +183,17 @@ require([
       }
 
       this.artist.tags = this.tags;
-    };
+    }
 
-    var fetchFail = function() {
+    function fetchFail() {
       // Temporary fix for requests limit from echonest
       // just... don't show any tags.
       // Note: since the API key being used has request limits,
       // sometimes the limit is reached very easily. If so
       // don't show anything.
       this.elements.tagsTitle.reset();
-    };
+    }
 
-    this.graphcontroller.fetchTags(this.artist.uri, 'weight')
-      .done(fetchDone.bind(this))
-      .fail(fetchFail.bind(this));
   };
 
   // control buttons update: shows/hides controls

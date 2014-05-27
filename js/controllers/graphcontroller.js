@@ -221,8 +221,10 @@ require([
       models.player.load('track').done(onPlayerChange);
     });
 
-    models.application.addEventListener('dropped',
-      this.onItemDropped.bind(this));
+    var onItemDropped = this.onItemDropped.bind(this);
+    models.application.addEventListener('dropped', function() {
+      models.application.load('dropped').done(onItemDropped);
+    });
 
     _.each(this.events, function(event) {
       this.artistgraph.on(event.eventName, event.eventHandler);
@@ -291,10 +293,11 @@ require([
   };
 
   // When spotify items (artist, track, album)
-  // are drag and dropped to the application
-  // draw the graph of the artist of the item
-  GraphController.prototype.onItemDropped = function(event) {
-    var itemURI = event.data.dropped[0];
+  // are dropped to the application
+  // draw the graph of the artist of the item.
+  // note: item can be an artist, track or album.
+  GraphController.prototype.onItemDropped = function(application) {
+    var itemURI = application.dropped[0].uri;
 
     if (itemURI.contains('artist')) {
       models.Artist.fromURI(itemURI).load('name')

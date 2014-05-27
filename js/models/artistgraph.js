@@ -6,9 +6,6 @@
 */
 var ArtistGraph = function(element, artist, config) {
 
-  // indicates if the
-  this.isBuildingGraph = false;
-
   // the DOM element where the canvas should be put on
   // to be later on passed to the vis.Graph object
   this.element = element;
@@ -168,10 +165,8 @@ ArtistGraph.prototype = {
       // draw the final graph.
       if (currentIteration >= this.maxIterations) {
         this.drawGraph(true);
-        if (done) {
-          this.isBuildingGraph = false;
+        if (done)
           done();
-        }
       }
     }
   },
@@ -211,6 +206,7 @@ ArtistGraph.prototype = {
     // note: this means that this function will be called
     //       exactly this.branching times.
     function forEachRelated(childArtist) {
+
       // Try to find repeated nodes in the graph
       // given the name of the artist is the same
       var duplicated = this.getNode(childArtist);
