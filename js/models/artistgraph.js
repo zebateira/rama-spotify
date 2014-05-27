@@ -102,6 +102,7 @@ ArtistGraph.prototype = {
         // artist and isLeaf are helper properties
         // for future reference
         artist: this.artist,
+        uri: this.artist.uri,
         // isLeaf simply indicates if the node is a leaf
         // in the graph or not
         isLeaf: false,
@@ -271,6 +272,7 @@ ArtistGraph.prototype = {
           id: ++this.currentNodeId,
           label: childArtist.name,
           artist: childArtist,
+          uri: childArtist.uri,
           // if the depth value of the graph is zero
           // then this is most definitely a leaf node
           isLeaf: depth <= 0
@@ -360,11 +362,10 @@ ArtistGraph.prototype = {
   getNode: function(artist) {
     return _.findWhere(
       this.data.nodes, {
-        id: artist.nodeid
+        uri: artist.uri
       }
     );
   },
-
 
   // Events
 
