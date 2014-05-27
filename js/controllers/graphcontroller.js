@@ -172,12 +172,16 @@ require([
       this.throbber.hide();
   };
 
+
   GraphController.prototype.highlightNodes = function(nodes) {
     _.each(nodes, this.highlightNode);
     this.updateNodes();
     _.each(nodes, this.unHighlightNode);
   };
-
+  GraphController.prototype.unHighlightNodes = function(nodes) {
+    _.each(nodes, this.unHighlightNode);
+    this.updateNodes();
+  };
   GraphController.prototype.highlightArtist = function(artist) {
     this.highlightNode(this.artistgraph.getNode(artist));
   };

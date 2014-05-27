@@ -129,19 +129,19 @@ require([
       tagElement.innerHTML = tag.name;
       tagElement.nodes = tag.nodes;
 
-      // on tag click, highlight all of its
+      // on tag click, toggle highlighting all of its
       // corresponding artists
       tagElement.onclick = function onTagClick(event) {
-        if (this.className.contains('selected'))
-          return;
 
-        // the selected class is used to highlight the 
-        // currently viewed tag
-        $(commontagClass).removeClass('selected');
-        this.className += ' selected';
+        $(commontagClass + '.selected').not(this)
+          .removeClass('selected');
+        $(this).toggleClass('selected');
 
-        // highlight the tag's nodes
-        graphcontroller.highlightNodes(this.nodes);
+        if ($(this).hasClass('selected'))
+          graphcontroller.highlightNodes(this.nodes);
+        else
+          graphcontroller.unHighlightNodes(this.nodes);
+
       };
 
       // finally append it to the tag's container
