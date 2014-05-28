@@ -19,10 +19,7 @@ require([
 
     this.options = config.options;
 
-    // Graph's component specific events
-    this.events = [];
-    // vis.Graph's events
-    this.graphevents = [];
+    this.customEvents = [];
   };
 
   GraphController.prototype = Object.create(Controller.prototype);
@@ -212,109 +209,101 @@ require([
 
   // Binds all the events related to the graph components.
   GraphController.prototype.bindAllEvents = function() {
+    this.artistgraph.onGraph('doubleClick',
+      this.events.onNodeDoubleClick.bind(this));
 
-    this.addGraphEvent('doubleClick',
-      this.onNodeDoubleClick.bind(this));
-
-    var onPlayerChange = this.onPlayerChange.bind(this);
+    var onPlayerChange = this.events.onPlayerChange.bind(this);
     models.player.addEventListener('change', function(player) {
       models.player.load('track').done(onPlayerChange);
     });
 
-    var onItemDropped = this.onItemDropped.bind(this);
+    var onItemDropped = this.events.onItemDropped.bind(this);
     models.application.addEventListener('dropped', function() {
       models.application.load('dropped').done(onItemDropped);
     });
 
-    _.each(this.events, function(event) {
+    _.each(this.customEvents, function(event) {
       this.artistgraph.on(event.eventName, event.eventHandler);
     }, this);
-
-    _.each(this.graphevents, function(event) {
-      this.artistgraph.onGraph(event.eventName, event.eventHandler);
-    }, this);
   };
+
   // Adds eventName to the ArtistGraph object given eventHandler,
   // as a graph event.
   GraphController.prototype.addGraphEvent = function(eventName, eventHandler) {
     this.artistgraph.onGraph(eventName, eventHandler);
-
-    this.graphevents.push({
-      eventName: eventName,
-      eventHandler: eventHandler
-    });
   };
 
   // Adds eventName to the ArtistGraph object given eventHandler,
   // as a custom event. The event should be run by ArtistGraph
   // accordingly.
   GraphController.prototype.addCustomGraphEvent = function(eventName, eventHandler) {
-    if (this.artistgraph)
-      this.artistgraph.on(eventName, eventHandler);
-
-    this.events.push({
+    this.customEvents.push({
       eventName: eventName,
       eventHandler: eventHandler
     });
   };
 
-  // Event for double clicking a graph node
-  GraphController.prototype.onNodeDoubleClick = function(data) {
+  GraphController.prototype.events = {
 
-    // find the clicked node.
-    var node = _.findWhere(this.artistgraph.data.nodes, {
-      id: parseInt(data.nodes[0])
-    });
+    // Event for double clicking a graph node
+    onNodeDoubleClick: function(data) {
 
-    // ignore event if it's the same artist
-    if (!node || this.nowplayingArtist.uri === node.artist.uri)
-      return;
+      // find the clicked node.
+      var node = _.findWhere(this.artistgraph.data.nodes, {
+        id: parseInt(data.nodes[0])
+      });
 
-    // play top list tracks from artist.
-    node.artist.load('compilations').done(function(artist) {
-      models.player.playContext(artist.compilations);
-    });
-  };
+      // ignore event if it's the same artist
+      if (!node || this.nowplayingArtist.uri === node.artist.uri)
+        return;
 
-  // Spotify events
+      // play top list tracks from artist.
+      node.artist.load('compilations').done(function(artist) {
+        models.player.playContext(artist.compilations);
+      });
+    },
 
-  // When the player changes the playing track,
-  // update this.nowplayingArtist with the track's artist.
-  GraphController.prototype.onPlayerChange = function(player) {
+    // Spotify events
 
-    if (!player.track)
-      return;
+    // When the player changes the playing track,
+    // update this.nowplayingArtist with the track's artist.
+    onPlayerChange: function(player) {
 
-    // ignore change if it's playing an ad.
-    if (player.track.advertisement)
-      return;
+      if (!player.track)
+        return;
 
-    this.nowplayingArtist = player.track.artists[0];
-  };
+      // ignore change if it's playing an ad.
+      if (player.track.advertisement)
+        return;
 
-  // When spotify items (artist, track, album)
-  // are dropped to the application
-  // draw the graph of the artist of the item.
-  // note: item can be an artist, track or album.
-  GraphController.prototype.onItemDropped = function(application) {
-    var itemURI = application.dropped[0].uri;
+      this.nowplayingArtist = player.track.artists[0];
+    },
 
-    if (itemURI.contains('artist')) {
-      models.Artist.fromURI(itemURI).load('name')
-        .done(this, this.newGraph);
-    } else if (itemURI.contains('track')) {
-      models.Track.fromURI(itemURI).load('artists')
-        .done(this, function(track) {
-          track.artists[0].load('name')
-            .done(this, this.newGraph);
-        });
-    } else if (itemURI.contains('album')) {
-      models.Album.fromURI(itemURI).load('artists')
-        .done(this, function(album) {
-          album.artists[0].load('name')
-            .done(this, this.newGraph);
-        });
+    // When spotify items (artist, track, album)
+    // are dropped to the application
+    // draw the graph of the artist of the item.
+    // note: item can be an artist, track or album.
+    onItemDropped: function(application) {
+      var itemURI = application.dropped[0].uri;
+
+      if (itemURI.contains('artist')) {
+        models.Artist.fromURI(itemURI).load('name')
+          .done(this, this.newGraph);
+      } else if (itemURI.contains('track')) {
+        models.Track.fromURI(itemURI).load('artists')
+          .done(this, function(track) {
+            track.artists[0].load('name')
+              .done(this, this.newGraph);
+          });
+      } else if (itemURI.contains('album')) {
+        models.Album.fromURI(itemURI).load('artists')
+          .done(this, function(album) {
+            album.artists[0].load('name')
+              .done(this, this.newGraph);
+          });
+      }
     }
+
   };
 
   GraphController.prototype.constructor = GraphController;
