@@ -45,6 +45,11 @@ var ArtistGraph = function(element, artist, config) {
   this.graph =
     new vis.Graph(this.element, this.data, this.options);
 
+  this.graph.on('stabilize', function(eventData) {
+    this.storePosition();
+    console.log(eventData);
+  });
+
   this.bindAllGraphEvents();
 };
 
@@ -79,8 +84,6 @@ ArtistGraph.prototype = {
 
   // initiates state properties of the graph
   initGraph: function() {
-    // list of related artist of the main artist of the graph
-    this.relatedArtists = [];
 
     // extra edges that are missing from the graph in treemode form
     this.extraEdges = [];
@@ -108,6 +111,7 @@ ArtistGraph.prototype = {
         // isLeaf simply indicates if the node is a leaf
         // in the graph or not
         isLeaf: false,
+        level: 0,
         // is this the root node?
         isRoot: true
       }],
@@ -166,6 +170,8 @@ ArtistGraph.prototype = {
       // full graph constructed, then stop recursion and
       // call the final callback
       if (currentIteration >= this.maxIterations) {
+        this.graph.storePosition();
+
         this.updateData();
         if (done)
           done();
@@ -184,9 +190,7 @@ ArtistGraph.prototype = {
     var parentNode = this.getNode(parentArtist);
 
     parentNode.childs = [];
-
-    if (parentNode)
-      parentNode.isLeaf = false;
+    parentNode.isLeaf = false;
 
     // load the related artists property
     parentArtist.load('related').done(this, function(parentArtist) {
@@ -200,7 +204,12 @@ ArtistGraph.prototype = {
           // call forEachRelated on each artist
           .each(this, forEachRelated)
           // when done on each artist update the number of iterations
-          .done(done);
+          .done(this, function() {
+            this.updateData();
+
+            if (done)
+              done();
+          });
         });
     });
 
@@ -275,13 +284,13 @@ ArtistGraph.prototype = {
           label: childArtist.name,
           artist: childArtist,
           uri: childArtist.uri,
-          // if the depth value of the graph is zero
-          // then this is most definitely a leaf node
-          isLeaf: depth <= 0
+          isLeaf: depth <= 0,
+          level: parentNode.level + 1,
+          parentNode: parentNode,
+          parentNodeId: parentNode.id,
+          x: this.graph.nodesData.get(parentNode.id).x,
+          y: this.graph.nodesData.get(parentNode.id).y
         };
-
-        // then add it to the list of nodes
-        this.data.nodes.push(childNode);
 
         // also create the edge to connect the new node to
         // its parent
@@ -290,25 +299,23 @@ ArtistGraph.prototype = {
           to: this.currentNodeId
         });
 
-        this.relatedArtists.push(childArtist);
-
         childArtist.nodeid = this.currentNodeId;
-        childNode.parentNodeId = parentNode.id;
-        childNode.parentNode = parentNode;
 
         var jenny = childNode; // I'll name her Jenny 8D
         parentNode.childs.push(jenny); // now go play and be nice with your sisters
 
+        this.data.nodes.push(childNode);
+
       }
 
-      this.updateNodes();
-      this.updateEdges();
       // if a leaf node as not been reached, then continue
       // constructing the graph, now with this child node
       // as the root node
       if (depth > 0)
         this.expandNode(depth - 1, childArtist, done);
       // note: the condition to end the recursion is: if depth <= 0
+      this.updateNodes();
+      this.updateEdges();
     }
 
   },
@@ -324,14 +331,15 @@ ArtistGraph.prototype = {
         this.data.nodes = _.filter(this.data.nodes, function(node) {
           return node.id !== childnode.id;
         }, this);
+        this.graph.nodesData.remove(childnode);
       }, this);
 
-      this.graph.nodesData.remove(childnodes);
       parentNode.isLeaf = true;
       parentNode.childs = []; // my jenneeeeys u_u
     }, this);
 
-    this.updateData();
+    this.updateNodes();
+    this.updateEdges();
   },
 
   redrawGraph: function() {
@@ -358,22 +366,34 @@ ArtistGraph.prototype = {
   },
   updateDepth: function(newDepth) {
     var oldDepth = this.depth;
-    this.depth = newDepth || this.depth;
-
-    console.log('updating depth to', newDepth, 'from', oldDepth);
 
     var leafs = _.where(this.data.nodes, {
-      isLeaf: true
+      level: oldDepth
     });
 
-    if (newDepth > oldDepth)
-      _.each(leafs, function(node) {
-        this.expandNode(0,
-          this.getArtist(node),
-          this.updateData.bind(this));
-      }, this);
-    else if (newDepth < oldDepth)
-      this.compressNodes(leafs);
+
+    function expandWrapper(node) {
+      this.expandNode(Math.abs(newDepth - oldDepth - 1), this.getArtist(node),
+        this.updateData.bind(this));
+    }
+
+    if (newDepth > oldDepth) {
+      this.depth = newDepth;
+      _.each(leafs, expandWrapper, this);
+    } else if (newDepth < oldDepth) {
+      var inc = Math.min(1, Math.max(-1, newDepth - oldDepth));
+
+      while (oldDepth !== newDepth) {
+        leafs = _.where(this.data.nodes, {
+          level: oldDepth
+        });
+
+        this.compressNodes(leafs);
+
+        oldDepth += inc;
+        this.depth += inc;
+      }
+    }
   },
   updateTreemode: function(treemode) {
     this.treemode = treemode;

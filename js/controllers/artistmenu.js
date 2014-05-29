@@ -263,11 +263,10 @@ require([
           id: parseInt(data.nodes[0])
         });
 
-      console.log('node clicked', node);
-
       if (!node)
         return;
 
+      console.log('node clicked. level:', node.level);
 
       this.updateView(node.artist);
     },
