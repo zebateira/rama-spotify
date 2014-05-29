@@ -43,15 +43,10 @@ require([
   };
 
   // this.updateView
-  // Redraws the graph and centers the throbber if being shown.
-  // This is useful when the window is being resized and
-  // the throbbers is not aligned at the center of the screen.
+  // Redraws the graph.
   GraphController.prototype.updateView = function() {
     if (this.artistgraph) {
       this.artistgraph.redrawGraph();
-
-      if (this.artistgraph.throbber)
-        this.artistgraph.throbber.setPosition('center', 'center');
     }
   };
 
@@ -81,19 +76,13 @@ require([
       config
     );
 
-    this.showThrobber();
-    this.artistgraph.buildGraph(
-      this.hideThrobber.bind(this)
-    );
+    this.artistgraph.buildGraph();
 
     this.bindAllEvents();
   };
   // Updates the graph given the new config values
-  GraphController.prototype.updateGraph = function(config) {
-    this.showThrobber();
-    this.artistgraph.updateGraph(config,
-      this.hideThrobber.bind(this)
-    );
+  GraphController.prototype.updateConfig = function(config) {
+    this.artistgraph.updateConfig(config);
   };
   // Updates graph's data (nodes and edges)
   GraphController.prototype.updateData = function() {
@@ -145,24 +134,7 @@ require([
   // Expands the specific given artist in the graph.
   // the artist is required to be in the graph
   GraphController.prototype.expandNode = function(artist) {
-    this.artistgraph.expandNode(
-      0,
-      artist,
-      this.updateData.bind(this)
-    );
-  };
-  // Displays a loading throbber and hides the graph canvas
-  GraphController.prototype.showThrobber = function() {
-    this.throbber =
-      Throbber.forElement($('.loading-wrapper')[0]);
-
-    this.throbber.setPosition('center', 'center');
-    this.throbber._addBackground();
-    this.throbber.show();
-  };
-  GraphController.prototype.hideThrobber = function() {
-    if (this.throbber)
-      this.throbber.hide();
+    this.artistgraph.expandNode(0, artist);
   };
 
   GraphController.prototype.highlightNodes = function(nodes) {

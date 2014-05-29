@@ -44,6 +44,8 @@ var ArtistGraph = function(element, artist, config) {
   // create the vis.Graph Object
   this.graph =
     new vis.Graph(this.element, this.data, this.options);
+
+  this.bindAllGraphEvents();
 };
 
 // Default values to be used to construct the graph
@@ -120,7 +122,6 @@ ArtistGraph.prototype = {
 
   // Resets state variables and starts constructing the graph
   buildGraph: function(done) {
-    this.isBuildingGraph = true;
     // Current number of iterations (recursive calls)
     // done to construct the graph
     var currentIteration = 1;
@@ -163,9 +164,9 @@ ArtistGraph.prototype = {
 
       // If the number of iterations done is enough to have the
       // full graph constructed, then stop recursion and
-      // draw the final graph.
+      // call the final callback
       if (currentIteration >= this.maxIterations) {
-        this.drawGraph(true);
+        // this.drawGraph(true);
         if (done)
           done();
       }
@@ -174,7 +175,7 @@ ArtistGraph.prototype = {
 
   // Expands the node of the parent artist by this.branching.
   // It recursively decreases the depth parameter.
-  // The update parameter is the callback to be called
+  // The done parameter is the callback to be called
   // after all the callbacks of the child nodes of the root node
   // have finished.
   expandNode: function(depth, parentArtist, done) {
@@ -288,8 +289,11 @@ ArtistGraph.prototype = {
         this.relatedArtists.push(childArtist);
 
         childArtist.nodeid = this.currentNodeId;
+
       }
 
+      this.updateNodes();
+      this.updateEdges();
       // if a leaf node as not been reached, then continue
       // constructing the graph, now with this child node
       // as the root node
@@ -300,39 +304,13 @@ ArtistGraph.prototype = {
 
   },
 
-  // what it says...
-  drawGraph: function(debug) {
-    // binds all the graph events previously declared to the object.
-    this.bindAllGraphEvents();
-
-    // sets the previously computed graph data
-    // note: no animation starts at this point
-    this.graph.setData(this.data, {
-      disableStart: true
-    });
-
-    // starts the animation to draw the graph
-    this.graph.start();
-
-    // updates the tagsmenu UI component
-    this.events.updateTagsMenu();
-
-    // Debug information about the graph creation
-    if (debug) {
-      console.log('#### Stats for ' + this.artist.name);
-      console.log('# iterations: ' + this.maxIterations);
-      console.log('# nodes: ' + this.data.nodes.length);
-      console.log('# edges: ' + this.data.edges.length);
-    }
-
-  },
   redrawGraph: function() {
     this.graph.redraw();
   },
 
   // Updates the graph with the given config object
   // it is expected that config is defined
-  updateGraph: function(config, done) {
+  updateConfig: function(config, done) {
     this.branching = config.branching || this.branching;
     this.depth = config.depth || this.depth;
 
@@ -340,6 +318,7 @@ ArtistGraph.prototype = {
       this.treemode = config.treemode;
 
     this.reset();
+
     this.buildGraph(done);
   },
 

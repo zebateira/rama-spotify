@@ -62,7 +62,7 @@ require([
         config[this.name] = parseInt(this[input.value]) ||
           this[input.value];
 
-        graphcontroller.updateGraph(config);
+        graphcontroller.updateConfig(config);
       };
     });
 
