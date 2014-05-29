@@ -107,7 +107,9 @@ spotify.require([
             fontColor: '#dfe0e6',
             fontFace: '',
             shape: 'box',
-            radius: 1
+            radius: 1,
+            allowedToMoveX: true,
+            allowedToMoveY: true,
           },
           edges: {
             color: {

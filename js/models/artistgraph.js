@@ -166,7 +166,7 @@ ArtistGraph.prototype = {
       // full graph constructed, then stop recursion and
       // call the final callback
       if (currentIteration >= this.maxIterations) {
-        // this.drawGraph(true);
+        this.updateData();
         if (done)
           done();
       }
@@ -181,10 +181,12 @@ ArtistGraph.prototype = {
   expandNode: function(depth, parentArtist, done) {
 
     // after expanding, the node will stop being a leaf
-    var node = this.getNode(parentArtist);
+    var parentNode = this.getNode(parentArtist);
 
-    if (node)
-      node.isLeaf = false;
+    parentNode.childs = [];
+
+    if (parentNode)
+      parentNode.isLeaf = false;
 
     // load the related artists property
     parentArtist.load('related').done(this, function(parentArtist) {
@@ -268,8 +270,7 @@ ArtistGraph.prototype = {
       // if the node is new/unique to the graph
       else {
 
-        // then add it to the list of nodes
-        this.data.nodes.push({
+        var childNode = {
           id: ++this.currentNodeId,
           label: childArtist.name,
           artist: childArtist,
@@ -277,7 +278,10 @@ ArtistGraph.prototype = {
           // if the depth value of the graph is zero
           // then this is most definitely a leaf node
           isLeaf: depth <= 0
-        });
+        };
+
+        // then add it to the list of nodes
+        this.data.nodes.push(childNode);
 
         // also create the edge to connect the new node to
         // its parent
@@ -289,6 +293,11 @@ ArtistGraph.prototype = {
         this.relatedArtists.push(childArtist);
 
         childArtist.nodeid = this.currentNodeId;
+        childNode.parentNodeId = parentNode.id;
+        childNode.parentNode = parentNode;
+
+        var jenny = childNode; // I'll name her Jenny 8D
+        parentNode.childs.push(jenny); // now go play and be nice with your sisters
 
       }
 
@@ -303,23 +312,84 @@ ArtistGraph.prototype = {
     }
 
   },
+  compressNodes: function(leafNodes) {
+    var parentNodes = _.groupBy(leafNodes, 'parentNodeId');
+
+    _.each(parentNodes, function(childnodes, parentNodeId) {
+
+      var parentNode = childnodes[0].parentNode;
+
+      _.each(childnodes, function(childnode, index) {
+
+        this.data.nodes = _.filter(this.data.nodes, function(node) {
+          return node.id !== childnode.id;
+        }, this);
+      }, this);
+
+      this.graph.nodesData.remove(childnodes);
+      parentNode.isLeaf = true;
+      parentNode.childs = []; // my jenneeeeys u_u
+    }, this);
+
+    this.updateData();
+  },
 
   redrawGraph: function() {
     this.graph.redraw();
   },
 
   // Updates the graph with the given config object
-  // it is expected that config is defined
   updateConfig: function(config, done) {
-    this.branching = config.branching || this.branching;
-    this.depth = config.depth || this.depth;
+    if (config && config.branching)
+      this.updateBranching(config.branching);
 
-    if (typeof config.treemode != 'undefined')
-      this.treemode = config.treemode;
+    if (config && config.depth)
+      this.updateDepth(config.depth);
 
-    this.reset();
+    if (config && config.treemode !== undefined)
+      this.updateTreemode(config.treemode);
+  },
+  updateBranching: function(branching) {
+    this.branching = branching || this.branching;
 
-    this.buildGraph(done);
+    console.log('updating braching...', this.branching);
+
+    // TODO
+  },
+  updateDepth: function(newDepth) {
+    var oldDepth = this.depth;
+    this.depth = newDepth || this.depth;
+
+    console.log('updating depth to', newDepth, 'from', oldDepth);
+
+    var leafs = _.where(this.data.nodes, {
+      isLeaf: true
+    });
+
+    if (newDepth > oldDepth)
+      _.each(leafs, function(node) {
+        this.expandNode(0,
+          this.getArtist(node),
+          this.updateData.bind(this));
+      }, this);
+    else if (newDepth < oldDepth)
+      this.compressNodes(leafs);
+  },
+  updateTreemode: function(treemode) {
+    this.treemode = treemode;
+
+    console.log('updating treemode...', this.treemode);
+
+    // WIP
+    if (this.treemode) {
+      this.data.edges =
+        _.without(this.data.edges, this.extraEdges);
+    } else {
+      for (var edge in this.extraEdges) {
+        this.data.edges.push(this.extraEdges[edge]);
+      }
+    }
+    this.updateEdges();
   },
 
   // Refresh vis.Graph's data objects
@@ -345,6 +415,9 @@ ArtistGraph.prototype = {
       }
     );
   },
+  getArtist: function(node) {
+    return models.Artist.fromURI(node.uri);
+  },
 
   // Events
 
@@ -353,6 +426,7 @@ ArtistGraph.prototype = {
   bindAllGraphEvents: function() {
     for (var event in this.graphevents) {
       this.graph.on(event, this.graphevents[event]);
+      console.log(event);
     }
   },
 
@@ -364,12 +438,18 @@ ArtistGraph.prototype = {
   // saves a vis.Graph event, given the proper eventHandler.
   onGraph: function(event, eventHandler) {
     this.graphevents[event] = eventHandler;
+
+    this.graph.on(event, this.graphevents[event]);
   }
 };
 
 ArtistGraph.prototype.constructor = ArtistGraph;
 
+var models = {};
+
 // Exports for the spotify's require system
 require(['$api/models'], function(_models) {
+  models = _models;
+
   exports.ArtistGraph = ArtistGraph;
 });
