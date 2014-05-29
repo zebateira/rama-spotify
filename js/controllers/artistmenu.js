@@ -266,8 +266,6 @@ require([
       if (!node)
         return;
 
-      console.log('node clicked. level:', node.level);
-
       this.updateView(node.artist);
     },
     // on track change event

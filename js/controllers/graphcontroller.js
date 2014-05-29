@@ -20,6 +20,7 @@ require([
     this.options = config.options;
 
     this.customEvents = [];
+    this.graphevents = [];
   };
 
   GraphController.prototype = Object.create(Controller.prototype);
@@ -196,12 +197,21 @@ require([
     _.each(this.customEvents, function(event) {
       this.artistgraph.on(event.eventName, event.eventHandler);
     }, this);
+
+    _.each(this.graphevents, function(event) {
+      this.artistgraph.onGraph(event.eventName, event.eventHandler);
+    }, this);
   };
 
   // Adds eventName to the ArtistGraph object given eventHandler,
   // as a graph event.
   GraphController.prototype.addGraphEvent = function(eventName, eventHandler) {
     this.artistgraph.onGraph(eventName, eventHandler);
+
+    this.graphevents.push({
+      eventName: eventName,
+      eventHandler: eventHandler
+    });
   };
 
   // Adds eventName to the ArtistGraph object given eventHandler,
