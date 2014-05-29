@@ -145,7 +145,6 @@ require([
   // Expands the specific given artist in the graph.
   // the artist is required to be in the graph
   GraphController.prototype.expandNode = function(artist) {
-    this.highlightArtist(artist);
     this.artistgraph.expandNode(
       0,
       artist,
@@ -155,7 +154,7 @@ require([
   // Displays a loading throbber and hides the graph canvas
   GraphController.prototype.showThrobber = function() {
     this.throbber =
-      Throbber.forElement(document.getElementById(this.name));
+      Throbber.forElement($('.loading-wrapper')[0]);
 
     this.throbber.setPosition('center', 'center');
     this.throbber._addBackground();

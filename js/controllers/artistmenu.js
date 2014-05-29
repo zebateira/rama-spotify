@@ -288,6 +288,8 @@ require([
     // Expand control button click event
     onBtnExpandClick: function(event) {
       this.graphcontroller.expandNode(this.artist);
+      this.graphcontroller.highlightArtist(this.artist);
+
       this.elements.controlExpand.jelement.hide();
     },
     // New control button click event

@@ -501,6 +501,7 @@ a {
 
 /* line 1, ../sass/_artistmenu.scss */
 #artistmenu {
+  z-index: 1;
   position: absolute;
   left: 0;
   top: 110px;
