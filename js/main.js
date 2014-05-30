@@ -133,32 +133,32 @@ spotify.require([
           list: '#tracklist_items'
         }
       },
-      artistmenu: {
-        loadtemplate: true,
-        controller: controllers.ArtistMenu,
-        // artistmenu's specific DOM selectors
-        selectors: {
-          cover: '#artist_cover',
-          popularity: '#artist_pop',
-          years: '#artist_years',
-          albumsTitle: '#artist_albums_title',
-          albums: '#artist_albums',
-          tagsTitle: '#artist_tags_title',
-          tags: '#artist_tags',
-          controls: '#artist_controls',
-          controlExpand: '#control_expand',
-          controlNew: '#control_new'
-        },
-        hasDependencies: true
-      },
-      tagsmenu: {
-        loadtemplate: false,
-        controller: controllers.TagsMenu,
-        hasDependencies: true,
-        selectors: {
-          commontag: '.common-tag'
-        }
-      }
+      // artistmenu: {
+      //   loadtemplate: true,
+      //   controller: controllers.ArtistMenu,
+      //   // artistmenu's specific DOM selectors
+      //   selectors: {
+      //     cover: '#artist_cover',
+      //     popularity: '#artist_pop',
+      //     years: '#artist_years',
+      //     albumsTitle: '#artist_albums_title',
+      //     albums: '#artist_albums',
+      //     tagsTitle: '#artist_tags_title',
+      //     tags: '#artist_tags',
+      //     controls: '#artist_controls',
+      //     controlExpand: '#control_expand',
+      //     controlNew: '#control_new'
+      //   },
+      //   hasDependencies: true
+      // },
+      // tagsmenu: {
+      //   loadtemplate: false,
+      //   controller: controllers.TagsMenu,
+      //   hasDependencies: true,
+      //   selectors: {
+      //     commontag: '.common-tag'
+      //   }
+      // }
     }
   });
 

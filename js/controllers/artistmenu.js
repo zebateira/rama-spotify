@@ -199,10 +199,9 @@ require([
   // control buttons update: shows/hides controls
   // based on the artist
   ArtistMenu.prototype.updateControls = function(artist) {
-    var node = _.findWhere(
-      this.graphcontroller.getData().nodes, {
-        label: artist.name
-      });
+    var node = this.graphcontroller.getNodes().get({
+      label: artist.name
+    });
 
     // no node found for given artist.
     // This means the artist is not on the graph.

@@ -93,8 +93,11 @@ require([
     this.artistgraph.updateNodes();
   };
 
-  GraphController.prototype.getData = function() {
-    return this.artistgraph.data;
+  GraphController.prototype.getNodes = function() {
+    return this.artistgraph && this.artistgraph.graph.nodesData;
+  };
+  GraphController.prototype.getEdges = function() {
+    return this.artistgraph && this.artistgraph.graph.edgesData;
   };
 
   GraphController.prototype.fetchTags = function(artistURI, sortType) {

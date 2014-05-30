@@ -39,16 +39,12 @@ var ArtistGraph = function(element, artist, config) {
   this.options = (config && config.options) ||
     ArtistGraph.DEFAULT_OPTIONS;
 
-  this.initGraph();
 
   // create the vis.Graph Object
   this.graph =
-    new vis.Graph(this.element, this.data, this.options);
+    new vis.Graph(this.element, {}, this.options);
 
-  this.graph.on('stabilize', function(eventData) {
-    this.storePosition();
-    console.log(eventData);
-  });
+  this.initGraph();
 
   this.bindAllGraphEvents();
 };
@@ -86,37 +82,36 @@ ArtistGraph.prototype = {
   initGraph: function() {
 
     // extra edges that are missing from the graph in treemode form
-    this.extraEdges = [];
+    this.extraEdges = new vis.DataSet({});
 
     // current id value for the vis.Graph's nodes
     this.currentNodeId = 1;
 
-    // data object to be passed on to the vis.Graph object
-    this.data = {
-      nodes: [{
-        id: this.currentNodeId,
-        label: this.artist.name,
-        fontColor: '#313336', // TODO refactor colors
-        color: {
-          background: '#dfe0e6',
-          highlight: {
-            border: '#7fb701'
-          }
-        },
+    this.rootNode = {
+      id: this.currentNodeId,
+      label: this.artist.name,
+      fontColor: '#313336', // TODO refactor colors
+      color: {
+        background: '#dfe0e6',
+        highlight: {
+          border: '#7fb701'
+        }
+      },
 
-        // artist and isLeaf are helper properties
-        // for future reference
-        artist: this.artist,
-        uri: this.artist.uri,
-        // isLeaf simply indicates if the node is a leaf
-        // in the graph or not
-        isLeaf: false,
-        level: 0,
-        // is this the root node?
-        isRoot: true
-      }],
-      edges: []
+      // artist and isLeaf are helper properties
+      // for future reference
+      artist: this.artist,
+      uri: this.artist.uri,
+      // isLeaf simply indicates if the node is a leaf
+      // in the graph or not
+      isLeaf: false,
+      level: 0,
+      isRoot: true
     };
+
+    this.artist.node = this.rootNode;
+
+    this.graph.nodesData.add(this.rootNode);
   },
 
   // alias to initGraph
@@ -187,9 +182,9 @@ ArtistGraph.prototype = {
   expandNode: function(depth, parentArtist, done) {
 
     // after expanding, the node will stop being a leaf
-    var parentNode = this.getNode(parentArtist);
+    var parentNode = parentArtist.node;
 
-    parentNode.childs = [];
+    parentNode.childs = new vis.DataSet({});
     parentNode.isLeaf = false;
 
     // load the related artists property
@@ -204,12 +199,7 @@ ArtistGraph.prototype = {
           // call forEachRelated on each artist
           .each(this, forEachRelated)
           // when done on each artist update the number of iterations
-          .done(this, function() {
-            this.updateData();
-
-            if (done)
-              done();
-          });
+          .done(this, done);
         });
     });
 
@@ -222,23 +212,30 @@ ArtistGraph.prototype = {
 
       // Try to find repeated nodes in the graph
       // given the name of the artist is the same
-      var duplicated = this.getNode(childArtist);
+      var duplicated = this.graph.nodesData.get({
+        filter: function(node) {
+          return node.uri === childArtist.uri;
+        }
+      })[0];
 
       // Is the artist node already in the graph?
       // If there is a duplicate then create an
       // edge between the two artists:
       // the child artist and parent artist
       if (duplicated) {
-
         // try to find repeated edges in the graph
-        var edgeExists = _.findWhere(this.data.edges, {
-          to: duplicated.id,
-          from: parentArtist.nodeid
+        var edgeExists = this.graph.edgesData.get({
+          filter: function(edge) {
+            return edge.to === duplicated.id &&
+              edge.from === parentArtist.nodeid;
+          }
         });
         // try to find repeated edges (even if inverse)
-        var inverseEdgeExists = _.findWhere(this.data.edges, {
-          from: duplicated.id,
-          to: parentArtist.nodeid
+        var inverseEdgeExists = this.graph.edgesData.get({
+          filter: function(edge) {
+            return edge.from === duplicated.id &&
+              edge.to === parentArtist.nodeid;
+          }
         });
 
         // if the edge we are trying to insert 
@@ -250,7 +247,7 @@ ArtistGraph.prototype = {
         // sometimes, an artist would exist itself in its related
         // artists list, which created a edge that went from it to 
         // itself.
-        if (!edgeExists && !inverseEdgeExists &&
+        if (edgeExists.length === 0 && inverseEdgeExists.length === 0 &&
           childArtist.uri !== parentArtist.uri) {
 
           // Create the extra edge.
@@ -258,7 +255,7 @@ ArtistGraph.prototype = {
             from: parentArtist.nodeid,
             to: duplicated.id,
           };
-          this.extraEdges.push(extraEdge);
+          this.extraEdges.add(extraEdge);
 
           // The extra edge concept is related to the treemode of
           // the graph:
@@ -273,15 +270,16 @@ ArtistGraph.prototype = {
           // which means that the graph will not be a tree, 
           // with a much higher number of edges.
           if (!this.treemode)
-            this.data.edges.push(extraEdge);
+            this.graph.edgesData.add(extraEdge);
         }
       }
       // if the node is new/unique to the graph
       else {
 
-        var childNode = {
+        childArtist.nodeid = ++this.currentNodeId;
+        childArtist.node = {
           // properties required
-          id: ++this.currentNodeId,
+          id: this.currentNodeId,
           label: childArtist.name,
           // custom properties
           artist: childArtist,
@@ -290,25 +288,25 @@ ArtistGraph.prototype = {
           level: parentNode.level + 1,
           parentNode: parentNode,
           parentNodeId: parentNode.id,
-          x: this.graph.nodesData.get(parentNode.id).x,
-          y: this.graph.nodesData.get(parentNode.id).y
+          x: parentNode.x,
+          y: parentNode.y
         };
+
+
+        var jenny = childArtist.node; // I'll name her Jenny 8D
+        parentNode.childs.add(jenny); // now go play and be nice with your sisters
+
+        this.graph.nodesData.add(childArtist.node);
 
         // also create the edge to connect the new node to
         // its parent
-        this.data.edges.push({
+        this.graph.edgesData.add({
           from: parentArtist.nodeid,
           to: this.currentNodeId
         });
-
-        childArtist.nodeid = this.currentNodeId;
-
-        var jenny = childNode; // I'll name her Jenny 8D
-        parentNode.childs.push(jenny); // now go play and be nice with your sisters
-
-        this.data.nodes.push(childNode);
-
       }
+
+      this.graph.nodesData.update(parentNode);
 
       // if a leaf node as not been reached, then continue
       // constructing the graph, now with this child node
@@ -321,27 +319,16 @@ ArtistGraph.prototype = {
     }
 
   },
-  compressNodes: function(leafNodes) {
-    var parentNodes = _.groupBy(leafNodes, 'parentNodeId');
+  compressNodes: function(toBeLeafs) {
+    _.each(toBeLeafs, function(parentNode) {
+      var childNodesIds = _.pluck(parentNode.childs.get(), 'id');
 
-    _.each(parentNodes, function(childnodes, parentNodeId) {
-
-      var parentNode = childnodes[0].parentNode;
-
-      _.each(childnodes, function(childnode, index) {
-
-        this.data.nodes = _.filter(this.data.nodes, function(node) {
-          return node.id !== childnode.id;
-        }, this);
-        this.graph.nodesData.remove(childnode);
-      }, this);
-
+      parentNode.childs = new vis.DataSet({});
       parentNode.isLeaf = true;
-      parentNode.childs = []; // my jenneeeeys u_u
-    }, this);
+      this.graph.nodesData.update(parentNode);
 
-    this.updateNodes();
-    this.updateEdges();
+      this.graph.nodesData.remove(childNodesIds);
+    }, this);
   },
 
   redrawGraph: function() {
@@ -370,10 +357,11 @@ ArtistGraph.prototype = {
     console.log('updating depth...', newDepth);
     var oldDepth = this.depth;
 
-    var leafs = _.where(this.data.nodes, {
-      level: oldDepth
+    var leafs = this.graph.nodesData.get({
+      filter: function(node) {
+        return node.level === oldDepth;
+      }
     });
-
 
     function expandWrapper(node) {
       this.expandNode(Math.abs(newDepth - oldDepth - 1), this.getArtist(node),
@@ -387,11 +375,13 @@ ArtistGraph.prototype = {
       var inc = Math.min(1, Math.max(-1, newDepth - oldDepth));
 
       while (oldDepth !== newDepth) {
-        leafs = _.where(this.data.nodes, {
-          level: oldDepth
+        var toBeLeafs = this.graph.nodesData.get({
+          filter: function(node) {
+            return node.level === (oldDepth - 1);
+          }
         });
 
-        this.compressNodes(leafs);
+        this.compressNodes(toBeLeafs);
 
         oldDepth += inc;
         this.depth += inc;
@@ -419,30 +409,29 @@ ArtistGraph.prototype = {
 
   // Refresh vis.Graph's data objects
   updateData: function() {
-    this.updateNodes();
-    this.updateEdges();
+    // this.updateNodes();
+    // this.updateEdges();
 
-    this.events.updateTagsMenu();
+    // this.events.updateTagsMenu();
   },
   updateNodes: function() {
-    this.graph.nodesData.update(this.data.nodes);
+    // this.graph.nodesData.update(this.nodes);
   },
   updateEdges: function() {
-    this.graph.edgesData.update(this.data.edges);
+    // this.graph.edgesData.update(this.edges);
   },
 
   // Get the node of the given artist.
   // return undefined if not found.
   getNode: function(artist) {
-    return _.findWhere(
-      this.data.nodes, {
-        uri: artist.uri
-      }
-    );
+    return this.graph.nodesData.get({
+      uri: artist.uri
+    });
   },
   getArtist: function(node) {
     return models.Artist.fromURI(node.uri);
   },
+
 
   // Events
 
@@ -453,6 +442,18 @@ ArtistGraph.prototype = {
       this.graph.on(event, this.graphevents[event]);
       console.log(event);
     }
+
+    this.graph.nodesData.on('*', function() {
+      // console.log(arguments);
+    });
+
+    this.graph.on('click', function(data) {
+      console.log(this.nodesData.get(data.nodes[0]));
+    });
+
+    this.graph.on('stabilize', function(eventData) {
+      this.storePosition();
+    });
   },
 
   // saves the given event, given the proper eventHandler.
