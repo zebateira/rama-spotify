@@ -49,18 +49,25 @@ describe('Artist Graph Module', function() {
   });
 
   describe('build Graph', function() {
-    it('should build a graph with depth 2 and branching 2', function() {
+    it('should create 7 nodes with b=2 and d=2', function() {
       var ag = new ArtistGraph(
         document.createElement('div'), {
           name: 'Anamanaguchi',
-          uri: 'spotify:artist:2UwJRAgSOi1zcLkvUNc8XL',
-          load: function() {
-            return {
-              done: function() {
+          uri: 'spotify:artist:2UwJRAgSOi1zcLkvUNc8XL'
+        }, {
+          depth: 2,
+          branching: 2
+        }
+      );
 
-              }
-            };
-          }
+      expect(ag.calNumNodes(ag.depth, ag.branching)).toBe(7);
+    });
+
+    it('should build a graph with 7 nodes and 6 edges given depth 2 and branching 2', function() {
+      var ag = new ArtistGraph(
+        document.createElement('div'), {
+          name: 'Anamanaguchi',
+          uri: 'spotify:artist:2UwJRAgSOi1zcLkvUNc8XL'
         }, {
           depth: 2,
           branching: 2
@@ -69,7 +76,8 @@ describe('Artist Graph Module', function() {
 
       ag.buildGraph(function() {
         expect(ag.graph.nodesData.getIds().length)
-          .toBe(ag.calNumNodes(ag.depth, ag.branching));
+          .toBe(7);
+        expect(ag.graph.edgesData.getIds().length).toBe(6);
       });
 
     });

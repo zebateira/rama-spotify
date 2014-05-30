@@ -1,3 +1,5 @@
+var sputils;
+
 /**
   Artist Graph Model
 
@@ -210,11 +212,13 @@ ArtistGraph.prototype = {
         }
       })[0];
 
+
       // Is the artist node already in the graph?
       // If there is a duplicate then create an
       // edge between the two artists:
       // the child artist and parent artist
       if (duplicated) {
+
         // try to find repeated edges in the graph
         var edgeExists = this.graph.edgesData.get({
           filter: function(edge) {
@@ -443,7 +447,6 @@ ArtistGraph.prototype = {
 };
 
 ArtistGraph.prototype.constructor = ArtistGraph;
-var sputils = {};
 
 // Exports for the spotify's require system
 require(['js/utils/spotify'], function(_sputils) {

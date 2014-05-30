@@ -1,4 +1,4 @@
-spotify.require([
+require([
   'js/components#Components',
   'js/controllers/controllers',
   'js/controllers/controller#controller'
