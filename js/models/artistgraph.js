@@ -119,6 +119,13 @@ ArtistGraph.prototype = {
     this.initGraph();
   },
 
+  calNumNodes: function(depth, branching) {
+    return (function lambda(i) {
+      return Math.pow(branching, i) +
+        (i < depth ? lambda.bind(this)(i + 1) : 0);
+    }).bind(this)(0);
+  },
+
   // Resets state variables and starts constructing the graph
   buildGraph: function(done) {
     // Current number of iterations (recursive calls)
@@ -127,11 +134,7 @@ ArtistGraph.prototype = {
 
     // Maximum number of iterations that will be performed
     // to construct the graph.
-    this.maxIterations =
-      (function lambda(i) {
-      return Math.pow(this.branching, i) +
-        (i < this.depth ? lambda.bind(this)(i + 1) : 0);
-    }).bind(this)(0);
+    this.maxIterations = this.calNumNodes(this.depth, this.branching);
 
     // maxIterations is equal to:
     // 
@@ -165,8 +168,6 @@ ArtistGraph.prototype = {
       // full graph constructed, then stop recursion and
       // call the final callback
       if (currentIteration >= this.maxIterations) {
-        this.graph.storePosition();
-
         this.updateData();
         if (done)
           done();
@@ -187,21 +188,12 @@ ArtistGraph.prototype = {
     parentNode.childs = new vis.DataSet({});
     parentNode.isLeaf = false;
 
-    // load the related artists property
-    parentArtist.load('related').done(this, function(parentArtist) {
-      // when done loading, load the current snapshot of the array
-      // of artists, with this.branching length
-      parentArtist.related
-        .snapshot(0, this.branching).done(this, function(snapshot) {
-          // when done loading, load name and uri properties
-          // of each artist in the snapshot
-          snapshot.loadAll(['name', 'uri'])
-          // call forEachRelated on each artist
-          .each(this, forEachRelated)
-          // when done on each artist update the number of iterations
-          .done(this, done);
-        });
-    });
+    sputils.loadRelatedArtists(
+      parentArtist,
+      this.branching,
+      forEachRelated.bind(this),
+      done
+    );
 
     // Updates the graph given the artist parameter.
     // This function will be called on each child node
@@ -319,20 +311,13 @@ ArtistGraph.prototype = {
     }
 
   },
-  compressNodes: function(toBeLeafs) {
-    _.each(toBeLeafs, function(parentNode) {
-      var childNodesIds = _.pluck(parentNode.childs.get(), 'id');
+  compressNode: function(parentNode) {
+    var childNodesIds = parentNode.childs.getIds();
 
-      parentNode.childs = new vis.DataSet({});
-      parentNode.isLeaf = true;
-      this.graph.nodesData.update(parentNode);
-
-      this.graph.nodesData.remove(childNodesIds);
-    }, this);
-  },
-
-  redrawGraph: function() {
-    this.graph.redraw();
+    this.graph.nodesData.remove(childNodesIds);
+    parentNode.childs.clear();
+    parentNode.isLeaf = true;
+    this.graph.nodesData.update(parentNode);
   },
 
   // Updates the graph with the given config object
@@ -354,37 +339,33 @@ ArtistGraph.prototype = {
     // TODO
   },
   updateDepth: function(newDepth) {
-    console.log('updating depth...', newDepth);
     var oldDepth = this.depth;
+    this.depth = newDepth;
 
-    var leafs = this.graph.nodesData.get({
-      filter: function(node) {
-        return node.level === oldDepth;
-      }
-    });
-
-    function expandWrapper(node) {
-      this.expandNode(Math.abs(newDepth - oldDepth - 1), this.getArtist(node),
-        this.updateData.bind(this));
+    function filterNodes(oldDepth, node) {
+      return node.level == (oldDepth - 1);
     }
 
     if (newDepth > oldDepth) {
-      this.depth = newDepth;
-      _.each(leafs, expandWrapper, this);
+      var leafs = this.graph.nodesData.get({
+        filter: function(node) {
+          return node.level === oldDepth;
+        }
+      });
+      _.each(leafs, function(node) {
+        this.expandNode(Math.abs(newDepth - oldDepth - 1), node.artist,
+          this.updateData.bind(this));
+      }, this);
     } else if (newDepth < oldDepth) {
-      var inc = Math.min(1, Math.max(-1, newDepth - oldDepth));
-
       while (oldDepth !== newDepth) {
         var toBeLeafs = this.graph.nodesData.get({
-          filter: function(node) {
-            return node.level === (oldDepth - 1);
-          }
+          filter: filterNodes.bind(this, oldDepth)
         });
 
-        this.compressNodes(toBeLeafs);
+        _.each(toBeLeafs, this.compressNode, this);
 
-        oldDepth += inc;
-        this.depth += inc;
+        oldDepth--;
+        console.log(oldDepth);
       }
     }
   },
@@ -421,17 +402,9 @@ ArtistGraph.prototype = {
     // this.graph.edgesData.update(this.edges);
   },
 
-  // Get the node of the given artist.
-  // return undefined if not found.
-  getNode: function(artist) {
-    return this.graph.nodesData.get({
-      uri: artist.uri
-    });
+  redrawGraph: function() {
+    this.graph.redraw();
   },
-  getArtist: function(node) {
-    return models.Artist.fromURI(node.uri);
-  },
-
 
   // Events
 
@@ -448,7 +421,7 @@ ArtistGraph.prototype = {
     });
 
     this.graph.on('click', function(data) {
-      console.log(this.nodesData.get(data.nodes[0]));
+      console.log(this.nodesData.get(data.nodes[0]).level);
     });
 
     this.graph.on('stabilize', function(eventData) {
@@ -470,12 +443,10 @@ ArtistGraph.prototype = {
 };
 
 ArtistGraph.prototype.constructor = ArtistGraph;
-
-var models = {};
+var sputils = {};
 
 // Exports for the spotify's require system
-require(['$api/models'], function(_models) {
-  models = _models;
-
+require(['js/utils/spotify'], function(_sputils) {
+  sputils = _sputils.utils;
   exports.ArtistGraph = ArtistGraph;
 });

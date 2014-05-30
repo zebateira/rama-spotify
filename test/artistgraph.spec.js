@@ -1,6 +1,6 @@
 describe('Artist Graph Module', function() {
-  describe('new ArtistGraph', function() {
 
+  describe('new ArtistGraph', function() {
     it('should set branching factor do default if not specified', function() {
 
       var ag = new ArtistGraph(
@@ -45,6 +45,33 @@ describe('Artist Graph Module', function() {
       );
 
       expect(ag.depth).toBe(2);
+    });
+  });
+
+  describe('build Graph', function() {
+    it('should build a graph with depth 2 and branching 2', function() {
+      var ag = new ArtistGraph(
+        document.createElement('div'), {
+          name: 'Anamanaguchi',
+          uri: 'spotify:artist:2UwJRAgSOi1zcLkvUNc8XL',
+          load: function() {
+            return {
+              done: function() {
+
+              }
+            };
+          }
+        }, {
+          depth: 2,
+          branching: 2
+        }
+      );
+
+      ag.buildGraph(function() {
+        expect(ag.graph.nodesData.getIds().length)
+          .toBe(ag.calNumNodes(ag.depth, ag.branching));
+      });
+
     });
   });
 });

@@ -29,7 +29,7 @@ module.exports = function(grunt) {
     },
     watch: {
       files: ['Gruntfile.js', 'js/**/*.js', 'sass/*.scss', 'test/*.js'],
-      tasks: ['compass', 'jshint']
+      tasks: ['compass', 'jshint', 'jasmine']
     },
     useminPrepare: {
       html: 'index.html',
