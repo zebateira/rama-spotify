@@ -280,8 +280,10 @@ ArtistGraph.prototype = {
       else {
 
         var childNode = {
+          // properties required
           id: ++this.currentNodeId,
           label: childArtist.name,
+          // custom properties
           artist: childArtist,
           uri: childArtist.uri,
           isLeaf: depth <= 0,
@@ -365,6 +367,7 @@ ArtistGraph.prototype = {
     // TODO
   },
   updateDepth: function(newDepth) {
+    console.log('updating depth...', newDepth);
     var oldDepth = this.depth;
 
     var leafs = _.where(this.data.nodes, {
@@ -404,7 +407,9 @@ ArtistGraph.prototype = {
     if (this.treemode) {
       this.data.edges =
         _.without(this.data.edges, this.extraEdges);
+      this.graph.edgesData.remove(this.extraEdges);
     } else {
+      this.graph.edgesData.add(this.extraEdges);
       for (var edge in this.extraEdges) {
         this.data.edges.push(this.extraEdges[edge]);
       }
