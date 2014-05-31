@@ -190,12 +190,23 @@ ArtistGraph.prototype = {
     parentNode.childs = new vis.DataSet({});
     parentNode.isLeaf = false;
 
+    var childArtists = [];
+
     sputils.loadRelatedArtists(
       parentArtist,
       this.branching,
       forEachRelated.bind(this),
-      done
+      whenAllDone.bind(this)
     );
+
+    function whenAllDone() {
+      _.each(childArtists, function(childArtist) {
+        if (depth > 0)
+          this.expandNode(depth - 1, childArtist, done);
+
+      }, this);
+      done();
+    }
 
     // Updates the graph given the artist parameter.
     // This function will be called on each child node
@@ -304,11 +315,8 @@ ArtistGraph.prototype = {
 
       this.graph.nodesData.update(parentNode);
 
-      // if a leaf node as not been reached, then continue
-      // constructing the graph, now with this child node
-      // as the root node
-      if (depth > 0)
-        this.expandNode(depth - 1, childArtist, done);
+      childArtists.push(childArtist);
+
       // note: the condition to end the recursion is: if depth <= 0
       this.updateNodes();
       this.updateEdges();
