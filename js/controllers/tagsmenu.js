@@ -31,7 +31,7 @@ require([
 
   // updates the current list of shown tags 
   TagsMenu.prototype.updateTags = function() {
-    var nodes = this.graphcontroller.getNodes();
+    var nodes = this.graphcontroller.getData().nodes;
 
     this.resetView();
 
@@ -48,7 +48,7 @@ require([
         ++numRequests;
       } else {
         // otherwise fetch the tags from echonest
-        this.graphcontroller.fetchTags(nodeArtist.uri,
+        this.graphcontroller.fetchTags(nodeArtist.artist.uri,
           'frequency')
         // when the server responds, add the tags 
         // to this.commonTags that are unique to it

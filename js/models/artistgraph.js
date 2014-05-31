@@ -22,17 +22,13 @@ var ArtistGraph = function(element, artist, config) {
   // vis.Graph Events
   this.graphevents = {};
 
-  // load branching value from config if present
-  // otherwise, load ArtistGraph.DEFAULT_BRANCHING
+  // load configurations
   this.branching = (config && config.branching) ||
     ArtistGraph.DEFAULT_BRANCHING;
-  // load depth value from config if present
-  // otherwise, load ArtistGraph.DEFAULT_DEPTH
+
   this.depth = (config && config.depth) ||
     ArtistGraph.DEFAULT_DEPTH;
 
-  // load treemode value from config if present
-  // otherwise, load ArtistGraph.DEFAULT_TREEMODE
   if (config && typeof config.treemode !== 'undefined')
     this.treemode = config.treemode;
   else this.treemode = ArtistGraph.DEFAULT_TREEMODE;
@@ -327,6 +323,7 @@ ArtistGraph.prototype = {
     var childNodesIds = parentNode.childs.getIds();
 
     this.graph.nodesData.remove(childNodesIds);
+
     parentNode.childs.clear();
     parentNode.isLeaf = true;
     this.graph.nodesData.update(parentNode);
@@ -377,7 +374,6 @@ ArtistGraph.prototype = {
         _.each(toBeLeafs, this.compressNode, this);
 
         oldDepth--;
-        console.log(oldDepth);
       }
     }
   },
@@ -412,6 +408,15 @@ ArtistGraph.prototype = {
   },
   updateEdges: function() {
     // this.graph.edgesData.update(this.edges);
+  },
+
+  // number of nodes in the graph
+  getNumNodes: function() {
+    return this.graph.nodesData.getIds().length;
+  },
+  // number of edges in the graph
+  getNumEdges: function() {
+    return this.graph.edgesData.getIds().length;
   },
 
   redrawGraph: function() {
