@@ -15,7 +15,7 @@ The presented projects often use external data bases (like last.fm) to fetch met
 This is the preferred way, since those are the most complete sets of information. 
 
 \section{Related and Similar Services} % (fold)
-\label{sec:projetos_relacionados}
+\label{sec:related_similar_services}
 
 \subsection{Liveplasma - liveplasma.com} % (fold)
 \label{sub:liveplasma}
@@ -38,7 +38,7 @@ On the left side of the application there are some interesting elements: a grid 
 
 In \ref{fig:sota_liveplasma2} the user can have the choice to play tracks \emph{only} from that artist, or play \emph{similar} artists.
 
-\begin{figure}[tb]
+\begin{figure}[b]
   \begin{center}
     \includegraphics[]{liveplasma2.pdf}
   \end{center}
@@ -46,38 +46,39 @@ In \ref{fig:sota_liveplasma2} the user can have the choice to play tracks \emph{
   \label{fig:sota_liveplasma2}
 \end{figure}
 
-\subsubsection{Prós} % (fold)
+\subsubsection{Pros} % (fold)
 \label{ssub:liveplasma_pros}
 
-Os aspetos interessantes desta ferramenta são:
+This tools, has two interesting aspects to it:
 
 \begin{itemize}
-  \item Links para compra dos álbums
-  \item Reproduzir músicas de artistas semelhantes
+  \item Links to buy albums of the artist
+  \item Play tracks from similar artists to the search artist.
 \end{itemize}
 
 % subsubsection pros (end)
 
-\subsubsection{Contras} % (fold)
-\label{ssub:liveplasma_contras}
+\subsubsection{Cons} % (fold)
+\label{ssub:liveplasma_cons}
 
-O grafo desenhado é bastante confuso quando existem muitos nós com muitas ligações.
-Isto acontece quando existem muitos artistas semelhantes.
-Para além disso, são atribuídas cores aos nós que devem identificar o grau de parecença entre os artistas.
-No entanto não existe nenhum tipo de informação que explique qual o seu verdadeiro significado ao utilizador, assim como também não existe uma explicação das ligações entre os nós.
+The graph drawn from this simple search, is very cluttered with edges.
+Two nodes can have several connections between, which seems to overload the graph and making it very confusing.
 
-É também de notar que o tamanho dos nós é diretamente proporcional à popularidade dos artistas respectivos, mas mais uma vez, este tipo de informação não é dada ao utilizador.
+Different colours are used, but their meaning remains unknown. One can assume that they represent the similarity between artists, but that is just speculation.
 
-Outra falha a apontar é o facto de não se conseguir distinguir o nó de pesquisa dos restantes resultados em \ref{fig:sota_liveplasma} por exemplo.
+It can also be assumed that the size of the nodes (radius value) can be directly proportional to the artist's popularity, but that is, again, just speculation.
 
-% subsubsection contras (end)
+One critical detail is that the user cannot visually point out the search node in the graph, given the lack of visual distinction to the other nodes of the graph \ref{fig:sota_liveplasma}.
 
-\subsubsection{Resumo} % (fold)
-\label{ssub:liveplasma_resumo}
 
-Em suma, o liveplasma é usável, mas peca por ter muitas cores e ligações que tornam a experiência do utilizador ainda mais difícil do que a tradicional apresentação em lista ou grelha.
+% subsubsection cons (end)
 
-% subsubsection resumo (end)
+\subsubsection{Summary} % (fold)
+\label{ssub:liveplasma_summary}
+
+In short, liveplasma is not very user friendly. It uses too many colours and edges, which makes the user experience of searching for new music even harder than usual.
+
+% subsubsection summary (end)
 
 % subsection liveplasma (end)
 
@@ -110,7 +111,7 @@ Ao expandir o nó inicial de pesquisa, os nós novos estão apenas e só diretam
 
 Ao contrário do Liveplasma, o Tuneglue não faz uma pesquisa recursiva.
 
-\subsubsection{Prós} % (fold)
+\subsubsection{Pros} % (fold)
 \label{ssub:audiomap_pros}
 
 Dá bastante liberdade ao utilizador, pois dá-lhe toda a responsabilidade na criação do grafo.
@@ -118,23 +119,23 @@ O utilizador sente que todo o grafo foi criação sua e dissimula o utilizador a
 
 % subsubsection pros (end)
 
-\subsubsection{Contras} % (fold)
-\label{ssub:audiomap_contras}
+\subsubsection{Cons} % (fold)
+\label{ssub:audiomap_cons}
 
 Mais uma vez, o facto da ferramenta ser feita em flash não ajuda a que a interface seja intuitiva.
 Para além de pouco responsiva (o utilizador ao início pode-se sentir perdido por não saber o que fazer), é bastante uniforme, ou seja, não salienta diferenças entre cada artista, nem distingue as ligações entre eles.
 
 % subsubsection contras (end)
 
-\subsubsection{Resumo} % (fold)
-\label{ssub:audiomap_resumo}
+\subsubsection{Summary} % (fold)
+\label{ssub:audiomap_summary}
 
 Em suma, o Tuneglue é inteligente por dar poder ao utilizador, mas ao mesmo tempo não existe um limite nesse poder.
 E assim, é possível expandir o grafo até se tornar ilegível.
 
 
 
-% subsubsection resumo (end)
+% subsubsection summary (end)
 
 % subsection tuneglue (end)
 
@@ -146,7 +147,7 @@ E assim, é possível expandir o grafo até se tornar ilegível.
 
 
 
-  \subsubsection{Prós} % (fold)
+  \subsubsection{Pros} % (fold)
   \label{ssub:pros}
 
   
@@ -196,8 +197,8 @@ E assim, é possível expandir o grafo até se tornar ilegível.
 
   % subsubsection pros (end)
 
-  \subsubsection{Contras} % (fold)
-  \label{ssub:contras}
+  \subsubsection{Cons} % (fold)
+  \label{ssub:cons}
 
   Um problema do MusicRoamer é o facto de ser feito em flash, pois torna a interface menos natural e fluída.
   Para além disso, à medida que a profundidade do grafo vai aumentando, o grafo começa a ficar confuso e ilegível (figura~\ref{fig:sota_musicroamer4}).
@@ -211,22 +212,22 @@ E assim, é possível expandir o grafo até se tornar ilegível.
     \label{fig:sota_musicroamer4}
   \end{figure}
 
-  % subsubsection contras (end)
+  % subsubsection cons (end)
 
-  \subsubsection{Resumo} % (fold)
-  \label{ssub:resumo}
+  \subsubsection{Summary} % (fold)
+  \label{ssub:summary}
 
   Apesar de um utilizador do MusicRoamer ter muita liberdade na criação do grafo, a sua apresentação global é fraca e pouco trabalhada esteticamente.
   
-  % subsubsection resumo (end)
+  % subsubsection summary (end)
 
 % subsection musicroamer (end)
 
 
-% section projetos_relacionados (end)
+% section related_similar_services (end)
 
 
-\section{Resumo e Conclusões}
+\section{Conclusions}
 
 Existem muitas outras ferramentas de descoberta de música. Apesar serem poucas as que usam esta representação visual em grafo, todas elas são importantes de se referir:
 
