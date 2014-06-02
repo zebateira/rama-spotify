@@ -5,7 +5,8 @@ describe('Artist Graph Module', function() {
 
       var ag = new ArtistGraph(
         document.createElement('div'), {
-          name: 'Anamanaguchi'
+          name: 'Anamanaguchi',
+          uri: 'spotify:artist:2UwJRAgSOi1zcLkvUNc8XL'
         }
       );
 
@@ -16,7 +17,8 @@ describe('Artist Graph Module', function() {
 
       var ag = new ArtistGraph(
         document.createElement('div'), {
-          name: 'Anamanaguchi'
+          name: 'Anamanaguchi',
+          uri: 'spotify:artist:2UwJRAgSOi1zcLkvUNc8XL'
         }
       );
 
@@ -26,7 +28,8 @@ describe('Artist Graph Module', function() {
     it('should set branching factor for graph', function() {
       var ag = new ArtistGraph(
         document.createElement('div'), {
-          name: 'Anamanaguchi'
+          name: 'Anamanaguchi',
+          uri: 'spotify:artist:2UwJRAgSOi1zcLkvUNc8XL'
         }, {
           branching: 20
         }
@@ -38,7 +41,8 @@ describe('Artist Graph Module', function() {
     it('should set depth factor for graph', function() {
       var ag = new ArtistGraph(
         document.createElement('div'), {
-          name: 'Anamanaguchi'
+          name: 'Anamanaguchi',
+          uri: 'spotify:artist:2UwJRAgSOi1zcLkvUNc8XL'
         }, {
           depth: 2
         }
@@ -127,20 +131,20 @@ describe('Artist Graph Module', function() {
         }
       );
 
-      ag.buildGraph();
-
-      expect(ag.getNumNodes()).toBe(21);
-      expect(ag.getNumEdges()).toBe(20);
+      ag.buildGraph(function() {
+        expect(ag.getNumNodes()).toBe(21);
+        expect(ag.getNumEdges()).toBe(20);
+      });
 
       ag.updateDepth(3);
-
       expect(ag.getNumNodes()).toBe(85);
       expect(ag.getNumEdges()).toBe(84);
 
-      ag.updateDepth(1);
 
+      ag.updateDepth(1);
       expect(ag.getNumNodes()).toBe(5);
       expect(ag.getNumEdges()).toBe(4);
+
 
     });
 

@@ -77,7 +77,8 @@ require([
       config
     );
 
-    this.artistgraph.buildGraph();
+    this.artistgraph
+      .buildGraph();
 
     this.bindAllEvents();
   };

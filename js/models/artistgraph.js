@@ -82,11 +82,9 @@ ArtistGraph.prototype = {
     // extra edges that are missing from the graph in treemode form
     this.extraEdges = new vis.DataSet({});
 
-    // current id value for the vis.Graph's nodes
-    this.currentNodeId = 1;
-
     this.rootNode = {
-      id: this.currentNodeId,
+      // spotify's artist uri string is being used as the nodes' id.
+      id: this.artist.uri,
       label: this.artist.name,
       fontColor: '#313336', // TODO refactor colors
       color: {
@@ -100,9 +98,6 @@ ArtistGraph.prototype = {
       // for future reference
       artist: this.artist,
       uri: this.artist.uri,
-      // isLeaf simply indicates if the node is a leaf
-      // in the graph or not
-      isLeaf: false,
       level: 0,
       isRoot: true
     };
@@ -116,6 +111,24 @@ ArtistGraph.prototype = {
   reset: function() {
     this.initGraph();
   },
+
+
+  // maxIterations is equal to:
+  // 
+  //   d
+  //   ∑ b^i
+  //  i=0
+  //
+  //  which is the sum of the branching value to the power
+  //  of i, given that i goes from zero to the depth value.
+  //
+  //   depth
+  //    ___
+  //   |
+  //    \    
+  //    /    branching ^ i
+  //   |___
+  //   i = 0
 
   calNumNodes: function(depth, branching) {
     return (function lambda(i) {
@@ -134,22 +147,6 @@ ArtistGraph.prototype = {
     // to construct the graph.
     this.maxIterations = this.calNumNodes(this.depth, this.branching);
 
-    // maxIterations is equal to:
-    // 
-    //   d
-    //   ∑ b^i
-    //  i=0
-    //
-    //  which is the sum of the branching value to the power
-    //  of i, given that i goes from zero to the depth value.
-    //
-    //   depth
-    //    ___
-    //   |
-    //    \    
-    //    /    branching ^ i
-    //   |___
-    //   i = 0
 
     // start constructing the graph recursively
     this.expandNode(
@@ -166,9 +163,9 @@ ArtistGraph.prototype = {
       // full graph constructed, then stop recursion and
       // call the final callback
       if (currentIteration >= this.maxIterations) {
-        this.updateData();
-        if (done)
+        if (done) {
           done();
+        }
       }
     }
   },
@@ -178,30 +175,31 @@ ArtistGraph.prototype = {
   // The done parameter is the callback to be called
   // after all the callbacks of the child nodes of the root node
   // have finished.
-  expandNode: function(depth, parentArtist, done) {
+  expandNode: function(depth, parentArtist, iterationDone) {
 
     // after expanding, the node will stop being a leaf
     var parentNode = parentArtist.node;
 
     parentNode.childs = new vis.DataSet({});
-    parentNode.isLeaf = false;
-
-    var childArtists = [];
+    var artistsAdded = 0;
 
     sputils.loadRelatedArtists(
       parentArtist,
-      this.branching,
-      forEachRelated.bind(this),
       whenAllDone.bind(this)
     );
 
-    function whenAllDone() {
-      _.each(childArtists, function(childArtist) {
-        if (depth > 0)
-          this.expandNode(depth - 1, childArtist, done);
+
+    function whenAllDone(childArtists) {
+      _.each(childArtists, function(artist) {
+
+        if (artistsAdded < this.branching) {
+          forEachRelated.bind(this, artist)();
+
+          if (depth > 0)
+            this.expandNode(depth - 1, artist, iterationDone);
+        }
 
       }, this);
-      done();
     }
 
     // Updates the graph given the artist parameter.
@@ -213,12 +211,7 @@ ArtistGraph.prototype = {
 
       // Try to find repeated nodes in the graph
       // given the name of the artist is the same
-      var duplicated = this.graph.nodesData.get({
-        filter: function(node) {
-          return node.uri === childArtist.uri;
-        }
-      })[0];
-
+      var duplicated = this.getNode(childArtist);
 
       // Is the artist node already in the graph?
       // If there is a duplicate then create an
@@ -227,19 +220,11 @@ ArtistGraph.prototype = {
       if (duplicated) {
 
         // try to find repeated edges in the graph
-        var edgeExists = this.graph.edgesData.get({
-          filter: function(edge) {
-            return edge.to === duplicated.id &&
-              edge.from === parentArtist.nodeid;
-          }
-        });
+        var edgeExists =
+          this.getEdges(duplicated.id, parentArtist.uri);
         // try to find repeated edges (even if inverse)
-        var inverseEdgeExists = this.graph.edgesData.get({
-          filter: function(edge) {
-            return edge.from === duplicated.id &&
-              edge.to === parentArtist.nodeid;
-          }
-        });
+        var inverseEdgeExists =
+          this.getEdges(parentArtist.uri, duplicated.id);
 
         // if the edge we are trying to insert 
         // does not exist in the graph yet AND
@@ -251,11 +236,11 @@ ArtistGraph.prototype = {
         // artists list, which created a edge that went from it to 
         // itself.
         if (edgeExists.length === 0 && inverseEdgeExists.length === 0 &&
-          childArtist.uri !== parentArtist.uri) {
+          childArtist.uri != parentArtist.uri) {
 
           // Create the extra edge.
           var extraEdge = {
-            from: parentArtist.nodeid,
+            from: parentArtist.uri,
             to: duplicated.id,
           };
           this.extraEdges.add(extraEdge);
@@ -279,20 +264,16 @@ ArtistGraph.prototype = {
       // if the node is new/unique to the graph
       else {
 
-        childArtist.nodeid = ++this.currentNodeId;
         childArtist.node = {
           // properties required
-          id: this.currentNodeId,
+          id: childArtist.uri,
           label: childArtist.name,
           // custom properties
           artist: childArtist,
           uri: childArtist.uri,
-          isLeaf: depth <= 0,
           level: parentNode.level + 1,
           parentNode: parentNode,
-          parentNodeId: parentNode.id,
-          x: parentNode.x,
-          y: parentNode.y
+          parentNodeId: parentNode.id
         };
 
 
@@ -301,22 +282,28 @@ ArtistGraph.prototype = {
 
         this.graph.nodesData.add(childArtist.node);
 
+        var edgesToRemove = this.graph.edgesData.getIds({
+          filter: function(edge) {
+            return edge.to == childArtist.node.id || edge.from == childArtist.node.id;
+          }
+        });
+
+        this.graph.edgesData.remove(edgesToRemove);
+
         // also create the edge to connect the new node to
         // its parent
         this.graph.edgesData.add({
-          from: parentArtist.nodeid,
-          to: this.currentNodeId
+          from: parentArtist.uri,
+          to: childArtist.uri
         });
+
+        artistsAdded++;
       }
 
       this.graph.nodesData.update(parentNode);
-
-      childArtists.push(childArtist);
-
-      // note: the condition to end the recursion is: if depth <= 0
-      this.updateNodes();
-      this.updateEdges();
     }
+    if (iterationDone)
+      iterationDone();
 
   },
   compressNode: function(parentNode) {
@@ -324,9 +311,8 @@ ArtistGraph.prototype = {
 
     this.graph.nodesData.remove(childNodesIds);
 
-    parentNode.childs.clear();
+    parentNode.childs.remove(childNodesIds);
     parentNode.isLeaf = true;
-    this.graph.nodesData.update(parentNode);
   },
 
   // Updates the graph with the given config object
@@ -347,7 +333,8 @@ ArtistGraph.prototype = {
 
     // TODO
   },
-  updateDepth: function(newDepth) {
+  updateDepth: function(newDepth, update) {
+    console.log(this.graph.edgesData);
     var oldDepth = this.depth;
     this.depth = newDepth;
 
@@ -358,23 +345,33 @@ ArtistGraph.prototype = {
     if (newDepth > oldDepth) {
       var leafs = this.graph.nodesData.get({
         filter: function(node) {
-          return node.level === oldDepth;
+          return node.level == oldDepth;
         }
       });
       _.each(leafs, function(node) {
-        this.expandNode(Math.abs(newDepth - oldDepth - 1), node.artist,
-          this.updateData.bind(this));
+        this.expandNode(Math.abs(newDepth - oldDepth - 1), node.artist, update);
       }, this);
     } else if (newDepth < oldDepth) {
-      while (oldDepth !== newDepth) {
-        var toBeLeafs = this.graph.nodesData.get({
-          filter: filterNodes.bind(this, oldDepth)
+      var toRemove = this.graph.nodesData.get({
+        filter: function(node) {
+          return node.level > newDepth;
+        }
+      });
+
+      _.each(toRemove, function(node) {
+        var edgesToRemove = this.graph.edgesData.getIds({
+          filter: function(edge) {
+            return (edge.to == node.id || edge.from == node.id);
+          }
         });
 
-        _.each(toBeLeafs, this.compressNode, this);
+        console.log(edgesToRemove);
+        this.graph.edgesData.remove(edgesToRemove);
+      }, this);
 
-        oldDepth--;
-      }
+      this.graph.nodesData.remove(toRemove);
+      if (update)
+        update();
     }
   },
   updateTreemode: function(treemode) {
@@ -393,7 +390,6 @@ ArtistGraph.prototype = {
         this.data.edges.push(this.extraEdges[edge]);
       }
     }
-    this.updateEdges();
   },
 
   // Refresh vis.Graph's data objects
@@ -404,19 +400,34 @@ ArtistGraph.prototype = {
     // this.events.updateTagsMenu();
   },
   updateNodes: function() {
-    // this.graph.nodesData.update(this.nodes);
+    // this.graph.nodesData.update(this.graph.nodesData);
   },
   updateEdges: function() {
-    // this.graph.edgesData.update(this.edges);
+    // this.graph.edgesData.update(this.graph.edgesData);
   },
 
+
+  getNode: function(artist) {
+    return this.graph.nodesData.get({
+      filter: function(node) {
+        return node.id == artist.uri;
+      }
+    })[0];
+  },
+  getEdges: function(to, from) {
+    return this.graph.edgesData.get({
+      filter: function(edge) {
+        return edge.to == to && edge.from == from;
+      }
+    });
+  },
   // number of nodes in the graph
   getNumNodes: function() {
-    return this.graph.nodesData.getIds().length;
+    return this.graph.nodesData.get().length;
   },
   // number of edges in the graph
   getNumEdges: function() {
-    return this.graph.edgesData.getIds().length;
+    return this.graph.edgesData.get().length;
   },
 
   redrawGraph: function() {
