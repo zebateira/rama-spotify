@@ -175,28 +175,25 @@ But with no limit, the user can easily create a very complex graph that deterior
   Independently of the search form used, the result will always be one (or more) graphs where the nodes are music artists.
 
   MusicRoamer is worth mentioning because of the way it shows the graph.
-  In \ref{fig:sota_musicroamer3} one can see the search result for "Mariza".
-
-  The images of the music artists are used to represent the nodes. This way, the user have a mind map of the resulting graph.
-
-
-  A ferramenta também disponibiliza alguns parâmetros de personalização do grafo (figura~\ref{fig:sota_musicroamer2}) como Zoom, Tamanho da repulsão, imagem entre os nós e o número de artistas de música que deve expandir de um nó.
-
-  \begin{figure}[tb]
-    \begin{center}
-      \includegraphics[width=\textwidth]{musicroamer2.pdf}
-    \end{center}
-    \caption{MusicRoamer: Parâmetros de personalização do grafo}
-    \label{fig:sota_musicroamer2}
-  \end{figure}
-
-
+  In \ref{fig:sota_musicroamer2} one can see the search result for "Mariza".
 
   \begin{figure}[tb]
     \begin{center}
       \includegraphics[width=\textwidth]{musicroamer3.pdf}
     \end{center}
-    \caption{MusicRoamer: Representação visual do grafo de artistas}
+    \caption{MusicRoamer: Visual representation of the artist graph}
+    \label{fig:sota_musicroamer2}
+  \end{figure}
+
+  The images of the music artists are used to represent the nodes. This way, the user has a more friendly mind map of the resulting graph.
+
+  There is also some parameters (\ref{fig:sota_musicroamer3}) that the user can personalize to change the appearance of the graph: zoom; repulsion force between the nodes; size of the artist's images and the number of artist to be used as the branching value.
+
+  \begin{figure}[tb]
+    \begin{center}
+      \includegraphics[width=\textwidth]{musicroamer2.pdf}
+    \end{center}
+    \caption{MusicRoamer: Personalizable parameters for the graph }
     \label{fig:sota_musicroamer3}
   \end{figure}
 
@@ -205,15 +202,16 @@ But with no limit, the user can easily create a very complex graph that deterior
   \subsubsection{Cons} % (fold)
   \label{ssub:cons}
 
-  Um problema do MusicRoamer é o facto de ser feito em flash, pois torna a interface menos natural e fluída.
-  Para além disso, à medida que a profundidade do grafo vai aumentando, o grafo começa a ficar confuso e ilegível (figura~\ref{fig:sota_musicroamer4}).
-  A linhas começam a se sobrepor e alguns nós ficam pouco legíveis.
+  MusicRoamer is a flash application which makes the interface less natural and fluid to a website user.
+
+  Another problem occurs when the user starts to expand more and more nodes.
+  The graph starts to get confusing (\ref{fig:sota_musicroamer4}), the edges are drawn over the images, the artist's names start to get mixed in the images.
 
   \begin{figure}[tb]
     \begin{center}
       \includegraphics[width=\textwidth]{musicroamer4.pdf}
     \end{center}
-    \caption{MusicRoamer: Grafo depois de expandir um nó}
+    \caption{MusicRoamer: The graph after expanding one node}
     \label{fig:sota_musicroamer4}
   \end{figure}
 
@@ -222,8 +220,8 @@ But with no limit, the user can easily create a very complex graph that deterior
   \subsubsection{Summary} % (fold)
   \label{ssub:summary}
 
-  Apesar de um utilizador do MusicRoamer ter muita liberdade na criação do grafo, a sua apresentação global é fraca e pouco trabalhada esteticamente.
-  
+  Although the MusicRoamer user has a lot freedom when creating the graph, the graph presentation if weak and not very æsthetically pleasant.
+
   % subsubsection summary (end)
 
 % subsection musicroamer (end)
@@ -234,7 +232,11 @@ But with no limit, the user can easily create a very complex graph that deterior
 
 \section{Conclusions}
 
-Existem muitas outras ferramentas de descoberta de música. Apesar serem poucas as que usam esta representação visual em grafo, todas elas são importantes de se referir:
+There is an uncountable number of services to discover new music.
+The ones presented in the previous examples have a visual representation in graph.
+
+The following services are that have some sort of mechanism to present the users with new music (not necessarily with visual tools):
+
 
 \begin{itemize}
   \item liveplasma.com
@@ -258,7 +260,7 @@ Existem muitas outras ferramentas de descoberta de música. Apesar serem poucas 
 \end{itemize}
 
 
-Umas das primeiras lições que se tira dos exemplos dados é que quanto maior for o fator de ramificação de um grafo, mais confuso e saturado se torna.
-Não é um exagero dizer que para além de confuso, o grafo perde o seu propósito inicial de ajudar o utilizador na sua descoberta de música nova.
+The most important aspect to retain from the previous examples is that the bigger the branching value of the graph, the more confusing and cluttered the graph becomes.
+One could say that the visual tool loses its initial purpose to help the user to discover new music.
 
-Uma forma de evitar este problema, por exemplo, será limitar o fator de ramificação a um máximo que não cause este problema.
+A way to avoid that problem would be to force limits in the graph creation process.
