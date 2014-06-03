@@ -68,7 +68,7 @@ Different colours are used, but their meaning remains unknown. One can assume th
 
 It can also be assumed that the size of the nodes (radius value) can be directly proportional to the artist's popularity, but that is, again, just speculation.
 
-One critical detail is that the user cannot visually point out the search node in the graph, given the lack of visual distinction to the other nodes of the graph \ref{fig:sota_liveplasma}.
+One critical detail is that the user cannot visually point out the search node in the graph, given the lack of visual distinction from the other nodes of the graph \ref{fig:sota_liveplasma}.
 
 
 % subsubsection cons (end)
@@ -76,7 +76,8 @@ One critical detail is that the user cannot visually point out the search node i
 \subsubsection{Summary} % (fold)
 \label{ssub:liveplasma_summary}
 
-In short, liveplasma is not very user friendly. It uses too many colours and edges, which makes the user experience of searching for new music even harder than usual.
+In short, liveplasma is not very user friendly. 
+It uses too many colours and edges, which makes the user experience of searching for new music even harder than usual.
 
 % subsubsection summary (end)
 
@@ -85,11 +86,14 @@ In short, liveplasma is not very user friendly. It uses too many colours and edg
 \subsection{Tuneglue - audiomap.tuneglue.net} % (fold)
 \label{sub:tuneglue}
 
-O Tuneglue é outro serviço do mesmo género (também desenvolvido em flash) que usa a base de dados do last.fm para recolher a informação dos artistas de música, assim como artistas relacionados.
+Tuneglue is another flash application that tries to explore the graphic visualization of network of related artists.
+Last.fm's metadata API is used to retrieve artist information.
 
-Depois da pesquisa de um artista, por exemplo "Mariza", obtemos um grafo com apenas o nó de pesquisa. Ao clicar no nó é apresentado um menu com várias opções como se pode ver na figura \ref{fig:sota_tuneglue}.
+When you start Tuneglue and search for an artist, say "Mariza", the user is presented with a single-node graph.
+By clicking the node, the user has four options (\ref{fig:sota_tuneglue}): expand, releases, lock position and delete.
 
-\begin{figure}[tb]
+
+\begin{figure}[bt]
   \begin{center}
     \includegraphics[]{tuneglue.pdf}
   \end{center}
@@ -97,9 +101,7 @@ Depois da pesquisa de um artista, por exemplo "Mariza", obtemos um grafo com ape
   \label{fig:sota_tuneglue}
 \end{figure}
 
-A partir deste menu é possível ver uma das principais diferenças que o Tuneglue tem em relação ao liveplasma (\ref{sub:liveplasma}): a edição do grafo.
-É possível expandir, fixar e eliminar individualmente cada nó do grafo.
-Ao expandir o nó inicial de pesquisa, os nós novos estão apenas e só diretamente relacionados com o nó pai, como se pode ver na figura~\ref{fig:sota_tuneglue2}.
+When you first expand a node, you get the root node with six child nodes \ref{fig:sota_tuneglue2}.
 
 \begin{figure}[tb]
   \begin{center}
@@ -109,30 +111,33 @@ Ao expandir o nó inicial de pesquisa, os nós novos estão apenas e só diretam
   \label{fig:sota_tuneglue2}
 \end{figure}
 
-Ao contrário do Liveplasma, o Tuneglue não faz uma pesquisa recursiva.
+So the first feature that brings the user experience to another level (in comparison with liveplasma) is that of graph editing.
+The user can expand, fix and delete every single node in the graph.
+
 
 \subsubsection{Pros} % (fold)
 \label{ssub:audiomap_pros}
 
-Dá bastante liberdade ao utilizador, pois dá-lhe toda a responsabilidade na criação do grafo.
-O utilizador sente que todo o grafo foi criação sua e dissimula o utilizador a pensar que foi este que descobriu novos artistas ao invés de receber recomendações.
+Tuneglue gives control to the user.
+On one hand, the user is able to craft a graph and tailor it to its needs.
+The user feels that graph is its own creation.
 
 % subsubsection pros (end)
 
 \subsubsection{Cons} % (fold)
 \label{ssub:audiomap_cons}
 
-Mais uma vez, o facto da ferramenta ser feita em flash não ajuda a que a interface seja intuitiva.
-Para além de pouco responsiva (o utilizador ao início pode-se sentir perdido por não saber o que fazer), é bastante uniforme, ou seja, não salienta diferenças entre cada artista, nem distingue as ligações entre eles.
+On the other hand, the user has the responsibility to create the whole graph, which might be too much trouble and deteriorate the user experience.
+
+Again the root node is not highlighted, which might leave the user lost when the graph gets more and more complex.
 
 % subsubsection contras (end)
 
 \subsubsection{Summary} % (fold)
 \label{ssub:audiomap_summary}
 
-Em suma, o Tuneglue é inteligente por dar poder ao utilizador, mas ao mesmo tempo não existe um limite nesse poder.
-E assim, é possível expandir o grafo até se tornar ilegível.
-
+Tuneglue takes the approach to give the user the power to create what he wants.
+But with no limit, the user can easily create a very complex graph that deteriorates the user experience.
 
 
 % subsubsection summary (end)
