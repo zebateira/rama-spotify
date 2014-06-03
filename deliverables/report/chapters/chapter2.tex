@@ -147,38 +147,38 @@ But with no limit, the user can easily create a very complex graph that deterior
 \subsection{MusicRoamer - musicroamer.com} % (fold)
 \label{sub:musicroamer}
 
-  O MusicRoamer é outra ferramenta que permite explorar música nova.
-  Tal como o Tuneglue, este permitir construir o grafo à medida que se expande cada nó.
-
-
+  MusicRoamer is yet another flash application.
+  Although it is similar to Tuneglue when it allows the user to expand the graph further and further, it also imposes some limits to the user to avoid getting the graph confusing.
 
   \subsubsection{Pros} % (fold)
   \label{ssub:pros}
 
-  
-  Umas das funcionalidades interessantes do MusicRoamer são as várias opções de pesquisa (figura~\ref{fig:sota_musicroamer}):
+  There are three types of search \ref{fig:sota_musicroamer}): 
+
   \begin{description}
-    \item[Pesquisa por Artista] \hfill \\
-      Tipo de pesquisa mais utilizada
-    \item[Pesquisa por \emph{Keyword}] \hfill \\
-      Usar palavras-chave como géneros musicais para pesquisar livremente
-    \item[Pesquisa por perfil do Last.fm] \hfill \\
-      Esta pesquisa gera um grafo para cada artista (os mais ouvidos pelo utilizador)
+    \item[Artist Search] \hfill \\
+      The most used one.
+    \item[Keyword Search] \hfill \\
+      Search using keywords like genres and tags
+    \item[Last.fm user search] \hfill \\
+      The search result generates several graphs with the top artists of the user as the root nodes.
   \end{description}
 
   \begin{figure}[tb]
     \begin{center}
       \includegraphics[width=\textwidth]{musicroamer.pdf}
     \end{center}
-    \caption{MusicRoamer: Várias opções de pesquisa. Por artista; por \emph{keyword} e pelo perfil de utilizador do Last.fm}
+    \caption{MusicRoamer: Search options. by artist; by keyword and by Last.fm username}
     \label{fig:sota_musicroamer}
   \end{figure}
 
-  Todas estas formas de pesquisa desenham um (ou mais) grafo(s) em que os nós são sempre artistas de música.
+  Independently of the search form used, the result will always be one (or more) graphs where the nodes are music artists.
 
-  O que esta ferramenta trás de novo é a forma como apresenta os grafos.
-  A figura~\ref{fig:sota_musicroamer3} apresenta o resultado da pesquisa por Artista "Mariza".
-  Imagens dos artistas são usadas para representar os nós, o que ajuda o utilizador a diferenciar os resultados.
+  MusicRoamer is worth mentioning because of the way it shows the graph.
+  In \ref{fig:sota_musicroamer3} one can see the search result for "Mariza".
+
+  The images of the music artists are used to represent the nodes. This way, the user have a mind map of the resulting graph.
+
 
   A ferramenta também disponibiliza alguns parâmetros de personalização do grafo (figura~\ref{fig:sota_musicroamer2}) como Zoom, Tamanho da repulsão, imagem entre os nós e o número de artistas de música que deve expandir de um nó.
 
