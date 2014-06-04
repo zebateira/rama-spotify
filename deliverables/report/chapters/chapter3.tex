@@ -5,7 +5,7 @@
 
 \section*{}
 
-The primal objective of this dissertation, as referred in chapter \ref{chap:intro}, is to develop one or more software modules that will improve Spotify Users' music discovery and recommendation experience using visual tools to represent the music artists' relations and Spotify's high quality music streaming service.
+The primal objective of this dissertation, as referred in chapter \ref{chap:intro}, is to develop one or more software modules that will improve Spotify Users' music discovery and recommendation experience using visual tools to represent the music artists' relations and Spotify's streaming service to provide high quality music stream.
 
 The initial proposal was to develop a module that implements, at least, one of the following features:
 
@@ -19,13 +19,13 @@ The initial proposal was to develop a module that implements, at least, one of t
 \end{enumerate}
 
 The first three functionalities (\ref{item:obj1}, \ref{item:obj2} and \ref{item:obj3}) focus on improving RAMA using Spotify's API, i.e. to integrate Spotify into RAMA.
-Whereas \ref{item:obj4} and \ref{item:obj5} aim to integrate RAMA's concept into Spotify, through a Spotify Application. It would work as a plugin to Spotify's Desktop Client.
+Whereas \ref{item:obj4} and \ref{item:obj5} aim to integrate RAMA's concept into Spotify, through a Spotify Application (it would work as a plugin to Spotify's Desktop Client).
 The last one (\ref{item:obj6}) would focus on implementing the previous functionalities into an Android, iOS or Windows Phone Application.
 
 This chapter aims to analyse every single drawback of each possibility that affects the choice of which modules do develop, and on which environments it fits better: Spotify Application, Mobile Application, or RAMA improvements.
 
 At first, Spotify's development environment will be introduced \ref{sec:spotify} in order to assess which tools are available for developers.
-Next, the available tools will be analysed in order to determine which ones fit the proposed modules to be developed, mostly through experiments. 
+Next, the available tools will be evaluated in order to determine which ones fit the proposed modules to be developed, mostly, through experiments. 
 
 By the end of this chapter the modules to be developed should be clearly stated, as well as which tools will be used in the prototype.
 
@@ -40,50 +40,61 @@ The prototype should pursue the objective of contributing to an improved user ex
   % clients available: desktop client, webplayer and mobile apps
   Now, the service has several types of clients available to the users: desktop client, webplayer and mobile applications.
 
-\begin{description}
-  \item[\textbf{Desktop Client}] Desktop version of Spotify, with Windows and Mac versions (and also a Linux preview version).
-  \item[\textbf{Webplayer}] Web version of Spotify. This was released in 2013, and spotify still advises the use of the native applications for a better user experience.
+  \begin{description}
+    \item[\textbf{Desktop Client}] Desktop version of Spotify, with Windows and Mac versions (and also a Linux preview version).
+    \item[\textbf{Webplayer}] Web version of Spotify. This was released in 2013, and spotify still advises the use of the native applications for a better user experience.
+    \item[\textbf{Mobile Applications}] The mobile applications are available for Android and iOS devices.
+  \end{description}
+
+  \subsection{Development Tools} % (fold)
+  \label{sub:devtools}
   
-\end{description}
-
-  \subsection{Ferramentas de Desenvolvimento} % (fold)
-  \label{sub:ferramentas_de_desenvolvimento}
-  
-    No momento de escrita deste relatório, o Spotify tem disponível um conjunto de ferramentas\footnote{http://developer.spotify.com/technologies} para desenvolver módulos de software que podem estar embebidos nas mais diversas aplicações (\emph{third-party applications}) ou então dentro do \emph{Spotify Desktop Client}.
-
-    Existem quatro ferramentas de desenvolvimento, cada uma delas com o seu propósito e utilidade.
-
+    Spotify provides a set of tools\footnote{http://developer.spotify.com/technologies} to develop third-party applications (websites, native applications and mobile applications) and Spotify Applications (that run inside Spotify's Desktop Client).
+    There are five tools, each with different purposes.
 
     \subsubsection{Spotify Apps} % (fold)
     \label{ssub:spotify_apps}
-      Serve para desenvolver Aplicações Spotify\footnote{https://developer.spotify.com/technologies/apps} que são usadas pelos utilizadores Spotify dentro do \emph{Spotify Desktop Client}. Estas são aplicação \emph{HTML5}\footnote{http://www.w3.org/TR/html5/}.
+      Spotify Applications\footnote{https://developer.spotify.com/technologies/apps} are a special case in the whole set of tools provided by Spotify.
+      These applications are designed to run \emph{inside} the Desktop Client.
+      Hence, its development is also inside the same environment.
+
+      Spotify users can run and install applications from the store called "App Finder".
+      All the applications are free.
+
+      In \ref{fig:spotify_apps} on can see the interface of the desktop client.
+      In this case, the discovery mode's interface.
 
       \begin{figure}
         \begin{center}
           \includegraphics[width=\textwidth]{spotify.pdf}
         \end{center}
-        \caption{Spotify: interface do modo de descoberta do \emph{desktop client}}
+        \caption{Spotify: desktop client's discovery mode interface.}
         \label{fig:spotify_apps}
       \end{figure}
 
-      Na figura \ref{fig:spotify_apps} é possível ver o aspeto do \emph{Spotify Desktop Client}.
-      Na barra lateral esquerda, dentro do separador \emph{Apps}, aparece a lista de aplicações já instaladas, assim como o \emph{App Finder}, que permite procurar e instalar aplicações com apenas um clique.
- 
-      Na figura \ref{fig:spotify_apps2} está aberta a aplicação da Last.fm. É possível ver que as Aplicações Spotify têm apenas um espaço reservado embutido no \emph{Spotify Desktop Client}.
+      On the left side, in the menu, bellow the "App Finder" item, appears all the applications the user as installed from the store.
+
+      In \ref{fig:spotify_apps2} the official Last.fm application is opened.
+      Note how the space filled by the applications are always the same.
 
       \begin{figure}
         \begin{center}
           \includegraphics[width=\textwidth]{spotify_apps.pdf}
         \end{center}
-        \caption{Spotify: Aplicação Last.fm aberta no \emph{Spotify Player}}
+        \caption{Spotify: Last.fm's Spotify Application opened.}
         \label{fig:spotify_apps2}
       \end{figure}
 
-      Para o seu desenvolvimento destas aplicações são disponibilizadas duas \emph{frameworks}: \emph{API Framework}\footnote{https://developer.spotify.com/docs/apps/api/1.0/} e \emph{Views Framework}\footnote{https://developer.spotify.com/docs/apps/views/1.0/}.
-      A primeira fornece uma interface para recolher metadados de artistas, álbuns e músicas e controlar o reprodutor de música.
-      A segunda fornece componentes de design como botões, listas, abas, entre outros, para o desenvolvimento da aplicação.
+      The Applications' runtime environment is one of a browser-based.
+      More specifically, powered by the Chromium Embedded Framework\footnote{https://code.google.com/p/chromiumembedded}.
+      This means that the code to develop a Spotify Application follows the same principles as a web application: HTML, CSS and Javascript.
 
-      Para desenvolver os módulos \ref{item:obj4} e \ref{item:obj5} esta é a ferramenta mais apropriada.
+      Spotify developed two Frameworks\footnote{https://developer.spotify.com/technologies/apps/reference} to help developers create these applications: the API 1.x Framework\footnote{https://developer.spotify.com/docs/apps/api/1.0/} and the Views Framework\footnote{https://developer.spotify.com/docs/apps/views/1.0/}.
+
+      The first one provides an interface to use object models, access metadata, control the player, among others.
+      The second offers support for web components like buttons, lists, tabs, among others.
+
+      In order to develop the proposed modules \ref{item:obj4} and \ref{item:obj5}, these are the most appropriate tools.
 
     % subsubsection spotify_apps (end)
 
@@ -212,7 +223,9 @@ The prototype should pursue the objective of contributing to an improved user ex
 
     % subsubsection metadata_api (end)
 
-  % subsection ferramentas_de_desenvolvimento (end)
+  % subsection devtools (end)
+
+    As of the writing of this report, Spotify has a set of tools 
 
   \subsection{Experimentações Feitas} % (fold)
   \label{sub:experimentacoes}
