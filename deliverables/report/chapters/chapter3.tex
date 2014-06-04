@@ -13,30 +13,32 @@ The initial proposal was to develop a module that implements, at least, one of t
   \item \label{item:obj1} Integrate Spotify's music stream into RAMA's website
   \item \label{item:obj2} Integrate information from the Spotify user into RAMA
   \item \label{item:obj3} Improve RAMA's features and design
-  \item \label{item:obj4} Integrar a visualização de grafos de artistas de música \textbf{numa Aplicação Spotify}
-  \item \label{item:obj5} Integrar o módulo de criação de \emph{playlists} do RAMA \textbf{numa Aplicação Spotify}
-  \item \label{item:obj6} Integrar alguns dos módulos acima referidos \textbf{numa aplicação móvel}
+  \item \label{item:obj4} Integrate the RAMA concept into a Spotify Application
+  \item \label{item:obj5} Integrate RAMA's playlist generation into a Spotify Application
+  \item \label{item:obj6} Integrate some of the above mentioned modules into a Mobile Application
 \end{enumerate}
 
-As três primeiras funcionalidades (\ref{item:obj1}, \ref{item:obj2} e \ref{item:obj3}) focam-se em melhorar o serviço do RAMA, usando API's do Spotify, ou seja, integrar o Spotify dentro do RAMA.
-Por outro lado, as funcionalidades \ref{item:obj4} e \ref{item:obj5} têm como objetivo integrar o RAMA dentro do Spotify, através de uma Aplicação Spotify, que funciona como \emph{plugin} do programa principal do Spotify.
-A última funcionalidade (\ref{item:obj6}) teria de implementar algumas das anteriores num Sistema Operativo Móvel (Android, iOS ou Windows Phone).
+The first three functionalities (\ref{item:obj1}, \ref{item:obj2} and \ref{item:obj3}) focus on improving RAMA using Spotify's API, i.e. to integrate Spotify into RAMA.
+Whereas \ref{item:obj4} and \ref{item:obj5} aim to integrate RAMA's concept into Spotify, through a Spotify Application. It would work as a plugin to Spotify's Desktop Client.
+The last one (\ref{item:obj6}) would focus on implementing the previous functionalities into an Android, iOS or Windows Phone Application.
 
-Este capítulo procura analisar todas as condicionantes que afetam a escolha  dos módulos a desenvolver, e em que ambientes estes se encaixam melhor (Aplicação Spotify, aplicação móvel ou RAMA).
+This chapter aims to analyse every single drawback of each possibility that affects the choice of which modules do develop, and on which environments it fits better: Spotify Application, Mobile Application, or RAMA improvements.
 
-Inicialmente será explorado o ambiente de desenvolvimento que o Spotify disponibiliza, ou seja, que tecnologias tem disponíveis para \emph{developers}.
-De seguida serão analisadas quais dessas tecnologias assentam melhor em cada um dos módulos propostos a desenvolver, através de experimentações feitas, e quando necessário, será descrito um possível esquema de arquitetura por forma a facilitar a explicação do problema.
+At first, Spotify's development environment will be introduced \ref{sec:spotify} in order to assess which tools are available for developers.
+Next, the available tools will be analysed in order to determine which ones fit the proposed modules to be developed, mostly through experiments. 
 
+By the end of this chapter the modules to be developed should be clearly stated, as well as which tools will be used in the prototype.
 
-No final deste capítulo, deve ficar claro quais serão os módulos de software a desenvolver, que tecnologias irão ser usadas e qual o esquema geral da sua arquitetura.
-O produto final deve de ir ao encontro do objetivo de contribuir para uma melhoria na descoberta e recomendação de música num ambiente relacionado com o RAMA.
-
+The prototype should pursue the objective of contributing to an improved user experience when discovering new music taking advantage of visual tools that implement RAMA's concept.
 
 \section{Introducing Spotify} % (fold)
 \label{sec:spotify}
 
-  O Spotify é um serviço de \emph{streaming} de música que permite ouvir, através de uma ligação de Internet, qualquer música que o Spotify possua no seu catálogo.
+  Spotify is a Music Streaming Service that allows, through an Internet connection, the user to listen to any track (if available in the user's country) in Spotify's catalogue.
 
+  % clients available: desktop client, webplayer and mobile apps
+  The service has several types of clients available to the users: desktop client, webplayer and mobiles applications.
+  
 
   \subsection{Ferramentas de Desenvolvimento} % (fold)
   \label{sub:ferramentas_de_desenvolvimento}
