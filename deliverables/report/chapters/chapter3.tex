@@ -27,7 +27,7 @@ This chapter aims to analyse every single drawback of each possibility that affe
 At first, Spotify's development environment will be introduced \ref{sec:spotify} in order to assess which tools are available for developers.
 Next, the available tools will be evaluated in order to determine which ones fit the proposed modules to be developed, mostly, through experiments. 
 
-By the end of this chapter the modules to be developed should be clearly stated, as well as which tools will be used in the prototype.
+By the end of this chapter the modules developed should be clearly stated, as well as which tools were used in the prototype.
 
 The prototype should pursue the objective of contributing to an improved user experience when discovering new music taking advantage of visual tools that implement RAMA's concept.
 
@@ -211,9 +211,7 @@ The prototype should pursue the objective of contributing to an improved user ex
 
         \item[\emph{Lookup}] \hfill \\
 
-          When the URI is known, one can finally lookup detailed information about a database item.
-
-          With the following \emph{query}: \\
+          When the URI is known, one can finally lookup detailed information about a database item. With the following \emph{query}: \\
           \url{http://ws.spotify.com/lookup/1/.json?uri=spotify:artist:3MLPFTe4BrpEV2eOVG0gLK}
 
           The server responds with:
@@ -243,136 +241,135 @@ The prototype should pursue the objective of contributing to an improved user ex
 
   % subsection devtools (end)
 
-  \subsection{Experimentações Feitas} % (fold)
-  \label{sub:experimentacoes}
-  
-    Numa primeira experiência com as ferramentas, foi criado um pequeno \emph{website} que permite pesquisar e ouvir Música do Spotify usando a \emph{Metadata API} e \emph{Spotify Widgets}: \\
+  \subsection{Experiments} % (fold)
+  \label{sub:experiments}
+
+    On a first hands-on experience with these tools, a single-page website was developed which allows the users to search and listen to music using Spotify's \emph{Metadata API} and \emph{Widgets}: \\
 
     \url{http://carsy.github.io/spotify-playground} \\
 
-    Na figura \ref{fig:playground} é possível ver o resultado de uma pesquisa, e a \emph{Widget Play Button} com o resultado selecionado da pesquisa.
+    In \ref{fig:playground} one can see a search result and the \emph{Widget Play Button} with the selected item.
 
     \begin{figure}
       \centering
 
       \begin{subfigure}[b]{0.38\textwidth}
         \includegraphics[width=\textwidth]{playground.pdf}
-        \caption{Resultado da pesquisa "Mariza"}
+        \caption{Search result for "Mariza"}
         \label{fig:playgroun_a}
       \end{subfigure}
 
       \begin{subfigure}[b]{0.38\textwidth}
         \includegraphics[width=\textwidth]{playground2.pdf}
-        \caption{Depois de selecionado o álbum "Fado Tradicional" aparece o \emph{Play button} com as faixas do álbum.}
+        \caption{After selecting the album "Fado Tradicional" the \emph{Play button} displays all of the album's tracks to be played in sequence.}
         \label{fig:playground_b}
       \end{subfigure}
 
-      \caption{Experiência com \emph{Metadata API} e \emph{Play Button Widget} (código fonte: \url{github.com/carsy/spotify-playground})}
+      \caption{Experiment with the \emph{Metadata API} and the \emph{Play Button Widget} (source code: \url{github.com/carsy/spotify-playground})}
       \label{fig:playground}
 
     \end{figure}
 
-    Verificou-se que as duas ferramentas estão bem documentadas e em constante atualização. \\
+    Both tools turned out to be well documented and easy to use.
 
-    Outra experiência foi realizada para verificar se é possível usar o elemento \emph{canvas} numa Aplicação Spotify.
-    Isto é necessário pois será a única forma de poder desenhar graficamente o grafo.
-    Para isso foi apenas necessário criar uma aplicação com o seguinte código fonte:
 
-    \begin{lstlisting}[caption={Elemento \emph{iframe} que embebe o \emph{website} do RAMA na aplicação}]
+    Another experiment was made in order to assert the potential of Spotify Applications.
+    There was a need to know if the canvas element was well supported by Spotify's environment, because that is the preferred way to graphically draw a graph.
+
+    To test that, a simple application was created with the following code:
+
+    \begin{lstlisting}[caption={\emph{iframe} element that allows to embed RAMA's website into the application.}]
       <iframe src="http://rama.inescporto.pt/app" frameborder="0"></iframe>\end{lstlisting}
 
-    Desta forma, é possível embeber o RAMA na Aplicação Spotify (que usa o elemento \emph{canvas} para desenhar o grafo).
-    Resultado final na figura \ref{fig:rama_spotifyed}.
+    The final result can be seen in \ref{fig:rama_spotifyed}.
 
     \begin{figure}
       \begin{center}
         \includegraphics[width=\textwidth]{rama.pdf}
       \end{center}
-      \caption{\emph{Website} do RAMA embebido numa Aplicação Spotify}
+      \caption{RAMA's website embedded into a Spotify Application.}
       \label{fig:rama_spotifyed}
     \end{figure}
 
-    Apesar de \emph{iframes} serem suportadas, existem outros componentes que não o são.
-    A aplicação não é usável, pois não permite, por exemplo, reproduzir automaticamente faixas de artistas.
+    Although the \emph{iframe} and \emph{canvas} elements are supported, there are some that are not.
+    This specific application is not usable since, for example, playing tracks from external sources is not allowed.
 
-    No entanto existe uma forma de testar quais os elementos de \emph{HTML5} suportados, usando uma aplicação interna do Spotify.
-    Na figura \ref{fig:canvas_support} é possível ver que o elemento \emph{canvas} é suportado a cem por cento.
+    Nonetheless, there is a way to test which Html elements are supported, using an internal Spotify application.
+    In \ref{fig:canvas_support} one can see the 100\% supported canvas element.
 
     \begin{figure}
        \begin{center}
          \includegraphics[width=0.5\textwidth]{canvas_support.pdf}
        \end{center}
-       \caption{Resultado do teste do elemento \emph{canvas}}
+       \caption{Test result for the canvas element.}
        \label{fig:canvas_support}
      \end{figure}
 
-  % subsection experimentacoes (end)
+  % subsection experiments (end)
 
-  \subsection{Conclusão} % (fold)
-  \label{sub:conclusao}
-  
-    A prova de conceito desenvolvida (\ref{fig:rama_spotifyed}) demonstrou-se a mais indicada para o objetivo final de criar um ambiente integrado entre o Spotify e o RAMA.
+  \subsection{Conclusion} % (fold)
+  \label{sub:conclusion}
 
-    Assim, os módulos a serem desenvolvidos são \ref{item:obj4} e \ref{item:obj5}.
+    The developed prototype \ref{fig:rama_spotifyed} revealed to be the most appropriate to well integrate Spotify and RAMA.
 
-  % subsection conclusao (end)
+    Given that, the proposed modules developed are \ref{item:obj4} and \ref{item:obj5}.
+
+  % subsection conclusion (end)
 
 % section spotify (end)
 
 \section{Technologies used} % (fold)
 \label{sec:technologies}
 
-  As seguintes tecnologias serão utilizadas nas fase de desenvolvimento, testes e otimização da Aplicação Spotify.
+  The following technologies were used during the development of the application.
 
-  \subsection{\emph{Spotify Desktop Client}} % (fold)
+  \subsection{Spotify Desktop Client} % (fold)
   \label{sub:subsection_name}
-    O desenvolvimento de Aplicações Spotify é feito de forma integrada no programa.
+    Spotify Applications are developed in its runtime environment - the Spotify Desktop Client.
 
-    Para abrir uma Aplicação Spotify, localmente, escreve-se o seguinte na barra de pesquisa: spotify:app:rama
+    To open a Spotify Application, locally, one writes the following in the search bar: spotify:app:rama
 
-    Onde \emph{rama} deve ser o identificador da aplicação declarado no ficheiro \emph{manifest.json}\footnote{ficheiro situado na \emph{root} da pasta do projeto}. \\
-    Exemplo de ficheiro \emph{manifest.json}:
+    Where \emph{rama} is the application identifier declared in the \emph{manifest.json} file\footnote{file located at the root of the project folder}.
 
-    \lstinputlisting[caption={manifest.json: \emph{BundleIdentifier} é o identificador da aplicação; \emph{Dependencies} declara as dependências das API's necessárias ao desenvolvimento.}]{snippets/manifest.json}
+    Example:
 
-    Existem outras opções úteis a que se pode aceder usando a tab \emph{Develop} (\ref{fig:html5_support}).
-    A opção "Show Inspector" abre a janela \emph{Webkit Development Tools} (\ref{sub:webkit_tools})
+    \lstinputlisting[caption={manifest.json: \emph{BundleIdentifier} is the application's identifier; \emph{Dependencies} declares the Application's API dependencies.}]{snippets/manifest.json}
+
+    There are useful options for development located in the "Develop" tab (\ref{fig:html5_support}).
+    The "Show Inspector" option opens the \emph{Webkit Development Tools} (\ref{sub:webkit_tools}) window.
 
     \begin{figure}
       \begin{center}
         \includegraphics[width=0.6\textwidth]{html5_support.pdf}
       \end{center}
-      \caption{Menu \emph{Develop}}
+      \caption{\emph{Develop} Tab}
       \label{fig:html5_support}
     \end{figure}
   
-  % subsection subsection_name (end)
-
   \subsection{Webkit Development Tools - webkit.org} % (fold)
   \label{sub:webkit_tools}
 
-    A partir do \emph{webkit}, tem-se acesso a várias ferramentas úteis para o desenvolvimento \emph{web} (\ref{fig:webkit_inspector}).
+    The webkit tools provides a bundle of tools for web development.
 
     \begin{figure}
       \begin{center}
         \includegraphics[width=\textwidth]{webkit_inspector.pdf}
       \end{center}
-      \caption{Webkit: Vista da tab \emph{Inspector}. Outas ferramentas disponíveis (tabs): \emph{Resources, Network, Sources, Timeline, Profiles, Audits} e \emph{Console}.}
+      \caption{Webkit: \emph{Inspector} tab view. Other tools available: \emph{Resources, Network, Sources, Timeline, Profiles, Audits} and \emph{Console}.}
 
       \label{fig:webkit_inspector}
     \end{figure}
 
-    A mais importantes são:
+    Being the most important:
 
     \begin{description}
-      \item[Inspector] Permite inspecionar e editar o código \emph{HTML} e \emph{CSS} da aplicação diretamente  (\ref{fig:webkit_inspector}).
-      \item[Network] Permite, por exemplo, ver o tempo que cada componente da aplicação demorou a carregar (uma imagem ou um ficheiro \emph{css}) (\ref{fig:webkit_network}).
-      \item[Profile] Permite identificar que partes do código \emph{javascript} são as mais frequentemente executadas (\ref{fig:webkit_profile}).
-      \item[Audit] Ajuda a perceber quantos recursos estão a ser descarregados desnecessariamente, como por exemplo, regras de \emph{CSS} que não estão a ser usadas (\ref{fig:webkit_audit}).
-      \item[Console] Muito útil para \emph{debug} de \emph{javascript}.
+      \item[Inspector] Allows to inspect the resulting Html and CSS and edit the code and see the application automatically reflect those changes (\ref{fig:webkit_inspector}).
+      \item[Network] Shows a timeline list of resources that where loaded from external sources (sometimes local) (\ref{fig:webkit_network}).
+      \item[Profile] Allows to identify which parts of the javascript code are being executed frequently, and which ones might be creating a performance issue (\ref{fig:webkit_profile}).
+      \item[Audit] Helps to understand which CSS rules are not being used (\ref{fig:webkit_audit}).
+      \item[Console] Javascript interpreter that also works as the log output for the application (\ref{fig:webkit_console}).
 
     \end{description}
-
 
     \begin{figure}
       \begin{center}
@@ -386,7 +383,7 @@ The prototype should pursue the objective of contributing to an improved user ex
       \begin{center}
         \includegraphics[width=\textwidth]{webkit_profile.pdf}
       \end{center}
-      \caption{Webkit Profile: É possível ver que a renderização do grafo é o que ocupa mais tempo de processamento como esperado. No entanto, existe uma parte de \emph{JQuery} que ocupa 12.72\% do tempo de processamento, o que pode indicar um possível ponto de melhoria de performance.}
+      \caption{Webkit Profile: Canvas render functions are the ones taking up most of the processing cycles. However there is a JQuery function that used 12.75\% of processing time, which might indicate a performance issue to be improved.}
       \label{fig:webkit_profile}
     \end{figure}
 
@@ -394,7 +391,7 @@ The prototype should pursue the objective of contributing to an improved user ex
       \begin{center}
         \includegraphics[width=\textwidth]{webkit_audit.pdf}
       \end{center}
-      \caption{Webkit Audit: 96\% do código \emph{CSS} não está a ser usado, sendo por isso, um ponto de melhoria reduzir a quantidade de informação descarregada.}
+      \caption{Webkit Audit: 96\% of the CSS code is not being used indicates a issue to be solved.}
       \label{fig:webkit_audit}
     \end{figure}
 
@@ -402,43 +399,57 @@ The prototype should pursue the objective of contributing to an improved user ex
       \begin{center}
         \includegraphics[width=\textwidth]{webkit_console.pdf}
       \end{center}
-      \caption{Webkit Console: Erros de \emph{Javascript} aparecem destacados para chamar a atenção.}
+      \caption{Webkit Console: Javascript errors are reported there (and highlighted in red as well).}
       \label{fig:webkit_console}
     \end{figure}
 
-  % subsection webkit_tools (end)
+  \subsection{Gruntjs - gruntjs.com} % (fold)
+    \label{sub:gruntjs}
+      Gruntjs is a Javascript task runner.
+      It allows to automate most of the repetitive tasks when developing a website.
+      Very useful for testing, compiling and code optimization.
 
   \subsection{Npmjs - npmjs.org} % (fold)
   \label{sub:npm}
-    Gestor de pacotes de software e dependências.
-    Para usar \emph{npm} é necessário um ficheiro de configuração \emph{package.json} que permite identificar quais os pacotes de que a aplicação depende, e as suas versões. \\
-    Exemplo:
+    Package dependency manager for nodejs - Node Packaged Modules.
+    Node packages will be used, since Gruntjs plugins are all nodejs packages (as well as Grunt itself).
 
-    \lstinputlisting[caption={\emph{package.json}: ao indicar a versão com "*", significa que se deve usar sempre a mais recente.}]{snippets/package.json}
+    A npm configuration file (\emph{package.json}) allows to identify the packages that the application depends upon, as well as its versions.
 
-  % subsection npm (end)
+    Example: 
 
-  \subsection{Gruntjs - gruntjs.com} % (fold)
-    \label{sub:gruntjs} 
-      Programa de gestão de tarefas automatizadas.
-      Muito útil para testes, compilação e otimização de código.
-      É possível por exemplo, quando qualquer parte do código mudar, a aplicação automaticamente atualiza com as mudanças mais recentes, sem ser preciso refrescar manualmente a aplicação.
-  % subsection gruntjs (end)
+    \lstinputlisting[caption={\emph{package.json}: "*" means that npm should always install the latest version of that package.}]{snippets/package.json}
 
-  \subsection{Arborjs - arborjs.org} % (fold)
-  \label{sub:arborjs}
-    Framework de javascript para desenho de grafos. Foi já utilizada no desenvolvimento do RAMA (existe sempre a possibilidade de se usar outra ferramenta substituta caso esta não for adequada).
+  \subsection{Bower - bower.io} % (fold)
+  \label{sub:bower}
   
-  % subsection arborjs (end)
+  Bower is also a package manager, but oriented for web front-end packages.
 
-% section technologies (end)
+  % subsection bower (end)
+
+  \subsection{vis.js- visjs.org} % (fold)
+  \label{sub:visjs}
+    Javascript framework for visualization.
+    It provides a few visual components, including graphs.
+
+\section{Methodologies} % (fold)
+\label{sec:methodologies}
+
+
+  \subsection{User Tests} % (fold)
+  \label{sub:user_tests}
+  
+  % subsection user_tests (end)
+
+  \subsection{Data Analysis} % (fold)
+  \label{sub:data_analysis}
+  
+  % subsection data_analysis (end)
 
 \section{Conclusions}
 
-  A escolha final do módulo a desenvolver é a Aplicação Spotify.
+  The final choice is to develop the Spotify Application.
 
-  Apesar de as outras opções serem também viáveis, a possibilidade de poder integrar uma interface estilo RAMA num ambiente que os utilizadores já se sentem confortáveis (Spotify), é muito favorável a que seja melhor aceite pelos mesmos.
+  Although the other proposals were also doable, the possibility to integrate a RAMA-like interface into Spotify's Desktop Client leaves a Spotify User more at ease with the environment.
 
-  É esperado que as tecnologias a usar ajudem no desenvolvimento desta dissertação.
-
-  Em suma, será desenvolvida uma Aplicação Spotify que implemente os módulos \ref{item:obj4} e \ref{item:obj5}.
+  The prototype should implement the prosed modules \ref{item:obj4} and \ref{item:obj5}.
