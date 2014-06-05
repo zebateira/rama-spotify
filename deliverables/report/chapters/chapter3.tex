@@ -101,14 +101,15 @@ The prototype should pursue the objective of contributing to an improved user ex
 
     \subsubsection{Spotify Widgets} % (fold)
     \label{ssub:spotify_widgets}
-      As Widgets\footnote{https://developer.spotify.com/technologies/widgets} são pequenos componentes que se podem embeber em \emph{websites}.
-      No momento da escrita deste relatório existem dois componentes: \emph{Play Button} (\ref{fig:spotify_play_button}) e \emph{Follow Button} (\ref{fig:spotify_follow_button}).
+
+      Spotify Widgets\footnote{https://developer.spotify.com/technologies/widgets} are small web components that can be embedded in external websites.
+      Spotify provides two components: \emph{Play Button} (\ref{fig:spotify_play_button}) and a \emph{Follow Button} (\ref{fig:spotify_follow_button})
 
       \begin{figure}
         \begin{center}
           \includegraphics{spotify_play_button.pdf}
         \end{center}
-        \caption{Spotify: \emph{Play Button} pode ser embebido em \emph{websites}.}
+        \caption{Spotify: \emph{Play Button}.}
         \label{fig:spotify_play_button}
       \end{figure}
 
@@ -116,29 +117,31 @@ The prototype should pursue the objective of contributing to an improved user ex
         \begin{center}
           \includegraphics{spotify_follow_button.pdf}
         \end{center}
-        \caption{Spotify: \emph{Follow Button} permite seguir um artista.}
+        \caption{Spotify: \emph{Follow Button} Allows the user to follow the music artist.}
         \label{fig:spotify_follow_button}
       \end{figure}
 
-      No entanto, existe algumas limitações no uso destas componentes.
-      No Spotify, apenas utilizadores que tenham criado conta no serviço Spotify é que podem usar o mesmo.
-      O mesmo também se aplica a estas \emph{widgets} - apesar de estas existirem numa aplicação externa ao Spotify, apenas utilizadores Spotify podem usá-las.
-      Esta limitação pode fazer sentido para o \emph{Follow Button}, mas o \emph{Play Button} torna-se inútil para utilizadores que não usem o Spotify.
-      Outro problema surge quando a música do \emph{Play Button} não está disponível no País em que o utilizador está.
+      However, there are some limitations.
+      In Spotify, only logged in users can use the service (listen to tracks, etc).
+      This also applies to these widgets - Even if they are in an external application, only Spotify users can interact with them.
 
-      Estas \emph{widgets} apenas servem de hiperligação ou ao \emph{Player} do Spotify ou ao \emph{WebPlayer} do Spotify.
-      Na realidade, usando estas \emph{widgets}, o stream de música do Spotify é sempre reproduzido dentro do ambiente do Spotify, e nunca em aplicações externas. \\
+      This limitation does make sense in the case of the \emph{Follow Button}, but the \emph{Play Button} becomes useless to non-spotify users.
 
-      Para embeber as \emph{widgets} apenas é necessário introduzir um elemento \emph{iframe} no código \emph{HTML} fonte do \emph{website}:
+      In truth, these widgets are nothing but an hyperlink to a Spotify Client (Web Player or Desktop).
+      With the Play Button, the stream of tracks always played inside Spotify's environment, and not on external applications.
 
-      \lstinputlisting[language=HTML,caption={Código \emph{HTML} para embeber um \emph{Play Button}}]{snippets/play_button.html}
+      To embed a widget, it is only required to copy-paste Html code into the website, where appropriate:
 
-      As \emph{widgets} seriam úteis para desenvolver os módulos \ref{item:obj1} e \ref{item:obj3}.
+      \lstinputlisting[language=HTML,caption={Html code to embed the \emph{Play Button}}]{snippets/play_button.html}
+
+      These widgets are useful to develop the proposed modules \ref{item:obj1} and \ref{item:obj3}.
 
     % subsubsection spotify_widgets (end)
 
     \subsubsection{Libspotify SDK} % (fold)
     \label{ssub:libspotify_sdk}
+
+      
     
       Libspotify SDK\footnote{https://developer.spotify.com/technologies/libspotify} é uma API que permite adicionar os serviços do Spotify em aplicações externas.
       No entanto, existem algumas limitações para os utilizadores destas aplicações.
