@@ -34,7 +34,7 @@ The prototype should pursue the objective of contributing to an improved user ex
 \section{Introducing Spotify} % (fold)
 \label{sec:spotify}
 
-  Spotify is a Music Streaming Service that allows, through an Internet connection, the user to listen to any track (if available in the user's country) in Spotify's catalogue.
+  Spotify is a Music Streaming Service that allows the user, through an Internet connection, to listen to any track (if available in the user's country) in Spotify's catalogue.
   The service was launched in 2008 with a native desktop client application.
 
   % clients available: desktop client, webplayer and mobile apps
@@ -49,7 +49,7 @@ The prototype should pursue the objective of contributing to an improved user ex
   \subsection{Development Tools} % (fold)
   \label{sub:devtools}
   
-    Spotify provides a set of tools\footnote{http://developer.spotify.com/technologies} to develop third-party applications (websites, native applications and mobile applications) and Spotify Applications (that run inside Spotify's Desktop Client).
+    Spotify provides a set of tools\footnote{http://developer.spotify.com/technologies} to develop Third-party Applications (websites, native applications and mobile applications) and Spotify Applications (that run inside Spotify's Desktop Client).
     There are five tools, each with different purposes.
 
     \subsubsection{Spotify Apps} % (fold)
@@ -141,20 +141,19 @@ The prototype should pursue the objective of contributing to an improved user ex
     \subsubsection{Libspotify SDK} % (fold)
     \label{ssub:libspotify_sdk}
 
-      
-    
-      Libspotify SDK\footnote{https://developer.spotify.com/technologies/libspotify} é uma API que permite adicionar os serviços do Spotify em aplicações externas.
-      No entanto, existem algumas limitações para os utilizadores destas aplicações.
-      
-      Existem, dois tipos de conta a que o utilizador pode subscrever: conta grátis e conta \emph{premium}.
-      Como foi referido anteriormente (\ref{ssub:spotify_widgets}) apenas utilizadores Spotify podem interagir com qualquer componente do Spotify, dentro ou fora das aplicações nativas do mesmo.
-      Libspotify fornece uma interface que permite a um utilizador fazer \emph{login} no Spotify em aplicações externas por forma a poder ouvir música do Spotify, criar playlists e outras funcionalidades.
-      No entanto, os únicos utilizadores que pode fazer \emph{login} nestas aplicações que usam Libspotify, são utilizadores \emph{premium}.
-      Para além de que, os \emph{developers} da própria aplicação também precisam de ser utilizadores \emph{premium}.
+      Libspotify SDK\footnote{https://developer.spotify.com/technologies/libspotify} is an API that allows for third-party applications to include Spotify's services into them.
+      However, not without some limitations to the users of these applications.
+      The users are limited depending on the type of Spotify Subscription that they have signed up to.
 
-      Neste sentido, uma aplicação que, para funcionar, necessita de que o utilizador, para além de possuir uma conta Spotify, também pague uma subscrição mensal \emph{premium}, é uma aplicação bastante restritiva.
+      There are three different types of subscriptions, but the important to retain, is the difference between being a Free Subscription Spotify User, and a Paid Subscription Spotify User (premium and unlimited subscriptions).
+      As mentioned before (\ref{ssub:spotify_widgets}), only Spotify users can interact with the widgets.
+      That also applies to third-party applications that are using Libspotify SDK, which allow, for example, the user to login with their Spotify account.
+      But in this case, not only they need to be Spotify users, they also need to have signed up to a paid Spotify subscription.
+      And not only do the users need to pay to use the Spotify-powered application, but the developers as well.
 
-      Esta ferramenta pode ser usada para desenvolver os módulos \ref{item:obj1}, \ref{item:obj2} e \ref{item:obj6}.
+      This is a very restrictive environment, although Libspotify SDK comes in many different flavours\footnote{https://developer.spotify.com/technologies/libspotify/\#libspotify-downloads}.
+
+      This tool would be used to develop modules \ref{item:obj1}, \ref{item:obj2} and \ref{item:obj6}.
       
 
     % subsubsection libspotify_sdk (end)
@@ -162,73 +161,87 @@ The prototype should pursue the objective of contributing to an improved user ex
 
     \subsubsection{Metadata API} % (fold)
     \label{ssub:metadata_api}
-    
-      A \emph{Metadata API}\footnote{https://developer.spotify.com/technologies/web-api} disponibiliza publicamente informação de músicas, álbuns e artistas da Base de dados do Spotify.
 
-      Através de pedidos HTTP é possível obter informação da base de dados do Spotify. Existe dois tipos de pedidos que esta API disponibiliza: \emph{search}\footnote{https://developer.spotify.com/technologies/web-api/search} e \emph{lookup}\footnote{https://developer.spotify.com/technologies/web-api/lookup}.
-      Para obter informação detalhada de, por exemplo, um artista, é necessário saber o deu identificador único.
-      Esse identificador é um \emph{URI} da forma:
+      The \emph{Metadata API}\footnote{https://developer.spotify.com/technologies/web-api} allows for applications to retrieve information from Spotify's music catalogue: tracks, albums, artists, playlists, and so on.
 
-      \url{spotify:artist:<artist_id>}, onde \emph{artist\_id} é um identificar único.
+      Requests to the database are done through HTTP and are of two types: \emph{search}\footnote{https://developer.spotify.com/technologies/web-api/search} e \emph{lookup}\footnote{https://developer.spotify.com/technologies/web-api/lookup}.
 
-      Exemplo:
+      To request detailed information of, e.g., an artist, the URI (used as the unique identifier) of that artist is required. Such ID is of the form:
 
-      \url{spotify:artist:65nZq8l5VZRG4X445F5kmN}, é o identificador único da fadista "Mariza". \\
+      \url{spotify:artist:<artist_id>}, where \emph{artist\_id} is the unique identifier of the artist.
 
-      Também existem identificadores únicos para álbuns:
+      Example:
 
-      \url{spotify:album:5d1LpIPmTTrvPltx26TlEU} (álbum "Fado Tradicional" de "Mariza") \\
+      \url{spotify:artist:65nZq8l5VZRG4X445F5kmN}, is the ID for the artist "Mariza". \\
 
-       e para faixas de música:
+      There's also ID's for albums:
 
-       \url{spotify:track:2vqYasauhDLVjTt7CGWK6y} (música "Fado Vianinha" do mesmo álbum) \\
+      \url{spotify:album:5d1LpIPmTTrvPltx26TlEU} (album "Fado Tradicional" from "Mariza") \\
 
-      Para obter este \emph{URI} é preciso interrogar a base de dados com um método de pesquisa.
-      Para isso, usa-se o \emph{search}.
+       and for tracks:
+
+       \url{spotify:track:2vqYasauhDLVjTt7CGWK6y} (track "Fado Vianinha" of the previous album) \\
+
+      These URI schemes are compliant with Rosetta Stone's ID spaces\footnote{http://developer.echonest.com/docs/v4\#project-rosetta-stone}.
+
+      First, to get this URI, one needs to search the database.
 
       \begin{description}
         \item[\emph{Search}] \hfill
 
-          O \emph{URL} base de utilização é:
+          The base \emph{URL}:
 
-          \url{http://ws.spotify.com/search/1/album}, para pesquisa de álbuns.
+          \url{http://ws.spotify.com/search/1/album}, to search for albums.
 
-          Se se pretender pesquisar Artistas, usa-se \emph{artist}, se se pretender pesquisar Faixas de música, usa-se \emph{track}. \\
+          For artists, \emph{artist}, for tracks, \emph{track}. \\
 
-          Exemplos:
+          Examples:
 
           \url{http://ws.spotify.com/search/1/album?q=foo} \\
           \url{http://ws.spotify.com/search/1/artist.json?q=red+hot} \\
 
-          O resultado da \emph{query}, por defeito, tem o formato \emph{XML}. No entanto, também se pode especificar o formato \emph{JSON} (como no segundo exemplo).
+          The request response, by default, is formatted in \emph{XML}, although, as the second example demonstrates, \emph{JSON} is also supported.
 
-          Dada a \emph{query}: \\
-          \url{http://ws.spotify.com/search/1/artist.json?q=camane} (fadista "Camané")
+          Given the following query: \\
+          \url{http://ws.spotify.com/search/1/artist.json?q=camane}
 
-          Obtém-se o resultado:
+          The server responds with:
 
-          \lstinputlisting[caption={Os resultados são ordenados pelo atributo "popularity"}]{snippets/search_camane.json}
+          \lstinputlisting[caption={Results ordered by "popularity"}]{snippets/search_camane.json}
 
         \item[\emph{Lookup}] \hfill \\
-          Depois de obtido o \emph{URI} identificador, é possível obter mais informações de um conteúdo usando o \emph{lookup}.
 
-          A seguinte \emph{query}: \\
+          When the URI is known, one can finally lookup detailed information about a database item.
+
+          With the following \emph{query}: \\
           \url{http://ws.spotify.com/lookup/1/.json?uri=spotify:artist:3MLPFTe4BrpEV2eOVG0gLK}
 
-          Retorna:
+          The server responds with:
 
-          \lstinputlisting[caption={Resultado do \emph{lookup} do fadista "Camané"}]{snippets/lookup_camane.json}
+          \lstinputlisting[caption={\emph{lookup} of the artist "Camané"}]{snippets/lookup_camane.json}
 
       \end{description}
 
-      Esta API seria bastante útil para desenvolver qualquer um dos seis módulos propostos.
-      Aliás, até complementa as \emph{Widgets} e o \emph{Libspotify SDK}.
+      This API is very useful to all the six proposed modules.
 
     % subsubsection metadata_api (end)
 
-  % subsection devtools (end)
+    \subsubsection{iOS SDK (beta)} % (fold)
+    \label{ssub:ios_sdk}
+    
+    The iOS SDK supports iOS Application developers. Although still in beta\footnote{https://developer.spotify.com/technologies/spotify-ios-sdk}, this tool would be used to develop the proposed module \ref{item:obj6}.
+    Much like the Libspotify SDK, this SDK provides the following APIs:
 
-    As of the writing of this report, Spotify has a set of tools 
+    \begin{itemize}
+      \item User authentication
+      \item Audio playback and stream management
+      \item Metadata (artist, album, track) lookup including artwork
+      \item Playlist management
+    \end{itemize}
+
+    % subsubsection ios_sdk (end)
+
+  % subsection devtools (end)
 
   \subsection{Experimentações Feitas} % (fold)
   \label{sub:experimentacoes}
