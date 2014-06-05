@@ -1,95 +1,115 @@
 %!TEX root = ../mieic.tex
 
-\chapter{Projeto}
+\chapter{Context and Methodologies}
 \label{chap:chap3}
 
 \section*{}
 
-O principal objetivo desta dissertação, como foi referido no capítulo \ref{chap:intro}, é desenvolver um (ou mais) módulo(s) de software que contribuam para uma melhoria na descoberta e recomendação de música num ambiente integrado entre o RAMA e o Spotify, por forma a tirar partido da representação gráfica do grafo de artistas de música do RAMA e da qualidade do serviço de \emph{Streaming} de música do Spotify.
+The primal objective of this dissertation, as referred in chapter \ref{chap:intro}, is to develop one or more software modules that will improve Spotify Users' music discovery and recommendation experience using visual tools to represent the music artists' relations and Spotify's streaming service to provide high quality music stream.
 
-Para tal, a proposta inicial desta dissertação consiste em desenvolver, no mínimo, um módulo que implemente uma das seguintes funcionalidades:
+The initial proposal was to develop a module that implements, at least, one of the following features:
 
 \begin{enumerate}
-  \item \label{item:obj1} Integrar o serviço de \emph{streaming} de música do Spotify \textbf{no RAMA}
-  \item \label{item:obj2} Integrar informação de um utilizador Spotify \textbf{no RAMA}
-  \item \label{item:obj3} Melhorar design e funcionalidades \textbf{do RAMA}
-  \item \label{item:obj4} Integrar a visualização de grafos de artistas de música \textbf{numa Aplicação Spotify}
-  \item \label{item:obj5} Integrar o módulo de criação de \emph{playlists} do RAMA \textbf{numa Aplicação Spotify}
-  \item \label{item:obj6} Integrar alguns dos módulos acima referidos \textbf{numa aplicação móvel}
+  \item \label{item:obj1} Integrate Spotify's music stream into RAMA's website
+  \item \label{item:obj2} Integrate information from the Spotify user into RAMA
+  \item \label{item:obj3} Improve RAMA's features and design
+  \item \label{item:obj4} Integrate the RAMA concept into a Spotify Application
+  \item \label{item:obj5} Integrate RAMA's playlist generation into a Spotify Application
+  \item \label{item:obj6} Integrate some of the above mentioned modules into a Mobile Application
 \end{enumerate}
 
-As três primeiras funcionalidades (\ref{item:obj1}, \ref{item:obj2} e \ref{item:obj3}) focam-se em melhorar o serviço do RAMA, usando API's do Spotify, ou seja, integrar o Spotify dentro do RAMA.
-Por outro lado, as funcionalidades \ref{item:obj4} e \ref{item:obj5} têm como objetivo integrar o RAMA dentro do Spotify, através de uma Aplicação Spotify, que funciona como \emph{plugin} do programa principal do Spotify.
-A última funcionalidade (\ref{item:obj6}) teria de implementar algumas das anteriores num Sistema Operativo Móvel (Android, iOS ou Windows Phone).
+The first three functionalities (\ref{item:obj1}, \ref{item:obj2} and \ref{item:obj3}) focus on improving RAMA using Spotify's API, i.e. to integrate Spotify into RAMA.
+Whereas \ref{item:obj4} and \ref{item:obj5} aim to integrate RAMA's concept into Spotify, through a Spotify Application (it would work as a plugin to Spotify's Desktop Client).
+The last one (\ref{item:obj6}) would focus on implementing the previous functionalities into an Android, iOS or Windows Phone Application.
 
-Este capítulo procura analisar todas as condicionantes que afetam a escolha  dos módulos a desenvolver, e em que ambientes estes se encaixam melhor (Aplicação Spotify, aplicação móvel ou RAMA).
+This chapter aims to analyse every single drawback of each possibility that affects the choice of which modules do develop, and on which environments it fits better: Spotify Application, Mobile Application, or RAMA improvements.
 
-Inicialmente será explorado o ambiente de desenvolvimento que o Spotify disponibiliza, ou seja, que tecnologias tem disponíveis para \emph{developers}.
-De seguida serão analisadas quais dessas tecnologias assentam melhor em cada um dos módulos propostos a desenvolver, através de experimentações feitas, e quando necessário, será descrito um possível esquema de arquitetura por forma a facilitar a explicação do problema.
+At first, Spotify's development environment will be introduced \ref{sec:spotify} in order to assess which tools are available for developers.
+Next, the available tools will be evaluated in order to determine which ones fit the proposed modules to be developed, mostly, through experiments. 
 
+By the end of this chapter the modules developed should be clearly stated, as well as which tools were used in the prototype.
 
-No final deste capítulo, deve ficar claro quais serão os módulos de software a desenvolver, que tecnologias irão ser usadas e qual o esquema geral da sua arquitetura.
-O produto final deve de ir ao encontro do objetivo de contribuir para uma melhoria na descoberta e recomendação de música num ambiente relacionado com o RAMA.
+The prototype should pursue the objective of contributing to an improved user experience when discovering new music taking advantage of visual tools that implement RAMA's concept.
 
-
-\section{Spotify} % (fold)
+\section{Introducing Spotify} % (fold)
 \label{sec:spotify}
 
-  O Spotify é um serviço de \emph{streaming} de música que permite ouvir, através de uma ligação de Internet, qualquer música que o Spotify possua no seu catálogo.
+  Spotify is a Music Streaming Service that allows the user, through an Internet connection, to listen to any track (if available in the user's country) in Spotify's catalogue.
+  The service was launched in 2008 with a native desktop client application.
 
+  % clients available: desktop client, webplayer and mobile apps
+  Now, the service has several types of clients available to the users: desktop client, webplayer and mobile applications.
 
-  \subsection{Ferramentas de Desenvolvimento} % (fold)
-  \label{sub:ferramentas_de_desenvolvimento}
+  \begin{description}
+    \item[\textbf{Desktop Client}] Desktop version of Spotify, with Windows and Mac versions (and also a Linux preview version).
+    \item[\textbf{Webplayer}] Web version of Spotify. This was released in 2013, and spotify still advises the use of the native applications for a better user experience.
+    \item[\textbf{Mobile Applications}] The mobile applications are available for Android and iOS devices.
+  \end{description}
+
+  \subsection{Development Tools} % (fold)
+  \label{sub:devtools}
   
-    No momento de escrita deste relatório, o Spotify tem disponível um conjunto de ferramentas\footnote{http://developer.spotify.com/technologies} para desenvolver módulos de software que podem estar embebidos nas mais diversas aplicações (\emph{third-party applications}) ou então dentro do \emph{Spotify Desktop Client}.
-
-    Existem quatro ferramentas de desenvolvimento, cada uma delas com o seu propósito e utilidade.
-
+    Spotify provides a set of tools\footnote{http://developer.spotify.com/technologies} to develop Third-party Applications (websites, native applications and mobile applications) and Spotify Applications (that run inside Spotify's Desktop Client).
+    There are five tools, each with different purposes.
 
     \subsubsection{Spotify Apps} % (fold)
     \label{ssub:spotify_apps}
-      Serve para desenvolver Aplicações Spotify\footnote{https://developer.spotify.com/technologies/apps} que são usadas pelos utilizadores Spotify dentro do \emph{Spotify Desktop Client}. Estas são aplicação \emph{HTML5}\footnote{http://www.w3.org/TR/html5/}.
+      Spotify Applications\footnote{https://developer.spotify.com/technologies/apps} are a special case in the whole set of tools provided by Spotify.
+      These applications are designed to run \emph{inside} the Desktop Client.
+      Hence, its development is also inside the same environment.
+
+      Spotify users can run and install applications from the store called "App Finder".
+      All the applications are free.
+
+      In \ref{fig:spotify_apps} on can see the interface of the desktop client.
+      In this case, the discovery mode's interface.
 
       \begin{figure}
         \begin{center}
           \includegraphics[width=\textwidth]{spotify.pdf}
         \end{center}
-        \caption{Spotify: interface do modo de descoberta do \emph{desktop client}}
+        \caption{Spotify: desktop client's discovery mode interface.}
         \label{fig:spotify_apps}
       \end{figure}
 
-      Na figura \ref{fig:spotify_apps} é possível ver o aspeto do \emph{Spotify Desktop Client}.
-      Na barra lateral esquerda, dentro do separador \emph{Apps}, aparece a lista de aplicações já instaladas, assim como o \emph{App Finder}, que permite procurar e instalar aplicações com apenas um clique.
- 
-      Na figura \ref{fig:spotify_apps2} está aberta a aplicação da Last.fm. É possível ver que as Aplicações Spotify têm apenas um espaço reservado embutido no \emph{Spotify Desktop Client}.
+      On the left side, in the menu, bellow the "App Finder" item, appears all the applications the user as installed from the store.
+
+      In \ref{fig:spotify_apps2} the official Last.fm application is opened.
+      Note how the space filled by the applications are always the same.
 
       \begin{figure}
         \begin{center}
           \includegraphics[width=\textwidth]{spotify_apps.pdf}
         \end{center}
-        \caption{Spotify: Aplicação Last.fm aberta no \emph{Spotify Player}}
+        \caption{Spotify: Last.fm's Spotify Application opened.}
         \label{fig:spotify_apps2}
       \end{figure}
 
-      Para o seu desenvolvimento destas aplicações são disponibilizadas duas \emph{frameworks}: \emph{API Framework}\footnote{https://developer.spotify.com/docs/apps/api/1.0/} e \emph{Views Framework}\footnote{https://developer.spotify.com/docs/apps/views/1.0/}.
-      A primeira fornece uma interface para recolher metadados de artistas, álbuns e músicas e controlar o reprodutor de música.
-      A segunda fornece componentes de design como botões, listas, abas, entre outros, para o desenvolvimento da aplicação.
+      The Applications' runtime environment is one of a browser-based.
+      More specifically, powered by the Chromium Embedded Framework\footnote{https://code.google.com/p/chromiumembedded}.
+      This means that the code to develop a Spotify Application follows the same principles as a web application: HTML, CSS and Javascript.
 
-      Para desenvolver os módulos \ref{item:obj4} e \ref{item:obj5} esta é a ferramenta mais apropriada.
+      Spotify developed two Frameworks\footnote{https://developer.spotify.com/technologies/apps/reference} to help developers create these applications: the API 1.x Framework\footnote{https://developer.spotify.com/docs/apps/api/1.0/} and the Views Framework\footnote{https://developer.spotify.com/docs/apps/views/1.0/}.
+
+      The first one provides an interface to use object models, access metadata, control the player, among others.
+      The second offers support for web components like buttons, lists, tabs, among others.
+
+      In order to develop the proposed modules \ref{item:obj4} and \ref{item:obj5}, these are the most appropriate tools.
 
     % subsubsection spotify_apps (end)
 
 
     \subsubsection{Spotify Widgets} % (fold)
     \label{ssub:spotify_widgets}
-      As Widgets\footnote{https://developer.spotify.com/technologies/widgets} são pequenos componentes que se podem embeber em \emph{websites}.
-      No momento da escrita deste relatório existem dois componentes: \emph{Play Button} (\ref{fig:spotify_play_button}) e \emph{Follow Button} (\ref{fig:spotify_follow_button}).
+
+      Spotify Widgets\footnote{https://developer.spotify.com/technologies/widgets} are small web components that can be embedded in external websites.
+      Spotify provides two components: \emph{Play Button} (\ref{fig:spotify_play_button}) and a \emph{Follow Button} (\ref{fig:spotify_follow_button})
 
       \begin{figure}
         \begin{center}
           \includegraphics{spotify_play_button.pdf}
         \end{center}
-        \caption{Spotify: \emph{Play Button} pode ser embebido em \emph{websites}.}
+        \caption{Spotify: \emph{Play Button}.}
         \label{fig:spotify_play_button}
       \end{figure}
 
@@ -97,42 +117,43 @@ O produto final deve de ir ao encontro do objetivo de contribuir para uma melhor
         \begin{center}
           \includegraphics{spotify_follow_button.pdf}
         \end{center}
-        \caption{Spotify: \emph{Follow Button} permite seguir um artista.}
+        \caption{Spotify: \emph{Follow Button} Allows the user to follow the music artist.}
         \label{fig:spotify_follow_button}
       \end{figure}
 
-      No entanto, existe algumas limitações no uso destas componentes.
-      No Spotify, apenas utilizadores que tenham criado conta no serviço Spotify é que podem usar o mesmo.
-      O mesmo também se aplica a estas \emph{widgets} - apesar de estas existirem numa aplicação externa ao Spotify, apenas utilizadores Spotify podem usá-las.
-      Esta limitação pode fazer sentido para o \emph{Follow Button}, mas o \emph{Play Button} torna-se inútil para utilizadores que não usem o Spotify.
-      Outro problema surge quando a música do \emph{Play Button} não está disponível no País em que o utilizador está.
+      However, there are some limitations.
+      In Spotify, only logged in users can use the service (listen to tracks, etc).
+      This also applies to these widgets - Even if they are in an external application, only Spotify users can interact with them.
 
-      Estas \emph{widgets} apenas servem de hiperligação ou ao \emph{Player} do Spotify ou ao \emph{WebPlayer} do Spotify.
-      Na realidade, usando estas \emph{widgets}, o stream de música do Spotify é sempre reproduzido dentro do ambiente do Spotify, e nunca em aplicações externas. \\
+      This limitation does make sense in the case of the \emph{Follow Button}, but the \emph{Play Button} becomes useless to non-spotify users.
 
-      Para embeber as \emph{widgets} apenas é necessário introduzir um elemento \emph{iframe} no código \emph{HTML} fonte do \emph{website}:
+      In truth, these widgets are nothing but an hyperlink to a Spotify Client (Web Player or Desktop).
+      With the Play Button, the stream of tracks always played inside Spotify's environment, and not on external applications.
 
-      \lstinputlisting[language=HTML,caption={Código \emph{HTML} para embeber um \emph{Play Button}}]{snippets/play_button.html}
+      To embed a widget, it is only required to copy-paste Html code into the website, where appropriate:
 
-      As \emph{widgets} seriam úteis para desenvolver os módulos \ref{item:obj1} e \ref{item:obj3}.
+      \lstinputlisting[language=HTML,caption={Html code to embed the \emph{Play Button}}]{snippets/play_button.html}
+
+      These widgets are useful to develop the proposed modules \ref{item:obj1} and \ref{item:obj3}.
 
     % subsubsection spotify_widgets (end)
 
     \subsubsection{Libspotify SDK} % (fold)
     \label{ssub:libspotify_sdk}
-    
-      Libspotify SDK\footnote{https://developer.spotify.com/technologies/libspotify} é uma API que permite adicionar os serviços do Spotify em aplicações externas.
-      No entanto, existem algumas limitações para os utilizadores destas aplicações.
-      
-      Existem, dois tipos de conta a que o utilizador pode subscrever: conta grátis e conta \emph{premium}.
-      Como foi referido anteriormente (\ref{ssub:spotify_widgets}) apenas utilizadores Spotify podem interagir com qualquer componente do Spotify, dentro ou fora das aplicações nativas do mesmo.
-      Libspotify fornece uma interface que permite a um utilizador fazer \emph{login} no Spotify em aplicações externas por forma a poder ouvir música do Spotify, criar playlists e outras funcionalidades.
-      No entanto, os únicos utilizadores que pode fazer \emph{login} nestas aplicações que usam Libspotify, são utilizadores \emph{premium}.
-      Para além de que, os \emph{developers} da própria aplicação também precisam de ser utilizadores \emph{premium}.
 
-      Neste sentido, uma aplicação que, para funcionar, necessita de que o utilizador, para além de possuir uma conta Spotify, também pague uma subscrição mensal \emph{premium}, é uma aplicação bastante restritiva.
+      Libspotify SDK\footnote{https://developer.spotify.com/technologies/libspotify} is an API that allows for third-party applications to include Spotify's services into them.
+      However, not without some limitations to the users of these applications.
+      The users are limited depending on the type of Spotify Subscription that they have signed up to.
 
-      Esta ferramenta pode ser usada para desenvolver os módulos \ref{item:obj1}, \ref{item:obj2} e \ref{item:obj6}.
+      There are three different types of subscriptions, but the important to retain, is the difference between being a Free Subscription Spotify User, and a Paid Subscription Spotify User (premium and unlimited subscriptions).
+      As mentioned before (\ref{ssub:spotify_widgets}), only Spotify users can interact with the widgets.
+      That also applies to third-party applications that are using Libspotify SDK, which allow, for example, the user to login with their Spotify account.
+      But in this case, not only they need to be Spotify users, they also need to have signed up to a paid Spotify subscription.
+      And not only do the users need to pay to use the Spotify-powered application, but the developers as well.
+
+      This is a very restrictive environment, although Libspotify SDK comes in many different flavours\footnote{https://developer.spotify.com/technologies/libspotify/\#libspotify-downloads}.
+
+      This tool would be used to develop modules \ref{item:obj1}, \ref{item:obj2} and \ref{item:obj6}.
       
 
     % subsubsection libspotify_sdk (end)
@@ -140,202 +161,215 @@ O produto final deve de ir ao encontro do objetivo de contribuir para uma melhor
 
     \subsubsection{Metadata API} % (fold)
     \label{ssub:metadata_api}
-    
-      A \emph{Metadata API}\footnote{https://developer.spotify.com/technologies/web-api} disponibiliza publicamente informação de músicas, álbuns e artistas da Base de dados do Spotify.
 
-      Através de pedidos HTTP é possível obter informação da base de dados do Spotify. Existe dois tipos de pedidos que esta API disponibiliza: \emph{search}\footnote{https://developer.spotify.com/technologies/web-api/search} e \emph{lookup}\footnote{https://developer.spotify.com/technologies/web-api/lookup}.
-      Para obter informação detalhada de, por exemplo, um artista, é necessário saber o deu identificador único.
-      Esse identificador é um \emph{URI} da forma:
+      The \emph{Metadata API}\footnote{https://developer.spotify.com/technologies/web-api} allows for applications to retrieve information from Spotify's music catalogue: tracks, albums, artists, playlists, and so on.
 
-      \url{spotify:artist:<artist_id>}, onde \emph{artist\_id} é um identificar único.
+      Requests to the database are done through HTTP and are of two types: \emph{search}\footnote{https://developer.spotify.com/technologies/web-api/search} e \emph{lookup}\footnote{https://developer.spotify.com/technologies/web-api/lookup}.
 
-      Exemplo:
+      To request detailed information of, e.g., an artist, the URI (used as the unique identifier) of that artist is required. Such ID is of the form:
 
-      \url{spotify:artist:65nZq8l5VZRG4X445F5kmN}, é o identificador único da fadista "Mariza". \\
+      \url{spotify:artist:<artist_id>}, where \emph{artist\_id} is the unique identifier of the artist.
 
-      Também existem identificadores únicos para álbuns:
+      Example:
 
-      \url{spotify:album:5d1LpIPmTTrvPltx26TlEU} (álbum "Fado Tradicional" de "Mariza") \\
+      \url{spotify:artist:65nZq8l5VZRG4X445F5kmN}, is the ID for the artist "Mariza". \\
 
-       e para faixas de música:
+      There's also ID's for albums:
 
-       \url{spotify:track:2vqYasauhDLVjTt7CGWK6y} (música "Fado Vianinha" do mesmo álbum) \\
+      \url{spotify:album:5d1LpIPmTTrvPltx26TlEU} (album "Fado Tradicional" from "Mariza") \\
 
-      Para obter este \emph{URI} é preciso interrogar a base de dados com um método de pesquisa.
-      Para isso, usa-se o \emph{search}.
+       and for tracks:
+
+       \url{spotify:track:2vqYasauhDLVjTt7CGWK6y} (track "Fado Vianinha" of the previous album) \\
+
+      These URI schemes are compliant with Rosetta Stone's ID spaces\footnote{http://developer.echonest.com/docs/v4\#project-rosetta-stone}.
+
+      First, to get this URI, one needs to search the database.
 
       \begin{description}
         \item[\emph{Search}] \hfill
 
-          O \emph{URL} base de utilização é:
+          The base \emph{URL}:
 
-          \url{http://ws.spotify.com/search/1/album}, para pesquisa de álbuns.
+          \url{http://ws.spotify.com/search/1/album}, to search for albums.
 
-          Se se pretender pesquisar Artistas, usa-se \emph{artist}, se se pretender pesquisar Faixas de música, usa-se \emph{track}. \\
+          For artists, \emph{artist}, for tracks, \emph{track}. \\
 
-          Exemplos:
+          Examples:
 
           \url{http://ws.spotify.com/search/1/album?q=foo} \\
           \url{http://ws.spotify.com/search/1/artist.json?q=red+hot} \\
 
-          O resultado da \emph{query}, por defeito, tem o formato \emph{XML}. No entanto, também se pode especificar o formato \emph{JSON} (como no segundo exemplo).
+          The request response, by default, is formatted in \emph{XML}, although, as the second example demonstrates, \emph{JSON} is also supported.
 
-          Dada a \emph{query}: \\
-          \url{http://ws.spotify.com/search/1/artist.json?q=camane} (fadista "Camané")
+          Given the following query: \\
+          \url{http://ws.spotify.com/search/1/artist.json?q=camane}
 
-          Obtém-se o resultado:
+          The server responds with:
 
-          \lstinputlisting[caption={Os resultados são ordenados pelo atributo "popularity"}]{snippets/search_camane.json}
+          \lstinputlisting[caption={Results ordered by "popularity"}]{snippets/search_camane.json}
 
         \item[\emph{Lookup}] \hfill \\
-          Depois de obtido o \emph{URI} identificador, é possível obter mais informações de um conteúdo usando o \emph{lookup}.
 
-          A seguinte \emph{query}: \\
+          When the URI is known, one can finally lookup detailed information about a database item. With the following \emph{query}: \\
           \url{http://ws.spotify.com/lookup/1/.json?uri=spotify:artist:3MLPFTe4BrpEV2eOVG0gLK}
 
-          Retorna:
+          The server responds with:
 
-          \lstinputlisting[caption={Resultado do \emph{lookup} do fadista "Camané"}]{snippets/lookup_camane.json}
+          \lstinputlisting[caption={\emph{lookup} of the artist "Camané"}]{snippets/lookup_camane.json}
 
       \end{description}
 
-      Esta API seria bastante útil para desenvolver qualquer um dos seis módulos propostos.
-      Aliás, até complementa as \emph{Widgets} e o \emph{Libspotify SDK}.
+      This API is very useful to all the six proposed modules.
 
     % subsubsection metadata_api (end)
 
-  % subsection ferramentas_de_desenvolvimento (end)
+    \subsubsection{iOS SDK (beta)} % (fold)
+    \label{ssub:ios_sdk}
+    
+    The iOS SDK supports iOS Application developers. Although still in beta\footnote{https://developer.spotify.com/technologies/spotify-ios-sdk}, this tool would be used to develop the proposed module \ref{item:obj6}.
+    Much like the Libspotify SDK, this SDK provides the following APIs:
 
-  \subsection{Experimentações Feitas} % (fold)
-  \label{sub:experimentacoes}
-  
-    Numa primeira experiência com as ferramentas, foi criado um pequeno \emph{website} que permite pesquisar e ouvir Música do Spotify usando a \emph{Metadata API} e \emph{Spotify Widgets}: \\
+    \begin{itemize}
+      \item User authentication
+      \item Audio playback and stream management
+      \item Metadata (artist, album, track) lookup including artwork
+      \item Playlist management
+    \end{itemize}
+
+    % subsubsection ios_sdk (end)
+
+  % subsection devtools (end)
+
+  \subsection{Experiments} % (fold)
+  \label{sub:experiments}
+
+    On a first hands-on experience with these tools, a single-page website was developed which allows the users to search and listen to music using Spotify's \emph{Metadata API} and \emph{Widgets}: \\
 
     \url{http://carsy.github.io/spotify-playground} \\
 
-    Na figura \ref{fig:playground} é possível ver o resultado de uma pesquisa, e a \emph{Widget Play Button} com o resultado selecionado da pesquisa.
+    In \ref{fig:playground} one can see a search result and the \emph{Widget Play Button} with the selected item.
 
     \begin{figure}
       \centering
 
       \begin{subfigure}[b]{0.38\textwidth}
         \includegraphics[width=\textwidth]{playground.pdf}
-        \caption{Resultado da pesquisa "Mariza"}
+        \caption{Search result for "Mariza"}
         \label{fig:playgroun_a}
       \end{subfigure}
 
       \begin{subfigure}[b]{0.38\textwidth}
         \includegraphics[width=\textwidth]{playground2.pdf}
-        \caption{Depois de selecionado o álbum "Fado Tradicional" aparece o \emph{Play button} com as faixas do álbum.}
+        \caption{After selecting the album "Fado Tradicional" the \emph{Play button} displays all of the album's tracks to be played in sequence.}
         \label{fig:playground_b}
       \end{subfigure}
 
-      \caption{Experiência com \emph{Metadata API} e \emph{Play Button Widget} (código fonte: \url{github.com/carsy/spotify-playground})}
+      \caption{Experiment with the \emph{Metadata API} and the \emph{Play Button Widget} (source code: \url{github.com/carsy/spotify-playground})}
       \label{fig:playground}
 
     \end{figure}
 
-    Verificou-se que as duas ferramentas estão bem documentadas e em constante atualização. \\
+    Both tools turned out to be well documented and easy to use.
 
-    Outra experiência foi realizada para verificar se é possível usar o elemento \emph{canvas} numa Aplicação Spotify.
-    Isto é necessário pois será a única forma de poder desenhar graficamente o grafo.
-    Para isso foi apenas necessário criar uma aplicação com o seguinte código fonte:
 
-    \begin{lstlisting}[caption={Elemento \emph{iframe} que embebe o \emph{website} do RAMA na aplicação}]
+    Another experiment was made in order to assert the potential of Spotify Applications.
+    There was a need to know if the canvas element was well supported by Spotify's environment, because that is the preferred way to graphically draw a graph.
+
+    To test that, a simple application was created with the following code:
+
+    \begin{lstlisting}[caption={\emph{iframe} element that allows to embed RAMA's website into the application.}]
       <iframe src="http://rama.inescporto.pt/app" frameborder="0"></iframe>\end{lstlisting}
 
-    Desta forma, é possível embeber o RAMA na Aplicação Spotify (que usa o elemento \emph{canvas} para desenhar o grafo).
-    Resultado final na figura \ref{fig:rama_spotifyed}.
+    The final result can be seen in \ref{fig:rama_spotifyed}.
 
     \begin{figure}
       \begin{center}
         \includegraphics[width=\textwidth]{rama.pdf}
       \end{center}
-      \caption{\emph{Website} do RAMA embebido numa Aplicação Spotify}
+      \caption{RAMA's website embedded into a Spotify Application.}
       \label{fig:rama_spotifyed}
     \end{figure}
 
-    Apesar de \emph{iframes} serem suportadas, existem outros componentes que não o são.
-    A aplicação não é usável, pois não permite, por exemplo, reproduzir automaticamente faixas de artistas.
+    Although the \emph{iframe} and \emph{canvas} elements are supported, there are some that are not.
+    This specific application is not usable since, for example, playing tracks from external sources is not allowed.
 
-    No entanto existe uma forma de testar quais os elementos de \emph{HTML5} suportados, usando uma aplicação interna do Spotify.
-    Na figura \ref{fig:canvas_support} é possível ver que o elemento \emph{canvas} é suportado a cem por cento.
+    Nonetheless, there is a way to test which Html elements are supported, using an internal Spotify application.
+    In \ref{fig:canvas_support} one can see the 100\% supported canvas element.
 
     \begin{figure}
        \begin{center}
          \includegraphics[width=0.5\textwidth]{canvas_support.pdf}
        \end{center}
-       \caption{Resultado do teste do elemento \emph{canvas}}
+       \caption{Test result for the canvas element.}
        \label{fig:canvas_support}
      \end{figure}
 
-  % subsection experimentacoes (end)
+  % subsection experiments (end)
 
-  \subsection{Conclusão} % (fold)
-  \label{sub:conclusao}
-  
-    A prova de conceito desenvolvida (\ref{fig:rama_spotifyed}) demonstrou-se a mais indicada para o objetivo final de criar um ambiente integrado entre o Spotify e o RAMA.
+  \subsection{Conclusion} % (fold)
+  \label{sub:conclusion}
 
-    Assim, os módulos a serem desenvolvidos são \ref{item:obj4} e \ref{item:obj5}.
+    The developed prototype \ref{fig:rama_spotifyed} revealed to be the most appropriate to well integrate Spotify and RAMA.
 
-  % subsection conclusao (end)
+    Given that, the proposed modules developed are \ref{item:obj4} and \ref{item:obj5}.
+
+  % subsection conclusion (end)
 
 % section spotify (end)
 
-\section{Tecnologias} % (fold)
-\label{sec:tecnologias}
+\section{Technologies used} % (fold)
+\label{sec:technologies}
 
-  As seguintes tecnologias serão utilizadas nas fase de desenvolvimento, testes e otimização da Aplicação Spotify.
+  The following technologies were used during the development of the application.
 
-  \subsection{\emph{Spotify Desktop Client}} % (fold)
+  \subsection{Spotify Desktop Client} % (fold)
   \label{sub:subsection_name}
-    O desenvolvimento de Aplicações Spotify é feito de forma integrada no programa.
+    Spotify Applications are developed in its runtime environment - the Spotify Desktop Client.
 
-    Para abrir uma Aplicação Spotify, localmente, escreve-se o seguinte na barra de pesquisa: spotify:app:rama
+    To open a Spotify Application, locally, one writes the following in the search bar: spotify:app:rama
 
-    Onde \emph{rama} deve ser o identificador da aplicação declarado no ficheiro \emph{manifest.json}\footnote{ficheiro situado na \emph{root} da pasta do projeto}. \\
-    Exemplo de ficheiro \emph{manifest.json}:
+    Where \emph{rama} is the application identifier declared in the \emph{manifest.json} file\footnote{file located at the root of the project folder}.
 
-    \lstinputlisting[caption={manifest.json: \emph{BundleIdentifier} é o identificador da aplicação; \emph{Dependencies} declara as dependências das API's necessárias ao desenvolvimento.}]{snippets/manifest.json}
+    Example:
 
-    Existem outras opções úteis a que se pode aceder usando a tab \emph{Develop} (\ref{fig:html5_support}).
-    A opção "Show Inspector" abre a janela \emph{Webkit Development Tools} (\ref{sub:webkit_tools})
+    \lstinputlisting[caption={manifest.json: \emph{BundleIdentifier} is the application's identifier; \emph{Dependencies} declares the Application's API dependencies.}]{snippets/manifest.json}
+
+    There are useful options for development located in the "Develop" tab (\ref{fig:html5_support}).
+    The "Show Inspector" option opens the \emph{Webkit Development Tools} (\ref{sub:webkit_tools}) window.
 
     \begin{figure}
       \begin{center}
         \includegraphics[width=0.6\textwidth]{html5_support.pdf}
       \end{center}
-      \caption{Menu \emph{Develop}}
+      \caption{\emph{Develop} Tab}
       \label{fig:html5_support}
     \end{figure}
   
-  % subsection subsection_name (end)
-
   \subsection{Webkit Development Tools - webkit.org} % (fold)
   \label{sub:webkit_tools}
 
-    A partir do \emph{webkit}, tem-se acesso a várias ferramentas úteis para o desenvolvimento \emph{web} (\ref{fig:webkit_inspector}).
+    The webkit tools provides a bundle of tools for web development.
 
     \begin{figure}
       \begin{center}
         \includegraphics[width=\textwidth]{webkit_inspector.pdf}
       \end{center}
-      \caption{Webkit: Vista da tab \emph{Inspector}. Outas ferramentas disponíveis (tabs): \emph{Resources, Network, Sources, Timeline, Profiles, Audits} e \emph{Console}.}
+      \caption{Webkit: \emph{Inspector} tab view. Other tools available: \emph{Resources, Network, Sources, Timeline, Profiles, Audits} and \emph{Console}.}
 
       \label{fig:webkit_inspector}
     \end{figure}
 
-    A mais importantes são:
+    Being the most important:
 
     \begin{description}
-      \item[Inspector] Permite inspecionar e editar o código \emph{HTML} e \emph{CSS} da aplicação diretamente  (\ref{fig:webkit_inspector}).
-      \item[Network] Permite, por exemplo, ver o tempo que cada componente da aplicação demorou a carregar (uma imagem ou um ficheiro \emph{css}) (\ref{fig:webkit_network}).
-      \item[Profile] Permite identificar que partes do código \emph{javascript} são as mais frequentemente executadas (\ref{fig:webkit_profile}).
-      \item[Audit] Ajuda a perceber quantos recursos estão a ser descarregados desnecessariamente, como por exemplo, regras de \emph{CSS} que não estão a ser usadas (\ref{fig:webkit_audit}).
-      \item[Console] Muito útil para \emph{debug} de \emph{javascript}.
+      \item[Inspector] Allows to inspect the resulting Html and CSS and edit the code and see the application automatically reflect those changes (\ref{fig:webkit_inspector}).
+      \item[Network] Shows a timeline list of resources that where loaded from external sources (sometimes local) (\ref{fig:webkit_network}).
+      \item[Profile] Allows to identify which parts of the javascript code are being executed frequently, and which ones might be creating a performance issue (\ref{fig:webkit_profile}).
+      \item[Audit] Helps to understand which CSS rules are not being used (\ref{fig:webkit_audit}).
+      \item[Console] Javascript interpreter that also works as the log output for the application (\ref{fig:webkit_console}).
 
     \end{description}
-
 
     \begin{figure}
       \begin{center}
@@ -349,7 +383,7 @@ O produto final deve de ir ao encontro do objetivo de contribuir para uma melhor
       \begin{center}
         \includegraphics[width=\textwidth]{webkit_profile.pdf}
       \end{center}
-      \caption{Webkit Profile: É possível ver que a renderização do grafo é o que ocupa mais tempo de processamento como esperado. No entanto, existe uma parte de \emph{JQuery} que ocupa 12.72\% do tempo de processamento, o que pode indicar um possível ponto de melhoria de performance.}
+      \caption{Webkit Profile: Canvas render functions are the ones taking up most of the processing cycles. However there is a JQuery function that used 12.75\% of processing time, which might indicate a performance issue to be improved.}
       \label{fig:webkit_profile}
     \end{figure}
 
@@ -357,7 +391,7 @@ O produto final deve de ir ao encontro do objetivo de contribuir para uma melhor
       \begin{center}
         \includegraphics[width=\textwidth]{webkit_audit.pdf}
       \end{center}
-      \caption{Webkit Audit: 96\% do código \emph{CSS} não está a ser usado, sendo por isso, um ponto de melhoria reduzir a quantidade de informação descarregada.}
+      \caption{Webkit Audit: 96\% of the CSS code is not being used indicates a issue to be solved.}
       \label{fig:webkit_audit}
     \end{figure}
 
@@ -365,43 +399,57 @@ O produto final deve de ir ao encontro do objetivo de contribuir para uma melhor
       \begin{center}
         \includegraphics[width=\textwidth]{webkit_console.pdf}
       \end{center}
-      \caption{Webkit Console: Erros de \emph{Javascript} aparecem destacados para chamar a atenção.}
+      \caption{Webkit Console: Javascript errors are reported there (and highlighted in red as well).}
       \label{fig:webkit_console}
     \end{figure}
 
-  % subsection webkit_tools (end)
+  \subsection{Gruntjs - gruntjs.com} % (fold)
+    \label{sub:gruntjs}
+      Gruntjs is a Javascript task runner.
+      It allows to automate most of the repetitive tasks when developing a website.
+      Very useful for testing, compiling and code optimization.
 
   \subsection{Npmjs - npmjs.org} % (fold)
   \label{sub:npm}
-    Gestor de pacotes de software e dependências.
-    Para usar \emph{npm} é necessário um ficheiro de configuração \emph{package.json} que permite identificar quais os pacotes de que a aplicação depende, e as suas versões. \\
-    Exemplo:
+    Package dependency manager for nodejs - Node Packaged Modules.
+    Node packages will be used, since Gruntjs plugins are all nodejs packages (as well as Grunt itself).
 
-    \lstinputlisting[caption={\emph{package.json}: ao indicar a versão com "*", significa que se deve usar sempre a mais recente.}]{snippets/package.json}
+    A npm configuration file (\emph{package.json}) allows to identify the packages that the application depends upon, as well as its versions.
 
-  % subsection npm (end)
+    Example: 
 
-  \subsection{Gruntjs - gruntjs.com} % (fold)
-    \label{sub:gruntjs} 
-      Programa de gestão de tarefas automatizadas.
-      Muito útil para testes, compilação e otimização de código.
-      É possível por exemplo, quando qualquer parte do código mudar, a aplicação automaticamente atualiza com as mudanças mais recentes, sem ser preciso refrescar manualmente a aplicação.
-  % subsection gruntjs (end)
+    \lstinputlisting[caption={\emph{package.json}: "*" means that npm should always install the latest version of that package.}]{snippets/package.json}
 
-  \subsection{Arborjs - arborjs.org} % (fold)
-  \label{sub:arborjs}
-    Framework de javascript para desenho de grafos. Foi já utilizada no desenvolvimento do RAMA (existe sempre a possibilidade de se usar outra ferramenta substituta caso esta não for adequada).
+  \subsection{Bower - bower.io} % (fold)
+  \label{sub:bower}
   
-  % subsection arborjs (end)
+  Bower is also a package manager, but oriented for web front-end packages.
 
-% section tecnologias (end)
+  % subsection bower (end)
 
-\section{Resumo e Conclusões}
+  \subsection{vis.js- visjs.org} % (fold)
+  \label{sub:visjs}
+    Javascript framework for visualization.
+    It provides a few visual components, including graphs.
 
-  A escolha final do módulo a desenvolver é a Aplicação Spotify.
+\section{Methodologies} % (fold)
+\label{sec:methodologies}
 
-  Apesar de as outras opções serem também viáveis, a possibilidade de poder integrar uma interface estilo RAMA num ambiente que os utilizadores já se sentem confortáveis (Spotify), é muito favorável a que seja melhor aceite pelos mesmos.
 
-  É esperado que as tecnologias a usar ajudem no desenvolvimento desta dissertação.
+  \subsection{User Tests} % (fold)
+  \label{sub:user_tests}
+  
+  % subsection user_tests (end)
 
-  Em suma, será desenvolvida uma Aplicação Spotify que implemente os módulos \ref{item:obj4} e \ref{item:obj5}.
+  \subsection{Data Analysis} % (fold)
+  \label{sub:data_analysis}
+  
+  % subsection data_analysis (end)
+
+\section{Conclusions}
+
+  The final choice is to develop the Spotify Application.
+
+  Although the other proposals were also doable, the possibility to integrate a RAMA-like interface into Spotify's Desktop Client leaves a Spotify User more at ease with the environment.
+
+  The prototype should implement the prosed modules \ref{item:obj4} and \ref{item:obj5}.
