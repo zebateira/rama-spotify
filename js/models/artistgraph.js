@@ -373,7 +373,6 @@ ArtistGraph.prototype = {
   // graph object
   bindAllGraphEvents: function() {
     for (var event in this.graphevents) {
-      console.log(event, ' binded');
       this.graph.on(event, this.graphevents[event]);
     }
   },
