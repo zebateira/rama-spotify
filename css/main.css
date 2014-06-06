@@ -300,19 +300,23 @@ a {
   right: 0;
   top: 25%;
   margin-right: 10px;
-  display: inline-block;
+  opacity: .6;
 }
-/* line 27, ../sass/_header.scss */
+/* line 24, ../sass/_header.scss */
+#header .header-logo-en:hover {
+  opacity: 1;
+}
+/* line 30, ../sass/_header.scss */
 #header .header-text a {
   color: #dfe0e6;
 }
-/* line 32, ../sass/_header.scss */
+/* line 35, ../sass/_header.scss */
 #header .header-title {
   text-align: center;
   font-size: 3em;
   line-height: 60px;
 }
-/* line 38, ../sass/_header.scss */
+/* line 41, ../sass/_header.scss */
 #header .header-link {
   display: table;
   position: absolute;
@@ -324,12 +328,12 @@ a {
   background-color: #313336;
   margin-left: 10px;
 }
-/* line 51, ../sass/_header.scss */
+/* line 54, ../sass/_header.scss */
 #header .header-link a {
   display: table-cell;
   vertical-align: middle;
 }
-/* line 56, ../sass/_header.scss */
+/* line 59, ../sass/_header.scss */
 #header .header-link:after {
   content: url(../img/external_link-tiny-gray.png);
   display: inline-block;
@@ -339,7 +343,7 @@ a {
   margin-top: -5px;
 }
 @media (max-width: 500px) {
-  /* line 38, ../sass/_header.scss */
+  /* line 41, ../sass/_header.scss */
   #header .header-link {
     display: none;
   }
