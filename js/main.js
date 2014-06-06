@@ -88,6 +88,10 @@ spotify.require([
           form: '#settings_form'
         }
       },
+      feedback: {
+        loadtemplate: true,
+        controller: Controller
+      },
       graph: {
         loadtemplate: false,
         controller: controllers.GraphController,

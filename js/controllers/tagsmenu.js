@@ -131,21 +131,11 @@ require([
 
       // on tag click, toggle highlighting all of its
       // corresponding artists
-      tagElement.onclick = function onTagClick(event) {
-
-        $(commontagClass + '.selected').not(this)
-          .removeClass('selected');
-        $(this).toggleClass('selected');
-
-        if ($(this).hasClass('selected'))
-          graphcontroller.highlightNodes(this.nodes);
-        else
-          graphcontroller.unHighlightNodes(this.nodes);
-      };
+      tagElement.onclick = this.events.onTagClick.bind(this);
 
       // finally append it to the tag's container
       tagsContainer.append(tagElement);
-    });
+    }, this);
   };
 
   // reset the properties to their initial states
@@ -158,6 +148,19 @@ require([
   TagsMenu.prototype.bindEvents = function() {
     this.graphcontroller.addCustomGraphEvent('updateTagsMenu',
       this.updateTags.bind(this));
+  };
+
+  TagsMenu.prototype.events = {
+    onTagClick: function(event) {
+      $('.common-tag.selected').not(event.target)
+        .removeClass('selected');
+      $(event.target).toggleClass('selected');
+
+      if ($(event.target).hasClass('selected'))
+        this.graphcontroller.highlightNodes(event.target.nodes);
+      else
+        this.graphcontroller.unHighlightNodes(event.target.nodes);
+    }
   };
 
   TagsMenu.prototype.constructor = TagsMenu;

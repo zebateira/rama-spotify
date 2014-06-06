@@ -12,7 +12,7 @@ require([
   var EQBar = function(name, config) {
     Controller.call(this, name, config);
 
-    this.barcolor = config.barcolor || "#7e7e7e";
+    this.barcolor = config.barcolor || '#7e7e7e';
 
     // number of rows for the equalizer
     this.numRows = config.numRows || 128;
@@ -50,39 +50,41 @@ require([
     // bind event listener to get the waves
     // to render the equalizer
     audio.RealtimeAnalyzer.forPlayer(models.player)
-      .addEventListener('audio', this.onRealtimeAudio.bind(this));
+      .addEventListener('audio', this.events.onRealtimeAudio.bind(this));
   };
 
   // event that processes the wave at each instant (in realtime)
-  EQBar.prototype.onRealtimeAudio = function(event) {
-    // the waves: left and right arrays
-    var left = event.audio.wave.left;
-    var right = event.audio.wave.right;
+  EQBar.prototype.events = {
+    onRealtimeAudio: function(event) {
+      // the waves: left and right arrays
+      var left = event.audio.wave.left;
+      var right = event.audio.wave.right;
 
-    // at each frame clear the canvas
-    this.context.clearRect(0, 0,
-      this.canvas.width, this.canvas.height);
+      // at each frame clear the canvas
+      this.context.clearRect(0, 0,
+        this.canvas.width, this.canvas.height);
 
-    // draw the bars given the waves' values
-    for (var i = 0, x = 0; i < this.numRows; i++, x += this.barwidth + this.barmargin) {
-      // each value of wave.left and wave.right are
-      // values between -1.0 and 1.0 (smth like that) so
-      // by doing Math.abs(left[i]) we preserve the values
-      // even if they are negative.
+      // draw the bars given the waves' values
+      for (var i = 0, x = 0; i < this.numRows; i++, x += this.barwidth + this.barmargin) {
+        // each value of wave.left and wave.right are
+        // values between -1.0 and 1.0 (smth like that) so
+        // by doing Math.abs(left[i]) we preserve the values
+        // even if they are negative.
 
-      // height of the bar to draw
-      var height =
-      // we are ignoring if it's a left or right wave.
-      // we just add them up and represent a bar with the left 
-      // and the right values
-      (Math.abs(left[i]) + Math.abs(right[i])) *
-      // we use the scale factor to make the values visible
-      this.barHeightFactor;
+        // height of the bar to draw
+        var height =
+        // we are ignoring if it's a left or right wave.
+        // we just add them up and represent a bar with the left 
+        // and the right values
+        (Math.abs(left[i]) + Math.abs(right[i])) *
+        // we use the scale factor to make the values visible
+        this.barHeightFactor;
 
-      // each bar is draw always at y=0, with the same width
-      // the x value is updated give the same width and
-      // the this.barmargin
-      this.context.fillRect(x, 0, this.barwidth, height);
+        // each bar is draw always at y=0, with the same width
+        // the x value is updated give the same width and
+        // the this.barmargin
+        this.context.fillRect(x, 0, this.barwidth, height);
+      }
     }
   };
 

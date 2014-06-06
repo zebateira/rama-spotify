@@ -112,7 +112,7 @@ require([
               element.uri = track.uri;
               element.innerHTML = track.name;
               element.className = 'list-track';
-              element.onclick = this.onTrackClick;
+              element.onclick = this.events.onTrackClick;
 
               this.elements.list.jelement.append(element);
             }
@@ -121,23 +121,29 @@ require([
   };
 
   // Events
-  TrackList.prototype.onPlayerChange = function(player) {
-    this.loadController();
-  };
-
-  TrackList.prototype.onTrackClick = function(event) {
-    models.player.playTrack(
-      // the previously saved uri property is used
-      // to create the models.Track object
-      models.Track.fromURI(event.target.uri)
-    );
-  };
 
   // bind all the events
+
   TrackList.prototype.bindAllEvents = function() {
     models.player.addEventListener('change',
-      this.onPlayerChange.bind(this));
+      this.events.onPlayerChange.bind(this));
   };
+
+  TrackList.prototype.events = {
+    onPlayerChange: function(player) {
+      this.loadController();
+    },
+
+    onTrackClick: function(event) {
+      models.player.playTrack(
+        // the previously saved uri property is used
+        // to create the models.Track object
+        models.Track.fromURI(event.target.uri)
+      );
+    }
+  };
+
+
 
   TrackList.prototype.constructor = TrackList;
 
