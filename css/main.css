@@ -628,3 +628,36 @@ a {
 #tagsmenu .common-tag.selected {
   border-color: #95dc00;
 }
+
+/* line 1, ../sass/_feedback.scss */
+#feedback {
+  position: absolute;
+  z-index: 2;
+  bottom: 50px;
+  right: 0;
+  opacity: 0.9;
+  background-color: #222326;
+  border-color: #3e3e40;
+  border-width: 1px;
+  border-style: solid;
+  cursor: pointer;
+  margin: 10px;
+  padding: 2px 5px;
+}
+/* line 86, ../sass/main.scss */
+#feedback:hover {
+  opacity: 0.95;
+}
+/* line 90, ../sass/main.scss */
+#feedback:active {
+  border-color: #7fb701;
+  -webkit-transform: scale(0.98, 0.98);
+}
+/* line 13, ../sass/_feedback.scss */
+#feedback #feedback_form {
+  color: #a6a9b9;
+}
+/* line 16, ../sass/_feedback.scss */
+#feedback #feedback_form:hover {
+  color: #dfe0e6;
+}

@@ -1,0 +1,21 @@
+#feedback {
+  position: absolute;
+  z-index: 2;
+  bottom: $tracklist-height;
+  right: 0;
+
+  @include menubox();
+  @include clickableBtn();
+
+  margin: 10px;
+  padding: 2px 5px;
+
+  #feedback_form {
+    color: darken($new-white, 20%);
+
+    &:hover {
+      color: $new-white;
+    }
+  }
+
+}
