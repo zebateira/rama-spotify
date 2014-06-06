@@ -294,17 +294,25 @@ a {
   border-bottom: 1px solid #5e6069;
   min-height: 60px;
 }
-/* line 17, ../sass/_header.scss */
+/* line 16, ../sass/_header.scss */
+#header .header-logo-en {
+  position: absolute;
+  right: 0;
+  top: 25%;
+  margin-right: 10px;
+  display: inline-block;
+}
+/* line 27, ../sass/_header.scss */
 #header .header-text a {
   color: #dfe0e6;
 }
-/* line 22, ../sass/_header.scss */
+/* line 32, ../sass/_header.scss */
 #header .header-title {
   text-align: center;
   font-size: 3em;
   line-height: 60px;
 }
-/* line 28, ../sass/_header.scss */
+/* line 38, ../sass/_header.scss */
 #header .header-link {
   display: table;
   position: absolute;
@@ -316,12 +324,12 @@ a {
   background-color: #313336;
   margin-left: 10px;
 }
-/* line 41, ../sass/_header.scss */
+/* line 51, ../sass/_header.scss */
 #header .header-link a {
   display: table-cell;
   vertical-align: middle;
 }
-/* line 46, ../sass/_header.scss */
+/* line 56, ../sass/_header.scss */
 #header .header-link:after {
   content: url(../img/external_link-tiny-gray.png);
   display: inline-block;
@@ -331,7 +339,7 @@ a {
   margin-top: -5px;
 }
 @media (max-width: 500px) {
-  /* line 28, ../sass/_header.scss */
+  /* line 38, ../sass/_header.scss */
   #header .header-link {
     display: none;
   }
