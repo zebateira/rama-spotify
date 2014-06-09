@@ -316,7 +316,7 @@ ArtistGraph.prototype = {
   },
 
   // Updates the graph with the given config object
-  updateConfig: function(config, done) {
+  updateConfig: function(config) {
     if (config && config.branching)
       this.updateBranching(config.branching);
 
@@ -334,7 +334,6 @@ ArtistGraph.prototype = {
     // TODO
   },
   updateDepth: function(newDepth, update) {
-    console.log(this.graph.edgesData);
     var oldDepth = this.depth;
     this.depth = newDepth;
 
@@ -365,7 +364,6 @@ ArtistGraph.prototype = {
           }
         });
 
-        console.log(edgesToRemove);
         this.graph.edgesData.remove(edgesToRemove);
       }, this);
 
@@ -391,21 +389,6 @@ ArtistGraph.prototype = {
       }
     }
   },
-
-  // Refresh vis.Graph's data objects
-  updateData: function() {
-    // this.updateNodes();
-    // this.updateEdges();
-
-    // this.events.updateTagsMenu();
-  },
-  updateNodes: function() {
-    // this.graph.nodesData.update(this.graph.nodesData);
-  },
-  updateEdges: function() {
-    // this.graph.edgesData.update(this.graph.edgesData);
-  },
-
 
   getNode: function(artist) {
     return this.graph.nodesData.get({
@@ -441,7 +424,6 @@ ArtistGraph.prototype = {
   bindAllGraphEvents: function() {
     for (var event in this.graphevents) {
       this.graph.on(event, this.graphevents[event]);
-      console.log(event);
     }
 
     this.graph.nodesData.on('*', function() {
