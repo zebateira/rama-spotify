@@ -22,6 +22,23 @@ The development process will be explored regarding previous expectations about t
   \subsection{Visulization of the Artist Map} % (fold)
     \label{sub:visualization}
   
+    The application automatically draws the map with the current playing artist as the main node, as seen in (?).
+
+    The graph-like structure of the map, is created by recursively fetching a list of related artists from each artist. Once a certain pre-established limit of recursive levels is reached, the algorithm stops.
+
+    The map creation algorithm is as follows:
+
+    \lstinputlisting[caption={Simplified map creation algorithm in Javascript (duplicate nodes checking is encapsulated in the insertNode function, as well as duplicate edges in the insertEdge function)}, style=htmlcssjs]{snippets/map_creation_alg.js}
+
+    This algorithm, albeit simplified, represents the basic flow when constructing a graph, more specifically, a tree.
+    Since in this case of study, the direction of the edges of the graph are not relevant in any way, all of the edges are considered undirected.
+
+    Assuming that the insertNode() function only checks for duplicate nodes, i.e., it only inserts unique nodes into the graph, then the resulting graph is one of a tree, since there are no simple cycles in the graph.
+    An example of this behaviour can be seen in (?).
+
+    To build a graph with all the connections that exist between all of the artists in the graph, the insertNode() function would need to insert more edges into the graph by analysing the current graph state.
+    An example of this behaviour can be seen in (?).
+
 
 
   % subsection visualization (end)
