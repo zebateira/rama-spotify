@@ -1,192 +1,64 @@
 %!TEX root = ../mieic.tex
 
-\chapter{Plano de Trabalho}\label{chap:chap4}
+\chapter{Prototype}
+\label{chap:chap4}
 
 \section*{}
 
-  Neste capítulo serão explicadas as diferentes fases de desenvolvimento desta dissertação, atribuídos pontos de esforço a todas as tarefas de cada fase e definida a calendarização das mesmas fases.
+In this chapter further details about the developed prototype will be explored.
 
-\section{Fases do Projeto} % (fold)
-\label{sec:fases_projeto}
+The most important features will be explained in detail given the previously explored methodologies.
 
-
-  Cada fase terá um conjunto de tarefas associadas, e cada uma deles tem um quantificador de \emph{esforço} (escala \emph{Fibonacci} de 1 a 8) por forma a ajudar a compreender algumas das distribuições de tempo de trabalho para cada tarefa.
-  Para identificar uma tarefa, usou-se a nomenclatura:
+The development process will be explored regarding previous expectations about the expected outcome of the planned prototype, as well as a small introduction about future work to be done on the prototype.
 
 
-  \emph{<fase>.<tarefa>} \\
 
-  Exemplo: Tarefa 3.2 é a segunda tarefa da terceira fase do projeto.
 
-  \subsection{Fase 1 - Desenho da Aplicação} % (fold)
-  \label{sub:dev_desenho}
+\section{Main Features} % (fold)
+  \label{sec:main_features}
   
-    Numa primeira fase, serão quantificadas as funcionalidades a implementar por forma a desenhar bem o espaço da aplicação.
+  The main features of RAMA's Spotify Application are: visualization of a map of a network of connected artists; edit the graph (expand and new map functions, as well as with the depth and branching parameters); Tags overlay; music artist info.
 
-    \begin{description}
-      \item[Tarefa 1.1 - Estudo detalhado das funcionalidades] \hfill \\
-      Perceber quais as funcionalidades que vai ter mais destaque na aplicação. \\
-      \emph{Esforço: 3}
+  \subsection{Visulization of the Artist Map} % (fold)
+    \label{sub:visualization}
+  
 
-      \item[Tarefa 1.2 - Desenho global] \hfill \\
-      Especificação do \emph{layout} de todas as vistas da aplicação. \\
-      \emph{Esforço: 5}
 
-    \end{description}
+  % subsection visualization (end)
 
-  % subsection dev_desenho (end)
+  \subsection{Graph Edition} % (fold)
+    \label{sub:edition}
+  
 
-  \subsection{Fase 2 - Mapeamento de Metadados Spotify em Last.fm} % (fold)
-  \label{sub:dev_mapeamento}
+  % subsection edition (end)
 
-    O objetivo desta segunda fase da dissertação é conseguir fazer corresponder o conjunto de metadados da base de dados do Spotify na da Last.fm.
+  \subsection{Tags Overlay} % (fold)
+    \label{sub:tags_overlay}
+  
+
+
+  % subsection tags_overlay (end)
+
+  \subsection{Artist Info} % (fold)
+    \label{sub:artist_info}
+  
+
+
+  % subsection artist_info (end)
+
+% section main_features (end)  
+
+\section{Development Process} % (fold)
+  \label{sec:development_process}
+
     
-    Para isso, esta fase tem três tarefas associadas:
-    \begin{description}
-      \item[Tarefa 2.1 - Recolha de Informação] \hfill \\
-        Recolher informação relevante que ajude a perceber que tipos de metadados similares existem entre as duas bases de dados. \\
-        \emph{Esforço: 2}
 
-      \item[Tarefa 2.2 - Módulo de mapeamento] \hfill \\
-        Desenvolvimento de um módulo capaz de fazer esse mesmo mapeamento de uma forma modelar.
-        Deve tentar compilar a maior quantidade de metadados de cada parte numa entrada.\\
-        \emph{Esforço: 5}
+% section development_process (end)
 
-      \item[Tarefa 2.3 - Pesquisa de um Artista] \hfill \\
-        Desenvolvimento da funcionalidade de pesquisa de um artista, usando o módulo criado anteriormente. \\
-        \emph{Esforço: 3}
 
-    \end{description}
+\section{Conclusions} % (fold)
+  \label{sec:conclusions}
 
-  % subsection dev_mapeamento (end)
 
-  \subsection{Fase 3 - Criação e Edição do grafo} % (fold)
-  \label{sub:dev_grafo}
-  
-    Esta é a fase crítica da dissertação, pois contém as tarefas com maior classificação de esforço.
 
-    \begin{description}
-      \item[Tarefa 3.1 - Representação em Grafo] \hfill \\
-      Representação abstrata das relações dos artistas de música em grafo.
-      Esta tarefa depende bastante da tarefa 2.3 no sentido em que ainda é incerto, se é possível utilizador a metodologia utilizada pelo RAMA para gerar o grafo. \\
-      \emph{Esforço: 8}
-
-      \item[Tarefa 3.2 - Desenho gráfico do grafo] \hfill \\
-      Desenho do grafo usando uma ferramenta de renderização de grafos 2D\ref{sub:arborjs}.
-      Se o desempenho da ferramenta impedir uma boa experiência de utilizador, será necessário investigar mais e procurar outras ferramentas que permitam uma melhor performance. \\
-      \emph{Esforço: 8}
-
-      \item[Tarefa 3.3 - Edição do grafo] \hfill \\
-      Disponibilizar funcionalidades de edição do grafo desenhado como eliminar, expandir e mover nó. \\
-      \emph{Esforço: 3}
-
-      \item[Tarefa 3.4 - Parâmetros do grafo] \hfill \\
-      Como funcionalidades mais avançadas, mostrar parâmetros editáveis do grafo.
-      Não esquecer de limitar alguns parâmetros por forma a evitar comportamentos erráticos do grafo.\\
-      \emph{Esforço: 3}
-
-    \end{description}
-
-  % subsection dev_grafo (end)
-
-  \subsection{Fase 4 - Reprodução de Música} % (fold)
-  \label{sub:dev_playlists}
-  
-    Nesta quarta fase da dissertação, serão implementadas mais funcionalidades essenciais à aplicação.
-
-    \begin{description}
-      \item[Tarefa 4.1 - Reproduzir música de artista] \hfill \\
-      Permitir selecionar um nó e reproduzir as música mais populares desse artista. \\
-      \emph{Esforço: 3}
-
-      \item[Tarefa 4.2 - Gerar \emph{Playlists}] \hfill \\
-      Gerar uma \emph{playlists} a partir de um grafo. \\
-      \emph{Esforço: 3}
-
-      \item[Tarefa 4.3 - Guardar \emph{Playlists}] \hfill \\
-      Permitir ao utilizador guarda a \emph{playlists} gerada. \\
-      \emph{Esforço: 1}
-
-      \item[Tarefa 4.4 - Seguir Artista] \hfill \\
-      Seguir artista de qualquer nó do grafo. \\
-      \emph{Esforço: 2}
-
-    \end{description}
-
-  % subsection dev_playlists (end)
-
-  \subsection{Fase 5 - Avaliação e Validação} % (fold)
-  \label{sub:dev_validacao}
-  
-    Esta fase final do projeto irá contemplar uma avaliação da aplicação utilizando o \emph{feedback} de utilizadores que irão experimentar a mesma, por forma a validar o objetivo desta dissertação: melhoria de uma experiência musical de um utilizador Spotify.
-
-    \begin{description}
-      \item[Tarefa 5.1 - Recolha de dados de utilização da Aplicação] \hfill \\
-      Os utilizadores inicialmente irão mostrar os seus hábitos de pesquisa de nova música.
-      De seguida, ser-lhes-á introduzida a aplicação desenvolvida para se ficar com uma perceção do uso que lhe é dada. \\
-      \emph{Esforço: 3}
-
-      \item[Tarefa 5.2 - Análise dos Dados recolhidos] \hfill \\
-      Tirar conclusões dos dados recolhidos por forma a tirar conclusões sobre a forma de utilização da aplicação. \\
-      \emph{Esforço: 5}
-
-      \item[Tarefa 5.3 - Melhorias na Aplicação] \hfill \\
-      Melhorias na aplicação de acordo com o \emph{feedback} dos utilizadores. \\
-      \emph{Esforço: 3}
-
-    \end{description}
-
-  % subsection dev_validacao (end)
-
-% section fases_projeto (end)
-
-\section{Calendarização} % (fold)
-\label{sec:calendarizacao}
-
-\begin{figure}
-  \begin{ganttchart}[x unit=0.004\textwidth,time slot format=little-endian]{10.2.2014}{7.7.2014}
-    \gantttitlecalendar*{10.2.2014}{7.7.2014}{month=shortname} \\
-
-    \ganttgroup{1 Desenho da Aplicação}{10.2.2014}{14.2.2014} \\
-    \ganttbar{1.1 Funcionalidades}{10.2.2014}{12.2.2014} \\
-    \ganttbar{1.2 \emph{Layouts}}{10.2.2014}{14.2.2014} \\
-
-    \ganttgroup{2. Mapeamento Spotify - Last.fm}{17.2.2014}{28.2.2014} \\
-    \ganttbar{2.1 Recolha de Informação}{17.2.2014}{17.2.2014} \\
-    \ganttbar{2.2 Desenvolvimento do módulo}{17.2.2014}{28.2.2014} \\
-    \ganttbar{2.3 Pesquisa de um artista}{26.2.2014}{28.2.2014} \\
-
-    \ganttgroup{3. Criação do Grafo}{3.3.2014}{4.4.2014} \\
-    \ganttbar{3.1 Representação em grafo}{3.3.2014}{19.3.2014} \\
-    \ganttbar{3.2 Desenho gráfico}{10.3.2014}{28.3.2014} \\
-    \ganttbar{3.3 \& 3.4}{31.3.2014}{4.4.2014} \\
-
-    \ganttgroup{4. Reprodução de Música}{7.4.2014}{11.4.2014} \\
-
-    \ganttgroup{5. Avaliação e Validação}{7.4.2014}{16.5.2014} \\
-    \ganttbar{5.1 Recolha de dados}{7.4.2014}{25.4.2014} \\
-    \ganttbar{5.2 Análise de dados}{28.4.2014}{12.5.2014} \\
-    \ganttbar{5.3 Melhorias na Aplicação}{5.5.2014}{16.5.2014} \\
-
-    \ganttgroup{Escrita da Dissertação}{1.5.2014}{16.6.2014} \\
-
-    \ganttgroup{Escrita de Artigo Científico}{17.6.2014}{27.6.2014} \\
-
-    \ganttgroup{Preparação da Apresentação Final}{30.6.2014}{7.7.2014} \\
-
-  \end{ganttchart}
-  \caption{Calendarização do Plano de Trabalho}
-  \label{fig:calendarizacao}
-\end{figure}
-
-  Na figura \ref{fig:calendarizacao} é possível ver a calendarização do plano de trabalho para esta dissertação.
-  É de notar que a produção da documentação (dissertação, artigo e apresentação) não fazem parte das fases de desenvolvimento, no entanto, estão definidas na calendarização.
-
-% section calendarizacao (end)
-
-\section{Resumo}
-
-O planeamento desta dissertação foi feita de forma a que o grau de esforço das fases de desenvolvimento cresça ao longo do tempo.
-Assim, o desenvolvimento inicial será mais suave e natural, camuflando o aumento do grau de complexidade das seguintes fases.
-
-Tentou-se distribuir mais tempo para fase mais críticas, e menos tempo para fases menos prioritárias.
+% section conclusions (end)
