@@ -1,6 +1,6 @@
 #!/bin/bash
 
-version="v0.11"
+version="v1.0"
 
 mkdir ~/Spotify ; cd ~/Spotify
 rm -rf rama-spotify
@@ -10,7 +10,7 @@ curl -L -O https://github.com/carsy/rama-spotify/releases/download/"$version"/ra
 tar -xf rama_"$version".tar.gz
 
 unamestr=`uname`
-if [[ "$unamestr" == 'Drawin' ]]; then
+if [[ "$unamestr" == 'Darwin' ]]; then
    open spotify:app:rama
 elif [[ "$unamestr" == 'Linux' ]]; then
    xdg-open spotify:app:rama

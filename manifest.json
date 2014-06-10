@@ -12,7 +12,7 @@
     "track"
   ],
   "BundleType": "Application",
-  "BundleVersion": "0.11",
+  "BundleVersion": "1.0",
   "Dependencies": {
     "api": "1.0.0",
     "views": "1.0.0"

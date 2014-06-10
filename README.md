@@ -31,10 +31,9 @@ These are the contents of the script:
 ```sh
 $ mkdir ~/Spotify ; cd ~/Spotify
 $ rm -rf rama
-$ rm rama_v0.11.tar.gz
-$ curl https://github.com/carsy/rama-spotify/releases/download/v0.11/rama_v0.11.tar.gz
-$ tar -xvf rama_v0.11.tar.gz
-$ open spotify:app:rama
+$ rm rama_v1.0.tar.gz
+$ curl -L -O https://github.com/carsy/rama-spotify/releases/download/v1.0/rama_v1.0.tar.gz
+$ tar -xvf rama_v1.0.tar.gz
 ```
 
 You should now be in the app and seeing a graph thingy.
@@ -59,6 +58,11 @@ If not, restart Spotify and then open the app by typing spotify:app:rama in the 
 
 [Releases]
 ----
+
+[v1.0] - 1.0
+  - feedback button added
+  - echonest "powered by" logo added
+  - bugfix #47
 
 [v0.11] - Drop and draw
   - Spotify items can now be dropped into the application to update the graph (closes #38)
@@ -126,7 +130,7 @@ If not, restart Spotify and then open the app by typing spotify:app:rama in the 
 #### Author
 
 José Bateira
-[@zebateira]
+[@\_carsy\_]
 
 [carsy.github.io]
 
@@ -136,6 +140,7 @@ José Bateira
 [here]:https://github.com/carsy/rama-spotify/releases/latest
 [Releases]:https://github.com/carsy/rama-spotify/releases/latest
 [issues]:https://github.com/carsy/rama-spotify/issues
+[v1.0]:https://github.com/carsy/rama-spotify/releases/tag/v1.0
 [v0.11]:https://github.com/carsy/rama-spotify/releases/tag/v0.11
 [v0.10.6]:https://github.com/carsy/rama-spotify/releases/tag/v0.10.6
 [v0.10.5]:https://github.com/carsy/rama-spotify/releases/tag/v0.10.5

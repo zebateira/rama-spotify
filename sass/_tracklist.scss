@@ -1,5 +1,5 @@
-$height: 50px;
-$width: $height; // omg its a square
+$tracklist-height: 50px;
+$width: $tracklist-height; // omg its a square
 
 #tracklist {
   position: absolute;
@@ -8,7 +8,7 @@ $width: $height; // omg its a square
   left: 0;
   overflow: auto;
   width: 100%;
-  height: $height + 1px;
+  height: $tracklist-height + 1px;
   color: $new-white;
 
   @include menubox();

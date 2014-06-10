@@ -13,6 +13,19 @@
 
   min-height: $header-height;
 
+  .header-logo-en {
+    position: absolute;
+    right: 0;
+    top: 25%;
+    margin-right: 10px;
+
+    opacity: .6;
+   
+    &:hover {
+      opacity: 1;
+    }
+  }
+
   .header-text {
     a {
       color: $new-white;
