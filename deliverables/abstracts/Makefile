@@ -15,10 +15,10 @@
 # latexmk $TARGET.tex -bibtex -pdf -recorder -pvc
 
 ## Basename for result in PT
-TARGET=resumo-pt
+#TARGET=resumo
 
 ## Basename for result in EN
-#TARGET=resumo-en
+TARGET=abstract
 
 ## programs
 LATEX=latex
