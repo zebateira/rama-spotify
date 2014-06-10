@@ -88,7 +88,7 @@ $(TARGET).ps2:	  $(TARGET).dvi2
 $(TARGET).dvi2:	  $(TARGET).dvi
 
 ## Extensions
-EXTS=aux toc idx ind ilg log out lof lot lol bbl blg
+EXTS=aux toc idx ind ilg log out lof lot lol bbl blg fdb_latexmk synctex.gz
 
 ##clean
 clean:
