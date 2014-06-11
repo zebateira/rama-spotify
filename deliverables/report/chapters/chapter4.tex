@@ -19,7 +19,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
   \subsection{Main Features} % (fold)
     \label{sub:main_features}
     
-    The main features of RAMA's Spotify Application are: visualization of a map of a network of connected artists; edit the graph (expand and new map functions); Tags overlay and music artist info.
+    The main features of RAMA's Spotify Application are: visualization of a map of a network of connected artists; edit the visualization parameters; edit the graph (expand and new map functions); Tags overlay and music artist info.
 
     \subsubsection{Visulization of the Artist Map} % (fold)
       \label{ssub:visualization}
@@ -135,28 +135,79 @@ By this point, the validation of the prototype will be analysed, by explaining t
 
       The \textbf{branching} value of a tree graph determines the maximum number of child nodes a node can have.
       The example \ref{fig:graph_treemode} has 4 branching.
-      
 
     % subsubsection visualization (end)
 
+    \subsubsection{Visualization Parameters} % (fold)
+    \label{ssub:visualization_parameters}
+    
+    The visualization parameters are the branching and depth values, as well as the option to enable/disable the tree mode.
+
+    To allow the user to change these values, a settings menu was added to the application, and can be seen in Figure~\ref{fig:settings_menu}.
+    When the user changes the parameters, the graph refreshes accordingly.
+
+    \begin{figure}[tb]
+      \begin{center}
+        \includegraphics[width=1\textwidth]{settings_menu.pdf}
+      \end{center}
+      \caption{The settings menu that allows the user to change the visualization parameters.}
+      \label{fig:settings_menu} 
+    \end{figure}
+
+    % subsubsection visualization_parameters (end)
+
     \subsubsection{Graph Edition} % (fold)
       \label{ssub:edition}
-    
-    graph edition stuff
+
+      The available features to edit the graph are as follow: expand node, delete node and create a new map.
+      These interactions are available in the Artist Menu (\ref{ssub:artist_info}).
+
+      \paragraph{Expand node} \hfill \\
+      This option allows the user to expand a node further (ignoring the graph's branching value).
+      Given the previous example \ref{fig:graph_treemode}, if the "Dispatch" node gets expanded, it results in \ref{fig:node_expanded}.
+
+      \begin{figure}[tb]
+         \begin{center}
+           \includegraphics[width=\textwidth]{node_expanded.pdf}
+         \end{center}
+         \caption{"Dispatch" artist node expanded.}
+         \label{fig:node_expanded}
+      \end{figure}
+
+
+      \paragraph{Delete node} \hfill \\
+      This options allows the user to delete a node from the graph.
+      Useful for when the user wants to construct the graph to its needs.
+
+      \paragraph{New map} \hfill \\
+      The user may choose to create a whole new graph from a another node.
+      This way the root node will be the selected node.
+
 
     % subsubsection edition (end)
 
     \subsubsection{Tags Overlay} % (fold)
       \label{ssub:tags_overlay}
-    
 
 
     % subsubsection tags_overlay (end)
 
     \subsubsection{Artist Info} % (fold)
       \label{ssub:artist_info}
-    
+    The user is able to see additional information about artists in the Artist Menu (\ref{fig:artist_menu}) such as its popularity value, albums and tags.
 
+    \begin{figure}[tb]
+      \begin{center}
+        \includegraphics[width=\textwidth]{artist_menu.pdf}
+      \end{center}
+      \caption{Artist Menu with information about "Chris Cornell"}
+      \label{fig:artist_menu}
+    \end{figure}
+
+    When the user selects a node by clicking on it, the artist menu updates the displayed information.
+
+    Note the \emph{expand} and the \emph{new map} buttons.
+    These are used to perform the described actions in \ref{ssub:edition}.
 
     % subsubsection artist_info (end)
 
