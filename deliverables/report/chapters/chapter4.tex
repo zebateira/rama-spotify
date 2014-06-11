@@ -19,7 +19,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
   \subsection{Main Features} % (fold)
     \label{sub:main_features}
     
-    The main features of RAMA's Spotify Application are: visualization of a map of a network of connected artists; edit the graph (expand and new map functions, as well as depth and branching parameters); Tags overlay and music artist info.
+    The main features of RAMA's Spotify Application are: visualization of a map of a network of connected artists; edit the graph (expand and new map functions); Tags overlay and music artist info.
 
     \subsubsection{Visulization of the Artist Map} % (fold)
       \label{ssub:visualization}
@@ -63,14 +63,10 @@ By this point, the validation of the prototype will be analysed, by explaining t
       After that, when retrieving the childs of "Jane's Addiction", "Stone Templo Pilots" is contained in that list, and so the insertNode() function discards the node since it is a duplicate.
       But that means that there is a connection between the both of them that is being discarded.
 
-      \hfill \\ 
-      \noindent
-      \textbf{Graph's Tree Mode}
-
+      \paragraph{Graph's Tree Mode} \hfill \\
       To build a graph with all the connections that exist between all of the artists in the graph, the insertNode() function would need to insert the missing edge into the graph by analysing the current graph state.
       This method creates a graph by definition, while the previous one created a tree graph.
       An example of this behaviour can be seen in Figure~\ref{fig:graph_notreemode}.
-      \hfill \\
       \begin{figure}[tb]
         \begin{center}
           \includegraphics[width=\textwidth]{map_creation_notreemode.pdf}
@@ -79,21 +75,22 @@ By this point, the validation of the prototype will be analysed, by explaining t
         \label{fig:graph_notreemode}
       \end{figure}
 
-      \emph{From now on, if the graph is a tree, it will be said that the algorithm is using the \emph{Tree Mode}.
-            So the example \ref{fig:graph_treemode} is a \emph{Tree Mode} example, and the examples \ref{fig:graph_notreemode} and \ref{fig:graph_notreemode2} are not \emph{Tree Mode} examples\footnote{
-              Note that, sometimes, even if the algorithm is not on tree mode, it might generate a tree, simply because there were no missing edges between the nodes to be added to the graph.
-            }.}.
+      \hfill \\
+      \indent \emph{
+      From now on, if the graph is a tree, it will be said that the algorithm is using the \emph{Tree Mode}.
+      So the example \ref{fig:graph_treemode} is a \emph{Tree Mode} example, and the examples \ref{fig:graph_notreemode} and \ref{fig:graph_notreemode2} are not \emph{Tree Mode} examples\footnote{
+        Note that, sometimes, even if the algorithm is not on tree mode, it might generate a tree, simply because there were no missing edges between the nodes to be added to the graph.
+      }.}
       \hfill \\
 
-      Note (\ref{fig:graph_notreemode}) how "Stone Temple Pilots" is now child of both "Faith No More" and "Jane's Addiction".
+      Note (\ref{fig:graph_notreemode}) how "Stone Temple Pilots" is now a child of both "Faith No More" and "Jane's Addiction".
       Also note that the same behaviour is visible with the nodes "Mad Season" and "Screaming Trees".
 
-      In this case, the user's perception on the artist "Stone Temple Pilots" is now different from the previous example (Figure~\ref{fig:graph_treemode}).
+      In this case, the user's perception of the artist "Stone Temple Pilots" is now different from the previous example (Figure~\ref{fig:graph_treemode}).
       These added connections are, in a way, clustering together the most connected nodes.
       In this particular example, one could see an improvement with this approach: it contributes to the user's perception of the artist's network by making sure the user knows that those specific artists are more connected between them, than any others.
 
-      \hfill \\
-      \indent However, that is not always the case.
+      However, that is not always the case.
 
       The fact is, that in this example, only three extra edges where added, meaning there is not much visual clutter in the visualization.
       Although one could argue that the "Mad Season" artist node is already disturbing the visual representation by being drawn over an edge.
@@ -115,18 +112,30 @@ By this point, the validation of the prototype will be analysed, by explaining t
 
       So on one hand, the \emph{clustering} of the nodes seems like an interesting feature.
       It allows for a much more in-depth user access to the underlining information of the related artists.
-      But on the other hand, the focus of the visualization (to show a map of the artists' network) was shifting to this cluster-like representation.
+      But on the other hand, the focus of the visualization (to show a map of the artists' network) is shifting to this cluster-like representation.
 
       Both perspectives are advantageous depending on the data they are operating on (as seen in the previous examples).
       So instead of choosing only one method, both were chosen: by default, the graph creation algorithm is on tree mode, and the user can turn it off from a settings menu.
       This allows for the user to choose the visual representation method that suits its needs.
 
       \paragraph{Depth and Branching values} \hfill \\
-
       The depth and branching values have been mentioned before in this chapter, but not further explained.
 
-      The \textbf{depth} value of a graph
+      The \textbf{depth} value of a graph determines how deep the recursive algorithm is.
+      The previously presented example (\ref{fig:graph_treemode}) has a depth value of 2.
+      The example \ref{fig:graph_depth3} has a depth value of 3.
+      \begin{figure}[tb]
+        \begin{center}
+          \includegraphics[width=\textwidth]{graph_depth3.pdf}
+        \end{center}
+        \caption{Graph with depth value of 3}
+        \label{fig:graph_depth3}
+      \end{figure}
+      In short, depth is the maximum distance between the root node and any other node in the graph.
 
+      The \textbf{branching} value of a tree graph determines the maximum number of child nodes a node can have.
+      The example \ref{fig:graph_treemode} has 4 branching.
+      
 
     % subsubsection visualization (end)
 

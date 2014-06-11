@@ -128,7 +128,7 @@ with the `report' document style}{}}{}
 
 \RequirePackage[pdftex]{graphicx}
 \RequirePackage{url}
-\RequirePackage{setspace}
+% \RequirePackage{setspace}
 \RequirePackage{makeidx}
 \RequirePackage[tableposition=top]{caption}
 \RequirePackage[pagewise,switch*]{lineno}
@@ -414,7 +414,8 @@ with the `report' document style}{}}{}
 %% External commands
 \newcommand{\StartBody}{\cleardoublepage\pagenumbering{arabic}\setcounter{page}{1}\pagestyle{fancy}\Activate@lineno}
 
-\newenvironment{Prolog}{\maketitle\if@committeepage\committeepage\fi\@StartPrelim\begin{singlespace}}{\end{singlespace}}
+\newenvironment{Prolog}
+{\maketitle\if@committeepage\committeepage\fi\@StartPrelim}
 
 \degree{Mestrado Integrado em Engenharia Inform\'{a}tica e Computa\c{c}\~{a}o}
 
