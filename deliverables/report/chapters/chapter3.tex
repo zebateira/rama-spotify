@@ -67,7 +67,7 @@ The prototype should pursue the objective of contributing to an improved user ex
 
       \begin{figure}
         \begin{center}
-          \includegraphics[width=\textwidth]{spotify.pdf}
+          \includegraphics[width=\textwidth]{spotify_discovery.mode.pdf}
         \end{center}
         \caption{Spotify: desktop client's discovery mode interface.}
         \label{fig:spotify_apps}
@@ -146,7 +146,7 @@ The prototype should pursue the objective of contributing to an improved user ex
       However, not without some limitations to the users of these applications.
       The users are limited depending on the type of Spotify Subscription that they have signed up to.
 
-      There are three different types of subscriptions, but the important to retain, is the difference between being a Free Subscription Spotify User, and a Paid Subscription Spotify User (premium and unlimited subscriptions).
+      There are three different types of subscriptions, but the important part to retain, is the difference between being a Free Subscription Spotify User, and a Paid Subscription Spotify User (premium and unlimited subscriptions).
       As mentioned before (\ref{ssub:spotify_widgets}), only Spotify users can interact with the widgets.
       That also applies to third-party applications that are using Libspotify SDK, which allow, for example, the user to login with their Spotify account.
       But in this case, not only they need to be Spotify users, they also need to have signed up to a paid Spotify subscription.
@@ -280,13 +280,14 @@ The prototype should pursue the objective of contributing to an improved user ex
     To test that, a simple application was created with the following code:
 
     \begin{lstlisting}[caption={\emph{iframe} element that allows to embed RAMA's website into the application.}, style=htmlcssjs]
-      <iframe src="http://rama.inescporto.pt/app" frameborder="0"></iframe>\end{lstlisting}
+      <iframe src="http://rama.inescporto.pt/app" frameborder="0">
+      </iframe>\end{lstlisting}
 
     The final result can be seen in \ref{fig:rama_spotifyed}.
 
     \begin{figure}
       \begin{center}
-        \includegraphics[width=\textwidth]{rama.pdf}
+        \includegraphics[width=\textwidth]{spotify_rama.embedded.pdf}
       \end{center}
       \caption{RAMA's website embedded into a Spotify Application.}
       \label{fig:rama_spotifyed}
@@ -339,9 +340,9 @@ The prototype should pursue the objective of contributing to an improved user ex
     There are useful options for development located in the "Develop" tab (\ref{fig:html5_support}).
     The "Show Inspector" option opens the \emph{Webkit Development Tools} (\ref{sub:webkit_tools}) window.
 
-    \begin{figure}
+    \begin{figure}[tb]
       \begin{center}
-        \includegraphics[width=0.6\textwidth]{html5_support.pdf}
+        \includegraphics[width=\textwidth]{html5_support.pdf}
       \end{center}
       \caption{\emph{Develop} Tab}
       \label{fig:html5_support}

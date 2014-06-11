@@ -58,12 +58,17 @@ By this point, the validation of the prototype will be analysed, by explaining t
       \end{figure}
 
       This approach, however, is not showing all of the available information.
-      Given this same example (Figure~\ref{fig:graph_treemode}), the artist node "Stone Temple Pilots" is child of the node artist "Faith No More".
+      Given this same example (Figure~\ref{fig:graph_treemode}), the artist node "Stone Temple Pilots" is a child of the node artist "Faith No More".
       The algorithm inserted the latter first into the graph.
       After that, when retrieving the childs of "Jane's Addiction", "Stone Templo Pilots" appears, and so the insertNode() function discards the node since it is a duplicate.
       But that means that there is a connection between the both of them that is being discarded.
 
+      \hfill \\ 
+      \noindent
+      \large{\textbf{Graph's Tree mode}}
+
       To build a graph with all the connections that exist between all of the artists in the graph, the insertNode() function would need to insert the missing edge into the graph by analysing the current graph state.
+      This method creates graph by definition, while the previous one created a tree graph.
       An example of this behaviour can be seen in Figure~\ref{fig:graph_notreemode}.
 
       \begin{figure}[tb]
@@ -73,6 +78,17 @@ By this point, the validation of the prototype will be analysed, by explaining t
         \caption{Graph created with all the connections with "Red Hot Chilli Peppers" as the root node.}
         \label{fig:graph_notreemode}
       \end{figure}
+
+      Note how now "Stone Temple Pilots" is now child of both "Faith No More" and "Jane's Addiction".
+      Also note that the same behaviour is visible with the nodes "Mad Season" and "Screaming Trees".
+
+      In this case, the user's perception on the artist "Stone Temple Pilots" is now different from the previous example (Figure~\ref{fig:graph_treemode}).
+      These added connections are, in a way, clustering together the most connected nodes.
+      In this particular example, one could see an improvement with this approach.
+
+      However, that is not always the case.
+      The fact that (in this example) only three extra edges where added means that there is not much visual clutter in the visualization.
+      Although one could argue that the "Mad Season" artist node is already disturbing the visual representation by being drawn over an edge.
 
 
 
