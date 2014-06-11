@@ -189,25 +189,31 @@ By this point, the validation of the prototype will be analysed, by explaining t
     \subsubsection{Tags Overlay} % (fold)
       \label{ssub:tags_overlay}
 
+      
+
 
     % subsubsection tags_overlay (end)
 
     \subsubsection{Artist Info} % (fold)
       \label{ssub:artist_info}
-    The user is able to see additional information about artists in the Artist Menu (\ref{fig:artist_menu}) such as its popularity value, albums and tags.
+      The user is able to see additional information about artists in the Artist Menu (\ref{fig:artist_menu}) such as its popularity value, albums and tags.
 
-    \begin{figure}[tb]
-      \begin{center}
-        \includegraphics[width=\textwidth]{artist_menu.pdf}
-      \end{center}
-      \caption{Artist Menu with information about "Chris Cornell"}
-      \label{fig:artist_menu}
-    \end{figure}
+      \begin{figure}[tb]
+        \begin{center}
+          \includegraphics[width=\textwidth]{artist_menu.pdf}
+        \end{center}
+        \caption{Artist Menu with information about "Chris Cornell"}
+        \label{fig:artist_menu}
+      \end{figure}
 
-    When the user selects a node by clicking on it, the artist menu updates the displayed information.
+      When the user selects a node by clicking on it, the artist menu updates the displayed information.
 
-    Note the \emph{expand} and the \emph{new map} buttons.
-    These are used to perform the described actions in \ref{ssub:edition}.
+      The \emph{popularity} and the \emph{albums} are metadata information retrieved from Spotify's API framework (\ref{ssub:spotify_apps}).
+      The tags, however, are not supported by Spotify's API.
+      For that, Echonest's API was used, as explained in \ref{ssub:tags_overlay}.
+
+      Note the \emph{expand} and the \emph{new map} buttons.
+      These are used to perform the described actions in \ref{ssub:edition}.
 
     % subsubsection artist_info (end)
 
