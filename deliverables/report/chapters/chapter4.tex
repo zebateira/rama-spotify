@@ -8,7 +8,7 @@
 
 In this chapter, further details about the methodologies used in the developed prototype, as well as in the the validation process, will be explored.
 
-The development process will be compared to the previous expectations of the outcome of the planned prototype.
+The Development Processes section will go into development details about the processes used to maintain a sane development environment by taking advantage of several tools that automated most of the common tasks.
 
 By this point, the validation of the prototype will be analysed, by explaining the performed user tests, as well the analysis of the results.
 
@@ -21,7 +21,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
     
     The main features of RAMA's Spotify Application are: visualization of a map of a network of connected artists; edition of the visualization parameters; edition of the graph (expand and new map functions); Tags overlay and music artist info.
 
-    \subsubsection{Visulization of the Artist Map} % (fold)
+    \subsubsection{Visulization of the Artists Map} % (fold)
       \label{ssub:visualization}
     
       The application automatically draws the map with the current playing artist as the main node, as seen in Figure~\ref{fig:graph_rootnode}.
@@ -34,10 +34,11 @@ By this point, the validation of the prototype will be analysed, by explaining t
         \label{fig:graph_rootnode}
       \end{figure}
 
-      The graph-like structure of the map, is created by recursively fetching a list of related artists from each artist. Once a certain pre-established limit of recursive levels is reached\footnote{depth value of a graph}, the algorithm stops.
+      The graph-like structure is created by recursively fetching a list of related artists from each artist. Once a certain pre-established limit of recursive levels is reached\footnote{depth value of a graph}, the algorithm stops.
 
       The graph creation algorithm is as follows:
 
+      % change the code the attachments
       \lstinputlisting[
         caption={Simplified graph creation algorithm in Javascript (duplicate nodes checking is encapsulated in the insertNode function)}, style=htmlcssjs
       ]
@@ -86,16 +87,16 @@ By this point, the validation of the prototype will be analysed, by explaining t
       Note (\ref{fig:graph_notreemode}) how "Stone Temple Pilots" is now a child of both "Faith No More" and "Jane's Addiction".
       Also note that the same behaviour is visible with the nodes "Mad Season" and "Screaming Trees".
 
-      In this case, the user's perception of the artist "Stone Temple Pilots" is now different from the previous example (Figure~\ref{fig:graph_treemode}).
+      At this point, the user's perception of the artist "Stone Temple Pilots" is now different from the previous example (Figure~\ref{fig:graph_treemode}).
       These added connections are, in a way, clustering together the most connected nodes.
       In this particular example, one could see an improvement with this approach: it contributes to the user's perception of the artist's network by making sure the user knows that those specific artists are more connected between them, than any others.
+      The fact is that only three extra edges where added, meaning there is not much visual clutter in the visualization. \\
 
-      However, that is not always the case.
+      However, that might not always be the case.
 
-      The fact is, that in this example, only three extra edges where added, meaning there is not much visual clutter in the visualization.
-      Although one could argue that the "Mad Season" artist node is already disturbing the visual representation by being drawn over an edge.
+      One could argue that the "Mad Season" artist node is already disturbing the visual representation by being drawn over an edge.
 
-      With the exact same values of branching, depth and tree mode off, when creating a graph for the artist "Mariza", the visual clutter is so strong that the graph becomes confusing and not very helpful: Figure~\ref{fig:graph_notreemode2}.
+      In fact, with the exact same values of branching, depth and tree mode off, when creating a graph for the artist "Mariza", the visual clutter is so strong that the graph becomes confusing and not very helpful: Figure~\ref{fig:graph_notreemode2}.
 
       \begin{figure}[tb]
         \begin{center}
@@ -220,7 +221,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
       \emph{Sort} is another interesting parameter. 
       In general, artists have more than 10 or 15 terms.
       Each term has a value of \emph{frequency} and a value of \emph{weight}, and both are float values that range between zero and one.
-      No official documentation was found to explain what do these values represent, but Paul Lamere explains\footnote{thread in the forum for Echonest's API users - \url{http://developer.echonest.com/forums/thread/353}} that:
+      No official documentation was found to explain what do these values represent, but Paul Lamere\footnote{Paul Lamere is Director of Developer Platform at \url{the.echonest.com} (\url{http://the.echonest.com/company}). Also blogs here: \url{http://musicmachinery.com}} explains\footnote{thread in the forum for Echonest's API users - \url{http://developer.echonest.com/forums/thread/353}} that:
 
       \begin{quote}
       \emph{
@@ -278,24 +279,32 @@ By this point, the validation of the prototype will be analysed, by explaining t
   % subsection main_features (end)
 
 
-  \subsection{Development Process} % (fold)
+  \subsection{Development Processes} % (fold)
     \label{sub:development_process}
 
     The primal objectives for the RAMA Spotify Application were to implement the basic functionalities that RAMA's website\footnote{\url{http://rama.inescporto.pt/app}} offers.
 
     Incrementally, they were implemented, tested and added to the application.
-    A timeline (chronological order from bottom to top) with the added features can be seen in \\ 
-    \indent \url{https://github.com/carsy/rama-spotify/releases}.
+    A timeline (chronological order from bottom to top) with the added features (each update release) can be seen in \\ 
+    \indent \url{https://github.com/carsy/rama-spotify/releases} \\
 
-    % TODO refer the alfa and beta testers:
-    % the iterative process of alfa testing
-    % and beta testing
+    Unit tests were added for each feature.
+    The tests were run locally to ensure that nothing broke mean while.
+    Also to ensure that every release had the tests passing, the project was integrated in Travis's Continuous Integration\footnote{\url{http://travis-ci.org}} system: \\
+    \indent \url{http://travis-ci.org/carsy/rama-spotify}. \\
+
+    This way, after every push of a new release, the project gets build and the unit tests run automatically.
+
+    The solution was also submitted to validation several times during its development.
+    After each release, a constant small group of test subjects (3 people) reviewed the state of the application (alfa testers).
+    Their feedback would be carried over the next release: bug fixes, improvements, etc.
+    This was the testing cycle that allowed to validate the implemented features.
+    Given this iterative process of implementation and feedback, the solution would be better prepared for future occasional beta-testing.
+
     
-    % testing cycle
-
     % compare with the previous work plan
 
-  % subsection development_process (end)
+  % subsection development_processes (end)
 
 % section prototype (end)
 
@@ -327,7 +336,6 @@ By this point, the validation of the prototype will be analysed, by explaining t
 
 
 \section{Summary} % (fold)
-
 
 
 % section summary (end)
