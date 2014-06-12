@@ -1,7 +1,7 @@
 %!TEX root = ../report.tex
 
 
-\chapter{Methodologies}
+\chapter{Implementation and Validation}
 \label{chap:chap4}
 
 \section*{}
@@ -19,7 +19,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
   \subsection{Main Features} % (fold)
     \label{sub:main_features}
     
-    The main features of RAMA's Spotify Application are: visualization of a map of a network of connected artists; edit the visualization parameters; edit the graph (expand and new map functions); Tags overlay and music artist info.
+    The main features of RAMA's Spotify Application are: visualization of a map of a network of connected artists; edition of the visualization parameters; edition of the graph (expand and new map functions); Tags overlay and music artist info.
 
     \subsubsection{Visulization of the Artist Map} % (fold)
       \label{ssub:visualization}
@@ -39,14 +39,14 @@ By this point, the validation of the prototype will be analysed, by explaining t
       The graph creation algorithm is as follows:
 
       \lstinputlisting[
-        caption={Simplified graph creation algorithm in Javascript (duplicate nodes checking is encapsulated in the insertNode function, as well as duplicate edges in the insertEdge function)}, style=htmlcssjs
+        caption={Simplified graph creation algorithm in Javascript (duplicate nodes checking is encapsulated in the insertNode function)}, style=htmlcssjs
       ]
       {snippets/map_creation_alg.js}
 
       This algorithm, albeit simplified, represents the basic flow when constructing a graph, or more specifically, a tree.
       Since that, in this case of study, the direction of the edges of the graph is not relevant in any way to the artists' map, all of the edges are considered to be undirected.
 
-      Assuming that the insertNode() function only checks for duplicate nodes, i.e., it only inserts unique nodes into the graph, then the resulting graph is one of a tree, since there are no simple cycles in the graph.
+      Assuming that the insertNode() function checks for duplicate nodes, i.e., it only inserts unique nodes into the graph, then the resulting graph is one of a tree, since there are no simple cycles in the graph.
       An example of this behaviour can be seen in Figure~\ref{fig:graph_treemode}.
 
       \begin{figure}[tb]
@@ -287,6 +287,14 @@ By this point, the validation of the prototype will be analysed, by explaining t
     A timeline (chronological order from bottom to top) with the added features can be seen in \\ 
     \indent \url{https://github.com/carsy/rama-spotify/releases}.
 
+    % TODO refer the alfa and beta testers:
+    % the iterative process of alfa testing
+    % and beta testing
+    
+    % testing cycle
+
+    % compare with the previous work plan
+
   % subsection development_process (end)
 
 % section prototype (end)
@@ -312,15 +320,14 @@ By this point, the validation of the prototype will be analysed, by explaining t
   \subsection{Data Analysis} % (fold)
   \label{sub:data_analysis}
 
-  
+
   
   % subsection data_analysis (end)
 % section validation (end)
 
 
-\section{Conclusions} % (fold)
-  \label{sec:conclusions}
+\section{Summary} % (fold)
 
 
 
-% section conclusions (end)
+% section summary (end)
