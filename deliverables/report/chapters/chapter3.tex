@@ -50,12 +50,12 @@ The prototype should pursue the objective of contributing to an improved user ex
   \subsection{Development Tools} % (fold)
   \label{sub:devtools}
   
-    Spotify provides a set of tools\footnote{http://developer.spotify.com/technologies} to develop Third-party Applications (websites, native applications and mobile applications) and Spotify Applications (that run inside Spotify's Desktop Client).
+    Spotify provides a set of tools\footnote{\url{http://developer.spotify.com/technologies}} to develop Third-party Applications (websites, native applications and mobile applications) and Spotify Applications (that run inside Spotify's Desktop Client).
     There are five tools, each with different purposes.
 
     \subsubsection{Spotify Apps} % (fold)
     \label{ssub:spotify_apps}
-      Spotify Applications\footnote{https://developer.spotify.com/technologies/apps} are a special case in the whole set of tools provided by Spotify.
+      Spotify Applications\footnote{\url{https://developer.spotify.com/technologies/apps}} are a special case in the whole set of tools provided by Spotify.
       These applications are designed to run \emph{inside} the Desktop Client.
       Hence, its development is also inside the same environment.
 
@@ -87,10 +87,10 @@ The prototype should pursue the objective of contributing to an improved user ex
       \end{figure}
 
       The Applications' runtime environment is one of a browser-based.
-      More specifically, powered by the Chromium Embedded Framework\footnote{https://code.google.com/p/chromiumembedded}.
+      More specifically, powered by the Chromium Embedded Framework\footnote{\url{https://code.google.com/p/chromiumembedded}}.
       This means that the code to develop a Spotify Application follows the same principles as a web application: HTML, CSS and Javascript.
 
-      Spotify developed two Frameworks\footnote{https://developer.spotify.com/technologies/apps/reference} to help developers create these applications: the API 1.x Framework\footnote{https://developer.spotify.com/docs/apps/api/1.0/} and the Views Framework\footnote{https://developer.spotify.com/docs/apps/views/1.0/}.
+      Spotify developed two Frameworks\footnote{\url{https://developer.spotify.com/technologies/apps/reference}} to help developers create these applications: the API 1.x Framework\footnote{\url{https://developer.spotify.com/docs/apps/api/1.0/}} and the Views Framework\footnote{\url{https://developer.spotify.com/docs/apps/views/1.0/}}.
 
       The first one provides an interface to use object models, access metadata, control the player, among others.
       The second offers support for web components like buttons, lists, tabs, among others.
@@ -103,7 +103,7 @@ The prototype should pursue the objective of contributing to an improved user ex
     \subsubsection{Spotify Widgets} % (fold)
     \label{ssub:spotify_widgets}
 
-      Spotify Widgets\footnote{https://developer.spotify.com/technologies/widgets} are small web components that can be embedded in external websites.
+      Spotify Widgets\footnote{\url{https://developer.spotify.com/technologies/widgets}} are small web components that can be embedded in external websites.
       Spotify provides two components: \emph{Play Button} (\ref{fig:spotify_play_button}) and a \emph{Follow Button} (\ref{fig:spotify_follow_button})
 
       \begin{figure}
@@ -142,7 +142,7 @@ The prototype should pursue the objective of contributing to an improved user ex
     \subsubsection{Libspotify SDK} % (fold)
     \label{ssub:libspotify_sdk}
 
-      Libspotify SDK\footnote{https://developer.spotify.com/technologies/libspotify} is an API that allows for third-party applications to include Spotify's services into them.
+      Libspotify SDK\footnote{\url{https://developer.spotify.com/technologies/libspotify}} is an API that allows for third-party applications to include Spotify's services into them.
       However, not without some limitations to the users of these applications.
       The users are limited depending on the type of Spotify Subscription that they have signed up to.
 
@@ -152,7 +152,7 @@ The prototype should pursue the objective of contributing to an improved user ex
       But in this case, not only they need to be Spotify users, they also need to have signed up to a paid Spotify subscription.
       And not only do the users need to pay to use the Spotify-powered application, but the developers as well.
 
-      This is a very restrictive environment, although Libspotify SDK comes in many different flavours\footnote{https://developer.spotify.com/technologies/libspotify/\#libspotify-downloads}.
+      This is a very restrictive environment, although Libspotify SDK comes in many different flavours\footnote{\url{https://developer.spotify.com/technologies/libspotify/\#libspotify-downloads}}.
 
       This tool would be used to develop modules \ref{item:obj1}, \ref{item:obj2} and \ref{item:obj6}.
       
@@ -163,9 +163,9 @@ The prototype should pursue the objective of contributing to an improved user ex
     \subsubsection{Metadata API} % (fold)
     \label{ssub:metadata_api}
 
-      The \emph{Metadata API}\footnote{https://developer.spotify.com/technologies/web-api} allows for applications to retrieve information from Spotify's music catalogue: tracks, albums, artists, playlists, and so on.
+      The \emph{Metadata API}\footnote{\url{https://developer.spotify.com/technologies/web-api}} allows for applications to retrieve information from Spotify's music catalogue: tracks, albums, artists, playlists, and so on.
 
-      Requests to the database are done through HTTP and are of two types: \emph{search}\footnote{https://developer.spotify.com/technologies/web-api/search} e \emph{lookup}\footnote{https://developer.spotify.com/technologies/web-api/lookup}.
+      Requests to the database are done through HTTP and are of two types: \emph{search}\footnote{\url{https://developer.spotify.com/technologies/web-api/search}} e \emph{lookup}\footnote{\url{https://developer.spotify.com/technologies/web-api/lookup}}.
 
       To request detailed information of, e.g., an artist, the URI (used as the unique identifier) of that artist is required. Such ID is of the form:
 
@@ -183,7 +183,7 @@ The prototype should pursue the objective of contributing to an improved user ex
 
        \url{spotify:track:2vqYasauhDLVjTt7CGWK6y} (track "Fado Vianinha" of the previous album) \\
 
-      These URI schemes are compliant with Rosetta Stone's ID spaces\footnote{http://developer.echonest.com/docs/v4\#project-rosetta-stone}.
+      These URI schemes are compliant with Rosetta Stone's ID spaces\footnote{\url{http://developer.echonest.com/docs/v4\#project-rosetta-stone}}.
 
       First, to get this URI, one needs to search the database.
 
@@ -228,7 +228,7 @@ The prototype should pursue the objective of contributing to an improved user ex
     \subsubsection{iOS SDK (beta)} % (fold)
     \label{ssub:ios_sdk}
     
-    The iOS SDK supports iOS Application developers. Although still in beta\footnote{https://developer.spotify.com/technologies/spotify-ios-sdk}, this tool would be used to develop the proposed module \ref{item:obj6}.
+    The iOS SDK supports iOS Application developers. Although still in beta\footnote{\url{https://developer.spotify.com/technologies/spotify-ios-sdk}}, this tool would be used to develop the proposed module \ref{item:obj6}.
     Much like the Libspotify SDK, this SDK provides the following APIs:
 
     \begin{itemize}

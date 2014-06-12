@@ -208,7 +208,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
       \paragraph{Echonest's Terms} \hfill \\
       Echonest's tags are very similar to the most commonly known \emph{music genres} (like jazz, country, rock), but they also might include more alternative descriptive terms (progressive metal, symphonic, soundtrack).
 
-      The connection between the two APIs is possible thanks to the Project Rosetta Stone\footnote{http://developer.echonest.com/docs/v4\#project-rosetta-stone}.
+      The connection between the two APIs is possible thanks to the Project Rosetta Stone\footnote{\url{http://developer.echonest.com/docs/v4\#project-rosetta-stone}}.
       For example, to retrieve the terms\footnote{Echonest calls it terms. From now on, terms and tags will be used interchangeably} of an artist from Echonest's metadata API using the Spotify's Artist ID, the following query is used: \\
 
       \url{
@@ -220,7 +220,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
       \emph{Sort} is another interesting parameter. 
       In general, artists have more than 10 or 15 terms.
       Each term has a value of \emph{frequency} and a value of \emph{weight}, and both are float values that range between zero and one.
-      No official documentation was found to explain what do these values represent, but Paul Lamere explains\footnote{thread in the forum for Echonest's API users - http://developer.echonest.com/forums/thread/353} that:
+      No official documentation was found to explain what do these values represent, but Paul Lamere explains\footnote{thread in the forum for Echonest's API users - \url{http://developer.echonest.com/forums/thread/353}} that:
 
       \begin{quote}
       \emph{
@@ -280,6 +280,10 @@ By this point, the validation of the prototype will be analysed, by explaining t
 
   \subsection{Development Process} % (fold)
     \label{sub:development_process}
+
+    The primal objectives for the RAMA Spotify Application were to implement the basic functionalities that RAMA's website\footnote{\url{http://rama.inescporto.pt/app}} offers.
+
+    Incrementally, they were implemented and added to the application\footnote{a timeline with the added features can be seen in \url{https://github.com/carsy/rama-spotify/releases}}.
 
 
   % subsection development_process (end)
