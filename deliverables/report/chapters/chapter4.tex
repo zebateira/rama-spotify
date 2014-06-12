@@ -146,9 +146,9 @@ By this point, the validation of the prototype will be analysed, by explaining t
     To allow the user to change these values, a settings menu was added to the application, and can be seen in Figure~\ref{fig:settings_menu}.
     When the user changes the parameters, the graph refreshes accordingly.
 
-    \begin{figure}[tb]
+    \begin{figure}
       \begin{center}
-        \includegraphics[width=1\textwidth]{settings_menu.pdf}
+        \includegraphics[width=0.8\textwidth]{settings_menu.pdf}
       \end{center}
       \caption{The settings menu that allows the user to change the visualization parameters.}
       \label{fig:settings_menu} 
@@ -165,6 +165,8 @@ By this point, the validation of the prototype will be analysed, by explaining t
       \paragraph{Expand node} \hfill \\
       This option allows the user to expand a node further (ignoring the graph's branching value).
       Given the previous example \ref{fig:graph_treemode}, if the "Dispatch" node gets expanded, it results in \ref{fig:node_expanded}.
+
+      To put it simply, to expand a node, one performs one iteration of the graph creation algorithm.
 
       \begin{figure}[tb]
          \begin{center}
@@ -185,31 +187,9 @@ By this point, the validation of the prototype will be analysed, by explaining t
 
     % subsubsection edition (end)
 
-    \subsubsection{Tags Overlay} % (fold)
-      \label{ssub:tags_overlay}
-
-      The tags overlay (\ref{fig:tags_overlay}) tries to enhance the user's perception on the displayed artists' nodes regarding their tags.
-
-      \begin{figure}[tb]
-        \begin{center}
-          \includegraphics[width=\textwidth]{tags_overlay.pdf}
-        \end{center}
-        \caption{Tags overlay for the displayed graph. When the tag "grunge" is selected the corresponding artist nodes are selected}
-        \label{fig:tags_overlay}
-      \end{figure}
-
-      These tags are not supported by Spotify's API, and so, Echonest's\footnote{http://developer.echonest.com} API was used.
-      More specifically, Echonest calls them \emph{terms}\footnote{http://developer.echonest.com/docs/v4/artist.html\#terms}, that describe the artist.
-      They are very similar to the most commonly known \emph{music genres} (like jazz, country, rock), but they also might include more alternative descriptive terms (progressive metal, symphonic, soundtrack).
-
-      The tags are selectable, and so, when selected, the respective artist nodes that are described by those tags, are highlighted (as seen in \ref{fig:tags_overlay}).
-
-
-    % subsubsection tags_overlay (end)
-
     \subsubsection{Artist Info} % (fold)
       \label{ssub:artist_info}
-      The user is able to see additional information about artists in the Artist Menu (\ref{fig:artist_menu}) such as its popularity value, albums and tags.
+      The user is able to see additional information about artists in the Artist Menu (\ref{fig:artist_menu}) such as its popularity value, albums and tags, as well as perform the \emph{expand} and \emph{new map} functions described in \ref{ssub:edition}.
 
       \begin{figure}[tb]
         \begin{center}
@@ -219,22 +199,89 @@ By this point, the validation of the prototype will be analysed, by explaining t
         \label{fig:artist_menu}
       \end{figure}
 
-      When the user selects a node by clicking on it, the artist menu updates the displayed information. 
+      When the user selects a node by clicking on it, the artist menu updates the displayed information.
 
       The \emph{popularity} and the \emph{albums} are metadata information retrieved from Spotify's API framework (\ref{ssub:spotify_apps}).
       The tags, however, are not supported by Spotify's API.
-      For that, Echonest's API was used, as explained in \ref{ssub:tags_overlay}.
+      For that, Echonest's API was used.
 
-      Note the \emph{expand} and the \emph{new map} buttons.
-      These are used to perform the described actions in \ref{ssub:edition}.
+      \paragraph{Echonest's Terms} \hfill \\
+      Echonest's tags are very similar to the most commonly known \emph{music genres} (like jazz, country, rock), but they also might include more alternative descriptive terms (progressive metal, symphonic, soundtrack).
+
+      The connection between the two APIs is possible thanks to the Project Rosetta Stone\footnote{http://developer.echonest.com/docs/v4\#project-rosetta-stone}.
+      For example, to retrieve the terms\footnote{Echonest calls it terms. From now on, terms and tags will be used interchangeably} of an artist from Echonest's metadata API using the Spotify's Artist ID, the following query is used: \\
+
+      \url{
+        http://developer.echonest.com/api/v4/artist/terms?api_key=API_KEY&format=json&sort=weight&id=spotify-WW:artist:65nZq8l5VZRG4X445F5kmN
+      } \\
+
+      The \emph{id} parameter is similar to the Spotify's URI scheme (\ref{ssub:metadata_api}), and this allows for retrieving extra information about the artist that Spotify's API does not provide.
+
+      \emph{Sort} is another interesting parameter. 
+      In general, artists have more than 10 or 15 terms.
+      Each term has a value of \emph{frequency} and a value of \emph{weight}, and both are float values that range between zero and one.
+      No official documentation was found to explain what do these values represent, but Paul Lamere explains\footnote{thread in the forum for Echonest's API users - http://developer.echonest.com/forums/thread/353} that:
+
+      \begin{quote}
+      \emph{
+        term frequency is directly proportional to how often that term is used to describe that artist
+      }
+      \end{quote}
+
+      \begin{quote}
+      \emph{
+        term weight is a measure of how important that term is in describing the artist
+      }
+      \end{quote}
+
+      So given this, one can conclude that by sorting the terms of an artist by its frequency value, the top terms will be more general (rock, pop, jazz) and not very descriptive or specific of an artist.
+      And by sorting the tags by weight, one will get the most descriptive tags of that specific artist.
+
+      Clearly, in this case, for the Artist Menu the weight parameter is very helpful, and so, the sort parameter used for the query is \emph{weight}.
+      As seen in \ref{fig:artist_menu}, the tags shown are very descriptive of the artist (grunge, 80s, hard rock). \\
 
     % subsubsection artist_info (end)
 
-  % subsection main_features (end)  
+    \subsubsection{Tags Overlay} % (fold)
+      \label{ssub:tags_overlay}
+
+      The tags overlay menu (\ref{fig:tags_overlay}) is meant to enhance the user's perception on the displayed artists' nodes regarding their tags.
+
+      \begin{figure}[tb]
+        \begin{center}
+          \includegraphics[width=\textwidth]{tags_overlay.pdf}
+        \end{center}
+        \caption{Tags overlay for the displayed graph. When the tag "grunge" is selected the corresponding artist nodes are selected}
+        \label{fig:tags_overlay}
+      \end{figure}
+
+      These tags are the same ones used in the Artist Menu (\ref{fig:artist_menu}).
+
+      The tags are selectable, and so, when clicked, the respective artist nodes that are described by those tags, are highlighted (as seen in Figure~\ref{fig:tags_overlay}).
+
+      The tags shown in this menu, are just a small sample of the artists' tags of the whole graph.
+      For example, for the graph in the Figure~\ref{fig:graph_anamanaguchi}, the total count of unique tags in the whole graph is 93.
+      To select which tags to show, those same 93 tags were sorted by frequency in the graph, and then the top 12 ones are shown.
+
+      This way, the tags in the overlay are significant for the graph, by helping the user to visually group together some related artists.
+
+      \begin{figure}
+        \begin{center}
+          \includegraphics[width=\textwidth]{graph_anamanaguchi.pdf}
+        \end{center}
+        \caption{Graph for "Anamanaguchi". The tags shown above are only but a small sample of all the tags of all the artists in the graph}
+        \label{fig:graph_anamanaguchi}
+      \end{figure}
+
+    % subsubsection tags_overlay (end)
+
+  % subsection main_features (end)
 
 
   \subsection{Development Process} % (fold)
     \label{sub:development_process}
+
+
   % subsection development_process (end)
 
 % section prototype (end)
