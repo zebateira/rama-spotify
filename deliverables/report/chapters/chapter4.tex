@@ -1,192 +1,471 @@
-%!TEX root = ../mieic.tex
+%!TEX root = ../report.tex
 
-\chapter{Plano de Trabalho}\label{chap:chap4}
+
+\chapter{Implementation and Validation}
+\label{chap:chap4}
 
 \section*{}
 
-  Neste capítulo serão explicadas as diferentes fases de desenvolvimento desta dissertação, atribuídos pontos de esforço a todas as tarefas de cada fase e definida a calendarização das mesmas fases.
+In this chapter, further details about the methodologies used in the developed prototype, as well as in the the validation process, will be explored.
 
-\section{Fases do Projeto} % (fold)
-\label{sec:fases_projeto}
+The Development Processes section will go into details about the processes used to maintain a sane development environment by taking advantage of several tools that automated most of the common tasks.
 
-
-  Cada fase terá um conjunto de tarefas associadas, e cada uma deles tem um quantificador de \emph{esforço} (escala \emph{Fibonacci} de 1 a 8) por forma a ajudar a compreender algumas das distribuições de tempo de trabalho para cada tarefa.
-  Para identificar uma tarefa, usou-se a nomenclatura:
+By this point, the validation of the prototype will be analysed, by explaining the performed user tests, as well the analysis of the results.
 
 
-  \emph{<fase>.<tarefa>} \\
+\section{Prototype} % (fold)
+\label{sec:prototype}
 
-  Exemplo: Tarefa 3.2 é a segunda tarefa da terceira fase do projeto.
-
-  \subsection{Fase 1 - Desenho da Aplicação} % (fold)
-  \label{sub:dev_desenho}
-  
-    Numa primeira fase, serão quantificadas as funcionalidades a implementar por forma a desenhar bem o espaço da aplicação.
-
-    \begin{description}
-      \item[Tarefa 1.1 - Estudo detalhado das funcionalidades] \hfill \\
-      Perceber quais as funcionalidades que vai ter mais destaque na aplicação. \\
-      \emph{Esforço: 3}
-
-      \item[Tarefa 1.2 - Desenho global] \hfill \\
-      Especificação do \emph{layout} de todas as vistas da aplicação. \\
-      \emph{Esforço: 5}
-
-    \end{description}
-
-  % subsection dev_desenho (end)
-
-  \subsection{Fase 2 - Mapeamento de Metadados Spotify em Last.fm} % (fold)
-  \label{sub:dev_mapeamento}
-
-    O objetivo desta segunda fase da dissertação é conseguir fazer corresponder o conjunto de metadados da base de dados do Spotify na da Last.fm.
     
-    Para isso, esta fase tem três tarefas associadas:
-    \begin{description}
-      \item[Tarefa 2.1 - Recolha de Informação] \hfill \\
-        Recolher informação relevante que ajude a perceber que tipos de metadados similares existem entre as duas bases de dados. \\
-        \emph{Esforço: 2}
+  \subsection{Technologies used} % (fold)
+  \label{sub:technologies}
 
-      \item[Tarefa 2.2 - Módulo de mapeamento] \hfill \\
-        Desenvolvimento de um módulo capaz de fazer esse mesmo mapeamento de uma forma modelar.
-        Deve tentar compilar a maior quantidade de metadados de cada parte numa entrada.\\
-        \emph{Esforço: 5}
+    The following technologies were used during the development of the application.
 
-      \item[Tarefa 2.3 - Pesquisa de um Artista] \hfill \\
-        Desenvolvimento da funcionalidade de pesquisa de um artista, usando o módulo criado anteriormente. \\
-        \emph{Esforço: 3}
+    \subsubsection{Spotify Desktop Client} % (fold)
+    \label{ssub:subsection_name}
+      Spotify Applications are developed in its runtime environment - the Spotify Desktop Client.
 
-    \end{description}
+      To open a Spotify Application, locally, one writes the following in the search bar: spotify:app:rama
 
-  % subsection dev_mapeamento (end)
+      Where \emph{rama} is the application identifier declared in the \emph{manifest.json} file\footnote{file located at the root of the project folder}.
 
-  \subsection{Fase 3 - Criação e Edição do grafo} % (fold)
-  \label{sub:dev_grafo}
+      Example:
+
+      \lstinputlisting[caption={manifest.json: \emph{BundleIdentifier} is the application's identifier; \emph{Dependencies} declares the Application's API dependencies.}, style=htmlcssjs]{snippets/manifest.json}
+
+      There are useful options for development located in the "Develop" tab (\ref{fig:html5_support}).
+      The "Show Inspector" option opens the \emph{Webkit Development Tools} (\ref{ssub:webkit_tools}) window.
+
+      \begin{figure}[tb]
+        \begin{center}
+          \includegraphics[width=\textwidth]{html5_support.pdf}
+        \end{center}
+        \caption{\emph{Develop} Tab}
+        \label{fig:html5_support}
+      \end{figure}
+    
+    \subsubsection{Webkit Development Tools - webkit.org} % (fold)
+    \label{ssub:webkit_tools}
+
+      The webkit tools provides a bundle of tools for web development.
+
+      \begin{figure}
+        \begin{center}
+          \includegraphics[width=\textwidth]{webkit_inspector.pdf}
+        \end{center}
+        \caption{Webkit: \emph{Inspector} tab view. Other tools available: \emph{Resources, Network, Sources, Timeline, Profiles, Audits} and \emph{Console}.}
+
+        \label{fig:webkit_inspector}
+      \end{figure}
+
+      Being the most important:
+
+      \begin{description}
+        \item[Inspector] Allows to inspect the resulting Html and CSS and edit the code and see the application automatically reflect those changes (\ref{fig:webkit_inspector}).
+        \item[Network] Shows a timeline list of resources that where loaded from external sources (sometimes local) (\ref{fig:webkit_network}).
+        \item[Profile] Allows to identify which parts of the javascript code are being executed frequently, and which ones might be creating a performance issue (\ref{fig:webkit_profile}).
+        \item[Audit] Helps to understand which CSS rules are not being used (\ref{fig:webkit_audit}).
+        \item[Console] Javascript interpreter that also works as the log output for the application (\ref{fig:webkit_console}).
+
+      \end{description}
+
+      \begin{figure}
+        \begin{center}
+          \includegraphics[width=\textwidth]{webkit_network.pdf}
+        \end{center}
+        \caption{Webkit Network}
+        \label{fig:webkit_network}
+      \end{figure}
+
+      \begin{figure}
+        \begin{center}
+          \includegraphics[width=\textwidth]{webkit_profile.pdf}
+        \end{center}
+        \caption{Webkit Profile: Canvas render functions are the ones taking up most of the processing cycles. However there is a JQuery function that used 12.75\% of processing time, which might indicate a performance issue to be improved.}
+        \label{fig:webkit_profile}
+      \end{figure}
+
+      \begin{figure}
+        \begin{center}
+          \includegraphics[width=\textwidth]{webkit_audit.pdf}
+        \end{center}
+        \caption{Webkit Audit: 96\% of the CSS code is not being used indicates a issue to be solved.}
+        \label{fig:webkit_audit}
+      \end{figure}
+
+      \begin{figure}
+        \begin{center}
+          \includegraphics[width=\textwidth]{webkit_console.pdf}
+        \end{center}
+        \caption{Webkit Console: Javascript errors are reported there (and highlighted in red as well).}
+        \label{fig:webkit_console}
+      \end{figure}
+
+    \subsubsection{Gruntjs - gruntjs.com} % (fold)
+      \label{ssub:gruntjs}
+        Gruntjs is a Javascript task runner.
+        It allows to automate most of the repetitive tasks when developing a website.
+        Very useful for testing, compiling and code optimization.
+
+    \subsubsection{Npmjs - npmjs.org} % (fold)
+    \label{ssub:npm}
+      Package dependency manager for nodejs - Node Packaged Modules.
+      Node packages will be used, since Gruntjs plugins are all nodejs packages (as well as Grunt itself).
+
+      A npm configuration file (\emph{package.json}) allows to identify the packages that the application depends upon, as well as its versions.
+
+      Example: 
+
+      \lstinputlisting[caption={\emph{package.json}: "*" means that npm should always install the latest version of that package.}, style=htmlcssjs]{snippets/package.json}
+
+    \subsubsection{Bower - bower.io} % (fold)
+    \label{ssub:bower}
+    
+    Bower is also a package manager, but oriented for web front-end packages.
+
+    % subsection bower (end)
+
+    \subsubsection{vis.js - visjs.org} % (fold)
+    \label{ssub:visjs}
+      Javascript framework for visualization.
+      It provides a few visual components, including graphs.
+
+
+  \subsection{Requirements} % (fold)
+  \label{sub:requirements}
   
-    Esta é a fase crítica da dissertação, pois contém as tarefas com maior classificação de esforço.
 
-    \begin{description}
-      \item[Tarefa 3.1 - Representação em Grafo] \hfill \\
-      Representação abstrata das relações dos artistas de música em grafo.
-      Esta tarefa depende bastante da tarefa 2.3 no sentido em que ainda é incerto, se é possível utilizador a metodologia utilizada pelo RAMA para gerar o grafo. \\
-      \emph{Esforço: 8}
 
-      \item[Tarefa 3.2 - Desenho gráfico do grafo] \hfill \\
-      Desenho do grafo usando uma ferramenta de renderização de grafos 2D\ref{sub:arborjs}.
-      Se o desempenho da ferramenta impedir uma boa experiência de utilizador, será necessário investigar mais e procurar outras ferramentas que permitam uma melhor performance. \\
-      \emph{Esforço: 8}
+  % subsection requirements (end)
 
-      \item[Tarefa 3.3 - Edição do grafo] \hfill \\
-      Disponibilizar funcionalidades de edição do grafo desenhado como eliminar, expandir e mover nó. \\
-      \emph{Esforço: 3}
+  \subsection{Implemented Features} % (fold)
+    \label{sub:main_features}
+    
+    The main implemented features of RAMA's Spotify Application are: visualization of a map of a network of connected artists; edition of the visualization parameters; edition of the graph (expand and new map functions); Tags overlay and music artist info.
 
-      \item[Tarefa 3.4 - Parâmetros do grafo] \hfill \\
-      Como funcionalidades mais avançadas, mostrar parâmetros editáveis do grafo.
-      Não esquecer de limitar alguns parâmetros por forma a evitar comportamentos erráticos do grafo.\\
-      \emph{Esforço: 3}
+    \subsubsection{Visulization of the Artists Map} % (fold)
+      \label{ssub:visualization}
+    
+      The application automatically draws the map with the current playing artist as the main node, as seen in Figure~\ref{fig:graph_rootnode}.
 
-    \end{description}
+      \begin{figure}[tb]
+        \begin{center}
+          \includegraphics[width=\textwidth]{graph_rootnode.pdf}
+        \end{center}
+        \caption{The first drawn graph uses the current playing artist (lower left corner) as the root node.}
+        \label{fig:graph_rootnode}
+      \end{figure}
 
-  % subsection dev_grafo (end)
+      The graph-like structure is created by recursively fetching a list of related artists from each artist. Once a certain pre-established limit of recursive levels is reached\footnote{depth value of a graph}, the algorithm stops.
 
-  \subsection{Fase 4 - Reprodução de Música} % (fold)
-  \label{sub:dev_playlists}
+      The graph creation algorithm is as follows:
+
+      % change the code the attachments
+      \lstinputlisting[
+        caption={Simplified graph creation algorithm in Javascript (duplicate nodes checking is encapsulated in the insertNode function)}, style=htmlcssjs
+      ]
+      {snippets/map_creation_alg.js}
+
+      This algorithm, albeit simplified, represents the basic flow when constructing a graph, or more specifically, a tree.
+      Since that, in this case of study, the direction of the edges of the graph is not relevant in any way to the artists' map, all of the edges are considered to be undirected.
+
+      Assuming that the insertNode() function checks for duplicate nodes, i.e., it only inserts unique nodes into the graph, then the resulting graph is one of a tree, since there are no simple cycles in the graph.
+      An example of this behaviour can be seen in Figure~\ref{fig:graph_treemode}.
+
+      \begin{figure}[tb]
+        \begin{center}
+          \includegraphics[width=\textwidth]{map_creation_treemode.pdf}
+        \end{center}
+        \caption{Graph created like a tree with "Red Hot Chilli Peppers" as the root node.}
+        \label{fig:graph_treemode}
+      \end{figure}
+
+      This approach, however, is not showing all of the available information.
+      Given this same example (Figure~\ref{fig:graph_treemode}), the artist node "Stone Temple Pilots" is a child of the node artist "Faith No More".
+      The algorithm inserted the latter first into the graph.
+      After that, when retrieving the childs of "Jane's Addiction", "Stone Templo Pilots" is contained in that list, and so the insertNode() function discards the node since it is a duplicate.
+      But that means that there is a connection between the both of them that is being discarded.
+
+      \paragraph{Graph's Tree Mode} \hfill \\
+      To build a graph with all the connections that exist between all of the artists in the graph, the insertNode() function would need to insert the missing edge into the graph by analysing the current graph state.
+      This method creates a graph by definition, while the previous one created a tree graph.
+      An example of this behaviour can be seen in Figure~\ref{fig:graph_notreemode}.
+      \begin{figure}[tb]
+        \begin{center}
+          \includegraphics[width=\textwidth]{map_creation_notreemode.pdf}
+        \end{center}
+        \caption{Graph created with all the connections with "Red Hot Chilli Peppers" as the root node.}
+        \label{fig:graph_notreemode}
+      \end{figure}
+
+      \hfill \\
+      \indent \emph{
+      From now on, if the graph is a tree, it will be said that the algorithm is using the \emph{Tree Mode}.
+      So the example \ref{fig:graph_treemode} is a \emph{Tree Mode} example, and the examples \ref{fig:graph_notreemode} and \ref{fig:graph_notreemode2} are not \emph{Tree Mode} examples\footnote{
+        Note that, sometimes, even if the algorithm is not on tree mode, it might generate a tree, simply because there were no missing edges between the nodes to be added to the graph.
+      }.}
+      \hfill \\
+
+      Note (\ref{fig:graph_notreemode}) how "Stone Temple Pilots" is now a child of both "Faith No More" and "Jane's Addiction".
+      Also note that the same behaviour is visible with the nodes "Mad Season" and "Screaming Trees".
+
+      At this point, the user's perception of the artist "Stone Temple Pilots" is now different from the previous example (Figure~\ref{fig:graph_treemode}).
+      These added connections are, in a way, clustering together the most connected nodes.
+      In this particular example, one could see an improvement with this approach: it contributes to the user's perception of the artist's network by making sure the user knows that those specific artists are more connected between them, than any others.
+      The fact is that only three extra edges where added, meaning there is not much visual clutter in the visualization. \\
+
+      However, that might not always be the case.
+
+      One could argue that the "Mad Season" artist node is already disturbing the visual representation by being drawn over an edge.
+
+      In fact, with the exact same values of branching, depth and tree mode off, when creating a graph for the artist "Mariza", the visual clutter is so strong that the graph becomes confusing and not very helpful: Figure~\ref{fig:graph_notreemode2}.
+
+      \begin{figure}[tb]
+        \begin{center}
+          \includegraphics[width=\textwidth]{graph_notreemode2.pdf}
+        \end{center}
+        \caption{Graph created with all the connections with "Mariza" as the root node.}
+        \label{fig:graph_notreemode2}
+      \end{figure}
+
+      The cluster of nodes in the center makes it clear that those specific nodes are really connected between them. 
+      But then, the edges, that are forcing those nodes together, are creating a visual clutter that might not be so desirable.
+      Instead of creating a visual map of the artists' network for the user to perceive, explore and change in its own way, the representation is more contained, static and not so visually appealing.
+      \hfill \\
+
+      So on one hand, the \emph{clustering} of the nodes seems like an interesting feature.
+      It allows for a much more in-depth user access to the underlining information of the related artists.
+      But on the other hand, the focus of the visualization (to show a map of the artists' network) is shifting to this cluster-like representation.
+
+      Both perspectives are advantageous depending on the data they are operating on (as seen in the previous examples).
+      So instead of choosing only one method, both were chosen: by default, the graph creation algorithm is on tree mode, and the user can turn it off from a settings menu.
+      This allows for the user to choose the visual representation method that suits its needs.
+
+      \paragraph{Depth and Branching values} \hfill \\
+      The depth and branching values have been mentioned before in this chapter, but not further explained.
+
+      The \textbf{depth} value of a graph determines how deep the recursive algorithm is.
+      The previously presented example (\ref{fig:graph_treemode}) has a depth value of 2.
+      The example \ref{fig:graph_depth3} has a depth value of 3.
+      \begin{figure}[tb]
+        \begin{center}
+          \includegraphics[width=\textwidth]{graph_depth3.pdf}
+        \end{center}
+        \caption{Graph with depth value of 3}
+        \label{fig:graph_depth3}
+      \end{figure}
+      In short, depth is the maximum distance between the root node and any other node in the graph.
+
+      The \textbf{branching} value of a tree graph determines the maximum number of child nodes a node can have.
+      The example \ref{fig:graph_treemode} has 4 branching.
+
+    % subsubsection visualization (end)
+
+    \subsubsection{Visualization Parameters} % (fold)
+    \label{ssub:visualization_parameters}
+    
+    The visualization parameters are the branching and depth values, as well as the option to enable/disable the tree mode.
+
+    To allow the user to change these values, a settings menu was added to the application, and can be seen in Figure~\ref{fig:settings_menu}.
+    When the user changes the parameters, the graph refreshes accordingly.
+
+    \begin{figure}
+      \begin{center}
+        \includegraphics[width=0.8\textwidth]{settings_menu.pdf}
+      \end{center}
+      \caption{The settings menu that allows the user to change the visualization parameters.}
+      \label{fig:settings_menu} 
+    \end{figure}
+
+    % subsubsection visualization_parameters (end)
+
+    \subsubsection{Graph Edition} % (fold)
+      \label{ssub:edition}
+
+      The available features to edit the graph are as follow: expand node, delete node and create a new map.
+      These interactions are available in the Artist Menu (\ref{ssub:artist_info}).
+
+      \paragraph{Expand node} \hfill \\
+      This option allows the user to expand a node further (ignoring the graph's branching value).
+      Given the previous example \ref{fig:graph_treemode}, if the "Dispatch" node gets expanded, it results in \ref{fig:node_expanded}.
+
+      To put it simply, to expand a node, one performs one iteration of the graph creation algorithm.
+
+      \begin{figure}[tb]
+         \begin{center}
+           \includegraphics[width=\textwidth]{node_expanded.pdf}
+         \end{center}
+         \caption{"Dispatch" artist node expanded.}
+         \label{fig:node_expanded}
+      \end{figure}
+
+      \paragraph{Delete node} \hfill \\
+      This options allows the user to delete a node from the graph.
+      Useful for when the user wants to construct the graph to its needs.
+
+      \paragraph{New map} \hfill \\
+      The user may choose to create a whole new graph from a another node.
+      This way the root node will be the selected node.
+
+
+    % subsubsection edition (end)
+
+    \subsubsection{Artist Info} % (fold)
+      \label{ssub:artist_info}
+      The user is able to see additional information about artists in the Artist Menu (\ref{fig:artist_menu}) such as its popularity value, albums and tags, as well as perform the \emph{expand} and \emph{new map} functions described in \ref{ssub:edition}.
+
+      \begin{figure}[tb]
+        \begin{center}
+          \includegraphics[width=\textwidth]{artist_menu.pdf}
+        \end{center}
+        \caption{Artist Menu with information about "Chris Cornell"}
+        \label{fig:artist_menu}
+      \end{figure}
+
+      When the user selects a node by clicking on it, the artist menu updates the displayed information.
+
+      The \emph{popularity} and the \emph{albums} are metadata information retrieved from Spotify's API framework (\ref{sub:spotify_apps}).
+      The tags, however, are not supported by Spotify's API.
+      For that, Echonest's API was used.
+
+      \paragraph{Echonest's Terms} \hfill \\
+      Echonest's tags are very similar to the most commonly known \emph{music genres} (like jazz, country, rock), but they also might include more alternative descriptive terms (progressive metal, symphonic, soundtrack).
+
+      The connection between the two APIs is possible thanks to the Project Rosetta Stone\footnote{\url{http://developer.echonest.com/docs/v4\#project-rosetta-stone}}.
+      For example, to retrieve the terms\footnote{Echonest calls it terms. From now on, terms and tags will be used interchangeably} of an artist from Echonest's metadata API using the Spotify's Artist ID, the following query is used: \\
+
+      \url{
+        http://developer.echonest.com/api/v4/artist/terms?api_key=API_KEY&format=json&sort=weight&id=spotify-WW:artist:65nZq8l5VZRG4X445F5kmN
+      } \\
+
+      The \emph{id} parameter is similar to the Spotify's URI scheme (\ref{sub:metadata_api}), and this allows for retrieving extra information about the artist that Spotify's API does not provide.
+
+      \emph{Sort} is another interesting parameter. 
+      In general, artists have more than 10 or 15 terms.
+      Each term has a value of \emph{frequency} and a value of \emph{weight}, and both are float values that range between zero and one.
+      No official documentation was found to explain what do these values represent, but Paul Lamere\footnote{Paul Lamere is Director of Developer Platform at \url{the.echonest.com} (\url{http://the.echonest.com/company}). Also blogs here: \url{http://musicmachinery.com}} explains\footnote{thread in the forum for Echonest's API users - \url{http://developer.echonest.com/forums/thread/353}} that:
+
+      \begin{quote}
+      \emph{
+        term frequency is directly proportional to how often that term is used to describe that artist
+      }
+      \end{quote}
+
+      \begin{quote}
+      \emph{
+        term weight is a measure of how important that term is in describing the artist
+      }
+      \end{quote}
+
+      So given this, one can conclude that by sorting the terms of an artist by its frequency value, the top terms will be more general (rock, pop, jazz) and not very descriptive or specific of an artist.
+      And by sorting the tags by weight, one will get the most descriptive tags of that specific artist.
+
+      Clearly, in this case, for the Artist Menu the weight parameter is very helpful, and so, the sort parameter used for the query is \emph{weight}.
+      As seen in \ref{fig:artist_menu}, the tags shown are very descriptive of the artist (grunge, 80s, hard rock). \\
+
+    % subsubsection artist_info (end)
+
+    \subsubsection{Tags Overlay} % (fold)
+      \label{ssub:tags_overlay}
+
+      The tags overlay menu (\ref{fig:tags_overlay}) is meant to enhance the user's perception on the displayed artists' nodes regarding their tags.
+
+      \begin{figure}[tb]
+        \begin{center}
+          \includegraphics[width=\textwidth]{tags_overlay.pdf}
+        \end{center}
+        \caption{Tags overlay for the displayed graph. When the tag "grunge" is selected the corresponding artist nodes are selected}
+        \label{fig:tags_overlay}
+      \end{figure}
+
+      These tags are the same ones used in the Artist Menu (\ref{fig:artist_menu}).
+
+      The tags are selectable, and so, when clicked, the respective artist nodes that are described by those tags, are highlighted (as seen in Figure~\ref{fig:tags_overlay}).
+
+      The tags shown in this menu, are just a small sample of the artists' tags of the whole graph.
+      For example, for the graph in the Figure~\ref{fig:graph_anamanaguchi}, the total count of unique tags in the whole graph is 93.
+      To select which tags to show, those same 93 tags were sorted by frequency in the graph, and then the top 12 ones are shown.
+
+      This way, the tags in the overlay are significant for the graph, by helping the user to visually group together some related artists.
+
+      \begin{figure}
+        \begin{center}
+          \includegraphics[width=\textwidth]{graph_anamanaguchi.pdf}
+        \end{center}
+        \caption{Graph for "Anamanaguchi". The tags shown above are only but a small sample of all the tags of all the artists in the graph}
+        \label{fig:graph_anamanaguchi}
+      \end{figure}
+
+    % subsubsection tags_overlay (end)
+
+  % subsection main_features (end)
+
+
+  \subsection{Development Processes} % (fold)
+    \label{sub:development_process}
+
+    The primal objectives for the RAMA Spotify Application were to implement the basic functionalities that RAMA's website\footnote{\url{http://rama.inescporto.pt/app}} offers.
+
+    Incrementally, they were implemented, tested and added to the application.
+    A timeline (chronological order from bottom to top) with the added features (each update release) can be seen in \\ 
+    \indent \url{https://github.com/carsy/rama-spotify/releases} \\
+
+    Unit tests were added for each feature.
+    The tests were run locally to ensure that nothing broke mean while.
+    Also to ensure that every release had the tests passing, the project was integrated in Travis's Continuous Integration\footnote{\url{http://travis-ci.org}} system: \\
+    \indent \url{http://travis-ci.org/carsy/rama-spotify}. \\
+
+    This way, after every push of a new release, the project gets build and the unit tests run automatically.
+
+    The solution was also submitted to validation several times during its development.
+    After each release, a constant small group of test subjects (3 people) reviewed the state of the application (alfa testers).
+    Their feedback would be carried over the next release: bug fixes, improvements, etc.
+    This was the testing cycle that allowed to validate the implemented features.
+    Given this iterative process of implementation and feedback, the solution would be better prepared for future occasional beta-testing.
+
+    
+    % compare with the previous work plan
+
+  % subsection development_processes (end)
+
+% section prototype (end)
+
+
+\section{Validation} % (fold)
+\label{sec:validation}
+
+  In order to validate the proposed method, user tests were done with Spotify users and non-Spotify Users.
+  They represent the second group testers and will be referred as the beta-testers.
+
+  \subsection{User Tests} % (fold)
+  \label{sub:user_tests}
+
+    The proposed application is targeted at Spotify Users.
+    However, non-Spotify users also tested RAMA's Spotify Application after a few moments of using Spotify's interface.
+
+    During the test, the user was asked to first use Spotify only.
+    The task was to find a couple of new artists that the user liked.
+    This first task should take no more than 7 minutes, depending on the user.
+
+    Next, the user was asked to open the RAMA application and do the same (no more than 10 minutes).
+    Given this, the user is forced to compare the two approaches: discovering new music with Spotify only, and discovering new music with RAMA's Spotify Application as a helper.
+
+
+
   
-    Nesta quarta fase da dissertação, serão implementadas mais funcionalidades essenciais à aplicação.
+  % subsection user_tests (end)
 
-    \begin{description}
-      \item[Tarefa 4.1 - Reproduzir música de artista] \hfill \\
-      Permitir selecionar um nó e reproduzir as música mais populares desse artista. \\
-      \emph{Esforço: 3}
+  \subsection{Data Analysis} % (fold)
+  \label{sub:data_analysis}
 
-      \item[Tarefa 4.2 - Gerar \emph{Playlists}] \hfill \\
-      Gerar uma \emph{playlists} a partir de um grafo. \\
-      \emph{Esforço: 3}
 
-      \item[Tarefa 4.3 - Guardar \emph{Playlists}] \hfill \\
-      Permitir ao utilizador guarda a \emph{playlists} gerada. \\
-      \emph{Esforço: 1}
-
-      \item[Tarefa 4.4 - Seguir Artista] \hfill \\
-      Seguir artista de qualquer nó do grafo. \\
-      \emph{Esforço: 2}
-
-    \end{description}
-
-  % subsection dev_playlists (end)
-
-  \subsection{Fase 5 - Avaliação e Validação} % (fold)
-  \label{sub:dev_validacao}
   
-    Esta fase final do projeto irá contemplar uma avaliação da aplicação utilizando o \emph{feedback} de utilizadores que irão experimentar a mesma, por forma a validar o objetivo desta dissertação: melhoria de uma experiência musical de um utilizador Spotify.
+  % subsection data_analysis (end)
+% section validation (end)
 
-    \begin{description}
-      \item[Tarefa 5.1 - Recolha de dados de utilização da Aplicação] \hfill \\
-      Os utilizadores inicialmente irão mostrar os seus hábitos de pesquisa de nova música.
-      De seguida, ser-lhes-á introduzida a aplicação desenvolvida para se ficar com uma perceção do uso que lhe é dada. \\
-      \emph{Esforço: 3}
 
-      \item[Tarefa 5.2 - Análise dos Dados recolhidos] \hfill \\
-      Tirar conclusões dos dados recolhidos por forma a tirar conclusões sobre a forma de utilização da aplicação. \\
-      \emph{Esforço: 5}
+\section{Summary} % (fold)
 
-      \item[Tarefa 5.3 - Melhorias na Aplicação] \hfill \\
-      Melhorias na aplicação de acordo com o \emph{feedback} dos utilizadores. \\
-      \emph{Esforço: 3}
 
-    \end{description}
-
-  % subsection dev_validacao (end)
-
-% section fases_projeto (end)
-
-\section{Calendarização} % (fold)
-\label{sec:calendarizacao}
-
-\begin{figure}
-  \begin{ganttchart}[x unit=0.004\textwidth,time slot format=little-endian]{10.2.2014}{7.7.2014}
-    \gantttitlecalendar*{10.2.2014}{7.7.2014}{month=shortname} \\
-
-    \ganttgroup{1 Desenho da Aplicação}{10.2.2014}{14.2.2014} \\
-    \ganttbar{1.1 Funcionalidades}{10.2.2014}{12.2.2014} \\
-    \ganttbar{1.2 \emph{Layouts}}{10.2.2014}{14.2.2014} \\
-
-    \ganttgroup{2. Mapeamento Spotify - Last.fm}{17.2.2014}{28.2.2014} \\
-    \ganttbar{2.1 Recolha de Informação}{17.2.2014}{17.2.2014} \\
-    \ganttbar{2.2 Desenvolvimento do módulo}{17.2.2014}{28.2.2014} \\
-    \ganttbar{2.3 Pesquisa de um artista}{26.2.2014}{28.2.2014} \\
-
-    \ganttgroup{3. Criação do Grafo}{3.3.2014}{4.4.2014} \\
-    \ganttbar{3.1 Representação em grafo}{3.3.2014}{19.3.2014} \\
-    \ganttbar{3.2 Desenho gráfico}{10.3.2014}{28.3.2014} \\
-    \ganttbar{3.3 \& 3.4}{31.3.2014}{4.4.2014} \\
-
-    \ganttgroup{4. Reprodução de Música}{7.4.2014}{11.4.2014} \\
-
-    \ganttgroup{5. Avaliação e Validação}{7.4.2014}{16.5.2014} \\
-    \ganttbar{5.1 Recolha de dados}{7.4.2014}{25.4.2014} \\
-    \ganttbar{5.2 Análise de dados}{28.4.2014}{12.5.2014} \\
-    \ganttbar{5.3 Melhorias na Aplicação}{5.5.2014}{16.5.2014} \\
-
-    \ganttgroup{Escrita da Dissertação}{1.5.2014}{16.6.2014} \\
-
-    \ganttgroup{Escrita de Artigo Científico}{17.6.2014}{27.6.2014} \\
-
-    \ganttgroup{Preparação da Apresentação Final}{30.6.2014}{7.7.2014} \\
-
-  \end{ganttchart}
-  \caption{Calendarização do Plano de Trabalho}
-  \label{fig:calendarizacao}
-\end{figure}
-
-  Na figura \ref{fig:calendarizacao} é possível ver a calendarização do plano de trabalho para esta dissertação.
-  É de notar que a produção da documentação (dissertação, artigo e apresentação) não fazem parte das fases de desenvolvimento, no entanto, estão definidas na calendarização.
-
-% section calendarizacao (end)
-
-\section{Resumo}
-
-O planeamento desta dissertação foi feita de forma a que o grau de esforço das fases de desenvolvimento cresça ao longo do tempo.
-Assim, o desenvolvimento inicial será mais suave e natural, camuflando o aumento do grau de complexidade das seguintes fases.
-
-Tentou-se distribuir mais tempo para fase mais críticas, e menos tempo para fases menos prioritárias.
+% section summary (end)

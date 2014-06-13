@@ -1,3 +1,5 @@
+%!TEX root = ../report.tex
+
 %% FEUP THESIS STYLE for LaTeX2e
 %% FEUP, JCL & JCF, 31 July 2011
 %%
@@ -20,16 +22,6 @@
 \newif\if@english
 \@portuguesfalse
 \DeclareOption{english}{\@englishtrue}
-
-%% Option mieec
-\newif\if@mieec
-\@mieecfalse
-\DeclareOption{mieec}{\@mieectrue}
-
-%% Option mieic
-\newif\if@mieic
-\@mieicfalse
-\DeclareOption{mieic}{\@mieictrue}
 
 %% Option juri
 \newif\if@juri
@@ -96,29 +88,15 @@
 \fi
 
 \if@juri
-  \if@mieic
-    \@watermarktrue
-    \@uselinenotrue
-  \fi
+  \@watermarktrue
+  \@uselinenotrue
 \fi
 
-\if@mieec
-  \relax
-\else
-  \@committeepagetrue
-\fi
+\@committeepagetrue
 
-\if@mieic
-  \@headerscenteredtrue
-  \@numericrefsfalse
-  \@alpharefstrue
-\fi
-
-\if@mieec
-  \@numericrefstrue
-  \@alpharefsfalse
-\fi
-
+\@headerscenteredtrue
+\@numericrefsfalse
+\@alpharefstrue
 
 %% Make sure that report has been loaded
 \@ifundefined{chapter}{\@latexerr{The `feupteses' option should be used
@@ -141,27 +119,16 @@ with the `report' document style}{}}{}
 %% Ensure correct font encoding
 \RequirePackage[T1]{fontenc}
 
-\if@portugues
-  \RequirePackage[portuges]{babel}
-\else
-  \RequirePackage[english]{babel}
-\fi
+\RequirePackage[english]{babel}
 
 %% Global layout of the document
 
 %% geometry package
 \RequirePackage[outer=25mm,inner=35mm,vmargin=20mm,includehead,includefoot,headheight=15pt]{geometry}
 
-%% avoid widows and orphans
-\clubpenalty=6000
-\widowpenalty=6000
-
-\RequirePackage{mathptmx}	   % font times
-%\RequirePackage[scaled]{couriers}  % font courier
-%\RequirePackage[scaled]{helvet}    % font helvetica
 \RequirePackage[pdftex]{graphicx}
 \RequirePackage{url}
-\RequirePackage{setspace}
+% \RequirePackage{setspace}
 \RequirePackage{makeidx}
 \RequirePackage[tableposition=top]{caption}
 \RequirePackage[pagewise,switch*]{lineno}
@@ -185,11 +152,7 @@ with the `report' document style}{}}{}
 %% Watermark
 \if@watermark
   \SetWatermarkFontSize{72pt}
-  \if@portugues
-     \SetWatermarkText{Para Aprecia\c{c}\~{a}o por J\'{u}ri}
-   \else
-     \SetWatermarkText{For Jury Evaluation}
-   \fi
+  \SetWatermarkText{For Jury Evaluation}
 \fi
 
 %% Define all the pieces that go on the title page and the committeepage.
@@ -251,37 +214,12 @@ with the `report' document style}{}}{}
   \par%
   \center{\noindent\large #1: #2}}}
 
-%% Working version
-%\if@provisional
-% \if@mieec
-%    \if@portugues
-%       \additionalfronttext{Vers\~{a}o de trabalho}
-%    \else
-%       \additionalfronttext{Working version}
-%    \fi
-% \fi
-%\fi
+% Working version
 
-%\if@provisional
-% \if@mieic
-%    \if@portugues
-%       \additionalfronttext{Vers\~{a}o de trabalho}
-%    \else
-%       \additionalfronttext{Working version}
-%    \fi
-% \fi
-%\fi
-
-%% For Jury Evaluation
-\if@juri
-  \if@mieec
-    \if@portugues
-      \additionalfronttext{Para Aprecia\c{c}\~{a}o por J\'{u}ri}
-    \else
-      \additionalfronttext{For Jury Evaluation}
-    \fi
-  \fi
+\if@provisional
+  \additionalfronttext{Working version}
 \fi
+
 
 %% For final version
 \if@final
@@ -353,18 +291,10 @@ with the `report' document style}{}}{}
  {\Large \@degree}%
  \end{center}
  \vspace*{\fill}
- \if@mieec
-   \begin{center}
-   {\Large\textnormal{\@school}}
-   \\[1.5\baselineskip]
-   {\textnormal{\Large\@thesisdate}}
-   \end{center}
- \else
-   \unvbox\@supervisorstext
-   \vspace*{\fill}
-   \unvbox\@vivatext
-   \@thesisdate
- \fi
+ \unvbox\@supervisorstext
+ \vspace*{\fill}
+ \unvbox\@vivatext
+ \@thesisdate
 }
 
 %% If the titlepage environment, the paragraph skip is infinitely
@@ -410,19 +340,17 @@ with the `report' document style}{}}{}
 \renewcommand{\footrulewidth}{0pt}
 \addtolength{\headheight}{0.5pt}
 
-\if@mieic
-  \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
-  \fancyhead{} % clear all header fields
-  \fancyhead[C]{\leftmark}
-  \fancyfoot{} % clear all footer fields
-  \fancyfoot[C]{\thepage}
-  \fancyfoot[RO,LE]{}
-\fi
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\fancyhead{} % clear all header fields
+\fancyhead[C]{\leftmark}
+\fancyfoot{} % clear all footer fields
+\fancyfoot[C]{\thepage}
+\fancyfoot[RO,LE]{}
 
 %% changes to report.sty
-\lineskip 1pt
-\normallineskip 1pt
-\onehalfspacing	% one and a half line spacing
+% \lineskip 1pt
+% \normallineskip 1pt
+% \onehalfspacing	% one and a half line spacing
 \setcounter{secnumdepth}{3}      % to number subsubsections
 \setcounter{tocdepth}{2}         % sets the depth of sectional units listed in the toc
 \setcounter{topnumber}{1}        % maximum number of floats at top of page
@@ -442,18 +370,6 @@ with the `report' document style}{}}{}
 \if@backrefs
 \RequirePackage[hyperpageref]{backref}
 \renewcommand*{\backref}[1]{}
-\if@portugues
-\renewcommand*{\backrefalt}[4]{%
-  \ifcase #1 %
-  \or
-  {\footnotesize Citado na p\'{a}gina #2.}%
-  \else
-  {\footnotesize Citado nas p\'{a}ginas #2.}%
-  \fi
-}
-\renewcommand*{\backreftwosep}{ e~}
-\renewcommand*{\backreflastsep}{ e~}
-\else
 \renewcommand*{\backrefalt}[4]{%
   \ifcase #1 %
   \or
@@ -462,7 +378,6 @@ with the `report' document style}{}}{}
   {\footnotesize Cited on pages #2.}%
   \fi
 }
- \fi
 \fi
 
 \if@onpaper 
@@ -499,76 +414,40 @@ with the `report' document style}{}}{}
 %% External commands
 \newcommand{\StartBody}{\cleardoublepage\pagenumbering{arabic}\setcounter{page}{1}\pagestyle{fancy}\Activate@lineno}
 
-\newenvironment{Prolog}{\maketitle\if@committeepage\committeepage\fi\@StartPrelim\begin{singlespace}}{\end{singlespace}}
+\newenvironment{Prolog}
+{\maketitle\if@committeepage\committeepage\fi\@StartPrelim}
 
-%% Known degrees (always in Portuguese)
-\if@mieic
-  \degree{Mestrado Integrado em Engenharia Inform\'{a}tica e Computa\c{c}\~{a}o}
-\fi
+\degree{Mestrado Integrado em Engenharia Inform\'{a}tica e Computa\c{c}\~{a}o}
 
-%% Some language-dependent definitions
-\if@portugues
-  \RequirePackage{indentfirst}
+\newcommand{\@StartDoc}{%
+  \setcounter{page}{-3}%
+  \pagestyle{empty}
+  \pdfbookmark[0]{Front Page}{init}
+}
 
-  \newcommand{\@StartDoc}{%
-    \renewcommand{\appendixname}{Anexo}%
-    \setcounter{page}{-3}%
-    \pagestyle{empty}
-    \pdfbookmark[0]{P\'{a}gina de Rosto}{init}}
-
-  \newcommand{\PrintBib}[1]{%
-    \renewcommand{\bibname}{Refer\^{e}ncias}%
-    \if@numericrefs%
-      \bibliographystyle{unsrt-pt}%
+\newcommand{\PrintBib}[1]{%
+  \renewcommand{\bibname}{References}%
+  \if@numericrefs%
+    \bibliographystyle{unsrt}%
+  \else%
+    \if@alpharefs%
+      \bibliographystyle{alpha}%
     \else%
-      \if@alpharefs%
-        \bibliographystyle{alpha-pt}%
-      \else%
-        \bibliographystyle{plainnat-pt}%
-      \fi%
+      \bibliographystyle{plainnat}%
     \fi%
-    \cleardoublepage%
-    \phantomsection%
-    \addcontentsline{toc}{chapter}{Refer\^{e}ncias}%
-    \begin{singlespace}\bibliography{#1}\end{singlespace}}
+  \fi%
+  \cleardoublepage%
+  \phantomsection%
+  \addcontentsline{toc}{chapter}{References}%
+  \begin{singlespace}\bibliography{#1}\end{singlespace}
+}
 
-  \newcommand{\PrintIndex}{%
-    \cleardoublepage%
-    \phantomsection
-    \renewcommand{\indexname}{\'{I}ndice Remissivo}%
-    \addcontentsline{toc}{chapter}{\'{I}ndice Remissivo}%
-    \begin{singlespace}\printindex\end{singlespace}}
-
-\else
-
-  \newcommand{\@StartDoc}{%
-    \setcounter{page}{-3}%
-    \pagestyle{empty}
-    \pdfbookmark[0]{Front Page}{init}}
-
-  \newcommand{\PrintBib}[1]{%
-    \renewcommand{\bibname}{References}%
-    \if@numericrefs%
-      \bibliographystyle{unsrt}%
-    \else%
-      \if@alpharefs%
-        \bibliographystyle{alpha}%
-      \else%
-        \bibliographystyle{plainnat}%
-      \fi%
-    \fi%
-    \cleardoublepage%
-    \phantomsection%
-    \addcontentsline{toc}{chapter}{References}%
-    \begin{singlespace}\bibliography{#1}\end{singlespace}}
-
-  \newcommand{\PrintIndex}{%
-    \cleardoublepage%
-    \phantomsection%
-    \addcontentsline{toc}{chapter}{Index}%
-    \begin{singlespace}\printindex\end{singlespace}}
-
-\fi % Some language-dependent definitions
+\newcommand{\PrintIndex}{%
+  \cleardoublepage%
+  \phantomsection%
+  \addcontentsline{toc}{chapter}{Index}%
+  \begin{singlespace}\printindex\end{singlespace}
+}
 
 \AtBeginDocument{\@StartDoc}
 
