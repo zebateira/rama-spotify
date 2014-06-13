@@ -16,10 +16,133 @@ By this point, the validation of the prototype will be analysed, by explaining t
 \section{Prototype} % (fold)
 \label{sec:prototype}
 
-  \subsection{Main Features} % (fold)
+    
+  \subsection{Technologies used} % (fold)
+  \label{sub:technologies}
+
+    The following technologies were used during the development of the application.
+
+    \subsubsection{Spotify Desktop Client} % (fold)
+    \label{ssub:subsection_name}
+      Spotify Applications are developed in its runtime environment - the Spotify Desktop Client.
+
+      To open a Spotify Application, locally, one writes the following in the search bar: spotify:app:rama
+
+      Where \emph{rama} is the application identifier declared in the \emph{manifest.json} file\footnote{file located at the root of the project folder}.
+
+      Example:
+
+      \lstinputlisting[caption={manifest.json: \emph{BundleIdentifier} is the application's identifier; \emph{Dependencies} declares the Application's API dependencies.}, style=htmlcssjs]{snippets/manifest.json}
+
+      There are useful options for development located in the "Develop" tab (\ref{fig:html5_support}).
+      The "Show Inspector" option opens the \emph{Webkit Development Tools} (\ref{ssub:webkit_tools}) window.
+
+      \begin{figure}[tb]
+        \begin{center}
+          \includegraphics[width=\textwidth]{html5_support.pdf}
+        \end{center}
+        \caption{\emph{Develop} Tab}
+        \label{fig:html5_support}
+      \end{figure}
+    
+    \subsubsection{Webkit Development Tools - webkit.org} % (fold)
+    \label{ssub:webkit_tools}
+
+      The webkit tools provides a bundle of tools for web development.
+
+      \begin{figure}
+        \begin{center}
+          \includegraphics[width=\textwidth]{webkit_inspector.pdf}
+        \end{center}
+        \caption{Webkit: \emph{Inspector} tab view. Other tools available: \emph{Resources, Network, Sources, Timeline, Profiles, Audits} and \emph{Console}.}
+
+        \label{fig:webkit_inspector}
+      \end{figure}
+
+      Being the most important:
+
+      \begin{description}
+        \item[Inspector] Allows to inspect the resulting Html and CSS and edit the code and see the application automatically reflect those changes (\ref{fig:webkit_inspector}).
+        \item[Network] Shows a timeline list of resources that where loaded from external sources (sometimes local) (\ref{fig:webkit_network}).
+        \item[Profile] Allows to identify which parts of the javascript code are being executed frequently, and which ones might be creating a performance issue (\ref{fig:webkit_profile}).
+        \item[Audit] Helps to understand which CSS rules are not being used (\ref{fig:webkit_audit}).
+        \item[Console] Javascript interpreter that also works as the log output for the application (\ref{fig:webkit_console}).
+
+      \end{description}
+
+      \begin{figure}
+        \begin{center}
+          \includegraphics[width=\textwidth]{webkit_network.pdf}
+        \end{center}
+        \caption{Webkit Network}
+        \label{fig:webkit_network}
+      \end{figure}
+
+      \begin{figure}
+        \begin{center}
+          \includegraphics[width=\textwidth]{webkit_profile.pdf}
+        \end{center}
+        \caption{Webkit Profile: Canvas render functions are the ones taking up most of the processing cycles. However there is a JQuery function that used 12.75\% of processing time, which might indicate a performance issue to be improved.}
+        \label{fig:webkit_profile}
+      \end{figure}
+
+      \begin{figure}
+        \begin{center}
+          \includegraphics[width=\textwidth]{webkit_audit.pdf}
+        \end{center}
+        \caption{Webkit Audit: 96\% of the CSS code is not being used indicates a issue to be solved.}
+        \label{fig:webkit_audit}
+      \end{figure}
+
+      \begin{figure}
+        \begin{center}
+          \includegraphics[width=\textwidth]{webkit_console.pdf}
+        \end{center}
+        \caption{Webkit Console: Javascript errors are reported there (and highlighted in red as well).}
+        \label{fig:webkit_console}
+      \end{figure}
+
+    \subsubsection{Gruntjs - gruntjs.com} % (fold)
+      \label{ssub:gruntjs}
+        Gruntjs is a Javascript task runner.
+        It allows to automate most of the repetitive tasks when developing a website.
+        Very useful for testing, compiling and code optimization.
+
+    \subsubsection{Npmjs - npmjs.org} % (fold)
+    \label{ssub:npm}
+      Package dependency manager for nodejs - Node Packaged Modules.
+      Node packages will be used, since Gruntjs plugins are all nodejs packages (as well as Grunt itself).
+
+      A npm configuration file (\emph{package.json}) allows to identify the packages that the application depends upon, as well as its versions.
+
+      Example: 
+
+      \lstinputlisting[caption={\emph{package.json}: "*" means that npm should always install the latest version of that package.}, style=htmlcssjs]{snippets/package.json}
+
+    \subsubsection{Bower - bower.io} % (fold)
+    \label{ssub:bower}
+    
+    Bower is also a package manager, but oriented for web front-end packages.
+
+    % subsection bower (end)
+
+    \subsubsection{vis.js - visjs.org} % (fold)
+    \label{ssub:visjs}
+      Javascript framework for visualization.
+      It provides a few visual components, including graphs.
+
+
+  \subsection{Requirements} % (fold)
+  \label{sub:requirements}
+  
+
+
+  % subsection requirements (end)
+
+  \subsection{Implemented Features} % (fold)
     \label{sub:main_features}
     
-    The main features of RAMA's Spotify Application are: visualization of a map of a network of connected artists; edition of the visualization parameters; edition of the graph (expand and new map functions); Tags overlay and music artist info.
+    The main implemented features of RAMA's Spotify Application are: visualization of a map of a network of connected artists; edition of the visualization parameters; edition of the graph (expand and new map functions); Tags overlay and music artist info.
 
     \subsubsection{Visulization of the Artists Map} % (fold)
       \label{ssub:visualization}
@@ -202,7 +325,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
 
       When the user selects a node by clicking on it, the artist menu updates the displayed information.
 
-      The \emph{popularity} and the \emph{albums} are metadata information retrieved from Spotify's API framework (\ref{ssub:spotify_apps}).
+      The \emph{popularity} and the \emph{albums} are metadata information retrieved from Spotify's API framework (\ref{sub:spotify_apps}).
       The tags, however, are not supported by Spotify's API.
       For that, Echonest's API was used.
 
@@ -216,7 +339,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
         http://developer.echonest.com/api/v4/artist/terms?api_key=API_KEY&format=json&sort=weight&id=spotify-WW:artist:65nZq8l5VZRG4X445F5kmN
       } \\
 
-      The \emph{id} parameter is similar to the Spotify's URI scheme (\ref{ssub:metadata_api}), and this allows for retrieving extra information about the artist that Spotify's API does not provide.
+      The \emph{id} parameter is similar to the Spotify's URI scheme (\ref{sub:metadata_api}), and this allows for retrieving extra information about the artist that Spotify's API does not provide.
 
       \emph{Sort} is another interesting parameter. 
       In general, artists have more than 10 or 15 terms.
@@ -313,6 +436,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
 \label{sec:validation}
 
   In order to validate the proposed method, user tests were done with Spotify users and non-Spotify Users.
+  They represent the second group testers and will be referred as the beta-testers.
 
   \subsection{User Tests} % (fold)
   \label{sub:user_tests}
@@ -322,11 +446,13 @@ By this point, the validation of the prototype will be analysed, by explaining t
 
     During the test, the user was asked to first use Spotify only.
     The task was to find a couple of new artists that the user liked.
-    This first task should take no more than 7 minutes.
+    This first task should take no more than 7 minutes, depending on the user.
 
-    Next, the user was asked to open the RAMA application and do the same.
-    
-    Given this, the user is forced to compare the two approaches: discovering new music with Spotify only, and discovering new music with RAMA's Spotify Application.
+    Next, the user was asked to open the RAMA application and do the same (no more than 10 minutes).
+    Given this, the user is forced to compare the two approaches: discovering new music with Spotify only, and discovering new music with RAMA's Spotify Application as a helper.
+
+
+
   
   % subsection user_tests (end)
 

@@ -45,15 +45,46 @@
 
   Given the existence of some restrictions when using some APIs\footnote{for example, LibspotifySDK (\url{https://developer.spotify.com/technologies/libspotify/}) requires the developer and the user of the application to have a premium account.}, there are several aspects to take into account when choosing which API to use. \\
 
+  The initial proposal was to develop a software module that implements, at least, one of the following features:
+
+  \begin{enumerate}
+    \item \label{intro:obj1} Integrate Spotify's music stream into RAMA's website
+    \item \label{intro:obj2} Integrate information from the Spotify user into RAMA
+    \item \label{intro:obj3} Improve RAMA's features and design
+    \item \label{intro:obj4} Integrate the RAMA concept into a Spotify Application
+    \item \label{intro:obj5} Integrate RAMA's playlist generation into a Spotify Application
+    \item \label{intro:obj6} Integrate some of the above mentioned modules into a Mobile Application
+  \end{enumerate}
+
   All possibilities will be explored with further detail in Chapter~\ref{chap:chap3}.
-  In the end, this dissertation proposes a Spotify Application\footnote{\url{https://developer.spotify.com/technologies/apps}} that works like a plugin to the Spotify's Desktop Client, i.e., it should add something to Spotify's Application.
+  In the end, this dissertation proposes a Spotify Application\footnote{\url{https://developer.spotify.com/technologies/apps}} (module~\ref{intro:obj4}) that works like a plugin to the Spotify's Desktop Client, i.e., it should add something to Spotify's Application.
   This is a very appealing solution: Spotify Users will have the chance to continue using Spotify as they would normally do, but with an extra help to discover new music by using RAMA's application \emph{inside} Spotify. 
-  This method works on the assumption that Spotify's music discovery mode can be improved using a visual tool like rama. \\
+  This method works on the assumption that Spotify's music discovery mode can be improved using a visual tool like RAMA. \\
 
   After specifying the requirements, a prototype will be developed.
   This approach urges to answer the following question: Will a Spotify User experience a more pleasant and natural way of music discovery from this graphical representation of artist relations within Spotify, than its standard discovery mode?
 
   To answer that question and to evaluate and validate the final prototype, end-user testing will be done to compare Spotify's users experience of discovering new music with or without the developed application.
+
+
+\section{Requirements}
+\label{sec:requirements}
+
+  This application is meant to be an extra mode for discovering new music in Spotify.
+
+  This way, a visual representation of an artist network with a graph, similar to RAMA, is proposed.
+
+  The application runs inside the Spotify environment (Spotify's Desktop Client) were its main features are: 
+
+  \begin{itemize}
+    \item visualization of relations between artists;
+    \item edition of the visualization parameters (branching and depth);
+    \item edition of the graph by expanding and deleting the nodes;
+    \item visualize tags/genres (that describe an artist) in the graph representation.
+  \end{itemize}
+
+  These are the minimum requirements that the application must implement.
+
 
 \section{Methodologies} % (fold)
 \label{sec:methodologies}
@@ -68,37 +99,10 @@
     \item[Implementation and Validation (Chapter~\ref{chap:chap4})] \hfill \\
       Definition and implementation of: the prototype's main features/requirements; the development processes and the user validation processes.
     \item[Future Work (Chapter~\ref{chap:chap5})] \hfill \\
-      Definition of future work to be done in the prototype (improvements, features, bugs, etc).
+      Discussion of the results and definition of future work to be done in the prototype (improvements, features, bugs, etc).
   \end{description}
 
 % section methodologies (end)
-
-\section{Project Requirements}
-\label{sec:proj}
-
-  This application is meant to be an extra mode for discovering new music in Spotify.
-
-  This way, a visual representation of an artist network with a graph, similar to RAMA, is proposed.
-
-  The application runs inside the Spotify environment (Spotify's Desktop Client) were its main features are: visualization of relations between artists; edition of the visualization parameters (branching and depth); edition of the graph by expanding and deleting the nodes; visualize tags/genres (that describe an artist) in the graph representation.
-
-  The main tools used in the development of the application were:
-
-  \begin{description}
-    \item[Spotify Desktop Client] \hfill \\
-      The developed application is integrated in the Spotify's desktop client.
-    \item[Webkit Development Tools - webkit.org] \hfill \\
-      This is the engine used to run Spotify Applications.
-    \item[Npmjs - npmjs.org] \hfill \\
-      Package manager for development dependencies.
-    \item[Bower - bower.io] \hfill \\
-      Package manager for runtime dependencies.
-    \item[Gruntjs - gruntjs.com] \hfill \\
-      Manager for automating tasks. Very usefull for tests, code optimization and other repetitive tasks.
-    \item[Vis.js - visjs.org] \hfill \\
-      Visualization framework.
-  \end{description}
-
 
 \section{Dissertation Structure} \label{sec:struct}
 

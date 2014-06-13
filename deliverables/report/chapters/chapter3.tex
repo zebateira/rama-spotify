@@ -1,12 +1,11 @@
 %!TEX root = ../report.tex
 
-\chapter{Context}
+\chapter{Contextualization}
 \label{chap:chap3}
 
 \section*{}
 
 The primal objective of this dissertation, as referred in chapter \ref{chap:intro}, is to develop one or more software modules that will improve Spotify Users' music discovery and recommendation experience using visual tools to represent the music artists' relations and Spotify's streaming service to provide high quality music stream.
-
 
 The initial proposal was to develop a module that implements, at least, one of the following features:
 
@@ -38,7 +37,6 @@ The prototype should pursue the objective of contributing to an improved user ex
   Spotify is a Music Streaming Service that allows the user, through an Internet connection, to listen to any track (if available in the user's country) in Spotify's catalogue.
   The service was launched in 2008 with a native desktop client application.
 
-  % clients available: desktop client, webplayer and mobile apps
   Now, the service has several types of clients available to the users: desktop client, webplayer and mobile applications.
 
   \begin{description}
@@ -47,14 +45,14 @@ The prototype should pursue the objective of contributing to an improved user ex
     \item[\textbf{Mobile Applications}] The mobile applications are available for Android and iOS devices.
   \end{description}
 
-  \subsection{Development Tools} % (fold)
-  \label{sub:devtools}
+  \section{Development Tools} % (fold)
+  \label{sec:devtools}
   
     Spotify provides a set of tools\footnote{\url{http://developer.spotify.com/technologies}} to develop Third-party Applications (websites, native applications and mobile applications) and Spotify Applications (that run inside Spotify's Desktop Client).
     There are five tools, each with different purposes.
 
-    \subsubsection{Spotify Apps} % (fold)
-    \label{ssub:spotify_apps}
+    \subsection{Spotify Apps} % (fold)
+    \label{sub:spotify_apps}
       Spotify Applications\footnote{\url{https://developer.spotify.com/technologies/apps}} are a special case in the whole set of tools provided by Spotify.
       These applications are designed to run \emph{inside} the Desktop Client.
       Hence, its development is also inside the same environment.
@@ -100,8 +98,8 @@ The prototype should pursue the objective of contributing to an improved user ex
     % subsubsection spotify_apps (end)
 
 
-    \subsubsection{Spotify Widgets} % (fold)
-    \label{ssub:spotify_widgets}
+    \subsection{Spotify Widgets} % (fold)
+    \label{sub:spotify_widgets}
 
       Spotify Widgets\footnote{\url{https://developer.spotify.com/technologies/widgets}} are small web components that can be embedded in external websites.
       Spotify provides two components: \emph{Play Button} (\ref{fig:spotify_play_button}) and a \emph{Follow Button} (\ref{fig:spotify_follow_button})
@@ -139,15 +137,15 @@ The prototype should pursue the objective of contributing to an improved user ex
 
     % subsubsection spotify_widgets (end)
 
-    \subsubsection{Libspotify SDK} % (fold)
-    \label{ssub:libspotify_sdk}
+    \subsection{Libspotify SDK} % (fold)
+    \label{sub:libspotify_sdk}
 
       Libspotify SDK\footnote{\url{https://developer.spotify.com/technologies/libspotify}} is an API that allows for third-party applications to include Spotify's services into them.
       However, not without some limitations to the users of these applications.
       The users are limited depending on the type of Spotify Subscription that they have signed up to.
 
       There are three different types of subscriptions, but the important part to retain, is the difference between being a Free Subscription Spotify User, and a Paid Subscription Spotify User (premium and unlimited subscriptions).
-      As mentioned before (\ref{ssub:spotify_widgets}), only Spotify users can interact with the widgets.
+      As mentioned before (\ref{sub:spotify_widgets}), only Spotify users can interact with the widgets.
       That also applies to third-party applications that are using Libspotify SDK, which allow, for example, the user to login with their Spotify account.
       But in this case, not only they need to be Spotify users, they also need to have signed up to a paid Spotify subscription.
       And not only do the users need to pay to use the Spotify-powered application, but the developers as well.
@@ -160,8 +158,8 @@ The prototype should pursue the objective of contributing to an improved user ex
     % subsubsection libspotify_sdk (end)
 
 
-    \subsubsection{Metadata API} % (fold)
-    \label{ssub:metadata_api}
+    \subsection{Metadata API} % (fold)
+    \label{sub:metadata_api}
 
       The \emph{Metadata API}\footnote{\url{https://developer.spotify.com/technologies/web-api}} allows for applications to retrieve information from Spotify's music catalogue: tracks, albums, artists, playlists, and so on.
 
@@ -225,8 +223,8 @@ The prototype should pursue the objective of contributing to an improved user ex
 
     % subsubsection metadata_api (end)
 
-    \subsubsection{iOS SDK (beta)} % (fold)
-    \label{ssub:ios_sdk}
+    \subsection{iOS SDK (beta)} % (fold)
+    \label{sub:ios_sdk}
     
     The iOS SDK supports iOS Application developers. Although still in beta\footnote{\url{https://developer.spotify.com/technologies/spotify-ios-sdk}}, this tool would be used to develop the proposed module \ref{item:obj6}.
     Much like the Libspotify SDK, this SDK provides the following APIs:
@@ -242,8 +240,8 @@ The prototype should pursue the objective of contributing to an improved user ex
 
   % subsection devtools (end)
 
-  \subsection{Experiments} % (fold)
-  \label{sub:experiments}
+  \section{Experiments} % (fold)
+  \label{sec:experiments}
 
     On a first hands-on experience with these tools, a single-page website was developed which allows the users to search and listen to music using Spotify's \emph{Metadata API} and \emph{Widgets}: \\
 
@@ -309,130 +307,7 @@ The prototype should pursue the objective of contributing to an improved user ex
 
   % subsection experiments (end)
 
-  \subsection{Conclusion} % (fold)
-  \label{sub:conclusion}
-
-    The developed prototype \ref{fig:rama_spotifyed} revealed to be the most appropriate to well integrate Spotify and RAMA.
-
-    Given that, the proposed modules developed are \ref{item:obj4} and \ref{item:obj5}.
-
-  % subsection conclusion (end)
-
 % section spotify (end)
-
-\section{Technologies used} % (fold)
-\label{sec:technologies}
-
-  The following technologies were used during the development of the application.
-
-  \subsection{Spotify Desktop Client} % (fold)
-  \label{sub:subsection_name}
-    Spotify Applications are developed in its runtime environment - the Spotify Desktop Client.
-
-    To open a Spotify Application, locally, one writes the following in the search bar: spotify:app:rama
-
-    Where \emph{rama} is the application identifier declared in the \emph{manifest.json} file\footnote{file located at the root of the project folder}.
-
-    Example:
-
-    \lstinputlisting[caption={manifest.json: \emph{BundleIdentifier} is the application's identifier; \emph{Dependencies} declares the Application's API dependencies.}, style=htmlcssjs]{snippets/manifest.json}
-
-    There are useful options for development located in the "Develop" tab (\ref{fig:html5_support}).
-    The "Show Inspector" option opens the \emph{Webkit Development Tools} (\ref{sub:webkit_tools}) window.
-
-    \begin{figure}[tb]
-      \begin{center}
-        \includegraphics[width=\textwidth]{html5_support.pdf}
-      \end{center}
-      \caption{\emph{Develop} Tab}
-      \label{fig:html5_support}
-    \end{figure}
-  
-  \subsection{Webkit Development Tools - webkit.org} % (fold)
-  \label{sub:webkit_tools}
-
-    The webkit tools provides a bundle of tools for web development.
-
-    \begin{figure}
-      \begin{center}
-        \includegraphics[width=\textwidth]{webkit_inspector.pdf}
-      \end{center}
-      \caption{Webkit: \emph{Inspector} tab view. Other tools available: \emph{Resources, Network, Sources, Timeline, Profiles, Audits} and \emph{Console}.}
-
-      \label{fig:webkit_inspector}
-    \end{figure}
-
-    Being the most important:
-
-    \begin{description}
-      \item[Inspector] Allows to inspect the resulting Html and CSS and edit the code and see the application automatically reflect those changes (\ref{fig:webkit_inspector}).
-      \item[Network] Shows a timeline list of resources that where loaded from external sources (sometimes local) (\ref{fig:webkit_network}).
-      \item[Profile] Allows to identify which parts of the javascript code are being executed frequently, and which ones might be creating a performance issue (\ref{fig:webkit_profile}).
-      \item[Audit] Helps to understand which CSS rules are not being used (\ref{fig:webkit_audit}).
-      \item[Console] Javascript interpreter that also works as the log output for the application (\ref{fig:webkit_console}).
-
-    \end{description}
-
-    \begin{figure}
-      \begin{center}
-        \includegraphics[width=\textwidth]{webkit_network.pdf}
-      \end{center}
-      \caption{Webkit Network}
-      \label{fig:webkit_network}
-    \end{figure}
-
-    \begin{figure}
-      \begin{center}
-        \includegraphics[width=\textwidth]{webkit_profile.pdf}
-      \end{center}
-      \caption{Webkit Profile: Canvas render functions are the ones taking up most of the processing cycles. However there is a JQuery function that used 12.75\% of processing time, which might indicate a performance issue to be improved.}
-      \label{fig:webkit_profile}
-    \end{figure}
-
-    \begin{figure}
-      \begin{center}
-        \includegraphics[width=\textwidth]{webkit_audit.pdf}
-      \end{center}
-      \caption{Webkit Audit: 96\% of the CSS code is not being used indicates a issue to be solved.}
-      \label{fig:webkit_audit}
-    \end{figure}
-
-    \begin{figure}
-      \begin{center}
-        \includegraphics[width=\textwidth]{webkit_console.pdf}
-      \end{center}
-      \caption{Webkit Console: Javascript errors are reported there (and highlighted in red as well).}
-      \label{fig:webkit_console}
-    \end{figure}
-
-  \subsection{Gruntjs - gruntjs.com} % (fold)
-    \label{sub:gruntjs}
-      Gruntjs is a Javascript task runner.
-      It allows to automate most of the repetitive tasks when developing a website.
-      Very useful for testing, compiling and code optimization.
-
-  \subsection{Npmjs - npmjs.org} % (fold)
-  \label{sub:npm}
-    Package dependency manager for nodejs - Node Packaged Modules.
-    Node packages will be used, since Gruntjs plugins are all nodejs packages (as well as Grunt itself).
-
-    A npm configuration file (\emph{package.json}) allows to identify the packages that the application depends upon, as well as its versions.
-
-    Example: 
-
-    \lstinputlisting[caption={\emph{package.json}: "*" means that npm should always install the latest version of that package.}, style=htmlcssjs]{snippets/package.json}
-
-  \subsection{Bower - bower.io} % (fold)
-  \label{sub:bower}
-  
-  Bower is also a package manager, but oriented for web front-end packages.
-
-  % subsection bower (end)
-
-  \subsection{vis.js - visjs.org} % (fold)
-  \label{sub:visjs}
-    Javascript framework for visualization.
-    It provides a few visual components, including graphs.
 
 \section{Summary}
 
