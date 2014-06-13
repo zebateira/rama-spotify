@@ -422,7 +422,7 @@ a {
 /* line 73, ../sass/_settings.scss */
 #settings #settings_form .option input {
   padding: 2px;
-  width: 30px;
+  max-width: 30px;
   float: right;
   background-color: #222326;
   border-width: 1px;
@@ -432,6 +432,7 @@ a {
 #settings #settings_form .option input[name=treemode] {
   margin-top: 5px;
   margin-left: 5px;
+  float: left;
 }
 
 /* line 1, ../sass/_eqbar.scss */

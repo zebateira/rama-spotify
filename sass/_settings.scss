@@ -72,7 +72,7 @@
       }
       input {
         padding: 2px;
-        width: 30px;
+        max-width: 30px;
         float: right;
         background-color: $new-bg;
         border-width: 1px;
@@ -81,6 +81,7 @@
         &[name=treemode] {
           margin-top: 5px;
           margin-left: 5px;
+          float: left;
         }
       }
       
