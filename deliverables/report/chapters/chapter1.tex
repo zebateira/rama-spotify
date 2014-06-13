@@ -11,70 +11,75 @@
   Not so long ago, before the Internet boom, listening or discovering new music was a challenge on its own.
   Now, with a few clicks one can have on their hands such a vast music catalogue that a human mind is not able to compute.
 
-  There is an uncountable number of online services that offer exactly that.
-  Some focus on creation/generation of playlists, others try to expand their music catalogue even further, while others focus more on personalized music recommendations.
-  Most of these, present their results to the user with a list or a grid of music artists, for example.
+  There is an uncountable number of music streaming services that offer exactly that\footnote{Although some of them require the users to subscribe to a monthly fee, for example, in order to fully use the service, or remove the advertisements.}.
+  These services are, mostly, web based, although some offer desktop applications.
+  They allow the users to play music, save their collection, create playlists and much more.
+  Most of these services also have social components that allow the users to share what they're listening to with their friends, as well as playlists and much more.
 
-  % TODO give some examples of services
-  % what is Spotify?
-
-  However, lists or grids do not give the user enough information about the relation between the results \cite{Lamere2008}.
+  There is always something that makes a music streaming service different from the others.
+  Some services focus on creation/generation of playlists (8tracks\footnote{\url{http://8tracks.com}}), others try to expand their music catalogue even further (Spotify\footnote{\url{http://spotify.com}}, Rdio\footnote{\url{rdio.com}}), while others focus more on personalized music recommendations (Pandora\footnote{\url{pandora.com}}).
+  The latter ones, present their music recommendations to the user with a list or a grid of music artists, for example.
+  However, lists do not provide the user enough information about the relation between the results \cite{Lamere2008}.
   One could even say that they are not related to each other, which is not true.
+  
+  The relations exist and can be represented as a network of interconnected artists in a graph, where a node is a music artist, and each edge between them represents a connection.
+  This is the concept that RAMA (Relational Artist MAps), a project developed at INESC Porto, uses \cite{Costa2008} \cite{Sarmento2009} \cite{Costa2009} \cite{Gouyon2011}.
 
-  The relations exist and can be represented as a network of interconnected artists in a graph, where a node is a music artist, and each edge between them represents a strong connection.
-  This is the concept that RAMA (Relational Artist MAps), a project developed at INESC Porto, uses. \cite{Costa2008} \cite{Sarmento2009} \cite{Costa2009} \cite{Gouyon2011}
+  The concept is not new, and in Chapter~\ref{chap:chap2} some services that use visual tools will be analysed in detail.
+
 
 \section{Motivation and Goals} \label{sec:goals}
-
-  % explain the need for the research
-  % and the originality of the proposal
 
   From a single search, RAMA draws a graph that helps the user to explore new music that might caught his/her interest in a much more natural way.
 
   Nonetheless, when a user wants to listen to an artist's music, Youtube's stream is used.
   Although one can find a large catalogue of music in Youtube, this service is not music oriented and the sound quality is not adequate for a music streaming service.
 
-  Youtube's stream needs to be replaced, and Spotify\footnote{\url{http://spotify.com}} can provide a quality stream and an accurate music catalogue.
+  Youtube's stream needs to be replaced.
+  From the available services that provide a vast music catalogue, Spotify\footnote{\url{http://spotify.com}} provides a good quality stream and a good developer support for creating Spotify powered Applications.
 
   But how can RAMA and Spotify be integrated? \\
 
-  Several possibilities were analysed.
+  There are several possibilities that Spotify has made available for developers\footnote{\url{https://developer.spotify.com}} that can help to improve RAMA's concept.
+  From websites, mobile applications, native applications and even plugins for the Spotify Desktop Client, Spotify's API is very complete.
 
-  \begin{description}
-    \item[Spotify Play Button\footnote{\url{https://developer.spotify.com/technologies/widgets/spotify-play-button/}}] \hfill \\
-      A Spotify widget that can be embedded in RAMA. 
-    \item[Integrate Spotify User's profile data in RAMA] \hfill \\
-      To help complement artist recommendations.
-    \item[Spotify App\footnote{\url{https://developer.spotify.com/technologies/apps/}}] \hfill \\
-      A plugin to Spotify's desktop client
-  \end{description}
+  Given some limitations when using some APIs\footnote{for example, LibspotifySDK (\url{https://developer.spotify.com/technologies/libspotify/}) requires the developer and the user of the application to have a premium account.}, there are several aspects to take into account when choosing which API to use. \\
 
-  % TODO Why no play button?
-  % why no spotify into rama?
-  This dissertation proposes a Spotify App.
-  Will a Spotify user experience a more pleasant and natural way of music discovery from this graphical representation of artist relations within Spotify, than its standard discovery mode (with lists)?
+  In the end, this dissertation proposes a Spotify Application\footnote{\url{https://developer.spotify.com/technologies/apps}} that works like a plugin to the Spotify's Desktop Client, i.e., it should add something to Spotify's Application.
+  This is a very appealing solution: Spotify Users will have the chance to continue using Spotify as they normally would, but with an extra help to discover new music by using RAMA's application \emph{inside} Spotify. 
+  This method works on the assumption that Spotify's music discovery mode can be improved using a visual tool.
+  The reasons for the final decision will be explained with further detail in Chapter~\ref{chap:chap3}. \\
 
-  That is the main question that this dissertation urges to answer.
+  This approach urges to answer the following question: Will a Spotify user experience a more pleasant and natural way of music discovery from this graphical representation of artist relations within Spotify, than its standard discovery mode (with lists)?
 
-  Moreover, to evaluate and validate the final product, end-user testing will be done to compare Spotify's user experience with the developed application. 
+  To answer that question and to evaluate and validate the final prototype, end-user testing will be done to compare Spotify's user experience with the developed application.
 
 \section{Methodologies} % (fold)
 \label{sec:methodologies}
+  
+  The proposed work phases contemplate:
 
-  % requirements
-  % work plan (implementations)
-  % sota
+  \begin{description}
+    \item[State of the Art (Chapter~\ref{chap:chap2})] \hfill \\
+      Initial research on the current state of the art.
+    \item[Contextualization (Chapter~\ref{chap:chap3})] \hfill \\
+      Detailed analysis of the Spotify environment from the user perspective (applications available, e.g.) and the developer perspective (available APIs, e.g.) in order to determine the feasibility  prototype's requirements.
+    \item[Implementation and Validation (Chapter~\ref{chap:chap4})] \hfill \\
+      Definition and implementation of: the prototype's main features/requirements; the development processes and the user validation processes.
+    \item[Future Work (Chapter~\ref{chap:chap5})] \hfill \\
+      Definition of future work to be done in the prototype (improvements, features, bugs, etc).
+  \end{description}
 
 % section methodologies (end)
 
 \section{Project Requirements}
 \label{sec:proj}
 
-  The app is meant to be an extra mode for discovering new music in Spotify.
+  This application is meant to be an extra mode for discovering new music in Spotify.
 
   This way, a visual representation of an artist network with a graph, similar to RAMA, is proposed.
 
-  The application runs inside the Spotify environment (Spotify's Desktop Client) where its main features are: visualization of relations between artists, starting by the current playing artist; ability to grow the graph by expanding nodes; visualize tags (that describe an artist) in the graph representation.
+  The application runs inside the Spotify environment (Spotify's Desktop Client) were its main features are: visualization of relations between artists; edition of the visualization parameters (branching and depth); edition of the graph by expanding and deleting the nodes; visualize tags/genres (that describe an artist) in the graph representation.
 
   The main tools used in the development of the application were:
 
@@ -104,4 +109,4 @@
 
   In chapter \ref{chap:chap4}, a more detailed explanation about the developed prototype will be given, as well as some challenges and problems encountered during the development process.
 
-  Chapter \ref{chap:concl} concludes this report.
+  Chapter \ref{chap:chap5} concludes this report.
