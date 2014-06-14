@@ -22,14 +22,14 @@ The first three functionalities (\ref{item:obj1}, \ref{item:obj2} and \ref{item:
 Whereas \ref{item:obj4} and \ref{item:obj5} aim to integrate RAMA's concept into Spotify, through a Spotify Application (it would work as a plugin to Spotify's Desktop Client).
 The last one (\ref{item:obj6}) would focus on implementing the previous functionalities into an Android, iOS or Windows Phone Application.
 
-This chapter aims to analyse every single drawback of each possibility that affects the choice of which modules do develop, and on which environments it fits better: Spotify Application, Mobile Application, or RAMA improvements.
+This chapter aims to analyse every single drawback of each possibility that affects the choice of which modules do develop, and on which environments it fits better: Spotify Application, Mobile Application, or RAMA improvements. \\
 
-At first, Spotify's development environment will be introduced \ref{sec:spotify} in order to assess which tools are available for developers.
-Next, the available tools will be evaluated in order to determine which ones fit the proposed modules to be developed, mostly, through experiments. 
+At first, Spotify's user environment will be introduced (\ref{sec:spotify}), followed by Spotify's Development Tools (\ref{sec:devtools}) in order to assess which tools are available for developers.
+Next, the available tools will be evaluated, through experiments (\ref{sec:experiments}), in order to determine which ones fit the proposed modules better.
 
 By the end of this chapter the modules developed should be clearly stated, as well as which tools were used in the prototype.
 
-The prototype should pursue the objective of contributing to an improved user experience when discovering new music taking advantage of visual tools that implement RAMA's concept.
+The prototype should pursue the objective of contributing to an improved user experience of discovering new music by taking advantage of visual tools that implement RAMA's concept.
 
 \section{Introducing Spotify} % (fold)
 \label{sec:spotify}
@@ -93,7 +93,7 @@ The prototype should pursue the objective of contributing to an improved user ex
       The first one provides an interface to use object models, access metadata, control the player, among others.
       The second offers support for web components like buttons, lists, tabs, among others.
 
-      In order to develop the proposed modules \ref{item:obj4} and \ref{item:obj5}, these are the most appropriate tools.
+      In order to develop the proposed modules \ref{item:obj4} and \ref{item:obj5}, the prototype will be a Spotify Application for RAMA.
 
     % subsubsection spotify_apps (end)
 
@@ -112,7 +112,7 @@ The prototype should pursue the objective of contributing to an improved user ex
         \label{fig:spotify_play_button}
       \end{figure}
 
-      \begin{figure}
+      \begin{figure}[t]
         \begin{center}
           \includegraphics{spotify_follow_button.pdf}
         \end{center}
@@ -127,7 +127,7 @@ The prototype should pursue the objective of contributing to an improved user ex
       This limitation does make sense in the case of the \emph{Follow Button}, but the \emph{Play Button} becomes useless to non-spotify users.
 
       In truth, these widgets are nothing but an hyperlink to a Spotify Client (Web Player or Desktop).
-      With the Play Button, the stream of tracks always played inside Spotify's environment, and not on external applications.
+      With the Play Button, the stream of tracks always plays inside Spotify's environment, and not on external applications.
 
       To embed a widget, it is only required to copy-paste Html code into the website, where appropriate:
 
@@ -145,7 +145,7 @@ The prototype should pursue the objective of contributing to an improved user ex
       The users are limited depending on the type of Spotify Subscription that they have signed up to.
 
       There are three different types of subscriptions, but the important part to retain, is the difference between being a Free Subscription Spotify User, and a Paid Subscription Spotify User (premium and unlimited subscriptions).
-      As mentioned before (\ref{sub:spotify_widgets}), only Spotify users can interact with the widgets.
+      As mentioned before, only Spotify users can interact with Spotify Widgets (\ref{sub:spotify_widgets}).
       That also applies to third-party applications that are using Libspotify SDK, which allow, for example, the user to login with their Spotify account.
       But in this case, not only they need to be Spotify users, they also need to have signed up to a paid Spotify subscription.
       And not only do the users need to pay to use the Spotify-powered application, but the developers as well.
@@ -210,8 +210,9 @@ The prototype should pursue the objective of contributing to an improved user ex
 
         \item[\emph{Lookup}] \hfill \\
 
-          When the URI is known, one can finally lookup detailed information about a database item. With the following \emph{query}: \\
-          \url{http://ws.spotify.com/lookup/1/.json?uri=spotify:artist:3MLPFTe4BrpEV2eOVG0gLK}
+          When the URI is known, one can finally lookup detailed information about a database item. With the following query: \\
+
+          \url{http://ws.spotify.com/lookup/1/.json?uri=spotify:artist:3MLPFTe4BrpEV2eOVG0gLK&extras=album}
 
           The server responds with:
 
@@ -269,8 +270,7 @@ The prototype should pursue the objective of contributing to an improved user ex
 
     \end{figure}
 
-    Both tools turned out to be well documented and easy to use.
-
+    Both tools turned out to be well documented and easy to use. \\
 
     Another experiment was made in order to assert the potential of Spotify Applications.
     There was a need to know if the canvas element was well supported by Spotify's environment, because that is the preferred way to graphically draw a graph.
@@ -311,7 +311,7 @@ The prototype should pursue the objective of contributing to an improved user ex
 
 \section{Summary}
 
-  The final choice is to develop the Spotify Application.
+  The most appropriate solution is to develop the Spotify Application.
 
   Although the other proposals were also doable, the possibility to integrate a RAMA-like interface into Spotify's Desktop Client leaves a Spotify User more at ease with the environment.
 
