@@ -22,5 +22,8 @@
     "en"
   ],
   "VendorIdentifier": "pt.inescporto",
-  "RequiredPermissions": ["http://developer.echonest.com"]
+  "RequiredPermissions": ["http://developer.echonest.com"],
+  "AppIcon": {
+    "18x18": "img/ramalogo-18x18.png"
+  }
 }
