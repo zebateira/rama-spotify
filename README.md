@@ -4,9 +4,10 @@ RAMA - Relational Artist MAps
 
 RAMA is a Spotify Application for visualizing and interacting with networks of music artists. For the original RAMA web application see [rama.inescporto.pt]
 
-Here's a preview of what this app does:
+Here are some previews of what this app does:
 
-![Demo](http://i.imgur.com/TDsr6kl.gif)
+![Demo](demo2.gif)
+![Demo 2](demo.gif)
 
 For now, I do not intend to make this application available on the Spotify App Store, so to run it you need to set it up first.
 
