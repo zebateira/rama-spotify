@@ -180,6 +180,14 @@ By this point, the validation of the prototype will be analysed, by explaining t
       ]
       {snippets/map_creation_alg.js}
 
+      The maximum number of nodes that the graph might have, can be calculated like so:
+
+      \begin{equation}
+          \sum_{i=0}^{d} b ^ i
+      \end{equation}
+
+      Given $d$ to be the depth value and $b$ the branching value of the graph.
+
       This algorithm, albeit simplified, represents the basic flow when constructing a graph, or more specifically, a tree.
       Since that, in this case of study, the direction of the edges of the graph is not relevant in any way to the artists' map, all of the edges are considered to be undirected.
 
@@ -425,6 +433,16 @@ By this point, the validation of the prototype will be analysed, by explaining t
     A timeline (chronological order from bottom to top) with the added features (each update release) can be seen in \\ 
     \indent \url{https://github.com/carsy/rama-spotify/releases} \\
 
+    An overview of pushed commits can be viewed in Figure~\ref{fig:code_contributions}.
+
+    \begin{figure}
+      \begin{center}
+        \includegraphics[width=\textwidth]{code_contributions.pdf}
+      \end{center}
+      \caption{Graph showing the number of commits to the project from January to June, 2014. All of the development code was hosted in \url{Github.com}. Adapted from \url{https://github.com/carsy/rama-spotify/graphs/contributors}}
+      \label{fig:code_contributions}
+    \end{figure}
+
     Unit tests were added for each feature.
     The tests were run locally to ensure that previous features were still working during development.
     Also to ensure that every release had the tests passing, the project was integrated in Travis's Continuous Integration\footnote{Travis: \url{http://travis-ci.org}} system: \\
@@ -438,17 +456,6 @@ By this point, the validation of the prototype will be analysed, by explaining t
     This was the testing cycle that allowed to validate the implemented features.
     This iterative process was managed using the issue tracking system of Github\footnote{Github: \url{http://github.com}}: \url{https://github.com/carsy/rama-spotify/issues}.
     Given this iterative process of implementation and feedback, the solution would be better prepared for future occasional beta-testing.
-
-    An overview of the code growth can be viewed in Figure~\ref{fig:code_progress}.
-
-    \begin{figure}
-      \begin{center}
-        \includegraphics[width=\textwidth]{code_progress.pdf}
-      \end{center}
-      \caption{Graph showing the additions and deletions of lines of code to the project from February to June, 2014. All of the development code was hosted in \url{Github.com}. Adapted from \url{https://github.com/carsy/rama-spotify/graphs/code-frequency}}
-      \label{fig:code_progress}
-    \end{figure}
-
     
     % TODO compare with the previous work plan
 
@@ -593,7 +600,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
 
 \section{Summary} % (fold)
 
-  
+
 
 
 % section summary (end)
