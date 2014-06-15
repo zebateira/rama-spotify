@@ -33,19 +33,60 @@
 \section{Discussion} % (fold)
 \label{sec:discussion}
 
+  By introducing a visual tool into a complete service like Spotify, the users felt that their experience with RAMA's application improved their abilities to find new music.
+  The tests' results show that RAMA's Spotify Application is a successful approach to music discovery and recommendation.
 
-  % results discussion
+  Although, the final results point in that direction, after the experiments, 3 beta-testers stated that their music listening habits are not focused on the music artists they are listening to. Instead, they simply pay attention to the songs (mostly, the popular ones), and so, their playlists are track-driven, not artist-driven.
+  That might have had presented a problem to those users, since the focus of RAMA is the relations between the artists.
+  However, Spotify's API's recommendation system proved to please those users, which started to pay more attention to the name of the artists they listen to. \\
+
+  Services like Spotify or Rdio, offer a complete set of features that range between playing every track on their catalogue, to saving albums for offline mobile listening.
+  With such a vast music catalogue, the user might feel lost and not very motivated to find new music.
+  Although these services continue to add features like Spotify's "Radio"\footnote{Spotify's Radio mode: \\
+  \url{http://news.spotify.com/us/2011/12/09/discover-the-new-spotify-radio} \\ allows the user to listen to a automatically generated playlist.}, the user finds it hard to compute such a large world of available music.
+
+  By introducing this visual aid to music artist's relations, RAMA succeeds in letting the user explore the whole spectrum of available music.
 
 % section discussion (end)
 
 \section{Future Work} % (fold)
 \label{sec:future_work}
 
+  From the developed work so far, the need for a more segmented testing might have been called for, in order to improve the results obtained, as well to better understand the user's needs. \\
 
+  During the prototype's development and the beta-testing experiments, there were several additional features suggested for RAMA's Spotify Application.
+  Most of them were not included in the prototype because of the limited time frame for development, while others seemed to stray from RAMA's focus.
+  Nonetheless, every idea is important and might someday contribute for RAMA's future features.
 
-% more tests (and more segmented)
-% use more external databases to improve user experience
-% all of the other features from the feedback form
-% and the smc group
+  \paragraph*{Make it clear that the tags are clickable to the user} \hfill \\
+  \indent Some users complained that it was not apparent at first that the upper tags were clickable, they thought it was just an extra information, not something they could interact with.
+
+  \paragraph*{Allow to click-and-hold to preview listening to an artist} \hfill \\
+  \indent This Spotify feature could be applied to the nodes so that the user could browse the graph much faster. \\
+
+  \paragraph*{Select multiple artist or tags} \hfill \\
+  \indent Allow the user to select multiple artists (or tags), in order to, for example, generate playlists from that selection.
+
+  \paragraph*{Let the graph update automatically with the current playing artist} \hfill \\
+  \indent In order to keep RAMA more alive, the graph would refresh automatically when a new artist starts playing, with the new updated artist as root.
+  Maybe an option to keep the graph "locked" would allow the user choose if it wants that behaviour or not.
+
+  \paragraph*{Improve the connection between the artists and the tags} \hfill \\
+  \indent Although the communication between the two used databases (Spotify's and Echonest's) went very smoothly, ... \\
+  % last.fm can help here
+
+  \paragraph*{Improve the choice of artists to add to the graph} \hfill \\
+  \indent The blind trust in Spotify's recommendations might not be ... \\
+  % last.fm can help here as well
+
+  \paragraph*{Include an alternate view with tags as nodes, instead of nodes} \hfill \\
+  \indent Some users suggested that... \\
+
+  \paragraph*{Tag mind map} \hfill \\
+  \indent \\
+
+  \paragraph*{Cluster groups of artists} \hfill \\
+  \indent Cluster groups of artist to create a geographical representation of what the entire network of available artists would be like. \\
+
 
 % section future_work (end)
