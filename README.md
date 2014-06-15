@@ -135,13 +135,13 @@ If not, restart Spotify and then open the app by typing spotify:app:rama in the 
 #### Author
 
 José Bateira
-[@\_carsy\_]
+[@zebateira]
 
 [carsy.github.io]
 
 [rama.inescporto.pt]:http://rama.inescporto.pt
 [carsy.github.io]:http://carsy.github.io
-[@\_carsy\_]:http://twitter.com/_carsy_
+[@zebateira]:http://twitter.com/zebateira
 [here]:https://github.com/carsy/rama-spotify/releases/latest
 [Releases]:https://github.com/carsy/rama-spotify/releases/latest
 [issues]:https://github.com/carsy/rama-spotify/issues
