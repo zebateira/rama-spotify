@@ -71,22 +71,25 @@
   \indent In order to keep RAMA more alive, the graph would refresh automatically when a new artist starts playing, with the new updated artist as root.
   Maybe an option to keep the graph "locked" would allow the user choose if it wants that behaviour or not.
 
+
+  \paragraph*{Improve artists recommendation} \hfill \\
+  \indent The blind trust in Spotify's recommendations might not be so desirable.
+  Although the results are satisfactory, without knowing the reasons behind those choices of connections, the artists recommendations become inflexible.
+  To improve this, one could fully use Echonest's API to fetch the similar artists\footnote{similar artists query: \url{http://developer.echonest.com/docs/v4/artist.html\#similar}}.
+  The amount of query personalization is much more attractive than spotify's. \\
+
   \paragraph*{Improve the connection between the artists and the tags} \hfill \\
-  \indent Although the communication between the two used databases (Spotify's and Echonest's) went very smoothly, ... \\
-  % last.fm can help here
+  \indent As an improvement of the previous idea, the connections between the artists and the overlaying tags could become more related, and so, the intersection of tags between artists could be used to improve the recommendations (creation of connections).  \\
 
-  \paragraph*{Improve the choice of artists to add to the graph} \hfill \\
-  \indent The blind trust in Spotify's recommendations might not be ... \\
-  % last.fm can help here as well
+  \paragraph*{Include an alternate view with tags as nodes, instead of artists} \hfill \\
+  \indent Some users suggested that the tags overlay was an interesting point of view, and so, if the graph could be drawn using the tags instead, the resulting map could be an alternative view of the application. \\
 
-  \paragraph*{Include an alternate view with tags as nodes, instead of nodes} \hfill \\
-  \indent Some users suggested that... \\
-
-  \paragraph*{Tag mind map} \hfill \\
-  \indent \\
 
   \paragraph*{Cluster groups of artists} \hfill \\
   \indent Cluster groups of artist to create a geographical representation of what the entire network of available artists would be like. \\
 
+  \paragraph*{Tag mind map} \hfill \\
+  \indent In a way to try and complement the two previous ideas, a clustering of the tags would create an interesting mind map of the current genres.
+  And since there are indeed music genres that are similar (like metal and celtic metal) the map would be browsable. \\
 
 % section future_work (end)
