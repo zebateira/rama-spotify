@@ -8,7 +8,7 @@
 
 In this chapter, further details about the prototype's main features and the methodologies used when developing the prototype, as well as in the the validation process, will be explored.
 
-The Development Processes section will go into details about the processes used to maintain a sane development environment by taking advantage of several tools that automated most of the common tasks.
+The Implementation section will go into details about the processes used to maintain a sane development environment by taking advantage of several tools that automated most of the common tasks. The main implemented features will also be analysed.
 
 By this point, the validation of the prototype will be analysed, by explaining the performed user tests, as well the analysis of the results.
 
@@ -21,6 +21,14 @@ By this point, the validation of the prototype will be analysed, by explaining t
   \label{sub:technologies}
 
     The following technologies were used during the development of the application.
+
+    \subsubsection{Git} % (fold)
+    \label{ssub:git}
+    
+    The chosen version control system to manage the source code was git\footnote{git: \url{http://git-scm.com}}. \\
+    The use of branches\footnote{git branches: \url{http://git-scm.com/book/en/Git-Branching-What-a-Branch-Is}} and tags\footnote{git tags: \url{http://git-scm.com/book/en/Git-Basics-Tagging}} allowed for a sane code development environment, e.g., marking release commits or working on experimental features.
+
+    % subsubsection git (end)
 
     \subsubsection{Spotify Desktop Client} % (fold)
     \label{ssub:subsection_name}
@@ -37,9 +45,9 @@ By this point, the validation of the prototype will be analysed, by explaining t
       There are useful options for development located in the "Develop" tab (\ref{fig:html5_support}).
       The "Show Inspector" option opens the \emph{Webkit Development Tools} (\ref{ssub:webkit_tools}) window.
 
-      \begin{figure}[tb]
+      \begin{figure}
         \begin{center}
-          \includegraphics[width=\textwidth]{html5_support.pdf}
+          \includegraphics[width=0.8\textwidth]{html5_support.pdf}
         \end{center}
         \caption{\emph{Develop} Tab}
         \label{fig:html5_support}
@@ -172,6 +180,14 @@ By this point, the validation of the prototype will be analysed, by explaining t
       ]
       {snippets/map_creation_alg.js}
 
+      The maximum number of nodes that the graph might have, can be calculated like so:
+
+      \begin{equation}
+          \sum_{i=0}^{d} b ^ i
+      \end{equation}
+
+      Given $d$ to be the depth value and $b$ the branching value of the graph.
+
       This algorithm, albeit simplified, represents the basic flow when constructing a graph, or more specifically, a tree.
       Since that, in this case of study, the direction of the edges of the graph is not relevant in any way to the artists' map, all of the edges are considered to be undirected.
 
@@ -253,7 +269,8 @@ By this point, the validation of the prototype will be analysed, by explaining t
       The \textbf{depth} value of a graph determines how deep the recursive algorithm is.
       The previously presented example (\ref{fig:graph_treemode}) has a depth value of 2.
       The example \ref{fig:graph_depth3} has a depth value of 3.
-      \begin{figure}[tb]
+
+      \begin{figure}[hb]
         \begin{center}
           \includegraphics[width=\textwidth]{graph_depth3.pdf}
         \end{center}
@@ -416,43 +433,43 @@ By this point, the validation of the prototype will be analysed, by explaining t
     A timeline (chronological order from bottom to top) with the added features (each update release) can be seen in \\ 
     \indent \url{https://github.com/carsy/rama-spotify/releases} \\
 
-    Unit tests were added for each feature.
-    The tests were run locally to ensure that nothing broke mean while.
-    Also to ensure that every release had the tests passing, the project was integrated in Travis's Continuous Integration\footnote{\url{http://travis-ci.org}} system: \\
-    \indent \url{http://travis-ci.org/carsy/rama-spotify}. \\
-
-    This way, after every push of a new release, the project gets build and the unit tests run automatically.
-
-    The solution was also submitted to validation several times during its development.
-    After each release, a constant small group of test subjects (3 people) reviewed the state of the application (alfa testers).
-    Their feedback would be carried over the next release: bug fixes, improvements, etc.
-    This was the testing cycle that allowed to validate the implemented features.
-    This iterative process was managed using the issue tracking system of Github: \url{https://github.com/carsy/rama-spotify/issues} 
-    Given this iterative process of implementation and feedback, the solution would be better prepared for future occasional beta-testing.
-
-    An overview of the code growth can be viewed in Figure~\ref{fig:code_progress}.
+    An overview of pushed commits can be viewed in Figure~\ref{fig:code_contributions}.
 
     \begin{figure}
       \begin{center}
-        \includegraphics[width=\textwidth]{code_progress.pdf}
+        \includegraphics[width=\textwidth]{code_contributions.pdf}
       \end{center}
-      \caption{Graph showing the additions and deletions of lines of code to the project from February to June. Adapted from \url{https://github.com/carsy/rama-spotify/graphs/code-frequency}}
-      \label{fig:code_progress}
+      \caption{Graph showing the number of commits to the project from January to June, 2014. All of the development code was hosted in \url{Github.com}. Adapted from \url{https://github.com/carsy/rama-spotify/graphs/contributors}}
+      \label{fig:code_contributions}
     \end{figure}
 
+    Unit tests were added for each feature.
+    The tests were run locally to ensure that previous features were still working during development.
+    Also to ensure that every release had the tests passing, the project was integrated in Travis's Continuous Integration\footnote{Travis: \url{http://travis-ci.org}} system: \\
+    \indent \url{http://travis-ci.org/carsy/rama-spotify}.
+
+    This way, after every push of a new release, the project gets build and the unit tests run automatically. \\
+
+    The solution was also submitted to validation several times during its development.
+    After each release, a constant small group of alfa-testers (3 people) reviewed the state of the application.
+    Their feedback would be carried over the next release: bug fixes, improvements, etc.
+    This was the testing cycle that allowed to validate the implemented features.
+    This iterative process was managed using the issue tracking system of Github\footnote{Github: \url{http://github.com}}: \url{https://github.com/carsy/rama-spotify/issues}.
+    Given this iterative process of implementation and feedback, the solution would be better prepared for future occasional beta-testing.
     
-    % compare with the previous work plan
+    % TODO compare with the previous work plan
 
   % subsection development_processes (end)
 
 % section prototype (end)
 
+  \clearpage
 
 \section{Validation} % (fold)
 \label{sec:validation}
 
   In order to validate the proposed method, user tests were done with Spotify users and non-Spotify Users.
-  They represent the second group testers and will be referred as the beta-testers.
+  They represent the second group of testers and will be referred as the beta-testers.
 
   \subsection{User Tests} % (fold)
   \label{sub:user_tests}
@@ -464,24 +481,125 @@ By this point, the validation of the prototype will be analysed, by explaining t
     The task was to find a couple of new artists that the user liked.
     This first task should take no more than 7 minutes, depending on the user.
 
-    Next, the user was asked to open the RAMA application and do the same (no more than 10 minutes).
-    Given this, the user is forced to compare the two approaches: discovering new music with Spotify only, and discovering new music with RAMA's Spotify Application as a helper.
+    Next, the user was asked to open the RAMA application and do the same (no more than 7 minutes as well).
+    Given this, the user is forced to compare the two approaches: discovering new music with Spotify only, and discovering new music with RAMA's Spotify Application.
 
+    After the test, the user filled a short inquiry about the experiment, which contained the following questions:
 
+    \begin{enumerate}
+      \item Are you a Spotify user?
+      \item Did the RAMA application help you discover new interesting artists?
+      \item Do you think you would use the application to discover new music?
+      \item Was the application well integrated with Spotify?
+    \end{enumerate}
 
-  
   % subsection user_tests (end)
+
 
   \subsection{Data Analysis} % (fold)
   \label{sub:data_analysis}
 
+    A total of 15 beta-testers participated in the experiment.
 
+    \subsubsection{Question 1: Are you a Spotify user?} % (fold)
+    \label{ssub:question_1}
+
+      This question was meant to establish the user's experience with Spotify.
+
+      The results can be seen in Table~\ref{tab:question1}.
+
+      \begin{table}[hb]
+         \begin{center}
+           \begin{tabular}{l|c}
+       
+           \hline
+           \textbf{Answer} & \textbf{Nº of responses} \\
+           \hline
+
+           \hline
+              Yes, I use it as my main way to listen to music & 3 \\
+              Yes, I use it from time to time & 3 \\
+              No, but I have used/tried it at least once & 4 \\
+              No, this is my first time using it & 5 \\
+           \hline
+           \end{tabular}
+         \end{center}
+         \caption{Results for question 1.}
+         \label{tab:question1}
+       \end{table}
+
+       This test group is relatively well distributed with 6 Spotify Users, and 9 non-spotify users.
+    
+    \subsubsection{Question 2: Did the RAMA application help you discover new interesting artists?}
+    \label{ssub:question_2}
+
+      This was a yes or no question: 14 responded "yes", whereas, 1 responded "no".
+
+      It is clear that RAMA's Spotify Application did not faulted the initial purpose of letting the user discover new music.
+
+
+    \subsubsection{Question 3: Do you think you would use the application to discover new music?}
+    \label{ssub:question_3}
+
+    This is the ultimate question that leaves the user thinking if RAMA in fact a usable way of discovering new music within Spotify.
+
+      \begin{table}[hb]
+         \begin{center}
+           \begin{tabular}{l|c}
+       
+           \hline
+           \textbf{Answer} & \textbf{Nº of responses} \\
+           \hline
+
+           \hline
+            Yes, this is what Spotify is missing! & 5 \\
+            Yes, sometimes it's nice to see this visual representation & 10 \\
+            No, it does not add much to Spotify & 0 \\
+            No, I wouldn't use it. I like Spotify the way it is & 0 \\
+           \hline
+           \end{tabular}
+         \end{center}
+         \caption{Results for question 3.}
+         \label{tab:question3}
+       \end{table}
+
+      The results indicate that the visual representation is indeed a very useful feature when discovering new music.
+
+      \subsubsection{Question 4: Was the application well integrated with Spotify?}
+      \label{ssub:question_4}
+
+        In a scale of 1 to 5, given 1 to be "I felt the app was out of place" and 5 to be "I felt the app was part of Spotify", the users were asked to grade the application's integration into Spotify.
+
+        \begin{table}[hb]
+           \begin{center}
+             \begin{tabular}{c|c}
+         
+             \hline
+             \textbf{Answer} & \textbf{Nº of responses} \\
+             \hline
+             1 & 0 \\
+             2 & 0 \\
+             3 & 1 \\
+             4 & 4 \\
+             5 & 10 \\
+             \hline
+             \end{tabular}
+           \end{center}
+           \caption{Results for question 4.}
+           \label{tab:question4}
+         \end{table}
+
+         The majority of the users felt that the application was part of Spotify.
+         This is a very important result which indicates that the developed prototype blends very well with Spotify's Desktop Client.
   
   % subsection data_analysis (end)
 % section validation (end)
 
 
 \section{Summary} % (fold)
+
+  The used tools during the whole development process proved to be very useful.
+  All of the proposed features for the prototype were implemented within schedule, and the feedback from the users was very positive.
 
 
 % section summary (end)
