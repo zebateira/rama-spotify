@@ -53,11 +53,9 @@
   Now, with a few clicks one can have on their hands such a vast music catalogue that a human mind is not able to compute.
 
   There is an uncountable number of music streaming services that offer exactly that\footnote{Although some of them require the users to subscribe to a monthly fee, for example, in order to fully use the service, or remove the advertisements.}.
-  These services are, mostly, web based, although some offer desktop applications.
   They allow the users to play music, save their collection, create playlists and much more.
   Most of these services also have social components that allow the users to share what they're listening to with their friends, as well as playlists and much more.
 
-  There is always something that makes a music streaming service different from the others.
   Some services focus on creation/generation of playlists (8tracks\footnote{\url{http://8tracks.com}}), others try to expand their music catalogue even further (Spotify\footnote{\url{http://spotify.com}}, Rdio\footnote{\url{rdio.com}}), while others focus more on personalized music recommendations (Pandora\footnote{\url{pandora.com}}).
   The latter ones, present their music recommendations to the user with a list or a grid of music artists, for example.
   However, lists do not provide the user enough information about the relation between the results \cite{Lamere2008}.
@@ -80,11 +78,6 @@
 
   But how can RAMA and Spotify be integrated? \\
 
-  There are several possibilities that Spotify has made available for developers\footnote{\url{https://developer.spotify.com}} that can help to improve RAMA's concept.
-  From websites, mobile applications, native applications and even plugins for the Spotify Desktop Client, Spotify's API is very complete.
-
-  Given the existence of some restrictions when using some APIs\footnote{for example, LibspotifySDK (\url{https://developer.spotify.com/technologies/libspotify/}) requires the developer and the user of the application to have a premium account.}, there are several aspects to take into account when choosing which API to use. \\
-
   The initial proposal was to develop a software module that implements, at least, one of the following features:
 
   \begin{enumerate}
@@ -100,19 +93,11 @@
   This is a very appealing solution: Spotify Users will have the chance to continue using Spotify as they would normally do, but with an extra help to discover new music by using RAMA's application \emph{inside} Spotify. 
   This method works on the assumption that Spotify's music discovery mode can be improved using a visual tool like RAMA. \\
 
-  After specifying the requirements, a prototype will be developed.
   This approach urges to answer the following question: Will a Spotify User experience a more pleasant and natural way of music discovery from this graphical representation of artist relations within Spotify, than its standard discovery mode?
-
-  To answer that question and to evaluate and validate the final prototype, end-user testing will be done to compare Spotify's users experience of discovering new music with or without the developed application.
 
 \section{Work Description}
 \label{sec:work}
-
-  This application is meant to be an extra mode for discovering new music in Spotify.
-
-  This way, a visual representation of an artist network with a graph, similar to RAMA, is proposed.
-
-  The application runs inside the Spotify environment (Spotify's Desktop Client) were its main features are: 
+  The main features of the prototype are as follows:
 
   \begin{itemize}
     \item Visualization of relations between artists by means of a visual tool;
@@ -120,8 +105,6 @@
     \item Edition of the graph by allowing to remove and add new nodes;
     \item Visualize tags/genres (that describe an artist) in the graph representation.
   \end{itemize}
-
-  These are the minimum requirements that the prototype must implement.
 
   The proposed work phases contemplate:
 
@@ -139,40 +122,8 @@
 \section{Conclusions}
 \label{sec:conclusions}
 
-  The proposed thesis focused on delivering an enhanced user experience when discovering new music in Spotify's Environment.
-
   By using RAMA's concept applied in the developed prototype, the user experience when discovering new music as been greatly increased.
-  The users felt that RAMA's Spotify Application was natural and intuitive.
-
-  \paragraph*{State of the Art} \hfill \\
-  \indent The amount of services that use visual tools for recommending music to users are not that many, although the ones shown here are not representative of the whole spectrum.
-
-  \paragraph*{Contextualization} \hfill \\
-  \indent Given the overview of the possibilities, creating a Spotify Application to apply RAMA's concept proved to be the best option to take.
-
-  \paragraph*{Implementation and Validation} \hfill \\
-  \indent All of the proposed features were implemented within schedule. \\
-  The developed prototype proved to work after the beta-testing results.
-  Although, there are a lot of improvements to do, the final result was very appealing to the users.
-  All of the beta-testers liked the visual experience and the majority responded positively about using the application in a regular basis to discover new music. \\
-
-  All of the developed material (code, documentation, screenshots, demos) can be found in the project's code repository: \url{http://github.com/carsy/rama-spotify}.
-
-  % discussion
-
-  By introducing a visual tool into a complete service like Spotify, the users felt that their experience with RAMA's application improved their abilities to find new music.
-  The tests' results show that RAMA's Spotify Application is a successful approach to music discovery and recommendation.
-
-  Although, the final results point in that direction, after the experiments, 3 beta-testers stated that their music listening habits are not focused on the music artists they are listening to. Instead, they simply pay attention to the songs (mostly, the popular ones), and so, their playlists are track-driven, not artist-driven.
-  That might have had presented a problem to those users, since the focus of RAMA is the relations between the artists.
-  However, Spotify's API's recommendation system proved to please those users, which started to pay more attention to the name of the artists they listen to. \\
-
-  Services like Spotify or Rdio, offer a complete set of features that range between playing every track on their catalogue, to saving albums for offline mobile listening.
-  With such a vast music catalogue, the user might feel lost and not very motivated to find new music.
-  Although these services continue to add features like Spotify's "Radio"\footnote{Spotify's Radio mode: \\
-  \url{http://news.spotify.com/us/2011/12/09/discover-the-new-spotify-radio} \\ allows the user to listen to a automatically generated playlist.}, the user finds it hard to compute such a large world of available music.
-
-  By introducing this visual aid to music artist's relations, RAMA succeeds in letting the user explore the whole spectrum of available music.
+  All of the beta-testers liked the visual experience and the majority responded positively about using the application in a regular basis to discover new music.
 
 
 \bibliographystyle{unsrt}  % numeric, unsorted refs
