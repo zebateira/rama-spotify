@@ -63,7 +63,7 @@ If not, restart Spotify and then open the app by typing spotify:app:rama in the 
 
 Thank you for testing!
 
-!(just dancing)[dance2.gif]
+![just dancing](dance2.gif)
 
 [Releases]
 ----
