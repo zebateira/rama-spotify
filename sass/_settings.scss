@@ -72,15 +72,16 @@
       }
       input {
         padding: 2px;
-        width: 30px;
+        max-width: 30px;
         float: right;
         background-color: $new-bg;
         border-width: 1px;
         border-color: $border-color;
 
-        &[name=treemode] {
+        &[type=checkbox],  {
           margin-top: 5px;
           margin-left: 5px;
+          float: left;
         }
       }
       

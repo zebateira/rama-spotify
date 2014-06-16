@@ -12,7 +12,7 @@
     "track"
   ],
   "BundleType": "Application",
-  "BundleVersion": "1.0",
+  "BundleVersion": "1.0.1",
   "Dependencies": {
     "api": "1.0.0",
     "views": "1.0.0"
@@ -22,5 +22,8 @@
     "en"
   ],
   "VendorIdentifier": "pt.inescporto",
-  "RequiredPermissions": ["http://developer.echonest.com"]
+  "RequiredPermissions": ["http://developer.echonest.com"],
+  "AppIcon": {
+    "18x18": "img/ramalogo-18x18.png"
+  }
 }

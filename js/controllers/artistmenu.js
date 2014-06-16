@@ -17,9 +17,9 @@ require([
   };
 
   // Maximum number of albums shown
-  ArtistMenu.MAX_ALBUMS = 8;
+  ArtistMenu.MAX_ALBUMS = 6;
   // Maximum number of tags shown
-  ArtistMenu.MAX_TAGS = 6;
+  ArtistMenu.MAX_TAGS = 4;
 
   ArtistMenu.prototype = Object.create(Controller.prototype);
 

@@ -154,12 +154,14 @@ require([
   };
   // Displays a loading throbber and hides the graph canvas
   GraphController.prototype.showThrobber = function() {
+    if (this.throbber)
+      this.throbber.hide();
+
     this.throbber =
       Throbber.forElement($('.loading-wrapper')[0]);
 
     this.throbber.setPosition('center', 'center');
     this.throbber._addBackground();
-    this.throbber.show();
   };
   GraphController.prototype.hideThrobber = function() {
     if (this.throbber)
@@ -207,7 +209,7 @@ require([
 
   // Events
 
-  // Binds all the events related to the graph components.
+  // Binds all the events related to the graph component.
   GraphController.prototype.bindAllEvents = function() {
     this.artistgraph.onGraph('doubleClick',
       this.events.onNodeDoubleClick.bind(this));

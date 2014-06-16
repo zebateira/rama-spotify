@@ -1,8 +1,10 @@
-%!TEX root = ../mieic.tex
+%!TEX root = ../report.tex
 
 \chapter{State of The Art} \label{chap:chap2}
 
 \section*{}
+
+% TODO dimensions on user experience
 
 \section{Introduction}
 
@@ -15,244 +17,255 @@ The presented projects often use external data bases (like last.fm) to fetch met
 This is the preferred way, since those are the most complete sets of information. 
 
 \section{Related and Similar Services} % (fold)
-\label{sec:projetos_relacionados}
+\label{sec:related_similar_services}
 
-\subsection{Liveplasma - liveplasma.com} % (fold)
-\label{sub:liveplasma}
+  \subsection{Liveplasma - liveplasma.com} % (fold)
+  \label{sub:liveplasma}
 
-liveplasma.com is a \emph{flash}\footnote{http://get.adobe.com/flashplayer} application that not only it allows to see a graph of music artists, but also of books and movies.
+    liveplasma.com is a \emph{flash}\footnote{\url{http://get.adobe.com/flashplayer}} application that not only it allows to see a graph of music artists, but also of books and movies.
 
-The interaction with the graph is very faulted: no changes to the graph are allowed, and the user can easily make a mistake and perform unwanted actions like redrawing the graph with another artist as the root node.
+    The interaction with the graph is very faulted: no changes to the graph are allowed, and the user can easily make a mistake and perform unwanted actions like redrawing the graph with another artist as the root node.
 
-\begin{figure}
-  \begin{center}
-    \includegraphics[width=\textwidth]{liveplasma.pdf}
-  \end{center}
-  \caption{liveplasma: search result for "Amália Rodrigues"; upper left corner: artist albums; lower left corner: youtube's \emph{mini-player}}
-  \label{fig:sota_liveplasma}
-\end{figure}
+    \begin{figure}
+      \begin{center}
+        \includegraphics[width=\textwidth]{liveplasma.pdf}
+      \end{center}
+      \caption{liveplasma: search result for "Amália Rodrigues"; upper left corner: artist albums; lower left corner: youtube's \emph{mini-player}}
+      \label{fig:sota_liveplasma}
+    \end{figure}
 
-In \ref{fig:sota_liveplasma} one can see the search result for "Amália Rodrigues".
+    In \ref{fig:sota_liveplasma} one can see the search result for "Amália Rodrigues".
 
-On the left side of the application there are some interesting elements: a grid of the artist's albums, a mini-player (stream from Youtube).
+    On the left side of the application there are some interesting elements: a grid of the artist's albums, a mini-player (stream from Youtube).
 
-In \ref{fig:sota_liveplasma2} the user can have the choice to play tracks \emph{only} from that artist, or play \emph{similar} artists.
+    In \ref{fig:sota_liveplasma2} the user can have the choice to play tracks \emph{only} from that artist, or play \emph{similar} artists.
 
-\begin{figure}[tb]
-  \begin{center}
-    \includegraphics[]{liveplasma2.pdf}
-  \end{center}
-  \caption{liveplasma: interface to start playing tracks. \emph{Similar} button plays tracks from similar artists, whereas, the \emph{only} button only plays tracks from the specified artist.}
-  \label{fig:sota_liveplasma2}
-\end{figure}
+    \begin{figure}[b]
+      \begin{center}
+        \includegraphics[]{liveplasma2.pdf}
+      \end{center}
+      \caption{liveplasma: interface to start playing tracks. \emph{Similar} button plays tracks from similar artists, whereas, the \emph{only} button only plays tracks from the specified artist.}
+      \label{fig:sota_liveplasma2}
+    \end{figure}
 
-\subsubsection{Prós} % (fold)
-\label{ssub:liveplasma_pros}
+    \subsubsection{Pros} % (fold)
+    \label{ssub:liveplasma_pros}
 
-Os aspetos interessantes desta ferramenta são:
+      This tools, has two interesting aspects to it:
 
-\begin{itemize}
-  \item Links para compra dos álbums
-  \item Reproduzir músicas de artistas semelhantes
-\end{itemize}
+      \begin{itemize}
+        \item Links to buy albums of the artist
+        \item Play tracks from similar artists to the search artist.
+      \end{itemize}
 
-% subsubsection pros (end)
+    % subsubsection pros (end)
 
-\subsubsection{Contras} % (fold)
-\label{ssub:liveplasma_contras}
+    \subsubsection{Cons} % (fold)
+    \label{ssub:liveplasma_cons}
 
-O grafo desenhado é bastante confuso quando existem muitos nós com muitas ligações.
-Isto acontece quando existem muitos artistas semelhantes.
-Para além disso, são atribuídas cores aos nós que devem identificar o grau de parecença entre os artistas.
-No entanto não existe nenhum tipo de informação que explique qual o seu verdadeiro significado ao utilizador, assim como também não existe uma explicação das ligações entre os nós.
+      The graph drawn from this simple search, is very cluttered with edges.
+      Two nodes can have several connections between them, which seems to overload the graph and making it very confusing.
 
-É também de notar que o tamanho dos nós é diretamente proporcional à popularidade dos artistas respectivos, mas mais uma vez, este tipo de informação não é dada ao utilizador.
+      Different colours are used, but their meaning remains unknown. One can assume that they represent the similarity between artists, but that is just speculation.
 
-Outra falha a apontar é o facto de não se conseguir distinguir o nó de pesquisa dos restantes resultados em \ref{fig:sota_liveplasma} por exemplo.
+      It can also be assumed that the size of the nodes (radius value) can be directly proportional to the artist's popularity, but that is, again, just speculation.
 
-% subsubsection contras (end)
+      One critical detail is that the user cannot visually point out the search node in the graph, given the lack of visual distinction from the other nodes of the graph \ref{fig:sota_liveplasma}.
 
-\subsubsection{Resumo} % (fold)
-\label{ssub:liveplasma_resumo}
+    % subsubsection cons (end)
 
-Em suma, o liveplasma é usável, mas peca por ter muitas cores e ligações que tornam a experiência do utilizador ainda mais difícil do que a tradicional apresentação em lista ou grelha.
+    \subsubsection{Summary} % (fold)
+    \label{ssub:liveplasma_summary}
 
-% subsubsection resumo (end)
+      In short, liveplasma is not very user friendly. 
+      It uses too many colours and edges, which makes the user experience of searching for new music even harder than it would be, if using a more standard mode of discovery.
 
-% subsection liveplasma (end)
+    % subsubsection summary (end)
 
-\subsection{Tuneglue - audiomap.tuneglue.net} % (fold)
-\label{sub:tuneglue}
+  % subsection liveplasma (end)
 
-O Tuneglue é outro serviço do mesmo género (também desenvolvido em flash) que usa a base de dados do last.fm para recolher a informação dos artistas de música, assim como artistas relacionados.
+  \subsection{Tuneglue - audiomap.tuneglue.net} % (fold)
+  \label{sub:tuneglue}
 
-Depois da pesquisa de um artista, por exemplo "Mariza", obtemos um grafo com apenas o nó de pesquisa. Ao clicar no nó é apresentado um menu com várias opções como se pode ver na figura \ref{fig:sota_tuneglue}.
+    Tuneglue is another flash application that tries to explore the graphic visualization of network of related artists.
+    Last.fm's metadata API is used to retrieve artist information.
 
-\begin{figure}[tb]
-  \begin{center}
-    \includegraphics[]{tuneglue.pdf}
-  \end{center}
-  \caption{Tuneglue: menu que aparece ao clicar num nó.}
-  \label{fig:sota_tuneglue}
-\end{figure}
+    When you start Tuneglue and search for an artist, say "Mariza", the user is presented with a single-node graph.
+    By clicking the node, the user has four options (\ref{fig:sota_tuneglue}): expand, releases, lock position and delete.
 
-A partir deste menu é possível ver uma das principais diferenças que o Tuneglue tem em relação ao liveplasma (\ref{sub:liveplasma}): a edição do grafo.
-É possível expandir, fixar e eliminar individualmente cada nó do grafo.
-Ao expandir o nó inicial de pesquisa, os nós novos estão apenas e só diretamente relacionados com o nó pai, como se pode ver na figura~\ref{fig:sota_tuneglue2}.
 
-\begin{figure}[tb]
-  \begin{center}
-    \includegraphics[]{tuneglue2.pdf}
-  \end{center}
-  \caption{Tuneglue: grafo depois do primeiro nó ser expandido.}
-  \label{fig:sota_tuneglue2}
-\end{figure}
+    \begin{figure}[hb]
+      \begin{center}
+        \includegraphics{tuneglue.pdf}
+      \end{center}
+      \caption{Tuneglue: menu for the node. Appears when the user clicks the node.}
+      \label{fig:sota_tuneglue}
+    \end{figure}
 
-Ao contrário do Liveplasma, o Tuneglue não faz uma pesquisa recursiva.
+    When you first expand a node, you get the root node with six child nodes \ref{fig:sota_tuneglue2}.
 
-\subsubsection{Prós} % (fold)
-\label{ssub:audiomap_pros}
+    \begin{figure}[!h]
+      \begin{center}
+        \includegraphics[width=0.5\textwidth]{tuneglue2.pdf}
+      \end{center}
+      \caption{Tuneglue: graph after expanding the root node.}
+      \label{fig:sota_tuneglue2}
+    \end{figure}
 
-Dá bastante liberdade ao utilizador, pois dá-lhe toda a responsabilidade na criação do grafo.
-O utilizador sente que todo o grafo foi criação sua e dissimula o utilizador a pensar que foi este que descobriu novos artistas ao invés de receber recomendações.
+    So the first feature that brings the user experience to another level (in comparison with liveplasma) is that of graph editing.
+    The user can expand, lock and delete every single node in the graph.
 
-% subsubsection pros (end)
 
-\subsubsection{Contras} % (fold)
-\label{ssub:audiomap_contras}
+    \subsubsection{Pros} % (fold)
+    \label{ssub:audiomap_pros}
 
-Mais uma vez, o facto da ferramenta ser feita em flash não ajuda a que a interface seja intuitiva.
-Para além de pouco responsiva (o utilizador ao início pode-se sentir perdido por não saber o que fazer), é bastante uniforme, ou seja, não salienta diferenças entre cada artista, nem distingue as ligações entre eles.
+      Tuneglue gives control to the user, whose is able to craft a graph and tailor it to its needs.
+      The user feels that the graph is its own creation.
 
-% subsubsection contras (end)
+    % subsubsection pros (end)
 
-\subsubsection{Resumo} % (fold)
-\label{ssub:audiomap_resumo}
+    \subsubsection{Cons} % (fold)
+    \label{ssub:audiomap_cons}
 
-Em suma, o Tuneglue é inteligente por dar poder ao utilizador, mas ao mesmo tempo não existe um limite nesse poder.
-E assim, é possível expandir o grafo até se tornar ilegível.
+      However, the user has the responsibility to create the whole graph, which might be too much trouble and deteriorate the user experience.
 
+      Again the root node is not highlighted, which might leave the user lost when the graph gets more and more complex.
 
+    % subsubsection contras (end)
 
-% subsubsection resumo (end)
+    \subsubsection{Summary} % (fold)
+    \label{ssub:audiomap_summary}
 
-% subsection tuneglue (end)
+      Tuneglue takes the approach to give the user the power to create what he wants.
+      But with no limit, the user can easily create a very complex graph that deteriorates the user experience.
 
-\subsection{MusicRoamer - musicroamer.com} % (fold)
-\label{sub:musicroamer}
 
-  O MusicRoamer é outra ferramenta que permite explorar música nova.
-  Tal como o Tuneglue, este permitir construir o grafo à medida que se expande cada nó.
+    % subsubsection summary (end)
 
+  % subsection tuneglue (end)
 
+  \subsection{MusicRoamer - musicroamer.com} % (fold)
+  \label{sub:musicroamer}
 
-  \subsubsection{Prós} % (fold)
-  \label{ssub:pros}
+    MusicRoamer is yet another flash application.
+    Although it is similar to Tuneglue when it allows the user to expand the graph further and further, it also imposes some limits to the user to avoid getting the graph confusing.
 
-  
-  Umas das funcionalidades interessantes do MusicRoamer são as várias opções de pesquisa (figura~\ref{fig:sota_musicroamer}):
-  \begin{description}
-    \item[Pesquisa por Artista] \hfill \\
-      Tipo de pesquisa mais utilizada
-    \item[Pesquisa por \emph{Keyword}] \hfill \\
-      Usar palavras-chave como géneros musicais para pesquisar livremente
-    \item[Pesquisa por perfil do Last.fm] \hfill \\
-      Esta pesquisa gera um grafo para cada artista (os mais ouvidos pelo utilizador)
-  \end{description}
+    \subsubsection{Pros} % (fold)
+    \label{ssub:pros}
 
-  \begin{figure}[tb]
-    \begin{center}
-      \includegraphics[width=\textwidth]{musicroamer.pdf}
-    \end{center}
-    \caption{MusicRoamer: Várias opções de pesquisa. Por artista; por \emph{keyword} e pelo perfil de utilizador do Last.fm}
-    \label{fig:sota_musicroamer}
-  \end{figure}
+      There are three types of search \ref{fig:sota_musicroamer}): 
 
-  Todas estas formas de pesquisa desenham um (ou mais) grafo(s) em que os nós são sempre artistas de música.
+      \begin{description}
+        \item[Artist Search] \hfill \\
+          The most used one.
+        \item[Keyword Search] \hfill \\
+          Search using keywords like genres and tags
+        \item[Last.fm user search] \hfill \\
+          The search result generates several graphs with the top artists of the user as the root nodes.
+      \end{description}
 
-  O que esta ferramenta trás de novo é a forma como apresenta os grafos.
-  A figura~\ref{fig:sota_musicroamer3} apresenta o resultado da pesquisa por Artista "Mariza".
-  Imagens dos artistas são usadas para representar os nós, o que ajuda o utilizador a diferenciar os resultados.
+      \begin{figure}[hb]
+        \begin{center}
+          \includegraphics[width=\textwidth]{musicroamer.pdf}
+        \end{center}
+        \caption{MusicRoamer: Search options. by artist; by keyword and by Last.fm username}
+        \label{fig:sota_musicroamer}
+      \end{figure}
 
-  A ferramenta também disponibiliza alguns parâmetros de personalização do grafo (figura~\ref{fig:sota_musicroamer2}) como Zoom, Tamanho da repulsão, imagem entre os nós e o número de artistas de música que deve expandir de um nó.
+      Independently of the search form used, the result will always be one (or more) graphs where the nodes are music artists.
 
-  \begin{figure}[tb]
-    \begin{center}
-      \includegraphics[width=\textwidth]{musicroamer2.pdf}
-    \end{center}
-    \caption{MusicRoamer: Parâmetros de personalização do grafo}
-    \label{fig:sota_musicroamer2}
-  \end{figure}
+      MusicRoamer is worth mentioning because of the way it shows the graph.
+      In \ref{fig:sota_musicroamer2} one can see the search result for "Mariza".
 
+      \begin{figure}[!ht]
+        \begin{center}
+          \includegraphics[width=0.5\textwidth]{musicroamer3.pdf}
+        \end{center}
+        \caption{MusicRoamer: Visual representation of the artist graph}
+        \label{fig:sota_musicroamer2}
+      \end{figure}
 
+      The images of the music artists are used to represent the nodes. This way, the user has a more friendly mind map of the resulting graph.
 
-  \begin{figure}[tb]
-    \begin{center}
-      \includegraphics[width=\textwidth]{musicroamer3.pdf}
-    \end{center}
-    \caption{MusicRoamer: Representação visual do grafo de artistas}
-    \label{fig:sota_musicroamer3}
-  \end{figure}
+      There is also some parameters (\ref{fig:sota_musicroamer3}) that the user can personalize to change the appearance of the graph: zoom; repulsion force between the nodes; size of the artist's images and the number of artist to be used as the branching value.
 
-  % subsubsection pros (end)
+      \begin{figure}[!h]
+        \begin{center}
+          \includegraphics[width=0.6\textwidth]{musicroamer2.pdf}
+        \end{center}
+        \caption{MusicRoamer: Personalizable parameters for the graph }
+        \label{fig:sota_musicroamer3}
+      \end{figure}
 
-  \subsubsection{Contras} % (fold)
-  \label{ssub:contras}
+    % subsubsection pros (end)
 
-  Um problema do MusicRoamer é o facto de ser feito em flash, pois torna a interface menos natural e fluída.
-  Para além disso, à medida que a profundidade do grafo vai aumentando, o grafo começa a ficar confuso e ilegível (figura~\ref{fig:sota_musicroamer4}).
-  A linhas começam a se sobrepor e alguns nós ficam pouco legíveis.
+    \subsubsection{Cons} % (fold)
+    \label{ssub:cons}
 
-  \begin{figure}[tb]
-    \begin{center}
-      \includegraphics[width=\textwidth]{musicroamer4.pdf}
-    \end{center}
-    \caption{MusicRoamer: Grafo depois de expandir um nó}
-    \label{fig:sota_musicroamer4}
-  \end{figure}
+      MusicRoamer is a flash application which makes the interface less natural and fluid to a website user.
 
-  % subsubsection contras (end)
+      Another problem occurs when the user starts to expand more and more nodes.
+      The graph starts to get confusing (\ref{fig:sota_musicroamer4}), the edges are drawn over the images, the artist's names start to get mixed in the images.
 
-  \subsubsection{Resumo} % (fold)
-  \label{ssub:resumo}
+      \begin{figure}
+        \begin{center}
+          \includegraphics[width=\textwidth]{musicroamer4.pdf}
+        \end{center}
+        \caption{MusicRoamer: The graph after expanding one node}
+        \label{fig:sota_musicroamer4}
+      \end{figure}
 
-  Apesar de um utilizador do MusicRoamer ter muita liberdade na criação do grafo, a sua apresentação global é fraca e pouco trabalhada esteticamente.
-  
-  % subsubsection resumo (end)
+    % subsubsection cons (end)
 
-% subsection musicroamer (end)
+    \subsubsection{Summary} % (fold)
+    \label{ssub:summary}
 
+      Although the MusicRoamer user has a lot freedom when creating the graph, the graph presentation if weak and not very æsthetically pleasant.
 
-% section projetos_relacionados (end)
+    % subsubsection summary (end)
 
+  % subsection musicroamer (end)
 
-\section{Resumo e Conclusões}
+  \clearpage
 
-Existem muitas outras ferramentas de descoberta de música. Apesar serem poucas as que usam esta representação visual em grafo, todas elas são importantes de se referir:
 
-\begin{itemize}
-  \item liveplasma.com
-  \item audiomapa.tuneglue.net
-  \item musicroamer.com
-  \item discovr.info
-  \item ifyoudig.net
-  \item pitchfork.com
-  \item hypem.com
-  \item awdio.com
-  \item 8tracks.com
-  \item tastekid.com
-  \item songza.com
-  \item thesixtyone.com
-  \item mog.com
-  \item stereogum.com
-  \item gigfi.com
-  \item jango.com
-  \item soundcloud.com
-  \item grooveshark.com
-\end{itemize}
+% section related_similar_services (end)
 
 
-Umas das primeiras lições que se tira dos exemplos dados é que quanto maior for o fator de ramificação de um grafo, mais confuso e saturado se torna.
-Não é um exagero dizer que para além de confuso, o grafo perde o seu propósito inicial de ajudar o utilizador na sua descoberta de música nova.
+\section{Summary}
 
-Uma forma de evitar este problema, por exemplo, será limitar o fator de ramificação a um máximo que não cause este problema.
+  There is an uncountable number of services to discover new music.
+  The ones presented in the previous examples have a visual representation in graph.
+
+  The following services have a some what interesting method to present the users with new music (not necessarily using visual tools):
+
+
+  \begin{itemize}
+    \item liveplasma.com
+    \item audiomapa.tuneglue.net
+    \item musicroamer.com
+    \item discovr.info
+    \item ifyoudig.net
+    \item pitchfork.com
+    \item hypem.com
+    \item awdio.com
+    \item 8tracks.com
+    \item tastekid.com
+    \item songza.com
+    \item thesixtyone.com
+    \item mog.com
+    \item stereogum.com
+    \item gigfi.com
+    \item jango.com
+    \item soundcloud.com
+    \item grooveshark.com
+    \item rdio.com
+    \item pandora.com
+    \item music.google.com
+  \end{itemize}
+
+
+  The most important aspect to retain from the previous examples is that the bigger the branching value (ramification) of the graph, the more confusing and cluttered the graph becomes.
+  One could say that the visual tool loses its initial purpose to help the user to discover new music.
+
+  A way to avoid that problem would be to force limits in the graph creation process.

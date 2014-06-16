@@ -47,10 +47,25 @@ require([
     // color of the bars
     this.context.fillStyle = this.barcolor;
 
+    $(this.element).hide();
+    this.realtimeEvent = this.events.onRealtimeAudio.bind(this);
+  };
+
+
+  EQBar.prototype.hide = function() {
+    $(this.element).hide();
+
+    audio.RealtimeAnalyzer.forPlayer(models.player)
+      .removeEventListener('audio', this.realtimeEvent);
+  };
+
+  EQBar.prototype.show = function() {
+    $(this.element).show();
+
     // bind event listener to get the waves
     // to render the equalizer
     audio.RealtimeAnalyzer.forPlayer(models.player)
-      .addEventListener('audio', this.events.onRealtimeAudio.bind(this));
+      .addEventListener('audio', this.realtimeEvent);
   };
 
   // event that processes the wave at each instant (in realtime)
@@ -59,6 +74,8 @@ require([
       // the waves: left and right arrays
       var left = event.audio.wave.left;
       var right = event.audio.wave.right;
+
+      console.log('its on');
 
       // at each frame clear the canvas
       this.context.clearRect(0, 0,

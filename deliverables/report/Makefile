@@ -15,14 +15,7 @@ DVI2PS=dvips -t landscape -x 707
 PS2PDF=ps2pdf -dEmbedAllFonts#true
 MKIDX=makeindex
 
-## Basename for result in PT
-TARGET=mieic
-## Basename for result in EN
-#TARGET=mieic-en
-
-## Basename for PDIS
-#TARGET=pdis
-#TARGET=pdis-en
+TARGET=report
 
 ## .tex files
 TEXFILES=$(wildcard *.tex **/*.tex)
@@ -88,7 +81,7 @@ $(TARGET).ps2:	  $(TARGET).dvi2
 $(TARGET).dvi2:	  $(TARGET).dvi
 
 ## Extensions
-EXTS=aux toc idx ind ilg log out lof lot lol bbl blg
+EXTS=aux toc idx ind ilg log out lof lot lol bbl blg fdb_latexmk synctex.gz
 
 ##clean
 clean:

@@ -1,0 +1,110 @@
+%%========================================
+%% Spotify-ed: Music Recommendation and 
+%%              in Spotify
+%%
+%% Author: José Bateira
+%% Supervisor: Fabien Gouyon
+%% co-supervisor: Matthew Davies
+%%========================================
+
+\documentclass[11pt,a4paper,twoside,openright]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage{subcaption}
+
+\usepackage{indentfirst}
+
+\usepackage[english]{styles/feupteses}
+%\usepackage[english,juri]{feupteses}
+%\usepackage[english,final]{feupteses}
+%\usepackage[english,final,onpaper]{feupteses}
+
+%% Uncomment the next lines if side by side graphics used
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{float}
+% \usepackage{morefloats}
+
+\usepackage{xcolor}
+
+%% Include source-code listings package
+\usepackage{listings}
+
+%% Uncomment next line to set the depth of sectional units listed in the toc
+%\setcounter{tocdepth}{3}
+
+%\makeindex
+
+\graphicspath{{figures/}}
+
+%% macros
+\include{utils/mymacros}
+
+% \includeonly{chapters/chapter4}
+
+%%========================================
+%% Start of document
+%%========================================
+\begin{document}
+
+
+\title{Spotify-ed: Music Recommendation and Discovery in Spotify}
+\author{José Lage Bateira}
+
+\thesisdate{June 23, 2014}
+
+\supervisor{Supervisor}{Fabien Gouyon}
+\supervisor{Co-Supervisor}{Matthew Davies}
+
+%% Uncomment committee stuff in the final version
+% \committeetext{Aprovado em provas públicas pelo Júri:}
+%\committeemember{Presidente}{Nome do presidente do júri}
+%\committeemember{Arguente}{Nome do arguente do júri}
+%\committeemember{Vogal}{Nome do vogal do júri}
+%\signature
+
+\logo{uporto-feup.pdf}
+
+\begin{Prolog}
+  %% Preliminary materials
+  \include{prolog/abstract} % the abstract
+  \include{prolog/acknows}  % the acknowledgments
+  % \include{prolog/quote}
+  \cleardoublepage
+  \pdfbookmark[0]{Content}{contents}
+  \tableofcontents
+  \cleardoublepage
+  \pdfbookmark[0]{List of Figures}{figures}
+  \listoffigures
+  \cleardoublepage
+  \pdfbookmark[0]{List of Tables}{tables}
+  \listoftables
+  % \include{prolog/abbrevs}
+\end{Prolog}
+
+%% Body
+\StartBody
+
+\include{chapters/chapter1} 
+\include{chapters/chapter2}
+\include{chapters/chapter3}
+\include{chapters/chapter4}
+\include{chapters/chapter5}
+
+%% Final materials
+
+%% Bibliography
+
+\renewcommand{\bibname}{References}
+
+\bibliography{bib/myrefs}
+\bibliographystyle{bib/unsrt-pt}
+
+
+%% Comment next 2 commands if numbered appendices are not used
+% \appendix
+% \include{appendix1}
+
+% \PrintIndex
+
+\end{document}

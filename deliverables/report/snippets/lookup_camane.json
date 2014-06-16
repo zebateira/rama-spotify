@@ -1,9 +1,42 @@
 {
-    "info": {
-        "type": "artist"
-    },
-    "artist": {
-        "href": "spotify:artist:3MLPFTe4BrpEV2eOVG0gLK",
-        "name": "Camane"
-    }
+  "info": {
+    "type": "artist"
+  },
+  "artist": {
+    "href": "spotify:artist:3MLPFTe4BrpEV2eOVG0gLK",
+    "name": "Camane",
+    "albums": [{
+        "album": {
+          "artist-id": "spotify:artist:3MLPFTe4BrpEV2eOVG0gLK",
+          "name": "O Melhor 1995 -2013",
+          "artist": "Camane",
+          "href": "spotify:album:1YksI1vvItkdH95NBfjTvX",
+          "availability": {
+            "territories": "AD AR AT AU BE BG BO BR CA CH CL CO CR CY CZ DE DK DO EC EE ES FI FR GB GR GT HK HN HR HU IE IS IT LI LT LU LV MC MT MX MY NI NL NO NZ PA PE PH PL PT PY RO SE SG SI SK SV TR TW UY"
+          }
+        },
+        "info": {
+          "type": "album"
+        }
+      }, {
+        "album": {
+          "artist-id": "spotify:artist:3MLPFTe4BrpEV2eOVG0gLK",
+          "name": "Do Amor E Dos Dias",
+          "artist": "Camane",
+          "href": "spotify:album:0N4aahnnaGZfLRFSQaqqUe",
+          "availability": {
+            "territories": "AD AR AT AU BE BG BO BR CA CH CL CO CR CY CZ DE DK DO EC EE ES FI FR GB GR GT HK HN HR HU IE IS IT LI LT LU LV MC MT MX MY NI NL NO NZ PA PE PH PL PT PY RO SE SG SI SK SV TR TW UY"
+          }
+        },
+        "info": {
+          "type": "album"
+        }
+      },
+
+      {
+          ...
+      }
+
+    ]
+  }
 }

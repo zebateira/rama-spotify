@@ -422,16 +422,17 @@ a {
 /* line 73, ../sass/_settings.scss */
 #settings #settings_form .option input {
   padding: 2px;
-  width: 30px;
+  max-width: 30px;
   float: right;
   background-color: #222326;
   border-width: 1px;
   border-color: #3e3e40;
 }
 /* line 81, ../sass/_settings.scss */
-#settings #settings_form .option input[name=treemode] {
+#settings #settings_form .option input[type=checkbox] {
   margin-top: 5px;
   margin-left: 5px;
+  float: left;
 }
 
 /* line 1, ../sass/_eqbar.scss */
@@ -516,7 +517,7 @@ a {
   z-index: 1;
   position: absolute;
   left: 0;
-  top: 110px;
+  top: 15%;
   width: 126px;
   opacity: 0.9;
   background-color: #222326;

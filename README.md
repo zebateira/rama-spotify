@@ -4,6 +4,11 @@ RAMA - Relational Artist MAps
 
 RAMA is a Spotify Application for visualizing and interacting with networks of music artists. For the original RAMA web application see [rama.inescporto.pt]
 
+Here are some previews of what this app does:
+
+![Demo](demo2.gif)
+![Demo 2](demo.gif)
+
 For now, I do not intend to make this application available on the Spotify App Store, so to run it you need to set it up first.
 
 To open a downloaded app you need to **Activate Spotify Developer account** here: https://devaccount.spotify.com/my-account (no premium account needed).
@@ -31,9 +36,9 @@ These are the contents of the script:
 ```sh
 $ mkdir ~/Spotify ; cd ~/Spotify
 $ rm -rf rama
-$ rm rama_v1.0.tar.gz
-$ curl -L -O https://github.com/carsy/rama-spotify/releases/download/v1.0/rama_v1.0.tar.gz
-$ tar -xvf rama_v1.0.tar.gz
+$ rm rama_v1.0.1.tar.gz
+$ curl -L -O https://github.com/carsy/rama-spotify/releases/download/v1.0.1/rama_v1.0.1.tar.gz
+$ tar -xvf rama_v1.0.1.tar.gz
 ```
 
 You should now be in the app and seeing a graph thingy.
@@ -56,8 +61,16 @@ You should now be in the app and seeing a graph thingy.
 
 If not, restart Spotify and then open the app by typing spotify:app:rama in the search bar.
 
+Thank you for testing!
+
+!(just dancing)[dance2.gif]
+
 [Releases]
 ----
+
+[v1.0.1] - "Equalizer" bar hidden
+  - bugfixes: #61 and #48
+  - added checkbox for hidding/showing the "equalizer" bar - it causes Spotify to crash.
 
 [v1.0] - 1.0
   - feedback button added
@@ -140,6 +153,7 @@ José Bateira
 [here]:https://github.com/carsy/rama-spotify/releases/latest
 [Releases]:https://github.com/carsy/rama-spotify/releases/latest
 [issues]:https://github.com/carsy/rama-spotify/issues
+[v1.0.1]:https://github.com/carsy/rama-spotify/releases/tag/v1.0.1
 [v1.0]:https://github.com/carsy/rama-spotify/releases/tag/v1.0
 [v0.11]:https://github.com/carsy/rama-spotify/releases/tag/v0.11
 [v0.10.6]:https://github.com/carsy/rama-spotify/releases/tag/v0.10.6
