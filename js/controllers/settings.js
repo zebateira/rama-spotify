@@ -1,7 +1,8 @@
 require([
   'js/controllers/controller#controller',
+  'js/components#Components',
   'js/models/element#element'
-], function(Controller, Element) {
+], function(Controller, Components, Element) {
 
   /**
     Controller for the Settings UI Component
@@ -30,6 +31,7 @@ require([
       this.inputs[input].selector =
         this.selectors.form + ' input[name=' + input + ']';
     }
+
   };
 
   Settings.prototype = Object.create(Controller.prototype);
@@ -65,6 +67,17 @@ require([
         graphcontroller.updateGraph(config);
       };
     });
+
+    this.equalizer = document.querySelectorAll('input[name="equalizer"]')[0];
+
+    this.equalizer.onchange = function() {
+      var eqbarController = Components.components.eqbar.controller;
+
+      if (this.checked)
+        eqbarController.show();
+      else
+        eqbarController.hide();
+    };
 
   };
 

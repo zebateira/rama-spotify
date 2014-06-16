@@ -131,7 +131,7 @@ require([
 
       // on tag click, toggle highlighting all of its
       // corresponding artists
-      tagElement.onmouseover = this.events.onTagClick.bind(this);
+      tagElement.onclick = this.events.onTagClick.bind(this);
 
       // finally append it to the tag's container
       tagsContainer.append(tagElement);
