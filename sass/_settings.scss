@@ -78,7 +78,7 @@
         border-width: 1px;
         border-color: $border-color;
 
-        &[name=treemode] {
+        &[type=checkbox],  {
           margin-top: 5px;
           margin-left: 5px;
           float: left;
