@@ -42,29 +42,21 @@ By this point, the validation of the prototype will be analysed, by explaining t
       \lstinputlisting[caption={manifest.json: \emph{BundleIdentifier} is the application's identifier; \emph{Dependencies} declares the Application's API dependencies.}, style=htmlcssjs]{snippets/manifest.json}
 
       There are useful options for development located in the "Develop" tab (\ref{fig:html5_support}).
-      The "Show Inspector" option opens the \emph{Webkit Development Tools} (\ref{ssub:webkit_tools}) window.
 
-      \begin{figure}
+      \begin{figure}[h]
         \begin{center}
           \includegraphics[width=0.8\textwidth]{html5_support.pdf}
         \end{center}
         \caption{\emph{Develop} Tab}
         \label{fig:html5_support}
       \end{figure}
-    
+
+      The "Show Inspector" option opens the \emph{Webkit Development Tools} (\ref{ssub:webkit_tools}) window.
+
     \subsubsection{Webkit Development Tools - webkit.org} % (fold)
     \label{ssub:webkit_tools}
 
       The webkit tools provides a bundle of tools for web development.
-
-      \begin{figure}
-        \begin{center}
-          \includegraphics[width=\textwidth]{webkit_inspector.pdf}
-        \end{center}
-        \caption{Webkit: \emph{Inspector} tab view. Other tools available: \emph{Resources, Network, Sources, Timeline, Profiles, Audits} and \emph{Console}.}
-
-        \label{fig:webkit_inspector}
-      \end{figure}
 
       Being the most important:
 
@@ -74,10 +66,17 @@ By this point, the validation of the prototype will be analysed, by explaining t
         \item[Profile] Allows to identify which parts of the javascript code are being executed frequently, and which ones might be creating a performance issue (\ref{fig:webkit_profile}).
         \item[Audit] Helps to understand which CSS rules are not being used (\ref{fig:webkit_audit}).
         \item[Console] Javascript interpreter that also works as the log output for the application (\ref{fig:webkit_console}).
-
       \end{description}
 
-      \begin{figure}
+      \begin{figure}[ht]
+        \begin{center}
+          \includegraphics[width=\textwidth]{webkit_inspector.pdf}
+        \end{center}
+        \caption{Webkit: \emph{Inspector} tab view. Other tools available: \emph{Resources, Network, Sources, Timeline, Profiles, Audits} and \emph{Console}.}
+        \label{fig:webkit_inspector}
+      \end{figure}
+
+      \begin{figure}[ht]
         \begin{center}
           \includegraphics[width=\textwidth]{webkit_network.pdf}
         \end{center}
@@ -85,7 +84,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
         \label{fig:webkit_network}
       \end{figure}
 
-      \begin{figure}
+      \begin{figure}[ht]
         \begin{center}
           \includegraphics[width=\textwidth]{webkit_profile.pdf}
         \end{center}
@@ -93,7 +92,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
         \label{fig:webkit_profile}
       \end{figure}
 
-      \begin{figure}
+      \begin{figure}[ht]
         \begin{center}
           \includegraphics[width=\textwidth]{webkit_audit.pdf}
         \end{center}
@@ -101,13 +100,15 @@ By this point, the validation of the prototype will be analysed, by explaining t
         \label{fig:webkit_audit}
       \end{figure}
 
-      \begin{figure}
+      \begin{figure}[ht]
         \begin{center}
           \includegraphics[width=\textwidth]{webkit_console.pdf}
         \end{center}
         \caption{Webkit Console: Javascript errors are reported there (and highlighted in red as well).}
         \label{fig:webkit_console}
       \end{figure}
+
+      \clearpage
 
     \subsubsection{Gruntjs - gruntjs.com} % (fold)
       \label{ssub:gruntjs}
@@ -161,7 +162,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
     
       The application automatically draws the map with the current playing artist as the main node, as seen in Figure~\ref{fig:graph_rootnode}.
 
-      \begin{figure}[tb]
+      \begin{figure}[H]
         \begin{center}
           \includegraphics[width=\textwidth]{graph_rootnode.pdf}
         \end{center}
@@ -193,7 +194,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
       Assuming that the insertNode() function checks for duplicate nodes, i.e., it only inserts unique nodes into the graph, then the resulting graph is one of a tree, since there are no simple cycles in the graph.
       An example of this behaviour can be seen in Figure~\ref{fig:graph_treemode}.
 
-      \begin{figure}[tb]
+      \begin{figure}[ht]
         \begin{center}
           \includegraphics[width=\textwidth]{map_creation_treemode.pdf}
         \end{center}
@@ -211,7 +212,8 @@ By this point, the validation of the prototype will be analysed, by explaining t
       To build a graph with all the connections that exist between all of the artists in the graph, the insertNode() function would need to insert the missing edge into the graph by analysing the current graph state.
       This method creates a graph by definition, while the previous one created a tree graph.
       An example of this behaviour can be seen in Figure~\ref{fig:graph_notreemode}.
-      \begin{figure}[tb]
+
+      \begin{figure}[h]
         \begin{center}
           \includegraphics[width=\textwidth]{map_creation_notreemode.pdf}
         \end{center}
@@ -291,9 +293,9 @@ By this point, the validation of the prototype will be analysed, by explaining t
     To allow the user to change these values, a settings menu was added to the application, and can be seen in Figure~\ref{fig:settings_menu}.
     When the user changes the parameters, the graph refreshes accordingly.
 
-    \begin{figure}
+    \begin{figure}[H]
       \begin{center}
-        \includegraphics[width=0.8\textwidth]{settings_menu.pdf}
+        \includegraphics[width=0.2\textwidth]{settings_menu.pdf}
       \end{center}
       \caption{The settings menu that allows the user to change the visualization parameters.}
       \label{fig:settings_menu} 
@@ -315,7 +317,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
 
       \begin{figure}[tb]
          \begin{center}
-           \includegraphics[width=\textwidth]{node_expanded.pdf}
+           \includegraphics[width=\textwidth]{graph_expanded_node.pdf}
          \end{center}
          \caption{"Dispatch" artist node expanded.}
          \label{fig:node_expanded}
@@ -338,7 +340,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
 
       \begin{figure}[tb]
         \begin{center}
-          \includegraphics[width=\textwidth]{artist_menu.pdf}
+          \includegraphics[width=0.2\textwidth]{artist_menu.pdf}
         \end{center}
         \caption{Artist Menu with information about "Chris Cornell"}
         \label{fig:artist_menu}
