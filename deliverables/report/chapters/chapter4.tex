@@ -33,7 +33,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
     \label{ssub:subsection_name}
       Spotify Applications are developed in its runtime environment - the Spotify Desktop Client.
 
-      To open a Spotify Application, locally, one writes the following in the search bar: spotify:app:rama
+      To open a Spotify Application, in the Desktop Client, one writes the following in the search bar: spotify:app:rama
 
       Where \emph{rama} is the application identifier declared in the \emph{manifest.json} file\footnote{file located at the root of the project folder}.
 
@@ -56,7 +56,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
     \subsubsection{Webkit Development Tools - webkit.org} % (fold)
     \label{ssub:webkit_tools}
 
-      The webkit tools provides a bundle of tools for web development.
+      Webkit provides a bundle of tools for web development.
 
       Being the most important:
 
@@ -424,6 +424,8 @@ By this point, the validation of the prototype will be analysed, by explaining t
 
   % subsection main_features (end)
 
+  \clearpage
+
 
   \subsection{Development Processes} % (fold)
     \label{sub:development_process}
@@ -436,7 +438,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
 
     An overview of pushed commits can be viewed in Figure~\ref{fig:code_contributions}.
 
-    \begin{figure}
+    \begin{figure}[H]
       \begin{center}
         \includegraphics[width=\textwidth]{code_contributions.pdf}
       \end{center}
@@ -501,6 +503,8 @@ By this point, the validation of the prototype will be analysed, by explaining t
       \item Was the application well integrated with Spotify?
     \end{enumerate}
 
+    Also in the end, the user was encouraged to leave suggestions/feedback or comments about the application.
+
   % subsection user_tests (end)
 
 
@@ -516,7 +520,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
 
       The results can be seen in Table~\ref{tab:question1}.
 
-      \begin{table}[hb]
+      \begin{table}[H]
          \begin{center}
            \begin{tabular}{l|c}
        
@@ -559,12 +563,14 @@ By this point, the validation of the prototype will be analysed, by explaining t
       The one user that did not find new music, did not notice the action buttons.
       This indicates that the buttons maybe should placed somehow near the artist node, and not on the artist menu.
 
+      Furthermore, additional improvements to the choice of artists to include in the graph might be required in order to try and impress the user right from the start.
+
     \subsubsection{Question 3: Do you think you would use the application to discover new music?}
     \label{ssub:question_3}
 
-      This is the ultimate question that leaves the user thinking if RAMA in fact a usable way of discovering new music within Spotify.
+      This is the ultimate question that leaves the user thinking if RAMA is in fact a usable way of discovering new music within Spotify.
 
-      \begin{table}[hb]
+      \begin{table}[H]
          \begin{center}
            \begin{tabular}{l|c}
        
@@ -587,9 +593,9 @@ By this point, the validation of the prototype will be analysed, by explaining t
       The results indicate that the visual representation is indeed a very useful feature.
       Although the majority of the users do not find it to be an essential feature that Spotify is missing, they still think it serves as a good helper to discover new music. \\
 
-      Given how different listening habits of users can be, some like to just have an automatic generated playlist playing in the background, wherein others might like to listen to an artist's albums in sequence. \\
+      Given how different listening habits of users can be, RAMA might be or not the appropriate tool for them: some like to just have an automatic generated playlist playing in the background, wherein others might like to listen to an artist's albums in sequence. \\
       The first ones are more adventurous when discovering new music and may not care much about what artists they are listening to, while the latter ones are more conservative and may feel very strong about the music artists they like.
-      These are two extreme cases, but it may play a huge role in the user experience of RAMA: users that relate more to the adventurous type, may not feel that the graph is the best way to discover new music and may ask, for example, for a way to select multiple artists to generate an automatic playlist; and users that related more the conservative type, may be very pleased with RAMA's concept.
+      These are two extreme cases, but it may play a huge role in the user experience of RAMA: users that relate more to the adventurous type, may not feel that the graph is the best way to discover new music and may ask, for example, for a way to select multiple artists to generate an automatic playlist; wherein users that relate more to the conservative type, may be very pleased with RAMA's concept.
 
 
     \subsubsection{Question 4: Was the application well integrated with Spotify?}
@@ -621,7 +627,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
       This is a very important indicative for evaluating the application's integration into Spotify's environment since it plays a major role in defining how good is RAMA in terms of user experience. \\
 
       The user that classified with 2 points was not able to create a new map from an artist that was not visible in the graph although it was a regular Spotify user.
-      This might indicate that the current way of performing this action, might be too work on the user.
+      This might indicate that the current way of performing this action is not very intuitive.
   
   % subsection data_analysis (end)
 
