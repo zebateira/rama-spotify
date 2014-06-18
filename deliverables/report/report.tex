@@ -40,8 +40,6 @@
 %% macros
 \include{utils/mymacros}
 
-% \includeonly{chapters/chapter4}
-
 %%========================================
 %% Start of document
 %%========================================
@@ -65,14 +63,20 @@
 
 \logo{uporto-feup.pdf}
 
+
 \begin{Prolog}
   %% Preliminary materials
   \include{prolog/abstract} % the abstract
   \include{prolog/acknows}  % the acknowledgments
   % \include{prolog/quote}
   \cleardoublepage
-  \pdfbookmark[0]{Content}{contents}
-  \tableofcontents
+
+  \begingroup
+    \baselineskip=13pt % so the toc fits in one page
+    \pdfbookmark[0]{Content}{contents}
+    \tableofcontents
+  \endgroup
+
   \cleardoublepage
   \pdfbookmark[0]{List of Figures}{figures}
   \listoffigures
