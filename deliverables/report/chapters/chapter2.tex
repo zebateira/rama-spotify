@@ -9,10 +9,8 @@
 \section{Introduction}
 
 In this chapter, the most relevant web services for this thesis will be analysed.
-
 The proposed methodology focus on how the content is presented and less on what the content is (without discarding its importance).
 Even so, some projects that focus on the content will be analysed.
-
 The presented projects often use external data bases (like last.fm) to fetch metadata from.
 This is the preferred way, since those are the most complete sets of information. 
 
@@ -23,7 +21,6 @@ This is the preferred way, since those are the most complete sets of information
   \label{sub:liveplasma}
 
     liveplasma.com is a \emph{flash}\footnote{\url{http://get.adobe.com/flashplayer}} application that not only it allows to see a graph of music artists, but also of books and movies.
-
     The interaction with the graph is very faulted: no changes to the graph are allowed, and the user can easily make a mistake and perform unwanted actions like redrawing the graph with another artist as the root node.
 
     \begin{figure}
@@ -35,9 +32,7 @@ This is the preferred way, since those are the most complete sets of information
     \end{figure}
 
     In \ref{fig:sota_liveplasma} one can see the search result for "Amália Rodrigues".
-
     On the left side of the application there are some interesting elements: a grid of the artist's albums, a mini-player (stream from Youtube).
-
     In \ref{fig:sota_liveplasma2} the user can have the choice to play tracks \emph{only} from that artist, or play \emph{similar} artists.
 
     \begin{figure}[b]
@@ -66,8 +61,7 @@ This is the preferred way, since those are the most complete sets of information
       The graph drawn from this simple search, is very cluttered with edges.
       Two nodes can have several connections between them, which seems to overload the graph and making it very confusing.
 
-      Different colours are used, but their meaning remains unknown. One can assume that they represent the similarity between artists, but that is just speculation.
-
+      Different colours are used for the nodes and edges, but their meaning remains unknown. One can assume that they represent the similarity between artists, but that is just speculation.
       It can also be assumed that the size of the nodes (radius value) can be directly proportional to the artist's popularity, but that is, again, just speculation.
 
       One critical detail is that the user cannot visually point out the search node in the graph, given the lack of visual distinction from the other nodes of the graph (\ref{fig:sota_liveplasma}).
@@ -89,7 +83,6 @@ This is the preferred way, since those are the most complete sets of information
 
     Tuneglue is another flash application that tries to explore the graphic visualization of network of related artists.
     Last.fm's metadata API is used to retrieve artist information.
-
     When you start Tuneglue and search for an artist, say "Mariza", the user is presented with a single-node graph.
     By clicking the node, the user has four options (\ref{fig:sota_tuneglue}): expand, releases, lock position and delete.
 
@@ -104,7 +97,7 @@ This is the preferred way, since those are the most complete sets of information
 
     When you first expand a node, you get the root node with six child nodes \ref{fig:sota_tuneglue2}.
 
-    \begin{figure}[!h]
+    \begin{figure}[H]
       \begin{center}
         \includegraphics[width=0.5\textwidth]{tuneglue2.pdf}
       \end{center}
@@ -128,7 +121,6 @@ This is the preferred way, since those are the most complete sets of information
     \label{ssub:audiomap_cons}
 
       However, the user has the responsibility to create the whole graph, which might be too much trouble and deteriorate the user experience.
-
       Again the root node is not highlighted, which might leave the user lost when the graph gets more and more complex.
 
     % subsubsection contras (end)
@@ -173,11 +165,10 @@ This is the preferred way, since those are the most complete sets of information
       \end{figure}
 
       Independently of the search form used, the result will always be one (or more) graphs where the nodes are music artists.
-
       MusicRoamer is worth mentioning because of the way it shows the graph.
       In \ref{fig:sota_musicroamer2} one can see the search result for "Mariza".
 
-      \begin{figure}[!ht]
+      \begin{figure}[H]
         \begin{center}
           \includegraphics[width=0.5\textwidth]{musicroamer3.pdf}
         \end{center}
@@ -185,11 +176,11 @@ This is the preferred way, since those are the most complete sets of information
         \label{fig:sota_musicroamer2}
       \end{figure}
 
-      The images of the music artists are used to represent the nodes. This way, the user has a more friendly mind map of the resulting graph.
-
+      The images of the music artists are used to represent the nodes.
+      This way, the user has a more friendly mind map of the resulting graph.
       There are also some parameters (\ref{fig:sota_musicroamer3}) that the user can personalize to change the appearance of the graph: zoom; repulsion force between the nodes; size of the artist's images and the number of artist to be used as the branching value.
 
-      \begin{figure}[!h]
+      \begin{figure}[H]
         \begin{center}
           \includegraphics[width=0.6\textwidth]{musicroamer2.pdf}
         \end{center}
@@ -203,7 +194,6 @@ This is the preferred way, since those are the most complete sets of information
     \label{ssub:cons}
 
       MusicRoamer is a flash application which makes the interface less natural and fluid to a website user.
-
       Another problem occurs when the user starts to expand more and more nodes.
       The graph starts to get confusing (\ref{fig:sota_musicroamer4}), the edges are drawn over the images, the artist's names start to get overlap other artist's images.
 
@@ -236,7 +226,6 @@ This is the preferred way, since those are the most complete sets of information
 
   There is an uncountable number of services to discover new music.
   The ones presented in the previous examples have a visual representation in graph.
-
   The following services have a some what interesting method to present the users with new music (not necessarily using visual tools):
 
 
@@ -267,5 +256,4 @@ This is the preferred way, since those are the most complete sets of information
 
   The most important aspect to retain from the previous examples is that the bigger the visualization parameters (branching and depth) of the graph, the more confusing and cluttered the graph becomes.
   One could say that the visual tool loses its initial purpose to help the user to discover new music.
-
   A way to avoid that problem would be to force limits in the graph creation process.

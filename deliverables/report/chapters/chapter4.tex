@@ -9,7 +9,6 @@
 In this chapter, further details about the prototype's main features and the methodologies used when developing the prototype, as well as in the the validation process, will be explored.
 
 The Implementation section will go into details about the processes used to maintain a sane development environment by taking advantage of several tools that automated most of the common tasks. The main implemented features will also be analysed.
-
 By this point, the validation of the prototype will be analysed, by explaining the performed user tests, as well the analysis of the results.
 
 \section{Implementation} % (fold)
@@ -32,10 +31,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
     \subsubsection{Spotify Desktop Client} % (fold)
     \label{ssub:subsection_name}
       Spotify Applications are developed in its runtime environment - the Spotify Desktop Client.
-
-      To open a Spotify Application, in the Desktop Client, one writes the following in the search bar: spotify:app:rama
-
-      Where \emph{rama} is the application identifier declared in the \emph{manifest.json} file\footnote{file located at the root of the project folder}.
+      To open a Spotify Application, in the Desktop Client, one writes the following in the search bar: spotify:app:rama, where \emph{rama} is the application identifier declared in the \emph{manifest.json} file\footnote{file located at the root of the project folder}.
 
       Example:
 
@@ -43,7 +39,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
 
       There are useful options for development located in the "Develop" tab (\ref{fig:html5_support}).
 
-      \begin{figure}[h]
+      \begin{figure}[H]
         \begin{center}
           \includegraphics[width=0.8\textwidth]{html5_support.pdf}
         \end{center}
@@ -120,7 +116,6 @@ By this point, the validation of the prototype will be analysed, by explaining t
     \label{ssub:npm}
       Package dependency manager for nodejs - Node Packaged Modules.
       Node packages will be used, since Gruntjs plugins are all nodejs packages (as well as Grunt itself).
-
       A npm configuration file (\emph{package.json}) allows to identify the packages that the application depends upon, as well as its versions.
 
       Example: 
@@ -171,10 +166,9 @@ By this point, the validation of the prototype will be analysed, by explaining t
       \end{figure}
 
       The graph-like structure is created by recursively fetching a list of related artists from each artist. Once a certain pre-established limit of recursive levels is reached\footnote{depth value of a graph}, the algorithm stops.
-
       The graph creation algorithm is as follows:
 
-      % change the code the attachments
+      % TODO change the code to attachments
       \lstinputlisting[
         caption={Simplified graph creation algorithm in Javascript (duplicate nodes checking is encapsulated in the insertNode function)}, style=htmlcssjs
       ]
@@ -235,12 +229,10 @@ By this point, the validation of the prototype will be analysed, by explaining t
       At this point, the user's perception of the artist "Stone Temple Pilots" is now different from the previous example (Figure~\ref{fig:graph_treemode}).
       These added connections are, in a way, clustering together the most connected nodes.
       In this particular example, one could see an improvement with this approach: it contributes to the user's perception of the artist's network by making sure the user knows that those specific artists are more connected between them, than any others.
-      The fact is that only three extra edges where added, meaning there is not much visual clutter in the visualization. \\
-
+      The fact is that only three extra edges where added, meaning there is not much visual clutter in the visualization.
       However, that might not always be the case.
 
       One could argue that the "Mad Season" artist node is already disturbing the visual representation by being drawn over an edge.
-
       In fact, with the exact same values of branching, depth and tree mode off, when creating a graph for the artist "Mariza", the visual clutter is so strong that the graph becomes confusing and not very helpful: Figure~\ref{fig:graph_notreemode2}.
 
       \begin{figure}[tb]
@@ -270,7 +262,6 @@ By this point, the validation of the prototype will be analysed, by explaining t
       The \textbf{depth} value of a graph determines how deep the recursive algorithm is.
       The previously presented example (\ref{fig:graph_treemode}) has a depth value of 2.
       The example \ref{fig:graph_depth3} has a depth value of 3.
-
       \begin{figure}[hb]
         \begin{center}
           \includegraphics[width=\textwidth]{graph_depth3.pdf}
@@ -289,7 +280,6 @@ By this point, the validation of the prototype will be analysed, by explaining t
     \label{ssub:visualization_parameters}
     
     The visualization parameters are the branching and depth values, as well as the option to enable/disable the tree mode.
-
     To allow the user to change these values, a settings menu was added to the application, and can be seen in Figure~\ref{fig:settings_menu}.
     When the user changes the parameters, the graph refreshes accordingly.
 
@@ -312,7 +302,6 @@ By this point, the validation of the prototype will be analysed, by explaining t
       \paragraph{Expand node} \hfill \\
       This option allows the user to expand a node further (ignoring the graph's branching value).
       Given the previous example \ref{fig:graph_treemode}, if the "Dispatch" node gets expanded, it results in \ref{fig:node_expanded}.
-
       To put it simply, to expand a node, one performs one iteration of the graph creation algorithm.
 
       \begin{figure}[tb]
@@ -337,7 +326,6 @@ By this point, the validation of the prototype will be analysed, by explaining t
     \subsubsection{Artist Info} % (fold)
       \label{ssub:artist_info}
       The user is able to see additional information about artists in the Artist Menu (\ref{fig:artist_menu}) such as its popularity value, albums and tags, as well as perform the \emph{expand} and \emph{new map} functions described in \ref{ssub:edition}.
-
       \begin{figure}[tb]
         \begin{center}
           \includegraphics[width=0.2\textwidth]{artist_menu.pdf}
@@ -345,7 +333,6 @@ By this point, the validation of the prototype will be analysed, by explaining t
         \caption{Artist Menu with information about "Chris Cornell"}
         \label{fig:artist_menu}
       \end{figure}
-
       When the user selects a node by clicking on it, the artist menu updates the displayed information.
 
       The \emph{popularity} and the \emph{albums} are metadata information retrieved from Spotify's API framework (\ref{sub:spotify_apps}).
@@ -383,9 +370,8 @@ By this point, the validation of the prototype will be analysed, by explaining t
 
       So given this, one can conclude that by sorting the terms of an artist by its frequency value, the top terms will be more general (rock, pop, jazz) and not very descriptive or specific of an artist.
       And by sorting the tags by weight, one will get the most descriptive tags of that specific artist.
-
       Clearly, in this case, for the Artist Menu the weight parameter is very helpful, and so, the sort parameter used for the query is \emph{weight}.
-      As seen in \ref{fig:artist_menu}, the tags shown are very descriptive of the artist (grunge, 80s, hard rock). \\
+      As seen in \ref{fig:artist_menu}, the tags shown are very descriptive of the artist (grunge, 80s, hard rock).
 
     % subsubsection artist_info (end)
 
@@ -393,7 +379,6 @@ By this point, the validation of the prototype will be analysed, by explaining t
       \label{ssub:tags_overlay}
 
       The tags overlay menu (\ref{fig:tags_overlay}) is meant to enhance the user's perception on the displayed artists' nodes regarding their tags.
-
       \begin{figure}[tb]
         \begin{center}
           \includegraphics[width=\textwidth]{tags_overlay.pdf}
@@ -401,10 +386,8 @@ By this point, the validation of the prototype will be analysed, by explaining t
         \caption{Tags overlay for the displayed graph. When the tag "grunge" is selected the corresponding artist nodes are selected}
         \label{fig:tags_overlay}
       \end{figure}
-
       These tags are the same ones used in the Artist Menu (\ref{fig:artist_menu}).
-
-      The tags are selectable, and so, when clicked, the respective artist nodes that are described by those tags, are highlighted (as seen in Figure~\ref{fig:tags_overlay}).
+      They are selectable, and so, when clicked, the respective artist nodes that are described by those tags, are highlighted (as seen in Figure~\ref{fig:tags_overlay}).
 
       The tags shown in this menu, are just a small sample of the artists' tags of the whole graph.
       For example, for the graph in the Figure~\ref{fig:graph_anamanaguchi}, the total count of unique tags in the whole graph is 93.
@@ -431,7 +414,6 @@ By this point, the validation of the prototype will be analysed, by explaining t
     \label{sub:development_process}
 
     The primal objectives for the RAMA Spotify Application were to implement the basic functionalities that RAMA's website\footnote{\url{http://rama.inescporto.pt/app}} offers.
-
     Incrementally, they were implemented, tested and added to the application.
     A timeline (chronological order from bottom to top) with the added features (each update release) can be seen in \\ 
     \indent \url{https://github.com/carsy/rama-spotify/releases} \\
@@ -477,11 +459,9 @@ By this point, the validation of the prototype will be analysed, by explaining t
 
     The proposed application is targeted at Spotify Users.
     However, non-Spotify users also tested RAMA's Spotify Application after a few moments of using Spotify's Desktop Client.
-
     During the test, the user was asked to first use Spotify only.
     The task was to find a couple of new artists that the user liked.
     This first task should take no more than 7 minutes, depending on the user.
-
     The next task was to open the RAMA application and do the same (no more than 7 minutes as well).
     Given this, the user is forced to compare the two approaches: discovering new music with Spotify only, and discovering new music with RAMA's Spotify Application.
 
@@ -517,7 +497,6 @@ By this point, the validation of the prototype will be analysed, by explaining t
     \label{ssub:question_1}
 
       This question was meant to establish the user's experience with Spotify.
-
       The results can be seen in Table~\ref{tab:question1}.
 
       \begin{table}[H]
@@ -540,9 +519,9 @@ By this point, the validation of the prototype will be analysed, by explaining t
          \label{tab:question1}
        \end{table}
 
-      This test group is relatively well distributed with 10 Spotify Users, and 11 non-spotify users. \\
+      This test group is relatively well distributed with 10 Spotify Users, and 11 non-spotify users.
 
-      This information was very important to better understand the user's suggestions that may or may not be related to basic Spotify interactions.
+      This information is very important to better understand the user's suggestions that may or may not be related to basic Spotify interactions.
       For example, when a user wants to start a new map with an artist that is not at the moment visible, there two possibilities to do this.
       By searching the new artist, the user can only then drag and drop the artist into the application in the right side menu, or start playing a song from that artist, and then go back to RAMA and click the \emph{new map} button in the artist menu.
 
@@ -553,8 +532,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
     \label{ssub:question_2}
 
       This was a yes or no question: 20 responded "yes", whereas, 1 responded "no".
-
-      It is clear that RAMA's Spotify Application did not faulted the initial purpose of letting the user discover new music. \\
+      It is clear that RAMA's Spotify Application did not faulted the initial purpose of letting the user discover new music.
 
       Most of the users did not discover new artists before using the \emph{expand} button or the \emph{new map} button.
       The users launched RAMA when listening to a known artist and this means that, for the most cases, the user already knows most of the similar artists that appear in the graph.
@@ -562,7 +540,6 @@ By this point, the validation of the prototype will be analysed, by explaining t
 
       The one user that did not find new music, did not notice the action buttons.
       This indicates that the buttons maybe should placed somehow near the artist node, and not on the artist menu.
-
       Furthermore, additional improvements to the choice of artists to include in the graph might be required in order to try and impress the user right from the start.
 
     \subsubsection{Question 3: Do you think you would use the application to discover new music?}
@@ -591,9 +568,10 @@ By this point, the validation of the prototype will be analysed, by explaining t
        \end{table}
 
       The results indicate that the visual representation is indeed a very useful feature.
-      Although the majority of the users do not find it to be an essential feature that Spotify is missing, they still think it serves as a good helper to discover new music. \\
+      Although the majority of the users do not find it to be an essential feature that Spotify is missing, they still think it serves as a good helper to discover new music.
 
-      Given how different listening habits of users can be, RAMA might be or not the appropriate tool for them: some like to just have an automatic generated playlist playing in the background, wherein others might like to listen to an artist's albums in sequence. \\
+      Given how different listening habits of users can be, RAMA might be or not the appropriate tool for them: some like to just have an automatic generated playlist playing in the background, wherein others might like to listen to an artist's albums in sequence.
+
       The first ones are more adventurous when discovering new music and may not care much about what artists they are listening to, while the latter ones are more conservative and may feel very strong about the music artists they like.
       These are two extreme cases, but it may play a huge role in the user experience of RAMA: users that relate more to the adventurous type, may not feel that the graph is the best way to discover new music and may ask, for example, for a way to select multiple artists to generate an automatic playlist; wherein users that relate more to the conservative type, may be very pleased with RAMA's concept.
 
@@ -624,7 +602,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
 
       The majority of the users felt that the application was part of Spotify.
       These results indicate that the developed prototype blends very well with Spotify's Desktop Client.
-      This is a very important indicative for evaluating the application's integration into Spotify's environment since it plays a major role in defining how good is RAMA in terms of user experience. \\
+      This is a very important indicative for evaluating the application's integration into Spotify's environment since it plays a major role in defining how good is RAMA in terms of user experience.
 
       The user that classified with 2 points was not able to create a new map from an artist that was not visible in the graph although it was a regular Spotify user.
       This might indicate that the current way of performing this action is not very intuitive.
