@@ -13,7 +13,6 @@ By this point, the validation of the prototype will be analysed, by explaining t
 
 \section{Implementation} % (fold)
 \label{sec:implementation}
-
     
   \subsection{Technologies used} % (fold)
   \label{sub:technologies}
@@ -23,8 +22,9 @@ By this point, the validation of the prototype will be analysed, by explaining t
     \subsubsection{Git} % (fold)
     \label{ssub:git}
     
-    The chosen version control system to manage the source code was git\footnote{git: \url{http://git-scm.com}}. \\
-    The use of branches\footnote{git branches: \url{http://git-scm.com/book/en/Git-Branching-What-a-Branch-Is}} and tags\footnote{git tags: \url{http://git-scm.com/book/en/Git-Basics-Tagging}} allowed for a manageable code development environment, e.g., marking release commits or working on experimental features.
+    The chosen version control system to manage the source code was Git\footnote{Git: \url{http://git-scm.com}}. \\
+    Although not strictly followed, the model described in \cite{nviebranching} was an inspiration.
+    The use of branches~\cite{gitbranches} and tags~\cite{gittags} allowed for a manageable code development environment, e.g., marking release commits or working on experimental features.
 
     % subsubsection git (end)
 
@@ -32,7 +32,6 @@ By this point, the validation of the prototype will be analysed, by explaining t
     \label{ssub:subsection_name}
       Spotify Applications are developed in its runtime environment - the Spotify Desktop Client.
       To open a Spotify Application, in the Desktop Client, one writes the following in the search bar: spotify:app:rama, where \emph{rama} is the application identifier declared in the \emph{manifest.json} file\footnote{file located at the root of the project folder}.
-
       Example:
 
       \lstinputlisting[caption={manifest.json: \emph{BundleIdentifier} is the application's identifier; \emph{Dependencies} declares the Application's API dependencies.}, style=htmlcssjs, captionpos=b]{snippets/manifest.json}
@@ -117,7 +116,6 @@ By this point, the validation of the prototype will be analysed, by explaining t
       Npmjs is the package dependency manager for nodejs\footnote{nodejs: \url{http://nodejs.org}} - Node Packaged Modules.
       Node packages will be used, since Gruntjs plugins are all nodejs packages (as well as Grunt itself).
       An npm configuration file (\emph{package.json}) allows the identification of the packages that the application depends upon, as well as its versions.
-
       Example: 
 
       \lstinputlisting[caption={\emph{package.json}: "*" means that npm should always install the latest version of that package.}, style=htmlcssjs, captionpos=b]{snippets/package.json}
