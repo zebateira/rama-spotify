@@ -45,8 +45,8 @@ The prototype should pursue the objective of contributing to an improved user ex
     \item[\textbf{Mobile Applications}] The mobile applications are available for Android and iOS devices.
   \end{description}
 
-  \subsection{Music Discovery Tools} % (fold)
-  \label{sub:discovery_tools}
+  % \subsection{Music Discovery Tools} % (fold)
+  % \label{sub:discovery_tools}
   
   % browse: groups of playlists
   % activity: social side that shows the user's friends' activity on spotify (what they listen to)
@@ -65,7 +65,7 @@ The prototype should pursue the objective of contributing to an improved user ex
 
     \subsection{Spotify Apps} % (fold)
     \label{sub:spotify_apps}
-      Spotify Applications\footnote{\url{https://developer.spotify.com/technologies/apps}} are a special case in the whole set of tools provided by Spotify.
+      Spotify Applications~\cite{spotifyapps} are a special case in the whole set of tools provided by Spotify.
       These applications are designed to run \emph{inside} the Desktop Client.
       Spotify users can run and install applications from the store called "App Finder".
       All the applications are free.
@@ -91,7 +91,7 @@ The prototype should pursue the objective of contributing to an improved user ex
       \end{figure}
 
       The Applications' runtime environment is one of a browser-based.
-      More specifically, powered by the Chromium Embedded Framework\footnote{\url{https://code.google.com/p/chromiumembedded}}.
+      More specifically, powered by the Chromium Embedded Framework~\cite{chromiumembedded}.
       This means that the code to develop a Spotify Application follows the same principles as a web application: HTML, CSS and Javascript.
 
       Spotify developed two Frameworks\footnote{\url{https://developer.spotify.com/technologies/apps/reference}} to help developers create these applications: the API 1.x Framework\footnote{\url{https://developer.spotify.com/docs/apps/api/1.0/}} and the Views Framework\footnote{\url{https://developer.spotify.com/docs/apps/views/1.0/}}.
@@ -132,7 +132,7 @@ The prototype should pursue the objective of contributing to an improved user ex
 
       To embed a widget, it is only required to copy-paste Html code into the website, where appropriate:
 
-      \lstinputlisting[language=HTML,caption={Html code to embed the \emph{Play Button}}, style=htmlcssjs]{snippets/play_button.html}
+      \lstinputlisting[language=HTML,caption={Html code to embed the \emph{Play Button}}, style=htmlcssjs, captionpos=b]{snippets/play_button.html}
 
       These widgets are useful to develop the proposed modules \ref{item:obj1} and \ref{item:obj3}.
 
@@ -150,7 +150,7 @@ The prototype should pursue the objective of contributing to an improved user ex
       That also applies to third-party applications that are using Libspotify SDK, which allow, for example, the user to login with their Spotify account.
       But in this case, not only do they need to be Spotify users, they also need to have signed up to a paid Spotify subscription.
       And not only do the users need to pay to use the Spotify-powered application, but the developers as well.
-      This is a very restrictive environment, although Libspotify SDK comes in many different flavours\footnote{\url{https://developer.spotify.com/technologies/libspotify/\#libspotify-downloads}}.
+      This is a very restrictive environment, although Libspotify SDK comes in many different flavours~\cite{libspotifysdk}.
 
       This tool would be used to develop modules \ref{item:obj1}, \ref{item:obj2} and \ref{item:obj6}.
       
@@ -161,7 +161,7 @@ The prototype should pursue the objective of contributing to an improved user ex
     \subsection{Metadata API} % (fold)
     \label{sub:metadata_api}
 
-      The \emph{Metadata API}\footnote{\url{https://developer.spotify.com/technologies/web-api}} allows for applications to retrieve information from Spotify's music catalogue: tracks, albums, artists, playlists, and so on.
+      The \emph{Metadata API}\footnote{Metadata API: \url{https://developer.spotify.com/technologies/web-api}. This API was recently deprecated (June, 2014) and was replaced by the \emph{Web API}. It follows the same principles of the previous one, and so, for the purposes of this report, the differences are not relevant.} allows for applications to retrieve information from Spotify's music catalogue: tracks, albums, artists, playlists, and so on.
 
       Requests to the database are done through HTTP and are of two types: \emph{search}\footnote{\url{https://developer.spotify.com/technologies/web-api/search}} e \emph{lookup}\footnote{\url{https://developer.spotify.com/technologies/web-api/lookup}}.
       To request detailed information of, e.g., an artist, the URI (used as the unique identifier) of that artist is required. Such ID is of the form:
@@ -180,7 +180,7 @@ The prototype should pursue the objective of contributing to an improved user ex
 
        \url{spotify:track:2vqYasauhDLVjTt7CGWK6y} (track "Fado Vianinha" of the previous album) \\
 
-      These URI schemes are compliant with Rosetta Stone's ID spaces\footnote{\url{http://developer.echonest.com/docs/v4\#project-rosetta-stone}}.
+      These URI schemes are compliant with Rosetta Stone's ID spaces~\cite{rosettastone}.
 
       First, to get this URI, one needs to search the database.
 
@@ -205,17 +205,18 @@ The prototype should pursue the objective of contributing to an improved user ex
 
           The server responds with:
 
-          \lstinputlisting[caption={Results ordered by "popularity"}, style=htmlcssjs]{snippets/search_camane.json}
+          \lstinputlisting[caption={Results ordered by "popularity"}, style=htmlcssjs, captionpos=b]{snippets/search_camane.json}
 
         \item[\emph{Lookup}] \hfill \\
 
           When the URI is known, one can finally lookup detailed information about a database item. With the following query:
 
+          \sloppy
           \url{http://ws.spotify.com/lookup/1/.json?uri=spotify:artist:3MLPFTe4BrpEV2eOVG0gLK&extras=album}
 
           The server responds with:
 
-          \lstinputlisting[caption={\emph{lookup} of the artist "Camané"}, style=htmlcssjs]{snippets/lookup_camane.json}
+          \lstinputlisting[caption={\emph{lookup} of the artist "Camané"}, style=htmlcssjs, captionpos=b]{snippets/lookup_camane.json}
 
       \end{description}
 
@@ -275,7 +276,7 @@ The prototype should pursue the objective of contributing to an improved user ex
     There was a need to know if the canvas element was well supported by Spotify's environment, because that is the preferred way to graphically draw a graph.
     To test that, a simple application was created with the following code:
 
-    \begin{lstlisting}[caption={\emph{iframe} element that allows to embed RAMA's website into the application.}, style=htmlcssjs]
+    \begin{lstlisting}[caption={\emph{iframe} element that allows to embed RAMA's website into the application.}, style=htmlcssjs, captionpos=b]
       <iframe src="http://rama.inescporto.pt/app" frameborder="0">
       </iframe>\end{lstlisting}
 

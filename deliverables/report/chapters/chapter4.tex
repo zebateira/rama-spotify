@@ -35,7 +35,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
 
       Example:
 
-      \lstinputlisting[caption={manifest.json: \emph{BundleIdentifier} is the application's identifier; \emph{Dependencies} declares the Application's API dependencies.}, style=htmlcssjs]{snippets/manifest.json}
+      \lstinputlisting[caption={manifest.json: \emph{BundleIdentifier} is the application's identifier; \emph{Dependencies} declares the Application's API dependencies.}, style=htmlcssjs, captionpos=b]{snippets/manifest.json}
 
       There are useful options for development located in the "Develop" tab (Figure~\ref{fig:html5_support}).
 
@@ -120,7 +120,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
 
       Example: 
 
-      \lstinputlisting[caption={\emph{package.json}: "*" means that npm should always install the latest version of that package.}, style=htmlcssjs]{snippets/package.json}
+      \lstinputlisting[caption={\emph{package.json}: "*" means that npm should always install the latest version of that package.}, style=htmlcssjs, captionpos=b]{snippets/package.json}
 
       Note that these software packages are for development only. They are not needed at all when running production code.
 
@@ -170,7 +170,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
 
       % TODO change the code to attachments
       \lstinputlisting[
-        caption={Simplified graph creation algorithm in Javascript (duplicate nodes checking is encapsulated in the insertNode function)}, style=htmlcssjs
+        caption={Simplified graph creation algorithm in Javascript (duplicate nodes checking is encapsulated in the insertNode function)}, style=htmlcssjs, captionpos=b
       ]
       {snippets/map_creation_alg.js}
 
@@ -335,14 +335,12 @@ By this point, the validation of the prototype will be analysed, by explaining t
       \end{figure}
       When the user selects a node by clicking on it, the artist menu updates the displayed information.
 
-      The \emph{popularity} and the \emph{albums} are metadata information retrieved from Spotify's API framework (\ref{sub:spotify_apps}).
-      The tags, however, are not supported by Spotify's API.
-      For that, Echonest's API\footnote{Echonest's API: \url{http://developer.echonest.com/docs/v4}} was used.
+      The \emph{popularity}, the \emph{albums} and the \emph{tags} are metadata information retrieved from Spotify's API framework (\ref{sub:spotify_apps}), although Echonest's API\footnote{Echonest's API: \url{http://developer.echonest.com/docs/v4}} is also used as a fallback source for the \emph{tags} (sometimes Spotify's API responds with a small number of results).
 
       \paragraph{Echonest's Terms} \hfill \\
       Echonest's tags are very similar to the most commonly known \emph{music genres} (like jazz, country, rock), but they also might include more alternative descriptive terms (progressive metal, symphonic, soundtrack).
 
-      The connection between the two APIs is possible thanks to the Project Rosetta Stone\footnote{\url{http://developer.echonest.com/docs/v4\#project-rosetta-stone}}.
+      The connection between the two APIs is possible thanks to the Project Rosetta Stone~\cite{rosettastone}.
       For example, to retrieve the terms\footnote{Echonest calls it terms. From now on, terms and tags will be used interchangeably} of an artist from Echonest's metadata API using the Spotify's Artist ID, the following query is used: \\
 
       \url{
@@ -354,17 +352,17 @@ By this point, the validation of the prototype will be analysed, by explaining t
       \emph{Sort} is another interesting parameter. 
       In general, artists have more than 10 or 15 terms.
       Each term has a value of \emph{frequency} and a value of \emph{weight}, and both are float values that range between zero and one.
-      No official documentation was found to explain what do these values represent, but Paul Lamere\footnote{Paul Lamere is Director of Developer Platform at \url{the.echonest.com} (\url{http://the.echonest.com/company}). He also blogs here: \url{http://musicmachinery.com}} explains\footnote{thread in the forum for Echonest's API users - \url{http://developer.echonest.com/forums/thread/353}} that:
+      No official documentation was found to explain what do these values represent, but Paul Lamere\footnote{Paul Lamere is Director of Developer Platform at \url{the.echonest.com} (\url{http://the.echonest.com/company}). He also blogs here: \url{http://musicmachinery.com}} explains~\cite{lamereterms} that:
 
       \begin{quote}
       \emph{
-        term frequency is directly proportional to how often that term is used to describe that artist
+        "term frequency is directly proportional to how often that term is used to describe that artist"
       }
       \end{quote}
 
       \begin{quote}
       \emph{
-        term weight is a measure of how important that term is in describing the artist
+        "term weight is a measure of how important that term is in describing the artist"
       }
       \end{quote}
 
@@ -413,7 +411,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
   \subsection{Development Processes} % (fold)
     \label{sub:development_process}
 
-    The main objectives for the RAMA Spotify Application were to implement the basic functionalities that RAMA's website\footnote{\url{http://rama.inescporto.pt/app}} offers.
+    The main objectives for the RAMA Spotify Application were to implement the basic functionalities that RAMA's website~\cite{ramaapp} offers.
     Incrementally, they were implemented, tested and added to the application.
     A timeline (chronological order from bottom to top) with the added features (each update release) can be seen in \\ 
     \indent \url{https://github.com/carsy/rama-spotify/releases} \\
