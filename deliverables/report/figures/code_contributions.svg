@@ -10,197 +10,234 @@
    height="175"
    width="920"
    class="viz"
-   id="svg2"
+   id="svg3127"
    version="1.1"
-   inkscape:version="0.48.4 r9939"
-   sodipodi:docname="code_contributions.pdf">
+   inkscape:version="0.48.2 r9819"
+   sodipodi:docname="code_contributions.svg">
   <metadata
-     id="metadata88">
+     id="metadata3213">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <defs
-     id="defs86" />
+     id="defs3211" />
   <sodipodi:namedview
-     pagecolor="#ffffff"
+     pagecolor="#f3f3f3"
      bordercolor="#666666"
      borderopacity="1"
      objecttolerance="10"
      gridtolerance="10"
      guidetolerance="10"
-     inkscape:pageopacity="0"
+     inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:window-width="1440"
-     inkscape:window-height="876"
-     id="namedview84"
+     inkscape:window-width="1466"
+     inkscape:window-height="943"
+     id="namedview3209"
      showgrid="false"
-     inkscape:zoom="0.89771817"
-     inkscape:cx="485.63593"
-     inkscape:cy="91.700893"
+     inkscape:zoom="1.28"
+     inkscape:cx="428.76928"
+     inkscape:cy="14.843996"
      inkscape:window-x="0"
-     inkscape:window-y="24"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg2" />
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg3127" />
+  <line
+     style="fill:#aaaaaa;fill-opacity:1;stroke:#cccccc;stroke-opacity:1"
+     y1="105.55556"
+     x1="50"
+     id="line4074"
+     y2="105.55556"
+     x2="900" />
+  <line
+     style="fill:#aaaaaa;fill-opacity:1;stroke:#cccccc;stroke-opacity:1"
+     y1="71.555557"
+     x1="50"
+     id="line3181"
+     y2="71.555557"
+     x2="900" />
+  <path
+     inkscape:connector-curvature="0"
+     id="path3193"
+     d="m 50,120.69444 6.524123,-0.5787 c 6.524123,-0.5787 19.572368,-1.73611 32.620614,-6.36574 13.048243,-4.62963 26.096493,-12.73148 39.144733,-20.25463 13.04825,-7.523148 26.09649,-14.467592 39.14474,-10.99537 13.04825,3.472222 26.09649,17.361111 39.14474,27.77778 13.04824,10.41666 26.09649,17.36111 39.14473,20.83333 13.04825,3.47222 26.0965,3.47222 39.14474,-6.94444 13.04825,-10.41667 26.09649,-31.250003 39.14474,-49.189818 13.04824,-17.939815 26.09649,-32.986111 39.14473,-34.143519 13.04825,-1.157407 26.0965,11.574074 39.14474,26.041667 13.04825,14.467593 26.09649,30.671296 39.14474,32.407407 13.04824,1.736113 26.09649,-10.99537 39.14474,-10.99537 13.04824,0 26.09649,12.731483 39.14473,16.782403 13.04825,4.05093 26.09649,-0.5787 39.14474,-5.208329 13.04824,-4.62963 26.09649,-9.259259 39.14474,-15.046296 13.04824,-5.787037 26.09649,-12.731482 39.14473,-12.152778 13.04825,0.578704 26.09649,8.680556 39.14474,1.157407 13.04825,-7.523148 26.09649,-30.671296 39.14474,-31.25 13.04824,-0.578703 26.09649,21.412037 39.14473,27.777778 13.04825,6.365741 26.09649,-2.893518 39.14474,-10.416666 13.04825,-7.523149 26.09649,-13.310186 39.14474,-9.25926 13.04824,4.050926 26.09649,17.939815 32.62061,24.88426 l 6.52412,6.944444 0,62.5 -6.52412,0 c -6.52412,0 -19.57237,0 -32.62061,0 -13.04825,0 -26.09649,0 -39.14474,0 -13.04825,0 -26.09649,0 -39.14474,0 -13.04824,0 -26.09649,0 -39.14473,0 -13.04825,0 -26.09649,0 -39.14474,0 -13.04825,0 -26.09649,0 -39.14474,0 -13.04824,0 -26.09649,0 -39.14473,0 -13.04825,0 -26.0965,0 -39.14474,0 -13.04825,0 -26.09649,0 -39.14474,0 -13.04824,0 -26.09649,0 -39.14473,0 -13.04825,0 -26.0965,0 -39.14474,0 -13.04825,0 -26.09649,0 -39.14474,0 -13.04824,0 -26.09649,0 -39.14474,0 -13.04824,0 -26.09649,0 -39.14473,0 -13.04825,0 -26.09649,0 -39.14474,0 -13.04824,0 -26.09649,0 -39.14474,0 -13.04824,0 -26.09649,0 -39.14473,0 -13.04825,0 -26.09649,0 -39.14474,0 -13.04825,0 -26.09649,0 -39.14474,0 -13.04824,0 -26.09649,0 -39.144733,0 -13.048246,0 -26.096491,0 -32.620614,0 L 50,145 z"
+     class="area"
+     style="fill:#87d2a0;fill-opacity:1" />
   <g
      class="tick"
-     transform="translate(125.68493,153.27055)"
-     id="g8"
-     style="fill:#666666">
+     transform="translate(122.69736,152.73398)"
+     id="g3133"
+     style="fill:#aaaaaa;fill-opacity:1">
     <line
        y2="6"
        x2="0"
-       id="line10"
+       id="line3135"
        x1="0"
        y1="0"
-       style="fill:#666666" />
+       style="fill:#aaaaaa;fill-opacity:1" />
     <text
        y="9"
        x="0"
-       dy="0"
-       style="text-anchor:middle;fill:#666666"
-       id="text12">February</text>
+       dy="8.9683102e-44"
+       style="text-anchor:middle;fill:#aaaaaa;fill-opacity:1"
+       id="text3137">February</text>
   </g>
   <g
      class="tick"
-     transform="translate(288.69863,153.27055)"
-     id="g14"
-     style="fill:#666666">
+     transform="translate(279.27632,152.73398)"
+     id="g3139"
+     style="fill:#aaaaaa;fill-opacity:1">
     <line
        y2="6"
        x2="0"
-       id="line16"
+       id="line3141"
        x1="0"
        y1="0"
-       style="fill:#666666" />
+       style="fill:#aaaaaa;fill-opacity:1" />
     <text
        y="9"
        x="0"
-       dy="0"
-       style="text-anchor:middle;fill:#666666"
-       id="text18">March</text>
+       dy="8.9683102e-44"
+       style="text-anchor:middle;fill:#aaaaaa;fill-opacity:1"
+       id="text3143">March</text>
   </g>
   <g
      class="tick"
-     transform="translate(468.9355,154.05822)"
-     id="g20"
-     style="fill:#666666">
+     transform="translate(452.39857,152.73398)"
+     id="g3145"
+     style="fill:#aaaaaa;fill-opacity:1">
     <line
        y2="6"
        x2="0"
-       id="line22"
+       id="line3147"
        x1="0"
        y1="0"
-       style="fill:#666666" />
+       style="fill:#aaaaaa;fill-opacity:1" />
     <text
        y="9"
        x="0"
-       dy="0"
-       style="text-anchor:middle;fill:#666666"
-       id="text24">April</text>
+       dy="8.9683102e-44"
+       style="text-anchor:middle;fill:#aaaaaa;fill-opacity:1"
+       id="text3149">April</text>
   </g>
   <g
      class="tick"
-     transform="translate(643.59304,154.05822)"
-     id="g26"
-     style="fill:#666666">
+     transform="translate(620.16173,152.73398)"
+     id="g3151"
+     style="fill:#aaaaaa;fill-opacity:1">
     <line
        y2="6"
        x2="0"
-       id="line28"
+       id="line3153"
        x1="0"
        y1="0"
-       style="fill:#666666" />
+       style="fill:#aaaaaa;fill-opacity:1" />
     <text
        y="9"
        x="0"
-       dy="0"
-       style="text-anchor:middle;fill:#666666"
-       id="text30">May</text>
+       dy="8.9683102e-44"
+       style="text-anchor:middle;fill:#aaaaaa;fill-opacity:1"
+       id="text3155">May</text>
   </g>
   <g
      class="tick"
-     transform="translate(824.07249,145)"
-     id="g32">
+     transform="translate(793.517,152.73398)"
+     id="g3157"
+     style="fill:#aaaaaa;fill-opacity:1">
     <line
        y2="6"
        x2="0"
-       id="line34"
+       id="line3159"
        x1="0"
-       y1="0" />
+       y1="0"
+       style="fill:#aaaaaa;fill-opacity:1" />
     <text
-       y="18.05822"
+       y="9"
        x="0"
-       dy="0"
-       style="text-anchor:middle;fill:#666666"
-       id="text36">June</text>
+       dy="8.9683102e-44"
+       style="text-anchor:middle;fill:#aaaaaa;fill-opacity:1"
+       id="text3161">June</text>
   </g>
   <g
      class="tick"
-     transform="translate(50,145)"
-     id="g42">
+     transform="translate(50,110.27778)"
+     id="g3173"
+     style="fill:#aaaaaa;fill-opacity:1">
     <line
        x2="850"
        y2="0"
-       id="line44"
+       id="line3175"
        x1="0"
-       y1="0" />
+       y1="0"
+       style="fill:#aaaaaa;fill-opacity:1" />
     <text
        x="-10"
        y="0"
-       dy="0"
-       style="text-anchor:end;fill:#666666"
-       id="text46">0</text>
+       dy="8.9683102e-44"
+       style="text-anchor:end;fill:#aaaaaa;fill-opacity:1"
+       id="text3177">10</text>
   </g>
-  <line
-     y1="105.82204"
-     x1="50"
-     id="line50"
-     y2="105.82204"
-     x2="900"
-     style="stroke:#d9d9d9;stroke-opacity:1" />
   <text
-     id="text52"
-     style="text-anchor:end;fill:#666666"
-     dy="0"
-     y="110.27778"
-     x="40">10</text>
-  <line
-     y1="71.099815"
-     x1="50"
-     id="line56"
-     y2="71.099815"
-     x2="900"
-     style="stroke:#d9d9d9;stroke-opacity:1" />
-  <text
-     id="text58"
-     style="text-anchor:end;fill:#666666"
-     dy="0"
+     id="text3183"
+     style="text-anchor:end;fill:#aaaaaa;fill-opacity:1"
+     dy="8.9683102e-44"
      y="75.555557"
      x="40">20</text>
   <line
-     y1="36.934559"
+     style="fill:none;fill-opacity:1;stroke:#dddd00;stroke-opacity:0"
+     y1="36.413914"
      x1="50"
-     id="line62"
-     y2="36.934559"
-     x2="900"
-     style="stroke:#d9d9d9;stroke-opacity:1" />
+     id="line3187"
+     y2="36.413914"
+     x2="900" />
   <text
-     id="text64"
-     style="text-anchor:end;fill:#666666"
-     dy="0"
+     id="text3189"
+     style="text-anchor:end;fill:#aaaaaa;fill-opacity:1"
+     dy="8.9683102e-44"
      y="40.833332"
      x="40">30</text>
-  <path
-     inkscape:connector-curvature="0"
-     id="path68"
-     d="m 50,120.69444 6.792237,-0.5787 C 63.584475,119.53704 77.16895,118.37963 90.753425,113.75 104.3379,109.12037 117.92237,101.01852 131.50685,93.49537 145.09132,85.972222 158.6758,79.027778 172.26027,82.5 c 13.58448,3.472222 27.16895,17.361111 40.75343,27.77778 13.58447,10.41666 27.16895,17.36111 40.75342,20.83333 13.58448,3.47222 27.16895,3.47222 40.75343,-6.94444 13.58447,-10.41667 27.16895,-31.250003 40.75342,-49.189818 13.58448,-17.939815 27.16895,-32.986111 40.75343,-34.143519 13.58447,-1.157407 27.16895,11.574074 40.75342,26.041667 13.58448,14.467593 27.16895,30.671296 40.75343,32.407407 13.58447,1.736113 27.16895,-10.99537 40.75342,-10.99537 13.58448,0 27.16895,12.731483 40.75343,16.782403 13.58447,4.05093 27.16895,-0.5787 40.75342,-5.208329 13.58448,-4.62963 27.16895,-9.259259 40.75343,-15.046296 13.58447,-5.787037 27.16894,-12.731482 40.75342,-12.152778 13.58447,0.578704 27.16895,8.680556 40.75342,1.157407 13.58448,-7.523148 27.16895,-30.671296 40.75343,-31.25 13.58447,-0.578703 27.16895,21.412037 40.75342,37.615741 13.58448,16.203704 27.16895,26.620375 40.75343,36.458335 13.58447,9.83796 27.16895,19.09722 33.96119,23.72685 l 6.79223,4.62963 0,0 -6.79223,0 c -6.79224,0 -20.37672,0 -33.96119,0 -13.58448,0 -27.16895,0 -40.75343,0 -13.58447,0 -27.16895,0 -40.75342,0 -13.58448,0 -27.16895,0 -40.75343,0 -13.58447,0 -27.16895,0 -40.75342,0 -13.58448,0 -27.16895,0 -40.75342,0 -13.58448,0 -27.16895,0 -40.75343,0 -13.58447,0 -27.16895,0 -40.75342,0 -13.58448,0 -27.16895,0 -40.75343,0 -13.58447,0 -27.16895,0 -40.75342,0 -13.58448,0 -27.16895,0 -40.75343,0 -13.58447,0 -27.16895,0 -40.75342,0 -13.58448,0 -27.16895,0 -40.75343,0 -13.58447,0 -27.16895,0 -40.75342,0 -13.58448,0 -27.16895,0 -40.75343,0 -13.58447,0 -27.16895,0 -40.75342,0 -13.58448,0 -27.16895,0 -40.75343,0 -13.58447,0 -27.16895,0 -40.75342,0 -13.58448,0 -27.16895,0 -40.753425,0 -13.584475,0 -27.16895,0 -33.961188,0 L 50,145 z"
-     class="area"
-     style="fill:#88d3a1;fill-opacity:1" />
+  <rect
+     class="extent"
+     x="535.41943"
+     width="0"
+     height="125"
+     id="rect3199"
+     y="288.47961" />
+  <g
+     class="resize e"
+     transform="translate(535.41942,288.47961)"
+     style="display:none"
+     id="g3201">
+    <rect
+       x="-3"
+       width="6"
+       height="125"
+       style="visibility:hidden"
+       id="rect3203"
+       y="0" />
+  </g>
+  <g
+     class="resize w"
+     transform="translate(535.41942,288.47961)"
+     style="display:none"
+     id="g3205">
+    <rect
+       x="-3"
+       width="6"
+       height="125"
+       style="visibility:hidden"
+       id="rect3207"
+       y="0" />
+  </g>
+  <line
+     x2="900"
+     y2="37.555557"
+     id="line4072"
+     x1="50"
+     y1="37.555557"
+     style="fill:#aaaaaa;fill-opacity:1;stroke:#cccccc;stroke-opacity:1" />
 </svg>
