@@ -3,31 +3,24 @@
 \chapter*{Abstract}
 
 Not so long ago, before the Internet boom, listening or discovering new music was a challenge on its own.
-Now, with a few clicks one can have on their hands such a vast music catalogue that a human mind cannot compute it.
+Now, with a few clicks users can have on their hands such a vast music catalogue that a human mind cannot compute it.
 
 There are dozens of online services that offer  exactly that.
-Some focus on creation/generation of playlists, others try to expand their music catalogue even further, but others focus more on personalized music recommendation.
-And these ones present their results to the user with a list or a grid of music artists, for example.
+Some focus on creation and/or generation of playlists, others try to expand their music catalogue even further, or focus on a more personalized music recommendation.
+And these systems present their results to the user with a list or a grid of music artists, for example.
 
 However, lists or grids do not give the user enough information about the relation between the results.
-One could even say that they are not related to each other, which is not true.
-
-The relations exist and can be represented as a network of interconnected artists in a graph, where a node is a music artist, and each edge between them represents a strong connection.
+A possible solution to this problem is to represent the artist's similarities as a network of interconnected artists in a graph, where a node is a music artist, and each edge between them represents a strong connection.
 This is the concept that RAMA (Relational Artist MAps), a project developed at INESC Porto, uses.
-
-From a single search, RAMA is able to draw a graph that helps the user to explore new music that might caught his/her interest in a much more natural way.
-
+From a single search, RAMA draws a graph that helps the user to explore new music that can catch his/her interest in a much more natural way.
 Nonetheless, when a user wants to listen to an artist's music, Youtube's stream is used.
 Although one can find a large catalogue of music in Youtube, this service is not Music Oriented and the sound quality is not adequate for a music streaming service.
-
-Youtube's stream needs to be replaced, and Spotify can provide a quality stream and an accurate music catalogue.
-
+The use of Youtube stream for audio thus needs to be replaced, and Spotify can provide a quality stream and an accurate music catalogue.
 But how can RAMA and Spotify be integrated?
 
-This thesis proposes a Spotify App.
-Will a Spotify user experience a more pleasant and natural way of music discovery from this graphical representation of artist relations within Spotify, than its standard discovery more (with grids)?
-
-That is the main question that this dissertation urges to answer.
+To address this question, this thesis proposes a Spotify App for RAMA.
+Will a Spotify user experience a more pleasant and natural way of music discovery from this graphical representation of artist relations within Spotify, than its standard discovery mode (with grids)?
+This is the main question that this dissertation seeks to answer.
 
 \chapter*{Resumo}
 
@@ -35,24 +28,19 @@ Bem longe vão os tempos, antes da Internet, em que ouvir e descobrir música no
 Agora, com alguns cliques, temos acesso a um catálogo de música tão grande, que o nosso cérebro não consegue processar.
 
 Existem dezenas de serviços online que oferecem isso mesmo.
-Alguns especializam-se na criação/geração de playlists (que funcionam como rádios), outros em expandir o catálogo de música e outros focam-se mais na sugestão e recomendação de artistas/álbuns/músicas personalizada para os utilizadores.
+Alguns especializam-se na criação e/ou geração de playlists (que funcionam como rádios), outros em expandir o catálogo de música e outros focam-se mais na sugestão e recomendação de artistas/álbuns/músicas personalizada para os utilizadores.
 Estes últimos, apresentam as sugestões de conteúdo ao utilizador de uma forma rudimentar como listas ou em grelha.
-
 No entanto, listas ou grelhas não fornecem ao utilizador qualquer tipo de informação adicional sobre a relação entre os artistas nem justificam a sua semelhança.
-Até fazem parecer que não existe nenhuma relação/ligação entre os artistas recomendados, o que não é verdade.
 
 Essas relações existem e podem ser representadas como uma rede de artistas interligados num grafo, onde cada nó é um artista de música, e cada ligação entre nós representa uma ligação forte de parecença entre os artistas.
 Este é o conceito que o RAMA (Relational Artist MAps), projeto desenvolvido no INESC Porto, usa.
-
 A partir de uma pesquisa de um artista de música, o RAMA cria e desenha um grafo que ajuda o utilizador a explorar música que lhe possa interessar de uma forma muito mais natural e informativa.
-
 No entanto, quando um utilizador pretende ouvir uma música de um artista, é usado \emph{stream} do Youtube. 
 Apesar de este oferecer um catálogo alargado de música, o mesmo não é indicado para esta funcionalidade pois não fornece uma API nativamente orientada a música, nem a qualidade de som do \emph{stream} é adequada.
 
 A experiência musical do utilizador do RAMA poderá melhorar consideravelmente ao colmatar esta falha.
 Existe por isso uma necessidade de substituir o Youtube por outro serviço mais orientado a \emph{streaming} de música de qualidade.
 O Spotify é um deles. Fornece API orientada a música, e o \emph{streaming} é de qualidade adequada para este tipo de funcionalidade.
-
 De que formas é que se pode integrar o RAMA e o Spotify?
 
 A escolha final foi desenvolver uma aplicação (como \emph{plugin}) para o Spotify.

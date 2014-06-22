@@ -14,8 +14,8 @@
 
 \usepackage{indentfirst}
 
-\usepackage[english]{styles/feupteses}
-%\usepackage[english,juri]{feupteses}
+% \usepackage[english]{styles/feupteses}
+\usepackage[english,juri]{styles/feupteses}
 %\usepackage[english,final]{feupteses}
 %\usepackage[english,final,onpaper]{feupteses}
 
@@ -23,6 +23,7 @@
 \usepackage{graphicx}
 \usepackage{grffile}
 \usepackage{float}
+% \usepackage{morefloats}
 
 \usepackage{xcolor}
 
@@ -38,8 +39,6 @@
 
 %% macros
 \include{utils/mymacros}
-
-% \includeonly{chapters/chapter4}
 
 %%========================================
 %% Start of document
@@ -64,20 +63,26 @@
 
 \logo{uporto-feup.pdf}
 
+
 \begin{Prolog}
   %% Preliminary materials
   \include{prolog/abstract} % the abstract
   \include{prolog/acknows}  % the acknowledgments
   % \include{prolog/quote}
   \cleardoublepage
-  \pdfbookmark[0]{Content}{contents}
-  \tableofcontents
+
+  \begingroup
+    \baselineskip=12pt % so the toc fits in one page
+    \pdfbookmark[0]{Content}{contents}
+    \tableofcontents
+  \endgroup
+
   \cleardoublepage
   \pdfbookmark[0]{List of Figures}{figures}
   \listoffigures
   \cleardoublepage
-  % \pdfbookmark[0]{Lista de Tabelas}{tables}
-  % \listoftables
+  \pdfbookmark[0]{List of Tables}{tables}
+  \listoftables
   % \include{prolog/abbrevs}
 \end{Prolog}
 
@@ -99,11 +104,7 @@
 \bibliography{bib/myrefs}
 \bibliographystyle{bib/unsrt-pt}
 
-
-%% Comment next 2 commands if numbered appendices are not used
-% \appendix
-% \include{appendix1}
-
-% \PrintIndex
+\appendix
+\include{appendix}
 
 \end{document}

@@ -101,7 +101,6 @@ FUNCTION {init.state.consts}
   #1 'open.brackets :=
   #2 'within.brackets :=
   #3 'close.brackets := % ...urlbst to here
-
   #0 'before.all :=
   #1 'mid.sentence :=
   #2 'after.sentence :=
@@ -364,7 +363,7 @@ FUNCTION {format.names}
 	      if$
 	      t "others" =
 		{ " et~al." * }
-		{ " e " * t * }
+		{ " and " * t * }
 	      if$
 	    }
 	  if$

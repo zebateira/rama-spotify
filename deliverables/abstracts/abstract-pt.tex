@@ -37,9 +37,6 @@
 }
 \date{23 de Julho, 2014}
 
-
-% title end
-
 \begin{document}
 
 \maketitle
@@ -49,121 +46,82 @@
 
 \section{Motivação}\label{sec:motiva}
 
-Neste documento apresentam-se alguns conselhos e instruções para a preparação dos resumos de projeto/dissertação. 
-Pede-se aos autores o favor de, dentro do possível, cumprirem com as instruções que são dadas, assim como com a estrutura apresentada, de forma a manter-se o mesmo aspeto em todos os resumos. 
-Nas subsecções~\ref{sec:lingua} a ~\ref{sec:number} podem encontrar-se alguns detalhes sobre a formatação do documento. 
+  Bem longe vão os tempos, antes da Internet, em que ouvir e descobrir música nova era um desafio por si só.
+  Agora, com alguns cliques, temos acesso a um catálogo de música tão grande, que o nosso cérebro não consegue processar.
 
-Na secção ``Motivação'' deve ser apresentado o enquadramento do trabalho, dando ideia das necessidades que o mesmo cobre.
+  Existem dezenas de serviços online que oferecem isso mesmo.
+  Alguns especializam-se na criação/geração de playlists (que funcionam como rádios), outros em expandir o catálogo de música e outros focam-se mais na sugestão e recomendação de artistas/álbuns/músicas personalizada para os utilizadores.
+  Estes últimos, apresentam as sugestões de conteúdo ao utilizador de uma forma rudimentar como listas ou em grelha.
+
+  No entanto, listas ou grelhas não fornecem ao utilizador qualquer tipo de informação adicional sobre a relação entre os artistas nem justificam a sua semelhança \cite{Lamere2008}.
+  Até fazem parecer que não existe nenhuma relação/ligação entre os artistas recomendados, o que não é verdade.
+
+  Essas relações existem e podem ser representadas como uma rede de artistas interligados num grafo, onde cada nó é um artista de música, e cada ligação entre nós representa uma ligação forte de parecença entre os artistas.
+  Este é o conceito que o RAMA (Relational Artist MAps), projeto desenvolvido no INESC Porto, usa \cite{Costa2008} \cite{Sarmento2009} \cite{Costa2009} \cite{Gouyon2011}.
 
 \section{Objetivos}\label{sec:goals}
 
-A secção ``Objetivos'' deve enunciar claramente os objetivos a atingir com o trabalho de projeto/dissertação, enquadrando-os na respetiva área de atividade a que o trabalho se destina. 
-Por exemplo, este documento tem como objetivos:
-\begin{itemize}
-\item Servir de modelo/exemplo do ponto de vista da dos resumos;
-\item Apresentar o aspeto gráfico que se pretende para os resumos;
-\item Disponibilizar \emph{templates} a quem pretenda utilizar \LaTeX.
-\end{itemize}
+  A partir de uma pesquisa de um artista de música, o RAMA cria e desenha um grafo que ajuda o utilizador a explorar música que lhe possa interessar de uma forma muito mais natural e informativa.
+
+  No entanto, quando um utilizador pretende ouvir uma música de um artista, é usado \emph{stream} do Youtube. 
+  Apesar de este oferecer um catálogo alargado de música, o mesmo não é indicado para esta funcionalidade pois não fornece uma API nativamente orientada a música, nem a qualidade de som do \emph{stream} é adequada.
+
+  A experiência musical do utilizador do RAMA poderá melhorar consideravelmente ao colmatar esta falha.
+  Existe por isso uma necessidade de substituir o Youtube por outro serviço mais orientado a \emph{streaming} de música de qualidade.
+  O Spotify é um deles. Fornece API orientada a música, e o \emph{streaming} é de qualidade adequada para este tipo de funcionalidade.
+
+  De que formas é que se pode integrar o RAMA e o Spotify?
+
+  A proposta inicial tinha como objectivo desenvolver, pelo menos, um dos seguintes módulos:
+
+  \begin{enumerate}
+    \item Integrar o serviço de \emph{Streaming} to Spotify no RAMA
+    \item Integrar informação de um utilizador Spotify no RAMA
+    \item Melhorar funcionalidades e design do RAMA
+    \item Integrar o conceito do RAMA numa Aplicação Spotify.
+    \item Integrar geração de \emph{playlists} numa Aplicação Spotify.
+    \item Integrar algumas das funcionalidades anteriores numa Aplicação Móvel.
+  \end{enumerate}
+
+  A escolha final foi desenvolver uma aplicação (como \emph{plugin}) para o Spotify.
+  Será que um utilizador Spotify ao descobrir música nova de uma forma mais gráfica terá uma experiência de utilizador mais rica e natural do que o modo de descoberta \emph{standard} do Spotify (em grelha)?
 
 \section{Descrição do Trabalho}\label{sec:work}
 
-Na secção ``Descrição do Trabalho'' (com este ou com outro nome que se julgue mais adequado) devem ser apresentadas as principais partes do trabalho, começando pela sua estruturação. Devem ser mencionadas as tecnologias utilizadas, com referências à sua interdependência e interligação dando especial ênfase aos componentes desenvolvidos pelo estudante no âmbito do trabalho em causa.
+  As fases de trabalho completadas, são:
 
-No presente documento, seguem-se 9 subsecções com instruções acerca da extensão da comunicação, margens, estilos e outras recomendações gerais acerca da elaboração da versão final dos resumos.
+  \begin{description}
+    \item[Estado da Arte] \hfill \\
+      Investigação inicial do estado atual de arte.
+    Inclui os serviços que oferecem ao utilizador uma plataforma completa com \emph{stream} de um catálogo de artistas grande e ferramentas de descoberta de música.
+    No entanto, apenas se irá entrar em detalhe nos serviços que usam ferramentas visuais.
 
-\subsection{Línguas Obrigatórias}\label{sec:lingua}
+    \item[Contextualização] \hfill \\
+      Análise detalhada do ambiente que o Spotify fornece, tanto de um perspectiva de utilizador (que aplicações este tem disponível) como de uma perspectiva de \emph{developer} (\emph{APIs} disponíveis).
 
-Os resumos deverão ser apresentados, em ficheiros separados, em versões portuguesa e inglesa. 
-No resumo em Português e em caso de necessidade de utilização de termos em língua Inglesa, estes deverão ser devidamente salientados pela adoção da fonte em itálico, como, por exemplo, \emph{Ray-Tracing}.
+    \item[Implementação e Validação] \hfill \\
+      Definição e implementação: das funcionalidades principais do protótipo a desenvolver; dos processos de desenvolvimento e de validação junto dos utilizadores.
 
-\subsection{Cabeçalho de Identificação}
+    \item[Discussão e Trabalho Futuro] \hfill \\
+      Discussão dos resultados e definição de trabalho futuro a ser implementado no protótipo.
+  \end{description}
 
-O cabeçalho de identificação deve ser centrado e inicia-se com o título da comunicação, em letras maiúsculas de tamanho 12 e em negrito. 
-Seguem-se, em linhas separadas e em tamanho 9, a identificação do estudante, da empresa e dos orientadores (estes dois numa única linha). 
-Todos os quatro nomes devem ser em itálico.
+  A principais funcionalidades desenvolvidas no protótipo são:
 
-\subsection{Extensão do Artigo e Tipo de Letra}
+  \begin{itemize}
+    \item Visualização das relações entre os artistas de música usando uma ferramenta visual;
+    \item Edição dos parâmetros de visualização;
+    \item Edição do grafo eliminando e acrescentando nós;
+    \item Visualização de \emph{tags}/géneros (que descrevam um artista) na representação gráfica.
+  \end{itemize}
 
-Cada resumo deve ser formatado com texto a duas colunas, não devendo exceder duas páginas de formato A4. 
-\textbf{As duas colunas devem terminar sensivelmente à mesma altura}, em cada uma das páginas. 
-
-O tipo de letra para o texto genérico deverá ser \emph{Times New Roman} com tamanho 9 e espaçamento simples entre linhas. 
-O espaçamento entre parágrafos deverá ser estendido a 1.5 linhas (0.5 linha de espaçamento extra).
-
-\subsection{Dimensões das Margens}
-
-As margens a manter à volta do texto deverão ser as constantes na Tab.~\ref{tab:medidas}.
-
-\begin{table}[H]
-  \centering
-  \caption{Margens expressas em centímetros}
-\begin{tabular}{c | c}
-	\hline
-\textbf{Espaçamento} & \textbf{Medida}\\
-	\hline
-	\hline
-        Margem Superior & 3 cm\\
-        Margem Inferior & 3 cm\\
-        Margem Esquerda & 3 cm\\
-        Margem Direita  & 3 cm\\
-        Entre Colunas   & 1.2 cm\\
-	\hline
-\end{tabular}
-  \label{tab:medidas}
-\end{table}
-
-\subsection{Corpo do Texto}
-
-Todos os títulos de secções e subsecções devem ser escritos em negrito e com um espaçamento para cima ligeiramente superior ao de um parágrafo normal. 
-Os títulos de níveis um e dois devem ter tamanhos, respetivamente, 11 e 9. 
-As ``subsubsecções'' devem ser evitadas.
-
-\subsection{Numeração das Secções}
-
-As secções deverão ser numeradas com início em "1", de acordo com os níveis e subníveis respetivos, usando-se o ponto como separador.
-
-\subsection{Figuras, Equações e Quadros}
-
-As figuras e as tabelas deverão ser centradas, sempre que possível, à largura da coluna de texto em que se
-inserem (Tab.~\ref{tab:medidas} e Fig.~\ref{fig:figura}). 
-As figuras e tabelas cujas dimensões não o permitam, podem ser centradas à largura da página.
-
-\begin{figure}[H]
-\centerline{\includegraphics[scale=.6]{figura.png}}
-\caption{Esta é a legenda da figura}  
-\label{fig:figura}
-\end{figure}
-
-As legendas das figuras, a negrito, devem ser colocadas na sua parte inferior, contendo a respetiva numeração antecedida do termo \textbf{Fig.} 
-O mesmo é aplicável às tabelas, exceto que a legenda deve ser iniciada pelo termo \textbf{Tab.}\ e deve ser colocada acima da tabela respetiva. 
-Devem ser evitadas figuras ou outros elementos com cores.
-
-\begin{equation}
-  S_{L,i} = S_{L,i-1} . (1-S_{P,i-1}) = \prod_{k=0}^{i-1} (1-S_{p,k}) \label{eq:cif}
-\end{equation}
-% \begin{eqnarray}
-% S_{L,i} &=& S_{L,i-1} . (1-S_{P,i-1}) \nonumber\\
-%        &=& \prod_{k=0}^{i-1} (1-S_{p,k}) \label{eq:cif}
-% \end{eqnarray}
-
-As equações deverão conter a respetiva numeração na mesma linha de texto e à sua direita, entre parêntesis, como se mostra no exemplo da Equação~\ref{eq:cif}.
-
-As figuras deverão ser numeradas a partir do número 1 e com uma única sequência, i.e., sem reinício em cada secção. 
-O mesmo deve suceder com as equações e com as tabelas.
-
-\subsection{Numeração de Páginas}\label{sec:number}
-
-As páginas \textbf{NÃO} devem ser numeradas.
 
 \section{Conclusões}\label{sec:conclui}
 
-Espera-se que este documento possa contribuir para uma melhor qualidade dos resumos dos projetos/dissertações do MIEIC/FEUP.
+  Aplicando o conceito do RAMA no protótipo desenvolvido, a experiência de utilizador ao descobrir música nova melhorou consideravelmente.
+  Todos os utilizadores que testaram a aplicação gostaram da experiência visual e a maioria respondeu positivamente quando lhes foi perguntado se usariam a aplicação para descobrir música nova.
 
-Documentos que não respeitem este aspeto gráfico serão liminarmente recusados, ficando os respetivos autores em falta em relação à sua entrega.
-
-Para as dissertações existem regras definidas noutro lado~\cite{kn:Mat93}.
-
-\bibliographystyle{unsrt-pt}  % numeric, unsorted refs
-\bibliography{refs}
+\bibliographystyle{unsrt}
+\bibliography{../report/bib/myrefs}
 
 \end{document}
