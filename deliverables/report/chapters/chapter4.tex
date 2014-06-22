@@ -30,7 +30,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
 
     \subsubsection{Spotify Desktop Client} % (fold)
     \label{ssub:subsection_name}
-      Spotify Applications are developed in its runtime environment - the Spotify Desktop Client.
+      Spotify Applications are developed in its runtime environment: the Spotify Desktop Client.
       To open a Spotify Application, in the Desktop Client, one writes the following in the search bar: spotify:app:rama, where \emph{rama} is the application identifier declared in the \emph{manifest.json} file\footnote{file located at the root of the project folder}.
       Example:
 
@@ -52,15 +52,14 @@ By this point, the validation of the prototype will be analysed, by explaining t
     \label{ssub:webkit_tools}
 
       Webkit provides a bundle of tools for web development.
-
       Being the most important:
 
       \begin{description}
         \item[Inspector] Allows the inspection of the resulting Html and CSS and edit the code and see the application automatically reflect those changes (Figure~\ref{fig:webkit_inspector}).
         \item[Network] Shows a timeline list of resources that where loaded from external sources (sometimes local) (Figure~\ref{fig:webkit_network}).
         \item[Profile] Allows the identification of which parts of the javascript code are being executed frequently, and which ones might be creating a performance issue (Figure~\ref{fig:webkit_profile}).
-        \item[Audit] Helps clarify which CSS rules are not being used (Figure~\ref{fig:webkit_audit}).
-        \item[Console] Javascript interpreter that also works as the log output for the application (Figure~\ref{fig:webkit_console}).
+        \item[Audit] Helps to clarify which CSS rules are not being used (Figure~\ref{fig:webkit_audit}).
+        \item[Console] Is a Javascript interpreter that also works as the log output for the application (Figure~\ref{fig:webkit_console}).
       \end{description}
 
       \begin{figure}[ht]
@@ -91,7 +90,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
         \begin{center}
           \includegraphics[width=\textwidth]{webkit_audit.pdf}
         \end{center}
-        \caption{Webkit Audit: 96\% of the CSS code is not being used indicates a issue to be solved.}
+        \caption{Webkit Audit: 96\% of the CSS code is not being used indicates an issue to be solved.}
         \label{fig:webkit_audit}
       \end{figure}
 
@@ -321,7 +320,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
 
     % subsubsection edition (end)
 
-    \subsubsection{Artist Info} % (fold)
+    \subsubsection{Artist Menu} % (fold)
       \label{ssub:artist_info}
       The user is able to see additional information about artists in the Artist Menu (Figure~\ref{fig:artist_menu}) such as its popularity value, albums and tags, as well as perform the \emph{expand} and \emph{new map} functions described in \ref{ssub:edition}.
       \begin{figure}[tb]
@@ -519,7 +518,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
 
       This information is very important to better understand the user's suggestions that may or may not be related to basic Spotify interactions.
       For example, when a user wants to start a new map with an artist that is not at the moment visible, there two possibilities to do this.
-      By searching for the new artist, the user can then drag and drop the artist into the application in the right side menu, or start playing a song from that artist, and then go back to RAMA and click the \emph{new map} button in the artist menu.
+      By searching for the new artist, the user can then drag and drop the artist into the application in the left side menu, or start playing a song from that artist, and then go back to RAMA and click the \emph{new map} button in the artist menu.
 
       Both ways require the user to search a new artist using Spotify's search bar.
       To regular Spotify users this is a recurrent procedure, but for new Spotify users, it might confuse them to go out of RAMA's application to fetch information.
@@ -532,7 +531,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
 
       Most of the users did not discover new artists before using the \emph{expand} button or the \emph{new map} button.
       The users launched RAMA when listening to a known artist and this meant that, for the most cases, the user already knew most of the similar artists that appeared in the graph.
-      Only when the user started to use these action buttons and found out how to progress in discovering new music, it started to get excited to see what new artists were coming.
+      Only when the user started to use these action buttons and found out how to progress in discovering new music, he/she started to get excited to see what new artists were coming.
 
     \subsubsection{Question 3: Do you think you would use the application to discover new music?}
     \label{ssub:question_3}

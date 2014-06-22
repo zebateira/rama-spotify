@@ -5,7 +5,7 @@
 
 \section*{}
 
-The primal objective of this dissertation, as referred in chapter \ref{chap:intro}, is to develop one or more software modules that will improve Spotify Users' music discovery and recommendation experience using visual tools to represent the music artists' relations and Spotify's streaming service to provide high quality music stream.
+The primal objective of this dissertation, as referred in chapter \ref{chap:intro}, is to develop one or more software modules that will improve Spotify users' music discovery and recommendation experience using visual tools to represent the music artists' relations and Spotify's streaming service to provide high quality music stream.
 
 The initial proposal was to develop a module that implements, at least, one of the following features:
 
@@ -41,7 +41,7 @@ The prototype should pursue the objective of contributing to an improved user ex
 
   \begin{description}
     \item[\textbf{Desktop Client}] Desktop version of Spotify, with Windows and Mac versions (and also a Linux preview version).
-    \item[\textbf{Webplayer}] Web version of Spotify. This was released in 2013, although spotify still advises the use of the native application for a better user experience.
+    \item[\textbf{Webplayer}] Web version of Spotify. This was released in 2013, although Spotify still advises the use of the native application for a better user experience.
     \item[\textbf{Mobile Applications}] The mobile applications are available for Android and iOS devices.
   \end{description}
 
@@ -63,7 +63,7 @@ The prototype should pursue the objective of contributing to an improved user ex
     Spotify provides a set of tools\footnote{\url{http://developer.spotify.com/technologies}} to develop Third-party Applications (websites, native applications and mobile applications) and Spotify Applications (that run inside Spotify's Desktop Client).
     There are five tools, each with different purposes.
 
-    \subsection{Spotify Apps} % (fold)
+    \subsection{Spotify Applications} % (fold)
     \label{sub:spotify_apps}
       Spotify Applications~\cite{spotifyapps} are a special case in the whole set of tools provided by Spotify.
       These applications are designed to run \emph{inside} the Desktop Client.
@@ -172,7 +172,7 @@ The prototype should pursue the objective of contributing to an improved user ex
 
       \url{spotify:artist:65nZq8l5VZRG4X445F5kmN}, is the ID for the artist "Mariza". \\
 
-      There's also ID's for albums:
+      There are also ID's for albums:
 
       \url{spotify:album:5d1LpIPmTTrvPltx26TlEU} (album "Fado Tradicional" from "Mariza") \\
 
@@ -272,6 +272,8 @@ The prototype should pursue the objective of contributing to an improved user ex
 
     Both tools turned out to be well documented and easy to use.
 
+    \clearpage
+
     Another experiment was made in order to assert the potential of Spotify Applications.
     There was a need to know if the canvas element was well supported by Spotify's environment, because that is the preferred way to graphically draw a graph.
     To test that, a simple application was created with the following code:
@@ -281,7 +283,7 @@ The prototype should pursue the objective of contributing to an improved user ex
       </iframe>\end{lstlisting}
 
     The final result can be seen in Figure~\ref{fig:rama_spotifyed}.
-    \begin{figure}
+    \begin{figure}[H]
       \begin{center}
         \includegraphics[width=\textwidth]{spotify_rama.embedded.pdf}
       \end{center}
@@ -308,7 +310,7 @@ The prototype should pursue the objective of contributing to an improved user ex
 \section{Summary}
 
   Based on the analysis conducted, the most appropriate solution was to develop a Spotify Application.
-  Although the other proposals were also feasible, the possibility to integrate a RAMA-like interface into Spotify's Desktop Client leaves a Spotify User more at ease with the environment.
+  Although the other proposals were also feasible, the possibility to integrate a RAMA-like interface into Spotify's Desktop Client leaves a Spotify user more at ease with the environment.
   The prototype should then implement the proposed modules \ref{item:obj4} and \ref{item:obj5}:
 
   \begin{itemize}
