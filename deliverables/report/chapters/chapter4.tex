@@ -6,7 +6,7 @@
 
 \section*{}
 
-In this chapter, further details about the prototype's main features and the methodologies used when developing the prototype, as well as in the the validation process, will be explored.
+In this chapter, further details about the prototype's main features and the methodologies used when developing the prototype, as well as in the validation process, will be explored.
 
 The Implementation section will go into details about the processes used to have a maintainable development environment by taking advantage of several tools that automated most of the common tasks. The main implemented features will also be analysed.
 By this point, the validation of the prototype will be analysed, by explaining the performed user tests, as well the analysis of the results.
@@ -19,14 +19,6 @@ By this point, the validation of the prototype will be analysed, by explaining t
 
     The following technologies were used during the development of the application.
 
-    \subsubsection{Git} % (fold)
-    \label{ssub:git}
-    
-    The chosen version control system to manage the source code was Git\footnote{Git: \url{http://git-scm.com}}. \\
-    Although not strictly followed, the model described in \cite{nviebranching} was an inspiration.
-    The use of branches~\cite{gitbranches} and tags~\cite{gittags} allowed for a manageable code development environment, e.g., marking release commits or working on experimental features.
-
-    % subsubsection git (end)
 
     \subsubsection{Spotify Desktop Client} % (fold)
     \label{ssub:subsection_name}
@@ -83,6 +75,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
           \includegraphics[width=\textwidth]{webkit_profile.pdf}
         \end{center}
         \caption{Webkit Profile: Canvas render functions are the ones taking up most of the processing cycles. However there is a function call in JQuery that used 12.72\% of processing time, which might indicate a performance issue to be improved.}
+
         \label{fig:webkit_profile}
       \end{figure}
 
@@ -103,6 +96,21 @@ By this point, the validation of the prototype will be analysed, by explaining t
       \end{figure}
 
       \clearpage
+
+    \subsubsection{vis.js - visjs.org} % (fold)
+    \label{ssub:visjs}
+      Vis.js is a javascript framework for visualization.
+      It provides a few visual components, including graphs.
+
+
+    \subsubsection{Git} % (fold)
+    \label{ssub:git}
+    
+      The chosen version control system to manage the source code was Git\footnote{Git: \url{http://git-scm.com}}. \\
+      Although not strictly followed, the model described in \cite{nviebranching} was an inspiration.
+      The use of branches~\cite{gitbranches} and tags~\cite{gittags} allowed for a manageable code development environment, e.g., marking release commits or working on experimental features.
+
+    % subsubsection git (end)
 
     \subsubsection{Gruntjs - gruntjs.com} % (fold)
       \label{ssub:gruntjs}
@@ -128,12 +136,6 @@ By this point, the validation of the prototype will be analysed, by explaining t
     It mainly supports runtime software packages, which are needed for production code.
 
     % subsection bower (end)
-
-    \subsubsection{vis.js - visjs.org} % (fold)
-    \label{ssub:visjs}
-      Vis.js is a javascript framework for visualization.
-      It provides a few visual components, including graphs.
-
 
   \subsection{Implemented Features} % (fold)
     \label{sub:main_features}
@@ -247,7 +249,6 @@ By this point, the validation of the prototype will be analysed, by explaining t
       So, on the one hand, the \emph{clustering} of the nodes seems like an interesting feature.
       It allows for a more complete understand of the underlying information of the related artists.
       But on the other hand, the focus of the visualization (to show a map of the artists' network) is shifting to this cluster-like representation.
-
       Both perspectives are advantageous depending on the data they are operating on (as seen in the previous examples).
       So instead of choosing only one method, both were chosen: by default, the graph creation algorithm is on tree mode, and the user can turn it off from a settings menu.
       This allows for the user to choose the visual representation method that suits his/her needs.
