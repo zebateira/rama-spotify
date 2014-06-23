@@ -36,7 +36,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
 
       \lstinputlisting[caption={manifest.json: \emph{BundleIdentifier} is the application's identifier; \emph{Dependencies} declares the Application's API dependencies.}, style=htmlcssjs, captionpos=b]{snippets/manifest.json}
 
-      There are useful options for development located in the "Develop" tab (Figure~\ref{fig:html5_support}).
+      There are useful options for development located in the ``Develop'' tab (Figure~\ref{fig:html5_support}).
 
       \begin{figure}[H]
         \begin{center}
@@ -46,7 +46,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
         \label{fig:html5_support}
       \end{figure}
 
-      The "Show Inspector" option opens the \emph{Webkit Development Tools} (\ref{ssub:webkit_tools}) window.
+      The ``Show Inspector'' option opens the \emph{Webkit Development Tools} (\ref{ssub:webkit_tools}) window.
 
     \subsubsection{Webkit Development Tools - webkit.org} % (fold)
     \label{ssub:webkit_tools}
@@ -55,7 +55,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
       Being the most important:
 
       \begin{description}
-        \item[Inspector] Allows the inspection of the resulting Html and CSS and edit the code and see the application automatically reflect those changes (Figure~\ref{fig:webkit_inspector}).
+        \item[Inspector] Allows the inspection of the resulting HTML and CSS and edit the code and see the application automatically reflect those changes (Figure~\ref{fig:webkit_inspector}).
         \item[Network] Shows a timeline list of resources that where loaded from external sources (sometimes local) (Figure~\ref{fig:webkit_network}).
         \item[Profile] Allows the identification of which parts of the javascript code are being executed frequently, and which ones might be creating a performance issue (Figure~\ref{fig:webkit_profile}).
         \item[Audit] Helps to clarify which CSS rules are not being used (Figure~\ref{fig:webkit_audit}).
@@ -90,7 +90,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
         \begin{center}
           \includegraphics[width=\textwidth]{webkit_audit.pdf}
         \end{center}
-        \caption{Webkit Audit: 96\% of the CSS code is not being used indicates an issue to be solved.}
+        \caption{Webkit Audit: 96\% of the CSS code is not being used, which indicates an issue to be solved.}
         \label{fig:webkit_audit}
       \end{figure}
 
@@ -108,7 +108,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
       \label{ssub:gruntjs}
         Gruntjs is a Javascript task runner.
         It allows the automation of most of the repetitive tasks when developing a website.
-        This is very useful for testing, compiling and code optimization.
+        This is very useful for testing, compiling and optimizing code.
 
     \subsubsection{Npmjs - npmjs.org} % (fold)
     \label{ssub:npm}
@@ -141,7 +141,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
     The requirements for the prototype are as following:
 
     \begin{itemize}
-      \item Visualization of relations between artists by means of a visual tool;
+      \item Reprentation of relations between artists by means of a visual tool;
       \item Editing of the visualization using several parameters;
       \item Editing of the graph by allowing to remove and add new nodes;
       \item Visualizing the tags/genres (that describe an artist) in the graph representation.
@@ -149,7 +149,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
 
     All of these features were implemented.
 
-    \subsubsection{Visulization of the Artists Map} % (fold)
+    \subsubsection{Visulization of the Artists' Map} % (fold)
       \label{ssub:visualization}
     
       The application automatically draws the map with the current playing artist as the main node, as seen in Figure~\ref{fig:graph_rootnode}.
@@ -165,7 +165,6 @@ By this point, the validation of the prototype will be analysed, by explaining t
       The graph-like structure is created by recursively fetching a list of related artists from each artist. Once a certain pre-established limit of recursive levels is reached\footnote{depth value of a graph}, the algorithm stops.
       The graph creation algorithm is as follows:
 
-      % TODO change the code to attachments?
       \lstinputlisting[
         caption={Simplified graph creation algorithm in Javascript (duplicate nodes checking is encapsulated in the insertNode function)}, style=htmlcssjs, captionpos=b
       ]
@@ -189,14 +188,14 @@ By this point, the validation of the prototype will be analysed, by explaining t
         \begin{center}
           \includegraphics[width=\textwidth]{map_creation_treemode.pdf}
         \end{center}
-        \caption{Graph created like a tree with "Red Hot Chilli Peppers" as the root node.}
+        \caption{Graph created like a tree with ``Red Hot Chilli Peppers'' as the root node.}
         \label{fig:graph_treemode}
       \end{figure}
 
       This approach, however, is not showing all of the available information.
-      Given this same example (Figure~\ref{fig:graph_treemode}), the artist node "Stone Temple Pilots" is a child of the node artist "Faith No More".
+      Given this same example (Figure~\ref{fig:graph_treemode}), the artist node ``Stone Temple Pilots'' is a child of the node artist ``Faith No More''
       The algorithm inserted the latter into the graph first.
-      After that, when retrieving the childs of "Jane's Addiction", the artist node "Stone Temple Pilots" is contained in that list, and so the insertNode() function discards the node since it is a duplicate.
+      After that, when retrieving the childs of ``Jane's Addiction'', the artist node ``Stone Temple Pilots'' is contained in that list, and so the insertNode() function discards the node since it is a duplicate.
       This means that there is a connection between both of them that is being discarded.
 
       \paragraph{Graph's Tree Mode} \hfill \\
@@ -208,7 +207,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
         \begin{center}
           \includegraphics[width=\textwidth]{map_creation_notreemode.pdf}
         \end{center}
-        \caption{Graph created with all the connections with "Red Hot Chilli Peppers" as the root node.}
+        \caption{Graph created with all the connections with ``Red Hot Chilli Peppers'' as the root node.}
         \label{fig:graph_notreemode}
       \end{figure}
 
@@ -220,23 +219,23 @@ By this point, the validation of the prototype will be analysed, by explaining t
       }.}
       \hfill \\
 
-      Note (Figure~\ref{fig:graph_notreemode}) how "Stone Temple Pilots" is now a child of both "Faith No More" and "Jane's Addiction".
-      Also note that the same behaviour is visible with the nodes "Mad Season" and "Screaming Trees".
+      Note (Figure~\ref{fig:graph_notreemode}) how ``Stone Temple Pilots'' is now a child of both ``Faith No More'' and ``Jane's Addiction''.
+      Also note that the same behaviour is visible with the nodes ``Mad Season'' and ``Screaming Trees''.
 
-      At this point, the current user's perception of the artist "Stone Temple Pilots" might be different from the previous example (Figure~\ref{fig:graph_treemode}).
+      At this point, the current user's perception of the artist ``Stone Temple Pilots'' might be different from the previous example (Figure~\ref{fig:graph_treemode}).
       These added connections are, in a way, clustering together the most connected nodes.
       In this particular example, one could see an improvement with this approach: it contributes to the user's understanding of the artist's network by making sure the user knows that those specific artists are more connected between them, than any others.
       Since only three extra edges where added, this means there is not much visual clutter in the visualization.
       However, that might not always be the case.
 
-      One could argue that the "Mad Season" artist node is already disturbing the visual representation by being drawn over an edge.
-      In fact, with the exact same values of branching, depth and tree mode off, when creating a graph for the artist "Mariza", the visual clutter is so strong that the graph becomes confusing and not very helpful: Figure~\ref{fig:graph_notreemode2}.
+      One could argue that the ``Mad Season'' artist node is already disturbing the visual representation by being drawn over an edge.
+      In fact, with the exact same values of branching, depth and tree mode off, when creating a graph for the artist ``Mariza'', the visual clutter is so strong that the graph becomes confusing and not very helpful: Figure~\ref{fig:graph_notreemode2}.
 
       \begin{figure}[tb]
         \begin{center}
           \includegraphics[width=\textwidth]{graph_notreemode2.pdf}
         \end{center}
-        \caption{Graph created with all the connections with "Mariza" as the root node.}
+        \caption{Graph created with all the connections with ``Mariza'' as the root node.}
         \label{fig:graph_notreemode2}
       \end{figure}
 
@@ -245,7 +244,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
       Instead of creating a visual map of the artists' network for the user to  explore and change in his/her own way, the representation is more contained, static and not so visually appealing.
       \hfill \\
 
-      So on one hand, the \emph{clustering} of the nodes seems like an interesting feature.
+      So, on the one hand, the \emph{clustering} of the nodes seems like an interesting feature.
       It allows for a more complete understand of the underlying information of the related artists.
       But on the other hand, the focus of the visualization (to show a map of the artists' network) is shifting to this cluster-like representation.
 
@@ -259,13 +258,6 @@ By this point, the validation of the prototype will be analysed, by explaining t
       The \textbf{depth} value of a graph determines how deep the recursive algorithm is.
       The previously presented example (Figure~\ref{fig:graph_treemode}) has a depth value of 2.
       The example in Figure~\ref{fig:graph_depth3} has a depth value of 3.
-      \begin{figure}[hb]
-        \begin{center}
-          \includegraphics[width=\textwidth]{graph_depth3.pdf}
-        \end{center}
-        \caption{Graph with depth value of 3}
-        \label{fig:graph_depth3}
-      \end{figure}
       In short, depth is the maximum distance between the root node and any other node in the graph.
 
       The \textbf{branching} value of a tree graph determines the maximum number of child nodes a node can have.
@@ -298,14 +290,14 @@ By this point, the validation of the prototype will be analysed, by explaining t
 
       \paragraph{Expand node} \hfill \\
       This option allows the user to expand a node further (ignoring the graph's branching value).
-      Given the previous example in Figure~\ref{fig:graph_treemode}, if the "Dispatch" node gets expanded, it results in Figure~\ref{fig:node_expanded}.
+      Given the previous example in Figure~\ref{fig:graph_treemode}, if the ``Dispatch'' node gets expanded, it results in Figure~\ref{fig:node_expanded}.
       To put it simply, to expand a node, one performs one iteration of the graph creation algorithm.
 
-      \begin{figure}[tb]
+      \begin{figure}[b]
          \begin{center}
            \includegraphics[width=\textwidth]{graph_expanded_node.pdf}
          \end{center}
-         \caption{"Dispatch" artist node expanded.}
+         \caption{``Dispatch'' artist node expanded.}
          \label{fig:node_expanded}
       \end{figure}
 
@@ -323,11 +315,11 @@ By this point, the validation of the prototype will be analysed, by explaining t
     \subsubsection{Artist Menu} % (fold)
       \label{ssub:artist_info}
       The user is able to see additional information about artists in the Artist Menu (Figure~\ref{fig:artist_menu}) such as its popularity value, albums and tags, as well as perform the \emph{expand} and \emph{new map} functions described in \ref{ssub:edition}.
-      \begin{figure}[tb]
+      \begin{figure}[b]
         \begin{center}
           \includegraphics[width=0.2\textwidth]{artist_menu.pdf}
         \end{center}
-        \caption{Artist Menu with information about "Chris Cornell"}
+        \caption{Artist Menu with information about ``Chris Cornell''}
         \label{fig:artist_menu}
       \end{figure}
       When the user selects a node by clicking on it, the artist menu updates the displayed information.
@@ -349,17 +341,17 @@ By this point, the validation of the prototype will be analysed, by explaining t
       \emph{Sort} is another interesting parameter. 
       In general, artists have more than 10 or 15 terms.
       Each term has a value of \emph{frequency} and a value of \emph{weight}, and both are float values that range between zero and one.
-      No official documentation was found to explain what do these values represent, but Paul Lamere\footnote{Paul Lamere is Director of Developer Platform at \url{the.echonest.com} (\url{http://the.echonest.com/company}). He also blogs here: \url{http://musicmachinery.com}} explains~\cite{lamereterms} that:
+      No official documentation was found to explain what these values represent, but Paul Lamere\footnote{Paul Lamere is Director of Developer Platform at \url{the.echonest.com} (\url{http://the.echonest.com/company}). He also blogs here: \url{http://musicmachinery.com}} explains~\cite{lamereterms} that:
 
       \begin{quote}
       \emph{
-        "term frequency is directly proportional to how often that term is used to describe that artist"
+        ``term frequency is directly proportional to how often that term is used to describe that artist''
       }
       \end{quote}
 
       \begin{quote}
       \emph{
-        "term weight is a measure of how important that term is in describing the artist"
+        ``term weight is a measure of how important that term is in describing the artist''
       }
       \end{quote}
 
@@ -378,7 +370,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
         \begin{center}
           \includegraphics[width=\textwidth]{tags_overlay.pdf}
         \end{center}
-        \caption{Tags overlay for the displayed graph. When the tag "grunge" is selected the corresponding artist nodes are selected}
+        \caption{Tags overlay for the displayed graph. When the tag ``grunge'' is selected the corresponding artist nodes are selected}
         \label{fig:tags_overlay}
       \end{figure}
       These tags are the same ones used in the Artist Menu (Figure~\ref{fig:artist_menu}).
@@ -394,8 +386,16 @@ By this point, the validation of the prototype will be analysed, by explaining t
         \begin{center}
           \includegraphics[width=\textwidth]{graph_anamanaguchi.pdf}
         \end{center}
-        \caption{Graph for "Anamanaguchi". The tags shown above are only but a small sample of all the tags of all the artists in the graph}
+        \caption{Graph for ``Anamanaguchi''. The tags shown above are only but a small sample of all the tags of all the artists in the graph}
         \label{fig:graph_anamanaguchi}
+      \end{figure}
+
+      \begin{figure}[hb]
+        \begin{center}
+          \includegraphics[width=\textwidth]{graph_depth3.pdf}
+        \end{center}
+        \caption{Graph with depth value of 3}
+        \label{fig:graph_depth3}
       \end{figure}
 
     % subsubsection tags_overlay (end)
@@ -460,14 +460,14 @@ By this point, the validation of the prototype will be analysed, by explaining t
     The next task was to open the RAMA application and do the same (again this should be completed in a short period of time).
     Given this, the user is forced to compare the two approaches: discovering new music with Spotify only, and discovering new music with RAMA's Spotify Application.
 
-    % The objectives of the experiment were to assess some aspects of the application:
+    The objectives of the experiment were to assess some aspects of the application:
 
-    % \begin{description}
-    %   \item[User Experience]
-    %     Was the user able to discover new music easily?
-    %   \item[Interface's intuitiveness/design]
-    %     Were all of the application's components (buttons, controls, etc) easy to use? well placed?
-    % \end{description}
+    \begin{description}
+      \item[User Experience]
+        Was the user able to discover new music easily?
+      \item[Interface's intuitiveness/design]
+        Were all of the application's components (buttons, controls, etc) easy to use and well placed?
+    \end{description}
 
     After the test, the user filled a short questionnaire (Figure \ref{fig:questionnaire}) about the experiment, which contained the following questions:
 
@@ -525,7 +525,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
     \subsubsection{Question 2: Did the RAMA application help you discover new interesting artists?}
     \label{ssub:question_2}
 
-      This was a yes or no question: 23 responded "yes", whereas, 1 responded "no".
+      This was a yes or no question: 23 responded  ``yes'', whereas, 1 responded ``no''.
       It is clear that RAMA's Spotify Application fulfilled the initial purpose of letting the user discover new music.
 
       Most of the users did not discover new artists before using the \emph{expand} button or the \emph{new map} button.
@@ -570,7 +570,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
     \subsubsection{Question 4: Was the application well integrated with Spotify?}
     \label{ssub:question_4}
 
-      In a scale of 1 to 5, given 1 to be "I felt the app was out of place" and 5 to be "I felt the app was part of Spotify", the users were asked to grade the application's integration into Spotify.
+      In a scale of 1 to 5, given 1 to be ``I felt the app was out of place'' and 5 to be ``I felt the app was part of Spotify'', the users were asked to grade the application's integration into Spotify.
 
       \begin{table}[H]
         \begin{center}
@@ -602,7 +602,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
 
   \subsection{Summary}
 
-    Overall, the results of the experiments were very positive and the users were very impressed with this new way of discovering new music within Spotify.
-    Some functionalities still need to be polished in order to create an even more improved user experience, but RAMA's concept implemented within Spotify worked very well for the majority of the users.
+    Overall, the results of the experiments were positive and the users were impressed with this new way of discovering new music within Spotify.
+    Some functionalities still need to be polished in order to create an even more improved user experience, but RAMA's concept implemented within Spotify worked well for the majority of the users.
   
 % section validation (end)
