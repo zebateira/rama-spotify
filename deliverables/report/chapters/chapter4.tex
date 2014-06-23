@@ -325,7 +325,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
       \end{figure}
       When the user selects a node by clicking on it, the artist menu updates the displayed information.
 
-      The \emph{popularity}, the \emph{albums} and the \emph{tags} are metadata information retrieved from Spotify's API framework (\ref{sub:spotify_apps}), although Echonest's API\footnote{Echonest's API: \url{http://developer.echonest.com/docs/v4}} is also used as a fallback source for the \emph{tags} (sometimes Spotify's API responds with a small number of results).
+      The \emph{popularity}, the \emph{albums} and the \emph{tags} are metadata information retrieved from Spotify's API framework (\ref{ssub:spotify_apps}), although Echonest's API\footnote{Echonest's API: \url{http://developer.echonest.com/docs/v4}} is also used as a fallback source for the \emph{tags} (sometimes Spotify's API responds with a small number of results).
 
       \paragraph{Echonest's Terms} \hfill \\
       Echonest's tags are very similar to the most commonly known \emph{music genres} (like jazz, country, rock), but they also might include more alternative descriptive terms (progressive metal, symphonic, soundtrack).
@@ -337,7 +337,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
         http://developer.echonest.com/api/v4/artist/terms?api_key=API_KEY&format=json&sort=weight&id=spotify-WW:artist:65nZq8l5VZRG4X445F5kmN
       } \\
 
-      The \emph{id} parameter is similar to the Spotify's URI scheme (\ref{sub:metadata_api}), and this allows for retrieving extra information about the artist that Spotify's API does not provide.
+      The \emph{id} parameter is similar to the Spotify's URI scheme (\ref{ssub:metadata_api}), and this allows for retrieving extra information about the artist that Spotify's API does not provide.
 
       \emph{Sort} is another interesting parameter. 
       In general, artists have more than 10 or 15 terms.
@@ -596,7 +596,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
       These results indicate that the developed prototype blends very well with Spotify's Desktop Client.
       This is a very important indicator for evaluating the application's integration into Spotify's environment since it plays a major role in defining how good is RAMA in terms of user experience.
 
-      The user that classified with 2 points was not able to create a new map from an artist that was not visible in the graph although it was a regular Spotify user.
+      The user that classified with 2 points was not able to create a new map from an artist that was not visible in the graph, although he/she was a regular Spotify user.
       This might indicate that the current way of performing this action is not very intuitive.
   
   % subsection data_analysis (end)
