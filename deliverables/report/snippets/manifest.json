@@ -6,20 +6,11 @@
   "AppDescription": {
     "en": "RAMA: Relational Artist MAps"
   },
-  "AcceptedLinkTypes": [
-    "playlist"
-  ],
   "BundleType": "Application",
   "BundleVersion": "1.0",
-  "DefaultTabs": [{
-    "arguments": "index",
-    "title": {
-      "en": "Home"
-    }
-  }],
   "Dependencies": {
-    "api": "1.10.2",
-    "views": "1.18.1"
+    "api": "1.0",
+    "views": "1.0"
   },
   "SupportedDeviceClasses": ["Desktop"],
   "SupportedLanguages": [

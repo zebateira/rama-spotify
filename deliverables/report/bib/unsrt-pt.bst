@@ -73,7 +73,7 @@ FUNCTION {init.urlbst.variables}
   % String constants, which you _might_ want to tweak.
   "URL: " 'urlintro := % prefix before URL; typically "Available from:" or "URL":
   "online" 'onlinestring := % indication that resource is online; typically "online"
-  "\'{u}ltimo acesso em " 'citedstring := % indicator of citation date; typically "cited "
+  "accessed " 'citedstring := % indicator of citation date; typically "cited "
   "[link]" 'linktextstring := % dummy link text; typically "[link]"
   "http://arxiv.org/abs/" 'eprinturl := % prefix to make URL from eprint ref
   "arXiv:" 'eprintprefix := % text prefix printed before eprint ref; typically "arXiv:"
@@ -487,7 +487,7 @@ FUNCTION {format.number.series}
 	  number tie.or.space.connect
 	  series empty$
 	    { "there's a number but no series in " cite$ * warning$ }
-	    { " em " * series * }
+	    { " in " * series * }
 	  if$
 	}
       if$
@@ -533,8 +533,8 @@ FUNCTION {format.pages}
 { pages empty$
     { "" }
     { pages multi.page.check
-	{ "p\'{a}ginas" pages n.dashify tie.or.space.connect }
-	{ "p\'{a}gina" pages tie.or.space.connect }
+	{ "pages" pages n.dashify tie.or.space.connect }
+	{ "page" pages tie.or.space.connect }
       if$
     }
   if$
@@ -581,8 +581,8 @@ FUNCTION {format.in.ed.booktitle}
 { booktitle empty$
     { "" }
     { editor empty$
-	{ "Em " booktitle emphasize * }
-	{ "Em " format.editors * ", " * booktitle emphasize * }
+	{ "In " booktitle emphasize * }
+	{ "Im " format.editors * ", " * booktitle emphasize * }
       if$
     }
   if$

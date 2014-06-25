@@ -8,8 +8,8 @@
 \section{Context} \label{sec:context}
 
 
-  Not so long ago, before the Internet boom, listening or discovering new music was a challenge on its own.
-  Now, with a few clicks users can have on their hands such a vast music catalogue that a human mind is not able to compute.
+  Not so long ago, before the Internet boom, listening to or discovering new music was a challenge on its own.
+  Now, with a few clicks, users can have in their hands such a vast music catalogue that a human mind is not able to compute.
 
   There is an uncountable number of music streaming services that offer exactly that\footnote{Although some of them require the users to subscribe to a monthly fee, for example, in order to fully use the service, or remove the advertisements.}.
   These services are, mostly, web based, although some offer desktop applications.
@@ -22,17 +22,16 @@
   However, lists do not provide the user enough information about the relation between the results \cite{Lamere2008}.
 
   A possible solution to this problem is to represent the artist's similarities as a network of interconnected artists in a graph, where a node is a music artist, and each edge between them represents a connection.
-  This is the concept that RAMA (Relational Artist MAps)\footnote{RAMA: \url{http://rama.inescporto.pt}}, a project developed at INESC Porto, uses \cite{Costa2008} \cite{Sarmento2009} \cite{Costa2009} \cite{Gouyon2011}.
+  This is the concept that RAMA (Relational Artist MAps)\footnote{RAMA: \url{http://rama.inescporto.pt}}, a project developed at INESC TEC, uses \cite{Costa2008} \cite{Sarmento2009} \cite{Costa2009} \cite{Gouyon2011}.
 
 \section{Motivation} \label{sec:motivation}
 
-  From a single search, the original RAMA system draws a graph that helps the user to explore new music that might caught his/her interest in a much more natural way.
-  Nonetheless, when a user wants to listen to an artist's music, Youtube's stream is used.
+  From a single search, the original RAMA system draws a graph that helps the user to explore new music that might catch his/her interest in a much more natural way.
+  When a user wants to listen to an artist's music, Youtube's stream is used.
   Although one can find a large catalogue of music in Youtube, this service is not music oriented and the sound quality is not adequate for a music streaming service.
   Youtube's stream needs to be replaced.
   From the available services that provide a vast music catalogue, Spotify\footnote{\url{http://spotify.com}} provides a good quality stream and a good developer support for creating Spotify-powered Applications.
-
-  But how can RAMA and Spotify be integrated? \\
+  But how can RAMA and Spotify be integrated?
 
 \section{Goals}
 \label{sec:goals}
@@ -69,19 +68,20 @@
   % SOTA
   The initial state of the art research was done to assess the main features of the music services that offer any sort of music discovery interface.
   There are an uncountable number of them, and so, focus was given to the ones that use visual tools.
-  Their main features were analysed, as well their pros and cons.
+  Their main features were analysed, as well as their pros and cons.
 
-  % Context
+  % Spotify
   Next, Spotify's environment was introduced from the user's perspective and the developer's perspective.
   At first, it was important to establish how a Spotify user goes about discovering new music, i.e., what tools are available.
   After that, the available tools for developers of Spotify-powered applications were analysed in detail.
-  The goal for the end of this phase was to determine what type of application to be developed as the prototype. 
+  The goal for the end of this phase was to determine the type of application to be developed as the prototype. 
 
   % Implementation
   By this point the user requirements of the application were defined and implemented.
   The tools used in the prototype's development were important to help automate most of the repetitive tasks: source code version management, testing, package managing, building and deploying.
   All of the development processes were important to keep a maintainable development environment.
   After each feature implementation, a small constant group of alpha-testers gave feedback and suggestions to be introduced in the following version of the prototype - this was the main development cycle that continuously made the prototype evolve into the defined user requirements.
+  There were approximately eighteen cycles throughout the whole prototype development.
 
   % User Validation
   After the prototype implemented the defined user requirements, it was submitted for user evaluation.
@@ -96,9 +96,9 @@
   \begin{description}
     \item[Chapter~\ref{chap:chap2}: State of the Art] \hfill \\
       Initial research on the current state of the art.
-      Detailed analysis on the services that provide a platform for users to listen and discover new music.
-      Although, focus will be given to the ones that use visual tools.
-    \item[Chapter~\ref{chap:chap3}: Contextualization] \hfill \\
+      Detailed analysis on the services that provide a platform for users to listen to and discover new music.
+      Although, this thesis focus on the ones that use visual tools.
+    \item[Chapter~\ref{chap:chap3}: Spotify] \hfill \\
       Detailed analysis of the Spotify environment from the users perspective (applications available, e.g.) and from the developers perspective (available APIs, e.g.) in order to give a much more insightful view when determining the feasibility of the prototype's requirements.
     \item[Chapter~\ref{chap:chap4}: Implementation and Validation] \hfill \\
       Definition and implementation of: the prototype's main features/requirements; the development processes and the user validation processes.
