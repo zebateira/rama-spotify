@@ -52,32 +52,33 @@
   \section{Music Discovery Tools in Spotify} % (fold)
   \label{sec:spotify_tools}
   
-    The recommendation systems in Spotify present the suggestions to the users in the form of lists and/or grids.
-    This is not ideal since the user cannot understand the reason behind such recommendations.
 
-    Spotify provides a set of tools for the users to discover new music.
-    Some are tailored for the user, while others show what bands are more popular at the moment.
-    The tools are: Browse, Activity, Discovery, Radio and Spotify Apps.
-    The latter is a different possibility for the user to discover new music.
-    It relies on Spotify apps that other services have developed, for example, Last.fm\footnote{\url{http://last.fm}} developed their application that uses its recommendation system. 
-    This way, Spotify users can have the best of both worlds from Spotify and Last.fm all in one application.
+    Spotify provides different features for the users to discover new music such as Browse, Activity, Discovery, Radio and Spotify Apps.
+    These features commonly present the recommendations as a list and/or grid, which is not ideal because the user cannot understand the reason behind such recommendations.
+    Spotify Apps gives different possibilities for the user to discover new music because they rely on third-party applications. For example, Last.fm\footnote{\url{http://last.fm}} developed their application that uses its recommendation system and this way Spotify users can have the best of both worlds from Spotify and Last.fm all in one application.
     But the way the recommendations are displayed (lists and grids) remains an issue.
+    This demo showcases a system that integrates RAMA into Spotify, providing a visual representation that is more natural and intuitive than lists.
 
   % section spotify_tools (end)
 
   \section{RAMA in Spotify} % (fold)
   \label{sec:rama}
   
-  RAMA breaks the pattern by introducing a visual representation of a network of music artists.
-  There are other approaches that solve this problem in a similar manner (for example, \url{http://liveplasma.com} and \url{http://musicroamer.com}).
-  Most of these applications use Youtube\footnote{\url{http://youtube.com}} to stream the music tracks.
-  This is not ideal given that: the sound quality is not appropriate for music streaming; Youtube is not a music oriented service and the \emph{noise} it exposes makes it an unreliable source for music stream.
-  Spotify can tackle those issues given its large music catalogue and high quality stream.
+  RAMA uses a tree graph to display a network of music artists that share similarities.
+  There are other visual-based recommendation applications (for example, \url{http://liveplasma.com} and \url{http://musicroamer.com}).
+  A downside of the applications mentioned above is the use of Youtube\footnote{\url{http://youtube.com}} to stream the music tracks.
+  This is not ideal given that the sound quality is not appropriate for music streaming. Also Youtube is not a music oriented service thus music-related queries do not always return the expected content. For example, interviews or podcasts might appear in the search results among the music videos.
 
-  Among all the possibilities that Spotify has made available for developers\footnote{\url{http://developer.spotify.com}}, Spotify Apps is the ideal choice: by implementing RAMA's concept into a Spotify App, the Spotify user gets a brand new tool to explore new music in a more natural and intuitive way \emph{inside} Spotify itself.
+  In contrast, Spotify is a music oriented service that has a large music catalogue and a high quality music stream.
+  It also has a very user-friendly environment that is ideal for the integration with RAMA.
+  Spotify has made several tools available to develop applications\footnote{\url{http://developer.spotify.com}} integrating their services.
+  Spotify Apps is the ideal choice to integrate RAMA into Spotify thus improving user experience in a more natural and intuitive way.
+  % A visual tool inside a complete service like Spotify improves user experience when discovering new music.
 
   \section{Main Features} % (fold)
   \label{sec:features}
+
+    % This demo shows the main implemented features of RAMA's Spotify App.
   
     \subsection{Visualization of the Artists' Map} % (fold)
     \label{sub:visualization}
