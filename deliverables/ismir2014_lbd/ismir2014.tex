@@ -25,9 +25,8 @@
 
 \end{abstract}
 
-  \section{Music Discovery Tools in Spotify} % (fold)
+  \section{Music Discovery Tools in Spotify} 
   \label{sec:spotify_tools}
-  
 
     Spotify provides different features for the users to discover new music such as Browse, Activity, Discovery, Radio and Spotify Apps.
     These features commonly present the recommendations as a list and/or grid, which is not ideal because the user cannot understand the reason behind such recommendations.
@@ -35,9 +34,7 @@
     But the way the recommendations are displayed (lists and grids) remains an issue.
     This demo showcases a system that integrates RAMA into Spotify, providing a visual representation that is more natural and intuitive than lists.
 
-  % section spotify_tools (end)
-
-  \section{RAMA in Spotify} % (fold)
+  \section{RAMA in Spotify} 
   \label{sec:rama}
   
   RAMA uses a tree graph to display a network of music artists that share similarities.
@@ -50,10 +47,10 @@
   Spotify has made several tools available to develop applications\footnote{\url{http://developer.spotify.com}} integrating their services.
   Spotify Apps is the ideal choice to integrate RAMA into Spotify thus improving user experience in a more natural and intuitive way.
 
-  \section{Main Features} % (fold)
+  \section{Main Features} 
   \label{sec:features}
 
-    \subsection{Visualization of the Artists' Map} % (fold)
+    \subsection{Visualization of the Artists' Map} 
     \label{sub:visualization}
 
       RAMA's Spotify App automatically draws the map with the current playing artist as the main node, as seen in Figure~\ref{fig:spotify_app}.
@@ -66,7 +63,7 @@
       \end{figure}
       The graph-like structure is created by recursively fetching a list of related artists from each artist using Spotify's API\footnote{\url{https://developer.spotify.com/docs/apps/api/1.0/api-models-artist.html}}.
 
-    \subsection{Visualization Parameters} % (fold)
+    \subsection{Visualization Parameters} 
     \label{sub:visualization_parameters}
 
       The visualization parameters can be personalized by the user in the settings menu in order to create richer graphs that match the user's preferences better.
@@ -75,7 +72,7 @@
       The tree mode option indicates whether the graph to be built is a tree graph or not.
       This means that when the tree mode is on, the graph has less edges (which leaves the graph more clean) and so it becomes a tree graph.
 
-    \subsection{Graph Edition} % (fold)
+    \subsection{Graph Edition} 
     \label{sub:graph_edition}
       
       The available features to edit the graph are: expand node, delete node and create a new map. These interactions are available in the Artist Menu (Figure~\ref{fig:artist_menu}).
@@ -84,7 +81,7 @@
       These two actions are useful for when the user wants to construct the graph to his/her needs.
       The new map action lets the user create a whole new graph from a another node. This way the root node will be the selected node of the new graph.
 
-    \subsection{Artist Menu} % (fold)
+    \subsection{Artist Menu} 
     \label{sub:artist_menu}
     
       The user is able to see additional information about artists in the Artist Menu (Figure~\ref{fig:artist_menu}) such as its popularity value, albums and tags, as well as perform the expand and new map functions described in \ref{sub:graph_edition}.
@@ -98,7 +95,7 @@
       When the user selects a node by clicking on it, the artist menu updates the displayed information.
       The popularity, the albums and the tags are metadata information retrieved from Spotify’s API, although Echonest’s API is also used as a fallback source for the tags (sometimes Spotify’s API responds with a small number of results).
 
-    \subsection{Tags Overlay} % (fold)
+    \subsection{Tags Overlay} 
     \label{sub:tags_overlay}
     
       The tags overlay menu (Figure~\ref{fig:tags_overlay}) is meant to enhance the user’s understanding on the displayed artists’ nodes regarding their tags. These tags are the same ones used in the Artist Menu (Figure~\ref{fig:artist_menu}).
