@@ -21,7 +21,7 @@
 
 \begin{abstract}
   This demo presents a Spotify App of the RAMA system that aims to improve the way music recommendations and artist relations are shown in Spotify.  This new version includes the majority of the existing features from RAMA including: editing the visualization parameters (to obtain more detailed graphs); adding and removing node artists (for users wishing to customize the graph); and visualization of the tags/genres that describe artists in the graph.
-  The metadata used in the application is provided by the Spotify and Echonest APIs\footnote{\url{http://developer.echonest.com}}.
+  The metadata used in the application is provided by the Spotify and Echonest APIs.
 \end{abstract}
 
   \section{Music Discovery Tools in Spotify}
@@ -85,7 +85,7 @@
     
       Users are able to see additional information about artists in the Artist Menu such as their popularity value, albums and tags, as well as performing the expand and new map functions described in \ref{sub:graph_edition}.
       When users select a node by clicking on it, the artist menu updates the displayed information.
-      The popularity, the albums and the tags are metadata information retrieved from the Spotify API, although the Echonest API is also used as a fallback source for the tags  as sometimes the Spotify API only returns a small number of results.
+      The popularity, the albums and the tags are metadata information retrieved from the Spotify API, although the Echonest API\cite{echonestdev} is also used as a fallback source for the tags  as sometimes the Spotify API only returns a small number of results.
 
     \subsection{Tags Overlay}
     \label{sub:tags_overlay}
