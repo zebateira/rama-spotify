@@ -31,7 +31,7 @@
     These features commonly present the music recommendations as a list and/or grid, however by representing the information in this way, users cannot easily understand the reasons behind the recommendations. 
     Spotify Apps offer different possibilities for users to discover new music because they rely on third-party applications. For example, Last.fm\footnote{\url{http://last.fm}} developed an application using their own recommendation system.
     However, these recommendations are displayed in a manner which is not informative for users, by again using a grid and lists. 
-    The goal of creating a Spotify App for RAMA was thus to provide users with a visual representation that is more natural and intuitive than lists towards an enhanced experience of browsing music recommendations and artist relations. 
+    The goal of creating a Spotify App for RAMA\cite{Gouyon2011} was thus to provide users with a visual representation that is more natural and intuitive than lists towards an enhanced experience of browsing music recommendations and artist relations. 
 
   \section{RAMA in Spotify}
   \label{sec:rama}
@@ -74,7 +74,7 @@
     \subsection{Graph Edition}
     \label{sub:graph_edition}
       
-      The available features to edit the graph are: \textit{expand node}, \textit{delete node} and \textit{create a new map}. These interactions are available in the Artist Menu (Figure~\ref{fig:artist_menu}).
+      The available features to edit the graph are: \textit{expand node}, \textit{delete node} and \textit{create a new map}. These interactions are available in the Artist Menu.
       The \textit{expand node} action allows users to expand a node further (ignoring the graph's branching value).
       The \textit{delete node} action allows users to delete a node from the graph.
       These two actions are useful for when users want to construct the graph to their needs.
@@ -83,22 +83,15 @@
     \subsection{Artist Menu}
     \label{sub:artist_menu}
     
-      Users are able to see additional information about artists in the Artist Menu (Figure~\ref{fig:artist_menu}) such as their popularity value, albums and tags, as well as performing the expand and new map functions described in \ref{sub:graph_edition}.
-      \begin{figure}[hb]
-        \begin{center}
-          \includegraphics[width=\columnwidth]{../report/figures/artist_menu2.pdf}
-        \end{center}
-        \caption{Artist Menu with information about the selected node artist ``047''}
-        \label{fig:artist_menu}
-      \end{figure}
+      Users are able to see additional information about artists in the Artist Menu such as their popularity value, albums and tags, as well as performing the expand and new map functions described in \ref{sub:graph_edition}.
       When users select a node by clicking on it, the artist menu updates the displayed information.
       The popularity, the albums and the tags are metadata information retrieved from the Spotify API, although the Echonest API is also used as a fallback source for the tags  as sometimes the Spotify API only returns a small number of results.
 
     \subsection{Tags Overlay}
     \label{sub:tags_overlay}
     
-      The tags overlay menu (Figure~\ref{fig:tags_overlay}) can enhance users' understanding of the displayed artists' nodes in terms of associated tags. These tags are the same as those used in the Artist Menu (Figure~\ref{fig:artist_menu}).
-      \begin{figure}[hb]
+      The tags overlay menu (Figure~\ref{fig:tags_overlay}) can enhance users' understanding of the displayed artists' nodes in terms of associated tags. These tags are the same as those used in the Artist Menu.
+      \begin{figure}[th]
         \begin{center}
           \includegraphics[width=\columnwidth]{../report/figures/tags_overlay.pdf}
         \end{center}
@@ -109,7 +102,7 @@
       The tags shown in this menu, are just a small sample of the artists tags of the whole graph.
 
 
-% \bibliography{../report/bib/myrefs}
+\bibliography{../report/bib/myrefs}
 \bibliographystyle{unstrnat}
 
 \end{document}
