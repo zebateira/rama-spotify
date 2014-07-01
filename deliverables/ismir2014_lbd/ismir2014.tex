@@ -20,16 +20,16 @@
 \maketitle
 
 \begin{abstract}
-  This demo presents a Spotify App\footnote{\url{https://developer.spotify.com/technologies/apps}} of the RAMA\footnote{\url{http://rama.inescporto.pt}} system that aims to improve the way music recommendations and artist relations are shown in Spotify\footnote{\url{http://spotify.com}}.  This new version includes the majority of the existing features from RAMA\footnote{\url{http://rama.inescporto.pt/app}} including: editing the visualization parameters (to obtain more detailed graphs); adding and removing node artists (for users wishing to customize the graph); and visualization of the tags/genres that describe artists in the graph.
+  This demo presents a Spotify App of the RAMA system that aims to improve the way music recommendations and artist relations are shown in Spotify.  This new version includes the majority of the existing features from RAMA including: editing the visualization parameters (to obtain more detailed graphs); adding and removing node artists (for users wishing to customize the graph); and visualization of the tags/genres that describe artists in the graph.
   The metadata used in the application is provided by the Spotify and Echonest APIs\footnote{\url{http://developer.echonest.com}}.
 \end{abstract}
 
   \section{Music Discovery Tools in Spotify}
   \label{sec:spotify_tools}
 
-    Spotify provides several features to allow users to discover new music such as \textit{Browse, Activity, Discovery, Radio} and \textit{Spotify Apps}.
+    Spotify\footnote{\url{http://spotify.com}} provides several features to allow users to discover new music such as \textit{Browse, Activity, Discovery, Radio} and \textit{Spotify Apps}.
     These features commonly present the music recommendations as a list and/or grid, however by representing the information in this way, users cannot easily understand the reasons behind the recommendations. 
-    Spotify Apps offer different possibilities for users to discover new music because they rely on third-party applications. For example, Last.fm\footnote{\url{http://last.fm}} developed an application using their own recommendation system.
+    Spotify Apps\cite{spotifyapps} offer different possibilities for users to discover new music because they rely on third-party applications. For example, Last.fm\footnote{\url{http://last.fm}} developed an application\cite{lastfmspotifyapp} using their own recommendation system.
     However, these recommendations are displayed in a manner which is not informative for users, by again using a grid and lists. 
     The goal of creating a Spotify App for RAMA\cite{Gouyon2011} was thus to provide users with a visual representation that is more natural and intuitive than lists towards an enhanced experience of browsing music recommendations and artist relations. 
 
@@ -37,13 +37,13 @@
   \label{sec:rama}
     \sloppy
     RAMA uses a tree graph to display a network of music artists that share similarities.
-    While there are other visual-based recommendation applications (e.g., \url{http://liveplasma.com} and \url{http://musicroamer.com}).
+    While there are other visual-based recommendation applications (e.g., MusicRoamer\cite{musicroamer} and Liveplasma\cite{liveplasma}).
     A downside of the applications is the use of Youtube\footnote{\url{http://youtube.com}} to stream the music tracks.
     This is not ideal given the often poor sound quality of Youttube audio. Also, Youtube is not a music oriented service thus music-related queries do not always return expected content. For example, interviews or podcasts might appear in the search results among the music videos.
 
     In contrast, Spotify is a music oriented service that has a large music catalogue and a high quality music content.
     It also has a very user-friendly environment that is ideal for the integration with RAMA.
-    Spotify has made several tools available to develop applications\footnote{\url{http://developer.spotify.com}} integrating their services.
+    Spotify has made several tools available to develop applications\cite{spotifydev} integrating their services.
     Spotify Apps is the ideal choice to integrate RAMA into Spotify thus improving user experience in a more natural and intuitive way.
 
   \section{Main Features}
@@ -60,7 +60,7 @@
         \caption{RAMA Spotify App opened inside the Spotify Desktop Client}
         \label{fig:spotify_app}
       \end{figure}
-      The graph-like structure is created by recursively fetching a list of related artists from each artist using the Spotify API\footnote{\url{https://developer.spotify.com/docs/apps/api/1.0/api-models-artist.html}}.
+      The graph-like structure is created by recursively fetching a list of related artists from each artist using the Spotify API\cite{spotifyapiartists}.
 
     \subsection{Visualization Parameters}
     \label{sub:visualization_parameters}
