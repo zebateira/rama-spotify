@@ -14,34 +14,9 @@
 {José Bateira$^{1,2}$, Fabien Gouyon$^{1,2}$, Matthew Davies$^{2}$, Marcelo Caetano$^{2}$}
 {$^{1}$Department of Informatics Engineering, University of Porto\\ $^{2}$Sound and Music Computing Group, INESC TEC \\ ei10133@fe.up.pt \{fgouyon,mdavies,mcaetano\}@inesctec.pt}
 
-% Single address
-% To use with only one author or several with the same address
-% ---------------
-%\oneauthor
-% {Names should be omitted for double-blind reviewing}
-% {Affiliations should be omitted for double-blind reviewing}
-
-% Two addresses
-% --------------
 \twoauthors
   {Jos\'{e} Bateira} {DEI, Univ. of Porto \\ {\tt ei10133@fe.up.pt}}
   {Fabien Gouyon, Matthew Davies, Marcelo Caetano} {INESC TEC, Porto \\ {\tt \{fgouyon,mdavies,mcaetano\}@inescporto.pt}}
-
-% Three addresses
-% --------------
-%\threeauthors
-%  {First author} {Affiliation1 \\ {\tt author1@ismir.edu}}
-%  {Second author} {\bf Retain these fake authors in\\\bf submission to preserve the formatting}
-%  {Third author} {Affiliation3 \\ {\tt author3@ismir.edu}}
-
-% Four addresses
-% --------------
-%\fourauthors
-%  {First author} {Affiliation1 \\ {\tt author1@ismir.edu}}
-%  {Second author}{Affiliation2 \\ {\tt author2@ismir.edu}}
-%  {Third author} {Affiliation3 \\ {\tt author3@ismir.edu}}
-%  {Fourth author} {Affiliation4 \\ {\tt author4@ismir.edu}}
-
 
 \begin{document}
 
@@ -65,16 +40,16 @@
   \label{sec:rama}
     \sloppy
     RAMA uses a tree graph to display a network of music artists that share similarities.
-    There are other visual-based recommendation applications, such as MusicRoamer\cite{musicroamer} and Liveplasma\cite{liveplasma}. A common downside of these applications is the use of Youtube\footnote{\url{http://youtube.com}} to stream the music tracks.
-    This is not ideal given the often poor sound quality of Youttube audio. Also, Youtube is not a music oriented service thus music-related queries do not always return expected content. For example, interviews or podcasts might appear in the search results among the music videos.
+    There are other visual-based recommendation applications, such as MusicRoamer\cite{musicroamer} and Liveplasma\cite{liveplasma}. A common downside of these applications is the use of YouTube\footnote{\url{http://youtube.com}} to stream the music tracks.
+    This is not ideal given the often poor sound quality of Youttube audio. Also, YouTube is not a music oriented service thus music-related queries do not always return expected content. For example, interviews or podcasts might appear in the search results among the music videos.
 
     In contrast, Spotify is a music oriented service that has a large music catalogue and a high quality music content.
     It also has a very user-friendly environment that is ideal for the integration with RAMA.
     Spotify has made several tools available to develop applications\cite{spotifydev} integrating their services.
     Spotify Apps is the ideal choice to integrate RAMA into Spotify thus improving user experience in a more natural and intuitive way.
 
-The application is freely available on \url{https://github.com/carsy/rama-spotify}, together with a 
-set of instructions for installation.
+    The application is freely available on \url{https://github.com/carsy/rama-spotify}, together with a 
+    set of instructions for installation.
 
 \vspace{-0.2cm}
   \section{Main Features}
@@ -84,14 +59,14 @@ set of instructions for installation.
     \label{sub:visualization}
 
       RAMA's Spotify App automatically draws the map with the current playing artist as the main node, as seen in Figure~\ref{fig:spotify_app}.
+      The graph-like structure is created by recursively fetching a list of related artists from each artist using the Spotify API\cite{spotifyapiartists}.
       \begin{figure}[hb]
         \begin{center}
           \includegraphics[width=\columnwidth]{../report/figures/graph_rootnode.pdf}
         \end{center}
-        \caption{RAMA Spotify App opened inside the Spotify Desktop Client}
+        \caption{RAMA Spotify App opened inside the Spotify Desktop Client.}
         \label{fig:spotify_app}
       \end{figure}
-      The graph-like structure is created by recursively fetching a list of related artists from each artist using the Spotify API\cite{spotifyapiartists}.
 
     \subsection{Visualization Parameters}
     \label{sub:visualization_parameters}
@@ -108,13 +83,13 @@ set of instructions for installation.
       The available features to edit the graph are: \textit{expand node}, \textit{delete node} and \textit{create a new map}. These interactions are available in the Artist Menu.
       The \textit{expand node} action allows users to expand a node further (ignoring the graph's branching value).
       The \textit{delete node} action allows users to delete a node from the graph.
-      These two actions are useful for when users want to construct the graph to their needs.
-      The \emph{new map} action allows users create a completely new graph from a another node. This way the root node will be the selected node of the new graph.
+      These two actions are useful when users want to construct the graph to their needs.
+      The \emph{new map} action allows users to create a completely new graph from a another node. This way the root node will be the selected node of the new graph.
 
     \subsection{Artist Menu}
     \label{sub:artist_menu}
     
-      Users are able to see additional information about artists in the Artist Menu such as their popularity value, albums and tags, as well as performing the expand and new map functions described in \ref{sub:graph_edition}.
+      Users are able to see additional information about artists in the Artist Menu such as their popularity value, albums and tags, as well as performing the expand and new map functions described in Section \ref{sub:graph_edition}.
       When users select a node by clicking on it, the artist menu updates the displayed information.
       The popularity, the albums and the tags are metadata information retrieved from the Spotify API, although the Echonest API\cite{echonestdev} is also used as a fallback source for the tags  as sometimes the Spotify API only returns a small number of results.
 
