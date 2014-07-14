@@ -143,7 +143,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
     The requirements for the prototype are as following:
 
     \begin{itemize}
-      \item Reprentation of relations between artists by means of a visual tool;
+      \item Representation of relations between artists by means of a visual tool;
       \item Editing of the visualization using several parameters;
       \item Editing of the graph by allowing to remove and add new nodes;
       \item Visualizing the tags/genres (that describe an artist) in the graph representation.
@@ -151,7 +151,7 @@ By this point, the validation of the prototype will be analysed, by explaining t
 
     All of these features were implemented.
 
-    \subsubsection{Visulization of the Artists' Map} % (fold)
+    \subsubsection{Visualization of the Artists' Map} % (fold)
       \label{ssub:visualization}
     
       The application automatically draws the map with the current playing artist as the main node, as seen in Figure~\ref{fig:graph_rootnode}.
@@ -198,7 +198,6 @@ By this point, the validation of the prototype will be analysed, by explaining t
       Given this same example (Figure~\ref{fig:graph_treemode}), the artist node ``Stone Temple Pilots'' is a child of the node artist ``Faith No More''
       The algorithm inserted the latter into the graph first.
       After that, when retrieving the childs of ``Jane's Addiction'', the artist node ``Stone Temple Pilots'' is contained in that list, and so the insertNode() function discards the node since it is a duplicate.
-      This means that there is a connection between both of them that is being discarded.
 
       \paragraph{Graph's Tree Mode} \hfill \\
       To build a graph with all the connections that exist between all of the artists in the graph, the insertNode() function would need to insert the missing edge into the graph by analysing the current graph state.
