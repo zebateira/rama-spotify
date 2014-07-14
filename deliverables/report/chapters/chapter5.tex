@@ -10,84 +10,110 @@
 \label{sec:summary}
 
   The proposed thesis focused on delivering an enhanced user experience when discovering new music in Spotify's Environment.
-
   By using RAMA's concept applied in the developed prototype, the user experience when discovering new music as been greatly increased.
   The users felt that RAMA's Spotify Application was natural and intuitive.
 
-  \paragraph*{State of the Art} \hfill \\
-  \indent The amount of services that use visual tools for recommending music to users are not that many, although the ones shown here are not representative of the whole spectrum.
+  The amount of services that use visual tools for recommending music to users are not that many, although, the ones shown in Chapter~\ref{chap:chap2} are not representative of the whole spectrum.
 
-  \paragraph*{Contextualization} \hfill \\
-  \indent Given the overview of the possibilities, creating a Spotify Application to apply RAMA's concept proved to be the best option to take.
+  Given the overview of the possibilities presented in Chapter~\ref{chap:chap3}, creating a Spotify Application to apply RAMA's concept proved to be the best option to take.
 
-  \paragraph*{Implementation and Validation} \hfill \\
-  \indent All of the proposed features were implemented within schedule. \\
+  The proposed modules \ref{intro:obj4} and \ref{item:obj5} were implemented.
   The developed prototype proved to work after the beta-testing results.
   Although, there are a lot of improvements to do, the final result was very appealing to the users.
-  All of the beta-testers liked the visual experience and the majority responded positively about using the application in a regular basis to discover new music. \\
+  All of the beta-testers liked the visual experience and the majority responded positively about using the application in a regular basis to discover new music.
 
-  All of the developed material (code, documentation, screenshots, demos) can be found in the project's code repository: \url{http://github.com/carsy/rama-spotify}.
+  All of the developed material (code, documentation, wiki, screenshots, demos) can be found in the project's code repository (\url{http://github.com/carsy/rama-spotify}) as well as in the appendix (\ref{appendix}) to this document.
+
+  Two submissions will be sent to the following conferences:
+  \begin{itemize}
+    \item ISMIR 2014\footnote{\url{http://www.terasoft.com.tw/conf/ismir2014}} - Demo submission\footnote{\url{http://www.terasoft.com.tw/conf/ismir2014/theLBD.html}}
+    \item INFORUM 2014\footnote{\url{http://inforum.org.pt/INForum2014}} - Comunication and poster\footnote{\url{http://inforum.org.pt/INForum2014/submissoes}}
+  \end{itemize}
 
 % section summary (end)
 
 \section{Discussion} % (fold)
 \label{sec:discussion}
 
-  By introducing a visual tool into a complete service like Spotify, the users felt that their experience with RAMA's application improved their abilities to find new music.
+  By introducing a visualization tool into a complete service like Spotify, the users felt that their experience with RAMA's application improved their abilities to find new music.
   The tests' results show that RAMA's Spotify Application is a successful approach to music discovery and recommendation.
-
   Although, the final results point in that direction, after the experiments, 3 beta-testers stated that their music listening habits are not focused on the music artists they are listening to. Instead, they simply pay attention to the songs (mostly, the popular ones), and so, their playlists are track-driven, not artist-driven.
   That might have had presented a problem to those users, since the focus of RAMA is the relations between the artists.
-  However, Spotify's API's recommendation system proved to please those users, which started to pay more attention to the name of the artists they listen to. \\
+  However, Spotify's API's recommendation system proved to please those users, who started to pay more attention to the name of the artists they listen to.
 
   Services like Spotify or Rdio, offer a complete set of features that range between playing every track on their catalogue, to saving albums for offline mobile listening.
   With such a vast music catalogue, the user might feel lost and not very motivated to find new music.
-  Although these services continue to add features like Spotify's "Radio"\footnote{Spotify's Radio mode: \\
-  \url{http://news.spotify.com/us/2011/12/09/discover-the-new-spotify-radio} \\ allows the user to listen to a automatically generated playlist.}, the user finds it hard to compute such a large world of available music.
+  Although these services continue to add features like Spotify's ``Radio''~\cite{spradio}, the user finds it hard to cope with such a large world of available music.
 
-  By introducing this visual aid to music artist's relations, RAMA succeeds in letting the user explore the whole spectrum of available music.
+  By introducing this visual aid to music artist's relations, RAMA succeeds in letting the user understand and explore better the whole spectrum of available music.
 
 % section discussion (end)
 
 \section{Future Work} % (fold)
 \label{sec:future_work}
 
-  From the developed work so far, the need for a more segmented testing might have been called for, in order to improve the results obtained, as well to better understand the user's needs. \\
+  From the developed work so far, a more segmented testing might have been called for, in order to improve the results obtained, as well to better understand the user's needs.
 
   During the prototype's development and the beta-testing experiments, there were several additional features suggested for RAMA's Spotify Application.
   Most of them were not included in the prototype because of the limited time frame for development, while others seemed to stray from RAMA's focus.
-  Nonetheless, every idea is important and might someday contribute for RAMA's future features.
+  Nonetheless, every idea is important and might someday contribute to the development of future features for RAMA.
+
+  \paragraph*{Place the action buttons (expand, new map and delete) near the artist node} \hfill \\
+  \indent Some users complained that it was hard to notice the action buttons (one user did not even notice them).
+  Maybe placing the buttons near the artist node and only show them while hovering it would make more sense.
 
   \paragraph*{Make it clear that the tags are clickable to the user} \hfill \\
-  \indent Some users complained that it was not apparent at first that the upper tags were clickable, they thought it was just an extra information, not something they could interact with.
+  \indent For some users it was not apparent at first that the upper tags were clickable, they thought it was just an extra information, not something they could interact with.
 
   \paragraph*{Allow to click-and-hold to preview listening to an artist} \hfill \\
-  \indent This Spotify feature could be applied to the nodes so that the user could browse the graph much faster. \\
+  \indent This Spotify feature could be applied to the nodes so that the user could browse the graph much faster.
 
-  \paragraph*{Select multiple artist or tags} \hfill \\
+  \paragraph*{Select multiple artists or tags} \hfill \\
   \indent Allow the user to select multiple artists (or tags), in order to, for example, generate playlists from that selection.
 
   \paragraph*{Let the graph update automatically with the current playing artist} \hfill \\
   \indent In order to keep RAMA more alive, the graph would refresh automatically when a new artist starts playing, with the new updated artist as root.
-  Maybe an option to keep the graph "locked" would allow the user choose if it wants that behaviour or not.
+  Maybe an option to keep the graph ``locked'' would allow the user to choose if he/she wants that behaviour or not.
 
-  \paragraph*{Improve artists recommendation} \hfill \\
-  \indent The blind trust in Spotify's recommendations might not be so desirable.
+  \paragraph*{Improve artists recommendations} \hfill \\
+  \indent The assumption that Spotify's recommendations are valid might not be so desirable.
   Although the results are satisfactory, without knowing the reasons behind those choices of connections, the artists recommendations become inflexible.
-  To improve this, one could fully use Echonest's API to fetch the similar artists\footnote{similar artists query: \url{http://developer.echonest.com/docs/v4/artist.html\#similar}}.
-  The amount of query personalization is much more attractive than spotify's. \\
+  To improve this, one could fully use Echonest's API to fetch the similar artists~\cite{echonestsimilar}.
+  The amount of query personalization is much more attractive than Spotify's.
 
   \paragraph*{Improve the connection between the artists and the tags} \hfill \\
-  \indent As an improvement of the previous idea, the connections between the artists and the overlaying tags could become more related, and so, the intersection of tags between artists could be used to improve the recommendations (creation of connections).  \\
+  \indent As an improvement of the previous idea, the connections between the artists and the overlaying tags could become more related, and so, the intersection of tags between artists could be used to improve the recommendations (creation of connections). 
 
   \paragraph*{Include an alternate view with tags as nodes, instead of artists} \hfill \\
-  \indent Some users suggested that the tags overlay was an interesting point of view, and so, if the graph could be drawn using the tags instead, the resulting map could be an alternative view of the application. \\
+  \indent Some users suggested that the tags overlay was an interesting point of view, and so, if the graph could be drawn using the tags instead, the resulting map would then be an alternative view of the application.
+
+  \paragraph*{Improve artists recommendations with Social Networks' data} \hfill \\
+  \indent A user suggested that the connections between the artist nodes could be improved using information from social networks.
+  Spotify already has the possibility for the user to integrate his/her Facebook\footnote{\url{http://facebook.com}} account, and so, this information could be used to personalize the recommendations \cite{Fields2011}.
 
   \paragraph*{Cluster groups of artists} \hfill \\
-  \indent Cluster groups of artist to create a geographical representation of what the entire network of available artists would be like. \\
+  \indent Cluster groups of artists to create a geographical representation of what the entire network of available artists could be like.
 
   \paragraph*{Tag mind map} \hfill \\
   \indent In a way to try and complement the two previous ideas, a clustering of the tags would create an interesting mind map of the current genres.
-  And since there are indeed music genres that are similar (like metal and celtic metal) the map would be browsable. \\
+  And since there are indeed music genres that are similar (for example, metal and celtic metal) the map would be browsable.
+
+  \paragraph*{Information} \hfill \\
+  \indent Add an information UI component to help the users understand better the visualization parameters (a tutorial-like component) - although those parameters are advanced settings (not strictly necessary for the user to interact with) it might be a good idea to give more power to the user and make these settings easy to understand.
+
+  \paragraph*{3D Visualization} \hfill \\
+  \indent Regarding the discussion in \ref{ssub:visualization}, if the graph is not a tree, the visual clutter can degradate the user's experience.
+  Some users suggested a 3D Visualization for these cases.
+  This approach can be in fact be a good solution to the problem \cite{Lamere2007using3D}.
+
+  \paragraph*{Show more tags} \hfill \\
+  \indent The list of tags shown in the Tags overlay is trimmed as mentioned in \ref{ssub:tags_overlay}, but sometimes the user might want to see more tags.
+  A possibility to solve this problem could be to make the list scrollable or to add a "show more" button.
+
+  \paragraph*{Improve the visualization of the connections} \hfill \\
+  \indent The length of the edges of the graph could have a repulsion value inversely proportional to how strong the connection between the artists are.
+  This might help the user to discover new music quicker than before.
+
+
 
 % section future_work (end)

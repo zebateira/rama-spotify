@@ -14,9 +14,8 @@
 
 \usepackage{indentfirst}
 
-\usepackage[english]{styles/feupteses}
-%\usepackage[english,juri]{feupteses}
-%\usepackage[english,final]{feupteses}
+% \usepackage[english]{styles/feupteses}
+\usepackage[english,final]{styles/feupteses}
 %\usepackage[english,final,onpaper]{feupteses}
 
 %% Uncomment the next lines if side by side graphics used
@@ -40,8 +39,6 @@
 %% macros
 \include{utils/mymacros}
 
-% \includeonly{chapters/chapter4}
-
 %%========================================
 %% Start of document
 %%========================================
@@ -51,19 +48,19 @@
 \title{Spotify-ed: Music Recommendation and Discovery in Spotify}
 \author{José Lage Bateira}
 
-\thesisdate{June 23, 2014}
+\thesisdate{July 8, 2014}
 
 \supervisor{Supervisor}{Fabien Gouyon}
 \supervisor{Co-Supervisor}{Matthew Davies}
 
 %% Uncomment committee stuff in the final version
-% \committeetext{Aprovado em provas públicas pelo Júri:}
-%\committeemember{Presidente}{Nome do presidente do júri}
-%\committeemember{Arguente}{Nome do arguente do júri}
-%\committeemember{Vogal}{Nome do vogal do júri}
-%\signature
+\committeetext{Approved by Jury:}
+\committeemember{President}{José Magalhães Cruz}
+\committeemember{Referee}{Luís Gustavo Martins}
+\signature
 
 \logo{uporto-feup.pdf}
+
 
 \begin{Prolog}
   %% Preliminary materials
@@ -100,11 +97,7 @@
 \bibliography{bib/myrefs}
 \bibliographystyle{bib/unsrt-pt}
 
-
-%% Comment next 2 commands if numbered appendices are not used
-% \appendix
-% \include{appendix1}
-
-% \PrintIndex
+\appendix
+\include{appendix}
 
 \end{document}
